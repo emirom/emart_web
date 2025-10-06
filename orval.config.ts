@@ -1,20 +1,20 @@
-import { defineConfig } from 'orval';
+import { defineConfig } from "orval";
 
 export default defineConfig({
   myApi: {
     input: {
-      target: './openapi.json',
+      target: "./openapi.json",
     },
     output: {
-      mode: 'tags-split',
-      target: './src/lib/services',
-      schemas: './src/lib/schemas',
-      client: 'react-query',
+      mode: "tags-split",
+      target: "./src/lib/services",
+      schemas: "./src/lib/schemas",
+      client: "react-query",
       mock: false,
       override: {
         mutator: {
-          path: './src/lib/configs/axios-instance.ts',
-          name: 'axiosInstance',
+          path: "./src/lib/configs/axios-instance.ts",
+          name: "axiosInstance",
         },
       },
     },
@@ -22,13 +22,13 @@ export default defineConfig({
 
   myApiZod: {
     input: {
-      target: './openapi.json',
+      target: "./openapi.json",
     },
     output: {
-      mode: 'tags-split',
-      target: './src/lib/zod',
-      client: 'zod',
-      fileExtension: '.zod.ts',
+      mode: "tags-split",
+      target: "./src/lib/zod",
+      client: "zod",
+      fileExtension: ".zod.ts",
       mock: false,
       override: {
         zod: {
