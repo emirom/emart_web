@@ -1,5 +1,5 @@
 "use client";
-import * as React from "react";
+import { InputHTMLAttributes } from "react";
 import { Control, Controller, FieldValues, Path } from "react-hook-form";
 import { FormErrorMessage } from "./FormErrorMessage";
 import { FormLabel } from "./FormLabel";
@@ -7,7 +7,7 @@ import { cn } from "./lib/utils";
 import { Input } from "./ui/input";
 
 interface Props<T extends FieldValues>
-  extends React.InputHTMLAttributes<HTMLInputElement> {
+  extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   name: Path<T>;
   control: Control<T>;
@@ -35,7 +35,7 @@ function FormInputField<T extends FieldValues>({
               {...field}
               className={cn(
                 `${fieldState.error && "border border-destructive text-black"}`,
-                className,
+                className
               )}
               {...props}
             />
