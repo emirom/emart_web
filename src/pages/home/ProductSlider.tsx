@@ -40,7 +40,7 @@ export default function ProductSlider() {
     >
       <ul
         className="flex transition-transform duration-500 ease-in-out will-change-transform"
-        style={{ transform: `translateX(-${carouselIndex * 100}%)` }}
+        style={{ transform: `translateX(${carouselIndex * 100}%)` }}
       >
         {Array.from({ length: SLIDES }, (_, ind) => {
           const isActive = ind === carouselIndex;
@@ -101,7 +101,7 @@ export default function ProductSlider() {
               role="tab"
               onClick={() => setCarouselIndex(ind)}
               className={cn(
-                "rounded-full outline-none flex items-center justify-center transition-all duration-200 ease-in-out",
+                "rounded-full outline-none flex items-center justify-center transition-all duration-200 ease-in-out cursor-pointer",
                 "w-6 h-6 sm:w-8 sm:h-8 md:w-9 md:h-9 lg:w-10 lg:h-10 xl:w-12 xl:h-12",
                 "hover:scale-110",
               )}
