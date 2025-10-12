@@ -36,7 +36,7 @@ export default function DesktopPrimaryHeader() {
               id={inputId}
               name="q"
               className="border-0 m-0 p-0"
-              placeholder="چی می‌خوای پیدا کنی؟"
+              placeholder="جستجو"
               aria-label="متن جستجو"
               autoComplete="off"
               type="search"

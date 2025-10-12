@@ -38,16 +38,16 @@ export default function CustomImage({
         src={error ? fallbackSrc : src}
         alt={alt}
         onError={() => setError(true)}
-        onLoadingComplete={() => setLoaded(true)}
+        onLoad={() => setLoaded(true)}
         className={clsx(
           "object-cover",
           withTransition && "transition-opacity duration-500",
           loaded ? "opacity-100" : "opacity-0",
         )}
       />
-      {!loaded && (
+      {/* {!loaded && (
         <div className="absolute inset-0 bg-gray-200 animate-pulse" />
-      )}
+      )} */}
     </div>
   );
 }
