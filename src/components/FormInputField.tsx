@@ -35,7 +35,7 @@ function FormInputField<T extends FieldValues>({
               {...field}
               className={cn(
                 `${fieldState.error && "border border-destructive text-black"}`,
-                className
+                className,
               )}
               {...props}
             />

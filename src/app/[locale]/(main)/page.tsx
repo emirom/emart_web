@@ -1,9 +1,7 @@
-import Home from "@/pages/home/Home";
+import Container from "@components/Container";
 
-export default async function Page() {
-  return (
-    <>
-      <Home />
-    </>
-  );
+export const dynamic = "force-static";
+
+export default function HomePage() {
+  return <Container>Home Page</Container>;
 }

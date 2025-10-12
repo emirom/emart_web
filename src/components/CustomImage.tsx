@@ -30,7 +30,7 @@ export default function CustomImage({
         "relative overflow-hidden",
         rounded && "rounded-xl",
         shadow && "shadow-md",
-        className
+        className,
       )}
     >
       <Image
@@ -42,7 +42,7 @@ export default function CustomImage({
         className={clsx(
           "object-cover",
           withTransition && "transition-opacity duration-500",
-          loaded ? "opacity-100" : "opacity-0"
+          loaded ? "opacity-100" : "opacity-0",
         )}
       />
       {!loaded && (
