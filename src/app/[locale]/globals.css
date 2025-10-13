@@ -12,7 +12,6 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  /* ⬇️ از متغیر فونت next/font استفاده کن */
   --font-sans: var(--font-vazir), var(--font-stack-fallback);
   --font-mono: var(--font-geist-mono);
   --color-sidebar-ring: var(--sidebar-ring);
@@ -67,7 +66,6 @@
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
   }
-  /* ⬇️ فونت را از متغیر next/font بگیر */
   body {
     font-family: var(--font-vazir), var(--font-stack-fallback) !important;
   }
@@ -110,6 +108,7 @@
 @theme inline {
   --color-destructive: #c30000;
   --color-destructive-light: #ed2e2e;
+  --color-sky-blue: #d4f1f4;
   --color-tint-blue-100: #e0eaf4;
   --color-tint-blue-200: #d1e8ff;
   --color-tint-blue-300: #8eb6dd;

@@ -49,7 +49,7 @@ export default function ProductSlider() {
             <li
               key={ind}
               className={cn(
-                "w-full flex-shrink-0 relative px-2",
+                "w-full flex-shrink-0 relative ",
                 !isActive && "pointer-events-none",
               )}
               aria-hidden={!isActive}
