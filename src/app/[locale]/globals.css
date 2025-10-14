@@ -108,7 +108,10 @@
 @theme inline {
   --color-destructive: #c30000;
   --color-destructive-light: #ed2e2e;
+  --color-red-500: #ff6a6a;
+  --color-green-200: #34c759;
   --color-sky-blue: #d4f1f4;
+  --color-sky-500: #1766b5;
   --color-tint-blue-100: #e0eaf4;
   --color-tint-blue-200: #d1e8ff;
   --color-tint-blue-300: #8eb6dd;
@@ -126,6 +129,7 @@
   --color-gray: #f9f9f9;
   --color-gray-100: #d9d9d9;
   --color-gray-200: #757575;
+
   --text-xs: clamp(0.75rem, 0.7rem + 0.2vw, 0.875rem);
   --text-sm: clamp(0.875rem, 0.8rem + 0.3vw, 1rem);
   --text-base: clamp(1rem, 0.9rem + 0.5vw, 1.25rem);

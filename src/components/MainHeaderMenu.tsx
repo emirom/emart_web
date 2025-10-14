@@ -3,7 +3,6 @@
 import { AxeIcon, HomeIcon } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
-import LanguageSwitcher from "./LanguageSwitcher";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -44,7 +43,7 @@ export function MainHeaderMenu() {
 
   return (
     <NavigationMenu>
-      <LanguageSwitcher />
+      {/* <LanguageSwitcher /> */}
       <NavigationMenuList>
         <NavigationMenuItem>
           <NavigationMenuTrigger className="text-sm w-fit text-tint-blue-500 flex items-center gap-2">

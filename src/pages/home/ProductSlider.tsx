@@ -8,13 +8,12 @@ import { useCallback, useEffect, useRef, useState } from "react";
 const SLIDES = 5;
 
 export default function ProductSlider() {
-  const [carouselIndex, setCarouselIndex] = useState<number>(0);
+  const [carouselIndex, setCarouselIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const goTo = useCallback(
-    (i: number) => setCarouselIndex((i + SLIDES) % SLIDES),
-    [],
-  );
+  const goTo = useCallback((i: number) => {
+    setCarouselIndex((i + SLIDES) % SLIDES);
+  }, []);
 
   const onKey = useCallback(
     (e: KeyboardEvent) => {
@@ -34,22 +33,48 @@ export default function ProductSlider() {
     <div
       ref={containerRef}
       tabIndex={0}
-      className={cn("relative overflow-hidden outline-none")}
+      className="relative overflow-hidden outline-none"
       aria-roledescription="carousel"
       aria-label="اسلایدر محصولات"
     >
       <ul
         className="flex transition-transform duration-500 ease-in-out will-change-transform"
-        style={{ transform: `translateX(${carouselIndex * 100}%)` }}
+        style={{ transform: `translateX(${-carouselIndex * 100}%)` }}
       >
-        {Array.from({ length: SLIDES }, (_, ind) => {
-          const isActive = ind === carouselIndex;
-          const isLCP = ind === 0;
+        <li
+          className={cn(
+            "w-full flex-shrink-0 relative",
+            carouselIndex !== 0 && "pointer-events-none",
+          )}
+          aria-hidden={carouselIndex !== 0}
+        >
+          <Link
+            href="/"
+            tabIndex={carouselIndex === 0 ? 0 : -1}
+            className="w-full h-full block relative rounded-lg focus:outline-none"
+          >
+            <CustomImage
+              src="/images/slider-image.png"
+              alt="اسلاید شماره ۱"
+              fill
+              priority
+              fetchPriority="high"
+              loading="eager"
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, (max-width: 1280px) 80vw, 70vw"
+              className="aspect-[16/4] lg:aspect-[19/4] rounded-lg object-cover"
+            />
+          </Link>
+        </li>
+
+        {Array.from({ length: SLIDES - 1 }, (_, ind) => {
+          const index = ind + 1;
+          const isActive = index === carouselIndex;
+
           return (
             <li
-              key={ind}
+              key={index}
               className={cn(
-                "w-full flex-shrink-0 relative ",
+                "w-full flex-shrink-0 relative",
                 !isActive && "pointer-events-none",
               )}
               aria-hidden={!isActive}
@@ -57,24 +82,16 @@ export default function ProductSlider() {
               <Link
                 href="/"
                 tabIndex={isActive ? 0 : -1}
-                className={cn(
-                  "w-full h-full block relative rounded-lg focus:outline-none",
-                )}
+                className="w-full h-full block relative rounded-lg focus:outline-none"
               >
                 <CustomImage
                   src="/images/slider-image.png"
-                  alt={`images-slider-${ind + 1}`}
+                  alt={`اسلاید شماره ${index + 1}`}
                   fill
-                  priority={isLCP}
-                  fetchPriority={isLCP ? "high" : "auto"}
-                  sizes="100vw"
-                  loading={isLCP ? "eager" : "lazy"}
-                  placeholder={isLCP ? "empty" : undefined}
-                  className={cn(
-                    "aspect-[16/4] lg:aspect-[19/4] rounded-lg",
-                    isLCP && "!opacity-100 !duration-0",
-                  )}
-                  style={isLCP ? { opacity: 1, transition: "none" } : undefined}
+                  loading="lazy"
+                  fetchPriority="auto"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, (max-width: 1280px) 80vw, 70vw"
+                  className="aspect-[16/4] lg:aspect-[19/4] rounded-lg object-cover"
                 />
               </Link>
             </li>
@@ -83,10 +100,7 @@ export default function ProductSlider() {
       </ul>
 
       <div
-        className={cn(
-          "flex items-center justify-center absolute right-0 left-0 bottom-1 z-40 mx-auto w-[60%]",
-          "gap-2",
-        )}
+        className="flex items-center justify-center absolute right-0 left-0 bottom-1 z-40 mx-auto w-[60%] gap-2"
         role="tablist"
         aria-label="ناوبری اسلایدها"
       >
