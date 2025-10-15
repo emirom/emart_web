@@ -4,7 +4,7 @@ import { cn } from "@components/lib/utils";
 export default function MultiPromoteProductList() {
   return (
     <ul
-      className="grid grid-cols-2 sm:grid-cols-4 gap-2"
+      className="grid grid-cols-2 sm:grid-cols-4 gap-2 lg:gap-1"
       aria-label="لیست محصولات پیشنهادی"
       itemScope
       itemType="https://schema.org/ItemList"
@@ -12,7 +12,7 @@ export default function MultiPromoteProductList() {
       {Array.from({ length: 4 }, (_, indx) => (
         <li
           key={indx}
-          className="relative border border-gray-100 w-full p-2 rounded-lg overflow-hidden"
+          className="relative border border-gray-100 w-full p-2 rounded-lg overflow-hidden lg:rounded-none"
           itemProp="itemListElement"
           itemScope
           itemType="https://schema.org/Product"

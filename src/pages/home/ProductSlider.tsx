@@ -13,7 +13,7 @@ export default function ProductSlider() {
 
   const goTo = useCallback(
     (i: number) => setCarouselIndex((i + SLIDES) % SLIDES),
-    []
+    [],
   );
 
   const onKey = useCallback(
@@ -21,7 +21,7 @@ export default function ProductSlider() {
       if (e.key === "ArrowRight") goTo(carouselIndex + 1);
       if (e.key === "ArrowLeft") goTo(carouselIndex - 1);
     },
-    [carouselIndex, goTo]
+    [carouselIndex, goTo],
   );
 
   useEffect(() => {
@@ -51,7 +51,7 @@ export default function ProductSlider() {
               key={ind}
               className={cn(
                 "w-full flex-shrink-0 relative",
-                !isActive && "pointer-events-none"
+                !isActive && "pointer-events-none",
               )}
               aria-hidden={!isActive}
             >
@@ -76,7 +76,7 @@ export default function ProductSlider() {
                   "
                   className={cn(
                     "aspect-[16/4] lg:aspect-[19/4] rounded-lg object-cover",
-                    isLCP && "!opacity-100 !duration-0"
+                    isLCP && "!opacity-100 !duration-0",
                   )}
                   style={isLCP ? { opacity: 1, transition: "none" } : undefined}
                 />
@@ -88,7 +88,7 @@ export default function ProductSlider() {
 
       <div
         className={cn(
-          "flex items-center justify-center absolute right-0 left-0 bottom-1 z-40 mx-auto w-[60%] gap-2"
+          "flex items-center justify-center absolute right-0 left-0 bottom-1 z-40 mx-auto w-[60%] gap-2",
         )}
         role="tablist"
         aria-label="ناوبری اسلایدها"
@@ -106,7 +106,7 @@ export default function ProductSlider() {
               className={cn(
                 "rounded-full outline-none flex items-center justify-center transition-all duration-200 ease-in-out cursor-pointer",
                 "w-6 h-6 sm:w-8 sm:h-8 md:w-9 md:h-9 lg:w-10 lg:h-10 xl:w-12 xl:h-12",
-                "hover:scale-110"
+                "hover:scale-110",
               )}
             >
               <span
@@ -115,7 +115,7 @@ export default function ProductSlider() {
                   "block rounded-full transition-all duration-200",
                   active
                     ? "bg-gray-100 w-5 h-2.5 sm:w-6 sm:h-3 md:w-7 md:h-3.5 lg:w-8 lg:h-4"
-                    : "bg-white w-3 h-3 sm:w-3.5 sm:h-3.5 md:w-4 md:h-4 lg:w-4.5 lg:h-4.5"
+                    : "bg-white w-3 h-3 sm:w-3.5 sm:h-3.5 md:w-4 md:h-4 lg:w-4.5 lg:h-4.5",
                 )}
               />
             </button>
