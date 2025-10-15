@@ -1,5 +1,6 @@
 "use client";
 
+import Container from "@components/Container";
 import CustomImage from "@components/CustomImage";
 import { cn } from "@components/lib/utils";
 import {
@@ -16,18 +17,20 @@ export default function RelatedCarousel() {
 
   return (
     <section
-      className="w-full max-w-[97%] md:max-w-[95%] lg:max-w-[85%] mx-auto py-5 overflow-hidden"
+      className="w-full max-w-[97%] md:max-w-[95%] lg:max-w-[100%] mx-auto py-5 overflow-hidden"
       aria-label="محصولات مشابه"
       itemScope
       itemType="https://schema.org/ItemList"
     >
       <header>
-        <h2
-          className="text-sm lg:text-lg font-bold mb-2 text-gray-900"
-          itemProp="name"
-        >
-          محصولات مشابه
-        </h2>
+        <Container>
+          <h2
+            className="text-sm lg:text-lg font-bold mb-2 text-gray-900"
+            itemProp="name"
+          >
+            محصولات مشابه
+          </h2>
+        </Container>
       </header>
 
       <div className="relative -mx-[4%] md:-mx-[3%] lg:-mx-[2%]">
@@ -42,22 +45,22 @@ export default function RelatedCarousel() {
               return (
                 <CarouselItem
                   key={indx}
-                  className="pl-3 select-none basis-[60%] sm:basis-[40%] md:basis-[30%] lg:basis-[22%] xl:basis-[18%]"
+                  className="pl-3 select-none basis-[25%]  lg:basis-[14%] xl:basis-[10%]"
                   itemProp="itemListElement"
                   itemScope
                   itemType="https://schema.org/Product"
                 >
                   <article
-                    className="bg-sky-blue p-5 rounded-md aspect-[21/20] sm:aspect-[19/18] md:aspect-[14/12] lg:aspect-[10/9] 2xl:aspect-[10/9]"
+                    className="bg-sky-blue p-5 flex rounded-md "
                     itemProp="item"
                   >
                     <figure
-                      className="relative w-full h-full overflow-hidden"
+                      className="relative w-full h-full overflow-hidden "
                       itemProp="image"
                     >
                       <Link
                         href={`/product/${indx + 1}`}
-                        className="w-full h-full block focus:outline-none"
+                        className="w-full h-full block focus:outline-none aspect-[14/13]"
                         itemProp="url"
                       >
                         <CustomImage
@@ -74,7 +77,7 @@ export default function RelatedCarousel() {
                           loading={isLCP ? "eager" : "lazy"}
                           placeholder={isLCP ? "empty" : undefined}
                           className={cn(
-                            "w-[80%] h-[80%] m-auto object-cover",
+                            "w-full h-full m-auto object-cover",
                             isLCP && "!opacity-100 !duration-0",
                           )}
                           style={
