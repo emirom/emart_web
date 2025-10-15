@@ -7,8 +7,8 @@ export default function MainHeader() {
   return (
     <header className="py-2 pt-4">
       <Container>
-        {/* Mobile size */}
         <MainSearchContext>
+          {/* Mobile size */}
           <MobilePrimaryHeader />
           {/* Desktop size */}
           <DesktopPrimaryHeader />

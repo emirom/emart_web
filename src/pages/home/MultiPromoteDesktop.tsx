@@ -33,7 +33,7 @@ export default function MultiPromoteDesktop() {
             aria-label="افزودن همه محصولات به سبد خرید"
             className="w-full bg-tint-blue-500 mt-10 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-tint-blue-400"
           >
-            افزودن به سبد خرید
+            افزودن مجموعه به سبد خرید
           </Button>
         </div>
       </div>

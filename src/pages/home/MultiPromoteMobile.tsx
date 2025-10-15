@@ -94,7 +94,7 @@ export default function MultiPromoteMobile() {
         aria-label="افزودن همه به سبد خرید"
         className="w-full bg-tint-blue-500 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-tint-blue-400"
       >
-        افزودن به سبد خرید
+        افزودن مجموعه به سبد خرید
       </Button>
     </section>
   );

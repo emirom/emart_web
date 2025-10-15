@@ -1,11 +1,19 @@
 "use client";
 
-interface FormErrorMessageProps {
-  message?: string;
-}
+import React from "react";
+import { cn } from "./lib/utils";
 
-export function FormErrorMessage({ message }: FormErrorMessageProps) {
+type Props = React.HTMLAttributes<HTMLParagraphElement> & {
+  message?: string;
+  className?: string;
+};
+
+export function FormErrorMessage({ message, className, ...props }: Props) {
   if (!message) return null;
 
-  return <p className="text-destructive text-sm mt-1">{message}</p>;
+  return (
+    <p {...props} className={cn("text-destructive text-sm mt-1", className)}>
+      {message}
+    </p>
+  );
 }

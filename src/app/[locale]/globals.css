@@ -108,6 +108,7 @@
 @theme inline {
   --color-destructive: #c30000;
   --color-destructive-light: #ed2e2e;
+  --color-red-400: #ff6961;
   --color-red-500: #ff6a6a;
   --color-red-800: #d32f2f;
   --color-green-200: #34c759;
@@ -121,6 +122,7 @@
   --color-tint-blue-600: #1b4874;
   --color-tint-blue-700: #153c64;
   --color-tint-blue-800: #032f5b;
+  --color-orange-700: #f9992f;
   --color-success: #00966d;
   --color-success-light: #00ba88;
   --color-warning: #ec9c00;
@@ -128,6 +130,7 @@
   --color-info: #008dcf;
   --color-info-light: #008dcf;
   --color-gray: #f9f9f9;
+
   --color-gray-100: #d9d9d9;
   --color-gray-200: #757575;
 

@@ -1,4 +1,5 @@
 import { Search } from "lucide-react";
+import { LoginModal } from "./LoginModal";
 import { MainHeaderMenu } from "./MainHeaderMenu";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
@@ -52,16 +53,9 @@ export default function DesktopPrimaryHeader() {
             aria-label="ورود یا عضویت"
             title="ورود یا عضویت"
           >
-            ورود‌ / عضویت
+            سبد خرید
           </Button>
-          <Button
-            type="button"
-            className="bg-white text-tint-blue-500 border border-tint-blue-100 text-sm py-2"
-            aria-label="ورود یا عضویت"
-            title="ورود یا عضویت"
-          >
-            ورود‌ / عضویت
-          </Button>
+          <LoginModal />
         </div>
       </div>
 
