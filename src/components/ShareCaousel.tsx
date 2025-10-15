@@ -2,6 +2,7 @@
 
 import { ArrowLeftRight, HeartIcon } from "lucide-react";
 import Link from "next/link";
+import Container from "./Container";
 import CustomImage from "./CustomImage";
 import { cn } from "./lib/utils";
 import { Button } from "./ui/button";
@@ -23,63 +24,66 @@ export default function ShareCarousel({ title, labelAria }: Props) {
 
   return (
     <section
-      className="w-full max-w-[97%] md:max-w-[95%] lg:max-w-[85%] mx-auto py-5 overflow-hidden"
+      className="mx-auto py-6 overflow-hidden w-[97%] md:w-[95%]"
       aria-label={labelAria}
       itemScope
       itemType="https://schema.org/ItemList"
     >
       {title && (
-        <header>
-          <h2
-            className="text-sm lg:text-lg font-bold mb-2 text-gray-900"
-            itemProp="name"
-          >
-            {title}
-          </h2>
+        <header className="mb-3">
+          <Container>
+            <h2
+              className="text-sm lg:text-lg font-bold text-gray-900"
+              itemProp="name"
+            >
+              {title}
+            </h2>
+          </Container>
         </header>
       )}
 
-      <div className="relative -mx-[4%] md:-mx-[3%] lg:-mx-[2%]">
+      <div className="relative">
         <Carousel
-          className="px-[5%] sm:px-[4%] md:px-[3%] lg:px-[2%]"
+          className="px-[4%] sm:px-[3%] md:px-[2%] lg:px-[1.5%]"
           aria-label={`${labelAria} - لیست محصولات`}
         >
           <CarouselContent className="-ml-3">
             {items.map((_, indx) => {
               const isLCP = indx === 0;
+
               return (
                 <CarouselItem
                   key={indx}
-                  className="pl-3 select-none basis-[80%] sm:basis-[45%] md:basis-[40%] lg:basis-[35%] xl:basis-[20%]"
+                  className="pl-3 select-none basis-[80%] sm:basis-[45%] md:basis-[40%] lg:basis-[30%] xl:basis-[20%]"
                   itemProp="itemListElement"
                   itemScope
                   itemType="https://schema.org/Product"
                 >
                   <article
-                    className="border overflow-hidden border-gray-100 rounded-lg p-2 relative"
+                    className="border border-gray-100 rounded-lg overflow-hidden p-2 relative shadow-sm hover:shadow-md transition-shadow"
                     itemProp="item"
                   >
                     <Link
                       href={`/product/${indx + 1}`}
-                      className="w-full h-full block focus:outline-none"
+                      className="block w-full h-full focus-visible:outline-none"
                       itemProp="url"
                     >
-                      <figure>
+                      <figure className="relative w-full  overflow-hidden rounded-md bg-gray-50">
                         <CustomImage
                           src="/images/related-porduct.png"
                           alt={`آیفون 13 پرو مکس - محصول شماره ${indx + 1}`}
                           fill
                           priority={isLCP}
                           fetchPriority={isLCP ? "high" : "auto"}
-                          sizes="(max-width: 640px) 80vw,
-                                 (max-width: 768px) 45vw,
-                                 (max-width: 1024px) 40vw,
-                                 (max-width: 1280px) 35vw,
-                                 20vw"
                           loading={isLCP ? "eager" : "lazy"}
                           placeholder={isLCP ? "empty" : undefined}
+                          sizes="(max-width: 640px) 80vw,
+                                 (max-width: 768px) 45vw,
+                                 (max-width: 1024px) 35vw,
+                                 (max-width: 1280px) 25vw,
+                                 20vw"
                           className={cn(
-                            "w-1/2 h-1/2 mx-auto object-cover aspect-[8/7]",
+                            " w-[40%] h-[48%] mx-auto  aspect-[16/15] transition-opacity duration-300",
                             isLCP && "!opacity-100 !duration-0",
                           )}
                           style={
@@ -99,35 +103,38 @@ export default function ShareCarousel({ title, labelAria }: Props) {
 
                       <span
                         aria-label="تخفیف"
-                        className="bg-sky-blue leading-5 justify-center text-sm text-sky-500 absolute rounded-lg right-2 top-2 p-2 font-bold"
+                        className="absolute right-2 top-2 bg-blue-50 text-blue-600 text-xs font-bold px-2 py-1 rounded-lg"
                       >
-                        ۵٪
+                        ۵٪ تخفیف
                       </span>
 
-                      <p
-                        className="text-xs mt-5 font-bold line-through text-sky-500"
-                        itemProp="price"
-                        content="90000000"
-                      >
-                        90,000,000 تومان
-                      </p>
-                      <p
-                        className="text-md mt-2 font-bold text-sky-500"
-                        itemProp="price"
-                        content="85500000"
-                      >
-                        85,500,000 تومان
-                      </p>
+                      <div className="mt-4 space-y-1">
+                        <p
+                          className="text-xs font-bold line-through text-gray-400"
+                          itemProp="price"
+                          content="90000000"
+                        >
+                          90,000,000 تومان
+                        </p>
 
-                      <p
-                        className="text-xs mt-2 font-bold text-sky-500"
-                        itemProp="name"
-                      >
-                        آیفون 13 پرو مکس | 5G | رم 16 | حافظه 128
-                      </p>
+                        <p
+                          className="text-base font-bold text-sky-600"
+                          itemProp="price"
+                          content="85500000"
+                        >
+                          85,500,000 تومان
+                        </p>
+
+                        <p
+                          className="text-xs font-bold text-gray-800 line-clamp-2"
+                          itemProp="name"
+                        >
+                          آیفون 13 پرو مکس | 5G | رم 16 | حافظه 128
+                        </p>
+                      </div>
 
                       <div
-                        className="flex items-center gap-2 my-2 mt-4"
+                        className="flex items-center gap-2 mt-3"
                         itemProp="offers"
                         itemScope
                         itemType="https://schema.org/Offer"
@@ -138,30 +145,30 @@ export default function ShareCarousel({ title, labelAria }: Props) {
                         />
                         <span
                           aria-hidden="true"
-                          className="inline-block w-2 h-2 bg-green-200 rounded-full"
+                          className="inline-block w-2 h-2 bg-green-400 rounded-full"
                         />
-                        <p className="text-md font-bold text-sky-500">
+                        <p className="text-xs font-medium text-green-700">
                           موجود در انبار
                         </p>
                       </div>
                     </Link>
 
-                    <div className="flex items-stretch gap-1 mt-2">
+                    <div className="flex items-stretch gap-1 mt-3">
                       <Button
                         aria-label="افزودن به سبد خرید"
-                        className="bg-sky-blue grow text-sky-600 rounded-lg cursor-pointer focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:ring-offset-2"
+                        className="bg-blue-50 grow text-sky-600 rounded-lg hover:bg-blue-100 focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:ring-offset-2"
                       >
-                        افزودن به سبد خرید
+                        افزودن به سبد
                       </Button>
                       <Button
                         aria-label="افزودن به علاقه‌مندی‌ها"
-                        className="bg-sky-blue text-sky-600 rounded-lg cursor-pointer focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:ring-offset-2"
+                        className="bg-blue-50 text-sky-600 rounded-lg hover:bg-blue-100 focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:ring-offset-2"
                       >
                         <HeartIcon aria-hidden="true" />
                       </Button>
                       <Button
                         aria-label="مقایسه محصول"
-                        className="bg-sky-blue text-sky-600 rounded-lg cursor-pointer focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:ring-offset-2"
+                        className="bg-blue-50 text-sky-600 rounded-lg hover:bg-blue-100 focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:ring-offset-2"
                       >
                         <ArrowLeftRight aria-hidden="true" />
                       </Button>
@@ -172,8 +179,14 @@ export default function ShareCarousel({ title, labelAria }: Props) {
             })}
           </CarouselContent>
 
-          <CarouselPrevious aria-label="محصول قبلی" />
-          <CarouselNext aria-label="محصول بعدی" />
+          <CarouselPrevious
+            aria-label="محصول قبلی"
+            className="hidden lg:flex items-center justify-center absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-white shadow-md hover:bg-gray-50 rounded-full w-9 h-9 border border-gray-200"
+          />
+          <CarouselNext
+            aria-label="محصول بعدی"
+            className="hidden lg:flex items-center justify-center absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-white shadow-md hover:bg-gray-50 rounded-full w-9 h-9 border border-gray-200"
+          />
         </Carousel>
       </div>
     </section>

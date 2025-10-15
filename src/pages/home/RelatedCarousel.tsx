@@ -7,8 +7,6 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
 } from "@components/ui/carousel";
 import Link from "next/link";
 
@@ -107,9 +105,6 @@ export default function RelatedCarousel() {
               );
             })}
           </CarouselContent>
-
-          <CarouselPrevious className="hidden" aria-label="محصول قبلی" />
-          <CarouselNext className="hidden" aria-label="محصول بعدی" />
         </Carousel>
       </div>
     </section>
