@@ -12,25 +12,30 @@ export default function SpecialOfferItem({
 }) {
   return (
     <article
-      className="border border-gray-100 bg-white  overflow-hidden p-2 relative shadow-sm hover:shadow-md transition-shadow"
+      className="border border-gray-100 bg-white overflow-hidden p-2 relative shadow-sm hover:shadow-md transition-shadow"
       itemProp="item"
     >
       <Link
         href={`/product/${indx + 1}`}
         className="block w-full h-full focus-visible:outline-none"
         itemProp="url"
+        role="link"
       >
-        <div className="flex items-stretch mb-5">
-          <p className="text-red-800 font-bold w-full">پیشنهادویژه</p>
+        <div className="flex items-center justify-between mb-5">
+          <h2 className="text-red-800 font-bold w-full" itemProp="name">
+            پیشنهاد ویژه
+          </h2>
           <span
             aria-label="تخفیف"
-            className=" bg-red-800 text-nowrap text-white text-xs font-bold px-2 py-1 rounded-lg"
+            className="bg-red-800 text-nowrap text-white text-xs font-bold px-2 py-1 rounded-lg"
           >
             ۵٪ تخفیف
           </span>
         </div>
+
         <TimerLine initialTime={3600} />
-        <figure className="relative w-full flex items-center justify-center  aspect-[23/15]  overflow-hidden rounded-md bg-gray-50">
+
+        <figure className="relative w-full flex items-center justify-center aspect-[23/15] overflow-hidden rounded-md bg-gray-50">
           <CustomImage
             src="/images/related-porduct.png"
             alt={`آیفون 13 پرو مکس - محصول شماره ${indx + 1}`}
@@ -40,16 +45,17 @@ export default function SpecialOfferItem({
             loading={isLCP ? "eager" : "lazy"}
             placeholder={isLCP ? "empty" : undefined}
             sizes="(max-width: 640px) 80vw,
-                                 (max-width: 768px) 45vw,
-                                 (max-width: 1024px) 35vw,
-                                 (max-width: 1280px) 25vw,
-                                 20vw"
+                   (max-width: 768px) 45vw,
+                   (max-width: 1024px) 35vw,
+                   (max-width: 1280px) 25vw,
+                   20vw"
             className={cn(
-              "   w-1/2 h-[75%] transition-opacity duration-300",
+              "w-1/2 h-[75%] transition-opacity duration-300",
               isLCP && "!opacity-100 !duration-0",
             )}
             style={isLCP ? { opacity: 1, transition: "none" } : undefined}
             itemProp="image"
+            aria-label="تصویر محصول آیفون 13 پرو مکس"
           />
           <figcaption className="sr-only">
             آیفون 13 پرو مکس - حافظه 128GB - رم 16GB
@@ -60,14 +66,14 @@ export default function SpecialOfferItem({
         <meta itemProp="sku" content={`iphone13-${indx}`} />
 
         <div className="mt-4 text-center space-y-1">
-          <p className="text-base font-bold text-sky-600">
+          <p className="text-base font-bold text-tint-blue-500">
             سامسونگ اس 25 الترا
           </p>
 
           <p
             className="text-md font-bold text-tint-blue-500 line-clamp-2"
             itemProp="price"
-            content="90000000"
+            content="88500000"
           >
             88,500,000 تومان
           </p>
