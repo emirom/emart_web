@@ -4,6 +4,7 @@ import RelatedCarousel from "@/pages/home/RelatedCarousel";
 import Container from "@components/Container";
 import LanguageSwitcher from "@components/LanguageSwitcher";
 import ShareCarousel from "@components/ShareCaousel";
+import SpecialOfferCarousel from "@components/SpecialOfferCarousel";
 
 export default function HomePage() {
   return (
@@ -17,6 +18,7 @@ export default function HomePage() {
       />
       <Container>
         <MultiPromote />
+        <SpecialOfferCarousel labelAria="پیشنهاد ویژه" />
       </Container>
     </>
   );
