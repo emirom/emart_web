@@ -1,3 +1,4 @@
+import MainFooter from "@components/MainFooter";
 import MainHeader from "@components/MainHeader";
 import { ReactNode } from "react";
 
@@ -10,6 +11,7 @@ export default async function mainLayout({
     <>
       <MainHeader />
       <main>{children}</main>
+      <MainFooter />
     </>
   );
 }
