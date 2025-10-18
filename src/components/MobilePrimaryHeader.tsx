@@ -1,4 +1,5 @@
-import { Menu, Search, ShoppingBasket } from "lucide-react";
+import { Search, ShoppingBasket } from "lucide-react";
+import { MobileNavbar } from "./MobileNavbar";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 
@@ -7,18 +8,7 @@ export default function MobilePrimaryHeader() {
 
   return (
     <div className="flex items-center w-full gap-2 md:hidden">
-      <Button
-        type="button"
-        className="bg-tint-blue-100"
-        aria-label="باز کردن منو"
-        title="باز کردن منو"
-      >
-        <Menu
-          className="stroke-tint-blue-500 stroke-3"
-          aria-hidden="true"
-          focusable="false"
-        />
-      </Button>
+      <MobileNavbar />
 
       <div
         role="search"
