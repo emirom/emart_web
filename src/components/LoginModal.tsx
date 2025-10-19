@@ -27,7 +27,7 @@ import {
 export function LoginModal() {
   const [open, setOpen] = useState(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
-
+  // Desktop size
   if (isDesktop) {
     return (
       <Dialog open={open} onOpenChange={setOpen}>
@@ -66,20 +66,20 @@ export function LoginModal() {
       </Dialog>
     );
   }
-
+  // Mobile size
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
         <Button variant="outline">ورود‌/‌عضویت</Button>
       </DrawerTrigger>
-      <DrawerContent>
-        <DrawerHeader className="text-left">
-          <DrawerTitle>ورود / عضویت</DrawerTitle>
+      <DrawerContent className="px-5">
+        <DrawerHeader className="text-left  px-0">
+          <DrawerTitle className="text-start">ورود / عضویت</DrawerTitle>
         </DrawerHeader>
         <ProfileForm />
         <DrawerFooter className="pt-2">
           <DrawerClose asChild>
-            <Button variant="outline">تايید</Button>
+            <Button variant="outline">انصراف</Button>
           </DrawerClose>
         </DrawerFooter>
       </DrawerContent>
