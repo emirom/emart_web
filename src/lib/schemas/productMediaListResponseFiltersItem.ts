@@ -4,11 +4,11 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { ProductMediaListResponseFiltersItemLabel } from './productMediaListResponseFiltersItemLabel';
-import type { ProductMediaListResponseFiltersItemModel } from './productMediaListResponseFiltersItemModel';
-import type { ProductMediaListResponseFiltersItemField } from './productMediaListResponseFiltersItemField';
-import type { ProductMediaListResponseFiltersItemAdvanced } from './productMediaListResponseFiltersItemAdvanced';
-import type { ProductMediaListResponseFiltersItemEnumOptions } from './productMediaListResponseFiltersItemEnumOptions';
+import type { ProductMediaListResponseFiltersItemLabel } from "./productMediaListResponseFiltersItemLabel";
+import type { ProductMediaListResponseFiltersItemModel } from "./productMediaListResponseFiltersItemModel";
+import type { ProductMediaListResponseFiltersItemField } from "./productMediaListResponseFiltersItemField";
+import type { ProductMediaListResponseFiltersItemAdvanced } from "./productMediaListResponseFiltersItemAdvanced";
+import type { ProductMediaListResponseFiltersItemEnumOptions } from "./productMediaListResponseFiltersItemEnumOptions";
 
 export type ProductMediaListResponseFiltersItem = {
   /** The key representing the service associated with the filter. */

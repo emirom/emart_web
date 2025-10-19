@@ -4,10 +4,7 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import {
-  z as zod
-} from 'zod';
-
+import { z as zod } from "zod";
 
 /**
  * Create a new label
@@ -16,11 +13,19 @@ export const postLabelsBodyNameMin = 2;
 
 export const postLabelsBodyNameMax = 50;
 
-
-export const postLabelsBody = zod.object({
-  "name": zod.coerce.string().min(postLabelsBodyNameMin).max(postLabelsBodyNameMax).describe('Label name'),
-  "pageId": zod.union([zod.uuid(),zod.null()]).optional().describe('Optional Associated page ID')
-}).describe('Label creation payload')
+export const postLabelsBody = zod
+  .object({
+    name: zod.coerce
+      .string()
+      .min(postLabelsBodyNameMin)
+      .max(postLabelsBodyNameMax)
+      .describe("Label name"),
+    pageId: zod
+      .union([zod.uuid(), zod.null()])
+      .optional()
+      .describe("Optional Associated page ID"),
+  })
+  .describe("Label creation payload");
 
 /**
  * Get all labels with pagination and filtering
@@ -29,53 +34,85 @@ export const getLabelsQuerySkipMin = 0;
 export const getLabelsQueryLimitMax = 20;
 export const getLabelsQueryNameMaxOne = 50;
 
-
 export const getLabelsQueryParams = zod.object({
-  "skip": zod.coerce.number().min(getLabelsQuerySkipMin).describe('Number of records to skip'),
-  "limit": zod.coerce.number().min(1).max(getLabelsQueryLimitMax).describe('Maximum number of records to return'),
-  "name": zod.union([zod.coerce.string().max(getLabelsQueryNameMaxOne),zod.null()]).optional().describe('Filter labels by name (partial match)')
-})
+  skip: zod.coerce
+    .number()
+    .min(getLabelsQuerySkipMin)
+    .describe("Number of records to skip"),
+  limit: zod.coerce
+    .number()
+    .min(1)
+    .max(getLabelsQueryLimitMax)
+    .describe("Maximum number of records to return"),
+  name: zod
+    .union([zod.coerce.string().max(getLabelsQueryNameMaxOne), zod.null()])
+    .optional()
+    .describe("Filter labels by name (partial match)"),
+});
 
-export const getLabelsResponse = zod.object({
-  "success": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Operation status')
-}).describe('Standard API response format')
+export const getLabelsResponse = zod
+  .object({
+    success: zod
+      .union([zod.coerce.boolean(), zod.null()])
+      .optional()
+      .describe("Operation status"),
+  })
+  .describe("Standard API response format");
 
 /**
  * Get a single label by ID
  */
 export const getLabelsIdParams = zod.object({
-  "id": zod.uuid().describe('Label ID')
-})
+  id: zod.uuid().describe("Label ID"),
+});
 
-export const getLabelsIdResponse = zod.object({
-  "success": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Operation status')
-}).describe('Standard API response format')
+export const getLabelsIdResponse = zod
+  .object({
+    success: zod
+      .union([zod.coerce.boolean(), zod.null()])
+      .optional()
+      .describe("Operation status"),
+  })
+  .describe("Standard API response format");
 
 /**
  * Update a label
  */
 export const patchLabelsIdParams = zod.object({
-  "id": zod.uuid().describe('Label ID')
-})
+  id: zod.uuid().describe("Label ID"),
+});
 
 export const patchLabelsIdBodyNameMin = 2;
 
 export const patchLabelsIdBodyNameMax = 50;
 
+export const patchLabelsIdBody = zod
+  .object({
+    name: zod.coerce
+      .string()
+      .min(patchLabelsIdBodyNameMin)
+      .max(patchLabelsIdBodyNameMax)
+      .optional()
+      .describe("Label name"),
+    pageId: zod
+      .union([zod.uuid(), zod.null()])
+      .optional()
+      .describe("Optional Associated page ID"),
+  })
+  .describe("Label update payload");
 
-export const patchLabelsIdBody = zod.object({
-  "name": zod.coerce.string().min(patchLabelsIdBodyNameMin).max(patchLabelsIdBodyNameMax).optional().describe('Label name'),
-  "pageId": zod.union([zod.uuid(),zod.null()]).optional().describe('Optional Associated page ID')
-}).describe('Label update payload')
-
-export const patchLabelsIdResponse = zod.object({
-  "success": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Operation status')
-}).describe('Standard API response format')
+export const patchLabelsIdResponse = zod
+  .object({
+    success: zod
+      .union([zod.coerce.boolean(), zod.null()])
+      .optional()
+      .describe("Operation status"),
+  })
+  .describe("Standard API response format");
 
 /**
  * Delete a label
  */
 export const deleteLabelsIdParams = zod.object({
-  "id": zod.uuid().describe('Label ID')
-})
-
+  id: zod.uuid().describe("Label ID"),
+});

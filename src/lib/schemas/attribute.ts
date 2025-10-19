@@ -4,8 +4,8 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { AttributeType } from './attributeType';
-import type { AttributeIconUrl } from './attributeIconUrl';
+import type { AttributeType } from "./attributeType";
+import type { AttributeIconUrl } from "./attributeIconUrl";
 
 /**
  * Product attribute entity

@@ -4,21 +4,23 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import {
-  z as zod
-} from 'zod';
-
+import { z as zod } from "zod";
 
 /**
  * Create a new attribute value
  */
 export const postAttributeValuesBodyValueMax = 100;
 
-
-export const postAttributeValuesBody = zod.object({
-  "value": zod.coerce.string().min(1).max(postAttributeValuesBodyValueMax).describe('Attribute value'),
-  "attributeId": zod.uuid().describe('Parent attribute ID')
-}).describe('Attribute value creation payload')
+export const postAttributeValuesBody = zod
+  .object({
+    value: zod.coerce
+      .string()
+      .min(1)
+      .max(postAttributeValuesBodyValueMax)
+      .describe("Attribute value"),
+    attributeId: zod.uuid().describe("Parent attribute ID"),
+  })
+  .describe("Attribute value creation payload");
 
 /**
  * List all attribute values with pagination and filters
@@ -27,52 +29,90 @@ export const getAttributeValuesQuerySkipMin = 0;
 export const getAttributeValuesQueryLimitMax = 20;
 export const getAttributeValuesQueryValueMaxOne = 50;
 
-
 export const getAttributeValuesQueryParams = zod.object({
-  "skip": zod.coerce.number().min(getAttributeValuesQuerySkipMin).describe('Number of records to skip'),
-  "limit": zod.coerce.number().min(1).max(getAttributeValuesQueryLimitMax).describe('Maximum number of records to return'),
-  "value": zod.union([zod.coerce.string().max(getAttributeValuesQueryValueMaxOne),zod.null()]).optional().describe('Filter by value content'),
-  "attributeId": zod.union([zod.uuid(),zod.null()]).optional().describe('Filter by attribute ID')
-})
+  skip: zod.coerce
+    .number()
+    .min(getAttributeValuesQuerySkipMin)
+    .describe("Number of records to skip"),
+  limit: zod.coerce
+    .number()
+    .min(1)
+    .max(getAttributeValuesQueryLimitMax)
+    .describe("Maximum number of records to return"),
+  value: zod
+    .union([
+      zod.coerce.string().max(getAttributeValuesQueryValueMaxOne),
+      zod.null(),
+    ])
+    .optional()
+    .describe("Filter by value content"),
+  attributeId: zod
+    .union([zod.uuid(), zod.null()])
+    .optional()
+    .describe("Filter by attribute ID"),
+});
 
-export const getAttributeValuesResponse = zod.object({
-  "success": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Operation status')
-}).describe('Standard API response format').describe('List of attribute values response')
+export const getAttributeValuesResponse = zod
+  .object({
+    success: zod
+      .union([zod.coerce.boolean(), zod.null()])
+      .optional()
+      .describe("Operation status"),
+  })
+  .describe("Standard API response format")
+  .describe("List of attribute values response");
 
 /**
  * Get a single attribute value by ID
  */
 export const getAttributeValuesIdParams = zod.object({
-  "id": zod.uuid().describe('Attribute Value ID')
-})
+  id: zod.uuid().describe("Attribute Value ID"),
+});
 
-export const getAttributeValuesIdResponse = zod.object({
-  "success": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Operation status')
-}).describe('Standard API response format').describe('Single attribute value response')
+export const getAttributeValuesIdResponse = zod
+  .object({
+    success: zod
+      .union([zod.coerce.boolean(), zod.null()])
+      .optional()
+      .describe("Operation status"),
+  })
+  .describe("Standard API response format")
+  .describe("Single attribute value response");
 
 /**
  * Update an attribute value
  */
 export const patchAttributeValuesIdParams = zod.object({
-  "id": zod.uuid().describe('Attribute Value ID')
-})
+  id: zod.uuid().describe("Attribute Value ID"),
+});
 
 export const patchAttributeValuesIdBodyValueMax = 100;
 
+export const patchAttributeValuesIdBody = zod
+  .object({
+    value: zod.coerce
+      .string()
+      .min(1)
+      .max(patchAttributeValuesIdBodyValueMax)
+      .optional()
+      .describe("Attribute value"),
+    attributeId: zod.uuid().optional().describe("Parent attribute ID"),
+  })
+  .describe("Attribute value update payload");
 
-export const patchAttributeValuesIdBody = zod.object({
-  "value": zod.coerce.string().min(1).max(patchAttributeValuesIdBodyValueMax).optional().describe('Attribute value'),
-  "attributeId": zod.uuid().optional().describe('Parent attribute ID')
-}).describe('Attribute value update payload')
-
-export const patchAttributeValuesIdResponse = zod.object({
-  "success": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Operation status')
-}).describe('Standard API response format').describe('Single attribute value response')
+export const patchAttributeValuesIdResponse = zod
+  .object({
+    success: zod
+      .union([zod.coerce.boolean(), zod.null()])
+      .optional()
+      .describe("Operation status"),
+  })
+  .describe("Standard API response format")
+  .describe("Single attribute value response");
 
 /**
  * Delete an attribute value
  */
 export const deleteAttributeValuesIdParams = zod.object({
-  "id": zod.uuid().describe('Attribute Value ID')
-})
-
+  id: zod.uuid().describe("Attribute Value ID"),
+});

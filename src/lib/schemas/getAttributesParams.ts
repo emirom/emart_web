@@ -6,27 +6,34 @@
  */
 
 export type GetAttributesParams = {
-/**
- * Number of records to skip
- * @minimum 0
- */
-skip: number;
-/**
- * Maximum number of records to return
- * @minimum 1
- * @maximum 20
- */
-limit: number;
-/**
- * Filter by attribute title
- */
-title?: string | null;
-/**
- * Filter by attribute type
- */
-type?: 'select' | 'multiselect' | 'text' | 'number' | 'boolean' | 'color' | null;
-/**
- * Filter by category ID
- */
-categoryId?: string | null;
+  /**
+   * Number of records to skip
+   * @minimum 0
+   */
+  skip: number;
+  /**
+   * Maximum number of records to return
+   * @minimum 1
+   * @maximum 20
+   */
+  limit: number;
+  /**
+   * Filter by attribute title
+   */
+  title?: string | null;
+  /**
+   * Filter by attribute type
+   */
+  type?:
+    | "select"
+    | "multiselect"
+    | "text"
+    | "number"
+    | "boolean"
+    | "color"
+    | null;
+  /**
+   * Filter by category ID
+   */
+  categoryId?: string | null;
 };

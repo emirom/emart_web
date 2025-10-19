@@ -4,11 +4,11 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { CategoryDeletedAt } from './categoryDeletedAt';
-import type { CategoryParentId } from './categoryParentId';
-import type { CategoryIconUrl } from './categoryIconUrl';
-import type { CategoryIsActive } from './categoryIsActive';
-import type { CategoryShowInMenu } from './categoryShowInMenu';
+import type { CategoryDeletedAt } from "./categoryDeletedAt";
+import type { CategoryParentId } from "./categoryParentId";
+import type { CategoryIconUrl } from "./categoryIconUrl";
+import type { CategoryIsActive } from "./categoryIsActive";
+import type { CategoryShowInMenu } from "./categoryShowInMenu";
 
 /**
  * Product category entity with hierarchical support

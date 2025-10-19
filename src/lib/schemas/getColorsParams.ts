@@ -6,39 +6,39 @@
  */
 
 export type GetColorsParams = {
-/**
- * Number of records to skip
- * @minimum 0
- */
-skip: number;
-/**
- * Maximum number of records to return
- * @minimum 1
- * @maximum 20
- */
-limit: number;
-/**
- * Optional date input, usually null
- */
-deletedAt?: string | null;
-/**
- * Filter by color name in native language
- */
-name?: string | null;
-/**
- * Filter by English color name for internationalization
- */
-enName?: string | null;
-/**
- * Filter by marketing display name (e.g., 'Snow white')
- */
-displayName?: string | null;
-/**
- * Filter by hexadecimal color code (e.g., #FFFFFF, #FF5733)
- */
-hex?: string | null;
-/**
- * Filter by active status
- */
-isActive?: boolean | null;
+  /**
+   * Number of records to skip
+   * @minimum 0
+   */
+  skip: number;
+  /**
+   * Maximum number of records to return
+   * @minimum 1
+   * @maximum 20
+   */
+  limit: number;
+  /**
+   * Optional date input, usually null
+   */
+  deletedAt?: string | null;
+  /**
+   * Filter by color name in native language
+   */
+  name?: string | null;
+  /**
+   * Filter by English color name for internationalization
+   */
+  enName?: string | null;
+  /**
+   * Filter by marketing display name (e.g., 'Snow white')
+   */
+  displayName?: string | null;
+  /**
+   * Filter by hexadecimal color code (e.g., #FFFFFF, #FF5733)
+   */
+  hex?: string | null;
+  /**
+   * Filter by active status
+   */
+  isActive?: boolean | null;
 };

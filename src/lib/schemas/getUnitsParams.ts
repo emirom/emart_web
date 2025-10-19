@@ -6,19 +6,19 @@
  */
 
 export type GetUnitsParams = {
-/**
- * Number of records to skip
- * @minimum 0
- */
-skip: number;
-/**
- * Maximum number of records to return
- * @minimum 1
- * @maximum 20
- */
-limit: number;
-/**
- * Filter units by title (partial match)
- */
-title?: string | null;
+  /**
+   * Number of records to skip
+   * @minimum 0
+   */
+  skip: number;
+  /**
+   * Maximum number of records to return
+   * @minimum 1
+   * @maximum 20
+   */
+  limit: number;
+  /**
+   * Filter units by title (partial match)
+   */
+  title?: string | null;
 };

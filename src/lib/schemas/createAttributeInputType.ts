@@ -8,14 +8,14 @@
 /**
  * Attribute type
  */
-export type CreateAttributeInputType = typeof CreateAttributeInputType[keyof typeof CreateAttributeInputType];
-
+export type CreateAttributeInputType =
+  (typeof CreateAttributeInputType)[keyof typeof CreateAttributeInputType];
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const CreateAttributeInputType = {
-  select: 'select',
-  multiselect: 'multiselect',
-  text: 'text',
-  number: 'number',
-  boolean: 'boolean',
+  select: "select",
+  multiselect: "multiselect",
+  text: "text",
+  number: "number",
+  boolean: "boolean",
 } as const;
