@@ -4,149 +4,68 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import { z as zod } from "zod";
+import {
+  z as zod
+} from 'zod';
+
 
 export const getProductMediasQuerySkipMin = 0;
 export const getProductMediasQueryLimitMax = 20;
 export const getProductMediasQueryMimetypeMaxOne = 50;
-export const getProductMediasQueryMediaTypeDefaultOne = "image";
-export const getProductMediasQuerySortByDefaultOne = "order";
-export const getProductMediasQuerySortOrderDefaultOne = "asc";
+export const getProductMediasQueryMediaTypeDefaultOne = "image";export const getProductMediasQuerySortByDefaultOne = "order";export const getProductMediasQuerySortOrderDefaultOne = "asc";
 
 export const getProductMediasQueryParams = zod.object({
-  skip: zod.coerce
-    .number()
-    .min(getProductMediasQuerySkipMin)
-    .describe("Number of records to skip"),
-  limit: zod.coerce
-    .number()
-    .min(1)
-    .max(getProductMediasQueryLimitMax)
-    .describe("Maximum number of records to return"),
-  productId: zod
-    .union([zod.uuid(), zod.null()])
-    .optional()
-    .describe("Filter by specific product UUID"),
-  mimetype: zod
-    .union([
-      zod.coerce.string().max(getProductMediasQueryMimetypeMaxOne),
-      zod.null(),
-    ])
-    .optional()
-    .describe("Filter by specific MIME type"),
-  mediaType: zod
-    .union([zod.enum(["image", "video"]), zod.null()])
-    .optional()
-    .describe("Filter by media category (image or video)"),
-  uploadedById: zod
-    .union([zod.uuid(), zod.null()])
-    .optional()
-    .describe("Filter by uploader user UUID"),
-  minOrder: zod
-    .union([zod.coerce.number(), zod.null()])
-    .optional()
-    .describe("Filter by minimum order value"),
-  maxOrder: zod
-    .union([zod.coerce.number(), zod.null()])
-    .optional()
-    .describe("Filter by maximum order value"),
-  hasAltText: zod
-    .union([zod.coerce.boolean(), zod.null()])
-    .optional()
-    .describe("Filter by presence of alternative text"),
-  hasCaption: zod
-    .union([zod.coerce.boolean(), zod.null()])
-    .optional()
-    .describe("Filter by presence of caption"),
-  minFileSize: zod
-    .union([zod.coerce.number(), zod.null()])
-    .optional()
-    .describe("Filter by minimum file size in bytes"),
-  maxFileSize: zod
-    .union([zod.coerce.number(), zod.null()])
-    .optional()
-    .describe("Filter by maximum file size in bytes"),
-  sortBy: zod
-    .union([
-      zod.enum(["createdAt", "updatedAt", "order", "fileSize"]),
-      zod.null(),
-    ])
-    .optional()
-    .describe("Sort results by specified field"),
-  sortOrder: zod
-    .union([zod.enum(["desc", "asc"]), zod.null()])
-    .optional()
-    .describe("Sort direction"),
-});
+  "skip": zod.coerce.number().min(getProductMediasQuerySkipMin).describe('Number of records to skip'),
+  "limit": zod.coerce.number().min(1).max(getProductMediasQueryLimitMax).describe('Maximum number of records to return'),
+  "productId": zod.union([zod.uuid(),zod.null()]).optional().describe('Filter by specific product UUID'),
+  "mimetype": zod.union([zod.coerce.string().max(getProductMediasQueryMimetypeMaxOne),zod.null()]).optional().describe('Filter by specific MIME type'),
+  "mediaType": zod.union([zod.enum(['image', 'video']),zod.null()]).optional().describe('Filter by media category (image or video)'),
+  "uploadedById": zod.union([zod.uuid(),zod.null()]).optional().describe('Filter by uploader user UUID'),
+  "minOrder": zod.union([zod.coerce.number(),zod.null()]).optional().describe('Filter by minimum order value'),
+  "maxOrder": zod.union([zod.coerce.number(),zod.null()]).optional().describe('Filter by maximum order value'),
+  "hasAltText": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Filter by presence of alternative text'),
+  "hasCaption": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Filter by presence of caption'),
+  "minFileSize": zod.union([zod.coerce.number(),zod.null()]).optional().describe('Filter by minimum file size in bytes'),
+  "maxFileSize": zod.union([zod.coerce.number(),zod.null()]).optional().describe('Filter by maximum file size in bytes'),
+  "sortBy": zod.union([zod.enum(['createdAt', 'updatedAt', 'order', 'fileSize']),zod.null()]).optional().describe('Sort results by specified field'),
+  "sortOrder": zod.union([zod.enum(['desc', 'asc']),zod.null()]).optional().describe('Sort direction')
+})
 
-export const getProductMediasResponse = zod
-  .object({
-    success: zod
-      .union([zod.coerce.boolean(), zod.null()])
-      .optional()
-      .describe("Operation status"),
-  })
-  .describe("Standard API response format")
-  .describe("Response schema for listing product media with pagination");
+export const getProductMediasResponse = zod.object({
+  "success": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Operation status')
+}).describe('Standard API response format').describe('Response schema for listing product media with pagination')
 
 export const getProductMediasIdParams = zod.object({
-  id: zod.coerce.string(),
-});
+  "id": zod.coerce.string()
+})
 
 export const getProductMediasIdQueryParams = zod.object({
-  id: zod.uuid().describe("Category ID"),
-});
+  "id": zod.uuid().describe('Category ID')
+})
 
-export const getProductMediasIdResponse = zod
-  .object({
-    success: zod
-      .union([zod.coerce.boolean(), zod.null()])
-      .optional()
-      .describe("Operation status"),
-  })
-  .describe("Standard API response format")
-  .describe("Response schema for single product media operations");
+export const getProductMediasIdResponse = zod.object({
+  "success": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Operation status')
+}).describe('Standard API response format').describe('Response schema for single product media operations')
 
 export const patchProductMediasIdParams = zod.object({
-  id: zod.coerce.string(),
-});
+  "id": zod.coerce.string()
+})
 
 export const patchProductMediasIdBodyAltTextMaxOne = 500;
 export const patchProductMediasIdBodyCaptionMaxOne = 1000;
 
-export const patchProductMediasIdBody = zod
-  .object({
-    altText: zod
-      .union([
-        zod.coerce.string().max(patchProductMediasIdBodyAltTextMaxOne),
-        zod.null(),
-      ])
-      .optional()
-      .describe("Update alternative text for accessibility"),
-    caption: zod
-      .union([
-        zod.coerce.string().max(patchProductMediasIdBodyCaptionMaxOne),
-        zod.null(),
-      ])
-      .optional()
-      .describe("Update media caption or description"),
-    order: zod
-      .union([zod.coerce.number(), zod.null()])
-      .optional()
-      .describe("Update display order"),
-  })
-  .describe("Schema for updating existing product media metadata");
 
-export const patchProductMediasIdResponse = zod
-  .object({
-    success: zod
-      .union([zod.coerce.boolean(), zod.null()])
-      .optional()
-      .describe("Operation status"),
-  })
-  .describe("Standard API response format")
-  .describe("Response schema for single product media operations");
+export const patchProductMediasIdBody = zod.object({
+  "altText": zod.union([zod.coerce.string().max(patchProductMediasIdBodyAltTextMaxOne),zod.null()]).optional().describe('Update alternative text for accessibility'),
+  "caption": zod.union([zod.coerce.string().max(patchProductMediasIdBodyCaptionMaxOne),zod.null()]).optional().describe('Update media caption or description'),
+  "order": zod.union([zod.coerce.number(),zod.null()]).optional().describe('Update display order')
+}).describe('Schema for updating existing product media metadata')
+
+export const patchProductMediasIdResponse = zod.object({
+  "success": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Operation status')
+}).describe('Standard API response format').describe('Response schema for single product media operations')
 
 export const deleteProductMediasIdParams = zod.object({
-  id: zod.coerce.string(),
-});
+  "id": zod.coerce.string()
+})
+

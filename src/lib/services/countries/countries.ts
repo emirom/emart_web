@@ -4,7 +4,10 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import { useMutation, useQuery } from "@tanstack/react-query";
+import {
+  useMutation,
+  useQuery
+} from '@tanstack/react-query';
 import type {
   DataTag,
   DefinedInitialDataOptions,
@@ -17,8 +20,8 @@ import type {
   UseMutationOptions,
   UseMutationResult,
   UseQueryOptions,
-  UseQueryResult,
-} from "@tanstack/react-query";
+  UseQueryResult
+} from '@tanstack/react-query';
 
 import type {
   BaseResponse,
@@ -30,531 +33,361 @@ import type {
   GetCountriesParams,
   InternalError,
   NotfoundError,
-  UpdateCountryInput,
-} from "../../schemas";
+  UpdateCountryInput
+} from '../../schemas';
 
-import { axiosInstance } from "../../configs/axios-instance";
+import { axiosInstance } from '../../configs/axios-instance';
+
+
+
 
 /**
  * Create a new country
  */
 export const postCountries = (
-  createCountryInput: CreateCountryInput,
-  signal?: AbortSignal,
+    createCountryInput: CreateCountryInput,
+ signal?: AbortSignal
 ) => {
-  return axiosInstance<CountryResponse>({
-    url: `/countries`,
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    data: createCountryInput,
-    signal,
-  });
-};
+      
+      
+      return axiosInstance<CountryResponse>(
+      {url: `/countries`, method: 'POST',
+      headers: {'Content-Type': 'application/json', },
+      data: createCountryInput, signal
+    },
+      );
+    }
+  
 
-export const getPostCountriesMutationOptions = <
-  TError = ErrorResponse | ConflictError | InternalError,
-  TContext = unknown,
->(options?: {
-  mutation?: UseMutationOptions<
-    Awaited<ReturnType<typeof postCountries>>,
-    TError,
-    { data: CreateCountryInput },
-    TContext
-  >;
-}): UseMutationOptions<
-  Awaited<ReturnType<typeof postCountries>>,
-  TError,
-  { data: CreateCountryInput },
-  TContext
-> => {
-  const mutationKey = ["postCountries"];
-  const { mutation: mutationOptions } = options
-    ? options.mutation &&
-      "mutationKey" in options.mutation &&
-      options.mutation.mutationKey
-      ? options
-      : { ...options, mutation: { ...options.mutation, mutationKey } }
-    : { mutation: { mutationKey } };
 
-  const mutationFn: MutationFunction<
-    Awaited<ReturnType<typeof postCountries>>,
-    { data: CreateCountryInput }
-  > = (props) => {
-    const { data } = props ?? {};
+export const getPostCountriesMutationOptions = <TError = ErrorResponse | ConflictError | InternalError,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postCountries>>, TError,{data: CreateCountryInput}, TContext>, }
+): UseMutationOptions<Awaited<ReturnType<typeof postCountries>>, TError,{data: CreateCountryInput}, TContext> => {
 
-    return postCountries(data);
-  };
+const mutationKey = ['postCountries'];
+const {mutation: mutationOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }};
 
-  return { mutationFn, ...mutationOptions };
-};
+      
 
-export type PostCountriesMutationResult = NonNullable<
-  Awaited<ReturnType<typeof postCountries>>
->;
-export type PostCountriesMutationBody = CreateCountryInput;
-export type PostCountriesMutationError =
-  | ErrorResponse
-  | ConflictError
-  | InternalError;
 
-export const usePostCountries = <
-  TError = ErrorResponse | ConflictError | InternalError,
-  TContext = unknown,
->(
-  options?: {
-    mutation?: UseMutationOptions<
-      Awaited<ReturnType<typeof postCountries>>,
-      TError,
-      { data: CreateCountryInput },
-      TContext
-    >;
-  },
-  queryClient?: QueryClient,
-): UseMutationResult<
-  Awaited<ReturnType<typeof postCountries>>,
-  TError,
-  { data: CreateCountryInput },
-  TContext
-> => {
-  const mutationOptions = getPostCountriesMutationOptions(options);
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postCountries>>, {data: CreateCountryInput}> = (props) => {
+          const {data} = props ?? {};
 
-  return useMutation(mutationOptions, queryClient);
-};
-/**
+          return  postCountries(data,)
+        }
+
+        
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type PostCountriesMutationResult = NonNullable<Awaited<ReturnType<typeof postCountries>>>
+    export type PostCountriesMutationBody = CreateCountryInput
+    export type PostCountriesMutationError = ErrorResponse | ConflictError | InternalError
+
+    export const usePostCountries = <TError = ErrorResponse | ConflictError | InternalError,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postCountries>>, TError,{data: CreateCountryInput}, TContext>, }
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof postCountries>>,
+        TError,
+        {data: CreateCountryInput},
+        TContext
+      > => {
+
+      const mutationOptions = getPostCountriesMutationOptions(options);
+
+      return useMutation(mutationOptions , queryClient);
+    }
+    /**
  * Get all countries with pagination and filters
  */
 export const getCountries = (
-  params: GetCountriesParams,
-  signal?: AbortSignal,
+    params: GetCountriesParams,
+ signal?: AbortSignal
 ) => {
-  return axiosInstance<CountryListResponse>({
-    url: `/countries`,
-    method: "GET",
-    params,
-    signal,
-  });
-};
+      
+      
+      return axiosInstance<CountryListResponse>(
+      {url: `/countries`, method: 'GET',
+        params, signal
+    },
+      );
+    }
+  
 
-export const getGetCountriesQueryKey = (params?: GetCountriesParams) => {
-  return [`/countries`, ...(params ? [params] : [])] as const;
-};
+export const getGetCountriesQueryKey = (params?: GetCountriesParams,) => {
+    return [`/countries`, ...(params ? [params]: [])] as const;
+    }
 
-export const getGetCountriesQueryOptions = <
-  TData = Awaited<ReturnType<typeof getCountries>>,
-  TError = InternalError,
->(
-  params: GetCountriesParams,
-  options?: {
-    query?: Partial<
-      UseQueryOptions<Awaited<ReturnType<typeof getCountries>>, TError, TData>
-    >;
-  },
+    
+export const getGetCountriesQueryOptions = <TData = Awaited<ReturnType<typeof getCountries>>, TError = InternalError>(params: GetCountriesParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getCountries>>, TError, TData>>, }
 ) => {
-  const { query: queryOptions } = options ?? {};
 
-  const queryKey = queryOptions?.queryKey ?? getGetCountriesQueryKey(params);
+const {query: queryOptions} = options ?? {};
 
-  const queryFn: QueryFunction<Awaited<ReturnType<typeof getCountries>>> = ({
-    signal,
-  }) => getCountries(params, signal);
+  const queryKey =  queryOptions?.queryKey ?? getGetCountriesQueryKey(params);
 
-  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
-    Awaited<ReturnType<typeof getCountries>>,
-    TError,
-    TData
-  > & { queryKey: DataTag<QueryKey, TData, TError> };
-};
+  
 
-export type GetCountriesQueryResult = NonNullable<
-  Awaited<ReturnType<typeof getCountries>>
->;
-export type GetCountriesQueryError = InternalError;
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getCountries>>> = ({ signal }) => getCountries(params, signal);
 
-export function useGetCountries<
-  TData = Awaited<ReturnType<typeof getCountries>>,
-  TError = InternalError,
->(
-  params: GetCountriesParams,
-  options: {
-    query: Partial<
-      UseQueryOptions<Awaited<ReturnType<typeof getCountries>>, TError, TData>
-    > &
-      Pick<
+      
+
+      
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getCountries>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type GetCountriesQueryResult = NonNullable<Awaited<ReturnType<typeof getCountries>>>
+export type GetCountriesQueryError = InternalError
+
+
+export function useGetCountries<TData = Awaited<ReturnType<typeof getCountries>>, TError = InternalError>(
+ params: GetCountriesParams, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getCountries>>, TError, TData>> & Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof getCountries>>,
           TError,
           Awaited<ReturnType<typeof getCountries>>
-        >,
-        "initialData"
-      >;
-  },
-  queryClient?: QueryClient,
-): DefinedUseQueryResult<TData, TError> & {
-  queryKey: DataTag<QueryKey, TData, TError>;
-};
-export function useGetCountries<
-  TData = Awaited<ReturnType<typeof getCountries>>,
-  TError = InternalError,
->(
-  params: GetCountriesParams,
-  options?: {
-    query?: Partial<
-      UseQueryOptions<Awaited<ReturnType<typeof getCountries>>, TError, TData>
-    > &
-      Pick<
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetCountries<TData = Awaited<ReturnType<typeof getCountries>>, TError = InternalError>(
+ params: GetCountriesParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getCountries>>, TError, TData>> & Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof getCountries>>,
           TError,
           Awaited<ReturnType<typeof getCountries>>
-        >,
-        "initialData"
-      >;
-  },
-  queryClient?: QueryClient,
-): UseQueryResult<TData, TError> & {
-  queryKey: DataTag<QueryKey, TData, TError>;
-};
-export function useGetCountries<
-  TData = Awaited<ReturnType<typeof getCountries>>,
-  TError = InternalError,
->(
-  params: GetCountriesParams,
-  options?: {
-    query?: Partial<
-      UseQueryOptions<Awaited<ReturnType<typeof getCountries>>, TError, TData>
-    >;
-  },
-  queryClient?: QueryClient,
-): UseQueryResult<TData, TError> & {
-  queryKey: DataTag<QueryKey, TData, TError>;
-};
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetCountries<TData = Awaited<ReturnType<typeof getCountries>>, TError = InternalError>(
+ params: GetCountriesParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getCountries>>, TError, TData>>, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 
-export function useGetCountries<
-  TData = Awaited<ReturnType<typeof getCountries>>,
-  TError = InternalError,
->(
-  params: GetCountriesParams,
-  options?: {
-    query?: Partial<
-      UseQueryOptions<Awaited<ReturnType<typeof getCountries>>, TError, TData>
-    >;
-  },
-  queryClient?: QueryClient,
-): UseQueryResult<TData, TError> & {
-  queryKey: DataTag<QueryKey, TData, TError>;
-} {
-  const queryOptions = getGetCountriesQueryOptions(params, options);
+export function useGetCountries<TData = Awaited<ReturnType<typeof getCountries>>, TError = InternalError>(
+ params: GetCountriesParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getCountries>>, TError, TData>>, }
+ , queryClient?: QueryClient 
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
 
-  const query = useQuery(queryOptions, queryClient) as UseQueryResult<
-    TData,
-    TError
-  > & { queryKey: DataTag<QueryKey, TData, TError> };
+  const queryOptions = getGetCountriesQueryOptions(params,options)
 
-  query.queryKey = queryOptions.queryKey;
+  const query = useQuery(queryOptions , queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  query.queryKey = queryOptions.queryKey ;
 
   return query;
 }
+
+
 
 /**
  * Get a single country by ID
  */
-export const getCountriesId = (id: string, signal?: AbortSignal) => {
-  return axiosInstance<CountryResponse>({
-    url: `/countries/${id}`,
-    method: "GET",
-    signal,
-  });
-};
-
-export const getGetCountriesIdQueryKey = (id?: string) => {
-  return [`/countries/${id}`] as const;
-};
-
-export const getGetCountriesIdQueryOptions = <
-  TData = Awaited<ReturnType<typeof getCountriesId>>,
-  TError = ErrorResponse | NotfoundError | InternalError,
->(
-  id: string,
-  options?: {
-    query?: Partial<
-      UseQueryOptions<Awaited<ReturnType<typeof getCountriesId>>, TError, TData>
-    >;
-  },
+export const getCountriesId = (
+    id: string,
+ signal?: AbortSignal
 ) => {
-  const { query: queryOptions } = options ?? {};
+      
+      
+      return axiosInstance<CountryResponse>(
+      {url: `/countries/${id}`, method: 'GET', signal
+    },
+      );
+    }
+  
 
-  const queryKey = queryOptions?.queryKey ?? getGetCountriesIdQueryKey(id);
+export const getGetCountriesIdQueryKey = (id?: string,) => {
+    return [`/countries/${id}`] as const;
+    }
 
-  const queryFn: QueryFunction<Awaited<ReturnType<typeof getCountriesId>>> = ({
-    signal,
-  }) => getCountriesId(id, signal);
+    
+export const getGetCountriesIdQueryOptions = <TData = Awaited<ReturnType<typeof getCountriesId>>, TError = ErrorResponse | NotfoundError | InternalError>(id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getCountriesId>>, TError, TData>>, }
+) => {
 
-  return {
-    queryKey,
-    queryFn,
-    enabled: !!id,
-    ...queryOptions,
-  } as UseQueryOptions<
-    Awaited<ReturnType<typeof getCountriesId>>,
-    TError,
-    TData
-  > & { queryKey: DataTag<QueryKey, TData, TError> };
-};
+const {query: queryOptions} = options ?? {};
 
-export type GetCountriesIdQueryResult = NonNullable<
-  Awaited<ReturnType<typeof getCountriesId>>
->;
-export type GetCountriesIdQueryError =
-  | ErrorResponse
-  | NotfoundError
-  | InternalError;
+  const queryKey =  queryOptions?.queryKey ?? getGetCountriesIdQueryKey(id);
 
-export function useGetCountriesId<
-  TData = Awaited<ReturnType<typeof getCountriesId>>,
-  TError = ErrorResponse | NotfoundError | InternalError,
->(
-  id: string,
-  options: {
-    query: Partial<
-      UseQueryOptions<Awaited<ReturnType<typeof getCountriesId>>, TError, TData>
-    > &
-      Pick<
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getCountriesId>>> = ({ signal }) => getCountriesId(id, signal);
+
+      
+
+      
+
+   return  { queryKey, queryFn, enabled: !!(id), ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getCountriesId>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type GetCountriesIdQueryResult = NonNullable<Awaited<ReturnType<typeof getCountriesId>>>
+export type GetCountriesIdQueryError = ErrorResponse | NotfoundError | InternalError
+
+
+export function useGetCountriesId<TData = Awaited<ReturnType<typeof getCountriesId>>, TError = ErrorResponse | NotfoundError | InternalError>(
+ id: string, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getCountriesId>>, TError, TData>> & Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof getCountriesId>>,
           TError,
           Awaited<ReturnType<typeof getCountriesId>>
-        >,
-        "initialData"
-      >;
-  },
-  queryClient?: QueryClient,
-): DefinedUseQueryResult<TData, TError> & {
-  queryKey: DataTag<QueryKey, TData, TError>;
-};
-export function useGetCountriesId<
-  TData = Awaited<ReturnType<typeof getCountriesId>>,
-  TError = ErrorResponse | NotfoundError | InternalError,
->(
-  id: string,
-  options?: {
-    query?: Partial<
-      UseQueryOptions<Awaited<ReturnType<typeof getCountriesId>>, TError, TData>
-    > &
-      Pick<
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetCountriesId<TData = Awaited<ReturnType<typeof getCountriesId>>, TError = ErrorResponse | NotfoundError | InternalError>(
+ id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getCountriesId>>, TError, TData>> & Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof getCountriesId>>,
           TError,
           Awaited<ReturnType<typeof getCountriesId>>
-        >,
-        "initialData"
-      >;
-  },
-  queryClient?: QueryClient,
-): UseQueryResult<TData, TError> & {
-  queryKey: DataTag<QueryKey, TData, TError>;
-};
-export function useGetCountriesId<
-  TData = Awaited<ReturnType<typeof getCountriesId>>,
-  TError = ErrorResponse | NotfoundError | InternalError,
->(
-  id: string,
-  options?: {
-    query?: Partial<
-      UseQueryOptions<Awaited<ReturnType<typeof getCountriesId>>, TError, TData>
-    >;
-  },
-  queryClient?: QueryClient,
-): UseQueryResult<TData, TError> & {
-  queryKey: DataTag<QueryKey, TData, TError>;
-};
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetCountriesId<TData = Awaited<ReturnType<typeof getCountriesId>>, TError = ErrorResponse | NotfoundError | InternalError>(
+ id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getCountriesId>>, TError, TData>>, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 
-export function useGetCountriesId<
-  TData = Awaited<ReturnType<typeof getCountriesId>>,
-  TError = ErrorResponse | NotfoundError | InternalError,
->(
-  id: string,
-  options?: {
-    query?: Partial<
-      UseQueryOptions<Awaited<ReturnType<typeof getCountriesId>>, TError, TData>
-    >;
-  },
-  queryClient?: QueryClient,
-): UseQueryResult<TData, TError> & {
-  queryKey: DataTag<QueryKey, TData, TError>;
-} {
-  const queryOptions = getGetCountriesIdQueryOptions(id, options);
+export function useGetCountriesId<TData = Awaited<ReturnType<typeof getCountriesId>>, TError = ErrorResponse | NotfoundError | InternalError>(
+ id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getCountriesId>>, TError, TData>>, }
+ , queryClient?: QueryClient 
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
 
-  const query = useQuery(queryOptions, queryClient) as UseQueryResult<
-    TData,
-    TError
-  > & { queryKey: DataTag<QueryKey, TData, TError> };
+  const queryOptions = getGetCountriesIdQueryOptions(id,options)
 
-  query.queryKey = queryOptions.queryKey;
+  const query = useQuery(queryOptions , queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  query.queryKey = queryOptions.queryKey ;
 
   return query;
 }
+
+
 
 /**
  * Update a country
  */
 export const patchCountriesId = (
-  id: string,
-  updateCountryInput: UpdateCountryInput,
-) => {
-  return axiosInstance<CountryResponse>({
-    url: `/countries/${id}`,
-    method: "PATCH",
-    headers: { "Content-Type": "application/json" },
-    data: updateCountryInput,
-  });
-};
+    id: string,
+    updateCountryInput: UpdateCountryInput,
+ ) => {
+      
+      
+      return axiosInstance<CountryResponse>(
+      {url: `/countries/${id}`, method: 'PATCH',
+      headers: {'Content-Type': 'application/json', },
+      data: updateCountryInput
+    },
+      );
+    }
+  
 
-export const getPatchCountriesIdMutationOptions = <
-  TError = ErrorResponse | NotfoundError | ConflictError | InternalError,
-  TContext = unknown,
->(options?: {
-  mutation?: UseMutationOptions<
-    Awaited<ReturnType<typeof patchCountriesId>>,
-    TError,
-    { id: string; data: UpdateCountryInput },
-    TContext
-  >;
-}): UseMutationOptions<
-  Awaited<ReturnType<typeof patchCountriesId>>,
-  TError,
-  { id: string; data: UpdateCountryInput },
-  TContext
-> => {
-  const mutationKey = ["patchCountriesId"];
-  const { mutation: mutationOptions } = options
-    ? options.mutation &&
-      "mutationKey" in options.mutation &&
-      options.mutation.mutationKey
-      ? options
-      : { ...options, mutation: { ...options.mutation, mutationKey } }
-    : { mutation: { mutationKey } };
 
-  const mutationFn: MutationFunction<
-    Awaited<ReturnType<typeof patchCountriesId>>,
-    { id: string; data: UpdateCountryInput }
-  > = (props) => {
-    const { id, data } = props ?? {};
+export const getPatchCountriesIdMutationOptions = <TError = ErrorResponse | NotfoundError | ConflictError | InternalError,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof patchCountriesId>>, TError,{id: string;data: UpdateCountryInput}, TContext>, }
+): UseMutationOptions<Awaited<ReturnType<typeof patchCountriesId>>, TError,{id: string;data: UpdateCountryInput}, TContext> => {
 
-    return patchCountriesId(id, data);
-  };
+const mutationKey = ['patchCountriesId'];
+const {mutation: mutationOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }};
 
-  return { mutationFn, ...mutationOptions };
-};
+      
 
-export type PatchCountriesIdMutationResult = NonNullable<
-  Awaited<ReturnType<typeof patchCountriesId>>
->;
-export type PatchCountriesIdMutationBody = UpdateCountryInput;
-export type PatchCountriesIdMutationError =
-  | ErrorResponse
-  | NotfoundError
-  | ConflictError
-  | InternalError;
 
-export const usePatchCountriesId = <
-  TError = ErrorResponse | NotfoundError | ConflictError | InternalError,
-  TContext = unknown,
->(
-  options?: {
-    mutation?: UseMutationOptions<
-      Awaited<ReturnType<typeof patchCountriesId>>,
-      TError,
-      { id: string; data: UpdateCountryInput },
-      TContext
-    >;
-  },
-  queryClient?: QueryClient,
-): UseMutationResult<
-  Awaited<ReturnType<typeof patchCountriesId>>,
-  TError,
-  { id: string; data: UpdateCountryInput },
-  TContext
-> => {
-  const mutationOptions = getPatchCountriesIdMutationOptions(options);
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof patchCountriesId>>, {id: string;data: UpdateCountryInput}> = (props) => {
+          const {id,data} = props ?? {};
 
-  return useMutation(mutationOptions, queryClient);
-};
-/**
+          return  patchCountriesId(id,data,)
+        }
+
+        
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type PatchCountriesIdMutationResult = NonNullable<Awaited<ReturnType<typeof patchCountriesId>>>
+    export type PatchCountriesIdMutationBody = UpdateCountryInput
+    export type PatchCountriesIdMutationError = ErrorResponse | NotfoundError | ConflictError | InternalError
+
+    export const usePatchCountriesId = <TError = ErrorResponse | NotfoundError | ConflictError | InternalError,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof patchCountriesId>>, TError,{id: string;data: UpdateCountryInput}, TContext>, }
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof patchCountriesId>>,
+        TError,
+        {id: string;data: UpdateCountryInput},
+        TContext
+      > => {
+
+      const mutationOptions = getPatchCountriesIdMutationOptions(options);
+
+      return useMutation(mutationOptions , queryClient);
+    }
+    /**
  * Delete a country
  */
-export const deleteCountriesId = (id: string) => {
-  return axiosInstance<BaseResponse>({
-    url: `/countries/${id}`,
-    method: "DELETE",
-  });
-};
+export const deleteCountriesId = (
+    id: string,
+ ) => {
+      
+      
+      return axiosInstance<BaseResponse>(
+      {url: `/countries/${id}`, method: 'DELETE'
+    },
+      );
+    }
+  
 
-export const getDeleteCountriesIdMutationOptions = <
-  TError = ErrorResponse | NotfoundError | InternalError,
-  TContext = unknown,
->(options?: {
-  mutation?: UseMutationOptions<
-    Awaited<ReturnType<typeof deleteCountriesId>>,
-    TError,
-    { id: string },
-    TContext
-  >;
-}): UseMutationOptions<
-  Awaited<ReturnType<typeof deleteCountriesId>>,
-  TError,
-  { id: string },
-  TContext
-> => {
-  const mutationKey = ["deleteCountriesId"];
-  const { mutation: mutationOptions } = options
-    ? options.mutation &&
-      "mutationKey" in options.mutation &&
-      options.mutation.mutationKey
-      ? options
-      : { ...options, mutation: { ...options.mutation, mutationKey } }
-    : { mutation: { mutationKey } };
 
-  const mutationFn: MutationFunction<
-    Awaited<ReturnType<typeof deleteCountriesId>>,
-    { id: string }
-  > = (props) => {
-    const { id } = props ?? {};
+export const getDeleteCountriesIdMutationOptions = <TError = ErrorResponse | NotfoundError | InternalError,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteCountriesId>>, TError,{id: string}, TContext>, }
+): UseMutationOptions<Awaited<ReturnType<typeof deleteCountriesId>>, TError,{id: string}, TContext> => {
 
-    return deleteCountriesId(id);
-  };
+const mutationKey = ['deleteCountriesId'];
+const {mutation: mutationOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }};
 
-  return { mutationFn, ...mutationOptions };
-};
+      
 
-export type DeleteCountriesIdMutationResult = NonNullable<
-  Awaited<ReturnType<typeof deleteCountriesId>>
->;
 
-export type DeleteCountriesIdMutationError =
-  | ErrorResponse
-  | NotfoundError
-  | InternalError;
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteCountriesId>>, {id: string}> = (props) => {
+          const {id} = props ?? {};
 
-export const useDeleteCountriesId = <
-  TError = ErrorResponse | NotfoundError | InternalError,
-  TContext = unknown,
->(
-  options?: {
-    mutation?: UseMutationOptions<
-      Awaited<ReturnType<typeof deleteCountriesId>>,
-      TError,
-      { id: string },
-      TContext
-    >;
-  },
-  queryClient?: QueryClient,
-): UseMutationResult<
-  Awaited<ReturnType<typeof deleteCountriesId>>,
-  TError,
-  { id: string },
-  TContext
-> => {
-  const mutationOptions = getDeleteCountriesIdMutationOptions(options);
+          return  deleteCountriesId(id,)
+        }
 
-  return useMutation(mutationOptions, queryClient);
-};
+        
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type DeleteCountriesIdMutationResult = NonNullable<Awaited<ReturnType<typeof deleteCountriesId>>>
+    
+    export type DeleteCountriesIdMutationError = ErrorResponse | NotfoundError | InternalError
+
+    export const useDeleteCountriesId = <TError = ErrorResponse | NotfoundError | InternalError,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteCountriesId>>, TError,{id: string}, TContext>, }
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof deleteCountriesId>>,
+        TError,
+        {id: string},
+        TContext
+      > => {
+
+      const mutationOptions = getDeleteCountriesIdMutationOptions(options);
+
+      return useMutation(mutationOptions , queryClient);
+    }
+    

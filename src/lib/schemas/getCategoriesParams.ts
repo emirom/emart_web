@@ -6,47 +6,47 @@
  */
 
 export type GetCategoriesParams = {
-  /**
-   * Number of records to skip
-   * @minimum 0
-   */
-  skip: number;
-  /**
-   * Maximum number of records to return
-   * @minimum 1
-   * @maximum 20
-   */
-  limit: number;
-  /**
-   * Optional date input, usually null
-   */
-  deletedAt?: string | null;
-  /**
-   * Filter by category name
-   */
-  name?: string | null;
-  /**
-   * Filter by category enName
-   */
-  enName?: string | null;
-  /**
-   * Filter by parent category ID
-   */
-  parentId?: string | null;
-  /**
-   * Filter by unit ID
-   */
-  unitId?: string | null;
-  /**
-   * Filter by icon URL
-   */
-  iconUrl?: string | null;
-  /**
-   * Filter by active status
-   */
-  isActive?: boolean | null;
-  /**
-   * Filter by show in menu status
-   */
-  showInMenu?: boolean | null;
+/**
+ * Number of records to skip
+ * @minimum 0
+ */
+skip: number;
+/**
+ * Maximum number of records to return
+ * @minimum 1
+ * @maximum 20
+ */
+limit: number;
+/**
+ * Optional date input, usually null
+ */
+deletedAt?: string | null;
+/**
+ * Filter by category name
+ */
+name?: string | null;
+/**
+ * Filter by category enName
+ */
+enName?: string | null;
+/**
+ * Filter by parent category ID
+ */
+parentId?: string | null;
+/**
+ * Filter by unit ID
+ */
+unitId?: string | null;
+/**
+ * Filter by icon URL
+ */
+iconUrl?: string | null;
+/**
+ * Filter by active status
+ */
+isActive?: boolean | null;
+/**
+ * Filter by show in menu status
+ */
+showInMenu?: boolean | null;
 };

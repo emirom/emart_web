@@ -4,10 +4,10 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { BaseResponse } from "./baseResponse";
-import type { CountryListResponseDetails } from "./countryListResponseDetails";
-import type { CountryListResponseFiltersItem } from "./countryListResponseFiltersItem";
-import type { Country } from "./country";
+import type { BaseResponse } from './baseResponse';
+import type { CountryListResponseDetails } from './countryListResponseDetails';
+import type { CountryListResponseFiltersItem } from './countryListResponseFiltersItem';
+import type { Country } from './country';
 
 /**
  * Response for list country operations
@@ -18,15 +18,10 @@ export type CountryListResponse = BaseResponse & {
   filters: CountryListResponseFiltersItem[];
   /** Array of countries matching the query */
   data: Country[];
-} & Required<
-    Pick<
-      BaseResponse & {
-        /** Pagination metadata */
-        details?: CountryListResponseDetails;
-        filters: CountryListResponseFiltersItem[];
-        /** Array of countries matching the query */
-        data: Country[];
-      },
-      "filters" | "data"
-    >
-  >;
+} & Required<Pick<BaseResponse & {
+  /** Pagination metadata */
+  details?: CountryListResponseDetails;
+  filters: CountryListResponseFiltersItem[];
+  /** Array of countries matching the query */
+  data: Country[];
+}, 'filters' | 'data'>>;

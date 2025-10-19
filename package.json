@@ -9,7 +9,7 @@
     "lint": "eslint",
     "format": "prettier --write .",
     "prepare": "husky install",
-    "generate:api": "curl -s $BASE_OPENAPI_JSON_URL -o ./openapi.json && orval --config orval.config.ts && rm ./openapi.json",
+    "generate:api": "curl -s http://localhost:3010/docs/json -o ./openapi.json && orval --config orval.config.ts && rm ./openapi.json",
     "analyze": "ANALYZE=true next build"
   },
   "dependencies": {

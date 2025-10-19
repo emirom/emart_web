@@ -4,18 +4,18 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { UpdateInsuranceInputStart } from "./updateInsuranceInputStart";
-import type { UpdateInsuranceInputMonths } from "./updateInsuranceInputMonths";
-import type { UpdateInsuranceInputDays } from "./updateInsuranceInputDays";
-import type { UpdateInsuranceInputLogo } from "./updateInsuranceInputLogo";
-import type { UpdateInsuranceInputProviderName } from "./updateInsuranceInputProviderName";
-import type { UpdateInsuranceInputCoverage } from "./updateInsuranceInputCoverage";
-import type { UpdateInsuranceInputExclusions } from "./updateInsuranceInputExclusions";
-import type { UpdateInsuranceInputClaimLimit } from "./updateInsuranceInputClaimLimit";
-import type { UpdateInsuranceInputDeductible } from "./updateInsuranceInputDeductible";
-import type { UpdateInsuranceInputClaimProcess } from "./updateInsuranceInputClaimProcess";
-import type { UpdateInsuranceInputMinOrderValue } from "./updateInsuranceInputMinOrderValue";
-import type { UpdateInsuranceInputMaxOrderValue } from "./updateInsuranceInputMaxOrderValue";
+import type { UpdateInsuranceInputStart } from './updateInsuranceInputStart';
+import type { UpdateInsuranceInputMonths } from './updateInsuranceInputMonths';
+import type { UpdateInsuranceInputDays } from './updateInsuranceInputDays';
+import type { UpdateInsuranceInputLogo } from './updateInsuranceInputLogo';
+import type { UpdateInsuranceInputProviderName } from './updateInsuranceInputProviderName';
+import type { UpdateInsuranceInputCoverage } from './updateInsuranceInputCoverage';
+import type { UpdateInsuranceInputExclusions } from './updateInsuranceInputExclusions';
+import type { UpdateInsuranceInputClaimLimit } from './updateInsuranceInputClaimLimit';
+import type { UpdateInsuranceInputDeductible } from './updateInsuranceInputDeductible';
+import type { UpdateInsuranceInputClaimProcess } from './updateInsuranceInputClaimProcess';
+import type { UpdateInsuranceInputMinOrderValue } from './updateInsuranceInputMinOrderValue';
+import type { UpdateInsuranceInputMaxOrderValue } from './updateInsuranceInputMaxOrderValue';
 
 /**
  * Product insurance protection plan
@@ -31,6 +31,7 @@ export interface UpdateInsuranceInput {
   start?: UpdateInsuranceInputStart;
   /** Duration in months (optional) */
   months?: UpdateInsuranceInputMonths;
+  /** Duration in days (optional) */
   days?: UpdateInsuranceInputDays;
   /** Provider logo URL */
   logo?: UpdateInsuranceInputLogo;

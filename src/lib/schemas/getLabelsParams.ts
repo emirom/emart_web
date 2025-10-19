@@ -6,19 +6,19 @@
  */
 
 export type GetLabelsParams = {
-  /**
-   * Number of records to skip
-   * @minimum 0
-   */
-  skip: number;
-  /**
-   * Maximum number of records to return
-   * @minimum 1
-   * @maximum 20
-   */
-  limit: number;
-  /**
-   * Filter labels by name (partial match)
-   */
-  name?: string | null;
+/**
+ * Number of records to skip
+ * @minimum 0
+ */
+skip: number;
+/**
+ * Maximum number of records to return
+ * @minimum 1
+ * @maximum 20
+ */
+limit: number;
+/**
+ * Filter labels by name (partial match)
+ */
+name?: string | null;
 };

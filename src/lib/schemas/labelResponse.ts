@@ -4,16 +4,11 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { BaseResponse } from "./baseResponse";
-import type { Label } from "./label";
+import type { BaseResponse } from './baseResponse';
+import type { Label } from './label';
 
 export type LabelResponse = BaseResponse & {
   data: Label;
-} & Required<
-    Pick<
-      BaseResponse & {
-        data: Label;
-      },
-      "data"
-    >
-  >;
+} & Required<Pick<BaseResponse & {
+  data: Label;
+}, 'data'>>;

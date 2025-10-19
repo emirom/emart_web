@@ -4,21 +4,16 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { BaseError } from "./baseError";
+import type { BaseError } from './baseError';
 
 export type InternalError = BaseError & {
   /** Error code */
   code: string;
   /** Error detials */
   details?: unknown;
-} & Required<
-    Pick<
-      BaseError & {
-        /** Error code */
-        code: string;
-        /** Error detials */
-        details?: unknown;
-      },
-      "code"
-    >
-  >;
+} & Required<Pick<BaseError & {
+  /** Error code */
+  code: string;
+  /** Error detials */
+  details?: unknown;
+}, 'code'>>;

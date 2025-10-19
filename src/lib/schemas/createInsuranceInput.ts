@@ -4,18 +4,18 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { CreateInsuranceInputStart } from "./createInsuranceInputStart";
-import type { CreateInsuranceInputMonths } from "./createInsuranceInputMonths";
-import type { CreateInsuranceInputDays } from "./createInsuranceInputDays";
-import type { CreateInsuranceInputLogo } from "./createInsuranceInputLogo";
-import type { CreateInsuranceInputProviderName } from "./createInsuranceInputProviderName";
-import type { CreateInsuranceInputCoverage } from "./createInsuranceInputCoverage";
-import type { CreateInsuranceInputExclusions } from "./createInsuranceInputExclusions";
-import type { CreateInsuranceInputClaimLimit } from "./createInsuranceInputClaimLimit";
-import type { CreateInsuranceInputDeductible } from "./createInsuranceInputDeductible";
-import type { CreateInsuranceInputClaimProcess } from "./createInsuranceInputClaimProcess";
-import type { CreateInsuranceInputMinOrderValue } from "./createInsuranceInputMinOrderValue";
-import type { CreateInsuranceInputMaxOrderValue } from "./createInsuranceInputMaxOrderValue";
+import type { CreateInsuranceInputStart } from './createInsuranceInputStart';
+import type { CreateInsuranceInputMonths } from './createInsuranceInputMonths';
+import type { CreateInsuranceInputDays } from './createInsuranceInputDays';
+import type { CreateInsuranceInputLogo } from './createInsuranceInputLogo';
+import type { CreateInsuranceInputProviderName } from './createInsuranceInputProviderName';
+import type { CreateInsuranceInputCoverage } from './createInsuranceInputCoverage';
+import type { CreateInsuranceInputExclusions } from './createInsuranceInputExclusions';
+import type { CreateInsuranceInputClaimLimit } from './createInsuranceInputClaimLimit';
+import type { CreateInsuranceInputDeductible } from './createInsuranceInputDeductible';
+import type { CreateInsuranceInputClaimProcess } from './createInsuranceInputClaimProcess';
+import type { CreateInsuranceInputMinOrderValue } from './createInsuranceInputMinOrderValue';
+import type { CreateInsuranceInputMaxOrderValue } from './createInsuranceInputMaxOrderValue';
 
 /**
  * Product insurance protection plan
@@ -31,6 +31,7 @@ export interface CreateInsuranceInput {
   start?: CreateInsuranceInputStart;
   /** Duration in months (optional) */
   months?: CreateInsuranceInputMonths;
+  /** Duration in days (optional) */
   days?: CreateInsuranceInputDays;
   /** Provider logo URL */
   logo?: CreateInsuranceInputLogo;

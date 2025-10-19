@@ -4,10 +4,10 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { UpdateCategoryInputParentId } from "./updateCategoryInputParentId";
-import type { UpdateCategoryInputIconUrl } from "./updateCategoryInputIconUrl";
-import type { UpdateCategoryInputIsActive } from "./updateCategoryInputIsActive";
-import type { UpdateCategoryInputShowInMenu } from "./updateCategoryInputShowInMenu";
+import type { UpdateCategoryInputParentId } from './updateCategoryInputParentId';
+import type { UpdateCategoryInputIconUrl } from './updateCategoryInputIconUrl';
+import type { UpdateCategoryInputIsActive } from './updateCategoryInputIsActive';
+import type { UpdateCategoryInputShowInMenu } from './updateCategoryInputShowInMenu';
 
 /**
  * Category update payload

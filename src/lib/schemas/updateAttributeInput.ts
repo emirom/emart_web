@@ -4,8 +4,8 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { UpdateAttributeInputType } from "./updateAttributeInputType";
-import type { UpdateAttributeInputIconUrl } from "./updateAttributeInputIconUrl";
+import type { UpdateAttributeInputType } from './updateAttributeInputType';
+import type { UpdateAttributeInputIconUrl } from './updateAttributeInputIconUrl';
 
 /**
  * Attribute update payload
