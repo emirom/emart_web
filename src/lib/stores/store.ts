@@ -1,3 +1,4 @@
+// lib/stores/store.ts
 import { Store } from "@lib/types/store";
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
@@ -17,8 +18,6 @@ export const useAppStore = create<Store>()(
         partialize: (state) => ({ phone: state.phone }),
       },
     ),
-    {
-      name: "app-store-devtools",
-    },
+    { name: "app-store-devtools" },
   ),
 );
