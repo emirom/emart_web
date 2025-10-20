@@ -3,6 +3,7 @@ import { isLocaleRTL } from "@lib/configs/i18n";
 import type { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
+import { ToastContainer } from "react-toastify";
 import { vazir } from "./font";
 import "./globals.css";
 
@@ -32,6 +33,7 @@ export default async function RootLayout({
         <ReactQueryProvider>
           <NextIntlClientProvider messages={messages} locale={locale}>
             {children}
+            <ToastContainer position="bottom-center" autoClose={3000} />
           </NextIntlClientProvider>
         </ReactQueryProvider>
       </body>

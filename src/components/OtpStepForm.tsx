@@ -1,6 +1,6 @@
 "use client";
 
-import { REGEXP_ONLY_DIGITS_AND_CHARS } from "input-otp";
+import { REGEXP_ONLY_DIGITS } from "input-otp";
 import { useState } from "react";
 import { FormErrorMessage } from "./FormErrorMessage";
 import { cn } from "./lib/utils";
@@ -9,7 +9,7 @@ import { InputOTP, InputOTPGroup, InputOTPSlot } from "./ui/input-otp";
 import { Label } from "./ui/label";
 
 export default function OtpStepForm() {
-  const [error, setError] = useState("");
+  const [error] = useState("");
 
   return (
     <form
@@ -42,7 +42,7 @@ export default function OtpStepForm() {
           aria-describedby={error ? "otp-error" : undefined}
           dir="ltr"
           maxLength={6}
-          pattern={REGEXP_ONLY_DIGITS_AND_CHARS}
+          pattern={REGEXP_ONLY_DIGITS}
           className="w-full flex justify-center"
         >
           <InputOTPGroup
