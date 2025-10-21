@@ -71,7 +71,7 @@ export default function MultiPromoteDesktop() {
               priority
               fetchPriority="high"
               loading="eager"
-              sizes="(max-width: 1024px) 100vw, 130px"
+              sizes="130px"
               className="object-cover aspect-[13/12]"
               itemProp="image"
             />

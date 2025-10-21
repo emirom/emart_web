@@ -44,11 +44,11 @@ export default function SpecialOfferItem({
             fetchPriority={isLCP ? "high" : "auto"}
             loading={isLCP ? "eager" : "lazy"}
             placeholder={isLCP ? "empty" : undefined}
-            sizes="(max-width: 640px) 80vw,
-                   (max-width: 768px) 45vw,
-                   (max-width: 1024px) 35vw,
-                   (max-width: 1280px) 25vw,
-                   20vw"
+            sizes="(max-width: 640px) 40vw,
+                   (max-width: 768px) 22.5vw,
+                   (max-width: 1024px) 17.5vw,
+                   (max-width: 1280px) 12.5vw,
+                   10vw"
             className={cn(
               "w-1/2 h-[75%] transition-opacity duration-300",
               isLCP && "!opacity-100 !duration-0",

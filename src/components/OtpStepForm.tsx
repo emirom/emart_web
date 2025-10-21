@@ -80,7 +80,7 @@ export default function OtpStepForm() {
               aria-label="کد پیامکی ۶ رقمی"
               aria-required="true"
               aria-invalid={!!formState.errors.otp}
-              aria-describedby={formState.errors.otp ? "otp-error" : undefined}
+              aria-describedby={formState.errors.otp ? "otp-error" : ""}
               dir="ltr"
               maxLength={6}
               pattern={REGEXP_ONLY_DIGITS}

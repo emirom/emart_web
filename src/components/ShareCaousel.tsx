@@ -77,11 +77,11 @@ export default function ShareCarousel({ title, labelAria }: Props) {
                           fetchPriority={isLCP ? "high" : "auto"}
                           loading={isLCP ? "eager" : "lazy"}
                           placeholder={isLCP ? "empty" : undefined}
-                          sizes="(max-width: 640px) 80vw,
-                                 (max-width: 768px) 45vw,
-                                 (max-width: 1024px) 35vw,
-                                 (max-width: 1280px) 25vw,
-                                 20vw"
+                          sizes="(max-width: 640px) 32vw,
+                                 (max-width: 768px) 18vw,
+                                 (max-width: 1024px) 14vw,
+                                 (max-width: 1280px) 10vw,
+                                 8vw"
                           className={cn(
                             " w-[40%] h-[48%] mx-auto  aspect-[16/15] transition-opacity duration-300",
                             isLCP && "!opacity-100 !duration-0",

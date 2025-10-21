@@ -28,7 +28,7 @@ export default function MultiPromoteProductList() {
               src="/images/related-porduct.png"
               alt={`آیفون 13 پرو مکس - محصول شماره ${indx + 1}`}
               fill
-              sizes="(max-width: 640px) 45vw, (max-width: 1024px) 25vw, 20vw"
+              sizes="110px"
               loading="lazy"
               fetchPriority="low"
               className={cn("object-cover aspect-[13/12]  rounded-lg")}

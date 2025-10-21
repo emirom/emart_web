@@ -41,7 +41,7 @@ export default function MultiPromoteMobile() {
             priority
             fetchPriority="high"
             loading="eager"
-            sizes="100vw"
+            sizes="140px"
             className="object-cover aspect-[13/12] my-auto"
             itemProp="image"
           />
