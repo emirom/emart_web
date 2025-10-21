@@ -1,11 +1,20 @@
+import TreeRender from "@/pages/dashboard/category/TreeRender";
+import { getCategories } from "@lib/services/categories/categories";
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from "@tanstack/react-query";
+
 export default async function Dashboard() {
+  const queryClient = new QueryClient();
+  await queryClient.prefetchQuery({
+    queryKey: ["category-child", null],
+    queryFn: () => getCategories({ parentId: null, skip: 0, limit: 20 }),
+  });
   return (
-    <div className="space-y-2">
-      {Array.from({ length: 100 }).map((_, i) => (
-        <div key={i} className="p-4 bg-gray-100 rounded">
-          آیتم {i + 1}
-        </div>
-      ))}
-    </div>
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <TreeRender />
+    </HydrationBoundary>
   );
 }

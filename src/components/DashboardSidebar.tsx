@@ -9,9 +9,9 @@ export default function DashboardSidebar() {
   const pathname = usePathname();
 
   const navItems = [
-    { href: "/admin", label: "صفحه اصلی", icon: Home },
-    { href: "/admin/users", label: "کاربران", icon: Users },
-    { href: "/admin/settings", label: "تنظیمات", icon: Settings },
+    { href: "/", label: "صفحه اصلی", icon: Home },
+    { href: "/users", label: "کاربران", icon: Users },
+    { href: "/settings", label: "تنظیمات", icon: Settings },
   ];
 
   return (
@@ -42,13 +42,13 @@ export default function DashboardSidebar() {
                   "hover:bg-gray-100",
                   isActive
                     ? "bg-primary/10 text-primary-700 font-semibold"
-                    : "text-gray-700 hover:text-gray-900",
+                    : "text-gray-700 hover:text-gray-900"
                 )}
               >
                 <Icon
                   className={cn(
                     "size-4 shrink-0 transition-colors duration-150",
-                    isActive ? "text-primary-600" : "text-gray-500",
+                    isActive ? "text-primary-600" : "text-gray-500"
                   )}
                   aria-hidden="true"
                 />

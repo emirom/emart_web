@@ -13,7 +13,8 @@ export const axiosInstance = async <T = unknown>({
   url,
   data,
   headers,
+  params
 }: AxiosRequestConfig): Promise<T> => {
-  const response = await instance.request<T>({ method, url, data, headers });
+  const response = await instance.request<T>({ method, url, data, headers, params });
   return response.data;
 };
