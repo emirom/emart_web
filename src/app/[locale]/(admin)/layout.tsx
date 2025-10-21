@@ -27,6 +27,7 @@ export const metadata: Metadata = {
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div
+      // prettier-ignore
       className={cn(
         "flex flex-col h-screen bg-tint-blue-200 py-2 text-gray-900",
         "selection:bg-primary/20 selection:text-primary-foreground",
@@ -45,6 +46,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
       {/* ===== Body Wrapper ===== */}
       <div
+        // prettier-ignore
         className={cn(
           "flex flex-1 mt-2 w-[99%] mx-auto gap-2",
           "overflow-hidden focus-within:ring-2 focus-within:ring-primary/30",
@@ -55,6 +57,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <aside
           role="complementary"
           aria-label="نوار کناری پنل مدیریت"
+          // prettier-ignore
           className={cn(
             "hidden lg:flex flex-col w-64 p-3 bg-white rounded-md shadow-md",
             "overflow-y-auto focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40",
@@ -71,6 +74,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           role="main"
           tabIndex={-1}
           aria-label="محتوای اصلی پنل"
+          // prettier-ignore
           className={cn(
             "flex-1 p-4 bg-white rounded-md shadow-md overflow-y-auto",
             "scrollbar-thin scrollbar-thumb-gray-300 hover:scrollbar-thumb-gray-400",

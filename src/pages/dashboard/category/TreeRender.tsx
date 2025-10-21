@@ -11,7 +11,7 @@ import TreeRenderAction from "./TreeRenderAction";
 
 type TreeNode = Category & { children?: TreeNode[] };
 
-const TreeNodeItem = React.memo(
+export const TreeNodeItem = React.memo(
   ({ node, isRoot = false }: { node: TreeNode; isRoot?: boolean }) => {
     const [expanded, setExpanded] = useState(false);
     const queryClient = useQueryClient();
@@ -74,7 +74,7 @@ const TreeNodeItem = React.memo(
         </ul>
       </li>
     );
-  }
+  },
 );
 
 TreeNodeItem.displayName = "TreeNodeItem";
