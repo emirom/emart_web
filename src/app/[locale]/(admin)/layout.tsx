@@ -49,7 +49,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         // prettier-ignore
         className={cn(
           "flex flex-1 mt-2 w-[99%] mx-auto gap-2",
-          "overflow-hidden focus-within:ring-2 focus-within:ring-primary/30",
+          "overflow-hidden ",
           "transition-all duration-200",
         )}
       >
