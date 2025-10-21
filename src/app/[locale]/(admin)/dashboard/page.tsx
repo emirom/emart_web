@@ -12,7 +12,7 @@ export default async function Dashboard() {
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <div className="flex items-center justify-between">
-        <h1>دسته بندی ها</h1>
+        <h2 className="text-sm font-bold">دسته بندی ها</h2>
         <Link
           className="bg-sky-500 p-2 rounded-lg text-white  "
           href="/dashboard/category/add"
