@@ -1,11 +1,12 @@
 "use client";
 
+import { queryClient } from "@lib/apis/queryClient";
 import { Category, ListCategoryResponse } from "@lib/schemas";
 import {
   getCategories,
   useGetCategories,
 } from "@lib/services/categories/categories";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import React, { useEffect, useState } from "react";
 import TreeRenderAction from "./TreeRenderAction";
 
@@ -14,7 +15,6 @@ type TreeNode = Category & { children?: TreeNode[] };
 export const TreeNodeItem = React.memo(
   ({ node, isRoot = false }: { node: TreeNode; isRoot?: boolean }) => {
     const [expanded, setExpanded] = useState(false);
-    const queryClient = useQueryClient();
 
     const { data, isFetching } = useQuery<ListCategoryResponse>({
       queryKey: ["category-child", node.id],
@@ -40,7 +40,7 @@ export const TreeNodeItem = React.memo(
     const children = data?.data || [];
 
     return (
-      <li className="relative w-full flex flex-col pr-5">
+      <li className="relative w-full flex flex-col pr-[0.375rem]">
         {!isRoot && (
           <>
             <span className="absolute right-0 top-0 bottom-0 w-px border-r border-dotted border-gray-400" />
@@ -74,7 +74,7 @@ export const TreeNodeItem = React.memo(
         </ul>
       </li>
     );
-  },
+  }
 );
 
 TreeNodeItem.displayName = "TreeNodeItem";
@@ -87,7 +87,7 @@ const TreeRender = () => {
   });
 
   return (
-    <ul className="tree-render p-2 w-full flex flex-col">
+    <ul className="tree-render  w-full flex flex-col">
       {categories?.data.map((node) => (
         <TreeNodeItem key={node.id} node={node} isRoot />
       ))}
