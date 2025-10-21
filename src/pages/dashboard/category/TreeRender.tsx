@@ -30,11 +30,7 @@ const TreeNodeItem = React.memo(
           queryClient.prefetchQuery({
             queryKey: ["category-child", child.id],
             queryFn: () =>
-              getCategories({
-                parentId: child.id ?? null,
-                skip: 0,
-                limit: 20,
-              }),
+              getCategories({ parentId: child.id ?? null, skip: 0, limit: 20 }),
             staleTime: 5 * 60 * 1000,
           });
         });

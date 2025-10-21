@@ -8,7 +8,7 @@ interface IconButtonProps {
   onClick?: () => void;
 }
 
-export const EditButton = memo(({ onClick }: IconButtonProps) => (
+const EditButtonComponent = ({ onClick }: IconButtonProps) => (
   <Button
     onClick={onClick}
     aria-label="ویرایش"
@@ -16,9 +16,9 @@ export const EditButton = memo(({ onClick }: IconButtonProps) => (
   >
     <EditIcon className="stroke-white stroke-2" />
   </Button>
-));
+);
 
-export const DeleteButton = memo(({ onClick }: IconButtonProps) => (
+const DeleteButtonComponent = ({ onClick }: IconButtonProps) => (
   <Button
     onClick={onClick}
     aria-label="حذف"
@@ -26,9 +26,9 @@ export const DeleteButton = memo(({ onClick }: IconButtonProps) => (
   >
     <Trash className="stroke-white stroke-2" />
   </Button>
-));
+);
 
-export const PlusButton = memo(({ onClick }: IconButtonProps) => (
+const PlusButtonComponent = ({ onClick }: IconButtonProps) => (
   <Button
     onClick={onClick}
     aria-label="افزودن"
@@ -36,9 +36,9 @@ export const PlusButton = memo(({ onClick }: IconButtonProps) => (
   >
     <PlusIcon className="stroke-gray-500 stroke-2" />
   </Button>
-));
+);
 
-export const CopyButton = memo(({ onClick }: IconButtonProps) => (
+const CopyButtonComponent = ({ onClick }: IconButtonProps) => (
   <Button
     onClick={onClick}
     aria-label="کپی"
@@ -46,9 +46,9 @@ export const CopyButton = memo(({ onClick }: IconButtonProps) => (
   >
     <CopyIcon className="stroke-gray-500 stroke-2" />
   </Button>
-));
+);
 
-export const EyeButton = memo(({ onClick }: IconButtonProps) => (
+const EyeButtonComponent = ({ onClick }: IconButtonProps) => (
   <Button
     onClick={onClick}
     aria-label="مشاهده"
@@ -56,4 +56,16 @@ export const EyeButton = memo(({ onClick }: IconButtonProps) => (
   >
     <EyeIcon className="stroke-gray-500 stroke-2" />
   </Button>
-));
+);
+
+export const EditButton = memo(EditButtonComponent);
+export const DeleteButton = memo(DeleteButtonComponent);
+export const PlusButton = memo(PlusButtonComponent);
+export const CopyButton = memo(CopyButtonComponent);
+export const EyeButton = memo(EyeButtonComponent);
+
+EditButton.displayName = "EditButton";
+DeleteButton.displayName = "DeleteButton";
+PlusButton.displayName = "PlusButton";
+CopyButton.displayName = "CopyButton";
+EyeButton.displayName = "EyeButton";

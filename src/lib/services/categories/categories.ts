@@ -127,7 +127,6 @@ export const getCategories = (
   params: GetCategoriesParams,
   signal?: AbortSignal,
 ) => {
-
   return axiosInstance<ListCategoryResponse>({
     url: `/categories`,
     method: "GET",
@@ -180,14 +179,14 @@ export function useGetCategories<
     query: Partial<
       UseQueryOptions<Awaited<ReturnType<typeof getCategories>>, TError, TData>
     > &
-    Pick<
-      DefinedInitialDataOptions<
-        Awaited<ReturnType<typeof getCategories>>,
-        TError,
-        Awaited<ReturnType<typeof getCategories>>
-      >,
-      "initialData"
-    >;
+      Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getCategories>>,
+          TError,
+          Awaited<ReturnType<typeof getCategories>>
+        >,
+        "initialData"
+      >;
   },
   queryClient?: QueryClient,
 ): DefinedUseQueryResult<TData, TError> & {
@@ -202,14 +201,14 @@ export function useGetCategories<
     query?: Partial<
       UseQueryOptions<Awaited<ReturnType<typeof getCategories>>, TError, TData>
     > &
-    Pick<
-      UndefinedInitialDataOptions<
-        Awaited<ReturnType<typeof getCategories>>,
-        TError,
-        Awaited<ReturnType<typeof getCategories>>
-      >,
-      "initialData"
-    >;
+      Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getCategories>>,
+          TError,
+          Awaited<ReturnType<typeof getCategories>>
+        >,
+        "initialData"
+      >;
   },
   queryClient?: QueryClient,
 ): UseQueryResult<TData, TError> & {
@@ -327,14 +326,14 @@ export function useGetCategoriesId<
         TData
       >
     > &
-    Pick<
-      DefinedInitialDataOptions<
-        Awaited<ReturnType<typeof getCategoriesId>>,
-        TError,
-        Awaited<ReturnType<typeof getCategoriesId>>
-      >,
-      "initialData"
-    >;
+      Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getCategoriesId>>,
+          TError,
+          Awaited<ReturnType<typeof getCategoriesId>>
+        >,
+        "initialData"
+      >;
   },
   queryClient?: QueryClient,
 ): DefinedUseQueryResult<TData, TError> & {
@@ -353,14 +352,14 @@ export function useGetCategoriesId<
         TData
       >
     > &
-    Pick<
-      UndefinedInitialDataOptions<
-        Awaited<ReturnType<typeof getCategoriesId>>,
-        TError,
-        Awaited<ReturnType<typeof getCategoriesId>>
-      >,
-      "initialData"
-    >;
+      Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getCategoriesId>>,
+          TError,
+          Awaited<ReturnType<typeof getCategoriesId>>
+        >,
+        "initialData"
+      >;
   },
   queryClient?: QueryClient,
 ): UseQueryResult<TData, TError> & {
