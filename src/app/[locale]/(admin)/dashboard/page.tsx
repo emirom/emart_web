@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export default async function Dashboard() {
   await queryClient.prefetchQuery({
-    queryKey: ["category-child", null],
+    queryKey: ["/categories", { parentId: null, skip: 0, limit: 20 }],
     queryFn: () => getCategories({ parentId: null, skip: 0, limit: 20 }),
   });
   return (

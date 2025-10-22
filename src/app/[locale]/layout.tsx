@@ -1,4 +1,4 @@
-import { ReactQueryProvider } from "@lib/apis/ReactQueryProvider";
+import ReactQueryProvider from "@lib/apis/ReactQueryProvider";
 import { isLocaleRTL } from "@lib/configs/i18n";
 import type { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
