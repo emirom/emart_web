@@ -5,6 +5,7 @@
  * OpenAPI spec version: 1.0.0
  */
 import type { CreateAttributeInputType } from "./createAttributeInputType";
+import type { CreateAttributeInputUnit } from "./createAttributeInputUnit";
 import type { CreateAttributeInputIconUrl } from "./createAttributeInputIconUrl";
 
 /**
@@ -19,6 +20,8 @@ export interface CreateAttributeInput {
   title: string;
   /** Attribute type */
   type: CreateAttributeInputType;
+  /** Attribute type */
+  unit?: CreateAttributeInputUnit;
   /** URL to attribute icon */
   iconUrl?: CreateAttributeInputIconUrl;
   /** Category ID this attribute belongs to */

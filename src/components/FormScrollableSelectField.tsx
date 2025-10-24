@@ -4,6 +4,7 @@ import { useMemo } from "react";
 import { Control, Controller, FieldValues, Path } from "react-hook-form";
 import { FormErrorMessage } from "./FormErrorMessage";
 import { FormLabel } from "./FormLabel";
+import { cn } from "./lib/utils";
 import {
   Select,
   SelectContent,
@@ -13,10 +14,7 @@ import {
   SelectValue,
 } from "./ui/select";
 
-interface Props<
-  T extends FieldValues,
-  TOption extends Record<string, unknown>,
-> {
+interface Props<T extends FieldValues = FieldValues, TOption = unknown> {
   label?: string;
   name: Path<T>;
   control: Control<T>;
@@ -27,8 +25,8 @@ interface Props<
 }
 
 export function FormScrollableSelectField<
-  T extends FieldValues,
-  TOption extends Record<string, unknown>,
+  T extends FieldValues = FieldValues,
+  TOption = unknown,
 >({
   label,
   name,
@@ -38,34 +36,45 @@ export function FormScrollableSelectField<
   getOptionLabel,
   getOptionValue,
 }: Props<T, TOption>) {
-  const mappedOptions = useMemo(
-    () =>
-      options.map((option, index) => {
-        const value = getOptionValue(option);
-        const labelText = getOptionLabel(option);
-        return { key: `${value}-${index}`, value, labelText };
-      }),
-    [options, getOptionLabel, getOptionValue],
-  );
+  const mappedOptions = useMemo(() => {
+    return options.map((option) => {
+      const baseValue = getOptionValue(option);
+      const value = `${baseValue}`;
+      const labelText = getOptionLabel(option);
+      return { key: value, value, labelText };
+    });
+  }, [options, getOptionLabel, getOptionValue]);
+
   return (
     <div>
-      <FormLabel label={label} htmlFor={name as string} />
+      {label && (
+        <FormLabel
+          label={label}
+          htmlFor={name as string}
+          className="text-xs mb-1 text-sky-500"
+        />
+      )}
       <Controller
         control={control}
         name={name}
         render={({ field, fieldState }) => {
-          const selectedOption = options.find(
-            (o) => getOptionValue(o) === field.value,
+          const currentValue = String(field.value ?? "");
+          const selectedOption = mappedOptions.find(
+            (o) => o.value === currentValue,
           );
-          const selectedLabel = selectedOption
-            ? getOptionLabel(selectedOption)
-            : "";
+          const selectedLabel = selectedOption ? selectedOption.labelText : "";
 
           return (
             <>
-              <Select value={field.value ?? ""} onValueChange={field.onChange}>
+              <Select
+                value={currentValue}
+                onValueChange={(val: string) => field.onChange(val)}
+              >
                 <SelectTrigger
-                  className="w-full border-destructive mt-2"
+                  className={cn(
+                    "w-full mt-2",
+                    fieldState.error?.message && "border-destructive",
+                  )}
                   id={String(name)}
                 >
                   <SelectValue
@@ -76,7 +85,6 @@ export function FormScrollableSelectField<
                     {selectedLabel}
                   </SelectValue>
                 </SelectTrigger>
-
                 <SelectContent>
                   <SelectGroup>
                     {mappedOptions.map((opt) => (
@@ -87,7 +95,6 @@ export function FormScrollableSelectField<
                   </SelectGroup>
                 </SelectContent>
               </Select>
-
               <FormErrorMessage message={fieldState.error?.message} />
             </>
           );

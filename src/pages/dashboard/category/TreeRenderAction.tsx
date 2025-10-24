@@ -1,5 +1,6 @@
 "use client";
 
+import { useQueryClient } from "@tanstack/react-query";
 import { memo } from "react";
 import { toast } from "react-toastify";
 
@@ -19,10 +20,16 @@ type Props = {
 };
 
 const TreeRenderActionComponent = ({ id }: Props) => {
+  const queryClient = useQueryClient();
+
   const handleDelete = async () => {
     try {
       await deleteCategoryAction(id);
       toast.success("دسته بندی حذف شد");
+
+      // ✅ Invalidate all category-related caches
+      queryClient.invalidateQueries({ queryKey: ["/categories"] });
+      queryClient.invalidateQueries({ queryKey: ["category-child"] });
     } catch (error: unknown) {
       if (error instanceof Error) {
         toast.error(error.message);

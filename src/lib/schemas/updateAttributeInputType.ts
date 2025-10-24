@@ -13,9 +13,8 @@ export type UpdateAttributeInputType =
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const UpdateAttributeInputType = {
-  select: "select",
-  multiselect: "multiselect",
   text: "text",
   number: "number",
   boolean: "boolean",
+  date: "date",
 } as const;

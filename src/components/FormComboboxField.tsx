@@ -18,8 +18,8 @@ import { Button } from "./ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 
 interface Props<
-  T extends FieldValues,
-  TOption extends Record<string, unknown>,
+  T extends FieldValues = FieldValues,
+  TOption = unknown,
   TValue extends string | number | boolean = string,
 > {
   label?: string;
@@ -34,8 +34,8 @@ interface Props<
 }
 
 export function FormComboboxField<
-  T extends FieldValues,
-  TOption extends Record<string, unknown>,
+  T extends FieldValues = FieldValues,
+  TOption = unknown,
   TValue extends string | number | boolean = string,
 >({
   label,
@@ -49,15 +49,22 @@ export function FormComboboxField<
   getOptionValue,
 }: Props<T, TOption, TValue>) {
   const [open, setOpen] = useState(false);
+
   return (
     <div>
-      <FormLabel label={label} htmlFor={name as string} />
+      {label && (
+        <FormLabel
+          label={label}
+          htmlFor={name as string}
+          className="text-xs mb-1 text-sky-500"
+        />
+      )}
       <Controller
         name={name}
         control={control}
         render={({ field, fieldState }) => {
           const selectedOption = options.find(
-            (opt) => getOptionValue(opt) === field.value,
+            (opt) => String(getOptionValue(opt)) === String(field.value),
           );
 
           const handleSelect = (currentValue: string) => {
@@ -65,7 +72,7 @@ export function FormComboboxField<
               (opt) => String(getOptionValue(opt)) === currentValue,
             );
             if (!matchedOption) return;
-            field.onChange(getOptionValue(matchedOption));
+            field.onChange(getOptionValue(matchedOption) as unknown as TValue);
             setOpen(false);
           };
 
@@ -79,7 +86,7 @@ export function FormComboboxField<
                     aria-expanded={open}
                     className={cn(
                       "w-full justify-between",
-                      `${fieldState.error && "border-destructive"}`,
+                      fieldState.error ? "border-destructive" : "",
                     )}
                   >
                     {selectedOption
@@ -87,12 +94,13 @@ export function FormComboboxField<
                       : placeholder}
                     <ChevronDown
                       className={cn(
-                        "ml-2 h-4 w-4 opacity-50 ",
+                        "ml-2 h-4 w-4 opacity-50",
                         open ? "rotate-90" : "rotate-0",
                       )}
                     />
                   </Button>
                 </PopoverTrigger>
+
                 <PopoverContent className="w-[var(--radix-popover-trigger-width)] p-0">
                   <Command className="w-full p-2">
                     <CommandInput
@@ -103,21 +111,23 @@ export function FormComboboxField<
                       <CommandEmpty className="w-full text-center">
                         {emptyMessage}
                       </CommandEmpty>
+
                       <CommandGroup>
                         {options.map((option, index) => {
                           const value = getOptionValue(option);
                           const label = getOptionLabel(option);
+                          const stringValue = String(value);
                           return (
                             <CommandItem
-                              key={`${String(value)}_${label}_${index}`}
-                              value={String(value)}
+                              key={`${stringValue}_${label}_${index}`}
+                              value={stringValue}
                               onSelect={handleSelect}
                             >
                               {label}
                               <Check
                                 className={cn(
                                   "ml-auto h-4 w-4",
-                                  String(field.value) === String(value)
+                                  String(field.value) === stringValue
                                     ? "opacity-100"
                                     : "opacity-0",
                                 )}
@@ -130,6 +140,7 @@ export function FormComboboxField<
                   </Command>
                 </PopoverContent>
               </Popover>
+
               <FormErrorMessage message={fieldState.error?.message} />
             </>
           );

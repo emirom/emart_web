@@ -5,5 +5,20 @@
   "Home": {
     "title": "بهترین پیشنهادها",
     "cta": "الان خرید کن"
-  }
+  },
+  "parentId": "دسته پدر",
+  "categoryCountingUnit": "واحد شمارش",
+  "categoryFaName": "نام فارسی",
+  "categoryEnName": "نام انگلیسی",
+  "categoryIsActive": "فعال",
+  "categoryShowInMenu": "نمایش در منو",
+  "categoryParent": "دسته پدر",
+  "saveButtonTitle": "ثبت",
+  "attributeTitle": "ثبت ویژگی",
+  "chooseCategoryLabel": "انتخاب دسته بندی",
+  "attributeTypeLabel": "نوع ویژگی",
+  "parentIdTitle": "دسته پدر",
+  "attributeNameLabel": "نام ویژگی",
+  "attributeTitleLabel": "عنوان ویژگی",
+  "attributeValueLabel": "نام ویژگی"
 }

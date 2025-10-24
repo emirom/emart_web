@@ -5,6 +5,7 @@
  * OpenAPI spec version: 1.0.0
  */
 import type { UpdateAttributeInputType } from "./updateAttributeInputType";
+import type { UpdateAttributeInputUnit } from "./updateAttributeInputUnit";
 import type { UpdateAttributeInputIconUrl } from "./updateAttributeInputIconUrl";
 
 /**
@@ -19,6 +20,8 @@ export interface UpdateAttributeInput {
   title?: string;
   /** Attribute type */
   type?: UpdateAttributeInputType;
+  /** Attribute type */
+  unit?: UpdateAttributeInputUnit;
   /** URL to attribute icon */
   iconUrl?: UpdateAttributeInputIconUrl;
   /** Category ID this attribute belongs to */

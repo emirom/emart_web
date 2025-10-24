@@ -25,8 +25,8 @@ export const TreeNodeItem = React.memo(
     });
 
     useEffect(() => {
-      if (expanded) {
-        data?.data.forEach((child) => {
+      if (expanded && data?.data) {
+        data.data.forEach((child) => {
           queryClient.prefetchQuery({
             queryKey: ["category-child", child.id],
             queryFn: () =>
@@ -35,7 +35,7 @@ export const TreeNodeItem = React.memo(
           });
         });
       }
-    }, [expanded, data, queryClient]);
+    }, [expanded, data]);
 
     const children = data?.data || [];
 
@@ -61,9 +61,11 @@ export const TreeNodeItem = React.memo(
           </div>
           <TreeRenderAction id={node.id} />
         </div>
+
         {expanded && isFetching && (
           <p className="text-xs text-gray-400 mr-5 mt-1">Loading...</p>
         )}
+
         <ul
           className="w-full flex flex-col"
           style={{ display: expanded ? "flex" : "none" }}
@@ -87,7 +89,7 @@ const TreeRender = () => {
   });
 
   return (
-    <ul className="tree-render  w-full flex flex-col">
+    <ul className="tree-render w-full flex flex-col">
       {categories?.data.map((node) => (
         <TreeNodeItem key={node.id} node={node} isRoot />
       ))}

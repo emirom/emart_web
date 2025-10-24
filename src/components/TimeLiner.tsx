@@ -6,7 +6,7 @@ interface TimerLineProps {
 
 const TimerLine = ({ initialTime }: TimerLineProps) => {
   const [time, setTime] = useState(initialTime);
-  const [duration, setDuration] = useState(initialTime);
+  const [duration] = useState(initialTime);
 
   useEffect(() => {
     const interval = setInterval(() => {

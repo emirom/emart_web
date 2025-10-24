@@ -1,4 +1,5 @@
 "use client";
+
 import { InputHTMLAttributes } from "react";
 import { Control, Controller, FieldValues, Path } from "react-hook-form";
 import { FormErrorMessage } from "./FormErrorMessage";
@@ -21,8 +22,14 @@ function FormInputField<T extends FieldValues>({
   ...props
 }: Props<T>) {
   return (
-    <div>
-      <FormLabel label={label} htmlFor={name as string} />
+    <div className="flex flex-col gap-1 w-full">
+      {label && (
+        <FormLabel
+          label={label}
+          htmlFor={name as string}
+          className="text-xs mb-1 text-sky-500"
+        />
+      )}
 
       <Controller
         control={control}
@@ -33,13 +40,16 @@ function FormInputField<T extends FieldValues>({
               id={name}
               data-slot="input"
               {...field}
+              value={field.value ?? ""}
               className={cn(
-                `${fieldState.error && "border border-destructive text-black"}`,
+                fieldState.error && "border border-destructive text-black",
                 className,
               )}
               {...props}
             />
-            <FormErrorMessage message={fieldState.error?.message} />
+            {fieldState.error && (
+              <FormErrorMessage message={fieldState.error.message} />
+            )}
           </>
         )}
       />

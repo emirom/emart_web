@@ -1,4 +1,3 @@
-// src/lib/configs/axios-instance.ts
 import axios, { AxiosRequestConfig } from "axios";
 
 const instance = axios.create({
@@ -6,6 +5,24 @@ const instance = axios.create({
   headers: {
     "Content-Type": "application/json",
   },
+});
+
+instance.interceptors.request.use((config) => {
+  const hasJsonContentType =
+    config.headers?.["Content-Type"] === "application/json";
+
+  const isEmptyBody =
+    config.data === undefined ||
+    config.data === null ||
+    (typeof config.data === "object" &&
+      Object.keys(config.data as Record<string, unknown>).length === 0);
+
+  if (hasJsonContentType && isEmptyBody) {
+    delete (config.headers as Record<string, unknown>)["Content-Type"];
+    delete config.data;
+  }
+
+  return config;
 });
 
 export const axiosInstance = async <T = unknown>({

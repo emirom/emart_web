@@ -12,6 +12,7 @@ import { z as zod } from "zod";
 export const postAttributesBodyTitleMin = 2;
 
 export const postAttributesBodyTitleMax = 50;
+export const postAttributesBodyUnitMaxOne = 50;
 export const postAttributesBodyIconUrlMaxOne = 50;
 
 export const postAttributesBody = zod
@@ -22,7 +23,14 @@ export const postAttributesBody = zod
       .max(postAttributesBodyTitleMax)
       .describe("Attribute title"),
     type: zod
-      .enum(["select", "multiselect", "text", "number", "boolean"])
+      .enum(["text", "number", "boolean", "date"])
+      .describe("Attribute type"),
+    unit: zod
+      .union([
+        zod.coerce.string().max(postAttributesBodyUnitMaxOne),
+        zod.null(),
+      ])
+      .optional()
       .describe("Attribute type"),
     iconUrl: zod
       .union([
@@ -41,7 +49,7 @@ export const postAttributesBody = zod
 export const getAttributesQuerySkipMin = 0;
 export const getAttributesQueryLimitMax = 20;
 export const getAttributesQueryTitleMaxOne = 50;
-export const getAttributesQueryTypeDefaultOne = "select";
+export const getAttributesQueryTypeDefaultOne = "text";
 
 export const getAttributesQueryParams = zod.object({
   skip: zod.coerce
@@ -58,10 +66,7 @@ export const getAttributesQueryParams = zod.object({
     .optional()
     .describe("Filter by attribute title"),
   type: zod
-    .union([
-      zod.enum(["select", "multiselect", "text", "number", "boolean", "color"]),
-      zod.null(),
-    ])
+    .union([zod.enum(["text", "number", "boolean", "date"]), zod.null()])
     .optional()
     .describe("Filter by attribute type"),
   categoryId: zod
@@ -107,6 +112,7 @@ export const patchAttributesIdParams = zod.object({
 export const patchAttributesIdBodyTitleMin = 2;
 
 export const patchAttributesIdBodyTitleMax = 50;
+export const patchAttributesIdBodyUnitMaxOne = 50;
 export const patchAttributesIdBodyIconUrlMaxOne = 50;
 
 export const patchAttributesIdBody = zod
@@ -118,7 +124,14 @@ export const patchAttributesIdBody = zod
       .optional()
       .describe("Attribute title"),
     type: zod
-      .enum(["select", "multiselect", "text", "number", "boolean"])
+      .enum(["text", "number", "boolean", "date"])
+      .optional()
+      .describe("Attribute type"),
+    unit: zod
+      .union([
+        zod.coerce.string().max(patchAttributesIdBodyUnitMaxOne),
+        zod.null(),
+      ])
       .optional()
       .describe("Attribute type"),
     iconUrl: zod

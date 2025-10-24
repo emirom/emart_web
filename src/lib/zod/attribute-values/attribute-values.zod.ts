@@ -23,46 +23,6 @@ export const postAttributeValuesBody = zod
   .describe("Attribute value creation payload");
 
 /**
- * List all attribute values with pagination and filters
- */
-export const getAttributeValuesQuerySkipMin = 0;
-export const getAttributeValuesQueryLimitMax = 20;
-export const getAttributeValuesQueryValueMaxOne = 50;
-
-export const getAttributeValuesQueryParams = zod.object({
-  skip: zod.coerce
-    .number()
-    .min(getAttributeValuesQuerySkipMin)
-    .describe("Number of records to skip"),
-  limit: zod.coerce
-    .number()
-    .min(1)
-    .max(getAttributeValuesQueryLimitMax)
-    .describe("Maximum number of records to return"),
-  value: zod
-    .union([
-      zod.coerce.string().max(getAttributeValuesQueryValueMaxOne),
-      zod.null(),
-    ])
-    .optional()
-    .describe("Filter by value content"),
-  attributeId: zod
-    .union([zod.uuid(), zod.null()])
-    .optional()
-    .describe("Filter by attribute ID"),
-});
-
-export const getAttributeValuesResponse = zod
-  .object({
-    success: zod
-      .union([zod.coerce.boolean(), zod.null()])
-      .optional()
-      .describe("Operation status"),
-  })
-  .describe("Standard API response format")
-  .describe("List of attribute values response");
-
-/**
  * Get a single attribute value by ID
  */
 export const getAttributeValuesIdParams = zod.object({

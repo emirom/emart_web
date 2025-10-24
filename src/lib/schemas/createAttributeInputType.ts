@@ -13,9 +13,8 @@ export type CreateAttributeInputType =
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const CreateAttributeInputType = {
-  select: "select",
-  multiselect: "multiselect",
   text: "text",
   number: "number",
   boolean: "boolean",
+  date: "date",
 } as const;

@@ -24,14 +24,7 @@ export type GetAttributesParams = {
   /**
    * Filter by attribute type
    */
-  type?:
-    | "select"
-    | "multiselect"
-    | "text"
-    | "number"
-    | "boolean"
-    | "color"
-    | null;
+  type?: "text" | "number" | "boolean" | "date" | null;
   /**
    * Filter by category ID
    */

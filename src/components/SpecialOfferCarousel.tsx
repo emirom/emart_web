@@ -30,8 +30,6 @@ export default function SpecialOfferCarousel({
         >
           <CarouselContent className="-ml-3">
             {items.map((_, indx) => {
-              const isLCP = indx === 0;
-
               return (
                 <CarouselItem
                   key={indx}

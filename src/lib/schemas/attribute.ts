@@ -5,6 +5,7 @@
  * OpenAPI spec version: 1.0.0
  */
 import type { AttributeType } from "./attributeType";
+import type { AttributeUnit } from "./attributeUnit";
 import type { AttributeIconUrl } from "./attributeIconUrl";
 
 /**
@@ -25,6 +26,8 @@ export interface Attribute {
   title: string;
   /** Attribute type */
   type: AttributeType;
+  /** Attribute type */
+  unit?: AttributeUnit;
   /** URL to attribute icon */
   iconUrl?: AttributeIconUrl;
   /** Category ID this attribute belongs to */
