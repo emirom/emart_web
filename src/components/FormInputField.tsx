@@ -2,16 +2,14 @@
 
 import { InputHTMLAttributes } from "react";
 import { Control, Controller, FieldValues, Path } from "react-hook-form";
-import { FormErrorMessage } from "./FormErrorMessage";
-import { FormLabel } from "./FormLabel";
 import { cn } from "./lib/utils";
 import { Input } from "./ui/input";
 
 interface Props<T extends FieldValues>
   extends InputHTMLAttributes<HTMLInputElement> {
-  label?: string;
   name: Path<T>;
   control: Control<T>;
+  label: string;
 }
 
 function FormInputField<T extends FieldValues>({
@@ -23,13 +21,7 @@ function FormInputField<T extends FieldValues>({
 }: Props<T>) {
   return (
     <div className="flex flex-col gap-1 w-full">
-      {label && (
-        <FormLabel
-          label={label}
-          htmlFor={name as string}
-          className="text-xs mb-1 text-sky-500"
-        />
-      )}
+      <label className={cn("block text-sm font-medium")}>{label}</label>
 
       <Controller
         control={control}
@@ -47,8 +39,10 @@ function FormInputField<T extends FieldValues>({
               )}
               {...props}
             />
-            {fieldState.error && (
-              <FormErrorMessage message={fieldState.error.message} />
+            {fieldState?.error && (
+              <p className="text-destructive text-sm mt-1">
+                {fieldState.error.message}
+              </p>
             )}
           </>
         )}

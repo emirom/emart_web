@@ -2,8 +2,6 @@
 
 import { useMemo } from "react";
 import { Control, Controller, FieldValues, Path } from "react-hook-form";
-import { FormErrorMessage } from "./FormErrorMessage";
-import { FormLabel } from "./FormLabel";
 import { cn } from "./lib/utils";
 import {
   Select,
@@ -15,7 +13,7 @@ import {
 } from "./ui/select";
 
 interface Props<T extends FieldValues = FieldValues, TOption = unknown> {
-  label?: string;
+  label: string;
   name: Path<T>;
   control: Control<T>;
   options: TOption[];
@@ -28,7 +26,6 @@ export function FormScrollableSelectField<
   T extends FieldValues = FieldValues,
   TOption = unknown,
 >({
-  label,
   name,
   control,
   options,
@@ -44,16 +41,8 @@ export function FormScrollableSelectField<
       return { key: value, value, labelText };
     });
   }, [options, getOptionLabel, getOptionValue]);
-
   return (
     <div>
-      {label && (
-        <FormLabel
-          label={label}
-          htmlFor={name as string}
-          className="text-xs mb-1 text-sky-500"
-        />
-      )}
       <Controller
         control={control}
         name={name}
@@ -95,7 +84,6 @@ export function FormScrollableSelectField<
                   </SelectGroup>
                 </SelectContent>
               </Select>
-              <FormErrorMessage message={fieldState.error?.message} />
             </>
           );
         }}

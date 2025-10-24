@@ -11,8 +11,6 @@ import {
   RegisterOptions,
 } from "react-hook-form";
 import DatePicker from "react-multi-date-picker";
-import { FormErrorMessage } from "./FormErrorMessage";
-import { FormLabel } from "./FormLabel";
 import { cn } from "./lib/utils";
 import { Input } from "./ui/input";
 
@@ -35,7 +33,7 @@ const jalaliKey = (date: JalaliDate) => {
 type CustomDatePickerProps<T extends FieldValues> = {
   name: Path<T>;
   control: Control<T>;
-  label?: string;
+  label: string;
   rules?: Omit<
     RegisterOptions<T, Path<T>>,
     "setValueAs" | "disabled" | "valueAsNumber" | "valueAsDate"
@@ -76,13 +74,11 @@ function toDate(value: unknown): Date | null {
 function FormDatePickerField<T extends FieldValues>({
   control,
   name,
-  label,
   rules,
   placeholder,
 }: CustomDatePickerProps<T>) {
   return (
     <>
-      {label && <FormLabel label={label} htmlFor={name as string} />}
       <Controller
         name={name}
         control={control}
@@ -120,7 +116,6 @@ function FormDatePickerField<T extends FieldValues>({
                   />
                 )}
               />
-              <FormErrorMessage message={fieldState.error?.message} />
             </>
           );
         }}

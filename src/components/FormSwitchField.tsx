@@ -7,7 +7,7 @@ import {
   PathValue,
   RegisterOptions,
 } from "react-hook-form";
-import { FormLabel } from "./FormLabel";
+import { cn } from "./lib/utils";
 
 type SwitchButtonProps<T extends FieldValues> = {
   label?: string;
@@ -38,14 +38,11 @@ const FormSwitchField = <T extends FieldValues>({
         const toggle = () => {
           onChange(!isActive);
         };
-
         return (
           <div className="flex flex-col justify-between text-[#0F4275] text-sm font-bold">
-            <FormLabel
-              label={label}
-              htmlFor={name as string}
-              className="text-xs mb-1 text-sky-500"
-            />
+            {label && (
+              <label className={cn("block text-sm font-medium")}>{label}</label>
+            )}
             <button
               type="button"
               onClick={toggle}

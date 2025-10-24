@@ -1,8 +1,6 @@
 "use client";
 
 import { Control, Controller, FieldValues, Path } from "react-hook-form";
-import { FormErrorMessage } from "./FormErrorMessage";
-import { FormLabel } from "./FormLabel";
 import { Label } from "./ui/label";
 import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
 
@@ -13,7 +11,7 @@ interface Props<
 > {
   control: Control<T>;
   name: Path<T>;
-  label?: string;
+  label: string;
   options: TOption[];
   getOptionLabel: (option: TOption) => string;
   getOptionValue: (option: TOption) => TValue;
@@ -32,8 +30,7 @@ export function FormRadioGroupField<
   getOptionValue,
 }: Props<T, TOption, TValue>) {
   return (
-    <>
-      <FormLabel label={label} htmlFor={name as string} />
+    <div>
       <Controller
         control={control}
         name={name}
@@ -80,11 +77,10 @@ export function FormRadioGroupField<
                   );
                 })}
               </RadioGroup>
-              <FormErrorMessage message={fieldState.error?.message} />
             </div>
           );
         }}
       />
-    </>
+    </div>
   );
 }

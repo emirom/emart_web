@@ -11,8 +11,6 @@ import {
 import { Check, ChevronDown } from "lucide-react";
 import { useState } from "react";
 import { Control, Controller, FieldValues, Path } from "react-hook-form";
-import { FormErrorMessage } from "./FormErrorMessage";
-import { FormLabel } from "./FormLabel";
 import { cn } from "./lib/utils";
 import { Button } from "./ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
@@ -22,7 +20,7 @@ interface Props<
   TOption = unknown,
   TValue extends string | number | boolean = string,
 > {
-  label?: string;
+  label: string;
   name: Path<T>;
   control: Control<T>;
   options: TOption[];
@@ -38,7 +36,6 @@ export function FormComboboxField<
   TOption = unknown,
   TValue extends string | number | boolean = string,
 >({
-  label,
   name,
   control,
   options,
@@ -49,16 +46,8 @@ export function FormComboboxField<
   getOptionValue,
 }: Props<T, TOption, TValue>) {
   const [open, setOpen] = useState(false);
-
   return (
     <div>
-      {label && (
-        <FormLabel
-          label={label}
-          htmlFor={name as string}
-          className="text-xs mb-1 text-sky-500"
-        />
-      )}
       <Controller
         name={name}
         control={control}
@@ -140,8 +129,6 @@ export function FormComboboxField<
                   </Command>
                 </PopoverContent>
               </Popover>
-
-              <FormErrorMessage message={fieldState.error?.message} />
             </>
           );
         }}

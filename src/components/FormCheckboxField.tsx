@@ -1,8 +1,6 @@
 "use client";
 
 import { Control, Controller, FieldValues, Path } from "react-hook-form";
-import { FormErrorMessage } from "./FormErrorMessage";
-import { FormLabel } from "./FormLabel";
 import { Checkbox } from "./ui/checkbox";
 import { Label } from "./ui/label";
 
@@ -12,7 +10,7 @@ interface Props<
 > {
   control: Control<T>;
   name: Path<T>;
-  label?: string;
+  label: string;
   options: TOption[];
   getOptionValue: (option: TOption) => string;
   getOptionLabel: (option: TOption) => string;
@@ -25,7 +23,6 @@ export function FormCheckboxField<
 >({
   control,
   name,
-  label,
   options,
   getOptionValue,
   getOptionLabel,
@@ -35,10 +32,8 @@ export function FormCheckboxField<
     direction === "col"
       ? "flex flex-col gap-2 mt-2"
       : "flex flex-row gap-4 mt-2";
-
   return (
     <div>
-      <FormLabel label={label} htmlFor={name as string} />
       <Controller
         control={control}
         name={name}
@@ -73,8 +68,6 @@ export function FormCheckboxField<
                   </div>
                 );
               })}
-
-              <FormErrorMessage message={fieldState.error?.message} />
             </div>
           );
         }}
