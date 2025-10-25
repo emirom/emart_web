@@ -1,4 +1,3 @@
-// src/app/[locale]/(admin)/dashboard/category/add/page.tsx
 "use client";
 
 import { FormInputField } from "@components/FormInputField";
@@ -15,10 +14,10 @@ export default function CreateCategoryPage() {
     },
   });
 
-  const options = [
-    { id: "1", name: "hello" },
-    { id: "2", name: "world" },
-  ];
+  // const options = [
+  //   { id: "1", name: "hello" },
+  //   { id: "2", name: "world" },
+  // ];
 
   return (
     <div className="w-full overflow-hidden">

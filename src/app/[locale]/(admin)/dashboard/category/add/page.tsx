@@ -9,15 +9,13 @@ export default async function Page() {
     <HydrationBoundary state={dehydrate(queryClient)}>
       <div className="grid items-stretch gap-2 relative lg:grid-cols-2">
         <div className="p-2 ">
-          {" "}
           <CreateCategory />
-          <CreateAttribute />{" "}
-        </div>{" "}
+          <CreateAttribute />
+        </div>
         <div className="w-full ">
-          {" "}
-          <PreviewList />{" "}
-        </div>{" "}
-      </div>{" "}
+          <PreviewList />
+        </div>
+      </div>
     </HydrationBoundary>
   );
 }
