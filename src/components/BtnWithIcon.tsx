@@ -8,6 +8,7 @@ import { Button } from "./ui/button";
 interface IconButtonProps {
   onClick?: () => void;
   className?: string;
+  disabled?: boolean;
 }
 
 const EditButtonComponent = ({ onClick }: IconButtonProps) => (
@@ -44,7 +45,9 @@ const CopyButtonComponent = ({ onClick, className }: IconButtonProps) => (
   <Button
     onClick={onClick}
     aria-label="کپی"
-    className="bg-white border border-gray-300 text-gray-500 hover:bg-gray-100 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-500 transition-colors"
+    className={cn(
+      "bg-white border border-gray-300 text-gray-500 hover:bg-gray-100 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-500 transition-colors"
+    )}
   >
     <CopyIcon className="stroke-gray-500 stroke-2" />
   </Button>
@@ -60,13 +63,18 @@ const EyeButtonComponent = ({ onClick }: IconButtonProps) => (
   </Button>
 );
 
-const SubmitButtonComponent = ({ onClick, className }: IconButtonProps) => (
+const SubmitButtonComponent = ({
+  onClick,
+  className,
+  disabled,
+}: IconButtonProps) => (
   <Button
+    disabled={disabled}
     onClick={onClick}
     aria-label="ذخیره"
     className={cn(
       "bg-green-300 text-white focus-visible:ring-2 focus-visible:ring-offset-2 transition-colors",
-      className,
+      className
     )}
   >
     ذخیره

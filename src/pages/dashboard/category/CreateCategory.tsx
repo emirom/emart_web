@@ -36,7 +36,7 @@ export default function CreateCategoryPage() {
     }
   };
   return (
-    <div className="w-full overflow-hidden">
+    <div className="w-full ">
       <h2 className="text-tint-blue-500">افزودن دسته بندی</h2>
       <form
         onSubmit={handleSubmit(onSubmit)}

@@ -25,11 +25,8 @@ const TreeRenderActionComponent = ({ id }: Props) => {
   const handleDelete = async () => {
     try {
       await deleteCategoryAction(id);
-      toast.success("دسته بندی حذف شد");
-
-      // ✅ Invalidate all category-related caches
       queryClient.invalidateQueries({ queryKey: ["/categories"] });
-      queryClient.invalidateQueries({ queryKey: ["category-child"] });
+      toast.success("دسته بندی حذف شد");
     } catch (error: unknown) {
       if (error instanceof Error) {
         toast.error(error.message);

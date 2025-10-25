@@ -51,7 +51,7 @@ export default function CreateAttribute() {
           control={control}
         />
         <div className="flex items-end gap-[0.4375rem]">
-          <div className="flex items-end gap-[0.4375rem] w-full">
+          <div className="flex items-end gap-[0.4375rem]">
             <FormInputField label="نام ویژگی" name="title" control={control} />
             <FormInputField label="واحد ویژگی" name="unit" control={control} />
             <FormScrollableSelectField
