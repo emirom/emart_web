@@ -2,29 +2,29 @@ import { v4 as uuidv4 } from "uuid";
 
 type AttributeUnitsType = {
   id: string;
-  value: "TEXT" | "NUMBER" | "BOOLEAN" | "DATE";
+  value: "text" | "number" | "boolean" | "date";
   name: string;
 };
 
 export const attributeUnits: AttributeUnitsType[] = [
   {
     id: uuidv4(),
-    value: "TEXT",
+    value: "text",
     name: "متن",
   },
   {
     id: uuidv4(),
-    value: "NUMBER",
+    value: "number",
     name: "عدد",
   },
   {
     id: uuidv4(),
-    value: "BOOLEAN",
+    value: "boolean",
     name: "بولین",
   },
   {
     id: uuidv4(),
-    value: "DATE",
+    value: "date",
     name: "تاریخ",
   },
 ];

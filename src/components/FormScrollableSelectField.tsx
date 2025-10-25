@@ -32,6 +32,7 @@ export function FormScrollableSelectField<
   placeholder,
   getOptionLabel,
   getOptionValue,
+  label,
 }: Props<T, TOption>) {
   const mappedOptions = useMemo(() => {
     return options.map((option) => {
@@ -43,6 +44,9 @@ export function FormScrollableSelectField<
   }, [options, getOptionLabel, getOptionValue]);
   return (
     <div>
+      <label className={cn("block text-xs font-medium text-tint-blue-500")}>
+        {label}
+      </label>
       <Controller
         control={control}
         name={name}
