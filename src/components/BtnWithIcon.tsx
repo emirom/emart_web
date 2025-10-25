@@ -2,10 +2,12 @@
 
 import { CopyIcon, EditIcon, EyeIcon, PlusIcon, Trash } from "lucide-react";
 import { memo } from "react";
+import { cn } from "./lib/utils";
 import { Button } from "./ui/button";
 
 interface IconButtonProps {
   onClick?: () => void;
+  className?: string;
 }
 
 const EditButtonComponent = ({ onClick }: IconButtonProps) => (
@@ -38,7 +40,7 @@ const PlusButtonComponent = ({ onClick }: IconButtonProps) => (
   </Button>
 );
 
-const CopyButtonComponent = ({ onClick }: IconButtonProps) => (
+const CopyButtonComponent = ({ onClick, className }: IconButtonProps) => (
   <Button
     onClick={onClick}
     aria-label="کپی"
@@ -58,14 +60,29 @@ const EyeButtonComponent = ({ onClick }: IconButtonProps) => (
   </Button>
 );
 
+const SubmitButtonComponent = ({ onClick, className }: IconButtonProps) => (
+  <Button
+    onClick={onClick}
+    aria-label="ذخیره"
+    className={cn(
+      "bg-green-300 text-white focus-visible:ring-2 focus-visible:ring-offset-2 transition-colors",
+      className,
+    )}
+  >
+    ذخیره
+  </Button>
+);
+
 export const EditButton = memo(EditButtonComponent);
 export const DeleteButton = memo(DeleteButtonComponent);
 export const PlusButton = memo(PlusButtonComponent);
 export const CopyButton = memo(CopyButtonComponent);
 export const EyeButton = memo(EyeButtonComponent);
+export const SubmitButton = memo(SubmitButtonComponent);
 
 EditButton.displayName = "EditButton";
 DeleteButton.displayName = "DeleteButton";
 PlusButton.displayName = "PlusButton";
 CopyButton.displayName = "CopyButton";
 EyeButton.displayName = "EyeButton";
+SubmitButton.displayName = "SubmitButton";

@@ -21,7 +21,9 @@ function FormInputField<T extends FieldValues>({
 }: Props<T>) {
   return (
     <div className="flex flex-col gap-1 w-full">
-      <label className={cn("block text-sm font-medium")}>{label}</label>
+      <label className={cn("block text-xs font-medium text-tint-blue-500")}>
+        {label}
+      </label>
 
       <Controller
         control={control}

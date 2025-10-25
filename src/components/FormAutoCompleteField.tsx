@@ -2,7 +2,6 @@
 
 import { useAutocomplete } from "@lib/hooks/useAutocomplete";
 import clsx from "clsx";
-import { useTranslations } from "next-intl";
 import { InputHTMLAttributes, useEffect, useRef } from "react";
 import {
   Control,
@@ -11,13 +10,14 @@ import {
   RegisterOptions,
   useController,
 } from "react-hook-form";
+import { cn } from "./lib/utils";
 import { Input } from "./ui/input";
 
 export interface AutocompleteProps<
   TOption extends object,
   TFieldValues extends FieldValues = FieldValues,
 > {
-  options?: TOption[];
+  options: TOption[];
   label: string;
   name: FieldPath<TFieldValues>;
   getOptionLabel: (option: TOption) => string;
@@ -34,7 +34,7 @@ function FormAutocomplete<
 >({
   options = [],
   onSelect,
-
+  label,
   name,
   getOptionLabel,
   getOptionValue,
@@ -66,7 +66,6 @@ function FormAutocomplete<
       setInputValue("");
     }
   }, [value, options, getOptionLabel, getOptionValue, setInputValue]);
-  const t = useTranslations();
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -96,6 +95,10 @@ function FormAutocomplete<
 
   return (
     <div ref={containerRef} className="flex flex-col justify-between grow">
+      <label className={cn("block text-xs text-tint-blue-500 font-medium")}>
+        {label}
+      </label>
+
       <div className="relative">
         <Input
           type="text"
@@ -136,9 +139,7 @@ function FormAutocomplete<
           </ul>
         )}
       </div>
-      {error && (
-        <span className="text-red-500 text-sm mt-1">{error.message}</span>
-      )}
+      {error && <p className="text-red-500 text-sm mt-1">{error.message}</p>}
     </div>
   );
 }

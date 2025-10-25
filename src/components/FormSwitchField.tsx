@@ -39,9 +39,11 @@ const FormSwitchField = <T extends FieldValues>({
           onChange(!isActive);
         };
         return (
-          <div className="flex flex-col justify-between text-[#0F4275] text-sm font-bold">
+          <div className="flex flex-col justify-between text-tint-blue-500 text-xs font-medium">
             {label && (
-              <label className={cn("block text-sm font-medium")}>{label}</label>
+              <label className={cn("block text-xs font-medium mb-1")}>
+                {label}
+              </label>
             )}
             <button
               type="button"
