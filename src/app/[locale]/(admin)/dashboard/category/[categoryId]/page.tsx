@@ -21,7 +21,7 @@ export default async function Page({
       <div className="grid items-stretch gap-2 relative lg:grid-cols-2">
         <div className="p-2 ">
           <EditCategory id={categoryId} />
-          <EditAttribute />
+          <EditAttribute id={categoryId} />
         </div>
         <div className="w-full ">
           <EditPreviewList />
