@@ -46,7 +46,7 @@ const CopyButtonComponent = ({ onClick, className }: IconButtonProps) => (
     onClick={onClick}
     aria-label="کپی"
     className={cn(
-      "bg-white border border-gray-300 text-gray-500 hover:bg-gray-100 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-500 transition-colors"
+      "bg-white border border-gray-300 text-gray-500 hover:bg-gray-100 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-500 transition-colors",
     )}
   >
     <CopyIcon className="stroke-gray-500 stroke-2" />
@@ -74,7 +74,7 @@ const SubmitButtonComponent = ({
     aria-label="ذخیره"
     className={cn(
       "bg-green-300 text-white focus-visible:ring-2 focus-visible:ring-offset-2 transition-colors",
-      className
+      className,
     )}
   >
     ذخیره
