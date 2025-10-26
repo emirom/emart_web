@@ -11,16 +11,19 @@ const columns: ColumnDef<Unit>[] = [
   { accessorKey: "title", header: "نام‌کمیت" },
 ];
 
+type InitialQuery = {
+  page?: number;
+  title?: string;
+};
+
 export default function UnitsTable({
-  serverPage = 0,
-  serverSearch,
+  initialQuery,
 }: {
-  serverPage?: number;
-  serverSearch?: string;
+  initialQuery?: InitialQuery;
 }) {
   const searchParams = useSearchParams();
-  const page = Number(searchParams?.get("page") ?? serverPage);
-  const title = searchParams?.get("search") ?? serverSearch;
+  const page = Number(searchParams?.get("page") ? initialQuery?.page : 0);
+  const title = searchParams?.get("search") ?? initialQuery?.title;
 
   const { data: units } = useGetUnits({ skip: page * 10, limit: 10, title });
 

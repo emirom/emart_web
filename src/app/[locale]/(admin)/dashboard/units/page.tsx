@@ -10,17 +10,27 @@ export default async function Page({
   searchParams?: Promise<Record<string, string>>;
 }) {
   const sp = searchParams ? await searchParams : {};
-  const page = Number(sp?.page ?? 0);
-  const title = sp?.search;
+  const initialQuery = {
+    page: Number(sp?.page ?? 0),
+    title: sp?.search,
+  };
 
   await queryClient.prefetchQuery({
-    queryKey: ["/units", { skip: page * 10, limit: 10, title }],
-    queryFn: () => getUnits({ skip: page * 10, limit: 10, title }),
+    queryKey: [
+      "/units",
+      { skip: initialQuery.page * 10, limit: 10, title: initialQuery.title },
+    ],
+    queryFn: () =>
+      getUnits({
+        skip: initialQuery.page * 10,
+        limit: 10,
+        title: initialQuery.title,
+      }),
   });
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <UnitsTable serverPage={page} serverSearch={title} />
+      <UnitsTable initialQuery={initialQuery} />
       <TablePagination />
     </HydrationBoundary>
   );

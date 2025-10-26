@@ -30,15 +30,17 @@ export function TablePagination() {
       <Pagination>
         <PaginationContent>
           <PaginationItem>
-            <PaginationPrevious
-              onClick={() => handlePageChange(currentPage - 1)}
-            />
+            <PaginationNext onClick={() => handlePageChange(currentPage + 1)} />
           </PaginationItem>
+
           <PaginationItem className="p-0 m-0 inline">
             <PaginationLink>{currentPage + 1}</PaginationLink>
           </PaginationItem>
+
           <PaginationItem>
-            <PaginationNext onClick={() => handlePageChange(currentPage + 1)} />
+            <PaginationPrevious
+              onClick={() => handlePageChange(currentPage - 1)}
+            />
           </PaginationItem>
         </PaginationContent>
       </Pagination>
