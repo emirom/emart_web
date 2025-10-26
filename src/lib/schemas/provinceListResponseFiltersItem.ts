@@ -4,11 +4,11 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { ProvinceListResponseFiltersItemLabel } from './provinceListResponseFiltersItemLabel';
-import type { ProvinceListResponseFiltersItemModel } from './provinceListResponseFiltersItemModel';
-import type { ProvinceListResponseFiltersItemField } from './provinceListResponseFiltersItemField';
-import type { ProvinceListResponseFiltersItemAdvanced } from './provinceListResponseFiltersItemAdvanced';
-import type { ProvinceListResponseFiltersItemEnumOptions } from './provinceListResponseFiltersItemEnumOptions';
+import type { ProvinceListResponseFiltersItemLabel } from "./provinceListResponseFiltersItemLabel";
+import type { ProvinceListResponseFiltersItemModel } from "./provinceListResponseFiltersItemModel";
+import type { ProvinceListResponseFiltersItemField } from "./provinceListResponseFiltersItemField";
+import type { ProvinceListResponseFiltersItemAdvanced } from "./provinceListResponseFiltersItemAdvanced";
+import type { ProvinceListResponseFiltersItemEnumOptions } from "./provinceListResponseFiltersItemEnumOptions";
 
 export type ProvinceListResponseFiltersItem = {
   /** The key representing the service associated with the filter. */

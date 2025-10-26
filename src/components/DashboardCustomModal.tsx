@@ -2,7 +2,7 @@
 
 import { useMediaQuery } from "@lib/hooks/useMediaQuery";
 import { XIcon } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "./ui/button";
 import {
   Dialog,
@@ -31,14 +31,23 @@ export function DashboardCustomModal({
   button: React.ReactNode;
 }) {
   const [open, setOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
+
+  // جلوگیری از mismatch بین SSR و CSR
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
+
   // Desktop size
   if (isDesktop) {
     return (
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
           <div
-            className="bg-white text-tint-blue-500 text-sm  "
+            className="bg-white text-tint-blue-500 text-sm"
             aria-label={title}
             title={title}
           >
@@ -48,12 +57,12 @@ export function DashboardCustomModal({
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
             <div className="flex items-center justify-between">
-              <DialogTitle className="text-sm   text-orange-700">
+              <DialogTitle className="text-sm text-orange-700">
                 {title}
               </DialogTitle>
               <Button
                 onClick={() => setOpen((open) => !open)}
-                className="bg-transparent cursor-pointer  block"
+                className="bg-transparent cursor-pointer block"
               >
                 <XIcon stroke="#aaa" />
               </Button>
@@ -64,12 +73,13 @@ export function DashboardCustomModal({
       </Dialog>
     );
   }
+
   // Mobile size
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
         <div
-          className="bg-white text-tint-blue-500  text-sm  "
+          className="bg-white text-tint-blue-500 text-sm"
           aria-label={title}
           title={title}
         >
@@ -77,7 +87,7 @@ export function DashboardCustomModal({
         </div>
       </DrawerTrigger>
       <DrawerContent className="px-5">
-        <DrawerHeader className="text-left  px-0">
+        <DrawerHeader className="text-left px-0">
           <DrawerTitle className="text-start">{title}</DrawerTitle>
         </DrawerHeader>
         {element}

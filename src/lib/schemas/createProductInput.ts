@@ -4,10 +4,10 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { CreateProductInputBrandId } from './createProductInputBrandId';
-import type { CreateProductInputLabels } from './createProductInputLabels';
-import type { CreateProductInputMedias } from './createProductInputMedias';
-import type { CreateProductInputDescriptions } from './createProductInputDescriptions';
+import type { CreateProductInputBrandId } from "./createProductInputBrandId";
+import type { CreateProductInputLabels } from "./createProductInputLabels";
+import type { CreateProductInputMedias } from "./createProductInputMedias";
+import type { CreateProductInputDescriptions } from "./createProductInputDescriptions";
 
 /**
  * Complete mobile phone product entity

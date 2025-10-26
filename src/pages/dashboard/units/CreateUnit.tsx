@@ -11,19 +11,25 @@ import { toast } from "react-toastify";
 export default function CreateUnit() {
   return (
     <DashboardCustomModal
-      button={<Button className="bg-green-200">افزودن کمیت </Button>}
+      button={
+        <Button className="bg-green-200" aria-label="افزودن کمیت">
+          افزودن کمیت{" "}
+        </Button>
+      }
       title="افزودن کمیت"
       element={<CreateUnitForm />}
     />
   );
 }
 export function CreateUnitForm() {
-  const { handleSubmit, control, formState } = useForm<CreateUnitInput>();
+  const { handleSubmit, control, formState, reset } =
+    useForm<CreateUnitInput>();
   const onSubmit: SubmitHandler<CreateUnitInput> = async (data) => {
     try {
       await postUnitAction(data);
       queryClient.invalidateQueries({ queryKey: ["/units"] });
       toast.success("کمیت اضافه شد");
+      reset();
     } catch (error: unknown) {
       if (error instanceof Error) {
         toast.error(error.message);

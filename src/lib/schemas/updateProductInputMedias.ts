@@ -4,9 +4,11 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { UpdateProductInputMediasAnyOfItem } from './updateProductInputMediasAnyOfItem';
+import type { UpdateProductInputMediasAnyOfItem } from "./updateProductInputMediasAnyOfItem";
 
 /**
  * Product media
  */
-export type UpdateProductInputMedias = UpdateProductInputMediasAnyOfItem[] | null;
+export type UpdateProductInputMedias =
+  | UpdateProductInputMediasAnyOfItem[]
+  | null;

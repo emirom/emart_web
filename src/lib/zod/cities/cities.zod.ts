@@ -4,10 +4,7 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import {
-  z as zod
-} from 'zod';
-
+import { z as zod } from "zod";
 
 /**
  * Create a new city
@@ -17,12 +14,18 @@ export const postCitiesBodyNameMin = 2;
 export const postCitiesBodyNameMax = 100;
 export const postCitiesBodyAbbMaxOne = 4;
 
-
 export const postCitiesBody = zod.object({
-  "name": zod.coerce.string().min(postCitiesBodyNameMin).max(postCitiesBodyNameMax).describe('City name'),
-  "abb": zod.union([zod.coerce.string().max(postCitiesBodyAbbMaxOne),zod.null()]).optional().describe('City abbreviation'),
-  "provinceId": zod.uuid().describe('Province ID')
-})
+  name: zod.coerce
+    .string()
+    .min(postCitiesBodyNameMin)
+    .max(postCitiesBodyNameMax)
+    .describe("City name"),
+  abb: zod
+    .union([zod.coerce.string().max(postCitiesBodyAbbMaxOne), zod.null()])
+    .optional()
+    .describe("City abbreviation"),
+  provinceId: zod.uuid().describe("Province ID"),
+});
 
 /**
  * Get all cities with pagination and filters
@@ -31,78 +34,112 @@ export const getCitiesQuerySkipMin = 0;
 export const getCitiesQueryLimitMax = 20;
 export const getCitiesQuerySearchMaxOne = 100;
 
-
 export const getCitiesQueryParams = zod.object({
-  "skip": zod.coerce.number().min(getCitiesQuerySkipMin).describe('Number of records to skip'),
-  "limit": zod.coerce.number().min(1).max(getCitiesQueryLimitMax).describe('Maximum number of records to return'),
-  "provinceId": zod.union([zod.uuid(),zod.null()]).optional(),
-  "search": zod.union([zod.coerce.string().max(getCitiesQuerySearchMaxOne),zod.null()]).optional().describe('Search term for city name')
-})
+  skip: zod.coerce
+    .number()
+    .min(getCitiesQuerySkipMin)
+    .describe("Number of records to skip"),
+  limit: zod.coerce
+    .number()
+    .min(1)
+    .max(getCitiesQueryLimitMax)
+    .describe("Maximum number of records to return"),
+  provinceId: zod.union([zod.uuid(), zod.null()]).optional(),
+  search: zod
+    .union([zod.coerce.string().max(getCitiesQuerySearchMaxOne), zod.null()])
+    .optional()
+    .describe("Search term for city name"),
+});
 
-export const getCitiesResponse = zod.object({
-  "success": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Operation status')
-}).describe('Standard API response format')
+export const getCitiesResponse = zod
+  .object({
+    success: zod
+      .union([zod.coerce.boolean(), zod.null()])
+      .optional()
+      .describe("Operation status"),
+  })
+  .describe("Standard API response format");
 
 /**
  * Get a single city by ID
  */
 export const getCitiesIdParams = zod.object({
-  "id": zod.uuid().describe('City ID')
-})
+  id: zod.uuid().describe("City ID"),
+});
 
 export const getCitiesIdResponseDataAbbMaxOne = 4;
 
-
 export const getCitiesIdResponse = zod.object({
-  "success": zod.coerce.boolean().describe('Operation status'),
-  "data": zod.object({
-  "id": zod.uuid().describe('Unique identifier (UUIDv4)'),
-  "createdAt": zod.iso.datetime({}).describe('Creation timestamp (ISO 8601)'),
-  "updatedAt": zod.iso.datetime({}).describe('Last update timestamp (ISO 8601)'),
-  "name": zod.coerce.string().describe('City name'),
-  "abb": zod.union([zod.coerce.string().max(getCitiesIdResponseDataAbbMaxOne),zod.null()]).optional().describe('City abbreviation'),
-  "provinceId": zod.uuid().describe('Province ID')
-})
-})
+  success: zod.coerce.boolean().describe("Operation status"),
+  data: zod.object({
+    id: zod.uuid().describe("Unique identifier (UUIDv4)"),
+    createdAt: zod.iso.datetime({}).describe("Creation timestamp (ISO 8601)"),
+    updatedAt: zod.iso
+      .datetime({})
+      .describe("Last update timestamp (ISO 8601)"),
+    name: zod.coerce.string().describe("City name"),
+    abb: zod
+      .union([
+        zod.coerce.string().max(getCitiesIdResponseDataAbbMaxOne),
+        zod.null(),
+      ])
+      .optional()
+      .describe("City abbreviation"),
+    provinceId: zod.uuid().describe("Province ID"),
+  }),
+});
 
 /**
  * Update a city
  */
 export const patchCitiesIdParams = zod.object({
-  "id": zod.uuid().describe('City ID')
-})
+  id: zod.uuid().describe("City ID"),
+});
 
 export const patchCitiesIdBodyNameMin = 2;
 
 export const patchCitiesIdBodyNameMax = 100;
 export const patchCitiesIdBodyAbbMaxOne = 4;
 
-
 export const patchCitiesIdBody = zod.object({
-  "name": zod.coerce.string().min(patchCitiesIdBodyNameMin).max(patchCitiesIdBodyNameMax).optional().describe('City name'),
-  "abb": zod.union([zod.coerce.string().max(patchCitiesIdBodyAbbMaxOne),zod.null()]).optional().describe('City abbreviation'),
-  "provinceId": zod.uuid().optional().describe('Province ID')
-})
+  name: zod.coerce
+    .string()
+    .min(patchCitiesIdBodyNameMin)
+    .max(patchCitiesIdBodyNameMax)
+    .optional()
+    .describe("City name"),
+  abb: zod
+    .union([zod.coerce.string().max(patchCitiesIdBodyAbbMaxOne), zod.null()])
+    .optional()
+    .describe("City abbreviation"),
+  provinceId: zod.uuid().optional().describe("Province ID"),
+});
 
 export const patchCitiesIdResponseDataAbbMaxOne = 4;
 
-
 export const patchCitiesIdResponse = zod.object({
-  "success": zod.coerce.boolean().describe('Operation status'),
-  "data": zod.object({
-  "id": zod.uuid().describe('Unique identifier (UUIDv4)'),
-  "createdAt": zod.iso.datetime({}).describe('Creation timestamp (ISO 8601)'),
-  "updatedAt": zod.iso.datetime({}).describe('Last update timestamp (ISO 8601)'),
-  "name": zod.coerce.string().describe('City name'),
-  "abb": zod.union([zod.coerce.string().max(patchCitiesIdResponseDataAbbMaxOne),zod.null()]).optional().describe('City abbreviation'),
-  "provinceId": zod.uuid().describe('Province ID')
-})
-})
+  success: zod.coerce.boolean().describe("Operation status"),
+  data: zod.object({
+    id: zod.uuid().describe("Unique identifier (UUIDv4)"),
+    createdAt: zod.iso.datetime({}).describe("Creation timestamp (ISO 8601)"),
+    updatedAt: zod.iso
+      .datetime({})
+      .describe("Last update timestamp (ISO 8601)"),
+    name: zod.coerce.string().describe("City name"),
+    abb: zod
+      .union([
+        zod.coerce.string().max(patchCitiesIdResponseDataAbbMaxOne),
+        zod.null(),
+      ])
+      .optional()
+      .describe("City abbreviation"),
+    provinceId: zod.uuid().describe("Province ID"),
+  }),
+});
 
 /**
  * Delete a city
  */
 export const deleteCitiesIdParams = zod.object({
-  "id": zod.uuid().describe('City ID')
-})
-
+  id: zod.uuid().describe("City ID"),
+});

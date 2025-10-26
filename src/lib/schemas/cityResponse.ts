@@ -4,7 +4,7 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { City } from './city';
+import type { City } from "./city";
 
 export interface CityResponse {
   /** Operation status */

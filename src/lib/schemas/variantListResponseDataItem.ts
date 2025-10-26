@@ -4,14 +4,14 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { VariantListResponseDataItemDeletedAt } from './variantListResponseDataItemDeletedAt';
-import type { VariantListResponseDataItemBarcode } from './variantListResponseDataItemBarcode';
-import type { VariantListResponseDataItemMpn } from './variantListResponseDataItemMpn';
-import type { VariantListResponseDataItemTitleOverride } from './variantListResponseDataItemTitleOverride';
-import type { VariantListResponseDataItemDescriptionOverride } from './variantListResponseDataItemDescriptionOverride';
-import type { VariantListResponseDataItemSlug } from './variantListResponseDataItemSlug';
-import type { VariantListResponseDataItemMetaTitle } from './variantListResponseDataItemMetaTitle';
-import type { VariantListResponseDataItemMetaDescription } from './variantListResponseDataItemMetaDescription';
+import type { VariantListResponseDataItemDeletedAt } from "./variantListResponseDataItemDeletedAt";
+import type { VariantListResponseDataItemBarcode } from "./variantListResponseDataItemBarcode";
+import type { VariantListResponseDataItemMpn } from "./variantListResponseDataItemMpn";
+import type { VariantListResponseDataItemTitleOverride } from "./variantListResponseDataItemTitleOverride";
+import type { VariantListResponseDataItemDescriptionOverride } from "./variantListResponseDataItemDescriptionOverride";
+import type { VariantListResponseDataItemSlug } from "./variantListResponseDataItemSlug";
+import type { VariantListResponseDataItemMetaTitle } from "./variantListResponseDataItemMetaTitle";
+import type { VariantListResponseDataItemMetaDescription } from "./variantListResponseDataItemMetaDescription";
 
 export type VariantListResponseDataItem = {
   /** Unique identifier (UUIDv4) */
