@@ -1,51 +1,37 @@
 "use client";
+
 import { CustomDataTable } from "@components/CustomDataTable";
-import { TablePagination } from "@components/TablePagination";
-import { Button } from "@components/ui/button";
 import { Unit } from "@lib/schemas";
 import { useGetUnits } from "@lib/services/units/units";
-import { useAppStore } from "@lib/stores/store";
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown } from "lucide-react";
+import { useSearchParams } from "next/navigation";
 
 const columns: ColumnDef<Unit>[] = [
   { accessorKey: "id", header: "#" },
-  {
-    accessorKey: "title",
-    header: ({ column }) => (
-      <Button
-        style={{ paddingInline: 0 }}
-        className=" m-0 p-0"
-        variant="ghost"
-        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-      >
-        عنوان واحد
-        <ArrowUpDown />
-      </Button>
-    ),
-    cell: ({ row }) => <>{row.getValue("title")}</>,
-  },
+  { accessorKey: "title", header: "نام‌کمیت" },
 ];
 
-export default function UnitsTable() {
-  const { data: units } = useGetUnits({ skip: 0, limit: 10 });
-  const { currentPage, previewPage, nextPage } = useAppStore();
+export default function UnitsTable({
+  serverPage = 0,
+  serverSearch,
+}: {
+  serverPage?: number;
+  serverSearch?: string;
+}) {
+  const searchParams = useSearchParams();
+  const page = Number(searchParams?.get("page") ?? serverPage);
+  const title = searchParams?.get("search") ?? serverSearch;
+
+  const { data: units } = useGetUnits({ skip: page * 10, limit: 10, title });
 
   return (
-    <>
-      <CustomDataTable
-        title="لیست واحدها"
-        data={units?.data ?? []}
-        columns={columns}
-        filterColumnKey="title"
-        filterPlaceholder="جستجو"
-        emptyMessage="هیچ واحدی ای پیدا نشد"
-      />
-      <TablePagination
-        currentPage={currentPage}
-        previousPage={previewPage}
-        nextPage={nextPage}
-      />
-    </>
+    <CustomDataTable
+      title="لیست واحدها"
+      data={units?.data ?? []}
+      columns={columns}
+      filterColumnKey="title"
+      filterPlaceholder="جستجو"
+      emptyMessage="هیچ واحدی پیدا نشد"
+    />
   );
 }

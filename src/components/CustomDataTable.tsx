@@ -12,16 +12,9 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { ChevronDown } from "lucide-react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import * as React from "react";
 import { cn } from "./lib/utils";
-import { Button } from "./ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuTrigger,
-} from "./ui/dropdown-menu";
 import { Input } from "./ui/input";
 import {
   Table,
@@ -55,7 +48,12 @@ export function CustomDataTable<TData>({
   );
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
-  const [rowSelection, setRowSelection] = React.useState({});
+  const [rowSelection, setRowSelection] = React.useState<
+    Record<string, boolean>
+  >({});
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
 
   const table = useReactTable({
     data,
@@ -93,14 +91,24 @@ export function CustomDataTable<TData>({
           <Input
             placeholder={filterPlaceholder}
             value={(filterColumn.getFilterValue() as string) ?? ""}
-            onChange={(event) =>
-              filterColumn.setFilterValue(event.target.value)
-            }
+            onChange={(event) => {
+              const value = event.target.value;
+              filterColumn.setFilterValue(value);
+              const params = new URLSearchParams(
+                searchParams ? Array.from(searchParams.entries()) : [],
+              );
+
+              if (value) {
+                params.set("search", value);
+              } else params.delete("search");
+
+              router.replace(`${pathname}?${params.toString()}`);
+            }}
             className="max-w-xs text-[0.75rem] font-medium placeholder:text-xs placeholder:font-medium border border-gray-300 rounded-lg"
           />
         )}
 
-        <DropdownMenu>
+        {/* <DropdownMenu>
           <DropdownMenuTrigger asChild className="select-none">
             <Button variant="outline">
               نمایش <ChevronDown />
@@ -123,7 +131,7 @@ export function CustomDataTable<TData>({
                 </DropdownMenuCheckboxItem>
               ))}
           </DropdownMenuContent>
-        </DropdownMenu>
+        </DropdownMenu> */}
       </div>
 
       <div className="overflow-hidden rounded-md border">
@@ -166,7 +174,7 @@ export function CustomDataTable<TData>({
               <TableRow>
                 <TableCell
                   colSpan={columns.length}
-                  className="h-24 text-center"
+                  className="h-12 text-center"
                 >
                   {emptyMessage}
                 </TableCell>
