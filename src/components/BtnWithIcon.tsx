@@ -81,6 +81,16 @@ const SubmitButtonComponent = ({
   </Button>
 );
 
+const AddButtonComponent = ({ onClick }: IconButtonProps) => (
+  <Button
+    onClick={onClick}
+    aria-label="افزودن"
+    className="bg-white border border-gray-300 text-gray-500 hover:bg-gray-100 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-500 transition-colors"
+  >
+    <PlusIcon className="stroke-gray-500 stroke-2" />
+  </Button>
+);
+
 export const EditButton = memo(EditButtonComponent);
 export const DeleteButton = memo(DeleteButtonComponent);
 export const PlusButton = memo(PlusButtonComponent);

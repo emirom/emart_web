@@ -32,6 +32,7 @@ interface CustomDataTableProps<TData> {
   filterColumnKey?: string;
   filterPlaceholder?: string;
   emptyMessage?: string;
+  customButton?: React.ReactNode;
 }
 
 export function CustomDataTable<TData>({
@@ -41,6 +42,7 @@ export function CustomDataTable<TData>({
   filterColumnKey,
   filterPlaceholder = "Filter...",
   emptyMessage = "No results found.",
+  customButton,
 }: CustomDataTableProps<TData>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -86,7 +88,7 @@ export function CustomDataTable<TData>({
         </h2>
       )}
 
-      <div className="flex items-center justify-between mb-2 border border-gray-300 rounded-lg p-2">
+      <div className="flex items-center justify-between mb-2  rounded-lg p-2">
         {filterColumn && (
           <Input
             placeholder={filterPlaceholder}
@@ -107,7 +109,7 @@ export function CustomDataTable<TData>({
             className="max-w-xs text-[0.75rem] font-medium placeholder:text-xs placeholder:font-medium border border-gray-300 rounded-lg"
           />
         )}
-
+        {customButton}
         {/* <DropdownMenu>
           <DropdownMenuTrigger asChild className="select-none">
             <Button variant="outline">

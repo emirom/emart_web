@@ -1,9 +1,15 @@
 import UnitsTable from "@/pages/dashboard/units/UnitsTable";
+import { HeaderWithLink } from "@components/HeaderWithLink";
 import { TablePagination } from "@components/TablePagination";
 import { queryClient } from "@lib/apis/queryClient";
 import { getUnits } from "@lib/services/units/units";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
+import { Metadata } from "next";
 
+export const metadata: Metadata = {
+  title: "کیمت",
+  description: "واحدهای مدیریت کمیت",
+};
 export default async function Page({
   searchParams,
 }: {
@@ -30,6 +36,11 @@ export default async function Page({
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
+      <HeaderWithLink
+        title="کمیت ها"
+        linkTitle="بازگشت"
+        linkHref="/dashboard"
+      />
       <UnitsTable initialQuery={initialQuery} />
       <TablePagination />
     </HydrationBoundary>

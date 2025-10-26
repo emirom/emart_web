@@ -5,11 +5,8 @@ import { Unit } from "@lib/schemas";
 import { useGetUnits } from "@lib/services/units/units";
 import { ColumnDef } from "@tanstack/react-table";
 import { useSearchParams } from "next/navigation";
-
-const columns: ColumnDef<Unit>[] = [
-  { accessorKey: "id", header: "#" },
-  { accessorKey: "title", header: "نام‌کمیت" },
-];
+import CreateUnit from "./CreateUnit";
+import UnitsActions from "./UnitsActions";
 
 type InitialQuery = {
   page?: number;
@@ -25,16 +22,26 @@ export default function UnitsTable({
   const page = Number(searchParams?.get("page") ? initialQuery?.page : 0);
   const title = searchParams?.get("search") ?? initialQuery?.title;
 
+  const columns: ColumnDef<Unit>[] = [
+    { accessorKey: "id", header: "#" },
+    { accessorKey: "title", header: "نام‌کمیت" },
+    {
+      accessorKey: "action",
+      header: "",
+      cell: ({ row }) => <UnitsActions key={row.id} id={row.original.id} />,
+    },
+  ];
+
   const { data: units } = useGetUnits({ skip: page * 10, limit: 10, title });
 
   return (
     <CustomDataTable
-      title="لیست واحدها"
       data={units?.data ?? []}
       columns={columns}
       filterColumnKey="title"
       filterPlaceholder="جستجو"
       emptyMessage="هیچ واحدی پیدا نشد"
+      customButton={<CreateUnit />}
     />
   );
 }
