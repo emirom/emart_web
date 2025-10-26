@@ -4,11 +4,11 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { ProductMediaThumbnailUrl } from "./productMediaThumbnailUrl";
-import type { ProductMediaAltText } from "./productMediaAltText";
-import type { ProductMediaCaption } from "./productMediaCaption";
-import type { ProductMediaMimetype } from "./productMediaMimetype";
-import type { ProductMediaUploadedById } from "./productMediaUploadedById";
+import type { ProductMediaThumbnailUrl } from './productMediaThumbnailUrl';
+import type { ProductMediaAltText } from './productMediaAltText';
+import type { ProductMediaCaption } from './productMediaCaption';
+import type { ProductMediaMimetype } from './productMediaMimetype';
+import type { ProductMediaUploadedById } from './productMediaUploadedById';
 
 /**
  * Complete product media entity with comprehensive metadata

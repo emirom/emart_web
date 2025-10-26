@@ -4,13 +4,13 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { ProductDeletedAt } from "./productDeletedAt";
-import type { ProductBrandId } from "./productBrandId";
-import type { ProductAverageRating } from "./productAverageRating";
-import type { ProductTotalReviews } from "./productTotalReviews";
-import type { ProductLabels } from "./productLabels";
-import type { ProductMedias } from "./productMedias";
-import type { ProductDescriptions } from "./productDescriptions";
+import type { ProductDeletedAt } from './productDeletedAt';
+import type { ProductBrandId } from './productBrandId';
+import type { ProductAverageRating } from './productAverageRating';
+import type { ProductTotalReviews } from './productTotalReviews';
+import type { ProductLabels } from './productLabels';
+import type { ProductMedias } from './productMedias';
+import type { ProductDescriptions } from './productDescriptions';
 
 /**
  * Complete mobile phone product entity

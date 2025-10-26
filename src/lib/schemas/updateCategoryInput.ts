@@ -4,10 +4,11 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { UpdateCategoryInputParentId } from "./updateCategoryInputParentId";
-import type { UpdateCategoryInputIconUrl } from "./updateCategoryInputIconUrl";
-import type { UpdateCategoryInputIsActive } from "./updateCategoryInputIsActive";
-import type { UpdateCategoryInputShowInMenu } from "./updateCategoryInputShowInMenu";
+import type { UpdateCategoryInputParentId } from './updateCategoryInputParentId';
+import type { UpdateCategoryInputIconUrl } from './updateCategoryInputIconUrl';
+import type { UpdateCategoryInputDesc } from './updateCategoryInputDesc';
+import type { UpdateCategoryInputIsActive } from './updateCategoryInputIsActive';
+import type { UpdateCategoryInputShowInMenu } from './updateCategoryInputShowInMenu';
 
 /**
  * Category update payload
@@ -33,6 +34,8 @@ export interface UpdateCategoryInput {
   unitId?: string;
   /** Icon URL */
   iconUrl?: UpdateCategoryInputIconUrl;
+  /** Category description in native language */
+  desc?: UpdateCategoryInputDesc;
   /** Active status */
   isActive?: UpdateCategoryInputIsActive;
   /** Show in menu status */

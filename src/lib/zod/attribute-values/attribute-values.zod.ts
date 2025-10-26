@@ -4,75 +4,56 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import { z as zod } from "zod";
+import {
+  z as zod
+} from 'zod';
+
 
 /**
  * Create a new attribute value
  */
 export const postAttributeValuesBodyValueMax = 100;
 
-export const postAttributeValuesBody = zod
-  .object({
-    value: zod.coerce
-      .string()
-      .min(1)
-      .max(postAttributeValuesBodyValueMax)
-      .describe("Attribute value"),
-    attributeId: zod.uuid().describe("Parent attribute ID"),
-  })
-  .describe("Attribute value creation payload");
+
+export const postAttributeValuesBody = zod.object({
+  "value": zod.coerce.string().min(1).max(postAttributeValuesBodyValueMax).describe('Attribute value'),
+  "attributeId": zod.uuid().describe('Parent attribute ID')
+}).describe('Attribute value creation payload')
 
 /**
  * Get a single attribute value by ID
  */
 export const getAttributeValuesIdParams = zod.object({
-  id: zod.uuid().describe("Attribute Value ID"),
-});
+  "id": zod.uuid().describe('Attribute Value ID')
+})
 
-export const getAttributeValuesIdResponse = zod
-  .object({
-    success: zod
-      .union([zod.coerce.boolean(), zod.null()])
-      .optional()
-      .describe("Operation status"),
-  })
-  .describe("Standard API response format")
-  .describe("Single attribute value response");
+export const getAttributeValuesIdResponse = zod.object({
+  "success": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Operation status')
+}).describe('Standard API response format').describe('Single attribute value response')
 
 /**
  * Update an attribute value
  */
 export const patchAttributeValuesIdParams = zod.object({
-  id: zod.uuid().describe("Attribute Value ID"),
-});
+  "id": zod.uuid().describe('Attribute Value ID')
+})
 
 export const patchAttributeValuesIdBodyValueMax = 100;
 
-export const patchAttributeValuesIdBody = zod
-  .object({
-    value: zod.coerce
-      .string()
-      .min(1)
-      .max(patchAttributeValuesIdBodyValueMax)
-      .optional()
-      .describe("Attribute value"),
-    attributeId: zod.uuid().optional().describe("Parent attribute ID"),
-  })
-  .describe("Attribute value update payload");
 
-export const patchAttributeValuesIdResponse = zod
-  .object({
-    success: zod
-      .union([zod.coerce.boolean(), zod.null()])
-      .optional()
-      .describe("Operation status"),
-  })
-  .describe("Standard API response format")
-  .describe("Single attribute value response");
+export const patchAttributeValuesIdBody = zod.object({
+  "value": zod.coerce.string().min(1).max(patchAttributeValuesIdBodyValueMax).optional().describe('Attribute value'),
+  "attributeId": zod.uuid().optional().describe('Parent attribute ID')
+}).describe('Attribute value update payload')
+
+export const patchAttributeValuesIdResponse = zod.object({
+  "success": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Operation status')
+}).describe('Standard API response format').describe('Single attribute value response')
 
 /**
  * Delete an attribute value
  */
 export const deleteAttributeValuesIdParams = zod.object({
-  id: zod.uuid().describe("Attribute Value ID"),
-});
+  "id": zod.uuid().describe('Attribute Value ID')
+})
+

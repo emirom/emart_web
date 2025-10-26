@@ -4,19 +4,14 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { BaseResponse } from "./baseResponse";
-import type { Guarantee } from "./guarantee";
+import type { BaseResponse } from './baseResponse';
+import type { Guarantee } from './guarantee';
 
 /**
  * Response for single guarantee operations
  */
 export type GuaranteeResponse = BaseResponse & {
   data: Guarantee;
-} & Required<
-    Pick<
-      BaseResponse & {
-        data: Guarantee;
-      },
-      "data"
-    >
-  >;
+} & Required<Pick<BaseResponse & {
+  data: Guarantee;
+}, 'data'>>;
