@@ -6,6 +6,7 @@ import { immer } from "zustand/middleware/immer";
 import { createCategoryListSlice } from "./category-attr-slice";
 import { createExampleSlice } from "./example-slice";
 import { createLoginSlice } from "./login-slice";
+import { createPaginationSlice } from "./pagination-slice";
 
 export const useAppStore = create<Store>()(
   devtools(
@@ -14,6 +15,7 @@ export const useAppStore = create<Store>()(
         ...createExampleSlice(...a),
         ...createLoginSlice(...a),
         ...createCategoryListSlice(...a),
+        ...createPaginationSlice(...a),
       })),
       {
         name: "phone-store",
