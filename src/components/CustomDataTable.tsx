@@ -27,7 +27,7 @@ import {
 
 interface CustomDataTableProps<TData> {
   title?: string;
-  data: TData[];
+  data?: TData[];
   columns: ColumnDef<TData>[];
   filterColumnKey?: string;
   filterPlaceholder?: string;
@@ -46,7 +46,7 @@ export function CustomDataTable<TData>({
 }: CustomDataTableProps<TData>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    [],
+    []
   );
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
@@ -58,7 +58,7 @@ export function CustomDataTable<TData>({
   const pathname = usePathname();
 
   const table = useReactTable({
-    data,
+    data: data ?? [],
     columns,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
@@ -87,8 +87,7 @@ export function CustomDataTable<TData>({
           {title}
         </h2>
       )}
-
-      <div className="flex items-center justify-between mb-2  rounded-lg p-2">
+      <div className="flex items-center justify-between mb-2 rounded-lg p-2">
         {filterColumn && (
           <Input
             placeholder={filterPlaceholder}
@@ -97,45 +96,17 @@ export function CustomDataTable<TData>({
               const value = event.target.value;
               filterColumn.setFilterValue(value);
               const params = new URLSearchParams(
-                searchParams ? Array.from(searchParams.entries()) : [],
+                searchParams ? Array.from(searchParams.entries()) : []
               );
-
-              if (value) {
-                params.set("search", value);
-              } else params.delete("search");
-
+              if (value) params.set("search", value);
+              else params.delete("search");
               router.replace(`${pathname}?${params.toString()}`);
             }}
             className="max-w-xs text-[0.75rem] font-medium placeholder:text-xs placeholder:font-medium border border-gray-300 rounded-lg"
           />
         )}
         {customButton}
-        {/* <DropdownMenu>
-          <DropdownMenuTrigger asChild className="select-none">
-            <Button variant="outline">
-              نمایش <ChevronDown />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="start" className="select-none">
-            {table
-              .getAllColumns()
-              .filter((col) => col.getCanHide())
-              .map((col) => (
-                <DropdownMenuCheckboxItem
-                  key={col.id}
-                  className="capitalize"
-                  checked={col.getIsVisible()}
-                  onCheckedChange={(value) => col.toggleVisibility(!!value)}
-                >
-                  {typeof col.columnDef.header === "string"
-                    ? col.columnDef.header
-                    : col.id}
-                </DropdownMenuCheckboxItem>
-              ))}
-          </DropdownMenuContent>
-        </DropdownMenu> */}
       </div>
-
       <div className="overflow-hidden rounded-md border">
         <Table>
           <TableHeader>
@@ -147,16 +118,15 @@ export function CustomDataTable<TData>({
                       ? null
                       : flexRender(
                           header.column.columnDef.header,
-                          header.getContext(),
+                          header.getContext()
                         )}
                   </TableHead>
                 ))}
               </TableRow>
             ))}
           </TableHeader>
-
           <TableBody>
-            {table.getRowModel().rows.length ? (
+            {Array.isArray(data) && data.length > 0 ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
@@ -166,13 +136,13 @@ export function CustomDataTable<TData>({
                     <TableCell className="text-xs" key={cell.id}>
                       {flexRender(
                         cell.column.columnDef.cell,
-                        cell.getContext(),
+                        cell.getContext()
                       )}
                     </TableCell>
                   ))}
                 </TableRow>
               ))
-            ) : (
+            ) : data === undefined ? null : (
               <TableRow>
                 <TableCell
                   colSpan={columns.length}

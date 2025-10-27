@@ -8,7 +8,7 @@ import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
-export default function EditUnitForm({ id }: { id: string }) {
+export default function EditAttributeForm({ id }: { id: string }) {
   const { handleSubmit, control, formState, reset } =
     useForm<UpdateUnitInput>();
   const { data: unit } = useGetUnitsId(id);
