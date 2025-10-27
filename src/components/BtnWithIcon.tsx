@@ -72,13 +72,13 @@ const SubmitButtonComponent = ({
   <Button
     disabled={disabled}
     onClick={onClick}
-    aria-label="ذخیره"
+    aria-label="ثبت"
     className={cn(
       "bg-green-300 text-white focus-visible:ring-2 focus-visible:ring-offset-2 transition-colors",
       className,
     )}
   >
-    ذخیره
+    ثبت
   </Button>
 );
 
