@@ -5,6 +5,7 @@ import { Color } from "@lib/schemas";
 import { useGetColors } from "@lib/services/colors/colors";
 import { ColumnDef } from "@tanstack/react-table";
 import { useSearchParams } from "next/navigation";
+import ColorsAction from "./ColorAction";
 import CreateColor from "./CreateColor";
 
 type InitialQuery = {
@@ -65,7 +66,7 @@ export default function ColorTable(initialQuery?: InitialQuery) {
       id: "action",
       accessorKey: "id",
       header: "",
-      cell: () => <div />,
+      cell: ({ row }) => <ColorsAction id={row.original.id} />,
     },
   ];
   const searchParams = useSearchParams();

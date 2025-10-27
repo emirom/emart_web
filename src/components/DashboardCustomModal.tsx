@@ -34,7 +34,6 @@ export function DashboardCustomModal({
   const [mounted, setMounted] = useState(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
-  // جلوگیری از mismatch بین SSR و CSR
   useEffect(() => {
     setMounted(true);
   }, []);
