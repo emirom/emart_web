@@ -24,7 +24,7 @@ export default function LabelAction({ id }: { id: string }) {
   };
 
   return (
-    <div className="flex gap-1 items-center justify-center w-full">
+    <div className="flex items-center justify-center w-full">
       <AlertDialogModal
         alertTitle="آیا از حذف این رنگ اطمینان دارید؟"
         button={<DeleteButton />}

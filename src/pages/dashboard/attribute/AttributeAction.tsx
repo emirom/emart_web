@@ -24,7 +24,7 @@ export default function AttributeActions({ id }: { id: string }) {
   };
 
   return (
-    <div className="flex gap-1 items-center justify-center w-full">
+    <div className="flex items-center justify-center w-full">
       <AlertDialogModal
         alertTitle="آیا از حذف این ویژگی اطمینان دارید؟"
         button={<DeleteButton />}
