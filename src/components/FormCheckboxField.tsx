@@ -37,7 +37,7 @@ export function FormCheckboxField<
       <Controller
         control={control}
         name={name}
-        render={({ field, fieldState }) => {
+        render={({ field }) => {
           const valueArray: string[] = Array.isArray(field.value)
             ? field.value
             : [];

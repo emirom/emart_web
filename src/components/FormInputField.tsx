@@ -1,7 +1,13 @@
 "use client";
 
 import { InputHTMLAttributes } from "react";
-import { Control, Controller, FieldValues, Path } from "react-hook-form";
+import {
+  Control,
+  Controller,
+  FieldValues,
+  Path,
+  RegisterOptions,
+} from "react-hook-form";
 import { cn } from "./lib/utils";
 import { Input } from "./ui/input";
 
@@ -10,6 +16,7 @@ interface Props<T extends FieldValues>
   name: Path<T>;
   control: Control<T>;
   label: string;
+  rules?: RegisterOptions<T, Path<T>>;
 }
 
 function FormInputField<T extends FieldValues>({
@@ -17,6 +24,8 @@ function FormInputField<T extends FieldValues>({
   name,
   control,
   className,
+  rules,
+  type,
   ...props
 }: Props<T>) {
   return (
@@ -28,6 +37,7 @@ function FormInputField<T extends FieldValues>({
       <Controller
         control={control}
         name={name}
+        rules={rules}
         render={({ field, fieldState }) => (
           <>
             <Input
@@ -35,10 +45,21 @@ function FormInputField<T extends FieldValues>({
               data-slot="input"
               {...field}
               value={field.value ?? ""}
+              onChange={(e) => {
+                let value: unknown = e.target.value;
+
+                if (type === "number") {
+                  value =
+                    e.target.value === "" ? undefined : Number(e.target.value);
+                }
+
+                field.onChange(value);
+              }}
               className={cn(
                 fieldState.error && "border border-destructive text-black",
                 className,
               )}
+              type={type}
               {...props}
             />
             {fieldState?.error && (

@@ -47,6 +47,7 @@ const CopyButtonComponent = ({ onClick, className }: IconButtonProps) => (
     aria-label="کپی"
     className={cn(
       "bg-white border border-gray-300 text-gray-500 hover:bg-gray-100 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-500 transition-colors",
+      className,
     )}
   >
     <CopyIcon className="stroke-gray-500 stroke-2" />
@@ -97,6 +98,7 @@ export const PlusButton = memo(PlusButtonComponent);
 export const CopyButton = memo(CopyButtonComponent);
 export const EyeButton = memo(EyeButtonComponent);
 export const SubmitButton = memo(SubmitButtonComponent);
+export const AddButton = memo(AddButtonComponent);
 
 EditButton.displayName = "EditButton";
 DeleteButton.displayName = "DeleteButton";
@@ -104,3 +106,4 @@ PlusButton.displayName = "PlusButton";
 CopyButton.displayName = "CopyButton";
 EyeButton.displayName = "EyeButton";
 SubmitButton.displayName = "SubmitButton";
+AddButton.displayName = "AddButton";

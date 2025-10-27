@@ -11,7 +11,6 @@ interface Props<
 > {
   control: Control<T>;
   name: Path<T>;
-  label: string;
   options: TOption[];
   getOptionLabel: (option: TOption) => string;
   getOptionValue: (option: TOption) => TValue;
@@ -24,7 +23,7 @@ export function FormRadioGroupField<
 >({
   control,
   name,
-  label,
+
   options,
   getOptionLabel,
   getOptionValue,
@@ -34,7 +33,7 @@ export function FormRadioGroupField<
       <Controller
         control={control}
         name={name}
-        render={({ field, fieldState }) => {
+        render={({ field }) => {
           const handleValueChange = (val: string) => {
             const matchedOption = options.find(
               (opt) => String(getOptionValue(opt)) === val,

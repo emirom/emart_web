@@ -9,7 +9,6 @@ import { attributeUnits } from "@lib/constants/attribute-units";
 import { UpdateAttributeInput } from "@lib/schemas";
 import { useGetAttributesId } from "@lib/services/attributes/attributes";
 import { useGetCategories } from "@lib/services/categories/categories";
-import { useGetUnits } from "@lib/services/units/units";
 import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
@@ -18,7 +17,6 @@ export default function EditAttributeForm({ id }: { id: string }) {
   const { handleSubmit, control, formState, reset } =
     useForm<Partial<UpdateAttributeInput>>();
   const { data: attribute } = useGetAttributesId(id);
-  const { data: units } = useGetUnits({ skip: 0, limit: 10 });
   const { data: categories } = useGetCategories({ skip: 0, limit: 10 });
 
   useEffect(() => {
