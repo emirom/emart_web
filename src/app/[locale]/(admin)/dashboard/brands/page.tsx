@@ -24,7 +24,7 @@ export default async function Page({
   await queryClient.prefetchQuery({
     queryKey: [
       "/brands",
-      { skip: initialQuery.page, limit: 10, name: initialQuery.name },
+      { skip: initialQuery.page * 10, limit: 10, name: initialQuery.name },
     ],
     queryFn: () =>
       getBrands({
