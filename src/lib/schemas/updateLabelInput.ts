@@ -4,7 +4,7 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { UpdateLabelInputPageId } from './updateLabelInputPageId';
+import type { UpdateLabelInputPageId } from "./updateLabelInputPageId";
 
 /**
  * Label update payload

@@ -13,7 +13,7 @@ export default function CreateUnit() {
     <DashboardCustomModal
       button={
         <Button className="bg-green-200" aria-label="افزودن کمیت">
-          افزودن کمیت{" "}
+          افزودن کمیت
         </Button>
       }
       title="افزودن کمیت"

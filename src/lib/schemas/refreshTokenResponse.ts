@@ -4,14 +4,19 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { BaseResponse } from './baseResponse';
-import type { RefreshTokenResponseData } from './refreshTokenResponseData';
+import type { BaseResponse } from "./baseResponse";
+import type { RefreshTokenResponseData } from "./refreshTokenResponseData";
 
 /**
  * Refresh token response schema
  */
 export type RefreshTokenResponse = BaseResponse & {
   data: RefreshTokenResponseData;
-} & Required<Pick<BaseResponse & {
-  data: RefreshTokenResponseData;
-}, 'data'>>;
+} & Required<
+    Pick<
+      BaseResponse & {
+        data: RefreshTokenResponseData;
+      },
+      "data"
+    >
+  >;

@@ -32,7 +32,7 @@ export default function EditAttributeForm({ id }: { id: string }) {
   }, [attribute, reset]);
 
   const onSubmit: SubmitHandler<Partial<UpdateAttributeInput>> = async (
-    data
+    data,
   ) => {
     try {
       await putAttributeAction(id, data);

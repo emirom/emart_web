@@ -49,7 +49,7 @@ export default function AttributeTable({
       columns={columns}
       filterColumnKey="title"
       filterPlaceholder="جستجو"
-      emptyMessage="هیچ واحدی پیدا نشد"
+      emptyMessage="هیچ ویژگی پیدا نشد"
     />
   );
 }

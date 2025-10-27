@@ -4,18 +4,18 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { CreateGuaranteeInputStart } from './createGuaranteeInputStart';
-import type { CreateGuaranteeInputMonths } from './createGuaranteeInputMonths';
-import type { CreateGuaranteeInputDays } from './createGuaranteeInputDays';
-import type { CreateGuaranteeInputLogo } from './createGuaranteeInputLogo';
-import type { CreateGuaranteeInputProviderName } from './createGuaranteeInputProviderName';
-import type { CreateGuaranteeInputProviderAddress } from './createGuaranteeInputProviderAddress';
-import type { CreateGuaranteeInputProviderPhone } from './createGuaranteeInputProviderPhone';
-import type { CreateGuaranteeInputProviderCode } from './createGuaranteeInputProviderCode';
-import type { CreateGuaranteeInputTermsUrl } from './createGuaranteeInputTermsUrl';
-import type { CreateGuaranteeInputClaimProcess } from './createGuaranteeInputClaimProcess';
-import type { CreateGuaranteeInputResponseTime } from './createGuaranteeInputResponseTime';
-import type { CreateGuaranteeInputSepidarGuaranteeId } from './createGuaranteeInputSepidarGuaranteeId';
+import type { CreateGuaranteeInputStart } from "./createGuaranteeInputStart";
+import type { CreateGuaranteeInputMonths } from "./createGuaranteeInputMonths";
+import type { CreateGuaranteeInputDays } from "./createGuaranteeInputDays";
+import type { CreateGuaranteeInputLogo } from "./createGuaranteeInputLogo";
+import type { CreateGuaranteeInputProviderName } from "./createGuaranteeInputProviderName";
+import type { CreateGuaranteeInputProviderAddress } from "./createGuaranteeInputProviderAddress";
+import type { CreateGuaranteeInputProviderPhone } from "./createGuaranteeInputProviderPhone";
+import type { CreateGuaranteeInputProviderCode } from "./createGuaranteeInputProviderCode";
+import type { CreateGuaranteeInputTermsUrl } from "./createGuaranteeInputTermsUrl";
+import type { CreateGuaranteeInputClaimProcess } from "./createGuaranteeInputClaimProcess";
+import type { CreateGuaranteeInputResponseTime } from "./createGuaranteeInputResponseTime";
+import type { CreateGuaranteeInputSepidarGuaranteeId } from "./createGuaranteeInputSepidarGuaranteeId";
 
 /**
  * Product warranty/guarantee entity

@@ -4,9 +4,11 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { ProductListResponseDataItemLabelsAnyOfItem } from './productListResponseDataItemLabelsAnyOfItem';
+import type { ProductListResponseDataItemLabelsAnyOfItem } from "./productListResponseDataItemLabelsAnyOfItem";
 
 /**
  * Connected label IDs
  */
-export type ProductListResponseDataItemLabels = ProductListResponseDataItemLabelsAnyOfItem[] | null;
+export type ProductListResponseDataItemLabels =
+  | ProductListResponseDataItemLabelsAnyOfItem[]
+  | null;

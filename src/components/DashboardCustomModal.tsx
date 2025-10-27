@@ -57,12 +57,12 @@ export function DashboardCustomModal({
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
             <div className="flex items-center justify-between">
-              <DialogTitle className="text-sm text-orange-700">
+              <DialogTitle className="text-sm text-tint-blue-500">
                 {title}
               </DialogTitle>
               <Button
                 onClick={() => setOpen((open) => !open)}
-                className="bg-transparent cursor-pointer block"
+                className="bg-transparent cursor-pointer block m-0 p-0"
               >
                 <XIcon stroke="#aaa" />
               </Button>

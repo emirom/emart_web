@@ -17,13 +17,10 @@ export async function putAttributeAction(
   data: Partial<CreateAttributeInput>,
 ) {
   await patchAttributesId(id, data);
-  revalidatePath('/dashboard/attributes')
-
+  revalidatePath("/dashboard/attributes");
 }
 
 export async function deleteAttributeAction(id: string) {
   await deleteAttributesId(id);
   revalidatePath("/dashboard/attributes");
 }
-
-

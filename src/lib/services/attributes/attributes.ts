@@ -4,10 +4,7 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import {
-  useMutation,
-  useQuery
-} from '@tanstack/react-query';
+import { useMutation, useQuery } from "@tanstack/react-query";
 import type {
   DataTag,
   DefinedInitialDataOptions,
@@ -20,8 +17,8 @@ import type {
   UseMutationOptions,
   UseMutationResult,
   UseQueryOptions,
-  UseQueryResult
-} from '@tanstack/react-query';
+  UseQueryResult,
+} from "@tanstack/react-query";
 
 import type {
   AttributeResponse,
@@ -33,361 +30,545 @@ import type {
   InternalError,
   ListAttributesResponse,
   NotfoundError,
-  UpdateAttributeInput
-} from '../../schemas';
+  UpdateAttributeInput,
+} from "../../schemas";
 
-import { axiosInstance } from '../../configs/axios-instance';
-
-
-
+import { axiosInstance } from "../../configs/axios-instance";
 
 /**
  * Create a new attribute
  */
 export const postAttributes = (
-    createAttributeInput: CreateAttributeInput,
- signal?: AbortSignal
+  createAttributeInput: CreateAttributeInput,
+  signal?: AbortSignal,
 ) => {
-      
-      
-      return axiosInstance<AttributeResponse>(
-      {url: `/attributes`, method: 'POST',
-      headers: {'Content-Type': 'application/json', },
-      data: createAttributeInput, signal
-    },
-      );
-    }
-  
+  return axiosInstance<AttributeResponse>({
+    url: `/attributes`,
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    data: createAttributeInput,
+    signal,
+  });
+};
 
+export const getPostAttributesMutationOptions = <
+  TError = ErrorResponse | ConflictError | InternalError,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof postAttributes>>,
+    TError,
+    { data: CreateAttributeInput },
+    TContext
+  >;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof postAttributes>>,
+  TError,
+  { data: CreateAttributeInput },
+  TContext
+> => {
+  const mutationKey = ["postAttributes"];
+  const { mutation: mutationOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey } };
 
-export const getPostAttributesMutationOptions = <TError = ErrorResponse | ConflictError | InternalError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postAttributes>>, TError,{data: CreateAttributeInput}, TContext>, }
-): UseMutationOptions<Awaited<ReturnType<typeof postAttributes>>, TError,{data: CreateAttributeInput}, TContext> => {
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof postAttributes>>,
+    { data: CreateAttributeInput }
+  > = (props) => {
+    const { data } = props ?? {};
 
-const mutationKey = ['postAttributes'];
-const {mutation: mutationOptions} = options ?
-      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
-      options
-      : {...options, mutation: {...options.mutation, mutationKey}}
-      : {mutation: { mutationKey, }};
+    return postAttributes(data);
+  };
 
-      
+  return { mutationFn, ...mutationOptions };
+};
 
+export type PostAttributesMutationResult = NonNullable<
+  Awaited<ReturnType<typeof postAttributes>>
+>;
+export type PostAttributesMutationBody = CreateAttributeInput;
+export type PostAttributesMutationError =
+  | ErrorResponse
+  | ConflictError
+  | InternalError;
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postAttributes>>, {data: CreateAttributeInput}> = (props) => {
-          const {data} = props ?? {};
+export const usePostAttributes = <
+  TError = ErrorResponse | ConflictError | InternalError,
+  TContext = unknown,
+>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof postAttributes>>,
+      TError,
+      { data: CreateAttributeInput },
+      TContext
+    >;
+  },
+  queryClient?: QueryClient,
+): UseMutationResult<
+  Awaited<ReturnType<typeof postAttributes>>,
+  TError,
+  { data: CreateAttributeInput },
+  TContext
+> => {
+  const mutationOptions = getPostAttributesMutationOptions(options);
 
-          return  postAttributes(data,)
-        }
-
-        
-
-
-  return  { mutationFn, ...mutationOptions }}
-
-    export type PostAttributesMutationResult = NonNullable<Awaited<ReturnType<typeof postAttributes>>>
-    export type PostAttributesMutationBody = CreateAttributeInput
-    export type PostAttributesMutationError = ErrorResponse | ConflictError | InternalError
-
-    export const usePostAttributes = <TError = ErrorResponse | ConflictError | InternalError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postAttributes>>, TError,{data: CreateAttributeInput}, TContext>, }
- , queryClient?: QueryClient): UseMutationResult<
-        Awaited<ReturnType<typeof postAttributes>>,
-        TError,
-        {data: CreateAttributeInput},
-        TContext
-      > => {
-
-      const mutationOptions = getPostAttributesMutationOptions(options);
-
-      return useMutation(mutationOptions , queryClient);
-    }
-    /**
+  return useMutation(mutationOptions, queryClient);
+};
+/**
  * List all attributes with pagination and filters
  */
 export const getAttributes = (
-    params: GetAttributesParams,
- signal?: AbortSignal
+  params: GetAttributesParams,
+  signal?: AbortSignal,
 ) => {
-      
-      
-      return axiosInstance<ListAttributesResponse>(
-      {url: `/attributes`, method: 'GET',
-        params, signal
-    },
-      );
-    }
-  
+  return axiosInstance<ListAttributesResponse>({
+    url: `/attributes`,
+    method: "GET",
+    params,
+    signal,
+  });
+};
 
-export const getGetAttributesQueryKey = (params?: GetAttributesParams,) => {
-    return [`/attributes`, ...(params ? [params]: [])] as const;
-    }
+export const getGetAttributesQueryKey = (params?: GetAttributesParams) => {
+  return [`/attributes`, ...(params ? [params] : [])] as const;
+};
 
-    
-export const getGetAttributesQueryOptions = <TData = Awaited<ReturnType<typeof getAttributes>>, TError = InternalError>(params: GetAttributesParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getAttributes>>, TError, TData>>, }
+export const getGetAttributesQueryOptions = <
+  TData = Awaited<ReturnType<typeof getAttributes>>,
+  TError = InternalError,
+>(
+  params: GetAttributesParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof getAttributes>>, TError, TData>
+    >;
+  },
 ) => {
+  const { query: queryOptions } = options ?? {};
 
-const {query: queryOptions} = options ?? {};
+  const queryKey = queryOptions?.queryKey ?? getGetAttributesQueryKey(params);
 
-  const queryKey =  queryOptions?.queryKey ?? getGetAttributesQueryKey(params);
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getAttributes>>> = ({
+    signal,
+  }) => getAttributes(params, signal);
 
-  
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof getAttributes>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
+};
 
-    const queryFn: QueryFunction<Awaited<ReturnType<typeof getAttributes>>> = ({ signal }) => getAttributes(params, signal);
+export type GetAttributesQueryResult = NonNullable<
+  Awaited<ReturnType<typeof getAttributes>>
+>;
+export type GetAttributesQueryError = InternalError;
 
-      
-
-      
-
-   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getAttributes>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
-}
-
-export type GetAttributesQueryResult = NonNullable<Awaited<ReturnType<typeof getAttributes>>>
-export type GetAttributesQueryError = InternalError
-
-
-export function useGetAttributes<TData = Awaited<ReturnType<typeof getAttributes>>, TError = InternalError>(
- params: GetAttributesParams, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getAttributes>>, TError, TData>> & Pick<
+export function useGetAttributes<
+  TData = Awaited<ReturnType<typeof getAttributes>>,
+  TError = InternalError,
+>(
+  params: GetAttributesParams,
+  options: {
+    query: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof getAttributes>>, TError, TData>
+    > &
+      Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof getAttributes>>,
           TError,
           Awaited<ReturnType<typeof getAttributes>>
-        > , 'initialData'
-      >, }
- , queryClient?: QueryClient
-  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetAttributes<TData = Awaited<ReturnType<typeof getAttributes>>, TError = InternalError>(
- params: GetAttributesParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getAttributes>>, TError, TData>> & Pick<
+        >,
+        "initialData"
+      >;
+  },
+  queryClient?: QueryClient,
+): DefinedUseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+};
+export function useGetAttributes<
+  TData = Awaited<ReturnType<typeof getAttributes>>,
+  TError = InternalError,
+>(
+  params: GetAttributesParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof getAttributes>>, TError, TData>
+    > &
+      Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof getAttributes>>,
           TError,
           Awaited<ReturnType<typeof getAttributes>>
-        > , 'initialData'
-      >, }
- , queryClient?: QueryClient
-  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetAttributes<TData = Awaited<ReturnType<typeof getAttributes>>, TError = InternalError>(
- params: GetAttributesParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getAttributes>>, TError, TData>>, }
- , queryClient?: QueryClient
-  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+        >,
+        "initialData"
+      >;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+};
+export function useGetAttributes<
+  TData = Awaited<ReturnType<typeof getAttributes>>,
+  TError = InternalError,
+>(
+  params: GetAttributesParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof getAttributes>>, TError, TData>
+    >;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+};
 
-export function useGetAttributes<TData = Awaited<ReturnType<typeof getAttributes>>, TError = InternalError>(
- params: GetAttributesParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getAttributes>>, TError, TData>>, }
- , queryClient?: QueryClient 
- ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+export function useGetAttributes<
+  TData = Awaited<ReturnType<typeof getAttributes>>,
+  TError = InternalError,
+>(
+  params: GetAttributesParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof getAttributes>>, TError, TData>
+    >;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+} {
+  const queryOptions = getGetAttributesQueryOptions(params, options);
 
-  const queryOptions = getGetAttributesQueryOptions(params,options)
+  const query = useQuery(queryOptions, queryClient) as UseQueryResult<
+    TData,
+    TError
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
 
-  const query = useQuery(queryOptions , queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
-
-  query.queryKey = queryOptions.queryKey ;
+  query.queryKey = queryOptions.queryKey;
 
   return query;
 }
-
-
 
 /**
  * Get a single attribute by ID
  */
-export const getAttributesId = (
-    id: string,
- signal?: AbortSignal
+export const getAttributesId = (id: string, signal?: AbortSignal) => {
+  return axiosInstance<AttributeResponse>({
+    url: `/attributes/${id}`,
+    method: "GET",
+    signal,
+  });
+};
+
+export const getGetAttributesIdQueryKey = (id?: string) => {
+  return [`/attributes/${id}`] as const;
+};
+
+export const getGetAttributesIdQueryOptions = <
+  TData = Awaited<ReturnType<typeof getAttributesId>>,
+  TError = NotfoundError | InternalError,
+>(
+  id: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof getAttributesId>>,
+        TError,
+        TData
+      >
+    >;
+  },
 ) => {
-      
-      
-      return axiosInstance<AttributeResponse>(
-      {url: `/attributes/${id}`, method: 'GET', signal
-    },
-      );
-    }
-  
+  const { query: queryOptions } = options ?? {};
 
-export const getGetAttributesIdQueryKey = (id?: string,) => {
-    return [`/attributes/${id}`] as const;
-    }
+  const queryKey = queryOptions?.queryKey ?? getGetAttributesIdQueryKey(id);
 
-    
-export const getGetAttributesIdQueryOptions = <TData = Awaited<ReturnType<typeof getAttributesId>>, TError = NotfoundError | InternalError>(id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getAttributesId>>, TError, TData>>, }
-) => {
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getAttributesId>>> = ({
+    signal,
+  }) => getAttributesId(id, signal);
 
-const {query: queryOptions} = options ?? {};
+  return {
+    queryKey,
+    queryFn,
+    enabled: !!id,
+    ...queryOptions,
+  } as UseQueryOptions<
+    Awaited<ReturnType<typeof getAttributesId>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
+};
 
-  const queryKey =  queryOptions?.queryKey ?? getGetAttributesIdQueryKey(id);
+export type GetAttributesIdQueryResult = NonNullable<
+  Awaited<ReturnType<typeof getAttributesId>>
+>;
+export type GetAttributesIdQueryError = NotfoundError | InternalError;
 
-  
-
-    const queryFn: QueryFunction<Awaited<ReturnType<typeof getAttributesId>>> = ({ signal }) => getAttributesId(id, signal);
-
-      
-
-      
-
-   return  { queryKey, queryFn, enabled: !!(id), ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getAttributesId>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
-}
-
-export type GetAttributesIdQueryResult = NonNullable<Awaited<ReturnType<typeof getAttributesId>>>
-export type GetAttributesIdQueryError = NotfoundError | InternalError
-
-
-export function useGetAttributesId<TData = Awaited<ReturnType<typeof getAttributesId>>, TError = NotfoundError | InternalError>(
- id: string, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getAttributesId>>, TError, TData>> & Pick<
+export function useGetAttributesId<
+  TData = Awaited<ReturnType<typeof getAttributesId>>,
+  TError = NotfoundError | InternalError,
+>(
+  id: string,
+  options: {
+    query: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof getAttributesId>>,
+        TError,
+        TData
+      >
+    > &
+      Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof getAttributesId>>,
           TError,
           Awaited<ReturnType<typeof getAttributesId>>
-        > , 'initialData'
-      >, }
- , queryClient?: QueryClient
-  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetAttributesId<TData = Awaited<ReturnType<typeof getAttributesId>>, TError = NotfoundError | InternalError>(
- id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getAttributesId>>, TError, TData>> & Pick<
+        >,
+        "initialData"
+      >;
+  },
+  queryClient?: QueryClient,
+): DefinedUseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+};
+export function useGetAttributesId<
+  TData = Awaited<ReturnType<typeof getAttributesId>>,
+  TError = NotfoundError | InternalError,
+>(
+  id: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof getAttributesId>>,
+        TError,
+        TData
+      >
+    > &
+      Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof getAttributesId>>,
           TError,
           Awaited<ReturnType<typeof getAttributesId>>
-        > , 'initialData'
-      >, }
- , queryClient?: QueryClient
-  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetAttributesId<TData = Awaited<ReturnType<typeof getAttributesId>>, TError = NotfoundError | InternalError>(
- id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getAttributesId>>, TError, TData>>, }
- , queryClient?: QueryClient
-  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+        >,
+        "initialData"
+      >;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+};
+export function useGetAttributesId<
+  TData = Awaited<ReturnType<typeof getAttributesId>>,
+  TError = NotfoundError | InternalError,
+>(
+  id: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof getAttributesId>>,
+        TError,
+        TData
+      >
+    >;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+};
 
-export function useGetAttributesId<TData = Awaited<ReturnType<typeof getAttributesId>>, TError = NotfoundError | InternalError>(
- id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getAttributesId>>, TError, TData>>, }
- , queryClient?: QueryClient 
- ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+export function useGetAttributesId<
+  TData = Awaited<ReturnType<typeof getAttributesId>>,
+  TError = NotfoundError | InternalError,
+>(
+  id: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof getAttributesId>>,
+        TError,
+        TData
+      >
+    >;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+} {
+  const queryOptions = getGetAttributesIdQueryOptions(id, options);
 
-  const queryOptions = getGetAttributesIdQueryOptions(id,options)
+  const query = useQuery(queryOptions, queryClient) as UseQueryResult<
+    TData,
+    TError
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
 
-  const query = useQuery(queryOptions , queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
-
-  query.queryKey = queryOptions.queryKey ;
+  query.queryKey = queryOptions.queryKey;
 
   return query;
 }
-
-
 
 /**
  * Update an attribute
  */
 export const patchAttributesId = (
-    id: string,
-    updateAttributeInput: UpdateAttributeInput,
- ) => {
-      
-      
-      return axiosInstance<AttributeResponse>(
-      {url: `/attributes/${id}`, method: 'PATCH',
-      headers: {'Content-Type': 'application/json', },
-      data: updateAttributeInput
-    },
-      );
-    }
-  
+  id: string,
+  updateAttributeInput: UpdateAttributeInput,
+) => {
+  return axiosInstance<AttributeResponse>({
+    url: `/attributes/${id}`,
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    data: updateAttributeInput,
+  });
+};
 
+export const getPatchAttributesIdMutationOptions = <
+  TError = ErrorResponse | NotfoundError | ConflictError | InternalError,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof patchAttributesId>>,
+    TError,
+    { id: string; data: UpdateAttributeInput },
+    TContext
+  >;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof patchAttributesId>>,
+  TError,
+  { id: string; data: UpdateAttributeInput },
+  TContext
+> => {
+  const mutationKey = ["patchAttributesId"];
+  const { mutation: mutationOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey } };
 
-export const getPatchAttributesIdMutationOptions = <TError = ErrorResponse | NotfoundError | ConflictError | InternalError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof patchAttributesId>>, TError,{id: string;data: UpdateAttributeInput}, TContext>, }
-): UseMutationOptions<Awaited<ReturnType<typeof patchAttributesId>>, TError,{id: string;data: UpdateAttributeInput}, TContext> => {
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof patchAttributesId>>,
+    { id: string; data: UpdateAttributeInput }
+  > = (props) => {
+    const { id, data } = props ?? {};
 
-const mutationKey = ['patchAttributesId'];
-const {mutation: mutationOptions} = options ?
-      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
-      options
-      : {...options, mutation: {...options.mutation, mutationKey}}
-      : {mutation: { mutationKey, }};
+    return patchAttributesId(id, data);
+  };
 
-      
+  return { mutationFn, ...mutationOptions };
+};
 
+export type PatchAttributesIdMutationResult = NonNullable<
+  Awaited<ReturnType<typeof patchAttributesId>>
+>;
+export type PatchAttributesIdMutationBody = UpdateAttributeInput;
+export type PatchAttributesIdMutationError =
+  | ErrorResponse
+  | NotfoundError
+  | ConflictError
+  | InternalError;
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof patchAttributesId>>, {id: string;data: UpdateAttributeInput}> = (props) => {
-          const {id,data} = props ?? {};
+export const usePatchAttributesId = <
+  TError = ErrorResponse | NotfoundError | ConflictError | InternalError,
+  TContext = unknown,
+>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof patchAttributesId>>,
+      TError,
+      { id: string; data: UpdateAttributeInput },
+      TContext
+    >;
+  },
+  queryClient?: QueryClient,
+): UseMutationResult<
+  Awaited<ReturnType<typeof patchAttributesId>>,
+  TError,
+  { id: string; data: UpdateAttributeInput },
+  TContext
+> => {
+  const mutationOptions = getPatchAttributesIdMutationOptions(options);
 
-          return  patchAttributesId(id,data,)
-        }
-
-        
-
-
-  return  { mutationFn, ...mutationOptions }}
-
-    export type PatchAttributesIdMutationResult = NonNullable<Awaited<ReturnType<typeof patchAttributesId>>>
-    export type PatchAttributesIdMutationBody = UpdateAttributeInput
-    export type PatchAttributesIdMutationError = ErrorResponse | NotfoundError | ConflictError | InternalError
-
-    export const usePatchAttributesId = <TError = ErrorResponse | NotfoundError | ConflictError | InternalError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof patchAttributesId>>, TError,{id: string;data: UpdateAttributeInput}, TContext>, }
- , queryClient?: QueryClient): UseMutationResult<
-        Awaited<ReturnType<typeof patchAttributesId>>,
-        TError,
-        {id: string;data: UpdateAttributeInput},
-        TContext
-      > => {
-
-      const mutationOptions = getPatchAttributesIdMutationOptions(options);
-
-      return useMutation(mutationOptions , queryClient);
-    }
-    /**
+  return useMutation(mutationOptions, queryClient);
+};
+/**
  * Delete an attribute
  */
-export const deleteAttributesId = (
-    id: string,
- ) => {
-      
-      
-      return axiosInstance<BaseResponse>(
-      {url: `/attributes/${id}`, method: 'DELETE'
-    },
-      );
-    }
-  
+export const deleteAttributesId = (id: string) => {
+  return axiosInstance<BaseResponse>({
+    url: `/attributes/${id}`,
+    method: "DELETE",
+  });
+};
 
+export const getDeleteAttributesIdMutationOptions = <
+  TError = NotfoundError | InternalError,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof deleteAttributesId>>,
+    TError,
+    { id: string },
+    TContext
+  >;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof deleteAttributesId>>,
+  TError,
+  { id: string },
+  TContext
+> => {
+  const mutationKey = ["deleteAttributesId"];
+  const { mutation: mutationOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey } };
 
-export const getDeleteAttributesIdMutationOptions = <TError = NotfoundError | InternalError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteAttributesId>>, TError,{id: string}, TContext>, }
-): UseMutationOptions<Awaited<ReturnType<typeof deleteAttributesId>>, TError,{id: string}, TContext> => {
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof deleteAttributesId>>,
+    { id: string }
+  > = (props) => {
+    const { id } = props ?? {};
 
-const mutationKey = ['deleteAttributesId'];
-const {mutation: mutationOptions} = options ?
-      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
-      options
-      : {...options, mutation: {...options.mutation, mutationKey}}
-      : {mutation: { mutationKey, }};
+    return deleteAttributesId(id);
+  };
 
-      
+  return { mutationFn, ...mutationOptions };
+};
 
+export type DeleteAttributesIdMutationResult = NonNullable<
+  Awaited<ReturnType<typeof deleteAttributesId>>
+>;
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteAttributesId>>, {id: string}> = (props) => {
-          const {id} = props ?? {};
+export type DeleteAttributesIdMutationError = NotfoundError | InternalError;
 
-          return  deleteAttributesId(id,)
-        }
+export const useDeleteAttributesId = <
+  TError = NotfoundError | InternalError,
+  TContext = unknown,
+>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof deleteAttributesId>>,
+      TError,
+      { id: string },
+      TContext
+    >;
+  },
+  queryClient?: QueryClient,
+): UseMutationResult<
+  Awaited<ReturnType<typeof deleteAttributesId>>,
+  TError,
+  { id: string },
+  TContext
+> => {
+  const mutationOptions = getDeleteAttributesIdMutationOptions(options);
 
-        
-
-
-  return  { mutationFn, ...mutationOptions }}
-
-    export type DeleteAttributesIdMutationResult = NonNullable<Awaited<ReturnType<typeof deleteAttributesId>>>
-    
-    export type DeleteAttributesIdMutationError = NotfoundError | InternalError
-
-    export const useDeleteAttributesId = <TError = NotfoundError | InternalError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteAttributesId>>, TError,{id: string}, TContext>, }
- , queryClient?: QueryClient): UseMutationResult<
-        Awaited<ReturnType<typeof deleteAttributesId>>,
-        TError,
-        {id: string},
-        TContext
-      > => {
-
-      const mutationOptions = getDeleteAttributesIdMutationOptions(options);
-
-      return useMutation(mutationOptions , queryClient);
-    }
-    
+  return useMutation(mutationOptions, queryClient);
+};
