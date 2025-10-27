@@ -6,27 +6,27 @@
  */
 
 export type GetProvincesParams = {
-  /**
-   * Number of records to skip
-   * @minimum 0
-   */
-  skip: number;
-  /**
-   * Maximum number of records to return
-   * @minimum 1
-   * @maximum 20
-   */
-  limit: number;
-  /**
-   * Filter by province name
-   */
-  name?: string | null;
-  /**
-   * Filter by province abbreviation
-   */
-  abb?: string | null;
-  /**
-   * Filter by country ID
-   */
-  countryId?: string | null;
+/**
+ * Number of records to skip
+ * @minimum 0
+ */
+skip: number;
+/**
+ * Maximum number of records to return
+ * @minimum 1
+ * @maximum 20
+ */
+limit: number;
+/**
+ * Filter by province name
+ */
+name?: string | null;
+/**
+ * Filter by province abbreviation
+ */
+abb?: string | null;
+/**
+ * Filter by country ID
+ */
+countryId?: string | null;
 };

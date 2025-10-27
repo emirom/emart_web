@@ -6,23 +6,23 @@
  */
 
 export type GetProductDescriptionsParams = {
-  /**
-   * Number of records to skip
-   * @minimum 0
-   */
-  skip: number;
-  /**
-   * Maximum number of records to return
-   * @minimum 1
-   * @maximum 20
-   */
-  limit: number;
-  /**
-   * Filter by product ID
-   */
-  productId?: string | null;
-  /**
-   * Filter by title content
-   */
-  title?: string | null;
+/**
+ * Number of records to skip
+ * @minimum 0
+ */
+skip: number;
+/**
+ * Maximum number of records to return
+ * @minimum 1
+ * @maximum 20
+ */
+limit: number;
+/**
+ * Filter by product ID
+ */
+productId?: string | null;
+/**
+ * Filter by title content
+ */
+title?: string | null;
 };

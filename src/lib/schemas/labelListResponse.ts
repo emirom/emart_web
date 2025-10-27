@@ -4,10 +4,10 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { BaseResponse } from "./baseResponse";
-import type { LabelListResponseDetails } from "./labelListResponseDetails";
-import type { LabelListResponseFiltersItem } from "./labelListResponseFiltersItem";
-import type { Label } from "./label";
+import type { BaseResponse } from './baseResponse';
+import type { LabelListResponseDetails } from './labelListResponseDetails';
+import type { LabelListResponseFiltersItem } from './labelListResponseFiltersItem';
+import type { Label } from './label';
 
 export type LabelListResponse = BaseResponse & {
   /** Pagination metadata */
@@ -15,15 +15,10 @@ export type LabelListResponse = BaseResponse & {
   filters: LabelListResponseFiltersItem[];
   /** Array of labels matching the query */
   data: Label[];
-} & Required<
-    Pick<
-      BaseResponse & {
-        /** Pagination metadata */
-        details?: LabelListResponseDetails;
-        filters: LabelListResponseFiltersItem[];
-        /** Array of labels matching the query */
-        data: Label[];
-      },
-      "filters" | "data"
-    >
-  >;
+} & Required<Pick<BaseResponse & {
+  /** Pagination metadata */
+  details?: LabelListResponseDetails;
+  filters: LabelListResponseFiltersItem[];
+  /** Array of labels matching the query */
+  data: Label[];
+}, 'filters' | 'data'>>;

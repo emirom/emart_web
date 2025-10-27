@@ -4,7 +4,10 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import { z as zod } from "zod";
+import {
+  z as zod
+} from 'zod';
+
 
 /**
  * Create a new province
@@ -14,20 +17,12 @@ export const postProvincesBodyNameMin = 2;
 export const postProvincesBodyNameMax = 50;
 export const postProvincesBodyAbbMaxOne = 50;
 
-export const postProvincesBody = zod
-  .object({
-    name: zod.coerce
-      .string()
-      .min(postProvincesBodyNameMin)
-      .max(postProvincesBodyNameMax)
-      .describe("Province name in native language"),
-    abb: zod
-      .union([zod.coerce.string().max(postProvincesBodyAbbMaxOne), zod.null()])
-      .optional()
-      .describe("Province abbreviation"),
-    countryId: zod.uuid().describe("Parent country ID"),
-  })
-  .describe("Province creation payload");
+
+export const postProvincesBody = zod.object({
+  "name": zod.coerce.string().min(postProvincesBodyNameMin).max(postProvincesBodyNameMax).describe('Province name in native language'),
+  "abb": zod.union([zod.coerce.string().max(postProvincesBodyAbbMaxOne),zod.null()]).optional().describe('Province abbreviation'),
+  "countryId": zod.uuid().describe('Parent country ID')
+}).describe('Province creation payload')
 
 /**
  * Get all provinces with pagination and filters
@@ -37,101 +32,57 @@ export const getProvincesQueryLimitMax = 20;
 export const getProvincesQueryNameMaxOne = 50;
 export const getProvincesQueryAbbMaxOne = 50;
 
-export const getProvincesQueryParams = zod.object({
-  skip: zod.coerce
-    .number()
-    .min(getProvincesQuerySkipMin)
-    .describe("Number of records to skip"),
-  limit: zod.coerce
-    .number()
-    .min(1)
-    .max(getProvincesQueryLimitMax)
-    .describe("Maximum number of records to return"),
-  name: zod
-    .union([zod.coerce.string().max(getProvincesQueryNameMaxOne), zod.null()])
-    .optional()
-    .describe("Filter by province name"),
-  abb: zod
-    .union([zod.coerce.string().max(getProvincesQueryAbbMaxOne), zod.null()])
-    .optional()
-    .describe("Filter by province abbreviation"),
-  countryId: zod
-    .union([zod.uuid(), zod.null()])
-    .optional()
-    .describe("Filter by country ID"),
-});
 
-export const getProvincesResponse = zod
-  .object({
-    success: zod
-      .union([zod.coerce.boolean(), zod.null()])
-      .optional()
-      .describe("Operation status"),
-  })
-  .describe("Standard API response format")
-  .describe("Response for list province operations");
+export const getProvincesQueryParams = zod.object({
+  "skip": zod.coerce.number().min(getProvincesQuerySkipMin).describe('Number of records to skip'),
+  "limit": zod.coerce.number().min(1).max(getProvincesQueryLimitMax).describe('Maximum number of records to return'),
+  "name": zod.union([zod.coerce.string().max(getProvincesQueryNameMaxOne),zod.null()]).optional().describe('Filter by province name'),
+  "abb": zod.union([zod.coerce.string().max(getProvincesQueryAbbMaxOne),zod.null()]).optional().describe('Filter by province abbreviation'),
+  "countryId": zod.union([zod.uuid(),zod.null()]).optional().describe('Filter by country ID')
+})
+
+export const getProvincesResponse = zod.object({
+  "success": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Operation status')
+}).describe('Standard API response format').describe('Response for list province operations')
 
 /**
  * Get a single province by ID
  */
 export const getProvincesIdParams = zod.object({
-  id: zod.uuid().describe("Province ID"),
-});
+  "id": zod.uuid().describe('Province ID')
+})
 
-export const getProvincesIdResponse = zod
-  .object({
-    success: zod
-      .union([zod.coerce.boolean(), zod.null()])
-      .optional()
-      .describe("Operation status"),
-  })
-  .describe("Standard API response format")
-  .describe("Response for single province operations");
+export const getProvincesIdResponse = zod.object({
+  "success": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Operation status')
+}).describe('Standard API response format').describe('Response for single province operations')
 
 /**
  * Update a province
  */
 export const patchProvincesIdParams = zod.object({
-  id: zod.uuid().describe("Province ID"),
-});
+  "id": zod.uuid().describe('Province ID')
+})
 
 export const patchProvincesIdBodyNameMin = 2;
 
 export const patchProvincesIdBodyNameMax = 50;
 export const patchProvincesIdBodyAbbMaxOne = 50;
 
-export const patchProvincesIdBody = zod
-  .object({
-    name: zod.coerce
-      .string()
-      .min(patchProvincesIdBodyNameMin)
-      .max(patchProvincesIdBodyNameMax)
-      .optional()
-      .describe("Province name in native language"),
-    abb: zod
-      .union([
-        zod.coerce.string().max(patchProvincesIdBodyAbbMaxOne),
-        zod.null(),
-      ])
-      .optional()
-      .describe("Province abbreviation"),
-    countryId: zod.uuid().optional().describe("Parent country ID"),
-  })
-  .describe("Province update payload");
 
-export const patchProvincesIdResponse = zod
-  .object({
-    success: zod
-      .union([zod.coerce.boolean(), zod.null()])
-      .optional()
-      .describe("Operation status"),
-  })
-  .describe("Standard API response format")
-  .describe("Response for single province operations");
+export const patchProvincesIdBody = zod.object({
+  "name": zod.coerce.string().min(patchProvincesIdBodyNameMin).max(patchProvincesIdBodyNameMax).optional().describe('Province name in native language'),
+  "abb": zod.union([zod.coerce.string().max(patchProvincesIdBodyAbbMaxOne),zod.null()]).optional().describe('Province abbreviation'),
+  "countryId": zod.uuid().optional().describe('Parent country ID')
+}).describe('Province update payload')
+
+export const patchProvincesIdResponse = zod.object({
+  "success": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Operation status')
+}).describe('Standard API response format').describe('Response for single province operations')
 
 /**
  * Delete a province
  */
 export const deleteProvincesIdParams = zod.object({
-  id: zod.uuid().describe("Province ID"),
-});
+  "id": zod.uuid().describe('Province ID')
+})
+

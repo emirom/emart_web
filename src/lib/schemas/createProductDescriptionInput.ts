@@ -4,8 +4,8 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { CreateProductDescriptionInputMediaSide } from "./createProductDescriptionInputMediaSide";
-import type { CreateProductDescriptionInputMediaId } from "./createProductDescriptionInputMediaId";
+import type { CreateProductDescriptionInputMediaSide } from './createProductDescriptionInputMediaSide';
+import type { CreateProductDescriptionInputMediaId } from './createProductDescriptionInputMediaId';
 
 /**
  * Create new product description section

@@ -4,11 +4,9 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { UpdateProductInputDescriptionsAnyOfItem } from "./updateProductInputDescriptionsAnyOfItem";
+import type { UpdateProductInputDescriptionsAnyOfItem } from './updateProductInputDescriptionsAnyOfItem';
 
 /**
  * Product descriptions
  */
-export type UpdateProductInputDescriptions =
-  | UpdateProductInputDescriptionsAnyOfItem[]
-  | null;
+export type UpdateProductInputDescriptions = UpdateProductInputDescriptionsAnyOfItem[] | null;

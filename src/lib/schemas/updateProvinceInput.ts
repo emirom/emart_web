@@ -4,7 +4,7 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { UpdateProvinceInputAbb } from "./updateProvinceInputAbb";
+import type { UpdateProvinceInputAbb } from './updateProvinceInputAbb';
 
 /**
  * Province update payload
