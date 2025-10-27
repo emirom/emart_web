@@ -13,7 +13,21 @@ type InitialQuery = {
   name?: string;
 };
 
-export default function ColorTable(initialQuery?: InitialQuery) {
+export default function ColorTable({
+  initialQuery,
+}: {
+  initialQuery?: InitialQuery;
+}) {
+  const searchParams = useSearchParams();
+  const page = Number(searchParams?.get("page") ?? initialQuery?.page ?? 0);
+  const name = searchParams?.get("search") ?? initialQuery?.name ?? "";
+
+  const { data: colors } = useGetColors({
+    skip: page * 4,
+    limit: 4,
+    name,
+  });
+
   const columns: ColumnDef<Color>[] = [
     { accessorKey: "id", header: "#" },
     {
@@ -33,28 +47,20 @@ export default function ColorTable(initialQuery?: InitialQuery) {
     },
     {
       accessorKey: "hex",
-      header: " رنگ",
+      header: "رنگ",
       cell: ({ getValue }) => (
-        <div>
-          <div
-            title={String(getValue())}
-            className="w-[1.125rem] mx-auto h-[1.125rem] rounded-xs border border-gray-300"
-            style={{
-              background: String(getValue()),
-            }}
-          />
-        </div>
+        <div
+          title={String(getValue())}
+          className="w-[1.125rem] mx-auto h-[1.125rem] rounded-xs border border-gray-300"
+          style={{ background: String(getValue()) }}
+        />
       ),
     },
-    {
-      id: "hexCode",
-      accessorKey: "hex",
-      header: "کد رنگ",
-    },
+    { id: "hexCode", accessorKey: "hex", header: "کد رنگ" },
     {
       accessorKey: "isActive",
       header: "فعال",
-      cell: ({ getValue }) => (getValue() ? "فعال " : "غیرفعال"),
+      cell: ({ getValue }) => (getValue() ? "فعال" : "غیرفعال"),
     },
     {
       accessorKey: "createdAt",
@@ -66,17 +72,15 @@ export default function ColorTable(initialQuery?: InitialQuery) {
       id: "action",
       accessorKey: "id",
       header: "",
-      cell: ({ row }) => <ColorsAction id={row.original.id} />,
+      cell: ({ row }) => (
+        <ColorsAction key={row.original.id} id={row.original.id} />
+      ),
     },
   ];
-  const searchParams = useSearchParams();
-  const page = Number(searchParams?.get("page") ? initialQuery?.page : 0);
-  const name = searchParams?.get("search") ?? initialQuery?.name;
-  const { data: colors } = useGetColors({ skip: page * 10, limit: 4, name });
 
   return (
     <CustomDataTable
-      title="رنگ ها"
+      title="رنگ‌ها"
       data={colors?.data ?? []}
       columns={columns}
       emptyMessage="رنگ مورد نظر یافت نشد"
