@@ -2,19 +2,29 @@
 import { SubmitButton } from "@components/BtnWithIcon";
 import { FormInputField } from "@components/FormInputField";
 import { FormScrollableSelectField } from "@components/FormScrollableSelectField";
-import { postGuaranteeAction } from "@lib/actions/guarantee-action";
+import { patchGuaranteeAction } from "@lib/actions/guarantee-action";
 import { queryClient } from "@lib/apis/queryClient";
-import { CreateGuaranteeInput } from "@lib/schemas";
+import { UpdateGuaranteeInput } from "@lib/schemas";
+import { useGetGuaranteesId } from "@lib/services/guarantees/guarantees";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
-export default function CreateGuarantee() {
-  const { handleSubmit, control, formState } = useForm<CreateGuaranteeInput>();
+export default function EditGuaranteeForm({ id }: { id: string }) {
+  const { handleSubmit, control, formState, reset } =
+    useForm<UpdateGuaranteeInput>();
   const router = useRouter();
-  const onSubmit: SubmitHandler<CreateGuaranteeInput> = async (data) => {
+
+  const { data: guarantee } = useGetGuaranteesId(id);
+  useEffect(() => {
+    if (guarantee) {
+      reset({ ...guarantee.data });
+    }
+  }, [guarantee, reset]);
+  const onSubmit: SubmitHandler<UpdateGuaranteeInput> = async (data) => {
     try {
-      await postGuaranteeAction(data);
+      await patchGuaranteeAction(id, data);
       queryClient.invalidateQueries({ queryKey: ["/guarantees"] });
       toast.success("گارانتی اضافه شد");
       router.push("/dashboard/guarantees");
@@ -22,7 +32,6 @@ export default function CreateGuarantee() {
       toast.error(error instanceof Error ? error.message : "خطایی رخ داده است");
     }
   };
-
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}

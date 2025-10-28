@@ -1,44 +1,38 @@
-"use client";
-
-import { SubmitButton } from "@components/BtnWithIcon";
-import { FormInputField } from "@components/FormInputField";
-import { FormScrollableSelectField } from "@components/FormScrollableSelectField";
-import { patchGuaranteeAction } from "@lib/actions/guarantee-action";
+import EditGuaranteeForm from "@/pages/dashboard/guarantees/EditGuaranteeForm";
 import { queryClient } from "@lib/apis/queryClient";
-import { UpdateGuaranteeInput } from "@lib/schemas";
-import { useGetGuaranteesId } from "@lib/services/guarantees/guarantees";
+import { getGuaranteesId } from "@lib/services/guarantees/guarantees";
+import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import Link from "next/link";
-import { useParams, useRouter } from "next/navigation";
-import { useEffect } from "react";
 
-import { SubmitHandler, useForm } from "react-hook-form";
-import { toast } from "react-toastify";
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<Record<string, string>>;
+}) {
+  const { id } = await params;
 
-export default function Page() {
-  const { handleSubmit, control, formState, reset } =
-    useForm<UpdateGuaranteeInput>();
-  const router = useRouter();
-  const params = useParams();
-  const id = params?.id as string;
-  const { data: guarantee } = useGetGuaranteesId(id);
-  useEffect(() => {
-    if (guarantee) {
-      reset({ ...guarantee.data });
-    }
-  }, [guarantee, reset]);
-  const onSubmit: SubmitHandler<UpdateGuaranteeInput> = async (data) => {
-    try {
-      await patchGuaranteeAction(id, data);
-      queryClient.invalidateQueries({ queryKey: ["/guarantees"] });
-      toast.success("گارانتی اضافه شد");
-      router.push("/dashboard/guarantees");
-    } catch (error: unknown) {
-      toast.error(error instanceof Error ? error.message : "خطایی رخ داده است");
-    }
-  };
+  const guarantee = await getGuaranteesId(id);
+  if (guarantee) {
+    return {
+      title: `ویرایش گارانتی ${guarantee.data.title}`,
+      description: `ویرایش گارانتی ${guarantee.data.title}`,
+    };
+  }
+  return {};
+}
+export default async function Page({
+  params,
+}: {
+  params: Promise<Record<string, string>>;
+}) {
+  const { id } = await params;
+  await queryClient.prefetchQuery({
+    queryKey: ["/guarantees", id],
+    queryFn: () => getGuaranteesId(id),
+  });
 
   return (
-    <>
+    <HydrationBoundary state={dehydrate(queryClient)}>
       <header
         className="flex flex-col sm:flex-row sm:items-center sm:justify-between w-full mb-6 border-b border-gray-200 pb-3"
         aria-label="افزودن گارانتی"
@@ -55,116 +49,7 @@ export default function Page() {
           ← بازگشت
         </Link>
       </header>
-
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="grid grid-cols-1 md:grid-cols-2  gap-2 items-end"
-      >
-        <FormInputField control={control} name="title" label="عنوان گارانتی" />
-        <FormInputField control={control} name="start" label="تاریخ شروع" />
-        <FormInputField
-          control={control}
-          name="months"
-          label="مدت (ماه)"
-          type="number"
-        />
-        <FormInputField
-          control={control}
-          name="days"
-          label="مدت (روز)"
-          type="number"
-        />
-        <FormInputField control={control} name="logo" label="آدرس لوگو (URL)" />
-        <FormInputField
-          control={control}
-          name="providerName"
-          label="نام ارائه‌دهنده"
-        />
-        <FormInputField
-          control={control}
-          name="providerAddress"
-          label="آدرس ارائه‌دهنده"
-        />
-        <FormInputField
-          control={control}
-          name="providerPhone"
-          label="تلفن ارائه‌دهنده"
-        />
-        <FormInputField
-          control={control}
-          name="providerCode"
-          label="کد ارائه‌دهنده"
-        />
-        <FormInputField
-          control={control}
-          name="termsUrl"
-          label="لینک شرایط و ضوابط"
-        />
-        <FormInputField
-          control={control}
-          name="claimProcess"
-          label="فرآیند مطالبه گارانتی"
-        />
-        <FormInputField
-          control={control}
-          name="responseTime"
-          label="زمان پاسخ‌گویی (روز)"
-          type="number"
-        />
-
-        <FormScrollableSelectField
-          control={control}
-          name="isInternational"
-          label="بین‌المللی است؟"
-          options={[
-            { label: "بله", value: true },
-            { label: "خیر", value: false },
-          ]}
-          getOptionLabel={(opt) => opt.label}
-          getOptionValue={(opt) => opt.value}
-        />
-
-        <FormScrollableSelectField
-          control={control}
-          name="isActive"
-          label="فعال است؟"
-          options={[
-            { label: "بله", value: true },
-            { label: "خیر", value: false },
-          ]}
-          getOptionLabel={(opt) => opt.label}
-          getOptionValue={(opt) => opt.value}
-        />
-
-        <FormScrollableSelectField
-          control={control}
-          name="isRegisteredWithTax"
-          label="ثبت‌شده در اداره مالیات؟"
-          options={[
-            { label: "بله", value: true },
-            { label: "خیر", value: false },
-          ]}
-          getOptionLabel={(opt) => opt.label}
-          getOptionValue={(opt) => opt.value}
-        />
-
-        <FormInputField
-          control={control}
-          name="sortOrder"
-          label="ترتیب نمایش"
-          type="number"
-        />
-        <FormInputField
-          control={control}
-          name="sepidarGuaranteeId"
-          label="شناسه سپیدار"
-        />
-
-        <SubmitButton
-          className="w-full md:w-auto"
-          disabled={!formState.isDirty}
-        />
-      </form>
-    </>
+      <EditGuaranteeForm id={id} />
+    </HydrationBoundary>
   );
 }
