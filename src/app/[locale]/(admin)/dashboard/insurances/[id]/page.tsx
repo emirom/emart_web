@@ -3,7 +3,7 @@
 import { SubmitButton } from "@components/BtnWithIcon";
 import { FormInputField } from "@components/FormInputField";
 import { FormScrollableSelectField } from "@components/FormScrollableSelectField";
-import { postInsuranceAction } from "@lib/actions/insurance-action";
+import { patchInsuranceAction } from "@lib/actions/insurance-action";
 import { queryClient } from "@lib/apis/queryClient";
 import { CreateInsuranceInput } from "@lib/schemas";
 import { useGetInsurancesId } from "@lib/services/insurances/insurances";
@@ -28,7 +28,7 @@ export default function Page() {
   }, [insurance?.data, reset]);
   const onSubmit: SubmitHandler<CreateInsuranceInput> = async (data) => {
     try {
-      await postInsuranceAction(data);
+      await patchInsuranceAction(id, data);
       queryClient.invalidateQueries({ queryKey: ["/insurance"] });
       toast.success("بیمه با موفقیت ویرایش شد");
       router.push("/dashboard/insurances");
