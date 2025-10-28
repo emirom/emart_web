@@ -1,32 +1,40 @@
 "use client";
 
 import { CustomDataTable } from "@components/CustomDataTable";
-import { Guarantee } from "@lib/schemas";
-import { useGetGuarantees } from "@lib/services/guarantees/guarantees";
+import { Insurance } from "@lib/schemas";
+import { useGetInsurances } from "@lib/services/insurances/insurances";
 import { ColumnDef } from "@tanstack/react-table";
-
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import GuaranteeAction from "./GuaranteeAction";
+import InsuranceAction from "./InsuranceAction";
 
-type Props = {
+type InitialQuery = {
   page?: number;
   title?: string;
 };
 
-const columns: ColumnDef<Guarantee>[] = [
+const columns: ColumnDef<Insurance>[] = [
   {
     accessorKey: "title",
-    header: "عنوان گارانتی",
+    header: "عنوان بیمه",
     cell: ({ row }) => (
       <div className="font-medium text-gray-800">{row.original.title}</div>
     ),
   },
   {
     accessorKey: "providerName",
-    header: "نام ارائه‌دهنده",
+    header: "شرکت بیمه‌گر",
     cell: ({ row }) => (
       <div className="text-gray-700">{row.original.providerName ?? "-"}</div>
+    ),
+  },
+  {
+    accessorKey: "price",
+    header: "قیمت (ریال)",
+    cell: ({ row }) => (
+      <div className="text-gray-700">
+        {row.original.price.toLocaleString("fa-IR")}
+      </div>
     ),
   },
   {
@@ -45,18 +53,23 @@ const columns: ColumnDef<Guarantee>[] = [
   {
     accessorKey: "isActive",
     header: "فعال",
-    cell: ({ row }) => <>{row.original.isActive ? "✅" : "❌"}</>,
-  },
-  {
-    accessorKey: "isInternational",
-    header: "بین‌المللی",
-    cell: ({ row }) => <>{row.original.isInternational ? "✅" : "❌"}</>,
+    cell: ({ row }) => (
+      <span
+        className={`px-2 py-1 text-xs rounded-full ${
+          row.original.isActive
+            ? "bg-green-100 text-green-700"
+            : "bg-red-100 text-red-600"
+        }`}
+      >
+        {row.original.isActive ? "بله" : "خیر"}
+      </span>
+    ),
   },
   {
     accessorKey: "sortOrder",
     header: "ترتیب نمایش",
     cell: ({ row }) => (
-      <div className="text-gray-700 ">{row.original.sortOrder}</div>
+      <div className="text-gray-700 text-center">{row.original.sortOrder}</div>
     ),
   },
   {
@@ -79,43 +92,44 @@ const columns: ColumnDef<Guarantee>[] = [
   },
   {
     id: "actions",
-    header: "عملیات",
+    header: "",
     cell: ({ row }) => (
-      <GuaranteeAction key={row.original.id} id={row.original.id} />
+      <InsuranceAction key={row.original.id} id={row.original.id} />
     ),
   },
 ];
 
-export default function GuaranteeTable({
+export default function InsuranceTable({
   initialQuery,
 }: {
-  initialQuery: Props;
+  initialQuery: InitialQuery;
 }) {
   const searchParams = useSearchParams();
   const page = Number(searchParams?.get("page") ?? initialQuery?.page ?? 0);
   const title = searchParams?.get("search") ?? initialQuery?.title;
-  const { data: guarantees } = useGetGuarantees({
+  const { data: insurances } = useGetInsurances({
     skip: page * 10,
-    limit: 3,
+    limit: 10,
     title,
   });
+
   return (
     <CustomDataTable
-      data={guarantees?.data ?? []}
+      data={insurances?.data ?? []}
       columns={columns}
       filterColumnKey="title"
       customButton={
         <Link
-          href="/dashboard/guarantees/add"
+          href="/dashboard/insurances/add"
           className="bg-green-200 p-2 text-white rounded-lg"
           aria-label="افزودن کمیت"
         >
-          افزودن گارانتی
+          افزودن‌بیمه
         </Link>
       }
-      emptyMessage="هیچ گارانتی‌ای یافت نشد"
-      filterPlaceholder="جستجو"
-      title="گارانتی‌ها"
+      emptyMessage="هیچ بیمه‌ای یافت نشد"
+      filterPlaceholder="جستجوی بیمه..."
+      title="بیمه‌ها"
     />
   );
 }
