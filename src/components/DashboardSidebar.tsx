@@ -1,7 +1,18 @@
 "use client";
 
 import { cn } from "@components/lib/utils";
-import { Home, Settings, Users } from "lucide-react";
+import {
+  Flag,
+  Home,
+  LandPlot,
+  Package,
+  PaintBucket,
+  Settings,
+  ShieldCheck,
+  Tags,
+  Umbrella,
+  Users,
+} from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -10,7 +21,14 @@ export default function DashboardSidebar() {
 
   const navItems = [
     { href: "/", label: "صفحه اصلی", icon: Home },
-    { href: "/users", label: "کاربران", icon: Users },
+    { href: "/dashboard/products", label: "محصولات", icon: Package },
+    { href: "/dashboard/users", label: "کاربران", icon: Users },
+    { href: "/dashboard/colors", label: "رنگ‌ها", icon: PaintBucket },
+    { href: "/dashboard/attributes", label: "ویژگی‌ها", icon: LandPlot },
+    { href: "/dashboard/labels", label: "برچسب‌ها", icon: Tags },
+    { href: "/dashboard/brands", label: "برندها", icon: Flag },
+    { href: "/dashboard/guarantees", label: "گارانتی ها", icon: ShieldCheck },
+    { href: "/dashboard/insurances", label: "بیمه ها", icon: Umbrella },
     { href: "/settings", label: "تنظیمات", icon: Settings },
   ];
 
@@ -42,13 +60,13 @@ export default function DashboardSidebar() {
                   "hover:bg-gray-100",
                   isActive
                     ? "bg-primary/10 text-primary-700 font-semibold"
-                    : "text-gray-700 hover:text-gray-900",
+                    : "text-gray-700 hover:text-gray-900"
                 )}
               >
                 <Icon
                   className={cn(
                     "size-4 shrink-0 transition-colors duration-150",
-                    isActive ? "text-primary-600" : "text-gray-500",
+                    isActive ? "text-primary-600" : "text-gray-500"
                   )}
                   aria-hidden="true"
                 />

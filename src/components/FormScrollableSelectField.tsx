@@ -44,7 +44,7 @@ export function FormScrollableSelectField<
   }, [options, getOptionLabel, getOptionValue]);
 
   return (
-    <div>
+    <div className="w-full">
       <label className={cn("block text-xs font-medium text-tint-blue-500")}>
         {label}
       </label>
@@ -54,7 +54,7 @@ export function FormScrollableSelectField<
         render={({ field, fieldState }) => {
           const currentValue = String(field.value ?? "");
           const selectedOption = mappedOptions.find(
-            (o) => o.stringValue === currentValue,
+            (o) => o.stringValue === currentValue
           );
           const selectedLabel = selectedOption ? selectedOption.labelText : "";
 
@@ -62,9 +62,8 @@ export function FormScrollableSelectField<
             <Select
               value={currentValue}
               onValueChange={(val: string) => {
-                // نوع اصلی را از mappedOptions پیدا کن
                 const matched = mappedOptions.find(
-                  (opt) => opt.stringValue === val,
+                  (opt) => opt.stringValue === val
                 );
                 if (matched) {
                   field.onChange(matched.rawValue);
@@ -76,7 +75,7 @@ export function FormScrollableSelectField<
               <SelectTrigger
                 className={cn(
                   "w-full mt-2",
-                  fieldState.error?.message && "border-destructive",
+                  fieldState.error?.message && "border-destructive"
                 )}
                 id={String(name)}
               >
