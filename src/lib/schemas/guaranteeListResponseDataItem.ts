@@ -4,19 +4,19 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { GuaranteeListResponseDataItemDeletedAt } from "./guaranteeListResponseDataItemDeletedAt";
-import type { GuaranteeListResponseDataItemStart } from "./guaranteeListResponseDataItemStart";
-import type { GuaranteeListResponseDataItemMonths } from "./guaranteeListResponseDataItemMonths";
-import type { GuaranteeListResponseDataItemDays } from "./guaranteeListResponseDataItemDays";
-import type { GuaranteeListResponseDataItemLogo } from "./guaranteeListResponseDataItemLogo";
-import type { GuaranteeListResponseDataItemProviderName } from "./guaranteeListResponseDataItemProviderName";
-import type { GuaranteeListResponseDataItemProviderAddress } from "./guaranteeListResponseDataItemProviderAddress";
-import type { GuaranteeListResponseDataItemProviderPhone } from "./guaranteeListResponseDataItemProviderPhone";
-import type { GuaranteeListResponseDataItemProviderCode } from "./guaranteeListResponseDataItemProviderCode";
-import type { GuaranteeListResponseDataItemTermsUrl } from "./guaranteeListResponseDataItemTermsUrl";
-import type { GuaranteeListResponseDataItemClaimProcess } from "./guaranteeListResponseDataItemClaimProcess";
-import type { GuaranteeListResponseDataItemResponseTime } from "./guaranteeListResponseDataItemResponseTime";
-import type { GuaranteeListResponseDataItemSepidarGuaranteeId } from "./guaranteeListResponseDataItemSepidarGuaranteeId";
+import type { GuaranteeListResponseDataItemDeletedAt } from './guaranteeListResponseDataItemDeletedAt';
+import type { GuaranteeListResponseDataItemStart } from './guaranteeListResponseDataItemStart';
+import type { GuaranteeListResponseDataItemMonths } from './guaranteeListResponseDataItemMonths';
+import type { GuaranteeListResponseDataItemDays } from './guaranteeListResponseDataItemDays';
+import type { GuaranteeListResponseDataItemLogo } from './guaranteeListResponseDataItemLogo';
+import type { GuaranteeListResponseDataItemProviderName } from './guaranteeListResponseDataItemProviderName';
+import type { GuaranteeListResponseDataItemProviderAddress } from './guaranteeListResponseDataItemProviderAddress';
+import type { GuaranteeListResponseDataItemProviderPhone } from './guaranteeListResponseDataItemProviderPhone';
+import type { GuaranteeListResponseDataItemProviderCode } from './guaranteeListResponseDataItemProviderCode';
+import type { GuaranteeListResponseDataItemTermsUrl } from './guaranteeListResponseDataItemTermsUrl';
+import type { GuaranteeListResponseDataItemClaimProcess } from './guaranteeListResponseDataItemClaimProcess';
+import type { GuaranteeListResponseDataItemResponseTime } from './guaranteeListResponseDataItemResponseTime';
+import type { GuaranteeListResponseDataItemSepidarGuaranteeId } from './guaranteeListResponseDataItemSepidarGuaranteeId';
 
 export type GuaranteeListResponseDataItem = {
   /** Unique identifier (UUIDv4) */

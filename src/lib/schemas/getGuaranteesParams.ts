@@ -6,39 +6,39 @@
  */
 
 export type GetGuaranteesParams = {
-  /**
-   * Number of records to skip
-   * @minimum 0
-   */
-  skip: number;
-  /**
-   * Maximum number of records to return
-   * @minimum 1
-   * @maximum 20
-   */
-  limit: number;
-  /**
-   * Optional date input, usually null
-   */
-  deletedAt?: string | null;
-  /**
-   * Filter by guarantee title
-   */
-  title?: string | null;
-  /**
-   * Filter by provider name
-   */
-  providerName?: string | null;
-  /**
-   * Filter by provider code
-   */
-  providerCode?: string | null;
-  /**
-   * Filter by active status
-   */
-  isActive?: boolean | null;
-  /**
-   * Filter by international status
-   */
-  isInternational?: boolean | null;
+/**
+ * Number of records to skip
+ * @minimum 0
+ */
+skip: number;
+/**
+ * Maximum number of records to return
+ * @minimum 1
+ * @maximum 20
+ */
+limit: number;
+/**
+ * Optional date input, usually null
+ */
+deletedAt?: string | null;
+/**
+ * Filter by guarantee title
+ */
+title?: string | null;
+/**
+ * Filter by provider name
+ */
+providerName?: string | null;
+/**
+ * Filter by provider code
+ */
+providerCode?: string | null;
+/**
+ * Filter by active status
+ */
+isActive?: boolean | null;
+/**
+ * Filter by international status
+ */
+isInternational?: boolean | null;
 };

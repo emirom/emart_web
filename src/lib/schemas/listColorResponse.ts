@@ -4,10 +4,10 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { BaseResponse } from "./baseResponse";
-import type { ListColorResponseDetails } from "./listColorResponseDetails";
-import type { ListColorResponseFiltersItem } from "./listColorResponseFiltersItem";
-import type { Color } from "./color";
+import type { BaseResponse } from './baseResponse';
+import type { ListColorResponseDetails } from './listColorResponseDetails';
+import type { ListColorResponseFiltersItem } from './listColorResponseFiltersItem';
+import type { ListColorResponseDataItem } from './listColorResponseDataItem';
 
 /**
  * Response schema for listing colors with pagination and metadata
@@ -17,16 +17,11 @@ export type ListColorResponse = BaseResponse & {
   details?: ListColorResponseDetails;
   filters: ListColorResponseFiltersItem[];
   /** Array of colors matching the query */
-  data: Color[];
-} & Required<
-    Pick<
-      BaseResponse & {
-        /** Pagination metadata */
-        details?: ListColorResponseDetails;
-        filters: ListColorResponseFiltersItem[];
-        /** Array of colors matching the query */
-        data: Color[];
-      },
-      "filters" | "data"
-    >
-  >;
+  data: ListColorResponseDataItem[];
+} & Required<Pick<BaseResponse & {
+  /** Pagination metadata */
+  details?: ListColorResponseDetails;
+  filters: ListColorResponseFiltersItem[];
+  /** Array of colors matching the query */
+  data: ListColorResponseDataItem[];
+}, 'filters' | 'data'>>;

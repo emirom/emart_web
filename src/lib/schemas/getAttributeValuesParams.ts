@@ -4,25 +4,30 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
+import type { GetAttributeValuesType } from './getAttributeValuesType';
 
 export type GetAttributeValuesParams = {
-  /**
-   * Number of records to skip
-   * @minimum 0
-   */
-  skip: number;
-  /**
-   * Maximum number of records to return
-   * @minimum 1
-   * @maximum 20
-   */
-  limit: number;
-  /**
-   * Filter by value content
-   */
-  value?: string | null;
-  /**
-   * Filter by attribute ID
-   */
-  attributeId?: string | null;
+/**
+ * Number of records to skip
+ * @minimum 0
+ */
+skip: number;
+/**
+ * Maximum number of records to return
+ * @minimum 1
+ * @maximum 20
+ */
+limit: number;
+/**
+ * Filter by value content
+ */
+value?: string | null;
+/**
+ * Filter by attribute ID
+ */
+attributeId?: string | null;
+/**
+ * Attribute type or Attribute id is needed to filter by value
+ */
+type: GetAttributeValuesType;
 };

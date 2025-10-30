@@ -4,10 +4,10 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { BaseResponse } from "./baseResponse";
-import type { ProductListResponseDetails } from "./productListResponseDetails";
-import type { ProductListResponseFiltersItem } from "./productListResponseFiltersItem";
-import type { ProductListResponseDataItem } from "./productListResponseDataItem";
+import type { BaseResponse } from './baseResponse';
+import type { ProductListResponseDetails } from './productListResponseDetails';
+import type { ProductListResponseFiltersItem } from './productListResponseFiltersItem';
+import type { ProductListResponseDataItem } from './productListResponseDataItem';
 
 /**
  * Paginated list of mobile devices
@@ -17,14 +17,9 @@ export type ProductListResponse = BaseResponse & {
   details?: ProductListResponseDetails;
   filters: ProductListResponseFiltersItem[];
   data: ProductListResponseDataItem[];
-} & Required<
-    Pick<
-      BaseResponse & {
-        /** Pagination metadata */
-        details?: ProductListResponseDetails;
-        filters: ProductListResponseFiltersItem[];
-        data: ProductListResponseDataItem[];
-      },
-      "filters" | "data"
-    >
-  >;
+} & Required<Pick<BaseResponse & {
+  /** Pagination metadata */
+  details?: ProductListResponseDetails;
+  filters: ProductListResponseFiltersItem[];
+  data: ProductListResponseDataItem[];
+}, 'filters' | 'data'>>;

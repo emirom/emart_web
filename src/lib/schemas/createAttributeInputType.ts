@@ -8,13 +8,13 @@
 /**
  * Attribute type
  */
-export type CreateAttributeInputType =
-  (typeof CreateAttributeInputType)[keyof typeof CreateAttributeInputType];
+export type CreateAttributeInputType = typeof CreateAttributeInputType[keyof typeof CreateAttributeInputType];
+
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const CreateAttributeInputType = {
-  text: "text",
-  number: "number",
-  boolean: "boolean",
-  date: "date",
+  text: 'text',
+  number: 'number',
+  boolean: 'boolean',
+  date: 'date',
 } as const;

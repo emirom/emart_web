@@ -8,13 +8,12 @@
 /**
  * @nullable
  */
-export type CreateProductInputDescriptionsAnyOfItemMediaSide =
-  | (typeof CreateProductInputDescriptionsAnyOfItemMediaSide)[keyof typeof CreateProductInputDescriptionsAnyOfItemMediaSide]
-  | null;
+export type CreateProductInputDescriptionsAnyOfItemMediaSide = typeof CreateProductInputDescriptionsAnyOfItemMediaSide[keyof typeof CreateProductInputDescriptionsAnyOfItemMediaSide] | null;
+
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const CreateProductInputDescriptionsAnyOfItemMediaSide = {
-  LEFT: "LEFT",
-  CENTER: "CENTER",
-  RIGHT: "RIGHT",
+  LEFT: 'LEFT',
+  CENTER: 'CENTER',
+  RIGHT: 'RIGHT',
 } as const;

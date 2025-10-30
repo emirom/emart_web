@@ -4,10 +4,10 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { BaseResponse } from "./baseResponse";
-import type { GuaranteeListResponseDetails } from "./guaranteeListResponseDetails";
-import type { GuaranteeListResponseFiltersItem } from "./guaranteeListResponseFiltersItem";
-import type { GuaranteeListResponseDataItem } from "./guaranteeListResponseDataItem";
+import type { BaseResponse } from './baseResponse';
+import type { GuaranteeListResponseDetails } from './guaranteeListResponseDetails';
+import type { GuaranteeListResponseFiltersItem } from './guaranteeListResponseFiltersItem';
+import type { GuaranteeListResponseDataItem } from './guaranteeListResponseDataItem';
 
 /**
  * Paginated list of guarantees
@@ -17,14 +17,9 @@ export type GuaranteeListResponse = BaseResponse & {
   details?: GuaranteeListResponseDetails;
   filters: GuaranteeListResponseFiltersItem[];
   data: GuaranteeListResponseDataItem[];
-} & Required<
-    Pick<
-      BaseResponse & {
-        /** Pagination metadata */
-        details?: GuaranteeListResponseDetails;
-        filters: GuaranteeListResponseFiltersItem[];
-        data: GuaranteeListResponseDataItem[];
-      },
-      "filters" | "data"
-    >
-  >;
+} & Required<Pick<BaseResponse & {
+  /** Pagination metadata */
+  details?: GuaranteeListResponseDetails;
+  filters: GuaranteeListResponseFiltersItem[];
+  data: GuaranteeListResponseDataItem[];
+}, 'filters' | 'data'>>;

@@ -6,47 +6,47 @@
  */
 
 export type GetVariantsParams = {
-  /**
-   * Number of records to skip
-   * @minimum 0
-   */
-  skip: number;
-  /**
-   * Maximum number of records to return
-   * @minimum 1
-   * @maximum 20
-   */
-  limit: number;
-  /**
-   * Optional date input, usually null
-   */
-  deletedAt?: string | null;
-  /**
-   * Filter by SKU
-   */
-  sku?: string | null;
-  /**
-   * Filter by barcode
-   */
-  barcode?: string | null;
-  /**
-   * Filter by MPN
-   */
-  mpn?: string | null;
-  /**
-   * Filter by product ID
-   */
-  publicId?: string | null;
-  /**
-   * Filter by product ID
-   */
-  productId?: string | null;
-  /**
-   * Filter by active status
-   */
-  isActive?: boolean | null;
-  /**
-   * Filter by approval status
-   */
-  isApproved?: boolean | null;
+/**
+ * Number of records to skip
+ * @minimum 0
+ */
+skip: number;
+/**
+ * Maximum number of records to return
+ * @minimum 1
+ * @maximum 20
+ */
+limit: number;
+/**
+ * Optional date input, usually null
+ */
+deletedAt?: string | null;
+/**
+ * Filter by SKU
+ */
+sku?: string | null;
+/**
+ * Filter by barcode
+ */
+barcode?: string | null;
+/**
+ * Filter by MPN
+ */
+mpn?: string | null;
+/**
+ * Filter by product ID
+ */
+publicId?: string | null;
+/**
+ * Filter by product ID
+ */
+productId?: string | null;
+/**
+ * Filter by active status
+ */
+isActive?: boolean | null;
+/**
+ * Filter by approval status
+ */
+isApproved?: boolean | null;
 };

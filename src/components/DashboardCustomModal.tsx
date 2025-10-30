@@ -38,13 +38,13 @@ export function DashboardCustomModal({
     return (
       <Dialog open={open} onOpenChange={onOpenChange}>
         <DialogTrigger asChild>
-          <div
+          <s
             className="bg-white text-tint-blue-500 text-sm"
             aria-label={title}
             title={title}
           >
             {button}
-          </div>
+          </s>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>

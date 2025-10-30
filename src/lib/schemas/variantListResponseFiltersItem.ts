@@ -4,11 +4,11 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { VariantListResponseFiltersItemLabel } from "./variantListResponseFiltersItemLabel";
-import type { VariantListResponseFiltersItemModel } from "./variantListResponseFiltersItemModel";
-import type { VariantListResponseFiltersItemField } from "./variantListResponseFiltersItemField";
-import type { VariantListResponseFiltersItemAdvanced } from "./variantListResponseFiltersItemAdvanced";
-import type { VariantListResponseFiltersItemEnumOptions } from "./variantListResponseFiltersItemEnumOptions";
+import type { VariantListResponseFiltersItemLabel } from './variantListResponseFiltersItemLabel';
+import type { VariantListResponseFiltersItemModel } from './variantListResponseFiltersItemModel';
+import type { VariantListResponseFiltersItemField } from './variantListResponseFiltersItemField';
+import type { VariantListResponseFiltersItemAdvanced } from './variantListResponseFiltersItemAdvanced';
+import type { VariantListResponseFiltersItemEnumOptions } from './variantListResponseFiltersItemEnumOptions';
 
 export type VariantListResponseFiltersItem = {
   /** The key representing the service associated with the filter. */

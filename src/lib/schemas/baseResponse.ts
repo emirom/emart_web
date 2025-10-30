@@ -4,7 +4,7 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { BaseResponseSuccess } from "./baseResponseSuccess";
+import type { BaseResponseSuccess } from './baseResponseSuccess';
 
 /**
  * Standard API response format
