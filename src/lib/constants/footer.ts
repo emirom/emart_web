@@ -2,7 +2,7 @@ import { v4 as uuidV4 } from "uuid";
 
 interface FooterItems {
   subTitle: string;
-  href: string;
+  h$ref: string;
   id: string;
 }
 
@@ -18,32 +18,32 @@ export const FOOTER_ITEMS: Footer[] = [
     id: uuidV4(),
     footerItems: [
       {
-        href: "/",
+        h$ref: "/",
         subTitle: "بلاگ",
         id: uuidV4(),
       },
       {
-        href: "/",
+        h$ref: "/",
         subTitle: "خرید گوشی",
         id: uuidV4(),
       },
       {
-        href: "/",
+        h$ref: "/",
         subTitle: "گوشی آیفون",
         id: uuidV4(),
       },
       {
-        href: "/",
+        h$ref: "/",
         subTitle: "گوشی شیائومی",
         id: uuidV4(),
       },
       {
-        href: "/",
+        h$ref: "/",
         subTitle: "مقایسه گوشی",
         id: uuidV4(),
       },
       {
-        href: "/",
+        h$ref: "/",
         subTitle: "مقایسه پیشنهادی",
         id: uuidV4(),
       },
@@ -54,27 +54,27 @@ export const FOOTER_ITEMS: Footer[] = [
     id: uuidV4(),
     footerItems: [
       {
-        href: "/",
+        h$ref: "/",
         id: uuidV4(),
         subTitle: "گوشی آیفون 13 پرومکس",
       },
       {
-        href: "/",
+        h$ref: "/",
         id: uuidV4(),
         subTitle: "گوشی سامسونگ اس 24 اولترا",
       },
       {
-        href: "/",
+        h$ref: "/",
         id: uuidV4(),
         subTitle: "گوشی شیائومی رد می نوت 14",
       },
       {
-        href: "/",
+        h$ref: "/",
         id: uuidV4(),
         subTitle: "گوشی سامسونگ اس 25",
       },
       {
-        href: "/",
+        h$ref: "/",
         id: uuidV4(),
         subTitle: "گوشی اقتصادی",
       },
@@ -84,47 +84,47 @@ export const FOOTER_ITEMS: Footer[] = [
     title: "درباره ما",
     id: uuidV4(),
     footerItems: [
-      { href: "/", id: uuidV4(), subTitle: "ماهور همراه در یک نگاه" },
-      { href: "/", id: uuidV4(), subTitle: "تیم ماهور همراه" },
-      { href: "/", id: uuidV4(), subTitle: "سوالات متداول" },
-      { href: "/", id: uuidV4(), subTitle: "فروش حضوری" },
-      { href: "/", id: uuidV4(), subTitle: "تماس با ما" },
+      { h$ref: "/", id: uuidV4(), subTitle: "ماهور همراه در یک نگاه" },
+      { h$ref: "/", id: uuidV4(), subTitle: "تیم ماهور همراه" },
+      { h$ref: "/", id: uuidV4(), subTitle: "سوالات متداول" },
+      { h$ref: "/", id: uuidV4(), subTitle: "فروش حضوری" },
+      { h$ref: "/", id: uuidV4(), subTitle: "تماس با ما" },
     ],
   },
   {
     id: uuidV4(),
     title: "پیش از خرید",
     footerItems: [
-      { href: "/", id: uuidV4(), subTitle: "راهنمای خرید اقساطی" },
-      { href: "/", id: uuidV4(), subTitle: "خرید سازمانی" },
-      { href: "/", id: uuidV4(), subTitle: "گوشی آیفون" },
-      { href: "/", id: uuidV4(), subTitle: "راهنمای خرید از ماهور همراه" },
-      { href: "/", id: uuidV4(), subTitle: "روش های خرید از ماهور همراه" },
-      { href: "/", id: uuidV4(), subTitle: "ضمانت ها و گارانتی محصولات" },
-      { href: "/", id: uuidV4(), subTitle: "شیوه ها و هزینه ارسال" },
-      { href: "/", id: uuidV4(), subTitle: "قوانین ثبت نظر و دیدگاه" },
+      { h$ref: "/", id: uuidV4(), subTitle: "راهنمای خرید اقساطی" },
+      { h$ref: "/", id: uuidV4(), subTitle: "خرید سازمانی" },
+      { h$ref: "/", id: uuidV4(), subTitle: "گوشی آیفون" },
+      { h$ref: "/", id: uuidV4(), subTitle: "راهنمای خرید از ماهور همراه" },
+      { h$ref: "/", id: uuidV4(), subTitle: "روش های خرید از ماهور همراه" },
+      { h$ref: "/", id: uuidV4(), subTitle: "ضمانت ها و گارانتی محصولات" },
+      { h$ref: "/", id: uuidV4(), subTitle: "شیوه ها و هزینه ارسال" },
+      { h$ref: "/", id: uuidV4(), subTitle: "قوانین ثبت نظر و دیدگاه" },
     ],
   },
   {
     id: uuidV4(),
     title: "پس از خرید",
     footerItems: [
-      { href: "/", id: uuidV4(), subTitle: "تضمین تحویل به موقع کالا" },
-      { href: "/", id: uuidV4(), subTitle: "روش های مرجوع کردن کالا" },
-      { href: "/", id: uuidV4(), subTitle: "تضمین رجیستری کالا" },
-      { href: "/", id: uuidV4(), subTitle: "سوالات متداول رجیستری" },
-      { href: "/", id: uuidV4(), subTitle: "رهگیری سفارش ها" },
-      { href: "/", id: uuidV4(), subTitle: "بهترین زمان ارسال" },
+      { h$ref: "/", id: uuidV4(), subTitle: "تضمین تحویل به موقع کالا" },
+      { h$ref: "/", id: uuidV4(), subTitle: "روش های مرجوع کردن کالا" },
+      { h$ref: "/", id: uuidV4(), subTitle: "تضمین رجیستری کالا" },
+      { h$ref: "/", id: uuidV4(), subTitle: "سوالات متداول رجیستری" },
+      { h$ref: "/", id: uuidV4(), subTitle: "رهگیری سفارش ها" },
+      { h$ref: "/", id: uuidV4(), subTitle: "بهترین زمان ارسال" },
     ],
   },
   {
     id: uuidV4(),
     title: "قوانین و مقررات",
     footerItems: [
-      { href: "/", id: uuidV4(), subTitle: "قوانین و مقررات" },
-      { href: "/", id: uuidV4(), subTitle: "حریم خصوصی کاربران" },
-      { href: "/", id: uuidV4(), subTitle: "همکاری با ما" },
-      { href: "/", id: uuidV4(), subTitle: "چرا ماهور همراه؟" },
+      { h$ref: "/", id: uuidV4(), subTitle: "قوانین و مقررات" },
+      { h$ref: "/", id: uuidV4(), subTitle: "حریم خصوصی کاربران" },
+      { h$ref: "/", id: uuidV4(), subTitle: "همکاری با ما" },
+      { h$ref: "/", id: uuidV4(), subTitle: "چرا ماهور همراه؟" },
     ],
   },
 ];

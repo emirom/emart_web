@@ -34,6 +34,7 @@ export default function LabelAction({ id }: { id: string }) {
         title="ویرایش برچسب"
         button={<EditButton />}
         element={<EditLabelForm id={id} />}
+        open
       />
     </div>
   );

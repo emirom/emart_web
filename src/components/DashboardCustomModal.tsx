@@ -2,7 +2,6 @@
 
 import { useMediaQuery } from "@lib/hooks/useMediaQuery";
 import { XIcon } from "lucide-react";
-import { useEffect, useState } from "react";
 import { Button } from "./ui/button";
 import {
   Dialog,
@@ -13,7 +12,6 @@ import {
 } from "./ui/dialog";
 import {
   Drawer,
-  DrawerClose,
   DrawerContent,
   DrawerFooter,
   DrawerHeader,
@@ -25,25 +23,20 @@ export function DashboardCustomModal({
   element,
   title,
   button,
+  open,
+  onOpenChange,
 }: {
   element: React.ReactNode;
   title: string;
-  button: React.ReactNode;
+  button?: React.ReactNode;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
 }) {
-  const [open, setOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) return null;
-
-  // Desktop size
   if (isDesktop) {
     return (
-      <Dialog open={open} onOpenChange={setOpen}>
+      <Dialog open={open} onOpenChange={onOpenChange}>
         <DialogTrigger asChild>
           <div
             className="bg-white text-tint-blue-500 text-sm"
@@ -59,12 +52,15 @@ export function DashboardCustomModal({
               <DialogTitle className="text-sm text-tint-blue-500">
                 {title}
               </DialogTitle>
-              <Button
-                onClick={() => setOpen((open) => !open)}
-                className="bg-transparent cursor-pointer block m-0 p-0"
-              >
-                <XIcon stroke="#aaa" />
-              </Button>
+              {onOpenChange && (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => onOpenChange(false)}
+                >
+                  <XIcon className="h-4 w-4" />
+                </Button>
+              )}
             </div>
           </DialogHeader>
           {element}
@@ -73,9 +69,8 @@ export function DashboardCustomModal({
     );
   }
 
-  // Mobile size
   return (
-    <Drawer open={open} onOpenChange={setOpen}>
+    <Drawer open={open} onOpenChange={onOpenChange}>
       <DrawerTrigger asChild>
         <div
           className="bg-white text-tint-blue-500 text-sm"
@@ -91,9 +86,11 @@ export function DashboardCustomModal({
         </DrawerHeader>
         {element}
         <DrawerFooter className="pt-2">
-          <DrawerClose asChild>
-            <Button variant="outline">انصراف</Button>
-          </DrawerClose>
+          {onOpenChange && (
+            <Button variant="outline" onClick={() => onOpenChange(false)}>
+              انصراف
+            </Button>
+          )}
         </DrawerFooter>
       </DrawerContent>
     </Drawer>

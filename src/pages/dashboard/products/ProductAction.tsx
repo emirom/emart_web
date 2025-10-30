@@ -12,8 +12,8 @@ export default function ProductAction({ id }: { id: string }) {
   const handleDelete = async () => {
     try {
       await deleteProductAction(id);
-      queryClient.invalidateQueries({ queryKey: ["/guarantees"] });
-      toast.success("بیمه  حذف شد");
+      queryClient.invalidateQueries({ queryKey: ["/products"] });
+      toast.success("محصول حذف شد");
     } catch (error: unknown) {
       if (error instanceof Error) {
         toast.error(error.message);

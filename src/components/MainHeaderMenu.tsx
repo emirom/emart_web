@@ -17,23 +17,23 @@ const helloWorldMenus = [
     label: "hello world 1",
     icon: <AxeIcon size={20} />,
     content: [
-      { text: "Link A1", href: "/a1" },
-      { text: "Link A2", href: "/a2" },
+      { text: "Link A1", h$ref: "/a1" },
+      { text: "Link A2", h$ref: "/a2" },
     ],
   },
   {
     label: "hello world 2",
     content: [
-      { text: "Link B1", href: "/b1" },
-      { text: "Link B2", href: "/b2" },
+      { text: "Link B1", h$ref: "/b1" },
+      { text: "Link B2", h$ref: "/b2" },
     ],
   },
   {
     label: "hello world 3",
     content: [
-      { text: "Link C1", href: "/c1" },
-      { text: "Link C2", href: "/c2" },
-      { text: "Link C3", href: "/c3" },
+      { text: "Link C1", h$ref: "/c1" },
+      { text: "Link C2", h$ref: "/c2" },
+      { text: "Link C3", h$ref: "/c3" },
     ],
   },
 ];

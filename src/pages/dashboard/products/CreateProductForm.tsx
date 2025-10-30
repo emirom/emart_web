@@ -1,4 +1,5 @@
 "use client";
+import { SubmitButton } from "@components/BtnWithIcon";
 import FormAutocomplete from "@components/FormAutoCompleteField";
 import { FormInputField } from "@components/FormInputField";
 import { FormScrollableSelectField } from "@components/FormScrollableSelectField";
@@ -9,6 +10,7 @@ import { CreateProductInput } from "@lib/schemas";
 import { useGetBrands } from "@lib/services/brands/brands";
 import { useGetCategories } from "@lib/services/categories/categories";
 import { useGetLabels } from "@lib/services/labels/labels";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
@@ -18,7 +20,7 @@ type Label = { id: string; name: string };
 
 export default function CreateProductForm() {
   const { handleSubmit, control } = useForm<CreateProductInput>({
-    defaultValues: { labels: [] },
+    defaultValues: { labels: [], isActive: false },
   });
 
   const { append, fields, remove } = useFieldArray({
@@ -27,14 +29,18 @@ export default function CreateProductForm() {
   });
 
   const [selectedLabels, setSelectedLabels] = useState<Label[]>([]);
-
+  const router = useRouter();
   const onSubmit: SubmitHandler<CreateProductInput> = async (data) => {
     try {
       await postProductAction(data);
       queryClient.invalidateQueries({ queryKey: ["/products"] });
       toast.success("محصول اضافه شد");
     } catch (error: unknown) {
-      toast.error(error instanceof Error ? error.message : "خطایی رخ داده است");
+      if (error instanceof Error) {
+        toast.error(error.message);
+      } else {
+        toast.error("خطایی رخ داده است");
+      }
     }
   };
 
@@ -130,6 +136,8 @@ export default function CreateProductForm() {
           placeholder="توضیحات محصول"
         />
       </div>
+
+      <SubmitButton className="col-span-1" />
     </form>
   );
 }
