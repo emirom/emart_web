@@ -14,7 +14,7 @@ export default function LabelAction({ id }: { id: string }) {
       await deleteLabelAction(id);
       queryClient.invalidateQueries({ queryKey: ["/labels"] });
       toast.success("برچسب حذف شد");
-    } catch (error: unknown) {
+    } catch (error) {
       if (error instanceof Error) {
         toast.error(error.message);
       } else {

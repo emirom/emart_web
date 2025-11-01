@@ -4,7 +4,7 @@ import { SubmitButton } from "@components/BtnWithIcon";
 import { FormInputField } from "@components/FormInputField";
 import { patchLabelAction } from "@lib/actions/label-action";
 import { queryClient } from "@lib/apis/queryClient";
-import { CreateLabelInput } from "@lib/schemas";
+import { UpdateLabelInput } from "@lib/schemas";
 import { useGetLabelsId } from "@lib/services/labels/labels";
 import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -12,17 +12,20 @@ import { toast } from "react-toastify";
 
 export default function EditLabelForm({ id }: { id: string }) {
   const { handleSubmit, control, formState, reset } =
-    useForm<CreateLabelInput>();
-  const { data: label } = useGetLabelsId(id);
+    useForm<UpdateLabelInput>();
+  const { data: label } = useGetLabelsId(id, {
+    query: { queryKey: ["/labels", id] },
+  });
   useEffect(() => {
     reset({ ...label?.data });
-  }, [label, reset]);
-  const onSubmit: SubmitHandler<CreateLabelInput> = async (data) => {
+  }, [label?.data, reset]);
+  useEffect(() => {}, []);
+  const onSubmit: SubmitHandler<UpdateLabelInput> = async (data) => {
     try {
       await patchLabelAction(id, data);
       queryClient.invalidateQueries({ queryKey: ["/labels"] });
+
       toast.success("برچسب ویرایش شد");
-      reset();
     } catch (error: unknown) {
       if (error instanceof Error) {
         toast.error(error.message);

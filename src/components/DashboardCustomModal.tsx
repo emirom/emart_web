@@ -71,15 +71,7 @@ export function DashboardCustomModal({
 
   return (
     <Drawer open={open} onOpenChange={onOpenChange}>
-      <DrawerTrigger asChild>
-        <div
-          className="bg-white text-tint-blue-500 text-sm"
-          aria-label={title}
-          title={title}
-        >
-          {button}
-        </div>
-      </DrawerTrigger>
+      <DrawerTrigger asChild>{button}</DrawerTrigger>
       <DrawerContent className="px-5">
         <DrawerHeader className="text-left px-0">
           <DrawerTitle className="text-start">{title}</DrawerTitle>
