@@ -6,6 +6,7 @@ import {
   Home,
   LandPlot,
   Package,
+  PackageSearch,
   PaintBucket,
   Settings,
   ShieldCheck,
@@ -22,6 +23,7 @@ export default function DashboardSidebar() {
   const navItems = [
     { href: "/", label: "صفحه اصلی", icon: Home },
     { href: "/dashboard/products", label: "محصولات", icon: Package },
+    { href: "/dashboard/variants", label: "تنوع محصول", icon: PackageSearch },
     { href: "/dashboard/users", label: "کاربران", icon: Users },
     { href: "/dashboard/colors", label: "رنگ‌ها", icon: PaintBucket },
     { href: "/dashboard/attributes", label: "ویژگی‌ها", icon: LandPlot },
