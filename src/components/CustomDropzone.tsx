@@ -3,6 +3,7 @@
 import { useFileStore } from "@lib/stores/store";
 import { FileWithPreview } from "@lib/types/file-with-preview";
 import { PauseCircle, Star, Upload, X } from "lucide-react";
+import Image from "next/image";
 import { useEffect } from "react";
 import { useDropzone } from "react-dropzone";
 import { cn } from "./lib/utils";
@@ -112,7 +113,7 @@ export default function CustomDropzone({
       {showPreview && currentFile && (
         <div className="mt-4 inline-flex flex-col items-center">
           <div className="relative w-24 h-32 border rounded-md overflow-hidden">
-            <img
+            <Image
               src={currentFile.preview}
               alt={currentFile.path || "preview"}
               className="w-full h-full object-cover"

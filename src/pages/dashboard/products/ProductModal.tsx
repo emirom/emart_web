@@ -12,7 +12,7 @@ export default function ProductModal() {
     if (currentFile) {
       setOpen(true);
     }
-  }, [currentFile, useAppStore]);
+  }, [currentFile, setOpen]);
 
   return (
     <DashboardCustomModal

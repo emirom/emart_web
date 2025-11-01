@@ -30,10 +30,12 @@ export async function postProductImageAction(
     if (caption != null && caption !== "") formData.append("caption", caption);
     if (order != null) formData.append("order", order.toString());
 
-    const response = await axiosInstance.post("/product-medias", formData, {
+    const response = await axiosInstance({
+      method: "POST",
+      url: "/product-medias",
+      data: formData,
       headers: { "Content-Type": "multipart/form-data" },
     });
-
     revalidatePath(`/dashboard/products/add/${productId}`);
     return response;
   } catch (error) {

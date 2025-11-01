@@ -9,7 +9,7 @@ export type MulterFile = {
   filename?: string;
   path?: string;
   buffer?: Buffer;
-  stream?: any;
+  stream?: null;
 };
 
 // Client-side input type (used in React form)

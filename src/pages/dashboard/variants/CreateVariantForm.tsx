@@ -7,15 +7,13 @@ import { queryClient } from "@lib/apis/queryClient";
 import { CreateVariantInput } from "@lib/schemas";
 import { useGetColors } from "@lib/services/colors/colors";
 import { useGetProducts } from "@lib/services/products/products";
-import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
 export default function CreateVariantForm() {
-  const [color, setColor] = useState<string | null>(null);
   const { data: products } = useGetProducts({ skip: 0, limit: 10 });
-  const { data: colors } = useGetColors({ skip: 0, limit: 10, name: color });
-  const { handleSubmit, control, formState } = useForm<CreateVariantInput>();
+  const { data: colors } = useGetColors({ skip: 0, limit: 10 });
+  const { handleSubmit, control } = useForm<CreateVariantInput>();
   const onSubmit: SubmitHandler<CreateVariantInput> = async (data) => {
     try {
       await postVariantAction(data);

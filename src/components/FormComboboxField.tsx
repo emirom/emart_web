@@ -9,7 +9,7 @@ import {
   CommandList,
 } from "cmdk";
 import { Check, ChevronDown } from "lucide-react";
-import React, { useState } from "react";
+import { useState } from "react";
 import { Control, Controller, FieldValues, Path } from "react-hook-form";
 import { cn } from "./lib/utils";
 import { Button } from "./ui/button";
@@ -141,4 +141,4 @@ function FormComboboxField<
   );
 }
 
-export default React.memo(FormComboboxField) as typeof FormComboboxField;
+export default FormComboboxField;

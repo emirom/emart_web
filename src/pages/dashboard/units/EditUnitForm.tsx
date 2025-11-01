@@ -13,7 +13,7 @@ export default function EditAttributeForm({ id }: { id: string }) {
     useForm<UpdateUnitInput>();
   const { data: unit } = useGetUnitsId(id);
   useEffect(() => {
-    reset({ ...unit });
+    reset({ ...unit?.data });
   }, [unit, reset]);
   const onSubmit: SubmitHandler<UpdateUnitInput> = async (data) => {
     try {

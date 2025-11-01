@@ -23,7 +23,7 @@ export default function LanguageSwitcher() {
         )}; Max-Age=${COOKIE_MAX_AGE}; Path=/; SameSite=Lax`;
 
         const nextHref = getPathname({
-          h$ref: pathname || "/",
+          href: pathname || "/",
           locale: nextLocale,
         });
 

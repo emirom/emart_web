@@ -37,7 +37,7 @@ export default function UploadImageForm() {
       fd.append("file", currentFile.file);
       fd.append("productId", id);
 
-      const title = clean(formData.title);
+      // const title = clean(formData.title);
       const altText = clean(formData.altText);
       const caption = clean(formData.caption);
 
@@ -53,8 +53,12 @@ export default function UploadImageForm() {
 
       clearFile();
       toast.success("تصویر آپلود شد");
-    } catch (error: any) {
-      toast.error(error.response?.data?.message || "خطا در آپلود تصویر");
+    } catch (error) {
+      if (error instanceof Error) {
+        toast.error(error.message);
+      } else {
+        toast.error("خطا در آپلود تصویر");
+      }
     }
   };
 

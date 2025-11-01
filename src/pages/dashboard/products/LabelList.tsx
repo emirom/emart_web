@@ -1,3 +1,4 @@
+"use client";
 import { cn } from "@components/lib/utils";
 import { X } from "lucide-react";
 
@@ -21,7 +22,7 @@ export default function LabelList({
         لیست برچسب‌های انتخاب شده
       </label>
       <div className="flex items-center gap-2 flex-wrap border border-gray-100 p-2 rounded-lg">
-        {selectedLabels.length > 0 ? (
+        {!!selectedLabels ? (
           selectedLabels.map((label) => (
             <div
               key={label.id}

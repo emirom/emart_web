@@ -48,6 +48,7 @@ export const createCategoryListSlice: StateCreator<
     categoryId: null,
     value: null,
     attributeId: null,
+    type: "number",
   },
 
   addCategory: (item) =>

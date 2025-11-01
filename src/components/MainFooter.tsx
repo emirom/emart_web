@@ -125,7 +125,7 @@ function FooterSection({
   section: {
     id: string;
     title: string;
-    footerItems: { id: string; h$ref: string; subTitle: string }[];
+    footerItems: { id: string; href: string; subTitle: string }[];
   };
 }) {
   return (

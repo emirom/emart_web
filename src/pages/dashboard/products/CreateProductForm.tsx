@@ -10,7 +10,6 @@ import { CreateProductInput } from "@lib/schemas";
 import { useGetBrands } from "@lib/services/brands/brands";
 import { useGetCategories } from "@lib/services/categories/categories";
 import { useGetLabels } from "@lib/services/labels/labels";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
@@ -29,7 +28,6 @@ export default function CreateProductForm() {
   });
 
   const [selectedLabels, setSelectedLabels] = useState<Label[]>([]);
-  const router = useRouter();
   const onSubmit: SubmitHandler<CreateProductInput> = async (data) => {
     try {
       await postProductAction(data);
