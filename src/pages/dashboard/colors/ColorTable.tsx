@@ -29,7 +29,6 @@ export default function ColorTable({
   });
 
   const columns: ColumnDef<Color>[] = [
-    { accessorKey: "id", header: "#" },
     {
       accessorKey: "name",
       header: "نام رنگ",

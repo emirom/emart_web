@@ -14,7 +14,9 @@ import { toast } from "react-toastify";
 export default function EditColorForm({ id }: { id: string }) {
   const { handleSubmit, control, formState, reset } =
     useForm<UpdateColorInput>();
-  const { data: color } = useGetColorsId(id);
+  const { data: color } = useGetColorsId(id, {
+    query: { queryKey: ["/colors", id] },
+  });
 
   useEffect(() => {
     if (id) reset({ ...color?.data });
