@@ -31,7 +31,7 @@ export default function AttributeActions({ id }: { id: string }) {
         onConfirm={handleDelete}
       />
       <DashboardCustomModal
-        title="ویرایش کمیت"
+        title="ویرایش ویژگی"
         button={<EditButton />}
         element={<EditAttributeForm id={id} />}
       />

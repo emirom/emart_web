@@ -19,7 +19,7 @@ export default function EditLabelForm({ id }: { id: string }) {
   useEffect(() => {
     reset({ ...label?.data });
   }, [label?.data, reset]);
-  useEffect(() => {}, []);
+
   const onSubmit: SubmitHandler<UpdateLabelInput> = async (data) => {
     try {
       await patchLabelAction(id, data);

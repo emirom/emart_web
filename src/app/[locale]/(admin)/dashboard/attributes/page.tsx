@@ -29,7 +29,7 @@ export default async function Page({
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <HeaderWithLink
-        title="ویزگی های دسته بندی"
+        title="ویژگی های دسته بندی"
         linkTitle="بازگشت"
         linkHref="/dashboard"
       />

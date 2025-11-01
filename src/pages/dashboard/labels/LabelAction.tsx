@@ -26,7 +26,7 @@ export default function LabelAction({ id }: { id: string }) {
   return (
     <div className="flex items-center justify-center w-full">
       <AlertDialogModal
-        alertTitle="آیا از حذف این رنگ اطمینان دارید؟"
+        alertTitle="آیا از حذف این برچسب اطمینان دارید؟"
         button={<DeleteButton />}
         onConfirm={handleDelete}
       />

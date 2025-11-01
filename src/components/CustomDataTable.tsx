@@ -87,7 +87,7 @@ export function CustomDataTable<TData>({
           {title}
         </h2>
       )}
-      <div className="flex items-center justify-between mb-2 rounded-lg p-2">
+      <div className="flex items-center justify-between gap-2 mb-2 rounded-lg p-2">
         {filterColumn && (
           <Input
             placeholder={filterPlaceholder}

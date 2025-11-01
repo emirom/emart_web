@@ -10,6 +10,7 @@ import { revalidatePath } from "next/cache";
 
 export async function postAttributeAction(data: CreateAttributeInput) {
   await postAttributes(data);
+  revalidatePath("/dashboard/attributes");
 }
 
 export async function putAttributeAction(

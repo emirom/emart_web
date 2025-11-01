@@ -38,13 +38,13 @@ export function DashboardCustomModal({
     return (
       <Dialog open={open} onOpenChange={onOpenChange}>
         <DialogTrigger asChild>
-          <s
+          <span
             className="bg-white text-tint-blue-500 text-sm"
             aria-label={title}
             title={title}
           >
             {button}
-          </s>
+          </span>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
@@ -74,7 +74,9 @@ export function DashboardCustomModal({
       <DrawerTrigger asChild>{button}</DrawerTrigger>
       <DrawerContent className="px-5">
         <DrawerHeader className="text-left px-0">
-          <DrawerTitle className="text-start">{title}</DrawerTitle>
+          <DrawerTitle className="text-start text-sm font-medium text-tint-blue-500">
+            {title}
+          </DrawerTitle>
         </DrawerHeader>
         {element}
         <DrawerFooter className="pt-2">

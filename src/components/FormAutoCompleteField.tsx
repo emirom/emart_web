@@ -2,7 +2,7 @@
 
 import { useAutocomplete } from "@lib/hooks/useAutocomplete";
 import clsx from "clsx";
-import { InputHTMLAttributes, useEffect, useRef } from "react";
+import React, { InputHTMLAttributes, useEffect, useRef } from "react";
 import {
   Control,
   FieldPath,
@@ -105,7 +105,7 @@ function FormAutocomplete<
           id={name}
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
-          onFocus={open}
+          onClick={open}
           {...inputProps}
         />
         {isOpen && (
@@ -144,4 +144,4 @@ function FormAutocomplete<
   );
 }
 
-export default FormAutocomplete;
+export default React.memo(FormAutocomplete) as typeof FormAutocomplete;

@@ -6,6 +6,7 @@ import { useGetAttributes } from "@lib/services/attributes/attributes";
 import { ColumnDef } from "@tanstack/react-table";
 import { useSearchParams } from "next/navigation";
 import AttributeActions from "./AttributeAction";
+import CreateAttribute from "./CreateAttribute";
 
 type InitialQuery = {
   page?: number;
@@ -22,7 +23,6 @@ export default function AttributeTable({
   const title = searchParams?.get("search") ?? initialQuery?.title;
 
   const columns: ColumnDef<Partial<Attribute>>[] = [
-    { accessorKey: "id", header: "#" },
     { accessorKey: "title", header: "نام ویژگی" },
     { accessorKey: "unit", header: "واحد ویژگی" },
     { accessorKey: "type", header: "نوع ویژگی" },
@@ -50,6 +50,7 @@ export default function AttributeTable({
       filterColumnKey="title"
       filterPlaceholder="جستجو"
       emptyMessage="هیچ ویژگی پیدا نشد"
+      customButton={<CreateAttribute />}
     />
   );
 }

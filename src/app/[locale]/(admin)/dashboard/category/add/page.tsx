@@ -1,4 +1,4 @@
-import CreateAttribute from "@/pages/dashboard/attribute/CreateAttribute";
+import CreateAttribute from "@/pages/dashboard/attribute/CreateAttributeForm";
 import CreateCategory from "@/pages/dashboard/category/CreateCategory";
 import PreviewList from "@/pages/dashboard/category/PreviewList";
 import { HeaderWithLink } from "@components/HeaderWithLink";

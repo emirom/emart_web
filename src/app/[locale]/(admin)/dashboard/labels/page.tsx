@@ -4,6 +4,12 @@ import { TablePagination } from "@components/TablePagination";
 import { queryClient } from "@lib/apis/queryClient";
 import { getLabels } from "@lib/services/labels/labels";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: { absolute: "برچسب ها" },
+  description: "برچسب ها",
+};
 
 export default async function Page({
   searchParams,
@@ -18,11 +24,11 @@ export default async function Page({
   await queryClient.prefetchQuery({
     queryKey: [
       "/labels",
-      { skip: initialQuery.page, limit: 10, name: initialQuery.name },
+      { skip: initialQuery.page * 10, limit: 10, name: initialQuery.name },
     ],
     queryFn: () =>
       getLabels({
-        skip: initialQuery.page,
+        skip: initialQuery.page * 10,
         limit: 10,
         name: initialQuery.name,
       }),

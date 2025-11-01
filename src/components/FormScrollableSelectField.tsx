@@ -74,7 +74,7 @@ export function FormScrollableSelectField<
             >
               <SelectTrigger
                 className={cn(
-                  "w-full mt-2",
+                  "w-full mt-2 flex items-center justify-between flex-row-reverse",
                   fieldState.error?.message && "border-destructive",
                 )}
                 id={String(name)}
@@ -90,7 +90,11 @@ export function FormScrollableSelectField<
               <SelectContent>
                 <SelectGroup>
                   {mappedOptions.map((opt) => (
-                    <SelectItem key={opt.key} value={opt.stringValue}>
+                    <SelectItem
+                      className="flex justify-between w-full flex-row-reverse"
+                      key={opt.key}
+                      value={opt.stringValue}
+                    >
                       {opt.labelText}
                     </SelectItem>
                   ))}
