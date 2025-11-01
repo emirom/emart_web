@@ -4,10 +4,7 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import {
-  z as zod
-} from 'zod';
-
+import { z as zod } from "zod";
 
 /**
  * Create a new guarantee
@@ -21,29 +18,104 @@ export const postGuaranteesBodyProviderAddressMaxOne = 50;
 export const postGuaranteesBodyProviderPhoneMaxOne = 50;
 export const postGuaranteesBodyProviderCodeMaxOne = 50;
 export const postGuaranteesBodyTermsUrlMaxOne = 1000;
-export const postGuaranteesBodyIsInternationalDefault = false;export const postGuaranteesBodyClaimProcessMaxOne = 50;
-export const postGuaranteesBodyIsActiveDefault = true;export const postGuaranteesBodySortOrderDefault = 0;export const postGuaranteesBodySepidarGuaranteeIdMaxOne = 50;
+export const postGuaranteesBodyIsInternationalDefault = false;
+export const postGuaranteesBodyClaimProcessMaxOne = 50;
+export const postGuaranteesBodyIsActiveDefault = true;
+export const postGuaranteesBodySortOrderDefault = 0;
+export const postGuaranteesBodySepidarGuaranteeIdMaxOne = 50;
 export const postGuaranteesBodyIsRegisteredWithTaxDefault = false;
 
-export const postGuaranteesBody = zod.object({
-  "title": zod.coerce.string().min(postGuaranteesBodyTitleMin).max(postGuaranteesBodyTitleMax).describe('Guarantee title displayed to customer'),
-  "start": zod.union([zod.iso.datetime({}),zod.null()]).optional().describe('Start date of guarantee validity'),
-  "months": zod.union([zod.coerce.number(),zod.null()]).optional().describe('Duration in months (optional — use with days)'),
-  "days": zod.union([zod.coerce.number(),zod.null()]).optional().describe('Duration in days (optional — use with months)'),
-  "logo": zod.union([zod.url().max(postGuaranteesBodyLogoMaxOne),zod.null()]).optional().describe('Logo URL of guarantee provider'),
-  "providerName": zod.union([zod.coerce.string().max(postGuaranteesBodyProviderNameMaxOne),zod.null()]).optional().describe('Name of warranty provider'),
-  "providerAddress": zod.union([zod.coerce.string().max(postGuaranteesBodyProviderAddressMaxOne),zod.null()]).optional().describe('Physical address of provider'),
-  "providerPhone": zod.union([zod.coerce.string().max(postGuaranteesBodyProviderPhoneMaxOne),zod.null()]).optional().describe('Contact phone of provider'),
-  "providerCode": zod.union([zod.coerce.string().max(postGuaranteesBodyProviderCodeMaxOne),zod.null()]).optional().describe('Internal provider code'),
-  "termsUrl": zod.union([zod.url().max(postGuaranteesBodyTermsUrlMaxOne),zod.null()]).optional().describe('URL to full terms and conditions'),
-  "isInternational": zod.coerce.boolean().optional().describe('Can be claimed internationally?'),
-  "claimProcess": zod.union([zod.coerce.string().max(postGuaranteesBodyClaimProcessMaxOne),zod.null()]).optional().describe('How to claim this guarantee'),
-  "responseTime": zod.union([zod.coerce.number(),zod.null()]).optional().describe('Max days to respond to claim'),
-  "isActive": zod.coerce.boolean().default(postGuaranteesBodyIsActiveDefault).describe('Is this guarantee active for new sales?'),
-  "sortOrder": zod.coerce.number().optional().describe('Display order priority'),
-  "sepidarGuaranteeId": zod.union([zod.coerce.string().max(postGuaranteesBodySepidarGuaranteeIdMaxOne),zod.null()]).optional().describe('Sepidar system reference ID'),
-  "isRegisteredWithTax": zod.coerce.boolean().optional().describe('Is this guarantee registered with tax authority?')
-}).describe('Product warranty/guarantee entity')
+export const postGuaranteesBody = zod
+  .object({
+    title: zod.coerce
+      .string()
+      .min(postGuaranteesBodyTitleMin)
+      .max(postGuaranteesBodyTitleMax)
+      .describe("Guarantee title displayed to customer"),
+    start: zod
+      .union([zod.iso.datetime({}), zod.null()])
+      .optional()
+      .describe("Start date of guarantee validity"),
+    months: zod
+      .union([zod.coerce.number(), zod.null()])
+      .optional()
+      .describe("Duration in months (optional — use with days)"),
+    days: zod
+      .union([zod.coerce.number(), zod.null()])
+      .optional()
+      .describe("Duration in days (optional — use with months)"),
+    logo: zod
+      .union([zod.url().max(postGuaranteesBodyLogoMaxOne), zod.null()])
+      .optional()
+      .describe("Logo URL of guarantee provider"),
+    providerName: zod
+      .union([
+        zod.coerce.string().max(postGuaranteesBodyProviderNameMaxOne),
+        zod.null(),
+      ])
+      .optional()
+      .describe("Name of warranty provider"),
+    providerAddress: zod
+      .union([
+        zod.coerce.string().max(postGuaranteesBodyProviderAddressMaxOne),
+        zod.null(),
+      ])
+      .optional()
+      .describe("Physical address of provider"),
+    providerPhone: zod
+      .union([
+        zod.coerce.string().max(postGuaranteesBodyProviderPhoneMaxOne),
+        zod.null(),
+      ])
+      .optional()
+      .describe("Contact phone of provider"),
+    providerCode: zod
+      .union([
+        zod.coerce.string().max(postGuaranteesBodyProviderCodeMaxOne),
+        zod.null(),
+      ])
+      .optional()
+      .describe("Internal provider code"),
+    termsUrl: zod
+      .union([zod.url().max(postGuaranteesBodyTermsUrlMaxOne), zod.null()])
+      .optional()
+      .describe("URL to full terms and conditions"),
+    isInternational: zod.coerce
+      .boolean()
+      .optional()
+      .describe("Can be claimed internationally?"),
+    claimProcess: zod
+      .union([
+        zod.coerce.string().max(postGuaranteesBodyClaimProcessMaxOne),
+        zod.null(),
+      ])
+      .optional()
+      .describe("How to claim this guarantee"),
+    responseTime: zod
+      .union([zod.coerce.number(), zod.null()])
+      .optional()
+      .describe("Max days to respond to claim"),
+    isActive: zod.coerce
+      .boolean()
+      .default(postGuaranteesBodyIsActiveDefault)
+      .describe("Is this guarantee active for new sales?"),
+    sortOrder: zod.coerce
+      .number()
+      .optional()
+      .describe("Display order priority"),
+    sepidarGuaranteeId: zod
+      .union([
+        zod.coerce.string().max(postGuaranteesBodySepidarGuaranteeIdMaxOne),
+        zod.null(),
+      ])
+      .optional()
+      .describe("Sepidar system reference ID"),
+    isRegisteredWithTax: zod.coerce
+      .boolean()
+      .optional()
+      .describe("Is this guarantee registered with tax authority?"),
+  })
+  .describe("Product warranty/guarantee entity");
 
 /**
  * Get all guarantees with pagination and filtering
@@ -54,33 +126,75 @@ export const getGuaranteesQueryTitleMaxOne = 50;
 export const getGuaranteesQueryProviderNameMaxOne = 50;
 export const getGuaranteesQueryProviderCodeMaxOne = 50;
 
-
 export const getGuaranteesQueryParams = zod.object({
-  "skip": zod.coerce.number().min(getGuaranteesQuerySkipMin).describe('Number of records to skip'),
-  "limit": zod.coerce.number().min(1).max(getGuaranteesQueryLimitMax).describe('Maximum number of records to return'),
-  "deletedAt": zod.union([zod.iso.datetime({}),zod.null()]).optional().describe('Optional date input, usually null'),
-  "title": zod.union([zod.coerce.string().max(getGuaranteesQueryTitleMaxOne),zod.null()]).optional().describe('Filter by guarantee title'),
-  "providerName": zod.union([zod.coerce.string().max(getGuaranteesQueryProviderNameMaxOne),zod.null()]).optional().describe('Filter by provider name'),
-  "providerCode": zod.union([zod.coerce.string().max(getGuaranteesQueryProviderCodeMaxOne),zod.null()]).optional().describe('Filter by provider code'),
-  "isActive": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Filter by active status'),
-  "isInternational": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Filter by international status')
-})
+  skip: zod.coerce
+    .number()
+    .min(getGuaranteesQuerySkipMin)
+    .describe("Number of records to skip"),
+  limit: zod.coerce
+    .number()
+    .min(1)
+    .max(getGuaranteesQueryLimitMax)
+    .describe("Maximum number of records to return"),
+  deletedAt: zod
+    .union([zod.iso.datetime({}), zod.null()])
+    .optional()
+    .describe("Optional date input, usually null"),
+  title: zod
+    .union([zod.coerce.string().max(getGuaranteesQueryTitleMaxOne), zod.null()])
+    .optional()
+    .describe("Filter by guarantee title"),
+  providerName: zod
+    .union([
+      zod.coerce.string().max(getGuaranteesQueryProviderNameMaxOne),
+      zod.null(),
+    ])
+    .optional()
+    .describe("Filter by provider name"),
+  providerCode: zod
+    .union([
+      zod.coerce.string().max(getGuaranteesQueryProviderCodeMaxOne),
+      zod.null(),
+    ])
+    .optional()
+    .describe("Filter by provider code"),
+  isActive: zod
+    .union([zod.coerce.boolean(), zod.null()])
+    .optional()
+    .describe("Filter by active status"),
+  isInternational: zod
+    .union([zod.coerce.boolean(), zod.null()])
+    .optional()
+    .describe("Filter by international status"),
+});
 
-export const getGuaranteesResponse = zod.object({
-  "success": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Operation status')
-}).describe('Standard API response format').describe('Paginated list of guarantees')
+export const getGuaranteesResponse = zod
+  .object({
+    success: zod
+      .union([zod.coerce.boolean(), zod.null()])
+      .optional()
+      .describe("Operation status"),
+  })
+  .describe("Standard API response format")
+  .describe("Paginated list of guarantees");
 
 export const getGuaranteesIdParams = zod.object({
-  "id": zod.uuid().describe('Guarantee ID')
-})
+  id: zod.uuid().describe("Guarantee ID"),
+});
 
-export const getGuaranteesIdResponse = zod.object({
-  "success": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Operation status')
-}).describe('Standard API response format').describe('Response for single guarantee operations')
+export const getGuaranteesIdResponse = zod
+  .object({
+    success: zod
+      .union([zod.coerce.boolean(), zod.null()])
+      .optional()
+      .describe("Operation status"),
+  })
+  .describe("Standard API response format")
+  .describe("Response for single guarantee operations");
 
 export const patchGuaranteesIdParams = zod.object({
-  "id": zod.uuid().describe('Guarantee ID')
-})
+  id: zod.uuid().describe("Guarantee ID"),
+});
 
 export const patchGuaranteesIdBodyTitleMin = 2;
 
@@ -91,35 +205,116 @@ export const patchGuaranteesIdBodyProviderAddressMaxOne = 50;
 export const patchGuaranteesIdBodyProviderPhoneMaxOne = 50;
 export const patchGuaranteesIdBodyProviderCodeMaxOne = 50;
 export const patchGuaranteesIdBodyTermsUrlMaxOne = 1000;
-export const patchGuaranteesIdBodyIsInternationalDefault = false;export const patchGuaranteesIdBodyClaimProcessMaxOne = 50;
-export const patchGuaranteesIdBodyIsActiveDefault = true;export const patchGuaranteesIdBodySortOrderDefault = 0;export const patchGuaranteesIdBodySepidarGuaranteeIdMaxOne = 50;
+export const patchGuaranteesIdBodyIsInternationalDefault = false;
+export const patchGuaranteesIdBodyClaimProcessMaxOne = 50;
+export const patchGuaranteesIdBodyIsActiveDefault = true;
+export const patchGuaranteesIdBodySortOrderDefault = 0;
+export const patchGuaranteesIdBodySepidarGuaranteeIdMaxOne = 50;
 export const patchGuaranteesIdBodyIsRegisteredWithTaxDefault = false;
 
-export const patchGuaranteesIdBody = zod.object({
-  "title": zod.coerce.string().min(patchGuaranteesIdBodyTitleMin).max(patchGuaranteesIdBodyTitleMax).optional().describe('Guarantee title displayed to customer'),
-  "start": zod.union([zod.iso.datetime({}),zod.null()]).optional().describe('Start date of guarantee validity'),
-  "months": zod.union([zod.coerce.number(),zod.null()]).optional().describe('Duration in months (optional — use with days)'),
-  "days": zod.union([zod.coerce.number(),zod.null()]).optional().describe('Duration in days (optional — use with months)'),
-  "logo": zod.union([zod.url().max(patchGuaranteesIdBodyLogoMaxOne),zod.null()]).optional().describe('Logo URL of guarantee provider'),
-  "providerName": zod.union([zod.coerce.string().max(patchGuaranteesIdBodyProviderNameMaxOne),zod.null()]).optional().describe('Name of warranty provider'),
-  "providerAddress": zod.union([zod.coerce.string().max(patchGuaranteesIdBodyProviderAddressMaxOne),zod.null()]).optional().describe('Physical address of provider'),
-  "providerPhone": zod.union([zod.coerce.string().max(patchGuaranteesIdBodyProviderPhoneMaxOne),zod.null()]).optional().describe('Contact phone of provider'),
-  "providerCode": zod.union([zod.coerce.string().max(patchGuaranteesIdBodyProviderCodeMaxOne),zod.null()]).optional().describe('Internal provider code'),
-  "termsUrl": zod.union([zod.url().max(patchGuaranteesIdBodyTermsUrlMaxOne),zod.null()]).optional().describe('URL to full terms and conditions'),
-  "isInternational": zod.coerce.boolean().optional().describe('Can be claimed internationally?'),
-  "claimProcess": zod.union([zod.coerce.string().max(patchGuaranteesIdBodyClaimProcessMaxOne),zod.null()]).optional().describe('How to claim this guarantee'),
-  "responseTime": zod.union([zod.coerce.number(),zod.null()]).optional().describe('Max days to respond to claim'),
-  "isActive": zod.coerce.boolean().default(patchGuaranteesIdBodyIsActiveDefault).describe('Is this guarantee active for new sales?'),
-  "sortOrder": zod.coerce.number().optional().describe('Display order priority'),
-  "sepidarGuaranteeId": zod.union([zod.coerce.string().max(patchGuaranteesIdBodySepidarGuaranteeIdMaxOne),zod.null()]).optional().describe('Sepidar system reference ID'),
-  "isRegisteredWithTax": zod.coerce.boolean().optional().describe('Is this guarantee registered with tax authority?')
-}).describe('Product warranty/guarantee entity')
+export const patchGuaranteesIdBody = zod
+  .object({
+    title: zod.coerce
+      .string()
+      .min(patchGuaranteesIdBodyTitleMin)
+      .max(patchGuaranteesIdBodyTitleMax)
+      .optional()
+      .describe("Guarantee title displayed to customer"),
+    start: zod
+      .union([zod.iso.datetime({}), zod.null()])
+      .optional()
+      .describe("Start date of guarantee validity"),
+    months: zod
+      .union([zod.coerce.number(), zod.null()])
+      .optional()
+      .describe("Duration in months (optional — use with days)"),
+    days: zod
+      .union([zod.coerce.number(), zod.null()])
+      .optional()
+      .describe("Duration in days (optional — use with months)"),
+    logo: zod
+      .union([zod.url().max(patchGuaranteesIdBodyLogoMaxOne), zod.null()])
+      .optional()
+      .describe("Logo URL of guarantee provider"),
+    providerName: zod
+      .union([
+        zod.coerce.string().max(patchGuaranteesIdBodyProviderNameMaxOne),
+        zod.null(),
+      ])
+      .optional()
+      .describe("Name of warranty provider"),
+    providerAddress: zod
+      .union([
+        zod.coerce.string().max(patchGuaranteesIdBodyProviderAddressMaxOne),
+        zod.null(),
+      ])
+      .optional()
+      .describe("Physical address of provider"),
+    providerPhone: zod
+      .union([
+        zod.coerce.string().max(patchGuaranteesIdBodyProviderPhoneMaxOne),
+        zod.null(),
+      ])
+      .optional()
+      .describe("Contact phone of provider"),
+    providerCode: zod
+      .union([
+        zod.coerce.string().max(patchGuaranteesIdBodyProviderCodeMaxOne),
+        zod.null(),
+      ])
+      .optional()
+      .describe("Internal provider code"),
+    termsUrl: zod
+      .union([zod.url().max(patchGuaranteesIdBodyTermsUrlMaxOne), zod.null()])
+      .optional()
+      .describe("URL to full terms and conditions"),
+    isInternational: zod.coerce
+      .boolean()
+      .optional()
+      .describe("Can be claimed internationally?"),
+    claimProcess: zod
+      .union([
+        zod.coerce.string().max(patchGuaranteesIdBodyClaimProcessMaxOne),
+        zod.null(),
+      ])
+      .optional()
+      .describe("How to claim this guarantee"),
+    responseTime: zod
+      .union([zod.coerce.number(), zod.null()])
+      .optional()
+      .describe("Max days to respond to claim"),
+    isActive: zod.coerce
+      .boolean()
+      .default(patchGuaranteesIdBodyIsActiveDefault)
+      .describe("Is this guarantee active for new sales?"),
+    sortOrder: zod.coerce
+      .number()
+      .optional()
+      .describe("Display order priority"),
+    sepidarGuaranteeId: zod
+      .union([
+        zod.coerce.string().max(patchGuaranteesIdBodySepidarGuaranteeIdMaxOne),
+        zod.null(),
+      ])
+      .optional()
+      .describe("Sepidar system reference ID"),
+    isRegisteredWithTax: zod.coerce
+      .boolean()
+      .optional()
+      .describe("Is this guarantee registered with tax authority?"),
+  })
+  .describe("Product warranty/guarantee entity");
 
-export const patchGuaranteesIdResponse = zod.object({
-  "success": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Operation status')
-}).describe('Standard API response format').describe('Response for single guarantee operations')
+export const patchGuaranteesIdResponse = zod
+  .object({
+    success: zod
+      .union([zod.coerce.boolean(), zod.null()])
+      .optional()
+      .describe("Operation status"),
+  })
+  .describe("Standard API response format")
+  .describe("Response for single guarantee operations");
 
 export const deleteGuaranteesIdParams = zod.object({
-  "id": zod.uuid().describe('Guarantee ID')
-})
-
+  id: zod.uuid().describe("Guarantee ID"),
+});

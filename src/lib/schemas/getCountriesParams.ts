@@ -6,27 +6,27 @@
  */
 
 export type GetCountriesParams = {
-/**
- * Number of records to skip
- * @minimum 0
- */
-skip: number;
-/**
- * Maximum number of records to return
- * @minimum 1
- * @maximum 20
- */
-limit: number;
-/**
- * Filter by country name
- */
-name?: string | null;
-/**
- * Filter by ISO country code
- */
-isoCode?: string | null;
-/**
- * Filter by phone code
- */
-phoneCode?: string | null;
+  /**
+   * Number of records to skip
+   * @minimum 0
+   */
+  skip: number;
+  /**
+   * Maximum number of records to return
+   * @minimum 1
+   * @maximum 20
+   */
+  limit: number;
+  /**
+   * Filter by country name
+   */
+  name?: string | null;
+  /**
+   * Filter by ISO country code
+   */
+  isoCode?: string | null;
+  /**
+   * Filter by phone code
+   */
+  phoneCode?: string | null;
 };

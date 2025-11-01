@@ -4,47 +4,63 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import {
-  z as zod
-} from 'zod';
-
+import { z as zod } from "zod";
 
 /**
  * Send a new otp request
  */
-export const postAuthOtpBodyPhoneRegExp = new RegExp('^09\\d{9}$');
-
+export const postAuthOtpBodyPhoneRegExp = new RegExp("^09\\d{9}$");
 
 export const postAuthOtpBody = zod.object({
-  "phone": zod.coerce.string().regex(postAuthOtpBodyPhoneRegExp).describe('Phone number for sending otp to')
-})
+  phone: zod.coerce
+    .string()
+    .regex(postAuthOtpBodyPhoneRegExp)
+    .describe("Phone number for sending otp to"),
+});
 
 /**
  * login request
  */
-export const postAuthLoginBodyPhoneRegExp = new RegExp('^09\\d{9}$');
+export const postAuthLoginBodyPhoneRegExp = new RegExp("^09\\d{9}$");
 export const postAuthLoginBodyOtpMin = 6;
 
 export const postAuthLoginBodyOtpMax = 6;
 
-
 export const postAuthLoginBody = zod.object({
-  "phone": zod.coerce.string().regex(postAuthLoginBodyPhoneRegExp).describe('Phone number for sending otp to'),
-  "otp": zod.coerce.string().min(postAuthLoginBodyOtpMin).max(postAuthLoginBodyOtpMax).describe('One-time password')
-})
+  phone: zod.coerce
+    .string()
+    .regex(postAuthLoginBodyPhoneRegExp)
+    .describe("Phone number for sending otp to"),
+  otp: zod.coerce
+    .string()
+    .min(postAuthLoginBodyOtpMin)
+    .max(postAuthLoginBodyOtpMax)
+    .describe("One-time password"),
+});
 
-export const postAuthLoginResponse = zod.object({
-  "success": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Operation status')
-}).describe('Standard API response format').describe('login response schema')
+export const postAuthLoginResponse = zod
+  .object({
+    success: zod
+      .union([zod.coerce.boolean(), zod.null()])
+      .optional()
+      .describe("Operation status"),
+  })
+  .describe("Standard API response format")
+  .describe("login response schema");
 
 /**
  * refresh token
  */
 export const postAuthRefreshBody = zod.object({
-  "refreshToken": zod.coerce.string().min(1).describe('Refresh token')
-})
+  refreshToken: zod.coerce.string().min(1).describe("Refresh token"),
+});
 
-export const postAuthRefreshResponse = zod.object({
-  "success": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Operation status')
-}).describe('Standard API response format').describe('Refresh token response schema')
-
+export const postAuthRefreshResponse = zod
+  .object({
+    success: zod
+      .union([zod.coerce.boolean(), zod.null()])
+      .optional()
+      .describe("Operation status"),
+  })
+  .describe("Standard API response format")
+  .describe("Refresh token response schema");

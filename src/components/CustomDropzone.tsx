@@ -10,7 +10,7 @@ import { cn } from "./lib/utils";
 interface CustomDropzoneProps {
   onUpload?: (
     file: FileWithPreview,
-    onProgress: (p: number) => void
+    onProgress: (p: number) => void,
   ) => Promise<void>;
   onDeleteFile?: (file: FileWithPreview) => void;
   onAbortUpload?: (file: FileWithPreview) => void;
@@ -163,7 +163,7 @@ export default function CustomDropzone({
                 "p-1 rounded",
                 currentFile.isCover
                   ? "bg-green-600 text-white"
-                  : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                  : "bg-gray-200 text-gray-700 hover:bg-gray-300",
               )}
               title="انتخاب به عنوان کاور"
             >

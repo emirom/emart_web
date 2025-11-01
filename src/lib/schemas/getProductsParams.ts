@@ -6,43 +6,43 @@
  */
 
 export type GetProductsParams = {
-/**
- * Number of records to skip
- * @minimum 0
- */
-skip: number;
-/**
- * Maximum number of records to return
- * @minimum 1
- * @maximum 20
- */
-limit: number;
-/**
- * Optional date input, usually null
- */
-deletedAt?: string | null;
-/**
- * Filter products by name (partial match)
- */
-name?: string | null;
-/**
- * Filter products by name (partial match)
- */
-enName?: string | null;
-/**
- * Filter products by category ID
- */
-categoryId?: string | null;
-/**
- * Brand ID (optional)
- */
-brandId?: string | null;
-/**
- * Filter products by active status
- */
-isActive?: boolean | null;
-/**
- * Filter products by associated labels (array of UUIDs)
- */
-labels?: string[];
+  /**
+   * Number of records to skip
+   * @minimum 0
+   */
+  skip: number;
+  /**
+   * Maximum number of records to return
+   * @minimum 1
+   * @maximum 20
+   */
+  limit: number;
+  /**
+   * Optional date input, usually null
+   */
+  deletedAt?: string | null;
+  /**
+   * Filter products by name (partial match)
+   */
+  name?: string | null;
+  /**
+   * Filter products by name (partial match)
+   */
+  enName?: string | null;
+  /**
+   * Filter products by category ID
+   */
+  categoryId?: string | null;
+  /**
+   * Brand ID (optional)
+   */
+  brandId?: string | null;
+  /**
+   * Filter products by active status
+   */
+  isActive?: boolean | null;
+  /**
+   * Filter products by associated labels (array of UUIDs)
+   */
+  labels?: string[];
 };

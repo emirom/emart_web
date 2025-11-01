@@ -59,7 +59,7 @@ function FormAutocomplete<
   useEffect(() => {
     if (value && options.length > 0) {
       const selectedOption = options.find(
-        (option) => getOptionValue(option) === value
+        (option) => getOptionValue(option) === value,
       );
       setInputValue(selectedOption ? getOptionLabel(selectedOption) : "");
     } else {
@@ -111,7 +111,7 @@ function FormAutocomplete<
         {isOpen && (
           <ul
             className={clsx(
-              "text-sm text-[#0F4275] rounded-[7px] absolute w-full top-12 left-0 right-0 bg-white border border-gray-300 max-h-[400px] overflow-y-auto z-[100]"
+              "text-sm text-[#0F4275] rounded-[7px] absolute w-full top-12 left-0 right-0 bg-white border border-gray-300 max-h-[400px] overflow-y-auto z-[100]",
             )}
           >
             <li

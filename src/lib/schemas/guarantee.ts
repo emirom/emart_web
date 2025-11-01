@@ -4,19 +4,19 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { GuaranteeDeletedAt } from './guaranteeDeletedAt';
-import type { GuaranteeStart } from './guaranteeStart';
-import type { GuaranteeMonths } from './guaranteeMonths';
-import type { GuaranteeDays } from './guaranteeDays';
-import type { GuaranteeLogo } from './guaranteeLogo';
-import type { GuaranteeProviderName } from './guaranteeProviderName';
-import type { GuaranteeProviderAddress } from './guaranteeProviderAddress';
-import type { GuaranteeProviderPhone } from './guaranteeProviderPhone';
-import type { GuaranteeProviderCode } from './guaranteeProviderCode';
-import type { GuaranteeTermsUrl } from './guaranteeTermsUrl';
-import type { GuaranteeClaimProcess } from './guaranteeClaimProcess';
-import type { GuaranteeResponseTime } from './guaranteeResponseTime';
-import type { GuaranteeSepidarGuaranteeId } from './guaranteeSepidarGuaranteeId';
+import type { GuaranteeDeletedAt } from "./guaranteeDeletedAt";
+import type { GuaranteeStart } from "./guaranteeStart";
+import type { GuaranteeMonths } from "./guaranteeMonths";
+import type { GuaranteeDays } from "./guaranteeDays";
+import type { GuaranteeLogo } from "./guaranteeLogo";
+import type { GuaranteeProviderName } from "./guaranteeProviderName";
+import type { GuaranteeProviderAddress } from "./guaranteeProviderAddress";
+import type { GuaranteeProviderPhone } from "./guaranteeProviderPhone";
+import type { GuaranteeProviderCode } from "./guaranteeProviderCode";
+import type { GuaranteeTermsUrl } from "./guaranteeTermsUrl";
+import type { GuaranteeClaimProcess } from "./guaranteeClaimProcess";
+import type { GuaranteeResponseTime } from "./guaranteeResponseTime";
+import type { GuaranteeSepidarGuaranteeId } from "./guaranteeSepidarGuaranteeId";
 
 /**
  * Product warranty/guarantee entity

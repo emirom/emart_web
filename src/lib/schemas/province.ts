@@ -4,7 +4,7 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { ProvinceAbb } from './provinceAbb';
+import type { ProvinceAbb } from "./provinceAbb";
 
 /**
  * Province entity with country relation

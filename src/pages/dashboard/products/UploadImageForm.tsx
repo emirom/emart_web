@@ -63,13 +63,13 @@ export default function UploadImageForm() {
       onSubmit={handleSubmit(onSubmit)}
       className={cn(
         "grid gap-4 p-4 bg-white rounded-xl shadow-sm",
-        "max-w-3xl mx-auto w-full"
+        "max-w-3xl mx-auto w-full",
       )}
     >
       <div
         className={cn(
           "flex flex-col gap-4",
-          "md:flex-row md:items-end md:justify-between"
+          "md:flex-row md:items-end md:justify-between",
         )}
       >
         <div className="flex-1">
@@ -79,7 +79,7 @@ export default function UploadImageForm() {
           <div
             className={cn(
               "border border-gray-200 rounded-lg p-3 text-[13px]",
-              "text-tint-blue-500 space-y-1 bg-gray-50"
+              "text-tint-blue-500 space-y-1 bg-gray-50",
             )}
           >
             <p className="font-medium">{currentFile?.path || "بدون نام"}</p>

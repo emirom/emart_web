@@ -18,7 +18,7 @@ export async function postProductImageAction(
     altText?: string | null;
     caption?: string | null;
     order?: number | null;
-  }
+  },
 ) {
   try {
     const formData = new FormData();

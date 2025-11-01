@@ -4,19 +4,21 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import {
-  z as zod
-} from 'zod';
-
+import { z as zod } from "zod";
 
 export const postUnitsBodyTitleMin = 2;
 
 export const postUnitsBodyTitleMax = 100;
 
-
-export const postUnitsBody = zod.object({
-  "title": zod.coerce.string().min(postUnitsBodyTitleMin).max(postUnitsBodyTitleMax).describe('Unit title/name for measurement categorization')
-}).describe('Payload for creating new measurement units')
+export const postUnitsBody = zod
+  .object({
+    title: zod.coerce
+      .string()
+      .min(postUnitsBodyTitleMin)
+      .max(postUnitsBodyTitleMax)
+      .describe("Unit title/name for measurement categorization"),
+  })
+  .describe("Payload for creating new measurement units");
 
 /**
  * Get all units with pagination and filtering
@@ -25,55 +27,94 @@ export const getUnitsQuerySkipMin = 0;
 export const getUnitsQueryLimitMax = 20;
 export const getUnitsQueryTitleMaxOne = 50;
 
-
 export const getUnitsQueryParams = zod.object({
-  "skip": zod.coerce.number().min(getUnitsQuerySkipMin).describe('Number of records to skip'),
-  "limit": zod.coerce.number().min(1).max(getUnitsQueryLimitMax).describe('Maximum number of records to return'),
-  "title": zod.union([zod.coerce.string().max(getUnitsQueryTitleMaxOne),zod.null()]).optional().describe('Filter units by title (partial match)')
-})
+  skip: zod.coerce
+    .number()
+    .min(getUnitsQuerySkipMin)
+    .describe("Number of records to skip"),
+  limit: zod.coerce
+    .number()
+    .min(1)
+    .max(getUnitsQueryLimitMax)
+    .describe("Maximum number of records to return"),
+  title: zod
+    .union([zod.coerce.string().max(getUnitsQueryTitleMaxOne), zod.null()])
+    .optional()
+    .describe("Filter units by title (partial match)"),
+});
 
-export const getUnitsResponse = zod.object({
-  "success": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Operation status')
-}).describe('Standard API response format')
+export const getUnitsResponse = zod
+  .object({
+    success: zod
+      .union([zod.coerce.boolean(), zod.null()])
+      .optional()
+      .describe("Operation status"),
+  })
+  .describe("Standard API response format");
 
 export const getUnitsIdParams = zod.object({
-  "id": zod.uuid().describe('Unique unit identifier (UUIDv4)')
-})
+  id: zod.uuid().describe("Unique unit identifier (UUIDv4)"),
+});
 
-export const getUnitsIdResponse = zod.object({
-  "success": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Operation status')
-}).describe('Standard API response format').describe('Response for single unit operations')
+export const getUnitsIdResponse = zod
+  .object({
+    success: zod
+      .union([zod.coerce.boolean(), zod.null()])
+      .optional()
+      .describe("Operation status"),
+  })
+  .describe("Standard API response format")
+  .describe("Response for single unit operations");
 
 export const patchUnitsIdParams = zod.object({
-  "id": zod.uuid().describe('Unique unit identifier (UUIDv4)')
-})
+  id: zod.uuid().describe("Unique unit identifier (UUIDv4)"),
+});
 
 export const patchUnitsIdBodyTitleMin = 2;
 
 export const patchUnitsIdBodyTitleMax = 100;
 
-
-export const patchUnitsIdBody = zod.object({
-  "title": zod.coerce.string().min(patchUnitsIdBodyTitleMin).max(patchUnitsIdBodyTitleMax).optional().describe('Unit title/name for measurement categorization')
-}).describe('Payload for updating unit details')
+export const patchUnitsIdBody = zod
+  .object({
+    title: zod.coerce
+      .string()
+      .min(patchUnitsIdBodyTitleMin)
+      .max(patchUnitsIdBodyTitleMax)
+      .optional()
+      .describe("Unit title/name for measurement categorization"),
+  })
+  .describe("Payload for updating unit details");
 
 export const patchUnitsIdResponseDataTitleMin = 2;
 
 export const patchUnitsIdResponseDataTitleMax = 100;
 
-
-export const patchUnitsIdResponse = zod.object({
-  "success": zod.coerce.boolean().describe('Operation status'),
-  "data": zod.object({
-  "id": zod.uuid().describe('Unique identifier (UUIDv4)'),
-  "createdAt": zod.iso.datetime({}).describe('Creation timestamp (ISO 8601)'),
-  "updatedAt": zod.iso.datetime({}).describe('Last update timestamp (ISO 8601)'),
-  "deletedAt": zod.union([zod.iso.datetime({}),zod.null()]).optional().describe('Deletion timestamp (ISO 8601) when soft deleted'),
-  "title": zod.coerce.string().min(patchUnitsIdResponseDataTitleMin).max(patchUnitsIdResponseDataTitleMax).describe('Unit title/name for measurement categorization')
-}).describe('Complete unit entity for product measurements')
-}).describe('Response format for unit update operations')
+export const patchUnitsIdResponse = zod
+  .object({
+    success: zod.coerce.boolean().describe("Operation status"),
+    data: zod
+      .object({
+        id: zod.uuid().describe("Unique identifier (UUIDv4)"),
+        createdAt: zod.iso
+          .datetime({})
+          .describe("Creation timestamp (ISO 8601)"),
+        updatedAt: zod.iso
+          .datetime({})
+          .describe("Last update timestamp (ISO 8601)"),
+        deletedAt: zod
+          .union([zod.iso.datetime({}), zod.null()])
+          .optional()
+          .describe("Deletion timestamp (ISO 8601) when soft deleted"),
+        title: zod.coerce
+          .string()
+          .min(patchUnitsIdResponseDataTitleMin)
+          .max(patchUnitsIdResponseDataTitleMax)
+          .describe("Unit title/name for measurement categorization"),
+      })
+      .describe("Complete unit entity for product measurements"),
+  })
+  .describe("Response format for unit update operations");
 
 export const deleteUnitsIdParams = zod.object({
-  "id": zod.uuid().describe('Unique unit identifier (UUIDv4)')
-})
-
+  id: zod.uuid().describe("Unique unit identifier (UUIDv4)"),
+});

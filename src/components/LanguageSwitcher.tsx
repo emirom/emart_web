@@ -19,7 +19,7 @@ export default function LanguageSwitcher() {
         const nextLocale = e.target.value;
 
         document.cookie = `${COOKIE_NAME}=${encodeURIComponent(
-          nextLocale
+          nextLocale,
         )}; Max-Age=${COOKIE_MAX_AGE}; Path=/; SameSite=Lax`;
 
         const nextHref = getPathname({

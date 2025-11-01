@@ -15,7 +15,7 @@ export const useAppStore = create<Store>()(
         ...createExampleSlice(...a),
         ...createLoginSlice(...a),
         ...createCategoryListSlice(...a),
-        ...createFileSlice(...a)
+        ...createFileSlice(...a),
       })),
       {
         name: "phone-store",

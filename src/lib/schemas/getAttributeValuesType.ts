@@ -5,13 +5,13 @@
  * OpenAPI spec version: 1.0.0
  */
 
-export type GetAttributeValuesType = typeof GetAttributeValuesType[keyof typeof GetAttributeValuesType];
-
+export type GetAttributeValuesType =
+  (typeof GetAttributeValuesType)[keyof typeof GetAttributeValuesType];
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const GetAttributeValuesType = {
-  text: 'text',
-  number: 'number',
-  boolean: 'boolean',
-  date: 'date',
+  text: "text",
+  number: "number",
+  boolean: "boolean",
+  date: "date",
 } as const;

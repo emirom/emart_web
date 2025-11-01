@@ -37,7 +37,7 @@ export function FormTextareaField<T extends FieldValues>({
                 className={cn(
                   "text-xs ",
                   `${fieldState?.error && "border-destructive ring-destructive"}`,
-                  className
+                  className,
                 )}
               />
             </div>
