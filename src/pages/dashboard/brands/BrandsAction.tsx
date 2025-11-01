@@ -24,7 +24,7 @@ export default function BrandsAction({ id }: { id: string }) {
   };
 
   return (
-    <div className="flex gap-1 items-center justify-center w-full">
+    <div className="flex  items-center justify-center w-full">
       <AlertDialogModal
         alertTitle="آیا از حذف این برند اطمینان دارید؟"
         button={<DeleteButton />}

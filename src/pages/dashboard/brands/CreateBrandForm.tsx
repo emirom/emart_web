@@ -63,8 +63,8 @@ export default function CreateBrandForm() {
           label="وب سایت"
           placeholder="www."
         />
-        <SubmitButton disabled={!formState.isDirty} />
       </div>
+      <SubmitButton className="w-full grow" disabled={!formState.isDirty} />
     </form>
   );
 }

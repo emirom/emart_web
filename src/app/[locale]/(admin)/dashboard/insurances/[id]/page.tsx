@@ -19,8 +19,10 @@ export default function Page() {
   const router = useRouter();
   const params = useParams();
   const id = params?.id as string;
+  const { data: insurance } = useGetInsurancesId(id, {
+    query: { queryKey: ["/insurances", id] },
+  });
 
-  const { data: insurance } = useGetInsurancesId(id);
   useEffect(() => {
     if (insurance?.data) {
       reset({ ...insurance?.data });

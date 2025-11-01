@@ -96,7 +96,7 @@ export default function GuaranteeTable({
   const title = searchParams?.get("search") ?? initialQuery?.title;
   const { data: guarantees } = useGetGuarantees({
     skip: page * 10,
-    limit: 3,
+    limit: 10,
     title,
   });
   return (

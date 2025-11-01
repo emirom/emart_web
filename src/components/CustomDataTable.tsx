@@ -83,7 +83,7 @@ export function CustomDataTable<TData>({
   return (
     <div className="w-full border border-gray-300 rounded-lg p-2">
       {title && (
-        <h2 className="text-xs text-tint-blue-500 font-semibold my-4">
+        <h2 className="text-xs text-tint-blue-500 font-semibold my-1">
           {title}
         </h2>
       )}

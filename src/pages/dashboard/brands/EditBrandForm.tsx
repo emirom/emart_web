@@ -15,7 +15,9 @@ export default function EditBrandForm({ id }: { id: string }) {
   const { handleSubmit, control, formState, reset } = useForm<UpdateBrandInput>(
     { defaultValues: { isActive: false } },
   );
-  const { data: brand } = useGetBrandsId(id);
+  const { data: brand } = useGetBrandsId(id, {
+    query: { queryKey: ["/brands", id] },
+  });
   useEffect(() => {
     reset({ ...brand?.data });
   }, [brand, reset]);
@@ -68,8 +70,8 @@ export default function EditBrandForm({ id }: { id: string }) {
           label="وب سایت"
           placeholder="www."
         />
-        <SubmitButton disabled={!formState.isDirty} />
       </div>
+      <SubmitButton className="w-full" disabled={!formState.isDirty} />
     </form>
   );
 }

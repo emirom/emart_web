@@ -30,7 +30,9 @@ export default function EditCategory({ id }: { id: string }) {
   });
   const { data: categories } = useGetCategories({ skip: 0, limit: 10 });
   const { data: units } = useGetUnits({ skip: 0, limit: 10 });
-  const { data: category } = useGetCategoriesId(id);
+  const { data: category } = useGetCategoriesId(id, {
+    query: { queryKey: ["/categories", id] },
+  });
   useEffect(() => {
     reset({ ...category?.data });
   }, [category, reset]);

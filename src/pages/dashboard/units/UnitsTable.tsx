@@ -23,7 +23,6 @@ export default function UnitsTable({
   const title = searchParams?.get("search") ?? initialQuery?.title;
 
   const columns: ColumnDef<Unit>[] = [
-    { accessorKey: "id", header: "#" },
     { accessorKey: "title", header: "نام‌کمیت" },
     {
       accessorKey: "action",

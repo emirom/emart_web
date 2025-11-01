@@ -7,7 +7,7 @@ import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "برندها",
+  title: { absolute: "برندها" },
   description: "برندهای محصول",
 };
 

@@ -3,7 +3,21 @@ import EditCategory from "@/pages/dashboard/category/EditCategory";
 import EditPreviewList from "@/pages/dashboard/category/EditPreviewList";
 import { HeaderWithLink } from "@components/HeaderWithLink";
 import { queryClient } from "@lib/apis/queryClient";
+import { getCategoriesId } from "@lib/services/categories/categories";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ categoryId: string }>;
+}) {
+  const { categoryId } = await params;
+  const { data } = await getCategoriesId(categoryId);
+  return {
+    title: `ویرایش دسته ${data.name}`,
+    description: `ویرایش دسته ${data.name}`,
+  };
+}
 
 export default async function Page({
   params,

@@ -35,10 +35,10 @@ export default async function Page({
     <HydrationBoundary state={dehydrate(queryClient)}>
       <header
         className="flex flex-col sm:flex-row sm:items-center sm:justify-between w-full mb-6 border-b border-gray-200 pb-3"
-        aria-label="افزودن گارانتی"
+        aria-label="ویرایش گارانتی"
       >
         <h1 className="text-sm font-bold text-tint-blue-600 tracking-tight">
-          افزودن گارانتی
+          ویرایش گارانتی
         </h1>
 
         <Link

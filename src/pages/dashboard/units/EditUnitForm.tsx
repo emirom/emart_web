@@ -9,9 +9,11 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
 export default function EditAttributeForm({ id }: { id: string }) {
+  const { data: unit } = useGetUnitsId(id, {
+    query: { queryKey: ["/units", id] },
+  });
   const { handleSubmit, control, formState, reset } =
     useForm<UpdateUnitInput>();
-  const { data: unit } = useGetUnitsId(id);
   useEffect(() => {
     reset({ ...unit?.data });
   }, [unit, reset]);

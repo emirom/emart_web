@@ -7,7 +7,7 @@ import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "ضمانت نامه ",
+  title: { absolute: "ضمانت نامه " },
   description: "ضمانت نامه",
 };
 export default async function Page({
@@ -25,14 +25,14 @@ export default async function Page({
       "/guarantees",
       {
         skip: initialQuery.page * 10,
-        limit: 3,
+        limit: 10,
         title: initialQuery.title,
       },
     ],
     queryFn: () =>
       getGuarantees({
         skip: initialQuery.page * 10,
-        limit: 3,
+        limit: 10,
         title: initialQuery.title,
       }),
   });

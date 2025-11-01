@@ -8,6 +8,7 @@ import {
   Package,
   PackageSearch,
   PaintBucket,
+  Scale,
   Settings,
   ShieldCheck,
   Tags,
@@ -28,6 +29,7 @@ export default function DashboardSidebar() {
     { href: "/dashboard/colors", label: "رنگ‌ها", icon: PaintBucket },
     { href: "/dashboard/attributes", label: "ویژگی‌ها", icon: LandPlot },
     { href: "/dashboard/labels", label: "برچسب‌ها", icon: Tags },
+    { href: "/dashboard/units", label: "کمیت ها", icon: Scale },
     { href: "/dashboard/brands", label: "برندها", icon: Flag },
     { href: "/dashboard/guarantees", label: "گارانتی ها", icon: ShieldCheck },
     { href: "/dashboard/insurances", label: "بیمه ها", icon: Umbrella },
@@ -72,7 +74,7 @@ export default function DashboardSidebar() {
                   )}
                   aria-hidden="true"
                 />
-                <span>{label}</span>
+                <>{label}</>
               </Link>
             </li>
           );

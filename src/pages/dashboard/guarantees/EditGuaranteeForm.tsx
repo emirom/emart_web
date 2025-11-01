@@ -16,7 +16,9 @@ export default function EditGuaranteeForm({ id }: { id: string }) {
     useForm<UpdateGuaranteeInput>();
   const router = useRouter();
 
-  const { data: guarantee } = useGetGuaranteesId(id);
+  const { data: guarantee } = useGetGuaranteesId(id, {
+    query: { queryKey: ["/guarantees", id] },
+  });
   useEffect(() => {
     if (guarantee) {
       reset({ ...guarantee.data });
