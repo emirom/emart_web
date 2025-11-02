@@ -12,6 +12,7 @@ export default async function mainLayout({
       <MainHeader />
       <main>{children}</main>
       <MainFooter />
+      <div id="portal-button"></div>
     </>
   );
 }

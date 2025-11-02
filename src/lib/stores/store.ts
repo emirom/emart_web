@@ -7,6 +7,7 @@ import { createCategoryListSlice } from "./category-attr-slice";
 import { createExampleSlice } from "./example-slice";
 import { createLoginSlice } from "./login-slice";
 import { createFileSlice } from "./product-file-slice";
+import { createStepperSlice } from "./stepper-slice";
 
 export const useAppStore = create<Store>()(
   devtools(
@@ -16,13 +17,18 @@ export const useAppStore = create<Store>()(
         ...createLoginSlice(...a),
         ...createCategoryListSlice(...a),
         ...createFileSlice(...a),
+        ...createStepperSlice(...a),
       })),
       {
         name: "phone-store",
-        partialize: (state) => ({ phone: state.phone }),
+        partialize: (state) => ({
+          phone: state.phone,
+          currentStep: state.currentStep,
+        }),
       },
     ),
     { name: "app-store-devtools" },
   ),
 );
+
 export const useFileStore = () => useAppStore((state) => state);
