@@ -1,6 +1,6 @@
 import { MapPin, Truck, TruckIcon } from "lucide-react";
 import { ReactNode } from "react";
-import { v4 as uuidV4 } from "uuid";
+
 export interface DeliveryOption {
   id: string;
   title: string;
@@ -11,7 +11,7 @@ export interface DeliveryOption {
 
 export const DELIVERY_OPTIONS: DeliveryOption[] = [
   {
-    id: uuidV4(),
+    id: "express",
     title: "پست پیشتاز",
     description: [
       "تحویل سریع‌تر نسبت به پست عادی با هزینه بیشتر",
@@ -22,7 +22,7 @@ export const DELIVERY_OPTIONS: DeliveryOption[] = [
     icon: <Truck className="w-[10.3125rem] h-30 text-green-400 opacity-50" />,
   },
   {
-    id: uuidV4(),
+    id: "regular",
     title: "پست عادی",
     description: [
       "ارسال مقرون‌به‌صرفه با زمان تحویل طولانی‌تر",
@@ -35,7 +35,7 @@ export const DELIVERY_OPTIONS: DeliveryOption[] = [
     ),
   },
   {
-    id: uuidV4(),
+    id: "tipax",
     title: "پست تیپاکس",
     description: [
       "ارسال سریع و مطمئن با امکان تحویل درب منزل",
@@ -48,7 +48,7 @@ export const DELIVERY_OPTIONS: DeliveryOption[] = [
     ),
   },
   {
-    id: uuidV4(),
+    id: "in-person",
     title: "مراجعه حضوری",
     description: ["مراجعه حضوری جهت تحویل کالا (به‌جز روزهای تعطیل)"],
     price: "بدون هزینه",
