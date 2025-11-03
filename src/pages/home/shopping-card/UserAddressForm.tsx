@@ -4,6 +4,7 @@ import { FormInputField } from "@components/FormInputField";
 import { cn } from "@components/lib/utils";
 import { Button } from "@components/ui/button";
 import { useGetProvinces } from "@lib/services/provinces/provinces";
+import { useAppStore } from "@lib/stores/store";
 import { UserIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
 import ShoppingCardPortalButton from "./ShoppingCardPortalButton";
@@ -27,12 +28,13 @@ interface UserAddressFormValues {
 export default function UserAddressForm() {
   const { control, handleSubmit } = useForm<UserAddressFormValues>();
   const { data: provinces } = useGetProvinces({ skip: 0, limit: 20 });
+  const { changeStepperState } = useAppStore();
   const onSubmit = (data: UserAddressFormValues) => {
     console.log(data);
   };
   return (
     <>
-      <h2 className="text-orange-500 text-sm font-semibold mb-3 text-center">
+      <h2 className="text-orange-500 text-sm font-semibold my-3 text-center">
         ثبت آدرس جدید
       </h2>
       <form
@@ -74,7 +76,9 @@ export default function UserAddressForm() {
             <UserIcon className="w-4 h-4 text-tint-blue-500 " />
           </Button>
         </div>
-        <ShoppingCardPortalButton onClick={() => alert("hello wrold")} />
+        <ShoppingCardPortalButton
+          onClick={() => changeStepperState("receiverMethod")}
+        />
       </form>
     </>
   );
