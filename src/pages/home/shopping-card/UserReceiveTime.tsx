@@ -1,11 +1,14 @@
 "use client";
 
 import { cn } from "@components/lib/utils";
+import { useAppStore } from "@lib/stores/store";
 import { useState } from "react";
+import ShoppingCardPortalButton from "./ShoppingCardPortalButton";
 import UserReceptionTime from "./UserReceptionTime";
 
 export default function UserReceiveTime() {
   const [selected, setSelected] = useState<number>(0);
+  const { changeStepperState } = useAppStore();
   return (
     <>
       <h2 className="text-orange-500 text-base font-semibold mb-6 text-center">
@@ -40,6 +43,9 @@ export default function UserReceiveTime() {
           </label>
         ))}
         <UserReceptionTime />
+        <ShoppingCardPortalButton
+          onClick={() => changeStepperState("payment")}
+        />
       </form>
     </>
   );
