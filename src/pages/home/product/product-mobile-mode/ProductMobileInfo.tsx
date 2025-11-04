@@ -4,6 +4,7 @@ import CustomImage from "@components/CustomImage";
 import { cn } from "@components/lib/utils";
 import ProductColor from "../ProductColor";
 import ProductButtonAction from "./ProductButtonAction";
+import ProductMobileWarranty from "./ProductMobileWarranty";
 
 export default function ProductMobileInfo() {
   return (
@@ -70,6 +71,7 @@ export default function ProductMobileInfo() {
         </div>
       </div>
       <ProductColor />
+      <ProductMobileWarranty />
     </article>
   );
 }
