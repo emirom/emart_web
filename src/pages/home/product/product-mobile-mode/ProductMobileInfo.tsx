@@ -2,6 +2,7 @@
 
 import CustomImage from "@components/CustomImage";
 import { cn } from "@components/lib/utils";
+import ProductColor from "../ProductColor";
 import ProductButtonAction from "./ProductButtonAction";
 
 export default function ProductMobileInfo() {
@@ -51,7 +52,7 @@ export default function ProductMobileInfo() {
         </h1>
 
         <div
-          className="grid grid-cols-2 justify-between gap-1 items-center w-1/3 text-center"
+          className="grid grid-cols-2 justify-between gap-1 items-center w-1/4 text-center"
           aria-label="قیمت و تخفیف"
         >
           <span className=" bg-red-700 w-fit block p-1 px-2  text-white rounded-lg text-sm py-1  font-medium">
@@ -68,6 +69,7 @@ export default function ProductMobileInfo() {
           </span>
         </div>
       </div>
+      <ProductColor />
     </article>
   );
 }
