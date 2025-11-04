@@ -6,10 +6,12 @@ import { createPortal } from "react-dom";
 type Props = {
   onClick: () => void;
   label?: string;
+  className?: string;
 };
 export default function ShoppingCardPortalButton({
   onClick,
   label = "بررسی و ادامه",
+  className,
 }: Props) {
   const [container, setContainer] = useState<Element | null>(null);
 
@@ -27,10 +29,11 @@ export default function ShoppingCardPortalButton({
       className={cn(
         "mt-4 w-full rounded-xl py-4 text-center text-white text-sm font-semibold",
         "bg-[#CFCFCF] hover:bg-[#bdbdbd] transition-colors",
+        className
       )}
     >
       {label}
     </button>,
-    container,
+    container
   );
 }

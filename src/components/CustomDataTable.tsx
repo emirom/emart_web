@@ -46,7 +46,7 @@ export function CustomDataTable<TData>({
 }: CustomDataTableProps<TData>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    [],
+    []
   );
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
@@ -96,7 +96,7 @@ export function CustomDataTable<TData>({
               const value = event.target.value;
               filterColumn.setFilterValue(value);
               const params = new URLSearchParams(
-                searchParams ? Array.from(searchParams.entries()) : [],
+                searchParams ? Array.from(searchParams.entries()) : []
               );
               if (value) params.set("search", value);
               else params.delete("search");
@@ -118,7 +118,7 @@ export function CustomDataTable<TData>({
                       ? null
                       : flexRender(
                           header.column.columnDef.header,
-                          header.getContext(),
+                          header.getContext()
                         )}
                   </TableHead>
                 ))}
@@ -136,7 +136,7 @@ export function CustomDataTable<TData>({
                     <TableCell className="text-xs" key={cell.id}>
                       {flexRender(
                         cell.column.columnDef.cell,
-                        cell.getContext(),
+                        cell.getContext()
                       )}
                     </TableCell>
                   ))}
