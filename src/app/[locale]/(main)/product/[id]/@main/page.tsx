@@ -1,3 +1,4 @@
+import ProductMobileMode from "@/pages/home/product/product-mobile-mode/ProductMobileMode";
 import Container from "@components/Container";
 
 export default async function Page({
@@ -6,6 +7,10 @@ export default async function Page({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-
-  return <Container>this is page {id}</Container>;
+  console.log(id);
+  return (
+    <Container>
+      <ProductMobileMode />
+    </Container>
+  );
 }
