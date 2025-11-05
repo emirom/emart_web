@@ -1,0 +1,22 @@
+{
+  "Header": {
+    "welcome": "welcome"
+  },
+  "Home": {
+    "title": "best off",
+    "cta": "buy now"
+  },
+  "parentId": "father's group",
+  "categoryCountingUnit": "Counting unit",
+  "categoryFaName": "Persian name",
+  "categoryEnName": "English name",
+  "categoryIsActive": "Active",
+  "categoryParent": "Parent category",
+  "saveButtonTitle": "Save",
+  "attributeTitle": "Name",
+  "chooseCategoryLabel": "Choose category",
+  "parentIdTitle": "Parent category",
+  "attributeNameLabel": "Attribute name",
+  "attributeTitleLabel": "Attribute title",
+  "attributeValueLabel": "attribute Name"
+}
