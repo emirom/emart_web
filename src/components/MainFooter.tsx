@@ -20,7 +20,7 @@ export default function MainFooter() {
             اطلاعات و پیوندهای پایانی سایت
           </h2>
           <nav aria-label="پیوندهای فوتر">
-            <div className="grid w-full gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid w-full gap-4 grid-cols-2 sm:grid-cols-2 lg:grid-cols-3">
               {FOOTER_ITEMS.map((section) => (
                 <FooterSection key={section.id} section={section} />
               ))}

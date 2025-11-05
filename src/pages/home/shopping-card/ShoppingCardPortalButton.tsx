@@ -29,11 +29,11 @@ export default function ShoppingCardPortalButton({
       className={cn(
         "mt-4 w-full rounded-xl py-4 text-center text-white text-sm font-semibold",
         "bg-[#CFCFCF] hover:bg-[#bdbdbd] transition-colors",
-        className
+        className,
       )}
     >
       {label}
     </button>,
-    container
+    container,
   );
 }

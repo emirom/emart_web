@@ -29,7 +29,7 @@ export default function UserPaymentMethod() {
                   "border border-gray-500 font-bold bg-white text-tint-blue-500  px-10",
                   selected === indx
                     ? "bg-green-400 border-green-400 text-white"
-                    : ""
+                    : "",
                 )}
               >
                 انتخاب

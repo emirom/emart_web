@@ -23,7 +23,7 @@ export default function DeliveryOptionCard({
         "relative cursor-pointer flex flex-col justify-between border rounded-2xl py-2 p-5 transition-all shadow-sm",
         isActive
           ? "border-green-500 bg-green-50 shadow-md"
-          : "border-gray-200 bg-white hover:shadow-md"
+          : "border-gray-200 bg-white hover:shadow-md",
       )}
     >
       <div className="absolute left-6 top-6 opacity-25">{option.icon}</div>
@@ -32,7 +32,7 @@ export default function DeliveryOptionCard({
         <h3
           className={cn(
             "text-lg font-semibold text-right",
-            isActive ? "text-green-400" : "text-[#0F4275]"
+            isActive ? "text-green-400" : "text-[#0F4275]",
           )}
         >
           {option.title}
@@ -47,7 +47,7 @@ export default function DeliveryOptionCard({
               <span
                 className={cn(
                   "mt-1 w-1.5 h-1.5 rounded-full",
-                  isActive ? "bg-green-400" : "bg-[#0F4275]"
+                  isActive ? "bg-green-400" : "bg-[#0F4275]",
                 )}
               />
               <span>{desc}</span>
@@ -65,7 +65,7 @@ export default function DeliveryOptionCard({
             "px-6 py-2 rounded-lg font-semibold transition-colors",
             isActive
               ? "bg-green-400 hover:bg-green-600 text-white"
-              : "border-[#0F4275] text-[#0F4275] hover:bg-[#0F4275]/10"
+              : "border-[#0F4275] text-[#0F4275] hover:bg-[#0F4275]/10",
           )}
         >
           انتخاب
@@ -73,7 +73,7 @@ export default function DeliveryOptionCard({
         <p
           className={cn(
             "text-base font-medium",
-            isActive ? "text-green-500" : "text-[#0F4275]"
+            isActive ? "text-green-500" : "text-[#0F4275]",
           )}
         >
           {option.price}

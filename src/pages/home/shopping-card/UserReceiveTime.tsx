@@ -21,14 +21,14 @@ export default function UserReceiveTime() {
             htmlFor="card"
             className={cn(
               "bg-white rounded-lg border flex flex-col gap-3  shadow-md p-4 ",
-              selected === indx ? "border-green-400" : "border-gray-300"
+              selected === indx ? "border-green-400" : "border-gray-300",
             )}
             onClick={() => setSelected(indx)}
           >
             <span
               className={cn(
                 "text-white flex items-center justify-center py-2 rounded-lg font-bold",
-                selected === indx ? "bg-green-400" : " bg-tint-blue-500"
+                selected === indx ? "bg-green-400" : " bg-tint-blue-500",
               )}
             >
               شنبه

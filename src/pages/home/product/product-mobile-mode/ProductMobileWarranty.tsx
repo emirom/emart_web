@@ -22,7 +22,7 @@ export default function ProductMobileWarranty() {
     <section
       aria-labelledby="product-warranty-title"
       className={cn(
-        "flex items-stretch gap-3 mt-4 rounded-lg shadow-sm border border-gray-100 p-3"
+        "flex items-stretch gap-3 mt-4 rounded-lg shadow-sm border border-gray-100 p-3",
       )}
     >
       <div className="w-full flex flex-col justify-between gap-2">
