@@ -11,7 +11,7 @@ export default function ProductMobileInfo() {
     <article
       className={cn(
         "shadow-md rounded-lg p-3 my-4 transition-shadow hover:shadow-lg focus-within:shadow-lg outline-none",
-        "sm:hidden",
+        "sm:hidden"
       )}
       role="region"
       aria-label="اطلاعات محصول برای موبایل"
@@ -26,8 +26,8 @@ export default function ProductMobileInfo() {
 
         <figure className="relative flex-1">
           <CustomImage
-            className="w-full aspect-[3/2] object-contain rounded-md"
-            src="/images/product.png"
+            className="w-full h-auto aspect-[3/2] object-contain rounded-md"
+            src="/images/product.webp"
             alt="تصویر گوشی موبایل آیفون ۱۳ پرو مکس"
             sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 20vw"
             fill

@@ -1,4 +1,6 @@
 import ProductGuarantees from "../ProductGuarantees";
+import ProductReview from "../ProductReview";
+import MobileProductSpecifications from "./MobileProductSpecifications";
 import ProductMobileInfo from "./ProductMobileInfo";
 
 export default function ProductMobileMode() {
@@ -6,6 +8,8 @@ export default function ProductMobileMode() {
     <>
       <ProductMobileInfo />
       <ProductGuarantees />
+      <MobileProductSpecifications />
+      <ProductReview />
     </>
   );
 }
