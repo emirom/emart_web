@@ -26,7 +26,7 @@ export default function MobileProductSpecifications() {
       <div
         className={cn(
           "relative border border-tint-blue-500 rounded-lg shadow-sm bg-white p-3 transition-[height] duration-300 ease-in-out will-change-transform",
-          open ? "h-fit overflow-visible" : "h-[10vh] overflow-hidden"
+          open ? "h-fit overflow-visible" : "h-[10vh] overflow-hidden",
         )}
         id="product-specs-content"
       >

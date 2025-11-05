@@ -15,6 +15,11 @@ export default function DeliveryOptionCard({
   isActive,
   onSelect,
 }: DeliveryOptionCardProps) {
+  // Guard against undefined option during static generation
+  if (!option) {
+    return null; // or a loading/error state
+  }
+
   return (
     <label
       key={option.id}
@@ -39,7 +44,7 @@ export default function DeliveryOptionCard({
         </h3>
 
         <ul className="text-xs text-right leading-relaxed">
-          {option.description.map((desc, i) => (
+          {option.description?.map((desc, i) => (
             <li
               key={i}
               className="flex items-center grow justify-start gap-1 text-gray-700"
