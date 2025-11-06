@@ -1,3 +1,3 @@
-export default async function Page() {
-  return <>specification</>;
+export default function Page() {
+  return <>hello wrld</>;
 }
