@@ -29,8 +29,8 @@ export default function ProductReview() {
       aria-labelledby="product-review-title"
       role="region"
       tabIndex={0}
+      id="review"
     >
-      {/* عنوان اصلی بخش */}
       <h3
         id="product-review-title"
         className="text-sm font-medium text-tint-blue-500 mb-4"
@@ -38,7 +38,6 @@ export default function ProductReview() {
         نقد و بررسی محصول
       </h3>
 
-      {/* لیست بخش‌های نقد و بررسی */}
       {rawDataFromDb.map((section, index) => (
         <article
           key={index}
@@ -50,7 +49,6 @@ export default function ProductReview() {
         >
           {index === 0 ? (
             <>
-              {/* تصویر معرفی محصول */}
               <figure className="aspect-[10/7] w-full mb-3">
                 <CustomImage
                   src={section.image}
@@ -71,7 +69,6 @@ export default function ProductReview() {
                 {section.title}
               </h4>
 
-              {/* توضیحات */}
               <p className="text-sm text-tint-blue-500 text-justify leading-relaxed">
                 {section.description}
               </p>
@@ -88,7 +85,7 @@ export default function ProductReview() {
                   id={`review-section-${index}`}
                   className={cn(
                     "bg-sky-blue text-sm font-medium px-2 py-2 flex items-center justify-center w-fit text-tint-blue-500 rounded-lg ",
-                    index % 2 === 0 ? "self-start" : "self-end",
+                    index % 2 === 0 ? "self-start" : "self-end"
                   )}
                 >
                   {section.title}
@@ -107,7 +104,6 @@ export default function ProductReview() {
                 </figure>
               </div>
 
-              {/* ستون توضیحات */}
               <div className="w-2/3">
                 <p className="text-sm text-tint-blue-500 text-justify leading-relaxed">
                   {section.description}

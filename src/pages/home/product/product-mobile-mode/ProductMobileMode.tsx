@@ -1,11 +1,15 @@
+"use client";
+
 import ProductGuarantees from "../ProductGuarantees";
 import ProductReview from "../ProductReview";
 import MobileProductSpecifications from "./MobileProductSpecifications";
 import ProductMobileInfo from "./ProductMobileInfo";
+import ProductMobileTab from "./ProductMobileTab";
 
 export default function ProductMobileMode() {
   return (
     <>
+      <ProductMobileTab />
       <ProductMobileInfo />
       <ProductGuarantees />
       <MobileProductSpecifications />
