@@ -1,22 +1,24 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
+import Container from "@components/Container";
 import { useEffect, useState } from "react";
 
 export default function ProductMobileTab() {
-  const [showTabs, setShowTabs] = useState(false);
+  const [showTabs, setShowTabs] = useState(true);
+  const [tabActive, setTabActive] = useState<string>("");
 
   useEffect(() => {
     const handleScroll = () => {
-      setShowTabs(window.scrollY > 100);
+      setShowTabs(window.scrollY > 200);
     };
 
     handleScroll();
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const handleSmoothScroll = (id: string) => {
+    setTabActive(id);
     const element = document.querySelector(id);
     if (element) {
       element.scrollIntoView({
@@ -26,27 +28,41 @@ export default function ProductMobileTab() {
     }
   };
 
+  const tabs = [
+    { id: "#specification", label: "مشخصات محصول" },
+    { id: "#review", label: "نقد و بررسی" },
+    { id: "#comments", label: "نظرات کاربران" },
+  ];
+
   return (
-    <AnimatePresence>
+    <>
       {showTabs && (
-        <motion.div
-          initial={{ y: -80, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          exit={{ y: -80, opacity: 0 }}
-          transition={{ duration: 0.3 }}
-          className="fixed top-0 left-0 right-0 z-50 flex items-center justify-center gap-3 bg-tint-blue-100 p-4 text-xs font-medium text-tint-blue-500 rounded-bl-lg rounded-br-lg shadow-md lg:hidden"
+        <nav
+          aria-label="ناوبری بخش‌های محصول"
+          role="tablist"
+          className="fixed top-15 right-0 left-0 mx-auto z-50 lg:hidden"
         >
-          <button onClick={() => handleSmoothScroll("#specification")}>
-            مشخصات محصول
-          </button>
-          <button onClick={() => handleSmoothScroll("#review")}>
-            نقد و بررسی
-          </button>
-          <button onClick={() => handleSmoothScroll("#comments")}>
-            نظرات کاربران
-          </button>
-        </motion.div>
+          <Container className="flex items-center gap-3 bg-tint-blue-100 px-4 py-2 text-xs font-medium text-tint-blue-500 rounded-bl-lg rounded-br-lg shadow-md">
+            {tabs.map((tab) => (
+              <button
+                key={tab.id}
+                role="tab"
+                id={`tab-${tab.id.replace("#", "")}`}
+                aria-controls={tab.id.replace("#", "")}
+                aria-selected={tabActive === tab.id}
+                onClick={() => handleSmoothScroll(tab.id)}
+                className={`py-2 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-tint-blue-500 focus-visible:rounded-md ${
+                  tabActive === tab.id
+                    ? "text-tint-blue-700 border-b-[2px] border-tint-blue-500"
+                    : "text-tint-blue-500 border-b-0"
+                }`}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </Container>
+        </nav>
       )}
-    </AnimatePresence>
+    </>
   );
 }

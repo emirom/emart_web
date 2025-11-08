@@ -1,5 +1,6 @@
 "use client";
 
+import Comments from "../Comments";
 import ProductGuarantees from "../ProductGuarantees";
 import ProductReview from "../ProductReview";
 import MobileProductSpecifications from "./MobileProductSpecifications";
@@ -14,6 +15,7 @@ export default function ProductMobileMode() {
       <ProductGuarantees />
       <MobileProductSpecifications />
       <ProductReview />
+      <Comments />
     </>
   );
 }

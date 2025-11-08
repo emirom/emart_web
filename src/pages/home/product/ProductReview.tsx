@@ -85,7 +85,7 @@ export default function ProductReview() {
                   id={`review-section-${index}`}
                   className={cn(
                     "bg-sky-blue text-sm font-medium px-2 py-2 flex items-center justify-center w-fit text-tint-blue-500 rounded-lg ",
-                    index % 2 === 0 ? "self-start" : "self-end"
+                    index % 2 === 0 ? "self-start" : "self-end",
                   )}
                 >
                   {section.title}
