@@ -10,7 +10,7 @@ export default async function mainLayout({
   return (
     <>
       <MainHeader />
-      <main>{children}</main>
+      <main className="mt-13">{children}</main>
       <MainFooter />
       <div id="portal-button"></div>
     </>
