@@ -33,7 +33,7 @@ export default function StarRating({
       setRating(index);
       onChange?.(index);
     },
-    [onChange]
+    [onChange],
   );
 
   const handleKeyDown = useCallback(
@@ -51,7 +51,7 @@ export default function StarRating({
         handleClick(prev);
       }
     },
-    [handleClick, maxStars]
+    [handleClick, maxStars],
   );
 
   const handleTouch = useCallback(
@@ -64,7 +64,7 @@ export default function StarRating({
         setHovered(touchedIndex);
       }
     },
-    [maxStars]
+    [maxStars],
   );
 
   const handleTouchEnd = useCallback(() => {
@@ -100,7 +100,7 @@ export default function StarRating({
               "cursor-pointer transition-all duration-200 active:scale-95",
               isFilled
                 ? "fill-yellow-400 text-yellow-400"
-                : "text-gray-300 hover:text-yellow-300"
+                : "text-gray-300 hover:text-yellow-300",
             )}
             aria-hidden="true"
           />
@@ -115,7 +115,7 @@ export default function StarRating({
       aria-label={label}
       className={cn(
         "flex items-center justify-center gap-1 select-none",
-        className
+        className,
       )}
       onTouchStart={handleTouch}
       onTouchMove={handleTouch}
