@@ -40,7 +40,7 @@ export default function CommentsItem() {
                 <ThumbsDown
                   className={cn(
                     "transition-colors",
-                    dislike ? "text-tint-blue-500" : "text-gray-300"
+                    dislike ? "text-tint-blue-500" : "text-gray-300",
                   )}
                   width={16}
                   height={16}
@@ -61,7 +61,7 @@ export default function CommentsItem() {
                 <ThumbsUp
                   className={cn(
                     "transition-colors",
-                    like ? "text-tint-blue-500" : "text-gray-300"
+                    like ? "text-tint-blue-500" : "text-gray-300",
                   )}
                   width={16}
                   height={16}
