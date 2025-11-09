@@ -4,6 +4,7 @@ import { loginAction } from "@lib/actions/login-action";
 import { PostAuthLoginBody } from "@lib/schemas";
 import { useAppStore } from "@lib/stores/store";
 import { REGEXP_ONLY_DIGITS } from "input-otp";
+import { useEffect, useRef } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { FormErrorMessage } from "./FormErrorMessage";
@@ -16,6 +17,17 @@ export default function OtpStepForm() {
   const { phone, clearPhone } = useAppStore();
   const { control, handleSubmit, formState } =
     useForm<Omit<PostAuthLoginBody, "phone">>();
+
+  const inputOtpRef = useRef<HTMLInputElement | null>(null);
+
+  useEffect(() => {
+    // Focus on the InputOTP component when the component mounts
+    if (inputOtpRef.current) {
+      setTimeout(() => {
+        inputOtpRef.current?.focus();
+      }, 0);
+    }
+  }, []);
 
   const onSubmit = async (data: Omit<PostAuthLoginBody, "phone">) => {
     if (!phone) {
@@ -31,9 +43,9 @@ export default function OtpStepForm() {
       await loginAction(payload);
       toast.success("شماره موبایل شما با موفقیت ثبت شد");
       clearPhone();
-    } catch (err: unknown) {
+    } catch (err) {
       if (err instanceof Error) {
-        // toast.error(err.message);
+        toast.error(err.message);
       } else {
         toast.error("خطایی رخ داده است");
       }
@@ -73,36 +85,39 @@ export default function OtpStepForm() {
             },
           }}
           render={({ field }) => (
-            <InputOTP
-              id="otp"
-              inputMode="numeric"
-              autoComplete="one-time-code"
-              aria-label="کد پیامکی ۶ رقمی"
-              aria-required="true"
-              aria-invalid={!!formState.errors.otp}
-              aria-describedby={formState.errors.otp ? "otp-error" : ""}
-              dir="ltr"
-              maxLength={6}
-              pattern={REGEXP_ONLY_DIGITS}
-              className="w-full flex justify-center"
-              value={field.value}
-              onChange={field.onChange}
-            >
-              <InputOTPGroup
-                className="grid grid-cols-6 gap-2 w-full max-w-sm sm:max-w-md md:max-w-lg [direction:ltr]"
-                role="group"
-                aria-label="ورودی اعداد کد پیامکی"
+            <div className="flex items-center justify-center">
+              <InputOTP
+                ref={inputOtpRef}
+                id="otp"
+                inputMode="numeric"
+                autoComplete="one-time-code"
+                aria-label="کد پیامکی ۶ رقمی"
+                aria-required="true"
+                aria-invalid={!!formState.errors.otp}
+                aria-describedby={formState.errors.otp ? "otp-error" : ""}
+                dir="ltr"
+                maxLength={6}
+                pattern={REGEXP_ONLY_DIGITS}
+                className="w-full flex justify-center"
+                value={field.value}
+                onChange={field.onChange}
               >
-                {Array.from({ length: 6 }).map((_, i) => (
-                  <InputOTPSlot
-                    key={i}
-                    index={i}
-                    aria-label={`عدد ${i + 1} از ۶`}
-                    className="w-full aspect-square h-12 sm:h-10 text-center text-lg rounded-md border border-gray-300 focus:border-tint-blue-500 focus:ring-2 focus:ring-tint-blue-500 outline-none transition-all"
-                  />
-                ))}
-              </InputOTPGroup>
-            </InputOTP>
+                <InputOTPGroup
+                  className="grid grid-cols-6 gap-2 w-full max-w-sm sm:max-w-md md:max-w-lg [direction:ltr]"
+                  role="group"
+                  aria-label="ورودی اعداد کد پیامکی"
+                >
+                  {Array.from({ length: 6 }).map((_, i) => (
+                    <InputOTPSlot
+                      key={i}
+                      index={i}
+                      aria-label={`عدد ${i + 1} از ۶`}
+                      className="w-full aspect-square h-12 sm:h-10 text-center text-lg rounded-md border border-gray-300 focus:border-tint-blue-500 focus:ring-2 focus:ring-tint-blue-500 outline-none transition-all"
+                    />
+                  ))}
+                </InputOTPGroup>
+              </InputOTP>
+            </div>
           )}
         />
         <FormErrorMessage
