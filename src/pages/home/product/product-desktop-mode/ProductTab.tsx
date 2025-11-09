@@ -24,7 +24,7 @@ const tabs = [
   },
 ];
 
-export function ProductTab() {
+export default function ProductTab() {
   const [tabActive, setActiveTab] = useState("specification");
   return (
     <div className=" w-full ">

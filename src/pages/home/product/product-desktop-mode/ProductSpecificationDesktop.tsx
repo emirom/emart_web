@@ -7,7 +7,7 @@ export default function ProductSpecificationDesktop() {
   const [open, setOpen] = useState<boolean>(false);
   const toggleOpen = React.useCallback(() => setOpen((prev) => !prev), []);
 
-  const specs = Array.from({ length: 14 }, (_, i) => ({
+  const specs = Array.from({ length: 14 }, () => ({
     title: "سیستم‌عامل",
     value: "iOS 15 (قابل ارتقا به نسخه‌های بالاتر)",
   }));
