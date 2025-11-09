@@ -1,3 +1,4 @@
+import ProductDesktopMode from "@/pages/home/product/product-desktop-mode/ProductDesktopMode";
 import ProductMobileMode from "@/pages/home/product/product-mobile-mode/ProductMobileMode";
 import Container from "@components/Container";
 
@@ -11,6 +12,7 @@ export default async function Page({
   return (
     <Container>
       <ProductMobileMode />
+      <ProductDesktopMode />
     </Container>
   );
 }

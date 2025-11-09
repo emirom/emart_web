@@ -53,7 +53,7 @@ export default function ProductButtonAction() {
   return (
     <nav
       aria-label="دکمه‌های کنش محصول"
-      className="flex flex-col justify-between gap-1"
+      className="flex flex-col justify-between gap-1 lg:flex-row lg:justify-end lg:gap-2 "
     >
       {actions.map(({ icon: Icon, label, color, onClick }) => (
         <Button
@@ -65,7 +65,7 @@ export default function ProductButtonAction() {
           aria-pressed={
             label === "افزودن به علاقه‌مندی‌ها" ? isFavorite : undefined
           }
-          className="rounded-lg bg-sky-blue focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-sky-500 transition-all"
+          className="rounded-lg bg-sky-blue focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-sky-500 transition-all cursor-pointer"
         >
           <Icon className={color} aria-hidden="true" focusable="false" />
           <span className="sr-only">{label}</span>

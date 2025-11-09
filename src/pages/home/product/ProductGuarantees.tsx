@@ -10,10 +10,19 @@ export default function ProductGuarantees() {
   return (
     <section
       aria-labelledby="product-guarantees-title"
-      className={cn("my-4  rounded-lg shadow-sm bg-white p-3")}
+      className={cn(
+        "my-4  rounded-lg shadow-sm bg-white p-3",
+        "md:shadow-none md:px-0",
+      )}
     >
-      <h2 id="product-guarantees-title" className="sr-only">
-        اطلاعات گارانتی و فروشنده محصول
+      <h2 id="product-guarantees-title" className="sr-only ">
+        قیمت همکاری
+      </h2>
+      <h2
+        id="product-guarantees-title"
+        className="hidden md:block text-tint-blue-500 text-sm font-medium mb-4 "
+      >
+        قیمت همکاری
       </h2>
 
       <ul role="list" className="flex flex-col gap-2">

@@ -2,20 +2,8 @@
 
 import { cn } from "@components/lib/utils";
 import { Button } from "@components/ui/button";
-import {
-  BadgeCheck,
-  CalendarDays,
-  ShieldEllipsis,
-  StoreIcon,
-  Truck,
-} from "lucide-react";
-
-const warrantyItems = [
-  { icon: StoreIcon, label: "فروشنده: ماهور همراه" },
-  { icon: ShieldEllipsis, label: "۱۸ ماه گارانتی ماهور" },
-  { icon: BadgeCheck, label: "۷ روز مهلت بازگشت کالا" },
-  { icon: Truck, label: "ارسال فوری و رایگان" },
-];
+import { CalendarDays } from "lucide-react";
+import SellerInformation from "../SellerInformation";
 
 export default function ProductMobileWarranty() {
   return (
@@ -30,26 +18,7 @@ export default function ProductMobileWarranty() {
           اطلاعات گارانتی و فروشنده
         </h2>
 
-        <ul className="flex flex-col gap-1" role="list">
-          {warrantyItems.map(({ icon: Icon, label }, index) => (
-            <li
-              key={index}
-              className="flex items-center gap-1 text-tint-blue-600"
-              aria-label={label}
-            >
-              <Icon
-                width={16}
-                height={16}
-                aria-hidden="true"
-                focusable="false"
-                className="text-tint-blue-600"
-              />
-              <span className="text-xs font-medium text-tint-blue-500">
-                {label}
-              </span>
-            </li>
-          ))}
-        </ul>
+        <SellerInformation />
       </div>
 
       <div className="flex flex-col gap-2 justify-end">

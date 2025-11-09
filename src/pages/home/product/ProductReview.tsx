@@ -33,7 +33,7 @@ export default function ProductReview() {
     >
       <h3
         id="product-review-title"
-        className="text-sm font-medium text-tint-blue-500 mb-4"
+        className="text-sm font-medium text-tint-blue-500 mb-4 lg:hidden"
       >
         نقد و بررسی محصول
       </h3>
@@ -49,7 +49,12 @@ export default function ProductReview() {
         >
           {index === 0 ? (
             <>
-              <figure className="aspect-[10/7] w-full mb-3">
+              <figure
+                className={cn(
+                  "aspect-[10/7] w-full mb-3 ",
+                  "flex items-center justify-center lg:aspect-[23/15] lg:w-[40%] lg:h-[40%] mx-auto",
+                )}
+              >
                 <CustomImage
                   src={section.image}
                   alt={`تصویر بخش ${section.title}`}
@@ -61,7 +66,6 @@ export default function ProductReview() {
                 <figcaption className="sr-only">{section.title}</figcaption>
               </figure>
 
-              {/* عنوان بخش */}
               <h4
                 id={`review-section-${index}`}
                 className="bg-sky-blue text-sm font-medium px-2 py-2 flex items-center justify-center w-fit text-tint-blue-500 rounded-lg mb-3"
@@ -79,7 +83,6 @@ export default function ProductReview() {
                 index % 2 === 0 ? "flex-row" : "flex-row-reverse"
               }`}
             >
-              {/* ستون تصویر */}
               <div className="w-1/3 flex flex-col gap-2">
                 <h4
                   id={`review-section-${index}`}
@@ -91,7 +94,12 @@ export default function ProductReview() {
                   {section.title}
                 </h4>
 
-                <figure className="aspect-[3/4] w-full">
+                <figure
+                  className={cn(
+                    "aspect-[3/4] w-full",
+                    "lg:aspect-[3/2] lg:w-[100%] h-[100%] lg:mr-auto ",
+                  )}
+                >
                   <CustomImage
                     src={section.image}
                     alt={`تصویر بخش ${section.title}`}

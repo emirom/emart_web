@@ -5,14 +5,10 @@ type Props = HTMLAttributes<HTMLDivElement> & {
   className?: string;
 };
 
-export default function Container({
-  children,
-  className = "",
-  ...props
-}: Props) {
+export default function Container({ children, className, ...props }: Props) {
   return (
     <div
-      className={`mx-auto w-[97%] md:w-[95%] lg:w-[93%] ${className}`}
+      className={`mx-auto w-[92%] md:w-[95%] lg:w-[93%] ${className}`}
       {...props}
     >
       {children}

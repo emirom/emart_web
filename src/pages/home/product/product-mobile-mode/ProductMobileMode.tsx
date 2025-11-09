@@ -9,13 +9,13 @@ import ProductMobileTab from "./ProductMobileTab";
 
 export default function ProductMobileMode() {
   return (
-    <>
+    <div className="lg:hidden">
       <ProductMobileTab />
       <ProductMobileInfo />
       <ProductGuarantees />
       <MobileProductSpecifications />
       <ProductReview />
       <Comments />
-    </>
+    </div>
   );
 }
