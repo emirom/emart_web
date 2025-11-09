@@ -1,8 +1,24 @@
 import { useCallback, useState } from "react";
-import {
-  convertToEnglishDigits,
-  convertToPersianDigits,
-} from "../helper/convertDigits";
+
+export function convertToEnglishDigits(value: string): string {
+  const persianDigits = ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"];
+  const arabicDigits = ["٠", "١", "٢", "٣", "٤", "٥", "٦", "٧", "٨", "٩"];
+  return value
+    .split("")
+    .map((char) => {
+      const p = persianDigits.indexOf(char);
+      if (p !== -1) return p.toString();
+      const a = arabicDigits.indexOf(char);
+      if (a !== -1) return a.toString();
+      return char;
+    })
+    .join("");
+}
+
+export function convertToPersianDigits(value: string): string {
+  const persianDigits = ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"];
+  return value.replace(/\d/g, (d) => persianDigits[parseInt(d)]);
+}
 
 function detectLocaleFromInput(value: string): "fa" | "en" {
   const lastChar = value.at(-1);
@@ -15,21 +31,16 @@ export function useSmartLocalizedInput() {
   const [displayValue, setDisplayValue] = useState("");
   const [locale, setLocale] = useState<"fa" | "en">("fa");
 
-  const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const rawValue = e.target.value;
-
-    const detected = detectLocaleFromInput(rawValue);
-    setLocale(detected);
-
-    const englishValue = convertToEnglishDigits(rawValue);
-
-    const localizedValue =
-      detected === "fa" ? convertToPersianDigits(englishValue) : englishValue;
-
-    setDisplayValue(localizedValue);
-
-    return englishValue;
-  }, []);
+  const handleChange = useCallback(
+    (value: string | React.ChangeEvent<HTMLInputElement>) => {
+      const rawValue = typeof value === "string" ? value : value.target.value;
+      const englishValue = convertToEnglishDigits(rawValue);
+      setDisplayValue(convertToPersianDigits(englishValue));
+      setLocale(detectLocaleFromInput(rawValue));
+      return englishValue;
+    },
+    [],
+  );
 
   return { displayValue, handleChange, locale, setDisplayValue };
 }

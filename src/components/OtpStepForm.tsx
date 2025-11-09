@@ -1,9 +1,9 @@
 "use client";
 
 import { loginAction } from "@lib/actions/login-action";
+import { useSmartLocalizedInput } from "@lib/hooks/useLocalizedNumberInput";
 import { PostAuthLoginBody } from "@lib/schemas";
 import { useAppStore } from "@lib/stores/store";
-import { REGEXP_ONLY_DIGITS } from "input-otp";
 import { useEffect, useRef } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
@@ -15,17 +15,13 @@ import { Label } from "./ui/label";
 
 export default function OtpStepForm() {
   const { phone, clearPhone } = useAppStore();
-  const { control, handleSubmit, formState } =
+  const { control, handleSubmit, formState, setValue } =
     useForm<Omit<PostAuthLoginBody, "phone">>();
-
+  const { handleChange } = useSmartLocalizedInput();
   const inputOtpRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
-    if (inputOtpRef.current) {
-      setTimeout(() => {
-        inputOtpRef.current?.focus();
-      }, 0);
-    }
+    if (inputOtpRef.current) setTimeout(() => inputOtpRef.current?.focus(), 0);
   }, []);
 
   const onSubmit = async (data: Omit<PostAuthLoginBody, "phone">) => {
@@ -33,21 +29,14 @@ export default function OtpStepForm() {
       toast.error("شماره موبایل پیدا نشد، لطفا دوباره وارد شوید");
       return;
     }
-
     try {
-      const payload: PostAuthLoginBody = {
-        phone,
-        otp: data.otp,
-      };
+      const payload: PostAuthLoginBody = { phone, otp: data.otp };
       await loginAction(payload);
       toast.success("شماره موبایل شما با موفقیت ثبت شد");
       clearPhone();
     } catch (err) {
-      if (err instanceof Error) {
-        toast.error(err.message);
-      } else {
-        toast.error("خطایی رخ داده است");
-      }
+      if (err instanceof Error) toast.error(err.message);
+      else toast.error("خطایی رخ داده است");
     }
   };
 
@@ -62,7 +51,6 @@ export default function OtpStepForm() {
       <h2 id="otp-form-title" className="sr-only">
         فرم ورود با کد پیامکی
       </h2>
-
       <div className="grid gap-1">
         <div className="flex items-center gap-1 mb-2">
           <Label htmlFor="otp" className="text-tint-blue-500 text-xs">
@@ -72,51 +60,47 @@ export default function OtpStepForm() {
             *
           </span>
         </div>
-
         <Controller
           name="otp"
           control={control}
           rules={{
             required: "کد پیامکی الزامی است",
-            pattern: {
-              value: /^\d{6}$/,
-              message: "کد باید ۶ رقم عددی باشد",
-            },
+            pattern: { value: /^\d{6}$/, message: "کد باید ۶ رقم عددی باشد" },
           }}
           render={({ field }) => (
-            <div className="flex items-center justify-center">
-              <InputOTP
-                ref={inputOtpRef}
-                id="otp"
-                inputMode="numeric"
-                autoComplete="one-time-code"
-                aria-label="کد پیامکی ۶ رقمی"
-                aria-required="true"
-                aria-invalid={!!formState.errors.otp}
-                aria-describedby={formState.errors.otp ? "otp-error" : ""}
-                dir="ltr"
-                maxLength={6}
-                pattern={REGEXP_ONLY_DIGITS}
-                className="w-full flex justify-center"
-                value={field.value}
-                onChange={field.onChange}
+            <InputOTP
+              ref={inputOtpRef}
+              id="otp"
+              inputMode="numeric"
+              autoComplete="one-time-code"
+              aria-label="کد پیامکی ۶ رقمی"
+              aria-required="true"
+              aria-invalid={!!formState.errors.otp}
+              aria-describedby={formState.errors.otp ? "otp-error" : ""}
+              maxLength={6}
+              pattern={/\d{0,6}/.source}
+              dir="ltr"
+              className="w-full flex justify-center"
+              onChange={(val: string) => {
+                const englishValue = handleChange(val);
+                setValue("otp", englishValue, { shouldValidate: true });
+              }}
+            >
+              <InputOTPGroup
+                className="grid grid-cols-6 gap-2 w-full max-w-sm sm:max-w-md md:max-w-lg [direction:ltr]"
+                role="group"
+                aria-label="ورودی اعداد کد پیامکی"
               >
-                <InputOTPGroup
-                  className="grid grid-cols-6 gap-2 w-full max-w-sm sm:max-w-md md:max-w-lg [direction:ltr]"
-                  role="group"
-                  aria-label="ورودی اعداد کد پیامکی"
-                >
-                  {Array.from({ length: 6 }).map((_, i) => (
-                    <InputOTPSlot
-                      key={i}
-                      index={i}
-                      aria-label={`عدد ${i + 1} از ۶`}
-                      className="w-full aspect-square h-12 sm:h-10 text-center text-lg rounded-md border border-gray-300 focus:border-tint-blue-500 focus:ring-2 focus:ring-tint-blue-500 outline-none transition-all"
-                    />
-                  ))}
-                </InputOTPGroup>
-              </InputOTP>
-            </div>
+                {Array.from({ length: 6 }).map((_, i) => (
+                  <InputOTPSlot
+                    key={i}
+                    index={i}
+                    aria-label={`عدد ${i + 1} از ۶`}
+                    className="w-full aspect-square h-12 sm:h-10 text-center text-lg rounded-md border border-gray-300 focus:border-tint-blue-500 focus:ring-2 focus:ring-tint-blue-500 outline-none transition-all"
+                  />
+                ))}
+              </InputOTPGroup>
+            </InputOTP>
           )}
         />
         <FormErrorMessage
