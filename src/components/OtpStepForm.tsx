@@ -21,7 +21,6 @@ export default function OtpStepForm() {
   const inputOtpRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
-    // Focus on the InputOTP component when the component mounts
     if (inputOtpRef.current) {
       setTimeout(() => {
         inputOtpRef.current?.focus();
