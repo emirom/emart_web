@@ -65,6 +65,8 @@ export default function CustomDropzone({
           updateProgress(p);
         }
       }
+      // Clear the file after successful upload
+      clearFile();
     } catch (err) {
       console.error("Upload canceled or failed:", err);
     } finally {
@@ -116,6 +118,8 @@ export default function CustomDropzone({
             <Image
               src={currentFile.preview}
               alt={currentFile.path || "preview"}
+              width={96} // 24 * 4px (assuming 1rem = 4px)
+              height={128} // 32 * 4px (assuming 1rem = 4px)
               className="w-full h-full object-cover"
             />
             {currentFile.isUploading && (

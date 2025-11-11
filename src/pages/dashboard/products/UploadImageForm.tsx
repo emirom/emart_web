@@ -44,7 +44,7 @@ export default function UploadImageForm() {
       if (altText) fd.append("altText", altText);
       if (caption) fd.append("caption", caption);
 
-      return await axiosInstance<ProductMediaResponse>({
+      await axiosInstance<ProductMediaResponse>({
         method: "POST",
         url: "/product-medias",
         data: fd,
