@@ -28,7 +28,7 @@ export default function PhoneStepForm() {
   const { register, handleSubmit, setValue, formState } =
     useForm<PhoneFormValues>({
       resolver: zodResolver(phoneSchema),
-      mode: "onBlur",
+      mode: "onChange",
     });
 
   const { displayValue, handleChange } = useSmartLocalizedInput();
