@@ -5,10 +5,12 @@ import { memo } from "react";
 import { cn } from "./lib/utils";
 import { Button } from "./ui/button";
 
-interface IconButtonProps {
+interface IconButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   onClick?: () => void;
   className?: string;
   disabled?: boolean;
+  label?: string;
 }
 
 const EditButtonComponent = ({ onClick }: IconButtonProps) => (
@@ -68,17 +70,18 @@ const SubmitButtonComponent = ({
   onClick,
   className,
   disabled,
+  label = "ثبت ",
 }: IconButtonProps) => (
   <Button
     disabled={disabled}
     onClick={onClick}
-    aria-label="ثبت"
+    aria-label={label ? label : "ثبت"}
     className={cn(
       "bg-green-300 text-white focus-visible:ring-2 focus-visible:ring-offset-2 transition-colors",
       className,
     )}
   >
-    ثبت
+    {label}
   </Button>
 );
 

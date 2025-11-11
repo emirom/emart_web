@@ -3,14 +3,14 @@ import { SubmitButton } from "@components/BtnWithIcon";
 import FormAutocomplete from "@components/FormAutoCompleteField";
 import { FormInputField } from "@components/FormInputField";
 import { FormScrollableSelectField } from "@components/FormScrollableSelectField";
-import { FormTextareaField } from "@components/FormTextareaField";
 import { postProductAction } from "@lib/actions/product-action";
 import { queryClient } from "@lib/apis/queryClient";
 import { CreateProductInput } from "@lib/schemas";
 import { useGetBrands } from "@lib/services/brands/brands";
 import { useGetCategories } from "@lib/services/categories/categories";
 import { useGetLabels } from "@lib/services/labels/labels";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState, useTransition } from "react";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import LabelList from "./LabelList";
@@ -18,62 +18,70 @@ import LabelList from "./LabelList";
 type Label = { id: string; name: string };
 
 export default function CreateProductForm() {
-  const { handleSubmit, control } = useForm<CreateProductInput>({
-    defaultValues: { labels: [], isActive: false },
-  });
-
-  const { append, fields, remove } = useFieldArray({
-    control,
-    name: "labels",
-  });
-
+  const router = useRouter();
+  const [isPending, startTransition] = useTransition();
   const [selectedLabels, setSelectedLabels] = useState<Label[]>([]);
-  const onSubmit: SubmitHandler<CreateProductInput> = async (data) => {
-    try {
-      await postProductAction(data);
-      queryClient.invalidateQueries({ queryKey: ["/products"] });
-      toast.success("محصول اضافه شد");
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        toast.error(error.message);
-      } else {
-        toast.error("خطایی رخ داده است");
-      }
-    }
-  };
+  const [productId, setProductId] = useState<string | null>(null);
+
+  const { handleSubmit, control, reset } = useForm<CreateProductInput>({
+    defaultValues: { labels: [], isActive: false, descriptions: null },
+  });
+
+  const { append, fields, remove } = useFieldArray({ control, name: "labels" });
 
   const { data: categories } = useGetCategories({ skip: 0, limit: 10 });
   const { data: brands } = useGetBrands({ skip: 0, limit: 10 });
-  const { data: labels } = useGetLabels({ limit: 10, skip: 0 });
+  const { data: labels } = useGetLabels({ skip: 0, limit: 10 });
+
+  useEffect(() => {
+    const savedId = localStorage.getItem("lastCreatedProductId");
+    if (savedId) setProductId(savedId);
+    return () => localStorage.removeItem("lastCreatedProductId");
+  }, []);
+
+  const onSubmit: SubmitHandler<CreateProductInput> = async (data) => {
+    try {
+      const id = await postProductAction(data);
+      if (!id) throw new Error("شناسه محصول بازگردانده نشد");
+
+      setProductId(id);
+      localStorage.setItem("lastCreatedProductId", id);
+      queryClient.invalidateQueries({ queryKey: ["/products"] });
+      toast.success("محصول با موفقیت افزوده شد");
+      reset();
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "خطایی رخ داده است");
+    }
+  };
 
   const handleSelectedLabels = (label: Label | null) => {
     if (!label) return;
-
-    const isAlreadyAdded =
+    const exists =
       fields.some((item) => item.id === label.id) ||
       selectedLabels.some((lbl) => lbl.id === label.id);
-
-    if (isAlreadyAdded) {
-      toast.info("این برچسب قبلاً اضافه شده است");
-      return;
-    }
+    if (exists) return toast.info("این برچسب قبلاً اضافه شده است");
 
     append({ id: label.id });
-    setSelectedLabels((state) => [...state, label]);
+    setSelectedLabels((prev) => [...prev, label]);
   };
 
   const handleRemoveLabel = (id: string) => {
     const index = fields.findIndex((item) => item.id === id);
-    if (index !== -1) {
-      remove(index);
-    }
+    if (index !== -1) remove(index);
     setSelectedLabels((prev) => prev.filter((lbl) => lbl.id !== id));
+  };
+
+  const handleGoToUpload = () => {
+    if (!productId) return;
+    startTransition(() => {
+      router.push(`/dashboard/products/add/${productId}`);
+    });
   };
 
   return (
     <form
-      className=" grid  sm:grid-cols-2 items-end gap-2 lg:grid-cols-3"
       onSubmit={handleSubmit(onSubmit)}
+      className="grid sm:grid-cols-2 lg:grid-cols-3 items-end gap-2"
     >
       <FormInputField control={control} name="name" label="نام محصول" />
       <FormInputField
@@ -103,7 +111,7 @@ export default function CreateProductForm() {
       <FormScrollableSelectField
         control={control}
         name="isActive"
-        label="فعال"
+        label="وضعیت"
         options={[
           { label: "غیرفعال", value: false },
           { label: "فعال", value: true },
@@ -126,16 +134,18 @@ export default function CreateProductForm() {
         selectedLabels={selectedLabels}
         handleRemoveLabel={handleRemoveLabel}
       />
-      <div className="mt-5 col-span-1 sm:col-span-2 lg:col-span-3">
-        <FormTextareaField
-          control={control}
-          name="descriptions"
-          label="توضیحات"
-          placeholder="توضیحات محصول"
-        />
-      </div>
 
-      <SubmitButton className="col-span-1" />
+      <SubmitButton className="col-span-1" label="ثبت محصول" />
+
+      {productId && (
+        <SubmitButton
+          type="button"
+          disabled={isPending}
+          className="col-span-1"
+          label={isPending ? "در حال انتقال..." : "افزودن تصاویر محصول"}
+          onClick={handleGoToUpload}
+        />
+      )}
     </form>
   );
 }
