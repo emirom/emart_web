@@ -10,7 +10,6 @@ import ProductAction from "./ProductAction";
 
 type InitialQuery = {
   page?: number;
-  name?: string;
 };
 
 const columns: ColumnDef<Product>[] = [
@@ -96,11 +95,10 @@ export default function ProductTable({
 }) {
   const searchParams = useSearchParams();
   const page = Number(searchParams?.get("page") ?? initialQuery?.page ?? 0);
-  const name = searchParams?.get("search") ?? initialQuery?.name;
+
   const { data: products } = useGetProducts({
     skip: page * 10,
     limit: 10,
-    name,
   });
 
   return (

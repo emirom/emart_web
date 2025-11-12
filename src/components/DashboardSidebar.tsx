@@ -2,6 +2,7 @@
 
 import { cn } from "@components/lib/utils";
 import {
+  ClipboardClock,
   Flag,
   Home,
   LandPlot,
@@ -24,6 +25,7 @@ export default function DashboardSidebar() {
   const navItems = [
     { href: "/", label: "صفحه اصلی", icon: Home },
     { href: "/dashboard/products", label: "محصولات", icon: Package },
+    { href: "/dashboard/inventory", label: "موجودی", icon: ClipboardClock },
     { href: "/dashboard/variants", label: "تنوع محصول", icon: PackageSearch },
     { href: "/dashboard/users", label: "کاربران", icon: Users },
     { href: "/dashboard/colors", label: "رنگ‌ها", icon: PaintBucket },

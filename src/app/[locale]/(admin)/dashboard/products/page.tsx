@@ -18,7 +18,6 @@ export default async function Page({
   const sp = searchParams ? await searchParams : {};
   const initialQuery = {
     page: sp.page ? Number(sp.page) : 0,
-    name: sp.name ? sp.name : "",
   };
   await queryClient.prefetchQuery({
     queryKey: [
@@ -26,14 +25,12 @@ export default async function Page({
       {
         limit: 10,
         skip: initialQuery.page * 10,
-        name: initialQuery.name,
       },
     ],
     queryFn: () =>
       getProducts({
         limit: 10,
         skip: initialQuery.page * 10,
-        name: initialQuery.name,
       }),
   });
 
