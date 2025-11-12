@@ -3,26 +3,30 @@ import CustomBreadcrumb from "@components/CustomBradcrump";
 import CustomImage from "@components/CustomImage";
 import { cn } from "@components/lib/utils";
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
-  const { id } = await params;
+export async function generateMetadata({ params }: { params: { id: string } }) {
+  const { id } = params;
 
   return {
-    title: `محصول با ایدی${id}`,
+    title: `محصول با ایدی ${id}`,
     description: `محصول با ایدی ${id}`,
   };
 }
 
-const routes = [
-  { label: "ماهورهمراه", href: "/" },
-  { label: "گوشی تلفن همراه", href: "/products" },
-  { label: "گوشی موبایل", href: "/product" },
-  { label: "آیفون " },
-];
-export default async function Page() {
+type PageProps = {
+  params: { id: string };
+  searchParams?: { [key: string]: string | string[] | undefined };
+};
+
+export default async function Page({ params }: PageProps) {
+  const { id } = params;
+
+  const routes = [
+    { label: "ماهورهمراه", href: "/" },
+    { label: "گوشی تلفن همراه", href: "/products" },
+    { label: "گوشی موبایل", href: "/product" },
+    { label: `مقایسه محصول ${id}`, href: `/product-comparison/${id}` },
+  ];
+
   return (
     <>
       <figure className="shadow-2xl">
