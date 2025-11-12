@@ -34,7 +34,7 @@ export default async function Page() {
           loading={"eager"}
           className={cn(
             "aspect-[16/4] lg:aspect-[19/4] rounded-lg object-cover",
-            "!opacity-100 !duration-0"
+            "!opacity-100 !duration-0",
           )}
         />
       </figure>
