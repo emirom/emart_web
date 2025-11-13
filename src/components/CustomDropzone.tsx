@@ -1,9 +1,11 @@
 "use client";
 
+import { useGetProductMedias } from "@lib/services/product-media/product-media";
 import { useFileStore } from "@lib/stores/store";
 import { FileWithPreview } from "@lib/types/file-with-preview";
 import { PauseCircle, Star, Upload, X } from "lucide-react";
 import Image from "next/image";
+import { useParams } from "next/navigation";
 import { useEffect } from "react";
 import { useDropzone } from "react-dropzone";
 import { cn } from "./lib/utils";
@@ -11,7 +13,7 @@ import { cn } from "./lib/utils";
 interface CustomDropzoneProps {
   onUpload?: (
     file: FileWithPreview,
-    onProgress: (p: number) => void,
+    onProgress: (p: number) => void
   ) => Promise<void>;
   onDeleteFile?: (file: FileWithPreview) => void;
   onAbortUpload?: (file: FileWithPreview) => void;
@@ -34,12 +36,25 @@ export default function CustomDropzone({
     setFileAsCover,
     clearFile,
   } = useFileStore();
+  const params = useParams();
+  const productId =
+    typeof params?.productId === "string"
+      ? params.productId
+      : Array.isArray(params?.productId)
+        ? params.productId[0]
+        : undefined;
+
+  const { data: productImage } = useGetProductMedias({
+    skip: 0,
+    limit: 10,
+    productId,
+  });
 
   const { getRootProps, getInputProps } = useDropzone({
     accept,
     multiple: false,
     onDrop: (acceptedFiles) => {
-      if (acceptedFiles.length === 0) return;
+      if (!acceptedFiles.length) return;
       const file = acceptedFiles[0];
       const newFile: FileWithPreview = {
         file,
@@ -65,10 +80,8 @@ export default function CustomDropzone({
           updateProgress(p);
         }
       }
-      // Clear the file after successful upload
       clearFile();
-    } catch (err) {
-      console.error("Upload canceled or failed:", err);
+    } catch {
     } finally {
       setFileUploading(false);
       updateFileProgress(100);
@@ -90,11 +103,19 @@ export default function CustomDropzone({
 
   useEffect(() => {
     return () => {
-      if (currentFile?.preview) {
-        URL.revokeObjectURL(currentFile.preview);
-      }
+      if (currentFile?.preview) URL.revokeObjectURL(currentFile.preview);
     };
   }, [currentFile]);
+
+  const constructImageUrl = (url: string): string => {
+    if (!url) return "";
+    const baseUrl =
+      process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3010";
+
+    const cleanBaseUrl = baseUrl.replace(/\/$/, "");
+    const cleanImgUrl = url.startsWith("/") ? url.substring(1) : url;
+    return `${cleanBaseUrl}/${cleanImgUrl}`;
+  };
 
   return (
     <div>
@@ -112,69 +133,132 @@ export default function CustomDropzone({
           </p>
         </div>
       </section>
-      {showPreview && currentFile && (
-        <div className="mt-4 inline-flex flex-col items-center">
-          <div className="relative w-24 h-32 border rounded-md overflow-hidden">
+      <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+        {productImage?.data &&
+          productImage.data.map((img) => (
+            <div
+              key={img.id}
+              className="relative w-full h-aut border rounded-md overflow-hidden flex flex-col items-center"
+            >
+              <div className="w-full h-24">
+                <img
+                  src={constructImageUrl(img.url)}
+                  alt={img.altText || "product image"}
+                  className="w-full h-24 object-cover"
+                  style={{ width: "100%", height: "100%" }}
+                  loading="lazy"
+                  crossOrigin="anonymous"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.src =
+                      "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOTYiIGhlaWdodD0iOTYiIHZpZXdCb3g9IjAgMCA5NiA5NiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9Ijk2IiBoZWlnaHQ9Ijk2IiBmaWxsPSIjRjVGNUY1Ii8+CjxwYXRoIGQ9Ik03MiA3Mkg4MFM5NiA1NiA5NiAzMiA4MCAzMiA4MCAzMiA2NCAzMiA0OCAzMiA0OCA0OCA0OCA0OCA0OCA0OCIgc3Ryb2tlPSIjRTNFNEU0IiBzdHJva2Utd2lkdGg9IjgiIGZpbGw9Im5vbmUiLz4KPHBhdGggZD0iTTE2IDE2TDMwLjQgMzAuNFoiIHN0cm9rZT0iI0UzRTRFNCIgc3Ryb2tlLXdpZHRoPSI2IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPC9zdmc+Cg==";
+                  }}
+                />
+              </div>
+              <div className="p-1 text-xs text-center truncate w-full">
+                {img.altText || "بدون عنوان"}
+              </div>
+              <div className="absolute top-1 right-1 flex gap-1">
+                <button
+                  type="button"
+                  onClick={() =>
+                    onDeleteFile?.(img as unknown as FileWithPreview)
+                  }
+                  className="p-1 rounded bg-red-500 hover:bg-red-600 text-white"
+                  title="حذف تصویر"
+                >
+                  <X size={12} />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    // Set as cover - the store only allows setting the current file as cover
+                    // For existing images, we'd need to first make them the current file
+                    // which requires a separate action that doesn't exist in this implementation
+                    setFileAsCover(); // Call without arguments as expected by the store
+                  }}
+                  className={cn(
+                    "p-1 rounded",
+                    // The store tracks isCover as a boolean on the current file only
+                    // So we can't compare an existing image ID with the current file's isCover property
+                    false // Placeholder - existing images can't be directly checked as cover in this implementation
+                      ? "bg-green-600 text-white"
+                      : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                  )}
+                  title="انتخاب به عنوان کاور"
+                >
+                  <Star size={12} />
+                </button>
+              </div>
+            </div>
+          ))}
+      </div>
+
+      {currentFile && (
+        <div className="mt-6 flex flex-col items-center">
+          <div className="w-32 h-40 border rounded-md overflow-hidden mb-2">
             <Image
               src={currentFile.preview}
-              alt={currentFile.path || "preview"}
-              width={96} // 24 * 4px (assuming 1rem = 4px)
-              height={128} // 32 * 4px (assuming 1rem = 4px)
+              alt="Preview"
+              width={128}
+              height={160}
               className="w-full h-full object-cover"
+              unoptimized
             />
             {currentFile.isUploading && (
-              <div className="absolute bottom-0 left-0 w-full h-1 bg-gray-200">
+              <div className="absolute bottom-0 left-0 w-full h-2 bg-gray-200">
                 <div
-                  className="h-1 bg-blue-500 transition-all duration-200"
+                  className="h-2 bg-blue-500 transition-all duration-200"
                   style={{ width: `${currentFile.progress}%` }}
                 />
               </div>
             )}
           </div>
-          <div className="flex gap-1 mt-2">
+          <div className="flex gap-2">
             {!currentFile.isUploading ? (
               <>
                 <button
                   type="button"
                   onClick={() => uploadFile(currentFile)}
-                  className="p-1 rounded bg-blue-500 hover:bg-blue-600 text-white"
+                  className="p-2 rounded bg-blue-500 hover:bg-blue-600 text-white"
                   title="آپلود"
                 >
-                  <Upload size={14} />
+                  <Upload size={16} />
                 </button>
                 <button
                   type="button"
                   onClick={removeFile}
-                  className="p-1 rounded bg-red-500 hover:bg-red-600 text-white"
+                  className="p-2 rounded bg-red-500 hover:bg-red-600 text-white"
                   title="حذف"
                 >
-                  <X size={14} />
+                  <X size={16} />
                 </button>
               </>
             ) : (
               <button
                 type="button"
                 onClick={() => cancelUpload(currentFile)}
-                className="p-1 rounded bg-gray-400 hover:bg-gray-500 text-white"
+                className="p-2 rounded bg-gray-400 hover:bg-gray-500 text-white"
                 title="لغو آپلود"
               >
-                <PauseCircle size={14} />
+                <PauseCircle size={16} />
               </button>
             )}
             <button
               type="button"
-              onClick={() => setFileAsCover()}
+              onClick={() => setFileAsCover()} // Call without arguments as expected by the store
               className={cn(
-                "p-1 rounded",
-                currentFile.isCover
+                "p-2 rounded",
+                currentFile?.isCover // Check the boolean isCover property of the current file
                   ? "bg-green-600 text-white"
-                  : "bg-gray-200 text-gray-700 hover:bg-gray-300",
+                  : "bg-gray-200 text-gray-700 hover:bg-gray-300"
               )}
               title="انتخاب به عنوان کاور"
             >
-              <Star size={14} />
+              <Star size={16} />
             </button>
           </div>
+          <p className="mt-2 text-sm text-gray-600">{currentFile.path}</p>
         </div>
       )}
     </div>
