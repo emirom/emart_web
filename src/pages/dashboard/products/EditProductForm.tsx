@@ -39,25 +39,31 @@ export default function EditProductId({ editId }: { editId: string }) {
     if (savedId) setProductId(savedId);
     return () => localStorage.removeItem("lastCreatedProductId");
   }, []);
+
   const { data: product } = useGetProductsId(editId);
+
   useEffect(() => {
-    if (product?.data)
+    if (product?.data) {
       reset({
-        name: product?.data.name,
-        enName: product?.data.name,
+        name: product.data.name,
+        enName: product.data.name,
         brandId: product.data.brandId,
-        categoryId: product?.data.categoryId,
-        isActive: product?.data?.isActive,
-        labels: product?.data?.labels,
+        categoryId: product.data.categoryId,
+        isActive: product.data.isActive,
+        labels:
+          product.data.labels?.map((lbl: Label) => ({ id: lbl.id })) ?? [],
       });
+      setSelectedLabels(product.data.labels ?? []);
+    }
   }, [product, reset]);
+
   const onSubmit: SubmitHandler<UpdateProductInput> = async (data) => {
     try {
       await patchProductAction(editId, data);
-
       queryClient.invalidateQueries({ queryKey: ["/products"] });
-      toast.success("محصول با موفقیت افزوده شد");
+      toast.success("محصول با موفقیت ویرایش شد");
       reset();
+      setSelectedLabels([]);
     } catch (error) {
       toast.error(error instanceof Error ? error.message : "خطایی رخ داده است");
     }
@@ -69,7 +75,6 @@ export default function EditProductId({ editId }: { editId: string }) {
       fields.some((item) => item.id === label.id) ||
       selectedLabels.some((lbl) => lbl.id === label.id);
     if (exists) return toast.info("این برچسب قبلاً اضافه شده است");
-
     append({ id: label.id });
     setSelectedLabels((prev) => [...prev, label]);
   };
@@ -98,7 +103,6 @@ export default function EditProductId({ editId }: { editId: string }) {
         name="enName"
         label="نام انگلیسی محصول"
       />
-
       <FormScrollableSelectField
         control={control}
         name="categoryId"
@@ -107,7 +111,6 @@ export default function EditProductId({ editId }: { editId: string }) {
         getOptionLabel={(opt) => opt.name}
         getOptionValue={(opt) => opt.id}
       />
-
       <FormScrollableSelectField
         control={control}
         name="brandId"
@@ -116,7 +119,6 @@ export default function EditProductId({ editId }: { editId: string }) {
         getOptionLabel={(opt) => opt.name}
         getOptionValue={(opt) => opt.id}
       />
-
       <FormScrollableSelectField
         control={control}
         name="isActive"
@@ -128,7 +130,6 @@ export default function EditProductId({ editId }: { editId: string }) {
         getOptionLabel={(opt) => opt.label}
         getOptionValue={(opt) => opt.value}
       />
-
       <FormAutocomplete
         control={control}
         name="labels"
@@ -138,14 +139,11 @@ export default function EditProductId({ editId }: { editId: string }) {
         getOptionValue={(opt) => opt.id}
         onSelect={handleSelectedLabels}
       />
-
       <LabelList
         selectedLabels={selectedLabels}
         handleRemoveLabel={handleRemoveLabel}
       />
-
       <SubmitButton className="col-span-1" label="ثبت محصول" />
-
       {productId && (
         <SubmitButton
           type="button"
