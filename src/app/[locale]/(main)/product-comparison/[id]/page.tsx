@@ -3,22 +3,19 @@ import CustomBreadcrumb from "@components/CustomBradcrump";
 import CustomImage from "@components/CustomImage";
 import { cn } from "@components/lib/utils";
 
-export async function generateMetadata({ params }: { params: { id: string } }) {
-  const { id } = params;
-
+export async function generateMetadata() {
   return {
-    title: `محصول با ایدی ${id}`,
-    description: `محصول با ایدی ${id}`,
+    title: `محصول با ایدی `,
+    description: `محصول با ایدی `,
   };
 }
 
 type PageProps = {
-  params: { id: string };
-  searchParams?: { [key: string]: string | string[] | undefined };
+  params: Promise<{ id: string }>;
 };
 
 export default async function Page({ params }: PageProps) {
-  const { id } = params;
+  const { id } = await params;
 
   const routes = [
     { label: "ماهورهمراه", href: "/" },

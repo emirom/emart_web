@@ -8,7 +8,7 @@ export default function SpecialOfferItem({
   isLCP,
 }: {
   indx: number;
-  isLCP: boolean;
+  isLCP?: boolean;
 }) {
   return (
     <article
