@@ -1,6 +1,6 @@
 "use server";
 
-import { CreateProductInput } from "@lib/schemas";
+import { CreateProductInput, UpdateProductInput } from "@lib/schemas";
 import {
   deleteProductsId,
   patchProductsId,
@@ -16,7 +16,7 @@ export async function postProductAction(data: CreateProductInput) {
   }
   throw new Error("افزودن محصول ناموفق بود");
 }
-export async function patchProductAction(id: string, data: CreateProductInput) {
+export async function patchProductAction(id: string, data: UpdateProductInput) {
   await patchProductsId(id, data);
   revalidatePath("/dashboard/products");
 }

@@ -31,7 +31,7 @@ export default function ProductAction({ id }: { id: string }) {
         onConfirm={handleDelete}
       />
       <Link
-        href={`/dashboard/products/${id}`}
+        href={`/dashboard/products/edit/${id}`}
         aria-label="ویرایش"
         className="flex items-center justify-center rounded-lg  bg-sky-500 cursor-pointer px-3 mx-1 text-white hover:bg-sky-600 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-sky-500 transition-colors"
       >
