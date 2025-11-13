@@ -25,5 +25,5 @@ export async function patchProductAction(id: string, data: UpdateProductInput) {
 export async function deleteProductAction(id: string) {
   await deleteProductsId(id);
   revalidatePath("/dashboard/products");
-  revalidatePath(`/dashboard/products/${id}`);
+
 }

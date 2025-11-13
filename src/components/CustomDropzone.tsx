@@ -26,7 +26,6 @@ export default function CustomDropzone({
   onDeleteFile,
   onAbortUpload,
   accept = { "image/*": [] },
-  showPreview = true,
 }: CustomDropzoneProps) {
   const {
     currentFile,
@@ -169,26 +168,6 @@ export default function CustomDropzone({
                 >
                   <X size={12} />
                 </button>
-                <button
-                  type="button"
-                  onClick={() => {
-                    // Set as cover - the store only allows setting the current file as cover
-                    // For existing images, we'd need to first make them the current file
-                    // which requires a separate action that doesn't exist in this implementation
-                    setFileAsCover(); // Call without arguments as expected by the store
-                  }}
-                  className={cn(
-                    "p-1 rounded",
-                    // The store tracks isCover as a boolean on the current file only
-                    // So we can't compare an existing image ID with the current file's isCover property
-                    false // Placeholder - existing images can't be directly checked as cover in this implementation
-                      ? "bg-green-600 text-white"
-                      : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-                  )}
-                  title="انتخاب به عنوان کاور"
-                >
-                  <Star size={12} />
-                </button>
               </div>
             </div>
           ))}
@@ -246,10 +225,10 @@ export default function CustomDropzone({
             )}
             <button
               type="button"
-              onClick={() => setFileAsCover()} // Call without arguments as expected by the store
+              onClick={() => setFileAsCover()}
               className={cn(
                 "p-2 rounded",
-                currentFile?.isCover // Check the boolean isCover property of the current file
+                currentFile?.isCover
                   ? "bg-green-600 text-white"
                   : "bg-gray-200 text-gray-700 hover:bg-gray-300"
               )}
