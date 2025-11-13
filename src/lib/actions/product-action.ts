@@ -19,6 +19,7 @@ export async function postProductAction(data: CreateProductInput) {
 export async function patchProductAction(id: string, data: UpdateProductInput) {
   await patchProductsId(id, data);
   revalidatePath("/dashboard/products");
+  revalidatePath(`/dashboard/products/${id}`);
 }
 
 export async function deleteProductAction(id: string) {

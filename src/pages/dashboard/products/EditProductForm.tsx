@@ -40,7 +40,9 @@ export default function EditProductId({ editId }: { editId: string }) {
     return () => localStorage.removeItem("lastCreatedProductId");
   }, []);
 
-  const { data: product } = useGetProductsId(editId);
+  const { data: product } = useGetProductsId(editId, {
+    query: { queryKey: ["/products", editId] },
+  });
 
   useEffect(() => {
     if (product?.data) {
