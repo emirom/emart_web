@@ -4,17 +4,19 @@ import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "react-toastify";
 import { z } from "zod";
-import { createProduct } from "@/libs/generated/api"; // Orval-generated API client
-import { ProductRequest } from "@/libs/types";
+import { postProducts } from "@lib/services/products/products";
+import { CreateProductInput } from "@lib/schemas";
 
 interface ProductFormData {
   name: string;
-  description: string;
+  enName: string;
+  categoryId: string;
 }
 
 const productSchema = z.object({
   name: z.string().min(1, "Product name is required"),
-  description: z.string().min(1, "Product description is required"),
+  enName: z.string().min(1, "English name is required"),
+  categoryId: z.string().min(1, "Category ID is required"),
 });
 
 const ProductForm: React.FC = () => {
@@ -27,20 +29,21 @@ const ProductForm: React.FC = () => {
     resolver: zodResolver(productSchema),
     defaultValues: {
       name: "",
-      description: "",
+      enName: "",
+      categoryId: "",
     },
   });
 
   const onSubmit = async (data: ProductFormData) => {
     try {
-      const productRequest: ProductRequest = {
+      const productRequest: CreateProductInput = {
         name: data.name,
-        description: data.description,
+        enName: data.enName,
+        categoryId: data.categoryId,
+        isActive: true,
       };
 
-      const response = await createProduct({
-        requestBody: productRequest,
-      });
+      const response = await postProducts(productRequest);
 
       toast.success("Product created successfully!");
       reset();
@@ -58,7 +61,7 @@ const ProductForm: React.FC = () => {
             htmlFor="name"
             className="block text-sm font-medium text-gray-700 mb-1"
           >
-            Product
+            Product Name
           </label>
           <Controller
             name="name"
@@ -82,29 +85,56 @@ const ProductForm: React.FC = () => {
 
         <div>
           <label
-            htmlFor="description"
+            htmlFor="enName"
             className="block text-sm font-medium text-gray-700 mb-1"
           >
-            Product Description
+            English Name
           </label>
           <Controller
-            name="description"
+            name="enName"
             control={control}
             render={({ field }) => (
-              <textarea
+              <input
                 {...field}
-                id="description"
-                rows={4}
+                id="enName"
+                type="text"
                 className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                  errors.description ? "border-red-500" : "border-gray-300"
+                  errors.enName ? "border-red-500" : "border-gray-300"
                 }`}
-                placeholder="Enter product description"
+                placeholder="Enter English name"
               />
             )}
           />
-          {errors.description && (
+          {errors.enName && (
+            <p className="mt-1 text-sm text-red-600">{errors.enName.message}</p>
+          )}
+        </div>
+
+        <div>
+          <label
+            htmlFor="categoryId"
+            className="block text-sm font-medium text-gray-700 mb-1"
+          >
+            Category ID
+          </label>
+          <Controller
+            name="categoryId"
+            control={control}
+            render={({ field }) => (
+              <input
+                {...field}
+                id="categoryId"
+                type="text"
+                className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                  errors.categoryId ? "border-red-500" : "border-gray-300"
+                }`}
+                placeholder="Enter category ID"
+              />
+            )}
+          />
+          {errors.categoryId && (
             <p className="mt-1 text-sm text-red-600">
-              {errors.description.message}
+              {errors.categoryId.message}
             </p>
           )}
         </div>

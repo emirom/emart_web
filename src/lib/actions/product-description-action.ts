@@ -23,7 +23,7 @@ export async function createProductDescriptionAction(
       revalidatePath("/dashboard/sections");
       return { success: true, data: response.data };
     } else {
-      throw new Error(response.message || "ایجاد توضیحات محصول ناموفق بود");
+      throw new Error("ایجاد توضیحات محصول ناموفق بود");
     }
   } catch (error: unknown) {
     console.error("Error in createProductDescriptionAction:", error);
@@ -68,9 +68,7 @@ export async function updateProductDescriptionAction(
       revalidatePath("/dashboard/sections");
       return { success: true, data: response.data };
     } else {
-      throw new Error(
-        response.message || "به‌روزرسانی توضیحات محصول ناموفق بود",
-      );
+      throw new Error("به‌روزرسانی توضیحات محصول ناموفق بود");
     }
   } catch (error: unknown) {
     // Check if this is a network error
@@ -111,7 +109,7 @@ export async function deleteProductDescriptionAction(id: string) {
       revalidatePath("/dashboard/sections");
       return { success: true };
     } else {
-      throw new Error(response.message || "حذف توضیحات محصول ناموفق بود");
+      throw new Error("حذف توضیحات محصول ناموفق بود");
     }
   } catch (error: unknown) {
     // Check if this is a network error
