@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useCallback } from "react";
 import { motion } from "framer-motion";
 import { useForm, FormProvider } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -11,6 +11,9 @@ import { SectionFormType } from "@/libs/types/sections";
 import { CreateProductDescriptionInput } from "@lib/schemas";
 import { createProductDescriptionAction } from "@lib/actions/product-description-action";
 import { FieldArrayWithId, useFieldArray } from "react-hook-form";
+import { useSectionImagesStore } from "@/libs/stores/editor/section-images.store";
+import { uploadProductMediaAction } from "@lib/actions/upload-product-media-action";
+import { FileWithPreview } from "@lib/types/file-with-preview";
 
 // Define validation schema using Zod
 const sectionSchema = z.object({
@@ -27,9 +30,9 @@ const sectionSchema = z.object({
         .min(2, "محتوا باید حداقل 2 کاراکتر باشد")
         .max(2000, "محتوا نمی‌تواند بیشتر از 2000 کاراکتر باشد")
         .min(1, "محتوا الزامی است"),
-      topImageId: z.string().nullish(),
-      leftImageId: z.string().nullish(),
-      rightImageId: z.string().nullish(),
+      topImageId: z.string().optional(),
+      leftImageId: z.string().optional(),
+      rightImageId: z.string().optional(),
     }),
   ),
 });
@@ -61,6 +64,8 @@ const SectionsForm: React.FC<SectionsFormProps> = ({ productId }) => {
     name: "sections",
   });
 
+  const { sections: sectionImageStore } = useSectionImagesStore();
+
   const addNewSection = () => {
     const newSection: SectionFormType = {
       id: Date.now().toString(),
@@ -74,6 +79,35 @@ const SectionsForm: React.FC<SectionsFormProps> = ({ productId }) => {
     remove(index);
   };
 
+  const uploadImage = useCallback(
+    async (imageFile: FileWithPreview, productId: string) => {
+      if (!imageFile.file) return null;
+
+      try {
+        const uploadData = {
+          file: imageFile.file,
+          productId,
+          title: imageFile.file.name,
+          altText: `Image for product ${productId}`,
+        };
+
+        const result = await uploadProductMediaAction(uploadData);
+        if (result.success && result.data) {
+          return result.data.data?.id || null; // Return the media ID from the response data
+        } else {
+          throw new Error(result.error || "Upload failed");
+        }
+      } catch (error) {
+        console.error("Error uploading image:", error);
+        toast.error(
+          error instanceof Error ? error.message : "خطا در بارگذاری تصویر",
+        );
+        return null;
+      }
+    },
+    [],
+  );
+
   const onSubmit = async (data: SectionsFormData) => {
     // Validate that we have a product ID
     if (!productId) {
@@ -83,15 +117,48 @@ const SectionsForm: React.FC<SectionsFormProps> = ({ productId }) => {
 
     try {
       // Process each section
-      for (const section of data.sections) {
+      for (let i = 0; i < data.sections.length; i++) {
+        const section = data.sections[i];
+        const sectionImages = sectionImageStore[section.id];
+
+        // Prepare image IDs for this section
+        let topImageId: string | null = null;
+        let leftImageId: string | null = null;
+        let rightImageId: string | null = null;
+
+        // Upload and get image IDs
+        if (sectionImages?.topImage) {
+          topImageId = await uploadImage(sectionImages.topImage, productId);
+        }
+        if (sectionImages?.leftImage) {
+          leftImageId = await uploadImage(sectionImages.leftImage, productId);
+        }
+        if (sectionImages?.rightImage) {
+          rightImageId = await uploadImage(sectionImages.rightImage, productId);
+        }
+
+        // Determine which image to use as mediaId and which side to place it
+        let mediaId: string | undefined;
+        let mediaSide: "LEFT" | "CENTER" | "RIGHT" = "CENTER";
+
+        if (leftImageId) {
+          mediaId = leftImageId;
+          mediaSide = "LEFT";
+        } else if (rightImageId) {
+          mediaId = rightImageId;
+          mediaSide = "RIGHT";
+        } else if (topImageId) {
+          mediaId = topImageId;
+          mediaSide = "CENTER"; // Top image can be treated as center in some contexts
+        }
+
         // Prepare the product description input based on the section data
         const productDescriptionInput: CreateProductDescriptionInput = {
           title: section.title,
           text: section.content,
-          mediaSide: "CENTER", // Default to center, you can modify based on your needs
+          mediaSide, // Use the appropriate media side
           productId: productId,
-          // The mediaId needs to be set based on the uploaded images
-          // For now, we're not handling image uploads in this simplified version
+          mediaId, // Use the uploaded media ID
         };
 
         // Call the server action to create the product description
