@@ -7,6 +7,7 @@ import { Plus, Trash2 } from "lucide-react";
 import React, { useCallback } from "react";
 import ImageUploader from "../ui/image-uploader/ImageUploader";
 import QuillEditorWrapper from "../ui/richtext-editor/QuillEditorWrapper";
+import { useSectionImageHandlers } from "@/libs/hooks/sections/useSectionImageHandlers";
 
 interface SectionItemProps {
   sectionId: string;
@@ -41,6 +42,11 @@ const SectionItemComponent: React.FC<SectionItemProps> = ({
     removeRightImage,
   } = useSectionImages(sectionId);
 
+  // Use the new hook for each side
+  const topHandlers = useSectionImageHandlers({ sectionId, side: "top" });
+  const leftHandlers = useSectionImageHandlers({ sectionId, side: "left" });
+  const rightHandlers = useSectionImageHandlers({ sectionId, side: "right" });
+
   React.useEffect(() => {
     return () => {
       if (topImage?.preview) {
@@ -57,54 +63,72 @@ const SectionItemComponent: React.FC<SectionItemProps> = ({
 
   const handleTopImageChange = useCallback(
     (file: FileWithPreview) => {
-      if (topImage?.preview) {
-        URL.revokeObjectURL(topImage.preview);
+      const success = topHandlers.handleImageUpload(file);
+      if (success) {
+        if (topImage?.preview) {
+          URL.revokeObjectURL(topImage.preview);
+        }
+        setTopImage(file);
       }
-      setTopImage(file);
     },
-    [setTopImage],
+    [topHandlers, setTopImage, topImage],
   );
 
   const handleLeftImageChange = useCallback(
     (file: FileWithPreview) => {
-      if (leftImage?.preview) {
-        URL.revokeObjectURL(leftImage.preview);
+      const success = leftHandlers.handleImageUpload(file);
+      if (success) {
+        if (leftImage?.preview) {
+          URL.revokeObjectURL(leftImage.preview);
+        }
+        setLeftImage(file);
       }
-      setLeftImage(file);
     },
-    [setLeftImage],
+    [leftHandlers, setLeftImage, leftImage],
   );
 
   const handleRightImageChange = useCallback(
     (file: FileWithPreview) => {
-      if (rightImage?.preview) {
-        URL.revokeObjectURL(rightImage.preview);
+      const success = rightHandlers.handleImageUpload(file);
+      if (success) {
+        if (rightImage?.preview) {
+          URL.revokeObjectURL(rightImage.preview);
+        }
+        setRightImage(file);
       }
-      setRightImage(file);
     },
-    [setRightImage],
+    [rightHandlers, setRightImage, rightImage],
   );
 
-  const handleRemoveTopImage = useCallback(() => {
+  const handleRemoveTopImage = useCallback(async () => {
     if (topImage?.preview) {
       URL.revokeObjectURL(topImage.preview);
     }
+    // Get the media ID if it exists and delete it
+    const mediaId = topImage?.path; // Assuming path contains the media ID
+    await topHandlers.handleImageRemove(mediaId);
     removeTopImage();
-  }, [removeTopImage]);
+  }, [removeTopImage, topHandlers, topImage]);
 
-  const handleRemoveLeftImage = useCallback(() => {
+  const handleRemoveLeftImage = useCallback(async () => {
     if (leftImage?.preview) {
       URL.revokeObjectURL(leftImage.preview);
     }
+    // Get the media ID if it exists and delete it
+    const mediaId = leftImage?.path; // Assuming path contains the media ID
+    await leftHandlers.handleImageRemove(mediaId);
     removeLeftImage();
-  }, [removeLeftImage]);
+  }, [removeLeftImage, leftHandlers, leftImage]);
 
-  const handleRemoveRightImage = useCallback(() => {
+  const handleRemoveRightImage = useCallback(async () => {
     if (rightImage?.preview) {
       URL.revokeObjectURL(rightImage.preview);
     }
+    // Get the media ID if it exists and delete it
+    const mediaId = rightImage?.path; // Assuming path contains the media ID
+    await rightHandlers.handleImageRemove(mediaId);
     removeRightImage();
-  }, [removeRightImage]);
+  }, [removeRightImage, rightHandlers, rightImage]);
 
   return (
     <motion.div
@@ -153,6 +177,9 @@ const SectionItemComponent: React.FC<SectionItemProps> = ({
             previewImage={topImage}
             placeholderText="بارگذاری تصویر بالا"
             className="w-full min-h-32"
+            hasOtherImages={
+              topHandlers.hasOtherImages || topHandlers.hasCurrentImage
+            }
           />
         </div>
 
@@ -163,6 +190,9 @@ const SectionItemComponent: React.FC<SectionItemProps> = ({
             previewImage={leftImage}
             placeholderText="بارگذاری تصویر چپ"
             className="w-full h-40"
+            hasOtherImages={
+              leftHandlers.hasOtherImages || leftHandlers.hasCurrentImage
+            }
           />
         </div>
 
@@ -181,6 +211,9 @@ const SectionItemComponent: React.FC<SectionItemProps> = ({
             previewImage={rightImage}
             placeholderText="بارگذاری تصویر راست"
             className="w-full h-40"
+            hasOtherImages={
+              rightHandlers.hasOtherImages || rightHandlers.hasCurrentImage
+            }
           />
         </div>
       </div>

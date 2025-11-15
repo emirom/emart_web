@@ -4,10 +4,10 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { CreateBrandInputEnName } from './createBrandInputEnName';
-import type { CreateBrandInputLogoUrl } from './createBrandInputLogoUrl';
-import type { CreateBrandInputWebsite } from './createBrandInputWebsite';
-import type { CreateBrandInputDescription } from './createBrandInputDescription';
+import type { CreateBrandInputEnName } from "./createBrandInputEnName";
+import type { CreateBrandInputLogoUrl } from "./createBrandInputLogoUrl";
+import type { CreateBrandInputWebsite } from "./createBrandInputWebsite";
+import type { CreateBrandInputDescription } from "./createBrandInputDescription";
 
 export interface CreateBrandInput {
   /**

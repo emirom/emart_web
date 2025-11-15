@@ -1,18 +1,15 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import {
-  uploadProductMedia,
-  UploadProductMediaInput,
-} from "@lib/services/product-media/upload-service";
+import { deleteProductMediasId } from "@lib/services/product-media/product-media";
 
-export async function uploadProductMediaAction(data: UploadProductMediaInput) {
+export async function deleteProductMediaAction(id: string) {
   try {
-    const response = await uploadProductMedia(data);
+    const response = await deleteProductMediasId(id);
     revalidatePath("/dashboard/sections");
     return { success: true, data: response };
   } catch (error: unknown) {
-    console.error("Error uploading product media:", error);
+    console.error("Error deleting product media:", error);
     const errorMessage =
       error instanceof Error ? error.message : "خطایی رخ داده است";
     return { success: false, error: errorMessage };

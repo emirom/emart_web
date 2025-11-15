@@ -4,18 +4,18 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { UpdateGuaranteeInputStart } from './updateGuaranteeInputStart';
-import type { UpdateGuaranteeInputMonths } from './updateGuaranteeInputMonths';
-import type { UpdateGuaranteeInputDays } from './updateGuaranteeInputDays';
-import type { UpdateGuaranteeInputLogo } from './updateGuaranteeInputLogo';
-import type { UpdateGuaranteeInputProviderName } from './updateGuaranteeInputProviderName';
-import type { UpdateGuaranteeInputProviderAddress } from './updateGuaranteeInputProviderAddress';
-import type { UpdateGuaranteeInputProviderPhone } from './updateGuaranteeInputProviderPhone';
-import type { UpdateGuaranteeInputProviderCode } from './updateGuaranteeInputProviderCode';
-import type { UpdateGuaranteeInputTermsUrl } from './updateGuaranteeInputTermsUrl';
-import type { UpdateGuaranteeInputClaimProcess } from './updateGuaranteeInputClaimProcess';
-import type { UpdateGuaranteeInputResponseTime } from './updateGuaranteeInputResponseTime';
-import type { UpdateGuaranteeInputSepidarGuaranteeId } from './updateGuaranteeInputSepidarGuaranteeId';
+import type { UpdateGuaranteeInputStart } from "./updateGuaranteeInputStart";
+import type { UpdateGuaranteeInputMonths } from "./updateGuaranteeInputMonths";
+import type { UpdateGuaranteeInputDays } from "./updateGuaranteeInputDays";
+import type { UpdateGuaranteeInputLogo } from "./updateGuaranteeInputLogo";
+import type { UpdateGuaranteeInputProviderName } from "./updateGuaranteeInputProviderName";
+import type { UpdateGuaranteeInputProviderAddress } from "./updateGuaranteeInputProviderAddress";
+import type { UpdateGuaranteeInputProviderPhone } from "./updateGuaranteeInputProviderPhone";
+import type { UpdateGuaranteeInputProviderCode } from "./updateGuaranteeInputProviderCode";
+import type { UpdateGuaranteeInputTermsUrl } from "./updateGuaranteeInputTermsUrl";
+import type { UpdateGuaranteeInputClaimProcess } from "./updateGuaranteeInputClaimProcess";
+import type { UpdateGuaranteeInputResponseTime } from "./updateGuaranteeInputResponseTime";
+import type { UpdateGuaranteeInputSepidarGuaranteeId } from "./updateGuaranteeInputSepidarGuaranteeId";
 
 /**
  * Product warranty/guarantee entity

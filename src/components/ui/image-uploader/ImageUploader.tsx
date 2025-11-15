@@ -4,6 +4,7 @@ import React, { useRef, useState, useCallback } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { FileWithPreview } from "@lib/types/file-with-preview";
+import { toast } from "react-toastify";
 
 interface ImageUploaderProps {
   onImageChange: (file: FileWithPreview) => void;
@@ -12,6 +13,7 @@ interface ImageUploaderProps {
   placeholderText?: string;
   className?: string;
   disabled?: boolean;
+  hasOtherImages?: boolean; // Added prop to indicate if other images exist
 }
 
 const ImageUploader: React.FC<ImageUploaderProps> = ({
@@ -21,12 +23,20 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({
   placeholderText = "بارگذاری تصویر",
   className = "",
   disabled = false,
+  hasOtherImages = false, // Default to false
 }) => {
   const [isDragging, setIsDragging] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleImageChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
+      if (hasOtherImages) {
+        toast.warning(
+          "لطفاً تصویر فعلی را حذف کنید قبل از بارگذاری تصویر جدید.",
+        );
+        return;
+      }
+
       const file = e.target.files?.[0];
       if (file) {
         const fileWithPreview: FileWithPreview = {
@@ -36,13 +46,19 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({
         onImageChange(fileWithPreview);
       }
     },
-    [onImageChange],
+    [onImageChange, hasOtherImages],
   );
 
-  const handleDragOver = useCallback((e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    setIsDragging(true);
-  }, []);
+  const handleDragOver = useCallback(
+    (e: React.DragEvent<HTMLDivElement>) => {
+      e.preventDefault();
+      if (hasOtherImages) {
+        return; // Prevent drag over if other images exist
+      }
+      setIsDragging(true);
+    },
+    [hasOtherImages],
+  );
 
   const handleDragLeave = useCallback((e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -51,6 +67,13 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({
 
   const handleDrop = useCallback(
     (e: React.DragEvent<HTMLDivElement>) => {
+      if (hasOtherImages) {
+        toast.warning(
+          "لطفاً تصویر فعلی را حذف کنید قبل از بارگذاری تصویر جدید.",
+        );
+        return;
+      }
+
       e.preventDefault();
       setIsDragging(false);
 
@@ -63,14 +86,19 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({
         onImageChange(fileWithPreview);
       }
     },
-    [onImageChange],
+    [onImageChange, hasOtherImages],
   );
 
   const handleClick = useCallback(() => {
+    if (hasOtherImages) {
+      toast.warning("لطفاً تصویر فعلی را حذف کنید قبل از بارگذاری تصویر جدید.");
+      return;
+    }
+
     if (fileInputRef.current && !disabled) {
       fileInputRef.current.click();
     }
-  }, [disabled]);
+  }, [disabled, hasOtherImages]);
 
   const handleRemove = useCallback(
     (e: React.MouseEvent) => {
@@ -86,7 +114,8 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({
     <div
       className={`relative flex flex-col items-center justify-center border-2 border-dashed rounded-lg overflow-hidden
         ${isDragging ? "border-blue-500 bg-blue-50" : "border-gray-300 hover:border-gray-400"}
-        ${previewImage ? "cursor-pointer" : "cursor-pointer"}
+        ${hasOtherImages && !previewImage ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}
+        ${previewImage ? "cursor-pointer" : ""}
         ${className}`}
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
@@ -99,7 +128,7 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({
         onChange={handleImageChange}
         accept="image/*"
         className="hidden"
-        disabled={disabled}
+        disabled={disabled || hasOtherImages}
       />
 
       {previewImage ? (

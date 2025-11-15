@@ -4,19 +4,24 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { BaseResponse } from './baseResponse';
-import type { CitiesResponseDetails } from './citiesResponseDetails';
-import type { CitiesResponseFiltersItem } from './citiesResponseFiltersItem';
-import type { City } from './city';
+import type { BaseResponse } from "./baseResponse";
+import type { CitiesResponseDetails } from "./citiesResponseDetails";
+import type { CitiesResponseFiltersItem } from "./citiesResponseFiltersItem";
+import type { City } from "./city";
 
 export type CitiesResponse = BaseResponse & {
   /** Pagination metadata */
   details?: CitiesResponseDetails;
   filters: CitiesResponseFiltersItem[];
   data: City[];
-} & Required<Pick<BaseResponse & {
-  /** Pagination metadata */
-  details?: CitiesResponseDetails;
-  filters: CitiesResponseFiltersItem[];
-  data: City[];
-}, 'filters' | 'data'>>;
+} & Required<
+    Pick<
+      BaseResponse & {
+        /** Pagination metadata */
+        details?: CitiesResponseDetails;
+        filters: CitiesResponseFiltersItem[];
+        data: City[];
+      },
+      "filters" | "data"
+    >
+  >;

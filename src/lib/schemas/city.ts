@@ -4,7 +4,7 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { CityAbb } from './cityAbb';
+import type { CityAbb } from "./cityAbb";
 
 export interface City {
   /** Unique identifier (UUIDv4) */

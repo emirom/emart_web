@@ -4,11 +4,11 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { ListBrandResponseDataItemDeletedAt } from './listBrandResponseDataItemDeletedAt';
-import type { ListBrandResponseDataItemEnName } from './listBrandResponseDataItemEnName';
-import type { ListBrandResponseDataItemLogoUrl } from './listBrandResponseDataItemLogoUrl';
-import type { ListBrandResponseDataItemWebsite } from './listBrandResponseDataItemWebsite';
-import type { ListBrandResponseDataItemDescription } from './listBrandResponseDataItemDescription';
+import type { ListBrandResponseDataItemDeletedAt } from "./listBrandResponseDataItemDeletedAt";
+import type { ListBrandResponseDataItemEnName } from "./listBrandResponseDataItemEnName";
+import type { ListBrandResponseDataItemLogoUrl } from "./listBrandResponseDataItemLogoUrl";
+import type { ListBrandResponseDataItemWebsite } from "./listBrandResponseDataItemWebsite";
+import type { ListBrandResponseDataItemDescription } from "./listBrandResponseDataItemDescription";
 
 export type ListBrandResponseDataItem = {
   /** Unique identifier (UUIDv4) */

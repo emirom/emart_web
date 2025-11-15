@@ -4,15 +4,13 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import {
-  useMutation
-} from '@tanstack/react-query';
+import { useMutation } from "@tanstack/react-query";
 import type {
   MutationFunction,
   QueryClient,
   UseMutationOptions,
-  UseMutationResult
-} from '@tanstack/react-query';
+  UseMutationResult,
+} from "@tanstack/react-query";
 
 import type {
   ConflictError,
@@ -24,195 +22,265 @@ import type {
   PostAuthOtpBody,
   PostAuthRefreshBody,
   RefreshTokenResponse,
-  UnauthorizedError
-} from '../../schemas';
+  UnauthorizedError,
+} from "../../schemas";
 
-import { axiosInstance } from '../../configs/axios-instance';
-
-
-
+import { axiosInstance } from "../../configs/axios-instance";
 
 /**
  * Send a new otp request
  */
 export const postAuthOtp = (
-    postAuthOtpBody: PostAuthOtpBody,
- signal?: AbortSignal
+  postAuthOtpBody: PostAuthOtpBody,
+  signal?: AbortSignal,
 ) => {
-      
-      
-      return axiosInstance<OtpResponse>(
-      {url: `/auth/otp`, method: 'POST',
-      headers: {'Content-Type': 'application/json', },
-      data: postAuthOtpBody, signal
-    },
-      );
-    }
-  
+  return axiosInstance<OtpResponse>({
+    url: `/auth/otp`,
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    data: postAuthOtpBody,
+    signal,
+  });
+};
 
+export const getPostAuthOtpMutationOptions = <
+  TError = ErrorResponse | ConflictError | InternalError,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof postAuthOtp>>,
+    TError,
+    { data: PostAuthOtpBody },
+    TContext
+  >;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof postAuthOtp>>,
+  TError,
+  { data: PostAuthOtpBody },
+  TContext
+> => {
+  const mutationKey = ["postAuthOtp"];
+  const { mutation: mutationOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey } };
 
-export const getPostAuthOtpMutationOptions = <TError = ErrorResponse | ConflictError | InternalError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postAuthOtp>>, TError,{data: PostAuthOtpBody}, TContext>, }
-): UseMutationOptions<Awaited<ReturnType<typeof postAuthOtp>>, TError,{data: PostAuthOtpBody}, TContext> => {
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof postAuthOtp>>,
+    { data: PostAuthOtpBody }
+  > = (props) => {
+    const { data } = props ?? {};
 
-const mutationKey = ['postAuthOtp'];
-const {mutation: mutationOptions} = options ?
-      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
-      options
-      : {...options, mutation: {...options.mutation, mutationKey}}
-      : {mutation: { mutationKey, }};
+    return postAuthOtp(data);
+  };
 
-      
+  return { mutationFn, ...mutationOptions };
+};
 
+export type PostAuthOtpMutationResult = NonNullable<
+  Awaited<ReturnType<typeof postAuthOtp>>
+>;
+export type PostAuthOtpMutationBody = PostAuthOtpBody;
+export type PostAuthOtpMutationError =
+  | ErrorResponse
+  | ConflictError
+  | InternalError;
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postAuthOtp>>, {data: PostAuthOtpBody}> = (props) => {
-          const {data} = props ?? {};
+export const usePostAuthOtp = <
+  TError = ErrorResponse | ConflictError | InternalError,
+  TContext = unknown,
+>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof postAuthOtp>>,
+      TError,
+      { data: PostAuthOtpBody },
+      TContext
+    >;
+  },
+  queryClient?: QueryClient,
+): UseMutationResult<
+  Awaited<ReturnType<typeof postAuthOtp>>,
+  TError,
+  { data: PostAuthOtpBody },
+  TContext
+> => {
+  const mutationOptions = getPostAuthOtpMutationOptions(options);
 
-          return  postAuthOtp(data,)
-        }
-
-        
-
-
-  return  { mutationFn, ...mutationOptions }}
-
-    export type PostAuthOtpMutationResult = NonNullable<Awaited<ReturnType<typeof postAuthOtp>>>
-    export type PostAuthOtpMutationBody = PostAuthOtpBody
-    export type PostAuthOtpMutationError = ErrorResponse | ConflictError | InternalError
-
-    export const usePostAuthOtp = <TError = ErrorResponse | ConflictError | InternalError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postAuthOtp>>, TError,{data: PostAuthOtpBody}, TContext>, }
- , queryClient?: QueryClient): UseMutationResult<
-        Awaited<ReturnType<typeof postAuthOtp>>,
-        TError,
-        {data: PostAuthOtpBody},
-        TContext
-      > => {
-
-      const mutationOptions = getPostAuthOtpMutationOptions(options);
-
-      return useMutation(mutationOptions , queryClient);
-    }
-    /**
+  return useMutation(mutationOptions, queryClient);
+};
+/**
  * login request
  */
 export const postAuthLogin = (
-    postAuthLoginBody: PostAuthLoginBody,
- signal?: AbortSignal
+  postAuthLoginBody: PostAuthLoginBody,
+  signal?: AbortSignal,
 ) => {
-      
-      
-      return axiosInstance<LoginResponse>(
-      {url: `/auth/login`, method: 'POST',
-      headers: {'Content-Type': 'application/json', },
-      data: postAuthLoginBody, signal
-    },
-      );
-    }
-  
+  return axiosInstance<LoginResponse>({
+    url: `/auth/login`,
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    data: postAuthLoginBody,
+    signal,
+  });
+};
 
+export const getPostAuthLoginMutationOptions = <
+  TError = ErrorResponse | UnauthorizedError | ConflictError | InternalError,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof postAuthLogin>>,
+    TError,
+    { data: PostAuthLoginBody },
+    TContext
+  >;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof postAuthLogin>>,
+  TError,
+  { data: PostAuthLoginBody },
+  TContext
+> => {
+  const mutationKey = ["postAuthLogin"];
+  const { mutation: mutationOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey } };
 
-export const getPostAuthLoginMutationOptions = <TError = ErrorResponse | UnauthorizedError | ConflictError | InternalError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postAuthLogin>>, TError,{data: PostAuthLoginBody}, TContext>, }
-): UseMutationOptions<Awaited<ReturnType<typeof postAuthLogin>>, TError,{data: PostAuthLoginBody}, TContext> => {
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof postAuthLogin>>,
+    { data: PostAuthLoginBody }
+  > = (props) => {
+    const { data } = props ?? {};
 
-const mutationKey = ['postAuthLogin'];
-const {mutation: mutationOptions} = options ?
-      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
-      options
-      : {...options, mutation: {...options.mutation, mutationKey}}
-      : {mutation: { mutationKey, }};
+    return postAuthLogin(data);
+  };
 
-      
+  return { mutationFn, ...mutationOptions };
+};
 
+export type PostAuthLoginMutationResult = NonNullable<
+  Awaited<ReturnType<typeof postAuthLogin>>
+>;
+export type PostAuthLoginMutationBody = PostAuthLoginBody;
+export type PostAuthLoginMutationError =
+  | ErrorResponse
+  | UnauthorizedError
+  | ConflictError
+  | InternalError;
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postAuthLogin>>, {data: PostAuthLoginBody}> = (props) => {
-          const {data} = props ?? {};
+export const usePostAuthLogin = <
+  TError = ErrorResponse | UnauthorizedError | ConflictError | InternalError,
+  TContext = unknown,
+>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof postAuthLogin>>,
+      TError,
+      { data: PostAuthLoginBody },
+      TContext
+    >;
+  },
+  queryClient?: QueryClient,
+): UseMutationResult<
+  Awaited<ReturnType<typeof postAuthLogin>>,
+  TError,
+  { data: PostAuthLoginBody },
+  TContext
+> => {
+  const mutationOptions = getPostAuthLoginMutationOptions(options);
 
-          return  postAuthLogin(data,)
-        }
-
-        
-
-
-  return  { mutationFn, ...mutationOptions }}
-
-    export type PostAuthLoginMutationResult = NonNullable<Awaited<ReturnType<typeof postAuthLogin>>>
-    export type PostAuthLoginMutationBody = PostAuthLoginBody
-    export type PostAuthLoginMutationError = ErrorResponse | UnauthorizedError | ConflictError | InternalError
-
-    export const usePostAuthLogin = <TError = ErrorResponse | UnauthorizedError | ConflictError | InternalError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postAuthLogin>>, TError,{data: PostAuthLoginBody}, TContext>, }
- , queryClient?: QueryClient): UseMutationResult<
-        Awaited<ReturnType<typeof postAuthLogin>>,
-        TError,
-        {data: PostAuthLoginBody},
-        TContext
-      > => {
-
-      const mutationOptions = getPostAuthLoginMutationOptions(options);
-
-      return useMutation(mutationOptions , queryClient);
-    }
-    /**
+  return useMutation(mutationOptions, queryClient);
+};
+/**
  * refresh token
  */
 export const postAuthRefresh = (
-    postAuthRefreshBody: PostAuthRefreshBody,
- signal?: AbortSignal
+  postAuthRefreshBody: PostAuthRefreshBody,
+  signal?: AbortSignal,
 ) => {
-      
-      
-      return axiosInstance<RefreshTokenResponse>(
-      {url: `/auth/refresh`, method: 'POST',
-      headers: {'Content-Type': 'application/json', },
-      data: postAuthRefreshBody, signal
-    },
-      );
-    }
-  
+  return axiosInstance<RefreshTokenResponse>({
+    url: `/auth/refresh`,
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    data: postAuthRefreshBody,
+    signal,
+  });
+};
 
+export const getPostAuthRefreshMutationOptions = <
+  TError = ErrorResponse | UnauthorizedError | ConflictError | InternalError,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof postAuthRefresh>>,
+    TError,
+    { data: PostAuthRefreshBody },
+    TContext
+  >;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof postAuthRefresh>>,
+  TError,
+  { data: PostAuthRefreshBody },
+  TContext
+> => {
+  const mutationKey = ["postAuthRefresh"];
+  const { mutation: mutationOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey } };
 
-export const getPostAuthRefreshMutationOptions = <TError = ErrorResponse | UnauthorizedError | ConflictError | InternalError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postAuthRefresh>>, TError,{data: PostAuthRefreshBody}, TContext>, }
-): UseMutationOptions<Awaited<ReturnType<typeof postAuthRefresh>>, TError,{data: PostAuthRefreshBody}, TContext> => {
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof postAuthRefresh>>,
+    { data: PostAuthRefreshBody }
+  > = (props) => {
+    const { data } = props ?? {};
 
-const mutationKey = ['postAuthRefresh'];
-const {mutation: mutationOptions} = options ?
-      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
-      options
-      : {...options, mutation: {...options.mutation, mutationKey}}
-      : {mutation: { mutationKey, }};
+    return postAuthRefresh(data);
+  };
 
-      
+  return { mutationFn, ...mutationOptions };
+};
 
+export type PostAuthRefreshMutationResult = NonNullable<
+  Awaited<ReturnType<typeof postAuthRefresh>>
+>;
+export type PostAuthRefreshMutationBody = PostAuthRefreshBody;
+export type PostAuthRefreshMutationError =
+  | ErrorResponse
+  | UnauthorizedError
+  | ConflictError
+  | InternalError;
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postAuthRefresh>>, {data: PostAuthRefreshBody}> = (props) => {
-          const {data} = props ?? {};
+export const usePostAuthRefresh = <
+  TError = ErrorResponse | UnauthorizedError | ConflictError | InternalError,
+  TContext = unknown,
+>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof postAuthRefresh>>,
+      TError,
+      { data: PostAuthRefreshBody },
+      TContext
+    >;
+  },
+  queryClient?: QueryClient,
+): UseMutationResult<
+  Awaited<ReturnType<typeof postAuthRefresh>>,
+  TError,
+  { data: PostAuthRefreshBody },
+  TContext
+> => {
+  const mutationOptions = getPostAuthRefreshMutationOptions(options);
 
-          return  postAuthRefresh(data,)
-        }
-
-        
-
-
-  return  { mutationFn, ...mutationOptions }}
-
-    export type PostAuthRefreshMutationResult = NonNullable<Awaited<ReturnType<typeof postAuthRefresh>>>
-    export type PostAuthRefreshMutationBody = PostAuthRefreshBody
-    export type PostAuthRefreshMutationError = ErrorResponse | UnauthorizedError | ConflictError | InternalError
-
-    export const usePostAuthRefresh = <TError = ErrorResponse | UnauthorizedError | ConflictError | InternalError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postAuthRefresh>>, TError,{data: PostAuthRefreshBody}, TContext>, }
- , queryClient?: QueryClient): UseMutationResult<
-        Awaited<ReturnType<typeof postAuthRefresh>>,
-        TError,
-        {data: PostAuthRefreshBody},
-        TContext
-      > => {
-
-      const mutationOptions = getPostAuthRefreshMutationOptions(options);
-
-      return useMutation(mutationOptions , queryClient);
-    }
-    
+  return useMutation(mutationOptions, queryClient);
+};
