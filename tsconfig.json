@@ -36,7 +36,8 @@
       "@/messages/*": ["messages/*"],
       "@/helpers/*": ["lib/helper/*"],
       "@/schemas/*": ["lib/schemas/*"],
-      "@/zod/*": ["lib/zod/*"]
+      "@/zod/*": ["lib/zod/*"],
+      "@/libs/*": ["../libs/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
