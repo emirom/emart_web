@@ -4,17 +4,18 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
+import type { CreateAttributeValueInputValue } from './createAttributeValueInputValue';
+import type { CreateAttributeValueInputAttributeId } from './createAttributeValueInputAttributeId';
+import type { CreateAttributeValueInputVariantId } from './createAttributeValueInputVariantId';
 
 /**
  * Attribute value creation payload
  */
 export interface CreateAttributeValueInput {
-  /**
-   * Attribute value
-   * @minLength 1
-   * @maxLength 100
-   */
-  value: string;
-  /** Parent attribute ID */
-  attributeId: string;
+  /** Filter by value content */
+  value?: CreateAttributeValueInputValue;
+  /** Filter by attribute ID */
+  attributeId?: CreateAttributeValueInputAttributeId;
+  /** Filter by variant ID */
+  variantId?: CreateAttributeValueInputVariantId;
 }

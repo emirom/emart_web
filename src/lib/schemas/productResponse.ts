@@ -4,19 +4,14 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { BaseResponse } from "./baseResponse";
-import type { Product } from "./product";
+import type { BaseResponse } from './baseResponse';
+import type { Product } from './product';
 
 /**
  * Response for single country operations
  */
 export type ProductResponse = BaseResponse & {
   data: Product;
-} & Required<
-    Pick<
-      BaseResponse & {
-        data: Product;
-      },
-      "data"
-    >
-  >;
+} & Required<Pick<BaseResponse & {
+  data: Product;
+}, 'data'>>;

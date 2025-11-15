@@ -4,6 +4,10 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
+import type { AttributeValueTextValue } from './attributeValueTextValue';
+import type { AttributeValueDateValue } from './attributeValueDateValue';
+import type { AttributeValueNumberValue } from './attributeValueNumberValue';
+import type { AttributeValueBoolValue } from './attributeValueBoolValue';
 
 /**
  * Attribute value entity
@@ -15,12 +19,16 @@ export interface AttributeValue {
   createdAt: string;
   /** Last update timestamp (ISO 8601) */
   updatedAt: string;
-  /**
-   * Attribute value
-   * @minLength 1
-   * @maxLength 100
-   */
-  value: string;
-  /** Parent attribute ID */
+  /** Attribute value */
+  textValue?: AttributeValueTextValue;
+  /** date AttributeValue */
+  dateValue?: AttributeValueDateValue;
+  /** number AttributeValue */
+  numberValue?: AttributeValueNumberValue;
+  /**  boolean AttributeValue */
+  boolValue?: AttributeValueBoolValue;
+  /** related attribute ID */
   attributeId: string;
+  /** related variant ID */
+  variantId: string;
 }

@@ -4,7 +4,7 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { UpdateCityAbb } from "./updateCityAbb";
+import type { UpdateCityAbb } from './updateCityAbb';
 
 export interface UpdateCity {
   /**

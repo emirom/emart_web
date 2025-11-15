@@ -4,19 +4,19 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { InsuranceDeletedAt } from "./insuranceDeletedAt";
-import type { InsuranceStart } from "./insuranceStart";
-import type { InsuranceMonths } from "./insuranceMonths";
-import type { InsuranceDays } from "./insuranceDays";
-import type { InsuranceLogo } from "./insuranceLogo";
-import type { InsuranceProviderName } from "./insuranceProviderName";
-import type { InsuranceCoverage } from "./insuranceCoverage";
-import type { InsuranceExclusions } from "./insuranceExclusions";
-import type { InsuranceClaimLimit } from "./insuranceClaimLimit";
-import type { InsuranceDeductible } from "./insuranceDeductible";
-import type { InsuranceClaimProcess } from "./insuranceClaimProcess";
-import type { InsuranceMinOrderValue } from "./insuranceMinOrderValue";
-import type { InsuranceMaxOrderValue } from "./insuranceMaxOrderValue";
+import type { InsuranceDeletedAt } from './insuranceDeletedAt';
+import type { InsuranceStart } from './insuranceStart';
+import type { InsuranceMonths } from './insuranceMonths';
+import type { InsuranceDays } from './insuranceDays';
+import type { InsuranceLogo } from './insuranceLogo';
+import type { InsuranceProviderName } from './insuranceProviderName';
+import type { InsuranceCoverage } from './insuranceCoverage';
+import type { InsuranceExclusions } from './insuranceExclusions';
+import type { InsuranceClaimLimit } from './insuranceClaimLimit';
+import type { InsuranceDeductible } from './insuranceDeductible';
+import type { InsuranceClaimProcess } from './insuranceClaimProcess';
+import type { InsuranceMinOrderValue } from './insuranceMinOrderValue';
+import type { InsuranceMaxOrderValue } from './insuranceMaxOrderValue';
 
 /**
  * Product insurance protection plan

@@ -4,17 +4,25 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
+import type { UpdateAttributeValueInputTextValue } from './updateAttributeValueInputTextValue';
+import type { UpdateAttributeValueInputDateValue } from './updateAttributeValueInputDateValue';
+import type { UpdateAttributeValueInputNumberValue } from './updateAttributeValueInputNumberValue';
+import type { UpdateAttributeValueInputBoolValue } from './updateAttributeValueInputBoolValue';
 
 /**
  * Attribute value update payload
  */
 export interface UpdateAttributeValueInput {
-  /**
-   * Attribute value
-   * @minLength 1
-   * @maxLength 100
-   */
-  value?: string;
-  /** Parent attribute ID */
+  /** Attribute value */
+  textValue?: UpdateAttributeValueInputTextValue;
+  /** date AttributeValue */
+  dateValue?: UpdateAttributeValueInputDateValue;
+  /** number AttributeValue */
+  numberValue?: UpdateAttributeValueInputNumberValue;
+  /**  boolean AttributeValue */
+  boolValue?: UpdateAttributeValueInputBoolValue;
+  /** related attribute ID */
   attributeId?: string;
+  /** related variant ID */
+  variantId?: string;
 }

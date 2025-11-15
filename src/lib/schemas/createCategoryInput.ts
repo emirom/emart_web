@@ -4,11 +4,11 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { CreateCategoryInputParentId } from "./createCategoryInputParentId";
-import type { CreateCategoryInputIconUrl } from "./createCategoryInputIconUrl";
-import type { CreateCategoryInputDesc } from "./createCategoryInputDesc";
-import type { CreateCategoryInputIsActive } from "./createCategoryInputIsActive";
-import type { CreateCategoryInputShowInMenu } from "./createCategoryInputShowInMenu";
+import type { CreateCategoryInputParentId } from './createCategoryInputParentId';
+import type { CreateCategoryInputIconUrl } from './createCategoryInputIconUrl';
+import type { CreateCategoryInputDesc } from './createCategoryInputDesc';
+import type { CreateCategoryInputIsActive } from './createCategoryInputIsActive';
+import type { CreateCategoryInputShowInMenu } from './createCategoryInputShowInMenu';
 
 /**
  * Category creation payload

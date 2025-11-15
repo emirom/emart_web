@@ -4,11 +4,9 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { CreateProductInputDescriptionsAnyOfItem } from "./createProductInputDescriptionsAnyOfItem";
+import type { CreateProductInputDescriptionsAnyOfItem } from './createProductInputDescriptionsAnyOfItem';
 
 /**
  * Product descriptions
  */
-export type CreateProductInputDescriptions =
-  | CreateProductInputDescriptionsAnyOfItem[]
-  | null;
+export type CreateProductInputDescriptions = CreateProductInputDescriptionsAnyOfItem[] | null;

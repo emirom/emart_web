@@ -4,10 +4,10 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { BaseResponse } from "./baseResponse";
-import type { ListBrandResponseDetails } from "./listBrandResponseDetails";
-import type { ListBrandResponseFiltersItem } from "./listBrandResponseFiltersItem";
-import type { ListBrandResponseDataItem } from "./listBrandResponseDataItem";
+import type { BaseResponse } from './baseResponse';
+import type { ListBrandResponseDetails } from './listBrandResponseDetails';
+import type { ListBrandResponseFiltersItem } from './listBrandResponseFiltersItem';
+import type { ListBrandResponseDataItem } from './listBrandResponseDataItem';
 
 export type ListBrandResponse = BaseResponse & {
   /** Pagination metadata */
@@ -15,15 +15,10 @@ export type ListBrandResponse = BaseResponse & {
   filters: ListBrandResponseFiltersItem[];
   /** Array of brands */
   data: ListBrandResponseDataItem[];
-} & Required<
-    Pick<
-      BaseResponse & {
-        /** Pagination metadata */
-        details?: ListBrandResponseDetails;
-        filters: ListBrandResponseFiltersItem[];
-        /** Array of brands */
-        data: ListBrandResponseDataItem[];
-      },
-      "filters" | "data"
-    >
-  >;
+} & Required<Pick<BaseResponse & {
+  /** Pagination metadata */
+  details?: ListBrandResponseDetails;
+  filters: ListBrandResponseFiltersItem[];
+  /** Array of brands */
+  data: ListBrandResponseDataItem[];
+}, 'filters' | 'data'>>;
