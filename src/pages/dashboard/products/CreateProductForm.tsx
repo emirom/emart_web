@@ -77,6 +77,12 @@ export default function CreateProductForm() {
       router.push(`/dashboard/products/add/${productId}`);
     });
   };
+  const handleGoToExpertReview = () => {
+    if (!productId) return;
+    startTransition(() => {
+      router.push(`/dashboard/sections?id=${productId}`);
+    });
+  };
 
   return (
     <form
@@ -144,6 +150,15 @@ export default function CreateProductForm() {
           className="col-span-1"
           label={isPending ? "در حال انتقال..." : "افزودن تصاویر محصول"}
           onClick={handleGoToUpload}
+        />
+      )}
+      {productId && (
+        <SubmitButton
+          type="button"
+          disabled={isPending}
+          className="col-span-1"
+          label={isPending ? "در حال انتقال..." : "افزودن بررسی تخصصی محصول"}
+          onClick={handleGoToExpertReview}
         />
       )}
     </form>

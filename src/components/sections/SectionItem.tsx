@@ -4,7 +4,7 @@ import { useSectionImages } from "@/libs/hooks/sections/useSectionImages";
 import { FileWithPreview } from "@lib/types/file-with-preview";
 import { motion } from "framer-motion";
 import { Plus, Trash2 } from "lucide-react";
-import React, { memo, useCallback } from "react";
+import React, { useCallback } from "react";
 import ImageUploader from "../ui/image-uploader/ImageUploader";
 import QuillEditorWrapper from "../ui/richtext-editor/QuillEditorWrapper";
 
