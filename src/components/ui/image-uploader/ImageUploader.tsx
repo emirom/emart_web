@@ -2,12 +2,11 @@
 
 import React, { useRef, useState, useCallback } from "react";
 import { motion } from "framer-motion";
-import Image from "next/image";
 import { FileWithPreview } from "@lib/types/file-with-preview";
 import { toast } from "react-toastify";
 
 interface ImageUploaderProps {
-  onImageChange: (file: FileWithPreview) => void;
+  onImageChange: (file: FileWithPreview) => Promise<void> | void;
   onRemove?: () => void;
   previewImage?: FileWithPreview;
   placeholderText?: string;
@@ -29,7 +28,7 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleImageChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
+    async (e: React.ChangeEvent<HTMLInputElement>) => {
       if (hasOtherImages) {
         toast.warning(
           "لطفاً تصویر فعلی را حذف کنید قبل از بارگذاری تصویر جدید.",
@@ -43,7 +42,7 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({
           file: file,
           preview: URL.createObjectURL(file),
         };
-        onImageChange(fileWithPreview);
+        await onImageChange(fileWithPreview);
       }
     },
     [onImageChange, hasOtherImages],
@@ -66,7 +65,7 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({
   }, []);
 
   const handleDrop = useCallback(
-    (e: React.DragEvent<HTMLDivElement>) => {
+    async (e: React.DragEvent<HTMLDivElement>) => {
       if (hasOtherImages) {
         toast.warning(
           "لطفاً تصویر فعلی را حذف کنید قبل از بارگذاری تصویر جدید.",
@@ -83,7 +82,7 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({
           file: file,
           preview: URL.createObjectURL(file),
         };
-        onImageChange(fileWithPreview);
+        await onImageChange(fileWithPreview);
       }
     },
     [onImageChange, hasOtherImages],
@@ -133,17 +132,15 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({
 
       {previewImage ? (
         <div className="relative w-full h-full min-h-32">
-          <Image
+          <img
             key={previewImage.preview} // Force re-render when preview URL changes
             src={previewImage.preview}
             alt="Preview"
-            fill
-            className="object-cover"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            onError={(e) => {
-              console.error("Image failed to load:", e);
+            className="object-cover w-full h-full"
+            onError={() => {
+              console.error("Image failed to load:", previewImage?.preview);
             }}
-            onLoad={(e) => {
+            onLoad={() => {
               console.log("Image loaded successfully:", previewImage.preview);
             }}
           />

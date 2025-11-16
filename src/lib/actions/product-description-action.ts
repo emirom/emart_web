@@ -15,9 +15,9 @@ export async function createProductDescriptionAction(
   data: CreateProductDescriptionInput,
 ) {
   try {
-    console.log("Creating product description with data:", data); // Debug log
+    console.log("Creating product description with data:", data);
     const response = await postProductDescriptions(data);
-    console.log("API response:", response); // Debug log
+    console.log("API response:", response);
 
     if (response.success) {
       revalidatePath("/dashboard/sections");
@@ -28,14 +28,12 @@ export async function createProductDescriptionAction(
   } catch (error: unknown) {
     console.error("Error in createProductDescriptionAction:", error);
 
-    // Check if this is a network error (which might happen if the API is not available)
     if (
       error instanceof Error &&
       (error.message.includes("fetch") ||
         error.message.includes("Network") ||
         error.message.includes("Failed"))
     ) {
-      // Simulate a successful response when API is not available for development purposes
       console.warn("API not available, returning simulated success response");
       revalidatePath("/dashboard/sections");
       return {
@@ -71,15 +69,12 @@ export async function updateProductDescriptionAction(
       throw new Error("به‌روزرسانی توضیحات محصول ناموفق بود");
     }
   } catch (error: unknown) {
-    // Check if this is a network error
     if (
       error instanceof Error &&
       (error.message.includes("fetch") ||
         error.message.includes("Network") ||
         error.message.includes("Failed"))
     ) {
-      // Simulate a successful response when API is not available for development purposes
-      console.warn("API not available, returning simulated success response");
       revalidatePath("/dashboard/sections");
       return {
         success: true,

@@ -1,26 +1,31 @@
 "use client";
 
-import { useCallback } from "react";
-import { toast } from "react-toastify";
 import { useSectionImagesStore } from "@/libs/stores/editor/section-images.store";
 import { deleteProductMediaAction } from "@lib/actions/delete-product-media-action";
+import { postProductMediaAction } from "@lib/actions/product-media-action";
 import { FileWithPreview } from "@lib/types/file-with-preview";
+import { useCallback, useMemo } from "react";
+import { toast } from "react-toastify";
 
 interface UseSectionImageHandlersProps {
   sectionId: string;
   side: "top" | "left" | "right";
+  productId?: string;
 }
 
 export const useSectionImageHandlers = ({
   sectionId,
   side,
+  productId,
 }: UseSectionImageHandlersProps) => {
-  const { sections, setSectionImage, removeSectionImage, clearSectionImages } =
+  const { sections, setSectionImage, removeSectionImage } =
     useSectionImagesStore();
 
-  const currentSectionImages = sections[sectionId] || {};
+  const currentSectionImages = useMemo(
+    () => sections[sectionId] || {},
+    [sections, sectionId],
+  );
 
-  // Check if any other image is uploaded for this section (excluding the current side)
   const hasOtherImages = useCallback(() => {
     const otherSides = ["top", "left", "right"].filter(
       (s) => s !== side,
@@ -30,33 +35,63 @@ export const useSectionImageHandlers = ({
     );
   }, [currentSectionImages, side]);
 
-  // Check if the current side has an image
   const hasCurrentImage = useCallback(() => {
     return !!currentSectionImages[`${side}Image`];
   }, [currentSectionImages, side]);
 
-  // Handle new image upload with restriction logic
   const handleImageUpload = useCallback(
-    (file: FileWithPreview) => {
-      // Check if any other image is already uploaded
+    async (file: FileWithPreview) => {
       if (hasOtherImages()) {
         toast.warning(
           "لطفاً تصویر فعلی را حذف کنید قبل از بارگذاری تصویر جدید.",
         );
-        return false; // Prevent upload
+        return false;
       }
 
-      // Set the new image
-      setSectionImage(sectionId, side as "left" | "right" | "top", file);
-      return true; // Upload successful
+      if (!productId) {
+        toast.error("شناسه محصول یافت نشد");
+        return false;
+      }
+
+      try {
+        const uploadData = {
+          file: file.file,
+          productId,
+          title: file.file.name,
+          altText: `Image for section ${sectionId}`,
+        };
+
+        const result = await postProductMediaAction(uploadData);
+
+        if (result.data && result.data.id) {
+          const fileWithMediaId: FileWithPreview = {
+            ...file,
+            path: result.data.id,
+          };
+
+          setSectionImage(
+            sectionId,
+            side as "left" | "right" | "top",
+            fileWithMediaId,
+          );
+          toast.success("تصویر با موفقیت آپلود شد");
+          return true;
+        } else {
+          throw new Error("Upload failed - no ID returned");
+        }
+      } catch (error) {
+        console.error("Error uploading image:", error);
+        toast.error(
+          error instanceof Error ? error.message : "خطا در بارگذاری تصویر",
+        );
+        return false; // Upload failed
+      }
     },
-    [sectionId, side, hasOtherImages, setSectionImage],
+    [sectionId, side, hasOtherImages, setSectionImage, productId],
   );
 
-  // Handle image removal with backend delete
   const handleImageRemove = useCallback(
     async (mediaId?: string) => {
-      // If there's a mediaId, delete from backend
       if (mediaId) {
         try {
           const result = await deleteProductMediaAction(mediaId);
@@ -79,7 +114,6 @@ export const useSectionImageHandlers = ({
     [sectionId, side, removeSectionImage],
   );
 
-  // Check if other updaters have images
   const getOtherImagesStatus = useCallback(() => {
     return {
       hasTopImage: !!currentSectionImages.topImage,

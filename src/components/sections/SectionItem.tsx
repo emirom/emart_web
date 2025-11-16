@@ -14,10 +14,19 @@ interface SectionItemProps {
   index: number;
   title: string;
   content: string;
+  productId?: string;
   onTitleChange: (title: string) => void;
   onContentChange: (content: string) => void;
   onRemove: () => void;
   onAddSection: () => void;
+  onMediaInfoChange?: (mediaInfo: {
+    topImageId?: string;
+    topImageUrl?: string;
+    leftImageId?: string;
+    leftImageUrl?: string;
+    rightImageId?: string;
+    rightImageUrl?: string;
+  }) => void;
 }
 
 const SectionItemComponent: React.FC<SectionItemProps> = ({
@@ -25,10 +34,12 @@ const SectionItemComponent: React.FC<SectionItemProps> = ({
   index,
   title,
   content,
+  productId,
   onTitleChange,
   onContentChange,
   onRemove,
   onAddSection,
+  onMediaInfoChange,
 }) => {
   const {
     topImage,
@@ -42,10 +53,22 @@ const SectionItemComponent: React.FC<SectionItemProps> = ({
     removeRightImage,
   } = useSectionImages(sectionId);
 
-  // Use the new hook for each side
-  const topHandlers = useSectionImageHandlers({ sectionId, side: "top" });
-  const leftHandlers = useSectionImageHandlers({ sectionId, side: "left" });
-  const rightHandlers = useSectionImageHandlers({ sectionId, side: "right" });
+  // Use the new hook for each side with productId
+  const topHandlers = useSectionImageHandlers({
+    sectionId,
+    side: "top",
+    productId,
+  });
+  const leftHandlers = useSectionImageHandlers({
+    sectionId,
+    side: "left",
+    productId,
+  });
+  const rightHandlers = useSectionImageHandlers({
+    sectionId,
+    side: "right",
+    productId,
+  });
 
   React.useEffect(() => {
     return () => {
@@ -62,8 +85,8 @@ const SectionItemComponent: React.FC<SectionItemProps> = ({
   }, [topImage, leftImage, rightImage]);
 
   const handleTopImageChange = useCallback(
-    (file: FileWithPreview) => {
-      const success = topHandlers.handleImageUpload(file);
+    async (file: FileWithPreview) => {
+      const success = await topHandlers.handleImageUpload(file);
       if (success) {
         if (topImage?.preview) {
           URL.revokeObjectURL(topImage.preview);
@@ -75,8 +98,8 @@ const SectionItemComponent: React.FC<SectionItemProps> = ({
   );
 
   const handleLeftImageChange = useCallback(
-    (file: FileWithPreview) => {
-      const success = leftHandlers.handleImageUpload(file);
+    async (file: FileWithPreview) => {
+      const success = await leftHandlers.handleImageUpload(file);
       if (success) {
         if (leftImage?.preview) {
           URL.revokeObjectURL(leftImage.preview);
@@ -88,8 +111,8 @@ const SectionItemComponent: React.FC<SectionItemProps> = ({
   );
 
   const handleRightImageChange = useCallback(
-    (file: FileWithPreview) => {
-      const success = rightHandlers.handleImageUpload(file);
+    async (file: FileWithPreview) => {
+      const success = await rightHandlers.handleImageUpload(file);
       if (success) {
         if (rightImage?.preview) {
           URL.revokeObjectURL(rightImage.preview);
@@ -129,6 +152,28 @@ const SectionItemComponent: React.FC<SectionItemProps> = ({
     await rightHandlers.handleImageRemove(mediaId);
     removeRightImage();
   }, [removeRightImage, rightHandlers, rightImage]);
+
+  // Custom effect to trigger media info change when images are updated
+  React.useEffect(() => {
+    if (onMediaInfoChange) {
+      onMediaInfoChange({
+        topImageId: topImage?.path,
+        topImageUrl: topImage?.preview,
+        leftImageId: leftImage?.path,
+        leftImageUrl: leftImage?.preview,
+        rightImageId: rightImage?.path,
+        rightImageUrl: rightImage?.preview,
+      });
+    }
+  }, [
+    topImage?.path,
+    topImage?.preview,
+    leftImage?.path,
+    leftImage?.preview,
+    rightImage?.path,
+    rightImage?.preview,
+    onMediaInfoChange,
+  ]);
 
   return (
     <motion.div

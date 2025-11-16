@@ -1,21 +1,17 @@
 "use client";
 
-import React, { useCallback } from "react";
-import { motion } from "framer-motion";
-import { useForm, FormProvider } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import { toast } from "react-toastify";
-import SectionItem from "@components/sections/SectionItem";
-import { SectionFormType } from "@/libs/types/sections";
-import { CreateProductDescriptionInput } from "@lib/schemas";
-import { createProductDescriptionAction } from "@lib/actions/product-description-action";
-import { FieldArrayWithId, useFieldArray } from "react-hook-form";
 import { useSectionImagesStore } from "@/libs/stores/editor/section-images.store";
-import { uploadProductMediaAction } from "@lib/actions/upload-product-media-action";
-import { FileWithPreview } from "@lib/types/file-with-preview";
+import { SectionFormType } from "@/libs/types/sections";
+import SectionItem from "@components/sections/SectionItem";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { createProductDescriptionAction } from "@lib/actions/product-description-action";
+import { CreateProductDescriptionInput } from "@lib/schemas";
+import { motion } from "framer-motion";
+import React from "react";
+import { FormProvider, useFieldArray, useForm } from "react-hook-form";
+import { toast } from "react-toastify";
+import { z } from "zod";
 
-// Define validation schema using Zod
 const sectionSchema = z.object({
   sections: z.array(
     z.object({
@@ -79,89 +75,56 @@ const SectionsForm: React.FC<SectionsFormProps> = ({ productId }) => {
     remove(index);
   };
 
-  const uploadImage = useCallback(
-    async (imageFile: FileWithPreview, productId: string) => {
-      if (!imageFile.file) return null;
-
-      try {
-        const uploadData = {
-          file: imageFile.file,
-          productId,
-          title: imageFile.file.name,
-          altText: `Image for product ${productId}`,
-        };
-
-        const result = await uploadProductMediaAction(uploadData);
-        if (result.success && result.data) {
-          return result.data.data?.id || null; // Return the media ID from the response data
-        } else {
-          throw new Error(result.error || "Upload failed");
-        }
-      } catch (error) {
-        console.error("Error uploading image:", error);
-        toast.error(
-          error instanceof Error ? error.message : "خطا در بارگذاری تصویر",
-        );
-        return null;
-      }
-    },
-    [],
-  );
-
   const onSubmit = async (data: SectionsFormData) => {
-    // Validate that we have a product ID
     if (!productId) {
       toast.error("شناسه محصول یافت نشد");
       return;
     }
 
     try {
-      // Process each section
       for (let i = 0; i < data.sections.length; i++) {
         const section = data.sections[i];
         const sectionImages = sectionImageStore[section.id];
 
-        // Prepare image IDs for this section
-        let topImageId: string | null = null;
-        let leftImageId: string | null = null;
-        let rightImageId: string | null = null;
+        const hasPendingUploads =
+          sectionImages?.topImage?.isUploading ||
+          sectionImages?.leftImage?.isUploading ||
+          sectionImages?.rightImage?.isUploading ||
+          (sectionImages?.topImage && !sectionImages?.topImage?.path) ||
+          (sectionImages?.leftImage && !sectionImages?.leftImage?.path) ||
+          (sectionImages?.rightImage && !sectionImages?.rightImage?.path);
 
-        // Upload and get image IDs
-        if (sectionImages?.topImage) {
-          topImageId = await uploadImage(sectionImages.topImage, productId);
+        if (hasPendingUploads) {
+          toast.warning("لطفاً تا پایان بارگذاری تصاویر صبر کنید");
+          return;
         }
-        if (sectionImages?.leftImage) {
-          leftImageId = await uploadImage(sectionImages.leftImage, productId);
-        }
-        if (sectionImages?.rightImage) {
-          rightImageId = await uploadImage(sectionImages.rightImage, productId);
-        }
+      }
 
-        // Determine which image to use as mediaId and which side to place it
+      for (let i = 0; i < data.sections.length; i++) {
+        const section = data.sections[i];
+
         let mediaId: string | undefined;
         let mediaSide: "LEFT" | "CENTER" | "RIGHT" = "CENTER";
 
-        if (leftImageId) {
-          mediaId = leftImageId;
+        if (section.leftImageId) {
+          mediaId = section.leftImageId;
           mediaSide = "LEFT";
-        } else if (rightImageId) {
-          mediaId = rightImageId;
+        } else if (section.rightImageId) {
+          mediaId = section.rightImageId;
           mediaSide = "RIGHT";
-        } else if (topImageId) {
-          mediaId = topImageId;
-          mediaSide = "CENTER"; // Top image can be treated as center in some contexts
+        } else if (section.topImageId) {
+          mediaId = section.topImageId;
+          mediaSide = "CENTER";
         }
 
-        // Prepare the product description input based on the section data
         const productDescriptionInput: CreateProductDescriptionInput = {
           title: section.title,
           text: section.content,
-          mediaSide, // Use the appropriate media side
+          mediaSide,
           productId: productId,
-          mediaId, // Use the uploaded media ID
+          ...(mediaId && { mediaId }),
         };
 
-        // Call the server action to create the product description
         const result = await createProductDescriptionAction(
           productDescriptionInput,
         );
@@ -191,6 +154,7 @@ const SectionsForm: React.FC<SectionsFormProps> = ({ productId }) => {
               index={index}
               title={formMethods.watch(`sections.${index}.title`)}
               content={formMethods.watch(`sections.${index}.content`)}
+              productId={productId}
               onTitleChange={(title) =>
                 formMethods.setValue(`sections.${index}.title`, title)
               }
@@ -199,6 +163,26 @@ const SectionsForm: React.FC<SectionsFormProps> = ({ productId }) => {
               }
               onRemove={() => removeSection(index)}
               onAddSection={addNewSection}
+              onMediaInfoChange={(mediaInfo) => {
+                if (mediaInfo.topImageId !== undefined) {
+                  formMethods.setValue(
+                    `sections.${index}.topImageId`,
+                    mediaInfo.topImageId,
+                  );
+                }
+                if (mediaInfo.leftImageId !== undefined) {
+                  formMethods.setValue(
+                    `sections.${index}.leftImageId`,
+                    mediaInfo.leftImageId,
+                  );
+                }
+                if (mediaInfo.rightImageId !== undefined) {
+                  formMethods.setValue(
+                    `sections.${index}.rightImageId`,
+                    mediaInfo.rightImageId,
+                  );
+                }
+              }}
             />
           ))}
         </div>
