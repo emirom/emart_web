@@ -1,8 +1,9 @@
 "use server";
 
-import { CreateVariantInput } from "@lib/schemas";
+import { CreateVariantInput, UpdateVariantInput } from "@lib/schemas";
 import {
   deleteVariantsId,
+  patchVariantsId,
   postVariants,
 } from "@lib/services/variants/variants";
 import { revalidatePath } from "next/cache";
@@ -22,4 +23,9 @@ export async function deleteVariantAction(id: string) {
       throw new Error("خطایی رخ داده است");
     }
   }
+}
+
+export async function patchVariantAction(id: string, data: UpdateVariantInput) {
+  await patchVariantsId(id, data);
+  revalidatePath("/dashboard/variants");
 }

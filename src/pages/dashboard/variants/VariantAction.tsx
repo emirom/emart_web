@@ -1,10 +1,11 @@
 "use client";
 
 import { AlertDialogModal } from "@components/AlertDialogModal";
-import { DeleteButton, EditButton } from "@components/BtnWithIcon";
-import { DashboardCustomModal } from "@components/DashboardCustomModal";
+import { DeleteButton } from "@components/BtnWithIcon";
 import { deleteVariantAction } from "@lib/actions/variants-action";
 import { queryClient } from "@lib/apis/queryClient";
+import { EditIcon } from "lucide-react";
+import Link from "next/link";
 import { toast } from "react-toastify";
 
 export default function UnitsActions({ id }: { id: string }) {
@@ -23,17 +24,19 @@ export default function UnitsActions({ id }: { id: string }) {
   };
 
   return (
-    <div className="flex items-center justify-end w-full">
+    <div className="flex items-stretch justify-end w-full">
       <AlertDialogModal
         alertTitle="آیا از حذف این تنوع محصول اطمینان دارید؟"
         button={<DeleteButton />}
         onConfirm={handleDelete}
       />
-      <DashboardCustomModal
-        title="ویرایش تنوع محصول"
-        button={<EditButton />}
-        element={<></>}
-      />
+      <Link
+        href={`/dashboard/variants/${id}`}
+        aria-label="ویرایش"
+        className="bg-sky-500 cursor-pointer flex items-center justify-center px-2 mx-1 text-white rounded-md hover:bg-sky-600 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-sky-500 transition-colors"
+      >
+        <EditIcon width={18} className="stroke-white stroke-2" />
+      </Link>
     </div>
   );
 }

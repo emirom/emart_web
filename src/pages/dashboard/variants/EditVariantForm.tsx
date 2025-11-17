@@ -5,25 +5,31 @@ import FormComboboxField from "@components/FormComboboxField";
 import { FormInputField } from "@components/FormInputField";
 import FormSwitchField from "@components/FormSwitchField";
 import { FormTextareaField } from "@components/FormTextareaField";
-import { postVariantAction } from "@lib/actions/variants-action";
+import { patchVariantAction } from "@lib/actions/variants-action";
 import { queryClient } from "@lib/apis/queryClient";
-import { CreateVariantInput } from "@lib/schemas";
+import { UpdateVariantInput } from "@lib/schemas";
 import { useGetColors } from "@lib/services/colors/colors";
 import { useGetProducts } from "@lib/services/products/products";
+import { useGetVariantsId } from "@lib/services/variants/variants";
+import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
-export default function CreateVariantForm() {
+export default function EditVariantForm({ id }: { id: string }) {
   const { data: products } = useGetProducts({ skip: 0, limit: 10 });
   const { data: colors } = useGetColors({ skip: 0, limit: 10 });
-
-  const { handleSubmit, control, reset } = useForm<CreateVariantInput>();
-
-  const onSubmit: SubmitHandler<CreateVariantInput> = async (data) => {
+  const { data: variant } = useGetVariantsId(id, {
+    query: { queryKey: ["/variants", id] },
+  });
+  const { handleSubmit, control, reset } = useForm<UpdateVariantInput>();
+  useEffect(() => {
+    reset({ ...variant?.data });
+  }, [variant, reset]);
+  const onSubmit: SubmitHandler<UpdateVariantInput> = async (data) => {
     try {
-      await postVariantAction(data);
+      await patchVariantAction(id, data);
       queryClient.invalidateQueries({ queryKey: ["/variants"] });
-      toast.success("تنوع افزوده شد");
+      toast.success("تنوع محصول ویرایش شد");
       reset();
     } catch (error) {
       if (error instanceof Error) {
@@ -85,7 +91,7 @@ export default function CreateVariantForm() {
 
       <FormSwitchField control={control} name="isActive" label="وضعیت" />
       <FormSwitchField control={control} name="isApproved" label="تأیید شده؟" />
-      <div className="flex items-stretch gap-2 col-span-1 md:col-span-2 lg:col-span-3">
+      <div className="flex items-stretch gap-2 flex-col col-span-1 md:col-span-2 md:flex-row lg:col-span-3">
         <FormTextareaField
           control={control}
           name="metaDescription"
@@ -101,7 +107,10 @@ export default function CreateVariantForm() {
           placeholder="بازنویسی عنوان "
         />
       </div>
-      <SubmitButton />
+      <div className="flex flex-col gap-2 md:flex-row">
+        <SubmitButton />
+        <SubmitButton label="ویرایش تصویر " />
+      </div>
     </form>
   );
 }
