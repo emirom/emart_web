@@ -6,16 +6,13 @@ import { useGetVariants } from "@lib/services/variants/variants";
 import { ColumnDef } from "@tanstack/react-table";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import VariantAction from "./VariantAction";
 
 type InitialQuery = {
   page?: number;
 };
 
 const columns: ColumnDef<Variant>[] = [
-  {
-    accessorKey: "id",
-    header: "ID",
-  },
   {
     accessorKey: "sku",
     header: "کد SKU",
@@ -65,24 +62,9 @@ const columns: ColumnDef<Variant>[] = [
     header: "کلید ویژگی‌ها (Attribute Key)",
   },
   {
-    accessorKey: "createdAt",
-    header: "تاریخ ایجاد",
-    cell: ({ row }) =>
-      new Date(row.original.createdAt).toLocaleDateString("fa-IR"),
-  },
-  {
-    accessorKey: "updatedAt",
-    header: "آخرین بروزرسانی",
-    cell: ({ row }) =>
-      new Date(row.original.updatedAt).toLocaleDateString("fa-IR"),
-  },
-  {
-    accessorKey: "deletedAt",
-    header: "تاریخ حذف",
-    cell: ({ row }) =>
-      row.original.deletedAt
-        ? new Date(row.original.deletedAt).toLocaleDateString("fa-IR")
-        : "-",
+    accessorKey: "action",
+    header: "",
+    cell: ({ row }) => <VariantAction key={row.id} id={row.original.id} />,
   },
 ];
 
@@ -115,7 +97,7 @@ export default function VariantsTable({
       emptyMessage="تنوعی یافت نشد"
       title="لیست تنوع محصولات"
       filterPlaceholder="جستجو‌تنوع‌محصول"
-      filterColumnKey="sku"
+      filterColumnKey="attributeComboKey"
     />
   );
 }
