@@ -5,12 +5,14 @@ import FormComboboxField from "@components/FormComboboxField";
 import { FormInputField } from "@components/FormInputField";
 import FormSwitchField from "@components/FormSwitchField";
 import { FormTextareaField } from "@components/FormTextareaField";
+import { cn } from "@components/lib/utils";
 import { patchVariantAction } from "@lib/actions/variants-action";
 import { queryClient } from "@lib/apis/queryClient";
 import { UpdateVariantInput } from "@lib/schemas";
 import { useGetColors } from "@lib/services/colors/colors";
 import { useGetProducts } from "@lib/services/products/products";
 import { useGetVariantsId } from "@lib/services/variants/variants";
+import Link from "next/link";
 import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
@@ -109,7 +111,14 @@ export default function EditVariantForm({ id }: { id: string }) {
       </div>
       <div className="flex flex-col gap-2 md:flex-row">
         <SubmitButton />
-        <SubmitButton label="ویرایش تصویر " />
+        <Link
+          className={cn(
+            "flex items-center justify-center rounded-md px-3 bg-green-300 text-white focus-visible:ring-2 focus-visible:ring-offset-2 transition-colors",
+          )}
+          href={`/dashboard/variants/add/${id}`}
+        >
+          افزودن تصویر
+        </Link>
       </div>
     </form>
   );
