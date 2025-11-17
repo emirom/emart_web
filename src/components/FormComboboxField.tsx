@@ -57,11 +57,11 @@ function FormComboboxField<
         control={control}
         render={({ field, fieldState }) => {
           const selectedOption = options.find(
-            (opt) => String(getOptionValue(opt)) === String(field.value)
+            (opt) => String(getOptionValue(opt)) === String(field.value),
           );
           const handleSelect = (currentValue: string) => {
             const matchedOption = options.find(
-              (opt) => String(getOptionValue(opt)) === currentValue
+              (opt) => String(getOptionValue(opt)) === currentValue,
             );
             if (!matchedOption) return;
             field.onChange(getOptionValue(matchedOption) as unknown as TValue);
@@ -78,7 +78,7 @@ function FormComboboxField<
                     aria-expanded={open}
                     className={cn(
                       "w-full justify-between",
-                      fieldState.error ? "border-destructive" : ""
+                      fieldState.error ? "border-destructive" : "",
                     )}
                   >
                     {selectedOption
@@ -87,7 +87,7 @@ function FormComboboxField<
                     <ChevronDown
                       className={cn(
                         "ml-2 h-4 w-4 opacity-50 transition-transform",
-                        open ? "rotate-90" : "rotate-0"
+                        open ? "rotate-90" : "rotate-0",
                       )}
                     />
                   </Button>
@@ -122,7 +122,7 @@ function FormComboboxField<
                                   " h-4 w-4",
                                   String(field.value) === stringValue
                                     ? "opacity-100"
-                                    : "opacity-0"
+                                    : "opacity-0",
                                 )}
                               />
                             </CommandItem>
