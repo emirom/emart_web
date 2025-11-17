@@ -1,7 +1,10 @@
 "use server";
 
 import { CreateVariantInput } from "@lib/schemas";
-import { deleteVariantsId, postVariants } from "@lib/services/variants/variants";
+import {
+  deleteVariantsId,
+  postVariants,
+} from "@lib/services/variants/variants";
 import { revalidatePath } from "next/cache";
 
 export async function postVariantAction(data: CreateVariantInput) {
@@ -9,17 +12,14 @@ export async function postVariantAction(data: CreateVariantInput) {
   revalidatePath("/dashboard/variants");
 }
 
-
 export async function deleteVariantAction(id: string) {
   try {
     await deleteVariantsId(id);
-
   } catch (error) {
     if (error instanceof Error) {
-      throw new Error(error.message)
+      throw new Error(error.message);
     } else {
-      throw new Error("خطایی رخ داده است")
+      throw new Error("خطایی رخ داده است");
     }
   }
-
 }
