@@ -6,9 +6,16 @@ import { DashboardCustomModal } from "@components/DashboardCustomModal";
 import { deleteBrandAction } from "@lib/actions/brand-action";
 import { queryClient } from "@lib/apis/queryClient";
 import { toast } from "react-toastify";
+import { useState, useEffect } from "react";
 import EditBrandForm from "./EditBrandForm";
 
 export default function BrandsAction({ id }: { id: string }) {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   const handleDelete = async () => {
     try {
       await deleteBrandAction(id);
@@ -23,8 +30,23 @@ export default function BrandsAction({ id }: { id: string }) {
     }
   };
 
+  if (!isClient) {
+    return (
+      <div className="flex items-center justify-center w-full">
+        <AlertDialogModal
+          alertTitle="آیا از حذف این برند اطمینان دارید؟"
+          button={<DeleteButton />}
+          onConfirm={handleDelete}
+        />
+        <span className="opacity-0 pointer-events-none">
+          <EditButton />
+        </span>
+      </div>
+    );
+  }
+
   return (
-    <div className="flex  items-center justify-center w-full">
+    <div className="flex items-center justify-center w-full">
       <AlertDialogModal
         alertTitle="آیا از حذف این برند اطمینان دارید؟"
         button={<DeleteButton />}

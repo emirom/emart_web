@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 
 export default function CreateBrandForm() {
   const { handleSubmit, control, formState, reset } = useForm<CreateBrandInput>(
-    { defaultValues: { logoUrl: "https://example.com/logo.png" } },
+    { defaultValues: { logoUrl: "https://example.com/logo.png" } }
   );
   const onSubmit: SubmitHandler<CreateBrandInput> = async (data) => {
     try {
@@ -33,7 +33,6 @@ export default function CreateBrandForm() {
       onSubmit={handleSubmit(onSubmit)}
       className="flex flex-wrap gap-2 items-stretch "
     >
-      {/* <FileUploader label="بارگذاری تصویر" /> */}
       <FormInputField name="name" control={control} label="نام برند" />
       <FormInputField name="enName" control={control} label="نام برند(en)" />
       <div className="w-full">

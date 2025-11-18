@@ -10,13 +10,19 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["localhost"],
+    domains: ["localhost", "example.com"],
     remotePatterns: [
       {
         protocol: "http",
         hostname: "localhost",
         port: "3010",
         pathname: "/public/**",
+      },
+      {
+        protocol: "https",
+        hostname: "example.com",
+        port: "",
+        pathname: "**",
       },
     ],
   },

@@ -1,3 +1,5 @@
+"use client";
+
 import { SubmitButton } from "@components/BtnWithIcon";
 import { DashboardCustomModal } from "@components/DashboardCustomModal";
 import { FormInputField } from "@components/FormInputField";
@@ -7,8 +9,19 @@ import { queryClient } from "@lib/apis/queryClient";
 import { CreateUnitInput } from "@lib/schemas";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+import { useState, useEffect } from "react";
 
 export default function CreateUnit() {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) {
+    return null; // Render nothing on the server to prevent hydration mismatch
+  }
+
   return (
     <DashboardCustomModal
       button={
