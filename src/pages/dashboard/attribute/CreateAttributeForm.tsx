@@ -40,7 +40,7 @@ export default function CreateAttributeForm() {
       className="w-full grid gap-2 items-end
                       grid-cols-1
                       sm:grid-cols-2
-                      lg:grid-cols-3"
+                      "
     >
       <div className="col-span-1 sm:col-span-2 lg:col-span-1">
         <FormAutocomplete
@@ -72,7 +72,7 @@ export default function CreateAttributeForm() {
         />
       </div>
 
-      <div className="col-span-1 sm:col-span-2 lg:col-span-1 w-full">
+      <div className="col-span-1 sm:col-span-2  mt-2 w-full">
         <SubmitButton className="w-full" disabled={!formState.isDirty} />
       </div>
     </form>

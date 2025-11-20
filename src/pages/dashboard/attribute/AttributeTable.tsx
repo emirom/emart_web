@@ -3,24 +3,18 @@
 import { CustomDataTable } from "@components/CustomDataTable";
 import { Attribute } from "@lib/schemas/attribute";
 import { useGetAttributes } from "@lib/services/attributes/attributes";
+import { FilterAttribute } from "@lib/types/filter-generator";
 import { ColumnDef } from "@tanstack/react-table";
 import { useSearchParams } from "next/navigation";
 import AttributeActions from "./AttributeAction";
 import CreateAttribute from "./CreateAttribute";
 
-type InitialQuery = {
-  page?: number;
-  title?: string;
-};
-
 export default function AttributeTable({
   initialQuery,
 }: {
-  initialQuery?: InitialQuery;
+  initialQuery?: FilterAttribute;
 }) {
   const searchParams = useSearchParams();
-  const page = Number(searchParams?.get("page") ? initialQuery?.page : 0);
-  const title = searchParams?.get("search") ?? initialQuery?.title;
 
   const columns: ColumnDef<Partial<Attribute>>[] = [
     { accessorKey: "title", header: "نام ویژگی" },
@@ -38,9 +32,9 @@ export default function AttributeTable({
   ];
 
   const { data: attributes } = useGetAttributes({
-    skip: page * 10,
+    skip: initialQuery?.page || 0,
     limit: 10,
-    title,
+    title: searchParams?.get("title") ?? initialQuery?.title,
   });
 
   return (
@@ -51,6 +45,7 @@ export default function AttributeTable({
       filterPlaceholder="جستجو"
       emptyMessage="هیچ ویژگی پیدا نشد"
       customButton={<CreateAttribute />}
+      filterConfigs={attributes?.filters}
     />
   );
 }
