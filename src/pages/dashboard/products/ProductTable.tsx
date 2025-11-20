@@ -2,15 +2,12 @@
 import { CustomDataTable } from "@components/CustomDataTable";
 import { Product } from "@lib/schemas";
 import { useGetProducts } from "@lib/services/products/products";
+import { ProductFilter } from "@lib/types/filter-generator";
 import { ColumnDef } from "@tanstack/react-table";
 import { Star } from "lucide-react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import ProductAction from "./ProductAction";
-
-type InitialQuery = {
-  page?: number;
-};
 
 const columns: ColumnDef<Product>[] = [
   {
@@ -91,7 +88,7 @@ const columns: ColumnDef<Product>[] = [
 export default function ProductTable({
   initialQuery,
 }: {
-  initialQuery: InitialQuery;
+  initialQuery: ProductFilter;
 }) {
   const searchParams = useSearchParams();
   const page = Number(searchParams?.get("page") ?? initialQuery?.page ?? 0);
@@ -99,6 +96,10 @@ export default function ProductTable({
   const { data: products } = useGetProducts({
     skip: page * 10,
     limit: 10,
+    categoryId: searchParams?.get("categoryId") ?? initialQuery?.categoryId,
+    // isActive: !!searchParams?.get("isActive") && initialQuery?.isActive,
+    name: searchParams?.get("name") ?? initialQuery?.name,
+    enName: searchParams?.get("enName") ?? initialQuery?.enName,
   });
 
   return (
@@ -109,6 +110,7 @@ export default function ProductTable({
       filterColumnKey="name"
       emptyMessage="محصولی یافت نشد"
       filterPlaceholder="جستجوی محصول..."
+      filterConfigs={products?.filters}
       customButton={
         <Link
           href="/dashboard/products/add"
