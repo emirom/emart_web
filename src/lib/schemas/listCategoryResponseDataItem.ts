@@ -4,12 +4,12 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { ListCategoryResponseDataItemDeletedAt } from "./listCategoryResponseDataItemDeletedAt";
-import type { ListCategoryResponseDataItemParentId } from "./listCategoryResponseDataItemParentId";
-import type { ListCategoryResponseDataItemIconUrl } from "./listCategoryResponseDataItemIconUrl";
-import type { ListCategoryResponseDataItemDesc } from "./listCategoryResponseDataItemDesc";
-import type { ListCategoryResponseDataItemIsActive } from "./listCategoryResponseDataItemIsActive";
-import type { ListCategoryResponseDataItemShowInMenu } from "./listCategoryResponseDataItemShowInMenu";
+import type { ListCategoryResponseDataItemDeletedAt } from './listCategoryResponseDataItemDeletedAt';
+import type { ListCategoryResponseDataItemParentId } from './listCategoryResponseDataItemParentId';
+import type { ListCategoryResponseDataItemIconUrl } from './listCategoryResponseDataItemIconUrl';
+import type { ListCategoryResponseDataItemDesc } from './listCategoryResponseDataItemDesc';
+import type { ListCategoryResponseDataItemIsActive } from './listCategoryResponseDataItemIsActive';
+import type { ListCategoryResponseDataItemShowInMenu } from './listCategoryResponseDataItemShowInMenu';
 
 export type ListCategoryResponseDataItem = {
   /** Unique identifier (UUIDv4) */

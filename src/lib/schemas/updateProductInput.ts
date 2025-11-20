@@ -4,10 +4,10 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { UpdateProductInputBrandId } from "./updateProductInputBrandId";
-import type { UpdateProductInputLabels } from "./updateProductInputLabels";
-import type { UpdateProductInputMedias } from "./updateProductInputMedias";
-import type { UpdateProductInputDescriptions } from "./updateProductInputDescriptions";
+import type { UpdateProductInputBrandId } from './updateProductInputBrandId';
+import type { UpdateProductInputLabels } from './updateProductInputLabels';
+import type { UpdateProductInputMedias } from './updateProductInputMedias';
+import type { UpdateProductInputDescriptions } from './updateProductInputDescriptions';
 
 /**
  * Complete mobile phone product entity

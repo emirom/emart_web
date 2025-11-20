@@ -4,11 +4,11 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { CitiesResponseFiltersItemLabel } from "./citiesResponseFiltersItemLabel";
-import type { CitiesResponseFiltersItemModel } from "./citiesResponseFiltersItemModel";
-import type { CitiesResponseFiltersItemField } from "./citiesResponseFiltersItemField";
-import type { CitiesResponseFiltersItemAdvanced } from "./citiesResponseFiltersItemAdvanced";
-import type { CitiesResponseFiltersItemEnumOptions } from "./citiesResponseFiltersItemEnumOptions";
+import type { CitiesResponseFiltersItemLabel } from './citiesResponseFiltersItemLabel';
+import type { CitiesResponseFiltersItemModel } from './citiesResponseFiltersItemModel';
+import type { CitiesResponseFiltersItemField } from './citiesResponseFiltersItemField';
+import type { CitiesResponseFiltersItemAdvanced } from './citiesResponseFiltersItemAdvanced';
+import type { CitiesResponseFiltersItemEnumOptions } from './citiesResponseFiltersItemEnumOptions';
 
 export type CitiesResponseFiltersItem = {
   /** The key representing the service associated with the filter. */

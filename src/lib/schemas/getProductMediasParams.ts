@@ -6,63 +6,63 @@
  */
 
 export type GetProductMediasParams = {
-  /**
-   * Number of records to skip
-   * @minimum 0
-   */
-  skip: number;
-  /**
-   * Maximum number of records to return
-   * @minimum 1
-   * @maximum 20
-   */
-  limit: number;
-  /**
-   * Filter by specific product UUID
-   */
-  productId?: string | null;
-  /**
-   * Filter by specific MIME type
-   */
-  mimetype?: string | null;
-  /**
-   * Filter by media category (image or video)
-   */
-  mediaType?: "image" | "video" | null;
-  /**
-   * Filter by uploader user UUID
-   */
-  uploadedById?: string | null;
-  /**
-   * Filter by minimum order value
-   */
-  minOrder?: number | null;
-  /**
-   * Filter by maximum order value
-   */
-  maxOrder?: number | null;
-  /**
-   * Filter by presence of alternative text
-   */
-  hasAltText?: boolean | null;
-  /**
-   * Filter by presence of caption
-   */
-  hasCaption?: boolean | null;
-  /**
-   * Filter by minimum file size in bytes
-   */
-  minFileSize?: number | null;
-  /**
-   * Filter by maximum file size in bytes
-   */
-  maxFileSize?: number | null;
-  /**
-   * Sort results by specified field
-   */
-  sortBy?: "createdAt" | "updatedAt" | "order" | "fileSize" | null;
-  /**
-   * Sort direction
-   */
-  sortOrder?: "desc" | "asc" | null;
+/**
+ * Number of records to skip
+ * @minimum 0
+ */
+skip: number;
+/**
+ * Maximum number of records to return
+ * @minimum 1
+ * @maximum 20
+ */
+limit: number;
+/**
+ * Filter by specific product UUID
+ */
+productId?: string | null;
+/**
+ * Filter by specific MIME type
+ */
+mimetype?: string | null;
+/**
+ * Filter by media category (image or video)
+ */
+mediaType?: 'image' | 'video' | null;
+/**
+ * Filter by uploader user UUID
+ */
+uploadedById?: string | null;
+/**
+ * Filter by minimum order value
+ */
+minOrder?: number | null;
+/**
+ * Filter by maximum order value
+ */
+maxOrder?: number | null;
+/**
+ * Filter by presence of alternative text
+ */
+hasAltText?: boolean | null;
+/**
+ * Filter by presence of caption
+ */
+hasCaption?: boolean | null;
+/**
+ * Filter by minimum file size in bytes
+ */
+minFileSize?: number | null;
+/**
+ * Filter by maximum file size in bytes
+ */
+maxFileSize?: number | null;
+/**
+ * Sort results by specified field
+ */
+sortBy?: 'createdAt' | 'updatedAt' | 'order' | 'fileSize' | null;
+/**
+ * Sort direction
+ */
+sortOrder?: 'desc' | 'asc' | null;
 };

@@ -4,11 +4,9 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { ProductListResponseDataItemDescriptionsAnyOfItem } from "./productListResponseDataItemDescriptionsAnyOfItem";
+import type { ProductListResponseDataItemDescriptionsAnyOfItem } from './productListResponseDataItemDescriptionsAnyOfItem';
 
 /**
  * Product descriptions
  */
-export type ProductListResponseDataItemDescriptions =
-  | ProductListResponseDataItemDescriptionsAnyOfItem[]
-  | null;
+export type ProductListResponseDataItemDescriptions = ProductListResponseDataItemDescriptionsAnyOfItem[] | null;

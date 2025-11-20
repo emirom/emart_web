@@ -8,12 +8,12 @@
 /**
  * Media placement side
  */
-export type CreateProductDescriptionInputMediaSide =
-  (typeof CreateProductDescriptionInputMediaSide)[keyof typeof CreateProductDescriptionInputMediaSide];
+export type CreateProductDescriptionInputMediaSide = typeof CreateProductDescriptionInputMediaSide[keyof typeof CreateProductDescriptionInputMediaSide];
+
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const CreateProductDescriptionInputMediaSide = {
-  LEFT: "LEFT",
-  CENTER: "CENTER",
-  RIGHT: "RIGHT",
+  LEFT: 'LEFT',
+  CENTER: 'CENTER',
+  RIGHT: 'RIGHT',
 } as const;

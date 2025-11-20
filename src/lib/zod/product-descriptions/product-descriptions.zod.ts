@@ -4,7 +4,10 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import { z as zod } from "zod";
+import {
+  z as zod
+} from 'zod';
+
 
 /**
  * Create a new product description
@@ -16,93 +19,51 @@ export const postProductDescriptionsBodyTextMin = 2;
 
 export const postProductDescriptionsBodyTextMax = 2000;
 
-export const postProductDescriptionsBody = zod
-  .object({
-    title: zod.coerce
-      .string()
-      .min(postProductDescriptionsBodyTitleMin)
-      .max(postProductDescriptionsBodyTitleMax)
-      .describe("Description section title"),
-    text: zod.coerce
-      .string()
-      .min(postProductDescriptionsBodyTextMin)
-      .max(postProductDescriptionsBodyTextMax)
-      .describe("Detailed description content"),
-    mediaSide: zod
-      .enum(["LEFT", "CENTER", "RIGHT"])
-      .describe("Media placement side"),
-    mediaId: zod
-      .union([zod.uuid(), zod.null()])
-      .optional()
-      .describe("Optional ID referencing a ProductMedia entity"),
-    productId: zod.uuid().describe("Associated product ID"),
-  })
-  .describe("Create new product description section");
+
+export const postProductDescriptionsBody = zod.object({
+  "title": zod.coerce.string().min(postProductDescriptionsBodyTitleMin).max(postProductDescriptionsBodyTitleMax).describe('Description section title'),
+  "text": zod.coerce.string().min(postProductDescriptionsBodyTextMin).max(postProductDescriptionsBodyTextMax).describe('Detailed description content'),
+  "mediaSide": zod.enum(['LEFT', 'CENTER', 'RIGHT']).describe('Media placement side'),
+  "mediaId": zod.union([zod.uuid(),zod.null()]).optional().describe('Optional ID referencing a ProductMedia entity'),
+  "productId": zod.uuid().describe('Associated product ID')
+}).describe('Create new product description section')
 
 /**
  * Get all product descriptions with pagination and filters
  */
 export const getProductDescriptionsQuerySkipMin = 0;
 export const getProductDescriptionsQueryLimitMax = 20;
-export const getProductDescriptionsQueryTitleMaxOne = 50;
+export const getProductDescriptionsQueryTitleMaxOne = 200;
+
 
 export const getProductDescriptionsQueryParams = zod.object({
-  skip: zod.coerce
-    .number()
-    .min(getProductDescriptionsQuerySkipMin)
-    .describe("Number of records to skip"),
-  limit: zod.coerce
-    .number()
-    .min(1)
-    .max(getProductDescriptionsQueryLimitMax)
-    .describe("Maximum number of records to return"),
-  productId: zod
-    .union([zod.uuid(), zod.null()])
-    .optional()
-    .describe("Filter by product ID"),
-  title: zod
-    .union([
-      zod.coerce.string().max(getProductDescriptionsQueryTitleMaxOne),
-      zod.null(),
-    ])
-    .optional()
-    .describe("Filter by title content"),
-});
+  "skip": zod.coerce.number().min(getProductDescriptionsQuerySkipMin).describe('Number of records to skip'),
+  "limit": zod.coerce.number().min(1).max(getProductDescriptionsQueryLimitMax).describe('Maximum number of records to return'),
+  "productId": zod.union([zod.uuid(),zod.null()]).optional().describe('Filter by product ID'),
+  "title": zod.union([zod.coerce.string().max(getProductDescriptionsQueryTitleMaxOne),zod.null()]).optional().describe('Filter by title content')
+})
 
-export const getProductDescriptionsResponse = zod
-  .object({
-    success: zod
-      .union([zod.coerce.boolean(), zod.null()])
-      .optional()
-      .describe("Operation status"),
-  })
-  .describe("Standard API response format")
-  .describe(
-    "Response schema for listing product descriptions with pagination and metadata",
-  );
+export const getProductDescriptionsResponse = zod.object({
+  "success": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Operation status')
+}).describe('Standard API response format').describe('Response schema for listing product descriptions with pagination and metadata')
 
 /**
  * Get a single product description by ID
  */
 export const getProductDescriptionsIdParams = zod.object({
-  id: zod.uuid().describe("Product description ID"),
-});
+  "id": zod.uuid().describe('Product description ID')
+})
 
-export const getProductDescriptionsIdResponse = zod
-  .object({
-    success: zod
-      .union([zod.coerce.boolean(), zod.null()])
-      .optional()
-      .describe("Operation status"),
-  })
-  .describe("Standard API response format");
+export const getProductDescriptionsIdResponse = zod.object({
+  "success": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Operation status')
+}).describe('Standard API response format')
 
 /**
  * Update a product description
  */
 export const patchProductDescriptionsIdParams = zod.object({
-  id: zod.uuid().describe("Product description ID"),
-});
+  "id": zod.uuid().describe('Product description ID')
+})
 
 export const patchProductDescriptionsIdBodyTitleMin = 2;
 
@@ -111,44 +72,23 @@ export const patchProductDescriptionsIdBodyTextMin = 2;
 
 export const patchProductDescriptionsIdBodyTextMax = 2000;
 
-export const patchProductDescriptionsIdBody = zod
-  .object({
-    title: zod.coerce
-      .string()
-      .min(patchProductDescriptionsIdBodyTitleMin)
-      .max(patchProductDescriptionsIdBodyTitleMax)
-      .optional()
-      .describe("Description section title"),
-    text: zod.coerce
-      .string()
-      .min(patchProductDescriptionsIdBodyTextMin)
-      .max(patchProductDescriptionsIdBodyTextMax)
-      .optional()
-      .describe("Detailed description content"),
-    mediaSide: zod
-      .enum(["LEFT", "CENTER", "RIGHT"])
-      .optional()
-      .describe("Media placement side"),
-    mediaId: zod
-      .union([zod.uuid(), zod.null()])
-      .optional()
-      .describe("Optional ID referencing a ProductMedia entity"),
-    productId: zod.uuid().optional().describe("Associated product ID"),
-  })
-  .describe("Update product description fields");
 
-export const patchProductDescriptionsIdResponse = zod
-  .object({
-    success: zod
-      .union([zod.coerce.boolean(), zod.null()])
-      .optional()
-      .describe("Operation status"),
-  })
-  .describe("Standard API response format");
+export const patchProductDescriptionsIdBody = zod.object({
+  "title": zod.coerce.string().min(patchProductDescriptionsIdBodyTitleMin).max(patchProductDescriptionsIdBodyTitleMax).optional().describe('Description section title'),
+  "text": zod.coerce.string().min(patchProductDescriptionsIdBodyTextMin).max(patchProductDescriptionsIdBodyTextMax).optional().describe('Detailed description content'),
+  "mediaSide": zod.enum(['LEFT', 'CENTER', 'RIGHT']).optional().describe('Media placement side'),
+  "mediaId": zod.union([zod.uuid(),zod.null()]).optional().describe('Optional ID referencing a ProductMedia entity'),
+  "productId": zod.uuid().optional().describe('Associated product ID')
+}).describe('Update product description fields')
+
+export const patchProductDescriptionsIdResponse = zod.object({
+  "success": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Operation status')
+}).describe('Standard API response format')
 
 /**
  * Delete a product description
  */
 export const deleteProductDescriptionsIdParams = zod.object({
-  id: zod.uuid().describe("Product description ID"),
-});
+  "id": zod.uuid().describe('Product description ID')
+})
+

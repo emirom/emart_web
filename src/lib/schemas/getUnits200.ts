@@ -4,24 +4,19 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { BaseResponse } from "./baseResponse";
-import type { GetUnits200Details } from "./getUnits200Details";
-import type { GetUnits200FiltersItem } from "./getUnits200FiltersItem";
-import type { GetUnits200DataItem } from "./getUnits200DataItem";
+import type { BaseResponse } from './baseResponse';
+import type { GetUnits200Details } from './getUnits200Details';
+import type { GetUnits200FiltersItem } from './getUnits200FiltersItem';
+import type { GetUnits200DataItem } from './getUnits200DataItem';
 
 export type GetUnits200 = BaseResponse & {
   /** Pagination metadata */
   details?: GetUnits200Details;
   filters: GetUnits200FiltersItem[];
   data: GetUnits200DataItem[];
-} & Required<
-    Pick<
-      BaseResponse & {
-        /** Pagination metadata */
-        details?: GetUnits200Details;
-        filters: GetUnits200FiltersItem[];
-        data: GetUnits200DataItem[];
-      },
-      "filters" | "data"
-    >
-  >;
+} & Required<Pick<BaseResponse & {
+  /** Pagination metadata */
+  details?: GetUnits200Details;
+  filters: GetUnits200FiltersItem[];
+  data: GetUnits200DataItem[];
+}, 'filters' | 'data'>>;

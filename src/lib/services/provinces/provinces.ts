@@ -4,7 +4,10 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import { useMutation, useQuery } from "@tanstack/react-query";
+import {
+  useMutation,
+  useQuery
+} from '@tanstack/react-query';
 import type {
   DataTag,
   DefinedInitialDataOptions,
@@ -17,8 +20,8 @@ import type {
   UseMutationOptions,
   UseMutationResult,
   UseQueryOptions,
-  UseQueryResult,
-} from "@tanstack/react-query";
+  UseQueryResult
+} from '@tanstack/react-query';
 
 import type {
   BaseResponse,
@@ -30,531 +33,361 @@ import type {
   NotfoundError,
   ProvinceListResponse,
   ProvinceResponse,
-  UpdateProvinceInput,
-} from "../../schemas";
+  UpdateProvinceInput
+} from '../../schemas';
 
-import { axiosInstance } from "../../configs/axios-instance";
+import { axiosInstance } from '../../configs/axios-instance';
+
+
+
 
 /**
  * Create a new province
  */
 export const postProvinces = (
-  createProvinceInput: CreateProvinceInput,
-  signal?: AbortSignal,
+    createProvinceInput: CreateProvinceInput,
+ signal?: AbortSignal
 ) => {
-  return axiosInstance<ProvinceResponse>({
-    url: `/provinces`,
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    data: createProvinceInput,
-    signal,
-  });
-};
+      
+      
+      return axiosInstance<ProvinceResponse>(
+      {url: `/provinces`, method: 'POST',
+      headers: {'Content-Type': 'application/json', },
+      data: createProvinceInput, signal
+    },
+      );
+    }
+  
 
-export const getPostProvincesMutationOptions = <
-  TError = ErrorResponse | ConflictError | InternalError,
-  TContext = unknown,
->(options?: {
-  mutation?: UseMutationOptions<
-    Awaited<ReturnType<typeof postProvinces>>,
-    TError,
-    { data: CreateProvinceInput },
-    TContext
-  >;
-}): UseMutationOptions<
-  Awaited<ReturnType<typeof postProvinces>>,
-  TError,
-  { data: CreateProvinceInput },
-  TContext
-> => {
-  const mutationKey = ["postProvinces"];
-  const { mutation: mutationOptions } = options
-    ? options.mutation &&
-      "mutationKey" in options.mutation &&
-      options.mutation.mutationKey
-      ? options
-      : { ...options, mutation: { ...options.mutation, mutationKey } }
-    : { mutation: { mutationKey } };
 
-  const mutationFn: MutationFunction<
-    Awaited<ReturnType<typeof postProvinces>>,
-    { data: CreateProvinceInput }
-  > = (props) => {
-    const { data } = props ?? {};
+export const getPostProvincesMutationOptions = <TError = ErrorResponse | ConflictError | InternalError,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postProvinces>>, TError,{data: CreateProvinceInput}, TContext>, }
+): UseMutationOptions<Awaited<ReturnType<typeof postProvinces>>, TError,{data: CreateProvinceInput}, TContext> => {
 
-    return postProvinces(data);
-  };
+const mutationKey = ['postProvinces'];
+const {mutation: mutationOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }};
 
-  return { mutationFn, ...mutationOptions };
-};
+      
 
-export type PostProvincesMutationResult = NonNullable<
-  Awaited<ReturnType<typeof postProvinces>>
->;
-export type PostProvincesMutationBody = CreateProvinceInput;
-export type PostProvincesMutationError =
-  | ErrorResponse
-  | ConflictError
-  | InternalError;
 
-export const usePostProvinces = <
-  TError = ErrorResponse | ConflictError | InternalError,
-  TContext = unknown,
->(
-  options?: {
-    mutation?: UseMutationOptions<
-      Awaited<ReturnType<typeof postProvinces>>,
-      TError,
-      { data: CreateProvinceInput },
-      TContext
-    >;
-  },
-  queryClient?: QueryClient,
-): UseMutationResult<
-  Awaited<ReturnType<typeof postProvinces>>,
-  TError,
-  { data: CreateProvinceInput },
-  TContext
-> => {
-  const mutationOptions = getPostProvincesMutationOptions(options);
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postProvinces>>, {data: CreateProvinceInput}> = (props) => {
+          const {data} = props ?? {};
 
-  return useMutation(mutationOptions, queryClient);
-};
-/**
+          return  postProvinces(data,)
+        }
+
+        
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type PostProvincesMutationResult = NonNullable<Awaited<ReturnType<typeof postProvinces>>>
+    export type PostProvincesMutationBody = CreateProvinceInput
+    export type PostProvincesMutationError = ErrorResponse | ConflictError | InternalError
+
+    export const usePostProvinces = <TError = ErrorResponse | ConflictError | InternalError,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postProvinces>>, TError,{data: CreateProvinceInput}, TContext>, }
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof postProvinces>>,
+        TError,
+        {data: CreateProvinceInput},
+        TContext
+      > => {
+
+      const mutationOptions = getPostProvincesMutationOptions(options);
+
+      return useMutation(mutationOptions , queryClient);
+    }
+    /**
  * Get all provinces with pagination and filters
  */
 export const getProvinces = (
-  params: GetProvincesParams,
-  signal?: AbortSignal,
+    params: GetProvincesParams,
+ signal?: AbortSignal
 ) => {
-  return axiosInstance<ProvinceListResponse>({
-    url: `/provinces`,
-    method: "GET",
-    params,
-    signal,
-  });
-};
+      
+      
+      return axiosInstance<ProvinceListResponse>(
+      {url: `/provinces`, method: 'GET',
+        params, signal
+    },
+      );
+    }
+  
 
-export const getGetProvincesQueryKey = (params?: GetProvincesParams) => {
-  return [`/provinces`, ...(params ? [params] : [])] as const;
-};
+export const getGetProvincesQueryKey = (params?: GetProvincesParams,) => {
+    return [`/provinces`, ...(params ? [params]: [])] as const;
+    }
 
-export const getGetProvincesQueryOptions = <
-  TData = Awaited<ReturnType<typeof getProvinces>>,
-  TError = InternalError,
->(
-  params: GetProvincesParams,
-  options?: {
-    query?: Partial<
-      UseQueryOptions<Awaited<ReturnType<typeof getProvinces>>, TError, TData>
-    >;
-  },
+    
+export const getGetProvincesQueryOptions = <TData = Awaited<ReturnType<typeof getProvinces>>, TError = InternalError>(params: GetProvincesParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getProvinces>>, TError, TData>>, }
 ) => {
-  const { query: queryOptions } = options ?? {};
 
-  const queryKey = queryOptions?.queryKey ?? getGetProvincesQueryKey(params);
+const {query: queryOptions} = options ?? {};
 
-  const queryFn: QueryFunction<Awaited<ReturnType<typeof getProvinces>>> = ({
-    signal,
-  }) => getProvinces(params, signal);
+  const queryKey =  queryOptions?.queryKey ?? getGetProvincesQueryKey(params);
 
-  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
-    Awaited<ReturnType<typeof getProvinces>>,
-    TError,
-    TData
-  > & { queryKey: DataTag<QueryKey, TData, TError> };
-};
+  
 
-export type GetProvincesQueryResult = NonNullable<
-  Awaited<ReturnType<typeof getProvinces>>
->;
-export type GetProvincesQueryError = InternalError;
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getProvinces>>> = ({ signal }) => getProvinces(params, signal);
 
-export function useGetProvinces<
-  TData = Awaited<ReturnType<typeof getProvinces>>,
-  TError = InternalError,
->(
-  params: GetProvincesParams,
-  options: {
-    query: Partial<
-      UseQueryOptions<Awaited<ReturnType<typeof getProvinces>>, TError, TData>
-    > &
-      Pick<
+      
+
+      
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getProvinces>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type GetProvincesQueryResult = NonNullable<Awaited<ReturnType<typeof getProvinces>>>
+export type GetProvincesQueryError = InternalError
+
+
+export function useGetProvinces<TData = Awaited<ReturnType<typeof getProvinces>>, TError = InternalError>(
+ params: GetProvincesParams, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getProvinces>>, TError, TData>> & Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof getProvinces>>,
           TError,
           Awaited<ReturnType<typeof getProvinces>>
-        >,
-        "initialData"
-      >;
-  },
-  queryClient?: QueryClient,
-): DefinedUseQueryResult<TData, TError> & {
-  queryKey: DataTag<QueryKey, TData, TError>;
-};
-export function useGetProvinces<
-  TData = Awaited<ReturnType<typeof getProvinces>>,
-  TError = InternalError,
->(
-  params: GetProvincesParams,
-  options?: {
-    query?: Partial<
-      UseQueryOptions<Awaited<ReturnType<typeof getProvinces>>, TError, TData>
-    > &
-      Pick<
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetProvinces<TData = Awaited<ReturnType<typeof getProvinces>>, TError = InternalError>(
+ params: GetProvincesParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getProvinces>>, TError, TData>> & Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof getProvinces>>,
           TError,
           Awaited<ReturnType<typeof getProvinces>>
-        >,
-        "initialData"
-      >;
-  },
-  queryClient?: QueryClient,
-): UseQueryResult<TData, TError> & {
-  queryKey: DataTag<QueryKey, TData, TError>;
-};
-export function useGetProvinces<
-  TData = Awaited<ReturnType<typeof getProvinces>>,
-  TError = InternalError,
->(
-  params: GetProvincesParams,
-  options?: {
-    query?: Partial<
-      UseQueryOptions<Awaited<ReturnType<typeof getProvinces>>, TError, TData>
-    >;
-  },
-  queryClient?: QueryClient,
-): UseQueryResult<TData, TError> & {
-  queryKey: DataTag<QueryKey, TData, TError>;
-};
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetProvinces<TData = Awaited<ReturnType<typeof getProvinces>>, TError = InternalError>(
+ params: GetProvincesParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getProvinces>>, TError, TData>>, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 
-export function useGetProvinces<
-  TData = Awaited<ReturnType<typeof getProvinces>>,
-  TError = InternalError,
->(
-  params: GetProvincesParams,
-  options?: {
-    query?: Partial<
-      UseQueryOptions<Awaited<ReturnType<typeof getProvinces>>, TError, TData>
-    >;
-  },
-  queryClient?: QueryClient,
-): UseQueryResult<TData, TError> & {
-  queryKey: DataTag<QueryKey, TData, TError>;
-} {
-  const queryOptions = getGetProvincesQueryOptions(params, options);
+export function useGetProvinces<TData = Awaited<ReturnType<typeof getProvinces>>, TError = InternalError>(
+ params: GetProvincesParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getProvinces>>, TError, TData>>, }
+ , queryClient?: QueryClient 
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
 
-  const query = useQuery(queryOptions, queryClient) as UseQueryResult<
-    TData,
-    TError
-  > & { queryKey: DataTag<QueryKey, TData, TError> };
+  const queryOptions = getGetProvincesQueryOptions(params,options)
 
-  query.queryKey = queryOptions.queryKey;
+  const query = useQuery(queryOptions , queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  query.queryKey = queryOptions.queryKey ;
 
   return query;
 }
+
+
 
 /**
  * Get a single province by ID
  */
-export const getProvincesId = (id: string, signal?: AbortSignal) => {
-  return axiosInstance<ProvinceResponse>({
-    url: `/provinces/${id}`,
-    method: "GET",
-    signal,
-  });
-};
-
-export const getGetProvincesIdQueryKey = (id?: string) => {
-  return [`/provinces/${id}`] as const;
-};
-
-export const getGetProvincesIdQueryOptions = <
-  TData = Awaited<ReturnType<typeof getProvincesId>>,
-  TError = ErrorResponse | NotfoundError | InternalError,
->(
-  id: string,
-  options?: {
-    query?: Partial<
-      UseQueryOptions<Awaited<ReturnType<typeof getProvincesId>>, TError, TData>
-    >;
-  },
+export const getProvincesId = (
+    id: string,
+ signal?: AbortSignal
 ) => {
-  const { query: queryOptions } = options ?? {};
+      
+      
+      return axiosInstance<ProvinceResponse>(
+      {url: `/provinces/${id}`, method: 'GET', signal
+    },
+      );
+    }
+  
 
-  const queryKey = queryOptions?.queryKey ?? getGetProvincesIdQueryKey(id);
+export const getGetProvincesIdQueryKey = (id?: string,) => {
+    return [`/provinces/${id}`] as const;
+    }
 
-  const queryFn: QueryFunction<Awaited<ReturnType<typeof getProvincesId>>> = ({
-    signal,
-  }) => getProvincesId(id, signal);
+    
+export const getGetProvincesIdQueryOptions = <TData = Awaited<ReturnType<typeof getProvincesId>>, TError = ErrorResponse | NotfoundError | InternalError>(id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getProvincesId>>, TError, TData>>, }
+) => {
 
-  return {
-    queryKey,
-    queryFn,
-    enabled: !!id,
-    ...queryOptions,
-  } as UseQueryOptions<
-    Awaited<ReturnType<typeof getProvincesId>>,
-    TError,
-    TData
-  > & { queryKey: DataTag<QueryKey, TData, TError> };
-};
+const {query: queryOptions} = options ?? {};
 
-export type GetProvincesIdQueryResult = NonNullable<
-  Awaited<ReturnType<typeof getProvincesId>>
->;
-export type GetProvincesIdQueryError =
-  | ErrorResponse
-  | NotfoundError
-  | InternalError;
+  const queryKey =  queryOptions?.queryKey ?? getGetProvincesIdQueryKey(id);
 
-export function useGetProvincesId<
-  TData = Awaited<ReturnType<typeof getProvincesId>>,
-  TError = ErrorResponse | NotfoundError | InternalError,
->(
-  id: string,
-  options: {
-    query: Partial<
-      UseQueryOptions<Awaited<ReturnType<typeof getProvincesId>>, TError, TData>
-    > &
-      Pick<
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getProvincesId>>> = ({ signal }) => getProvincesId(id, signal);
+
+      
+
+      
+
+   return  { queryKey, queryFn, enabled: !!(id), ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getProvincesId>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type GetProvincesIdQueryResult = NonNullable<Awaited<ReturnType<typeof getProvincesId>>>
+export type GetProvincesIdQueryError = ErrorResponse | NotfoundError | InternalError
+
+
+export function useGetProvincesId<TData = Awaited<ReturnType<typeof getProvincesId>>, TError = ErrorResponse | NotfoundError | InternalError>(
+ id: string, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getProvincesId>>, TError, TData>> & Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof getProvincesId>>,
           TError,
           Awaited<ReturnType<typeof getProvincesId>>
-        >,
-        "initialData"
-      >;
-  },
-  queryClient?: QueryClient,
-): DefinedUseQueryResult<TData, TError> & {
-  queryKey: DataTag<QueryKey, TData, TError>;
-};
-export function useGetProvincesId<
-  TData = Awaited<ReturnType<typeof getProvincesId>>,
-  TError = ErrorResponse | NotfoundError | InternalError,
->(
-  id: string,
-  options?: {
-    query?: Partial<
-      UseQueryOptions<Awaited<ReturnType<typeof getProvincesId>>, TError, TData>
-    > &
-      Pick<
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetProvincesId<TData = Awaited<ReturnType<typeof getProvincesId>>, TError = ErrorResponse | NotfoundError | InternalError>(
+ id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getProvincesId>>, TError, TData>> & Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof getProvincesId>>,
           TError,
           Awaited<ReturnType<typeof getProvincesId>>
-        >,
-        "initialData"
-      >;
-  },
-  queryClient?: QueryClient,
-): UseQueryResult<TData, TError> & {
-  queryKey: DataTag<QueryKey, TData, TError>;
-};
-export function useGetProvincesId<
-  TData = Awaited<ReturnType<typeof getProvincesId>>,
-  TError = ErrorResponse | NotfoundError | InternalError,
->(
-  id: string,
-  options?: {
-    query?: Partial<
-      UseQueryOptions<Awaited<ReturnType<typeof getProvincesId>>, TError, TData>
-    >;
-  },
-  queryClient?: QueryClient,
-): UseQueryResult<TData, TError> & {
-  queryKey: DataTag<QueryKey, TData, TError>;
-};
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetProvincesId<TData = Awaited<ReturnType<typeof getProvincesId>>, TError = ErrorResponse | NotfoundError | InternalError>(
+ id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getProvincesId>>, TError, TData>>, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 
-export function useGetProvincesId<
-  TData = Awaited<ReturnType<typeof getProvincesId>>,
-  TError = ErrorResponse | NotfoundError | InternalError,
->(
-  id: string,
-  options?: {
-    query?: Partial<
-      UseQueryOptions<Awaited<ReturnType<typeof getProvincesId>>, TError, TData>
-    >;
-  },
-  queryClient?: QueryClient,
-): UseQueryResult<TData, TError> & {
-  queryKey: DataTag<QueryKey, TData, TError>;
-} {
-  const queryOptions = getGetProvincesIdQueryOptions(id, options);
+export function useGetProvincesId<TData = Awaited<ReturnType<typeof getProvincesId>>, TError = ErrorResponse | NotfoundError | InternalError>(
+ id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getProvincesId>>, TError, TData>>, }
+ , queryClient?: QueryClient 
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
 
-  const query = useQuery(queryOptions, queryClient) as UseQueryResult<
-    TData,
-    TError
-  > & { queryKey: DataTag<QueryKey, TData, TError> };
+  const queryOptions = getGetProvincesIdQueryOptions(id,options)
 
-  query.queryKey = queryOptions.queryKey;
+  const query = useQuery(queryOptions , queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  query.queryKey = queryOptions.queryKey ;
 
   return query;
 }
+
+
 
 /**
  * Update a province
  */
 export const patchProvincesId = (
-  id: string,
-  updateProvinceInput: UpdateProvinceInput,
-) => {
-  return axiosInstance<ProvinceResponse>({
-    url: `/provinces/${id}`,
-    method: "PATCH",
-    headers: { "Content-Type": "application/json" },
-    data: updateProvinceInput,
-  });
-};
+    id: string,
+    updateProvinceInput: UpdateProvinceInput,
+ ) => {
+      
+      
+      return axiosInstance<ProvinceResponse>(
+      {url: `/provinces/${id}`, method: 'PATCH',
+      headers: {'Content-Type': 'application/json', },
+      data: updateProvinceInput
+    },
+      );
+    }
+  
 
-export const getPatchProvincesIdMutationOptions = <
-  TError = ErrorResponse | NotfoundError | ConflictError | InternalError,
-  TContext = unknown,
->(options?: {
-  mutation?: UseMutationOptions<
-    Awaited<ReturnType<typeof patchProvincesId>>,
-    TError,
-    { id: string; data: UpdateProvinceInput },
-    TContext
-  >;
-}): UseMutationOptions<
-  Awaited<ReturnType<typeof patchProvincesId>>,
-  TError,
-  { id: string; data: UpdateProvinceInput },
-  TContext
-> => {
-  const mutationKey = ["patchProvincesId"];
-  const { mutation: mutationOptions } = options
-    ? options.mutation &&
-      "mutationKey" in options.mutation &&
-      options.mutation.mutationKey
-      ? options
-      : { ...options, mutation: { ...options.mutation, mutationKey } }
-    : { mutation: { mutationKey } };
 
-  const mutationFn: MutationFunction<
-    Awaited<ReturnType<typeof patchProvincesId>>,
-    { id: string; data: UpdateProvinceInput }
-  > = (props) => {
-    const { id, data } = props ?? {};
+export const getPatchProvincesIdMutationOptions = <TError = ErrorResponse | NotfoundError | ConflictError | InternalError,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof patchProvincesId>>, TError,{id: string;data: UpdateProvinceInput}, TContext>, }
+): UseMutationOptions<Awaited<ReturnType<typeof patchProvincesId>>, TError,{id: string;data: UpdateProvinceInput}, TContext> => {
 
-    return patchProvincesId(id, data);
-  };
+const mutationKey = ['patchProvincesId'];
+const {mutation: mutationOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }};
 
-  return { mutationFn, ...mutationOptions };
-};
+      
 
-export type PatchProvincesIdMutationResult = NonNullable<
-  Awaited<ReturnType<typeof patchProvincesId>>
->;
-export type PatchProvincesIdMutationBody = UpdateProvinceInput;
-export type PatchProvincesIdMutationError =
-  | ErrorResponse
-  | NotfoundError
-  | ConflictError
-  | InternalError;
 
-export const usePatchProvincesId = <
-  TError = ErrorResponse | NotfoundError | ConflictError | InternalError,
-  TContext = unknown,
->(
-  options?: {
-    mutation?: UseMutationOptions<
-      Awaited<ReturnType<typeof patchProvincesId>>,
-      TError,
-      { id: string; data: UpdateProvinceInput },
-      TContext
-    >;
-  },
-  queryClient?: QueryClient,
-): UseMutationResult<
-  Awaited<ReturnType<typeof patchProvincesId>>,
-  TError,
-  { id: string; data: UpdateProvinceInput },
-  TContext
-> => {
-  const mutationOptions = getPatchProvincesIdMutationOptions(options);
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof patchProvincesId>>, {id: string;data: UpdateProvinceInput}> = (props) => {
+          const {id,data} = props ?? {};
 
-  return useMutation(mutationOptions, queryClient);
-};
-/**
+          return  patchProvincesId(id,data,)
+        }
+
+        
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type PatchProvincesIdMutationResult = NonNullable<Awaited<ReturnType<typeof patchProvincesId>>>
+    export type PatchProvincesIdMutationBody = UpdateProvinceInput
+    export type PatchProvincesIdMutationError = ErrorResponse | NotfoundError | ConflictError | InternalError
+
+    export const usePatchProvincesId = <TError = ErrorResponse | NotfoundError | ConflictError | InternalError,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof patchProvincesId>>, TError,{id: string;data: UpdateProvinceInput}, TContext>, }
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof patchProvincesId>>,
+        TError,
+        {id: string;data: UpdateProvinceInput},
+        TContext
+      > => {
+
+      const mutationOptions = getPatchProvincesIdMutationOptions(options);
+
+      return useMutation(mutationOptions , queryClient);
+    }
+    /**
  * Delete a province
  */
-export const deleteProvincesId = (id: string) => {
-  return axiosInstance<BaseResponse>({
-    url: `/provinces/${id}`,
-    method: "DELETE",
-  });
-};
+export const deleteProvincesId = (
+    id: string,
+ ) => {
+      
+      
+      return axiosInstance<BaseResponse>(
+      {url: `/provinces/${id}`, method: 'DELETE'
+    },
+      );
+    }
+  
 
-export const getDeleteProvincesIdMutationOptions = <
-  TError = ErrorResponse | NotfoundError | InternalError,
-  TContext = unknown,
->(options?: {
-  mutation?: UseMutationOptions<
-    Awaited<ReturnType<typeof deleteProvincesId>>,
-    TError,
-    { id: string },
-    TContext
-  >;
-}): UseMutationOptions<
-  Awaited<ReturnType<typeof deleteProvincesId>>,
-  TError,
-  { id: string },
-  TContext
-> => {
-  const mutationKey = ["deleteProvincesId"];
-  const { mutation: mutationOptions } = options
-    ? options.mutation &&
-      "mutationKey" in options.mutation &&
-      options.mutation.mutationKey
-      ? options
-      : { ...options, mutation: { ...options.mutation, mutationKey } }
-    : { mutation: { mutationKey } };
 
-  const mutationFn: MutationFunction<
-    Awaited<ReturnType<typeof deleteProvincesId>>,
-    { id: string }
-  > = (props) => {
-    const { id } = props ?? {};
+export const getDeleteProvincesIdMutationOptions = <TError = ErrorResponse | NotfoundError | InternalError,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteProvincesId>>, TError,{id: string}, TContext>, }
+): UseMutationOptions<Awaited<ReturnType<typeof deleteProvincesId>>, TError,{id: string}, TContext> => {
 
-    return deleteProvincesId(id);
-  };
+const mutationKey = ['deleteProvincesId'];
+const {mutation: mutationOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }};
 
-  return { mutationFn, ...mutationOptions };
-};
+      
 
-export type DeleteProvincesIdMutationResult = NonNullable<
-  Awaited<ReturnType<typeof deleteProvincesId>>
->;
 
-export type DeleteProvincesIdMutationError =
-  | ErrorResponse
-  | NotfoundError
-  | InternalError;
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteProvincesId>>, {id: string}> = (props) => {
+          const {id} = props ?? {};
 
-export const useDeleteProvincesId = <
-  TError = ErrorResponse | NotfoundError | InternalError,
-  TContext = unknown,
->(
-  options?: {
-    mutation?: UseMutationOptions<
-      Awaited<ReturnType<typeof deleteProvincesId>>,
-      TError,
-      { id: string },
-      TContext
-    >;
-  },
-  queryClient?: QueryClient,
-): UseMutationResult<
-  Awaited<ReturnType<typeof deleteProvincesId>>,
-  TError,
-  { id: string },
-  TContext
-> => {
-  const mutationOptions = getDeleteProvincesIdMutationOptions(options);
+          return  deleteProvincesId(id,)
+        }
 
-  return useMutation(mutationOptions, queryClient);
-};
+        
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type DeleteProvincesIdMutationResult = NonNullable<Awaited<ReturnType<typeof deleteProvincesId>>>
+    
+    export type DeleteProvincesIdMutationError = ErrorResponse | NotfoundError | InternalError
+
+    export const useDeleteProvincesId = <TError = ErrorResponse | NotfoundError | InternalError,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteProvincesId>>, TError,{id: string}, TContext>, }
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof deleteProvincesId>>,
+        TError,
+        {id: string},
+        TContext
+      > => {
+
+      const mutationOptions = getDeleteProvincesIdMutationOptions(options);
+
+      return useMutation(mutationOptions , queryClient);
+    }
+    

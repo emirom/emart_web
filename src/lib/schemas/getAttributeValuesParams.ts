@@ -6,31 +6,31 @@
  */
 
 export type GetAttributeValuesParams = {
-  /**
-   * Number of records to skip
-   * @minimum 0
-   */
-  skip: number;
-  /**
-   * Maximum number of records to return
-   * @minimum 1
-   * @maximum 20
-   */
-  limit: number;
-  /**
-   * Filter by value content
-   */
-  value?: string | null;
-  /**
-   * Filter by attribute ID
-   */
-  attributeId?: string | null;
-  /**
-   * Filter by variant ID
-   */
-  variantId?: string | null;
-  /**
-   * Attribute type or Attribute id is needed to filter by value
-   */
-  attributeType?: "text" | "number" | "boolean" | "date" | null;
+/**
+ * Number of records to skip
+ * @minimum 0
+ */
+skip: number;
+/**
+ * Maximum number of records to return
+ * @minimum 1
+ * @maximum 20
+ */
+limit: number;
+/**
+ * Filter by value content
+ */
+value?: string | null;
+/**
+ * Filter by attribute ID
+ */
+attributeId?: string | null;
+/**
+ * Filter by variant ID
+ */
+variantId?: string | null;
+/**
+ * Attribute type or Attribute id is needed to filter by value
+ */
+attributeType?: 'text' | 'number' | 'boolean' | 'date' | null;
 };
