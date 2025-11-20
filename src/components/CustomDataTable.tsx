@@ -14,6 +14,7 @@ import {
 } from "@tanstack/react-table";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import * as React from "react";
+import FilterGenerator from "./FilterGenerator";
 import { cn } from "./lib/utils";
 import { Input } from "./ui/input";
 import {
@@ -25,6 +26,24 @@ import {
   TableRow,
 } from "./ui/table";
 
+import { FieldValues } from "react-hook-form";
+
+import { FilterSchemaInput } from "@lib/types/file-type";
+
+type FilterConfig =
+  | FilterSchemaInput[]
+  | {
+      service: string;
+      label?: string | null;
+      open: boolean;
+      type: string;
+      model?: string | null;
+      field?: string | null;
+      advanced?: boolean | null;
+      enumOptions?: string | null;
+    }[]
+  | null;
+
 interface CustomDataTableProps<TData> {
   title?: string;
   data?: TData[];
@@ -33,6 +52,7 @@ interface CustomDataTableProps<TData> {
   filterPlaceholder?: string;
   emptyMessage?: string;
   customButton?: React.ReactNode;
+  filterConfigs?: FilterConfig;
 }
 
 export function CustomDataTable<TData>({
@@ -43,6 +63,7 @@ export function CustomDataTable<TData>({
   filterPlaceholder = "Filter...",
   emptyMessage = "No results found.",
   customButton,
+  filterConfigs,
 }: CustomDataTableProps<TData>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -53,6 +74,7 @@ export function CustomDataTable<TData>({
   const [rowSelection, setRowSelection] = React.useState<
     Record<string, boolean>
   >({});
+
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
@@ -87,26 +109,41 @@ export function CustomDataTable<TData>({
           {title}
         </h2>
       )}
+
       <div className="flex items-center justify-between gap-2 mb-2 rounded-lg p-2">
-        {filterColumn && (
-          <Input
-            placeholder={filterPlaceholder}
-            value={(filterColumn.getFilterValue() as string) ?? ""}
-            onChange={(event) => {
-              const value = event.target.value;
-              filterColumn.setFilterValue(value);
-              const params = new URLSearchParams(
-                searchParams ? Array.from(searchParams.entries()) : [],
-              );
-              if (value) params.set("search", value);
-              else params.delete("search");
-              router.replace(`${pathname}?${params.toString()}`);
-            }}
-            className="max-w-xs text-[0.75rem] font-medium placeholder:text-xs placeholder:font-medium border border-gray-300 rounded-lg"
-          />
-        )}
+        <div className="flex items-stretch gap-2">
+          {filterColumn && (
+            <Input
+              placeholder={filterPlaceholder}
+              value={(filterColumn.getFilterValue() as string) ?? ""}
+              onChange={(event) => {
+                const value = event.target.value;
+                filterColumn.setFilterValue(value);
+
+                const params = new URLSearchParams(
+                  searchParams ? Array.from(searchParams.entries()) : [],
+                );
+
+                if (value) params.set("search", value);
+                else params.delete("search");
+
+                router.replace(`${pathname}?${params.toString()}`);
+              }}
+              className="max-w-xs text-[0.75rem] font-medium placeholder:text-xs placeholder:font-medium border border-gray-300 rounded-lg"
+            />
+          )}
+
+          {filterConfigs && (
+            <FilterGenerator<FieldValues>
+              onSubmit={(v) => console.log("submitted filters:", v)}
+              configs={filterConfigs as FilterSchemaInput[] | null | undefined}
+            />
+          )}
+        </div>
+
         {customButton}
       </div>
+
       <div className="overflow-hidden rounded-md border">
         <Table>
           <TableHeader>
@@ -125,6 +162,7 @@ export function CustomDataTable<TData>({
               </TableRow>
             ))}
           </TableHeader>
+
           <TableBody>
             {Array.isArray(data) && data.length > 0 ? (
               table.getRowModel().rows.map((row) => (
@@ -142,7 +180,7 @@ export function CustomDataTable<TData>({
                   ))}
                 </TableRow>
               ))
-            ) : data === undefined ? null : (
+            ) : (
               <TableRow>
                 <TableCell
                   colSpan={columns.length}
@@ -155,10 +193,11 @@ export function CustomDataTable<TData>({
           </TableBody>
         </Table>
       </div>
+
       <div
         id="pagination"
         className={cn("flex items-center justify-center my-2")}
-      ></div>
+      />
     </div>
   );
 }

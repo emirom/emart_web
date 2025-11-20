@@ -41,6 +41,7 @@ export default function UnitsTable({
       filterPlaceholder="جستجو"
       emptyMessage="هیچ واحدی پیدا نشد"
       customButton={<CreateUnit />}
+      filterConfigs={units?.filters}
     />
   );
 }

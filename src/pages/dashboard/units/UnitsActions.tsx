@@ -5,8 +5,8 @@ import { DeleteButton, EditButton } from "@components/BtnWithIcon";
 import { DashboardCustomModal } from "@components/DashboardCustomModal";
 import { deleteUnitAction } from "@lib/actions/units-actions";
 import { queryClient } from "@lib/apis/queryClient";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { useState, useEffect } from "react";
 import EditUnitForm from "./EditUnitForm";
 
 export default function UnitsActions({ id }: { id: string }) {

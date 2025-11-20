@@ -3,14 +3,11 @@
 import { CustomDataTable } from "@components/CustomDataTable";
 import { Variant } from "@lib/schemas";
 import { useGetVariants } from "@lib/services/variants/variants";
+import { VariantFilter } from "@lib/types/filter-generator";
 import { ColumnDef } from "@tanstack/react-table";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import VariantAction from "./VariantAction";
-
-type InitialQuery = {
-  page?: number;
-};
 
 const columns: ColumnDef<Variant>[] = [
   {
@@ -71,7 +68,7 @@ const columns: ColumnDef<Variant>[] = [
 export default function VariantsTable({
   initialQuery,
 }: {
-  initialQuery?: InitialQuery;
+  initialQuery?: VariantFilter;
 }) {
   const searchParams = useSearchParams();
   const page = Number(searchParams?.get("page") ?? initialQuery?.page ?? 0);
@@ -79,6 +76,9 @@ export default function VariantsTable({
   const { data: variants } = useGetVariants({
     limit: 10,
     skip: page * 10,
+    sku: searchParams?.get("sku") ?? initialQuery?.sku,
+    barcode: searchParams?.get("barcode") ?? initialQuery?.barcode,
+    mpn: searchParams?.get("mpn") ?? initialQuery?.mpn,
   });
 
   return (
@@ -98,6 +98,7 @@ export default function VariantsTable({
       title="لیست تنوع محصولات"
       filterPlaceholder="جستجو‌تنوع‌محصول"
       filterColumnKey="attributeComboKey"
+      filterConfigs={variants?.filters}
     />
   );
 }

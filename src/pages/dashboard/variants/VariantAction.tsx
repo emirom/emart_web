@@ -8,7 +8,7 @@ import { EditIcon } from "lucide-react";
 import Link from "next/link";
 import { toast } from "react-toastify";
 
-export default function UnitsActions({ id }: { id: string }) {
+export default function VariantAction({ id }: { id: string }) {
   const handleDelete = async () => {
     try {
       await deleteVariantAction(id);

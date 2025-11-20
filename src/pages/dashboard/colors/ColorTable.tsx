@@ -86,6 +86,7 @@ export default function ColorTable({
       filterColumnKey="name"
       filterPlaceholder="جستجو رنگ"
       customButton={<CreateColor />}
+      filterConfigs={colors?.filters}
     />
   );
 }

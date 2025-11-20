@@ -3,6 +3,7 @@ import { HeaderWithLink } from "@components/HeaderWithLink";
 import { TablePagination } from "@components/TablePagination";
 import { queryClient } from "@lib/apis/queryClient";
 import { getVariants } from "@lib/services/variants/variants";
+import { VariantFilter } from "@lib/types/filter-generator";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import { Metadata } from "next";
 
@@ -18,12 +19,31 @@ export default async function Page({
 }) {
   const sp = searchParams ? await searchParams : {};
 
-  const initialQuery = {
-    page: Number(sp.page ?? 0),
+  const initialQuery: VariantFilter = {
+    page: Number(sp.page ?? 0) * 10,
+    sku: sp.sku,
+    barcode: sp.barcode,
+    mpn: sp.mpn,
   };
   await queryClient.prefetchQuery({
-    queryKey: ["/variants", { skip: initialQuery.page * 10, limit: 10 }],
-    queryFn: () => getVariants({ skip: initialQuery.page * 10, limit: 10 }),
+    queryKey: [
+      "/variants",
+      {
+        skip: initialQuery.page * 10,
+        limit: 10,
+        sku: initialQuery.sku,
+        barcode: initialQuery.barcode,
+        mpn: initialQuery.mpn,
+      },
+    ],
+    queryFn: () =>
+      getVariants({
+        skip: initialQuery.page,
+        limit: 10,
+        sku: initialQuery.sku,
+        barcode: initialQuery.barcode,
+        mpn: initialQuery.mpn,
+      }),
   });
 
   return (

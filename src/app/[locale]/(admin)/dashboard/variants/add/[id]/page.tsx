@@ -1,28 +1,14 @@
-import { getVariantsId } from "@lib/services/variants/variants";
-import Head from "next/head";
+import VariantFileUploader from "@/pages/dashboard/variants/VariantFileUploader";
 
-export async function generateMetadata({
+export default async function Page({
   params,
 }: {
-  params: Record<string, string>;
+  params: Promise<Record<string, string>>;
 }) {
   const { id } = await params;
-  const variant = await getVariantsId(id);
-  return {
-    title: {
-      absolute: `افزودن تصاویر${variant.data.metaTitle}`,
-    },
-    description: `${variant.data.metaDescription}`,
-  };
-}
-
-export default async function Page() {
   return (
     <>
-      <Head>
-        <title>تصاویر</title>
-      </Head>
-      hello world
+      <VariantFileUploader id={id} />
     </>
   );
 }
