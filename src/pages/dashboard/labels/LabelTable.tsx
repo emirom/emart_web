@@ -3,15 +3,12 @@
 import { CustomDataTable } from "@components/CustomDataTable";
 import { Label } from "@lib/schemas";
 import { useGetLabels } from "@lib/services/labels/labels";
+import { LabelFilter } from "@lib/types/filter-generator";
 import { ColumnDef } from "@tanstack/react-table";
 import { useSearchParams } from "next/navigation";
 import CreateLabel from "./CreateLabel";
 import LabelAction from "./LabelAction";
 
-type InitialQuery = {
-  page?: number;
-  name?: string;
-};
 // TODO: Use This Style for tables
 const columns: ColumnDef<Label>[] = [
   {
@@ -76,12 +73,15 @@ const columns: ColumnDef<Label>[] = [
 export default function LabelTable({
   initialQuery,
 }: {
-  initialQuery?: InitialQuery;
+  initialQuery?: LabelFilter;
 }) {
   const searchParams = useSearchParams();
-  const page = Number(searchParams?.get("page") ?? initialQuery?.page ?? 0);
-  const name = searchParams?.get("search") ?? initialQuery?.name;
-  const { data: labels } = useGetLabels({ skip: page * 10, limit: 10, name });
+
+  const { data: labels } = useGetLabels({
+    skip: initialQuery?.page ?? 0,
+    limit: 10,
+    name: searchParams?.get("name") ?? initialQuery?.name,
+  });
 
   return (
     <CustomDataTable
@@ -92,6 +92,7 @@ export default function LabelTable({
       emptyMessage="برچسبی یافت نشد"
       filterPlaceholder="جستجو"
       title="برچسب‌ها"
+      filterConfigs={labels?.filters}
     />
   );
 }

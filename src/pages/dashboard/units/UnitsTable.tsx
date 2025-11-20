@@ -3,24 +3,18 @@
 import { CustomDataTable } from "@components/CustomDataTable";
 import { Unit } from "@lib/schemas";
 import { useGetUnits } from "@lib/services/units/units";
+import { UnitFilter } from "@lib/types/filter-generator";
 import { ColumnDef } from "@tanstack/react-table";
 import { useSearchParams } from "next/navigation";
 import CreateUnit from "./CreateUnit";
 import UnitsActions from "./UnitsActions";
 
-type InitialQuery = {
-  page?: number;
-  title?: string;
-};
-
 export default function UnitsTable({
   initialQuery,
 }: {
-  initialQuery?: InitialQuery;
+  initialQuery?: UnitFilter;
 }) {
   const searchParams = useSearchParams();
-  const page = Number(searchParams?.get("page") ? initialQuery?.page : 0);
-  const title = searchParams?.get("search") ?? initialQuery?.title;
 
   const columns: ColumnDef<Unit>[] = [
     { accessorKey: "title", header: "نام‌کمیت" },
@@ -31,7 +25,11 @@ export default function UnitsTable({
     },
   ];
 
-  const { data: units } = useGetUnits({ skip: page * 10, limit: 10, title });
+  const { data: units } = useGetUnits({
+    skip: initialQuery?.page ?? 0,
+    limit: 10,
+    title: searchParams?.get("title") ?? initialQuery?.title,
+  });
 
   return (
     <CustomDataTable
