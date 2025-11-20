@@ -4,8 +4,8 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { CreateLocationInputStreetNumber } from './createLocationInputStreetNumber';
-import type { CreateLocationInputIsActive } from './createLocationInputIsActive';
+import type { CreateLocationInputStreetNumber } from "./createLocationInputStreetNumber";
+import type { CreateLocationInputIsActive } from "./createLocationInputIsActive";
 
 /**
  * Location creation payload

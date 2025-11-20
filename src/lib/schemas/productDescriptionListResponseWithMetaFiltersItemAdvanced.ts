@@ -8,4 +8,6 @@
 /**
  * Indicates if this filter is an advanced filter.
  */
-export type ProductDescriptionListResponseWithMetaFiltersItemAdvanced = boolean | null;
+export type ProductDescriptionListResponseWithMetaFiltersItemAdvanced =
+  | boolean
+  | null;

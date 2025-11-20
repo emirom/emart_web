@@ -4,8 +4,8 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { CreateColorInputEnName } from './createColorInputEnName';
-import type { CreateColorInputDisplayName } from './createColorInputDisplayName';
+import type { CreateColorInputEnName } from "./createColorInputEnName";
+import type { CreateColorInputDisplayName } from "./createColorInputDisplayName";
 
 /**
  * Color creation payload

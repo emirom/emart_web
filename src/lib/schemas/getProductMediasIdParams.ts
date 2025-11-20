@@ -6,8 +6,8 @@
  */
 
 export type GetProductMediasIdParams = {
-/**
- * Category ID
- */
-id: string;
+  /**
+   * Category ID
+   */
+  id: string;
 };

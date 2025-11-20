@@ -4,7 +4,7 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { GetUnits200DataItemDeletedAt } from './getUnits200DataItemDeletedAt';
+import type { GetUnits200DataItemDeletedAt } from "./getUnits200DataItemDeletedAt";
 
 export type GetUnits200DataItem = {
   /** Unique identifier (UUIDv4) */

@@ -4,10 +4,7 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import {
-  z as zod
-} from 'zod';
-
+import { z as zod } from "zod";
 
 /**
  * Create a new store
@@ -19,26 +16,57 @@ export const postStoresBodySlugMin = 2;
 
 export const postStoresBodySlugMax = 50;
 
-export const postStoresBodySlugRegExp = new RegExp('^[a-z0-9-]+$');
+export const postStoresBodySlugRegExp = new RegExp("^[a-z0-9-]+$");
 export const postStoresBodyLogoMaxOne = 200;
 export const postStoresBodyDescriptionMaxOne = 200;
 export const postStoresBodyEmailMaxOne = 50;
 export const postStoresBodyPhoneMaxOne = 200;
 export const postStoresBodyWebsiteMaxOne = 1000;
 
-
-export const postStoresBody = zod.object({
-  "name": zod.coerce.string().min(postStoresBodyNameMin).max(postStoresBodyNameMax).describe('Store name (unique)'),
-  "slug": zod.coerce.string().min(postStoresBodySlugMin).max(postStoresBodySlugMax).regex(postStoresBodySlugRegExp).describe('URL-friendly slug (unique, lowercase, hyphens only)'),
-  "logo": zod.union([zod.coerce.string().max(postStoresBodyLogoMaxOne),zod.null()]).optional().describe('Store logo URL'),
-  "description": zod.union([zod.coerce.string().max(postStoresBodyDescriptionMaxOne),zod.null()]).optional().describe('Store description'),
-  "email": zod.union([zod.email().max(postStoresBodyEmailMaxOne),zod.null()]).optional().describe('Business email (unique)'),
-  "phone": zod.union([zod.coerce.string().max(postStoresBodyPhoneMaxOne),zod.null()]).optional().describe('Business phone (unique)'),
-  "website": zod.union([zod.url().max(postStoresBodyWebsiteMaxOne),zod.null()]).optional().describe('External website URL'),
-  "isActive": zod.coerce.boolean().describe('Whether store is active'),
-  "isApproved": zod.coerce.boolean().describe('Platform approval status'),
-  "ownerId": zod.union([zod.uuid(),zod.null()]).optional().describe('Owner user ID')
-}).describe('Store creation payload')
+export const postStoresBody = zod
+  .object({
+    name: zod.coerce
+      .string()
+      .min(postStoresBodyNameMin)
+      .max(postStoresBodyNameMax)
+      .describe("Store name (unique)"),
+    slug: zod.coerce
+      .string()
+      .min(postStoresBodySlugMin)
+      .max(postStoresBodySlugMax)
+      .regex(postStoresBodySlugRegExp)
+      .describe("URL-friendly slug (unique, lowercase, hyphens only)"),
+    logo: zod
+      .union([zod.coerce.string().max(postStoresBodyLogoMaxOne), zod.null()])
+      .optional()
+      .describe("Store logo URL"),
+    description: zod
+      .union([
+        zod.coerce.string().max(postStoresBodyDescriptionMaxOne),
+        zod.null(),
+      ])
+      .optional()
+      .describe("Store description"),
+    email: zod
+      .union([zod.email().max(postStoresBodyEmailMaxOne), zod.null()])
+      .optional()
+      .describe("Business email (unique)"),
+    phone: zod
+      .union([zod.coerce.string().max(postStoresBodyPhoneMaxOne), zod.null()])
+      .optional()
+      .describe("Business phone (unique)"),
+    website: zod
+      .union([zod.url().max(postStoresBodyWebsiteMaxOne), zod.null()])
+      .optional()
+      .describe("External website URL"),
+    isActive: zod.coerce.boolean().describe("Whether store is active"),
+    isApproved: zod.coerce.boolean().describe("Platform approval status"),
+    ownerId: zod
+      .union([zod.uuid(), zod.null()])
+      .optional()
+      .describe("Owner user ID"),
+  })
+  .describe("Store creation payload");
 
 /**
  * List all stores with pagination and filters
@@ -50,40 +78,79 @@ export const getStoresQuerySlugMaxOne = 200;
 export const getStoresQueryEmailMaxOne = 200;
 export const getStoresQueryPhoneMaxOne = 200;
 
-
 export const getStoresQueryParams = zod.object({
-  "skip": zod.coerce.number().min(getStoresQuerySkipMin).describe('Number of records to skip'),
-  "limit": zod.coerce.number().min(1).max(getStoresQueryLimitMax).describe('Maximum number of records to return'),
-  "name": zod.union([zod.coerce.string().max(getStoresQueryNameMaxOne),zod.null()]).optional().describe('Filter by store name'),
-  "slug": zod.union([zod.coerce.string().max(getStoresQuerySlugMaxOne),zod.null()]).optional().describe('Filter by store slug'),
-  "ownerId": zod.union([zod.uuid(),zod.null()]).optional().describe('Filter by owner ID'),
-  "isActive": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Filter by active status'),
-  "isApproved": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Filter by approval status'),
-  "email": zod.union([zod.coerce.string().max(getStoresQueryEmailMaxOne),zod.null()]).optional().describe('Filter by email'),
-  "phone": zod.union([zod.coerce.string().max(getStoresQueryPhoneMaxOne),zod.null()]).optional().describe('Filter by phone')
-})
+  skip: zod.coerce
+    .number()
+    .min(getStoresQuerySkipMin)
+    .describe("Number of records to skip"),
+  limit: zod.coerce
+    .number()
+    .min(1)
+    .max(getStoresQueryLimitMax)
+    .describe("Maximum number of records to return"),
+  name: zod
+    .union([zod.coerce.string().max(getStoresQueryNameMaxOne), zod.null()])
+    .optional()
+    .describe("Filter by store name"),
+  slug: zod
+    .union([zod.coerce.string().max(getStoresQuerySlugMaxOne), zod.null()])
+    .optional()
+    .describe("Filter by store slug"),
+  ownerId: zod
+    .union([zod.uuid(), zod.null()])
+    .optional()
+    .describe("Filter by owner ID"),
+  isActive: zod
+    .union([zod.coerce.boolean(), zod.null()])
+    .optional()
+    .describe("Filter by active status"),
+  isApproved: zod
+    .union([zod.coerce.boolean(), zod.null()])
+    .optional()
+    .describe("Filter by approval status"),
+  email: zod
+    .union([zod.coerce.string().max(getStoresQueryEmailMaxOne), zod.null()])
+    .optional()
+    .describe("Filter by email"),
+  phone: zod
+    .union([zod.coerce.string().max(getStoresQueryPhoneMaxOne), zod.null()])
+    .optional()
+    .describe("Filter by phone"),
+});
 
-export const getStoresResponse = zod.object({
-  "success": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Operation status')
-}).describe('Standard API response format').describe('List of stores response')
+export const getStoresResponse = zod
+  .object({
+    success: zod
+      .union([zod.coerce.boolean(), zod.null()])
+      .optional()
+      .describe("Operation status"),
+  })
+  .describe("Standard API response format")
+  .describe("List of stores response");
 
 /**
  * Get a single store by ID
  */
 export const getStoresIdParams = zod.object({
-  "id": zod.uuid().describe('Store ID')
-})
+  id: zod.uuid().describe("Store ID"),
+});
 
-export const getStoresIdResponse = zod.object({
-  "success": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Operation status')
-}).describe('Standard API response format').describe('Single store response')
+export const getStoresIdResponse = zod
+  .object({
+    success: zod
+      .union([zod.coerce.boolean(), zod.null()])
+      .optional()
+      .describe("Operation status"),
+  })
+  .describe("Standard API response format")
+  .describe("Single store response");
 
 /**
  * Update a store
  */
 export const patchStoresIdParams = zod.object({
-  "id": zod.uuid().describe('Store ID')
-})
+  id: zod.uuid().describe("Store ID"),
+});
 
 export const patchStoresIdBodyNameMin = 2;
 
@@ -94,27 +161,68 @@ export const patchStoresIdBodyEmailMaxOne = 50;
 export const patchStoresIdBodyPhoneMaxOne = 200;
 export const patchStoresIdBodyWebsiteMaxOne = 1000;
 
+export const patchStoresIdBody = zod
+  .object({
+    name: zod.coerce
+      .string()
+      .min(patchStoresIdBodyNameMin)
+      .max(patchStoresIdBodyNameMax)
+      .optional()
+      .describe("Store name (unique)"),
+    logo: zod
+      .union([zod.coerce.string().max(patchStoresIdBodyLogoMaxOne), zod.null()])
+      .optional()
+      .describe("Store logo URL"),
+    description: zod
+      .union([
+        zod.coerce.string().max(patchStoresIdBodyDescriptionMaxOne),
+        zod.null(),
+      ])
+      .optional()
+      .describe("Store description"),
+    email: zod
+      .union([zod.email().max(patchStoresIdBodyEmailMaxOne), zod.null()])
+      .optional()
+      .describe("Business email (unique)"),
+    phone: zod
+      .union([
+        zod.coerce.string().max(patchStoresIdBodyPhoneMaxOne),
+        zod.null(),
+      ])
+      .optional()
+      .describe("Business phone (unique)"),
+    website: zod
+      .union([zod.url().max(patchStoresIdBodyWebsiteMaxOne), zod.null()])
+      .optional()
+      .describe("External website URL"),
+    isActive: zod.coerce
+      .boolean()
+      .optional()
+      .describe("Whether store is active"),
+    isApproved: zod.coerce
+      .boolean()
+      .optional()
+      .describe("Platform approval status"),
+    ownerId: zod
+      .union([zod.uuid(), zod.null()])
+      .optional()
+      .describe("Owner user ID"),
+  })
+  .describe("Store update payload");
 
-export const patchStoresIdBody = zod.object({
-  "name": zod.coerce.string().min(patchStoresIdBodyNameMin).max(patchStoresIdBodyNameMax).optional().describe('Store name (unique)'),
-  "logo": zod.union([zod.coerce.string().max(patchStoresIdBodyLogoMaxOne),zod.null()]).optional().describe('Store logo URL'),
-  "description": zod.union([zod.coerce.string().max(patchStoresIdBodyDescriptionMaxOne),zod.null()]).optional().describe('Store description'),
-  "email": zod.union([zod.email().max(patchStoresIdBodyEmailMaxOne),zod.null()]).optional().describe('Business email (unique)'),
-  "phone": zod.union([zod.coerce.string().max(patchStoresIdBodyPhoneMaxOne),zod.null()]).optional().describe('Business phone (unique)'),
-  "website": zod.union([zod.url().max(patchStoresIdBodyWebsiteMaxOne),zod.null()]).optional().describe('External website URL'),
-  "isActive": zod.coerce.boolean().optional().describe('Whether store is active'),
-  "isApproved": zod.coerce.boolean().optional().describe('Platform approval status'),
-  "ownerId": zod.union([zod.uuid(),zod.null()]).optional().describe('Owner user ID')
-}).describe('Store update payload')
-
-export const patchStoresIdResponse = zod.object({
-  "success": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Operation status')
-}).describe('Standard API response format').describe('Single store response')
+export const patchStoresIdResponse = zod
+  .object({
+    success: zod
+      .union([zod.coerce.boolean(), zod.null()])
+      .optional()
+      .describe("Operation status"),
+  })
+  .describe("Standard API response format")
+  .describe("Single store response");
 
 /**
  * Deactivate a store (soft delete)
  */
 export const deleteStoresIdParams = zod.object({
-  "id": zod.uuid().describe('Store ID')
-})
-
+  id: zod.uuid().describe("Store ID"),
+});

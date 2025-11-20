@@ -4,17 +4,17 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { CreateInventoryInputPriceOverride } from './createInventoryInputPriceOverride';
-import type { CreateInventoryInputCostPriceOverride } from './createInventoryInputCostPriceOverride';
-import type { CreateInventoryInputBatchNumber } from './createInventoryInputBatchNumber';
-import type { CreateInventoryInputExpiryDate } from './createInventoryInputExpiryDate';
-import type { CreateInventoryInputWarehouseCode } from './createInventoryInputWarehouseCode';
-import type { CreateInventoryInputShelfCode } from './createInventoryInputShelfCode';
-import type { CreateInventoryInputLeadTimeDays } from './createInventoryInputLeadTimeDays';
-import type { CreateInventoryInputHsCode } from './createInventoryInputHsCode';
-import type { CreateInventoryInputOriginCountry } from './createInventoryInputOriginCountry';
-import type { CreateInventoryInputPackageWeight } from './createInventoryInputPackageWeight';
-import type { CreateInventoryInputPackageDimensions } from './createInventoryInputPackageDimensions';
+import type { CreateInventoryInputPriceOverride } from "./createInventoryInputPriceOverride";
+import type { CreateInventoryInputCostPriceOverride } from "./createInventoryInputCostPriceOverride";
+import type { CreateInventoryInputBatchNumber } from "./createInventoryInputBatchNumber";
+import type { CreateInventoryInputExpiryDate } from "./createInventoryInputExpiryDate";
+import type { CreateInventoryInputWarehouseCode } from "./createInventoryInputWarehouseCode";
+import type { CreateInventoryInputShelfCode } from "./createInventoryInputShelfCode";
+import type { CreateInventoryInputLeadTimeDays } from "./createInventoryInputLeadTimeDays";
+import type { CreateInventoryInputHsCode } from "./createInventoryInputHsCode";
+import type { CreateInventoryInputOriginCountry } from "./createInventoryInputOriginCountry";
+import type { CreateInventoryInputPackageWeight } from "./createInventoryInputPackageWeight";
+import type { CreateInventoryInputPackageDimensions } from "./createInventoryInputPackageDimensions";
 
 /**
  * Inventory creation payload

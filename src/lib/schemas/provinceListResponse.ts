@@ -4,10 +4,10 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { BaseResponse } from './baseResponse';
-import type { ProvinceListResponseDetails } from './provinceListResponseDetails';
-import type { ProvinceListResponseFiltersItem } from './provinceListResponseFiltersItem';
-import type { Province } from './province';
+import type { BaseResponse } from "./baseResponse";
+import type { ProvinceListResponseDetails } from "./provinceListResponseDetails";
+import type { ProvinceListResponseFiltersItem } from "./provinceListResponseFiltersItem";
+import type { Province } from "./province";
 
 /**
  * Response for list province operations
@@ -18,10 +18,15 @@ export type ProvinceListResponse = BaseResponse & {
   filters: ProvinceListResponseFiltersItem[];
   /** Array of provinces matching the query */
   data: Province[];
-} & Required<Pick<BaseResponse & {
-  /** Pagination metadata */
-  details?: ProvinceListResponseDetails;
-  filters: ProvinceListResponseFiltersItem[];
-  /** Array of provinces matching the query */
-  data: Province[];
-}, 'filters' | 'data'>>;
+} & Required<
+    Pick<
+      BaseResponse & {
+        /** Pagination metadata */
+        details?: ProvinceListResponseDetails;
+        filters: ProvinceListResponseFiltersItem[];
+        /** Array of provinces matching the query */
+        data: Province[];
+      },
+      "filters" | "data"
+    >
+  >;

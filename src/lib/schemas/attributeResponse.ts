@@ -4,8 +4,8 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { BaseResponse } from './baseResponse';
-import type { Attribute } from './attribute';
+import type { BaseResponse } from "./baseResponse";
+import type { Attribute } from "./attribute";
 
 /**
  * Single attribute response

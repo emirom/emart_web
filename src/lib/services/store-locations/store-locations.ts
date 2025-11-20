@@ -4,10 +4,7 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import {
-  useMutation,
-  useQuery
-} from '@tanstack/react-query';
+import { useMutation, useQuery } from "@tanstack/react-query";
 import type {
   DataTag,
   DefinedInitialDataOptions,
@@ -20,8 +17,8 @@ import type {
   UseMutationOptions,
   UseMutationResult,
   UseQueryOptions,
-  UseQueryResult
-} from '@tanstack/react-query';
+  UseQueryResult,
+} from "@tanstack/react-query";
 
 import type {
   BaseResponse,
@@ -35,514 +32,835 @@ import type {
   NotfoundError,
   StoreLocationResponse,
   UpdateStoreLocationInput,
-  UpdateStoreLocationToggleInput
-} from '../../schemas';
+  UpdateStoreLocationToggleInput,
+} from "../../schemas";
 
-import { axiosInstance } from '../../configs/axios-instance';
-
-
-
+import { axiosInstance } from "../../configs/axios-instance";
 
 /**
  * Assign a location to a store (create warehouse/store assignment)
  */
 export const postStoreLocations = (
-    createStoreLocationInput: CreateStoreLocationInput,
- signal?: AbortSignal
+  createStoreLocationInput: CreateStoreLocationInput,
+  signal?: AbortSignal,
 ) => {
-      
-      
-      return axiosInstance<StoreLocationResponse>(
-      {url: `/store-locations`, method: 'POST',
-      headers: {'Content-Type': 'application/json', },
-      data: createStoreLocationInput, signal
-    },
-      );
-    }
-  
+  return axiosInstance<StoreLocationResponse>({
+    url: `/store-locations`,
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    data: createStoreLocationInput,
+    signal,
+  });
+};
 
+export const getPostStoreLocationsMutationOptions = <
+  TError = ErrorResponse | ConflictError | InternalError,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof postStoreLocations>>,
+    TError,
+    { data: CreateStoreLocationInput },
+    TContext
+  >;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof postStoreLocations>>,
+  TError,
+  { data: CreateStoreLocationInput },
+  TContext
+> => {
+  const mutationKey = ["postStoreLocations"];
+  const { mutation: mutationOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey } };
 
-export const getPostStoreLocationsMutationOptions = <TError = ErrorResponse | ConflictError | InternalError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postStoreLocations>>, TError,{data: CreateStoreLocationInput}, TContext>, }
-): UseMutationOptions<Awaited<ReturnType<typeof postStoreLocations>>, TError,{data: CreateStoreLocationInput}, TContext> => {
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof postStoreLocations>>,
+    { data: CreateStoreLocationInput }
+  > = (props) => {
+    const { data } = props ?? {};
 
-const mutationKey = ['postStoreLocations'];
-const {mutation: mutationOptions} = options ?
-      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
-      options
-      : {...options, mutation: {...options.mutation, mutationKey}}
-      : {mutation: { mutationKey, }};
+    return postStoreLocations(data);
+  };
 
-      
+  return { mutationFn, ...mutationOptions };
+};
 
+export type PostStoreLocationsMutationResult = NonNullable<
+  Awaited<ReturnType<typeof postStoreLocations>>
+>;
+export type PostStoreLocationsMutationBody = CreateStoreLocationInput;
+export type PostStoreLocationsMutationError =
+  | ErrorResponse
+  | ConflictError
+  | InternalError;
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postStoreLocations>>, {data: CreateStoreLocationInput}> = (props) => {
-          const {data} = props ?? {};
+export const usePostStoreLocations = <
+  TError = ErrorResponse | ConflictError | InternalError,
+  TContext = unknown,
+>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof postStoreLocations>>,
+      TError,
+      { data: CreateStoreLocationInput },
+      TContext
+    >;
+  },
+  queryClient?: QueryClient,
+): UseMutationResult<
+  Awaited<ReturnType<typeof postStoreLocations>>,
+  TError,
+  { data: CreateStoreLocationInput },
+  TContext
+> => {
+  const mutationOptions = getPostStoreLocationsMutationOptions(options);
 
-          return  postStoreLocations(data,)
-        }
-
-        
-
-
-  return  { mutationFn, ...mutationOptions }}
-
-    export type PostStoreLocationsMutationResult = NonNullable<Awaited<ReturnType<typeof postStoreLocations>>>
-    export type PostStoreLocationsMutationBody = CreateStoreLocationInput
-    export type PostStoreLocationsMutationError = ErrorResponse | ConflictError | InternalError
-
-    export const usePostStoreLocations = <TError = ErrorResponse | ConflictError | InternalError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postStoreLocations>>, TError,{data: CreateStoreLocationInput}, TContext>, }
- , queryClient?: QueryClient): UseMutationResult<
-        Awaited<ReturnType<typeof postStoreLocations>>,
-        TError,
-        {data: CreateStoreLocationInput},
-        TContext
-      > => {
-
-      const mutationOptions = getPostStoreLocationsMutationOptions(options);
-
-      return useMutation(mutationOptions , queryClient);
-    }
-    /**
+  return useMutation(mutationOptions, queryClient);
+};
+/**
  * List all store-location assignments with pagination and filters
  */
 export const getStoreLocations = (
-    params: GetStoreLocationsParams,
- signal?: AbortSignal
+  params: GetStoreLocationsParams,
+  signal?: AbortSignal,
 ) => {
-      
-      
-      return axiosInstance<ListStoreLocationsResponse>(
-      {url: `/store-locations`, method: 'GET',
-        params, signal
-    },
-      );
-    }
-  
+  return axiosInstance<ListStoreLocationsResponse>({
+    url: `/store-locations`,
+    method: "GET",
+    params,
+    signal,
+  });
+};
 
-export const getGetStoreLocationsQueryKey = (params?: GetStoreLocationsParams,) => {
-    return [`/store-locations`, ...(params ? [params]: [])] as const;
-    }
-
-    
-export const getGetStoreLocationsQueryOptions = <TData = Awaited<ReturnType<typeof getStoreLocations>>, TError = InternalError>(params: GetStoreLocationsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getStoreLocations>>, TError, TData>>, }
+export const getGetStoreLocationsQueryKey = (
+  params?: GetStoreLocationsParams,
 ) => {
+  return [`/store-locations`, ...(params ? [params] : [])] as const;
+};
 
-const {query: queryOptions} = options ?? {};
+export const getGetStoreLocationsQueryOptions = <
+  TData = Awaited<ReturnType<typeof getStoreLocations>>,
+  TError = InternalError,
+>(
+  params: GetStoreLocationsParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof getStoreLocations>>,
+        TError,
+        TData
+      >
+    >;
+  },
+) => {
+  const { query: queryOptions } = options ?? {};
 
-  const queryKey =  queryOptions?.queryKey ?? getGetStoreLocationsQueryKey(params);
+  const queryKey =
+    queryOptions?.queryKey ?? getGetStoreLocationsQueryKey(params);
 
-  
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<typeof getStoreLocations>>
+  > = ({ signal }) => getStoreLocations(params, signal);
 
-    const queryFn: QueryFunction<Awaited<ReturnType<typeof getStoreLocations>>> = ({ signal }) => getStoreLocations(params, signal);
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof getStoreLocations>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
+};
 
-      
+export type GetStoreLocationsQueryResult = NonNullable<
+  Awaited<ReturnType<typeof getStoreLocations>>
+>;
+export type GetStoreLocationsQueryError = InternalError;
 
-      
-
-   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getStoreLocations>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
-}
-
-export type GetStoreLocationsQueryResult = NonNullable<Awaited<ReturnType<typeof getStoreLocations>>>
-export type GetStoreLocationsQueryError = InternalError
-
-
-export function useGetStoreLocations<TData = Awaited<ReturnType<typeof getStoreLocations>>, TError = InternalError>(
- params: GetStoreLocationsParams, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getStoreLocations>>, TError, TData>> & Pick<
+export function useGetStoreLocations<
+  TData = Awaited<ReturnType<typeof getStoreLocations>>,
+  TError = InternalError,
+>(
+  params: GetStoreLocationsParams,
+  options: {
+    query: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof getStoreLocations>>,
+        TError,
+        TData
+      >
+    > &
+      Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof getStoreLocations>>,
           TError,
           Awaited<ReturnType<typeof getStoreLocations>>
-        > , 'initialData'
-      >, }
- , queryClient?: QueryClient
-  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetStoreLocations<TData = Awaited<ReturnType<typeof getStoreLocations>>, TError = InternalError>(
- params: GetStoreLocationsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getStoreLocations>>, TError, TData>> & Pick<
+        >,
+        "initialData"
+      >;
+  },
+  queryClient?: QueryClient,
+): DefinedUseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+};
+export function useGetStoreLocations<
+  TData = Awaited<ReturnType<typeof getStoreLocations>>,
+  TError = InternalError,
+>(
+  params: GetStoreLocationsParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof getStoreLocations>>,
+        TError,
+        TData
+      >
+    > &
+      Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof getStoreLocations>>,
           TError,
           Awaited<ReturnType<typeof getStoreLocations>>
-        > , 'initialData'
-      >, }
- , queryClient?: QueryClient
-  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetStoreLocations<TData = Awaited<ReturnType<typeof getStoreLocations>>, TError = InternalError>(
- params: GetStoreLocationsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getStoreLocations>>, TError, TData>>, }
- , queryClient?: QueryClient
-  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+        >,
+        "initialData"
+      >;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+};
+export function useGetStoreLocations<
+  TData = Awaited<ReturnType<typeof getStoreLocations>>,
+  TError = InternalError,
+>(
+  params: GetStoreLocationsParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof getStoreLocations>>,
+        TError,
+        TData
+      >
+    >;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+};
 
-export function useGetStoreLocations<TData = Awaited<ReturnType<typeof getStoreLocations>>, TError = InternalError>(
- params: GetStoreLocationsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getStoreLocations>>, TError, TData>>, }
- , queryClient?: QueryClient 
- ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+export function useGetStoreLocations<
+  TData = Awaited<ReturnType<typeof getStoreLocations>>,
+  TError = InternalError,
+>(
+  params: GetStoreLocationsParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof getStoreLocations>>,
+        TError,
+        TData
+      >
+    >;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+} {
+  const queryOptions = getGetStoreLocationsQueryOptions(params, options);
 
-  const queryOptions = getGetStoreLocationsQueryOptions(params,options)
+  const query = useQuery(queryOptions, queryClient) as UseQueryResult<
+    TData,
+    TError
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
 
-  const query = useQuery(queryOptions , queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
-
-  query.queryKey = queryOptions.queryKey ;
+  query.queryKey = queryOptions.queryKey;
 
   return query;
 }
-
-
 
 /**
  * Get a single store-location assignment by ID
  */
-export const getStoreLocationsId = (
-    id: string,
- signal?: AbortSignal
+export const getStoreLocationsId = (id: string, signal?: AbortSignal) => {
+  return axiosInstance<StoreLocationResponse>({
+    url: `/store-locations/${id}`,
+    method: "GET",
+    signal,
+  });
+};
+
+export const getGetStoreLocationsIdQueryKey = (id?: string) => {
+  return [`/store-locations/${id}`] as const;
+};
+
+export const getGetStoreLocationsIdQueryOptions = <
+  TData = Awaited<ReturnType<typeof getStoreLocationsId>>,
+  TError = NotfoundError | InternalError,
+>(
+  id: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof getStoreLocationsId>>,
+        TError,
+        TData
+      >
+    >;
+  },
 ) => {
-      
-      
-      return axiosInstance<StoreLocationResponse>(
-      {url: `/store-locations/${id}`, method: 'GET', signal
-    },
-      );
-    }
-  
+  const { query: queryOptions } = options ?? {};
 
-export const getGetStoreLocationsIdQueryKey = (id?: string,) => {
-    return [`/store-locations/${id}`] as const;
-    }
+  const queryKey = queryOptions?.queryKey ?? getGetStoreLocationsIdQueryKey(id);
 
-    
-export const getGetStoreLocationsIdQueryOptions = <TData = Awaited<ReturnType<typeof getStoreLocationsId>>, TError = NotfoundError | InternalError>(id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getStoreLocationsId>>, TError, TData>>, }
-) => {
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<typeof getStoreLocationsId>>
+  > = ({ signal }) => getStoreLocationsId(id, signal);
 
-const {query: queryOptions} = options ?? {};
+  return {
+    queryKey,
+    queryFn,
+    enabled: !!id,
+    ...queryOptions,
+  } as UseQueryOptions<
+    Awaited<ReturnType<typeof getStoreLocationsId>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
+};
 
-  const queryKey =  queryOptions?.queryKey ?? getGetStoreLocationsIdQueryKey(id);
+export type GetStoreLocationsIdQueryResult = NonNullable<
+  Awaited<ReturnType<typeof getStoreLocationsId>>
+>;
+export type GetStoreLocationsIdQueryError = NotfoundError | InternalError;
 
-  
-
-    const queryFn: QueryFunction<Awaited<ReturnType<typeof getStoreLocationsId>>> = ({ signal }) => getStoreLocationsId(id, signal);
-
-      
-
-      
-
-   return  { queryKey, queryFn, enabled: !!(id), ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getStoreLocationsId>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
-}
-
-export type GetStoreLocationsIdQueryResult = NonNullable<Awaited<ReturnType<typeof getStoreLocationsId>>>
-export type GetStoreLocationsIdQueryError = NotfoundError | InternalError
-
-
-export function useGetStoreLocationsId<TData = Awaited<ReturnType<typeof getStoreLocationsId>>, TError = NotfoundError | InternalError>(
- id: string, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getStoreLocationsId>>, TError, TData>> & Pick<
+export function useGetStoreLocationsId<
+  TData = Awaited<ReturnType<typeof getStoreLocationsId>>,
+  TError = NotfoundError | InternalError,
+>(
+  id: string,
+  options: {
+    query: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof getStoreLocationsId>>,
+        TError,
+        TData
+      >
+    > &
+      Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof getStoreLocationsId>>,
           TError,
           Awaited<ReturnType<typeof getStoreLocationsId>>
-        > , 'initialData'
-      >, }
- , queryClient?: QueryClient
-  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetStoreLocationsId<TData = Awaited<ReturnType<typeof getStoreLocationsId>>, TError = NotfoundError | InternalError>(
- id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getStoreLocationsId>>, TError, TData>> & Pick<
+        >,
+        "initialData"
+      >;
+  },
+  queryClient?: QueryClient,
+): DefinedUseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+};
+export function useGetStoreLocationsId<
+  TData = Awaited<ReturnType<typeof getStoreLocationsId>>,
+  TError = NotfoundError | InternalError,
+>(
+  id: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof getStoreLocationsId>>,
+        TError,
+        TData
+      >
+    > &
+      Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof getStoreLocationsId>>,
           TError,
           Awaited<ReturnType<typeof getStoreLocationsId>>
-        > , 'initialData'
-      >, }
- , queryClient?: QueryClient
-  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetStoreLocationsId<TData = Awaited<ReturnType<typeof getStoreLocationsId>>, TError = NotfoundError | InternalError>(
- id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getStoreLocationsId>>, TError, TData>>, }
- , queryClient?: QueryClient
-  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+        >,
+        "initialData"
+      >;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+};
+export function useGetStoreLocationsId<
+  TData = Awaited<ReturnType<typeof getStoreLocationsId>>,
+  TError = NotfoundError | InternalError,
+>(
+  id: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof getStoreLocationsId>>,
+        TError,
+        TData
+      >
+    >;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+};
 
-export function useGetStoreLocationsId<TData = Awaited<ReturnType<typeof getStoreLocationsId>>, TError = NotfoundError | InternalError>(
- id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getStoreLocationsId>>, TError, TData>>, }
- , queryClient?: QueryClient 
- ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+export function useGetStoreLocationsId<
+  TData = Awaited<ReturnType<typeof getStoreLocationsId>>,
+  TError = NotfoundError | InternalError,
+>(
+  id: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof getStoreLocationsId>>,
+        TError,
+        TData
+      >
+    >;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+} {
+  const queryOptions = getGetStoreLocationsIdQueryOptions(id, options);
 
-  const queryOptions = getGetStoreLocationsIdQueryOptions(id,options)
+  const query = useQuery(queryOptions, queryClient) as UseQueryResult<
+    TData,
+    TError
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
 
-  const query = useQuery(queryOptions , queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
-
-  query.queryKey = queryOptions.queryKey ;
+  query.queryKey = queryOptions.queryKey;
 
   return query;
 }
-
-
 
 /**
  * Update a store-location assignment
  */
 export const patchStoreLocationsId = (
-    id: string,
-    updateStoreLocationInput: UpdateStoreLocationInput,
- ) => {
-      
-      
-      return axiosInstance<StoreLocationResponse>(
-      {url: `/store-locations/${id}`, method: 'PATCH',
-      headers: {'Content-Type': 'application/json', },
-      data: updateStoreLocationInput
-    },
-      );
-    }
-  
+  id: string,
+  updateStoreLocationInput: UpdateStoreLocationInput,
+) => {
+  return axiosInstance<StoreLocationResponse>({
+    url: `/store-locations/${id}`,
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    data: updateStoreLocationInput,
+  });
+};
 
+export const getPatchStoreLocationsIdMutationOptions = <
+  TError = ErrorResponse | NotfoundError | ConflictError | InternalError,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof patchStoreLocationsId>>,
+    TError,
+    { id: string; data: UpdateStoreLocationInput },
+    TContext
+  >;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof patchStoreLocationsId>>,
+  TError,
+  { id: string; data: UpdateStoreLocationInput },
+  TContext
+> => {
+  const mutationKey = ["patchStoreLocationsId"];
+  const { mutation: mutationOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey } };
 
-export const getPatchStoreLocationsIdMutationOptions = <TError = ErrorResponse | NotfoundError | ConflictError | InternalError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof patchStoreLocationsId>>, TError,{id: string;data: UpdateStoreLocationInput}, TContext>, }
-): UseMutationOptions<Awaited<ReturnType<typeof patchStoreLocationsId>>, TError,{id: string;data: UpdateStoreLocationInput}, TContext> => {
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof patchStoreLocationsId>>,
+    { id: string; data: UpdateStoreLocationInput }
+  > = (props) => {
+    const { id, data } = props ?? {};
 
-const mutationKey = ['patchStoreLocationsId'];
-const {mutation: mutationOptions} = options ?
-      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
-      options
-      : {...options, mutation: {...options.mutation, mutationKey}}
-      : {mutation: { mutationKey, }};
+    return patchStoreLocationsId(id, data);
+  };
 
-      
+  return { mutationFn, ...mutationOptions };
+};
 
+export type PatchStoreLocationsIdMutationResult = NonNullable<
+  Awaited<ReturnType<typeof patchStoreLocationsId>>
+>;
+export type PatchStoreLocationsIdMutationBody = UpdateStoreLocationInput;
+export type PatchStoreLocationsIdMutationError =
+  | ErrorResponse
+  | NotfoundError
+  | ConflictError
+  | InternalError;
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof patchStoreLocationsId>>, {id: string;data: UpdateStoreLocationInput}> = (props) => {
-          const {id,data} = props ?? {};
+export const usePatchStoreLocationsId = <
+  TError = ErrorResponse | NotfoundError | ConflictError | InternalError,
+  TContext = unknown,
+>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof patchStoreLocationsId>>,
+      TError,
+      { id: string; data: UpdateStoreLocationInput },
+      TContext
+    >;
+  },
+  queryClient?: QueryClient,
+): UseMutationResult<
+  Awaited<ReturnType<typeof patchStoreLocationsId>>,
+  TError,
+  { id: string; data: UpdateStoreLocationInput },
+  TContext
+> => {
+  const mutationOptions = getPatchStoreLocationsIdMutationOptions(options);
 
-          return  patchStoreLocationsId(id,data,)
-        }
-
-        
-
-
-  return  { mutationFn, ...mutationOptions }}
-
-    export type PatchStoreLocationsIdMutationResult = NonNullable<Awaited<ReturnType<typeof patchStoreLocationsId>>>
-    export type PatchStoreLocationsIdMutationBody = UpdateStoreLocationInput
-    export type PatchStoreLocationsIdMutationError = ErrorResponse | NotfoundError | ConflictError | InternalError
-
-    export const usePatchStoreLocationsId = <TError = ErrorResponse | NotfoundError | ConflictError | InternalError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof patchStoreLocationsId>>, TError,{id: string;data: UpdateStoreLocationInput}, TContext>, }
- , queryClient?: QueryClient): UseMutationResult<
-        Awaited<ReturnType<typeof patchStoreLocationsId>>,
-        TError,
-        {id: string;data: UpdateStoreLocationInput},
-        TContext
-      > => {
-
-      const mutationOptions = getPatchStoreLocationsIdMutationOptions(options);
-
-      return useMutation(mutationOptions , queryClient);
-    }
-    /**
+  return useMutation(mutationOptions, queryClient);
+};
+/**
  * Deactivate a store-location assignment (soft delete)
  */
-export const deleteStoreLocationsId = (
-    id: string,
- ) => {
-      
-      
-      return axiosInstance<BaseResponse>(
-      {url: `/store-locations/${id}`, method: 'DELETE'
-    },
-      );
-    }
-  
+export const deleteStoreLocationsId = (id: string) => {
+  return axiosInstance<BaseResponse>({
+    url: `/store-locations/${id}`,
+    method: "DELETE",
+  });
+};
 
+export const getDeleteStoreLocationsIdMutationOptions = <
+  TError = NotfoundError | InternalError,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof deleteStoreLocationsId>>,
+    TError,
+    { id: string },
+    TContext
+  >;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof deleteStoreLocationsId>>,
+  TError,
+  { id: string },
+  TContext
+> => {
+  const mutationKey = ["deleteStoreLocationsId"];
+  const { mutation: mutationOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey } };
 
-export const getDeleteStoreLocationsIdMutationOptions = <TError = NotfoundError | InternalError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteStoreLocationsId>>, TError,{id: string}, TContext>, }
-): UseMutationOptions<Awaited<ReturnType<typeof deleteStoreLocationsId>>, TError,{id: string}, TContext> => {
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof deleteStoreLocationsId>>,
+    { id: string }
+  > = (props) => {
+    const { id } = props ?? {};
 
-const mutationKey = ['deleteStoreLocationsId'];
-const {mutation: mutationOptions} = options ?
-      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
-      options
-      : {...options, mutation: {...options.mutation, mutationKey}}
-      : {mutation: { mutationKey, }};
+    return deleteStoreLocationsId(id);
+  };
 
-      
+  return { mutationFn, ...mutationOptions };
+};
 
+export type DeleteStoreLocationsIdMutationResult = NonNullable<
+  Awaited<ReturnType<typeof deleteStoreLocationsId>>
+>;
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteStoreLocationsId>>, {id: string}> = (props) => {
-          const {id} = props ?? {};
+export type DeleteStoreLocationsIdMutationError = NotfoundError | InternalError;
 
-          return  deleteStoreLocationsId(id,)
-        }
+export const useDeleteStoreLocationsId = <
+  TError = NotfoundError | InternalError,
+  TContext = unknown,
+>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof deleteStoreLocationsId>>,
+      TError,
+      { id: string },
+      TContext
+    >;
+  },
+  queryClient?: QueryClient,
+): UseMutationResult<
+  Awaited<ReturnType<typeof deleteStoreLocationsId>>,
+  TError,
+  { id: string },
+  TContext
+> => {
+  const mutationOptions = getDeleteStoreLocationsIdMutationOptions(options);
 
-        
-
-
-  return  { mutationFn, ...mutationOptions }}
-
-    export type DeleteStoreLocationsIdMutationResult = NonNullable<Awaited<ReturnType<typeof deleteStoreLocationsId>>>
-    
-    export type DeleteStoreLocationsIdMutationError = NotfoundError | InternalError
-
-    export const useDeleteStoreLocationsId = <TError = NotfoundError | InternalError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteStoreLocationsId>>, TError,{id: string}, TContext>, }
- , queryClient?: QueryClient): UseMutationResult<
-        Awaited<ReturnType<typeof deleteStoreLocationsId>>,
-        TError,
-        {id: string},
-        TContext
-      > => {
-
-      const mutationOptions = getDeleteStoreLocationsIdMutationOptions(options);
-
-      return useMutation(mutationOptions , queryClient);
-    }
-    /**
+  return useMutation(mutationOptions, queryClient);
+};
+/**
  * Get warehouse locations for a specific store
  */
 export const getStoreLocationsWarehouseStoreId = (
-    storeId: string,
-    params: GetStoreLocationsWarehouseStoreIdParams,
- signal?: AbortSignal
+  storeId: string,
+  params: GetStoreLocationsWarehouseStoreIdParams,
+  signal?: AbortSignal,
 ) => {
-      
-      
-      return axiosInstance<ListStoreLocationsResponse>(
-      {url: `/store-locations/warehouse/${storeId}`, method: 'GET',
-        params, signal
-    },
-      );
-    }
-  
+  return axiosInstance<ListStoreLocationsResponse>({
+    url: `/store-locations/warehouse/${storeId}`,
+    method: "GET",
+    params,
+    signal,
+  });
+};
 
-export const getGetStoreLocationsWarehouseStoreIdQueryKey = (storeId?: string,
-    params?: GetStoreLocationsWarehouseStoreIdParams,) => {
-    return [`/store-locations/warehouse/${storeId}`, ...(params ? [params]: [])] as const;
-    }
-
-    
-export const getGetStoreLocationsWarehouseStoreIdQueryOptions = <TData = Awaited<ReturnType<typeof getStoreLocationsWarehouseStoreId>>, TError = NotfoundError | InternalError>(storeId: string,
-    params: GetStoreLocationsWarehouseStoreIdParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getStoreLocationsWarehouseStoreId>>, TError, TData>>, }
+export const getGetStoreLocationsWarehouseStoreIdQueryKey = (
+  storeId?: string,
+  params?: GetStoreLocationsWarehouseStoreIdParams,
 ) => {
+  return [
+    `/store-locations/warehouse/${storeId}`,
+    ...(params ? [params] : []),
+  ] as const;
+};
 
-const {query: queryOptions} = options ?? {};
+export const getGetStoreLocationsWarehouseStoreIdQueryOptions = <
+  TData = Awaited<ReturnType<typeof getStoreLocationsWarehouseStoreId>>,
+  TError = NotfoundError | InternalError,
+>(
+  storeId: string,
+  params: GetStoreLocationsWarehouseStoreIdParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof getStoreLocationsWarehouseStoreId>>,
+        TError,
+        TData
+      >
+    >;
+  },
+) => {
+  const { query: queryOptions } = options ?? {};
 
-  const queryKey =  queryOptions?.queryKey ?? getGetStoreLocationsWarehouseStoreIdQueryKey(storeId,params);
+  const queryKey =
+    queryOptions?.queryKey ??
+    getGetStoreLocationsWarehouseStoreIdQueryKey(storeId, params);
 
-  
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<typeof getStoreLocationsWarehouseStoreId>>
+  > = ({ signal }) =>
+    getStoreLocationsWarehouseStoreId(storeId, params, signal);
 
-    const queryFn: QueryFunction<Awaited<ReturnType<typeof getStoreLocationsWarehouseStoreId>>> = ({ signal }) => getStoreLocationsWarehouseStoreId(storeId,params, signal);
+  return {
+    queryKey,
+    queryFn,
+    enabled: !!storeId,
+    ...queryOptions,
+  } as UseQueryOptions<
+    Awaited<ReturnType<typeof getStoreLocationsWarehouseStoreId>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
+};
 
-      
+export type GetStoreLocationsWarehouseStoreIdQueryResult = NonNullable<
+  Awaited<ReturnType<typeof getStoreLocationsWarehouseStoreId>>
+>;
+export type GetStoreLocationsWarehouseStoreIdQueryError =
+  | NotfoundError
+  | InternalError;
 
-      
-
-   return  { queryKey, queryFn, enabled: !!(storeId), ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getStoreLocationsWarehouseStoreId>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
-}
-
-export type GetStoreLocationsWarehouseStoreIdQueryResult = NonNullable<Awaited<ReturnType<typeof getStoreLocationsWarehouseStoreId>>>
-export type GetStoreLocationsWarehouseStoreIdQueryError = NotfoundError | InternalError
-
-
-export function useGetStoreLocationsWarehouseStoreId<TData = Awaited<ReturnType<typeof getStoreLocationsWarehouseStoreId>>, TError = NotfoundError | InternalError>(
- storeId: string,
-    params: GetStoreLocationsWarehouseStoreIdParams, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getStoreLocationsWarehouseStoreId>>, TError, TData>> & Pick<
+export function useGetStoreLocationsWarehouseStoreId<
+  TData = Awaited<ReturnType<typeof getStoreLocationsWarehouseStoreId>>,
+  TError = NotfoundError | InternalError,
+>(
+  storeId: string,
+  params: GetStoreLocationsWarehouseStoreIdParams,
+  options: {
+    query: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof getStoreLocationsWarehouseStoreId>>,
+        TError,
+        TData
+      >
+    > &
+      Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof getStoreLocationsWarehouseStoreId>>,
           TError,
           Awaited<ReturnType<typeof getStoreLocationsWarehouseStoreId>>
-        > , 'initialData'
-      >, }
- , queryClient?: QueryClient
-  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetStoreLocationsWarehouseStoreId<TData = Awaited<ReturnType<typeof getStoreLocationsWarehouseStoreId>>, TError = NotfoundError | InternalError>(
- storeId: string,
-    params: GetStoreLocationsWarehouseStoreIdParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getStoreLocationsWarehouseStoreId>>, TError, TData>> & Pick<
+        >,
+        "initialData"
+      >;
+  },
+  queryClient?: QueryClient,
+): DefinedUseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+};
+export function useGetStoreLocationsWarehouseStoreId<
+  TData = Awaited<ReturnType<typeof getStoreLocationsWarehouseStoreId>>,
+  TError = NotfoundError | InternalError,
+>(
+  storeId: string,
+  params: GetStoreLocationsWarehouseStoreIdParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof getStoreLocationsWarehouseStoreId>>,
+        TError,
+        TData
+      >
+    > &
+      Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof getStoreLocationsWarehouseStoreId>>,
           TError,
           Awaited<ReturnType<typeof getStoreLocationsWarehouseStoreId>>
-        > , 'initialData'
-      >, }
- , queryClient?: QueryClient
-  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetStoreLocationsWarehouseStoreId<TData = Awaited<ReturnType<typeof getStoreLocationsWarehouseStoreId>>, TError = NotfoundError | InternalError>(
- storeId: string,
-    params: GetStoreLocationsWarehouseStoreIdParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getStoreLocationsWarehouseStoreId>>, TError, TData>>, }
- , queryClient?: QueryClient
-  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+        >,
+        "initialData"
+      >;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+};
+export function useGetStoreLocationsWarehouseStoreId<
+  TData = Awaited<ReturnType<typeof getStoreLocationsWarehouseStoreId>>,
+  TError = NotfoundError | InternalError,
+>(
+  storeId: string,
+  params: GetStoreLocationsWarehouseStoreIdParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof getStoreLocationsWarehouseStoreId>>,
+        TError,
+        TData
+      >
+    >;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+};
 
-export function useGetStoreLocationsWarehouseStoreId<TData = Awaited<ReturnType<typeof getStoreLocationsWarehouseStoreId>>, TError = NotfoundError | InternalError>(
- storeId: string,
-    params: GetStoreLocationsWarehouseStoreIdParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getStoreLocationsWarehouseStoreId>>, TError, TData>>, }
- , queryClient?: QueryClient 
- ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+export function useGetStoreLocationsWarehouseStoreId<
+  TData = Awaited<ReturnType<typeof getStoreLocationsWarehouseStoreId>>,
+  TError = NotfoundError | InternalError,
+>(
+  storeId: string,
+  params: GetStoreLocationsWarehouseStoreIdParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof getStoreLocationsWarehouseStoreId>>,
+        TError,
+        TData
+      >
+    >;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+} {
+  const queryOptions = getGetStoreLocationsWarehouseStoreIdQueryOptions(
+    storeId,
+    params,
+    options,
+  );
 
-  const queryOptions = getGetStoreLocationsWarehouseStoreIdQueryOptions(storeId,params,options)
+  const query = useQuery(queryOptions, queryClient) as UseQueryResult<
+    TData,
+    TError
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
 
-  const query = useQuery(queryOptions , queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
-
-  query.queryKey = queryOptions.queryKey ;
+  query.queryKey = queryOptions.queryKey;
 
   return query;
 }
-
-
 
 /**
  * Toggle warehouse active status (soft delete/restore)
  */
 export const patchStoreLocationsIdToggle = (
-    id: string,
-    updateStoreLocationToggleInput: UpdateStoreLocationToggleInput,
- ) => {
-      
-      
-      return axiosInstance<StoreLocationResponse>(
-      {url: `/store-locations/${id}/toggle`, method: 'PATCH',
-      headers: {'Content-Type': 'application/json', },
-      data: updateStoreLocationToggleInput
-    },
-      );
-    }
-  
+  id: string,
+  updateStoreLocationToggleInput: UpdateStoreLocationToggleInput,
+) => {
+  return axiosInstance<StoreLocationResponse>({
+    url: `/store-locations/${id}/toggle`,
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    data: updateStoreLocationToggleInput,
+  });
+};
 
+export const getPatchStoreLocationsIdToggleMutationOptions = <
+  TError = ErrorResponse | NotfoundError | InternalError,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof patchStoreLocationsIdToggle>>,
+    TError,
+    { id: string; data: UpdateStoreLocationToggleInput },
+    TContext
+  >;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof patchStoreLocationsIdToggle>>,
+  TError,
+  { id: string; data: UpdateStoreLocationToggleInput },
+  TContext
+> => {
+  const mutationKey = ["patchStoreLocationsIdToggle"];
+  const { mutation: mutationOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey } };
 
-export const getPatchStoreLocationsIdToggleMutationOptions = <TError = ErrorResponse | NotfoundError | InternalError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof patchStoreLocationsIdToggle>>, TError,{id: string;data: UpdateStoreLocationToggleInput}, TContext>, }
-): UseMutationOptions<Awaited<ReturnType<typeof patchStoreLocationsIdToggle>>, TError,{id: string;data: UpdateStoreLocationToggleInput}, TContext> => {
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof patchStoreLocationsIdToggle>>,
+    { id: string; data: UpdateStoreLocationToggleInput }
+  > = (props) => {
+    const { id, data } = props ?? {};
 
-const mutationKey = ['patchStoreLocationsIdToggle'];
-const {mutation: mutationOptions} = options ?
-      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
-      options
-      : {...options, mutation: {...options.mutation, mutationKey}}
-      : {mutation: { mutationKey, }};
+    return patchStoreLocationsIdToggle(id, data);
+  };
 
-      
+  return { mutationFn, ...mutationOptions };
+};
 
+export type PatchStoreLocationsIdToggleMutationResult = NonNullable<
+  Awaited<ReturnType<typeof patchStoreLocationsIdToggle>>
+>;
+export type PatchStoreLocationsIdToggleMutationBody =
+  UpdateStoreLocationToggleInput;
+export type PatchStoreLocationsIdToggleMutationError =
+  | ErrorResponse
+  | NotfoundError
+  | InternalError;
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof patchStoreLocationsIdToggle>>, {id: string;data: UpdateStoreLocationToggleInput}> = (props) => {
-          const {id,data} = props ?? {};
+export const usePatchStoreLocationsIdToggle = <
+  TError = ErrorResponse | NotfoundError | InternalError,
+  TContext = unknown,
+>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof patchStoreLocationsIdToggle>>,
+      TError,
+      { id: string; data: UpdateStoreLocationToggleInput },
+      TContext
+    >;
+  },
+  queryClient?: QueryClient,
+): UseMutationResult<
+  Awaited<ReturnType<typeof patchStoreLocationsIdToggle>>,
+  TError,
+  { id: string; data: UpdateStoreLocationToggleInput },
+  TContext
+> => {
+  const mutationOptions =
+    getPatchStoreLocationsIdToggleMutationOptions(options);
 
-          return  patchStoreLocationsIdToggle(id,data,)
-        }
-
-        
-
-
-  return  { mutationFn, ...mutationOptions }}
-
-    export type PatchStoreLocationsIdToggleMutationResult = NonNullable<Awaited<ReturnType<typeof patchStoreLocationsIdToggle>>>
-    export type PatchStoreLocationsIdToggleMutationBody = UpdateStoreLocationToggleInput
-    export type PatchStoreLocationsIdToggleMutationError = ErrorResponse | NotfoundError | InternalError
-
-    export const usePatchStoreLocationsIdToggle = <TError = ErrorResponse | NotfoundError | InternalError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof patchStoreLocationsIdToggle>>, TError,{id: string;data: UpdateStoreLocationToggleInput}, TContext>, }
- , queryClient?: QueryClient): UseMutationResult<
-        Awaited<ReturnType<typeof patchStoreLocationsIdToggle>>,
-        TError,
-        {id: string;data: UpdateStoreLocationToggleInput},
-        TContext
-      > => {
-
-      const mutationOptions = getPatchStoreLocationsIdToggleMutationOptions(options);
-
-      return useMutation(mutationOptions , queryClient);
-    }
-    
+  return useMutation(mutationOptions, queryClient);
+};

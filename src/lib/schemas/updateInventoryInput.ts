@@ -4,17 +4,17 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { UpdateInventoryInputPriceOverride } from './updateInventoryInputPriceOverride';
-import type { UpdateInventoryInputCostPriceOverride } from './updateInventoryInputCostPriceOverride';
-import type { UpdateInventoryInputBatchNumber } from './updateInventoryInputBatchNumber';
-import type { UpdateInventoryInputExpiryDate } from './updateInventoryInputExpiryDate';
-import type { UpdateInventoryInputWarehouseCode } from './updateInventoryInputWarehouseCode';
-import type { UpdateInventoryInputShelfCode } from './updateInventoryInputShelfCode';
-import type { UpdateInventoryInputLeadTimeDays } from './updateInventoryInputLeadTimeDays';
-import type { UpdateInventoryInputHsCode } from './updateInventoryInputHsCode';
-import type { UpdateInventoryInputOriginCountry } from './updateInventoryInputOriginCountry';
-import type { UpdateInventoryInputPackageWeight } from './updateInventoryInputPackageWeight';
-import type { UpdateInventoryInputPackageDimensions } from './updateInventoryInputPackageDimensions';
+import type { UpdateInventoryInputPriceOverride } from "./updateInventoryInputPriceOverride";
+import type { UpdateInventoryInputCostPriceOverride } from "./updateInventoryInputCostPriceOverride";
+import type { UpdateInventoryInputBatchNumber } from "./updateInventoryInputBatchNumber";
+import type { UpdateInventoryInputExpiryDate } from "./updateInventoryInputExpiryDate";
+import type { UpdateInventoryInputWarehouseCode } from "./updateInventoryInputWarehouseCode";
+import type { UpdateInventoryInputShelfCode } from "./updateInventoryInputShelfCode";
+import type { UpdateInventoryInputLeadTimeDays } from "./updateInventoryInputLeadTimeDays";
+import type { UpdateInventoryInputHsCode } from "./updateInventoryInputHsCode";
+import type { UpdateInventoryInputOriginCountry } from "./updateInventoryInputOriginCountry";
+import type { UpdateInventoryInputPackageWeight } from "./updateInventoryInputPackageWeight";
+import type { UpdateInventoryInputPackageDimensions } from "./updateInventoryInputPackageDimensions";
 
 /**
  * Inventory update payload

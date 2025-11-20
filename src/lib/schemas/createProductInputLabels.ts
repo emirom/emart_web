@@ -4,9 +4,11 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { CreateProductInputLabelsAnyOfItem } from './createProductInputLabelsAnyOfItem';
+import type { CreateProductInputLabelsAnyOfItem } from "./createProductInputLabelsAnyOfItem";
 
 /**
  * Connected label IDs
  */
-export type CreateProductInputLabels = CreateProductInputLabelsAnyOfItem[] | null;
+export type CreateProductInputLabels =
+  | CreateProductInputLabelsAnyOfItem[]
+  | null;

@@ -4,18 +4,18 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { InventoryDeletedAt } from './inventoryDeletedAt';
-import type { InventoryPriceOverride } from './inventoryPriceOverride';
-import type { InventoryCostPriceOverride } from './inventoryCostPriceOverride';
-import type { InventoryBatchNumber } from './inventoryBatchNumber';
-import type { InventoryExpiryDate } from './inventoryExpiryDate';
-import type { InventoryWarehouseCode } from './inventoryWarehouseCode';
-import type { InventoryShelfCode } from './inventoryShelfCode';
-import type { InventoryLeadTimeDays } from './inventoryLeadTimeDays';
-import type { InventoryHsCode } from './inventoryHsCode';
-import type { InventoryOriginCountry } from './inventoryOriginCountry';
-import type { InventoryPackageWeight } from './inventoryPackageWeight';
-import type { InventoryPackageDimensions } from './inventoryPackageDimensions';
+import type { InventoryDeletedAt } from "./inventoryDeletedAt";
+import type { InventoryPriceOverride } from "./inventoryPriceOverride";
+import type { InventoryCostPriceOverride } from "./inventoryCostPriceOverride";
+import type { InventoryBatchNumber } from "./inventoryBatchNumber";
+import type { InventoryExpiryDate } from "./inventoryExpiryDate";
+import type { InventoryWarehouseCode } from "./inventoryWarehouseCode";
+import type { InventoryShelfCode } from "./inventoryShelfCode";
+import type { InventoryLeadTimeDays } from "./inventoryLeadTimeDays";
+import type { InventoryHsCode } from "./inventoryHsCode";
+import type { InventoryOriginCountry } from "./inventoryOriginCountry";
+import type { InventoryPackageWeight } from "./inventoryPackageWeight";
+import type { InventoryPackageDimensions } from "./inventoryPackageDimensions";
 
 /**
  * Inventory item representing stock at a specific location

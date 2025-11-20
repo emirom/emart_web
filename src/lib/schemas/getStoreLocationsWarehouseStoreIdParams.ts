@@ -4,22 +4,22 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { LocationType } from './locationType';
+import type { LocationType } from "./locationType";
 
 export type GetStoreLocationsWarehouseStoreIdParams = {
-/**
- * Number of records to skip
- * @minimum 0
- */
-skip: number;
-/**
- * Maximum number of records to return
- * @minimum 1
- * @maximum 20
- */
-limit: number;
-/**
- * Filter by location type
- */
-type?: LocationType;
+  /**
+   * Number of records to skip
+   * @minimum 0
+   */
+  skip: number;
+  /**
+   * Maximum number of records to return
+   * @minimum 1
+   * @maximum 20
+   */
+  limit: number;
+  /**
+   * Filter by location type
+   */
+  type?: LocationType;
 };

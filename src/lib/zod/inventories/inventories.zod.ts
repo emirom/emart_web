@@ -4,10 +4,7 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import {
-  z as zod
-} from 'zod';
-
+import { z as zod } from "zod";
 
 /**
  * Create a new inventory item
@@ -19,28 +16,82 @@ export const postInventoriesBodyHsCodeMaxOne = 200;
 export const postInventoriesBodyOriginCountryMaxOne = 200;
 export const postInventoriesBodyPackageDimensionsMaxOne = 200;
 
-
-export const postInventoriesBody = zod.object({
-  "storeId": zod.uuid().describe('Store ID'),
-  "locationId": zod.uuid().describe('Location ID'),
-  "variantId": zod.uuid().describe('Variant ID'),
-  "price": zod.coerce.number().describe('Base price'),
-  "priceOverride": zod.union([zod.coerce.number(),zod.null()]).optional().describe('Override price for this inventory item'),
-  "discount": zod.coerce.number().describe('Discount percentage'),
-  "discountPrice": zod.coerce.number().describe('Price after discount'),
-  "inStock": zod.coerce.number().describe('Current stock quantity'),
-  "costPriceOverride": zod.union([zod.coerce.number(),zod.null()]).optional().describe('Override cost price for this batch'),
-  "batchNumber": zod.union([zod.coerce.string().max(postInventoriesBodyBatchNumberMaxOne),zod.null()]).optional().describe('Batch number for tracking'),
-  "expiryDate": zod.union([zod.iso.datetime({}),zod.null()]).optional().describe('Expiry date for perishable items'),
-  "warehouseCode": zod.union([zod.coerce.string().max(postInventoriesBodyWarehouseCodeMaxOne),zod.null()]).optional().describe('Warehouse code'),
-  "shelfCode": zod.union([zod.coerce.string().max(postInventoriesBodyShelfCodeMaxOne),zod.null()]).optional().describe('Shelf code for location in warehouse'),
-  "leadTimeDays": zod.union([zod.coerce.number(),zod.null()]).optional().describe('Lead time in days to prepare for shipping'),
-  "hsCode": zod.union([zod.coerce.string().max(postInventoriesBodyHsCodeMaxOne),zod.null()]).optional().describe('Harmonized System code for customs'),
-  "originCountry": zod.union([zod.coerce.string().max(postInventoriesBodyOriginCountryMaxOne),zod.null()]).optional().describe('Country of manufacture/origin'),
-  "packageWeight": zod.union([zod.coerce.number(),zod.null()]).optional().describe('Gross weight including packaging (kg)'),
-  "packageDimensions": zod.union([zod.coerce.string().max(postInventoriesBodyPackageDimensionsMaxOne),zod.null()]).optional().describe('Packaged dimensions: length x width x height'),
-  "lowStockThreshold": zod.coerce.number().describe('Low stock alert threshold')
-}).describe('Inventory creation payload')
+export const postInventoriesBody = zod
+  .object({
+    storeId: zod.uuid().describe("Store ID"),
+    locationId: zod.uuid().describe("Location ID"),
+    variantId: zod.uuid().describe("Variant ID"),
+    price: zod.coerce.number().describe("Base price"),
+    priceOverride: zod
+      .union([zod.coerce.number(), zod.null()])
+      .optional()
+      .describe("Override price for this inventory item"),
+    discount: zod.coerce.number().describe("Discount percentage"),
+    discountPrice: zod.coerce.number().describe("Price after discount"),
+    inStock: zod.coerce.number().describe("Current stock quantity"),
+    costPriceOverride: zod
+      .union([zod.coerce.number(), zod.null()])
+      .optional()
+      .describe("Override cost price for this batch"),
+    batchNumber: zod
+      .union([
+        zod.coerce.string().max(postInventoriesBodyBatchNumberMaxOne),
+        zod.null(),
+      ])
+      .optional()
+      .describe("Batch number for tracking"),
+    expiryDate: zod
+      .union([zod.iso.datetime({}), zod.null()])
+      .optional()
+      .describe("Expiry date for perishable items"),
+    warehouseCode: zod
+      .union([
+        zod.coerce.string().max(postInventoriesBodyWarehouseCodeMaxOne),
+        zod.null(),
+      ])
+      .optional()
+      .describe("Warehouse code"),
+    shelfCode: zod
+      .union([
+        zod.coerce.string().max(postInventoriesBodyShelfCodeMaxOne),
+        zod.null(),
+      ])
+      .optional()
+      .describe("Shelf code for location in warehouse"),
+    leadTimeDays: zod
+      .union([zod.coerce.number(), zod.null()])
+      .optional()
+      .describe("Lead time in days to prepare for shipping"),
+    hsCode: zod
+      .union([
+        zod.coerce.string().max(postInventoriesBodyHsCodeMaxOne),
+        zod.null(),
+      ])
+      .optional()
+      .describe("Harmonized System code for customs"),
+    originCountry: zod
+      .union([
+        zod.coerce.string().max(postInventoriesBodyOriginCountryMaxOne),
+        zod.null(),
+      ])
+      .optional()
+      .describe("Country of manufacture/origin"),
+    packageWeight: zod
+      .union([zod.coerce.number(), zod.null()])
+      .optional()
+      .describe("Gross weight including packaging (kg)"),
+    packageDimensions: zod
+      .union([
+        zod.coerce.string().max(postInventoriesBodyPackageDimensionsMaxOne),
+        zod.null(),
+      ])
+      .optional()
+      .describe("Packaged dimensions: length x width x height"),
+    lowStockThreshold: zod.coerce
+      .number()
+      .describe("Low stock alert threshold"),
+  })
+  .describe("Inventory creation payload");
 
 /**
  * List all inventory items with pagination and filters
@@ -52,45 +103,111 @@ export const getInventoriesQueryBatchNumberMaxOne = 200;
 export const getInventoriesQueryHsCodeMaxOne = 200;
 export const getInventoriesQueryOriginCountryMaxOne = 200;
 
-
 export const getInventoriesQueryParams = zod.object({
-  "skip": zod.coerce.number().min(getInventoriesQuerySkipMin).describe('Number of records to skip'),
-  "limit": zod.coerce.number().min(1).max(getInventoriesQueryLimitMax).describe('Maximum number of records to return'),
-  "storeId": zod.union([zod.uuid(),zod.null()]).optional().describe('Filter by store ID'),
-  "locationId": zod.union([zod.uuid(),zod.null()]).optional().describe('Filter by location ID'),
-  "variantId": zod.union([zod.uuid(),zod.null()]).optional().describe('Filter by variant ID'),
-  "warehouseCode": zod.union([zod.coerce.string().max(getInventoriesQueryWarehouseCodeMaxOne),zod.null()]).optional().describe('Filter by warehouse code'),
-  "batchNumber": zod.union([zod.coerce.string().max(getInventoriesQueryBatchNumberMaxOne),zod.null()]).optional().describe('Filter by batch number'),
-  "isLowStock": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Filter by low stock status'),
-  "minPrice": zod.union([zod.coerce.number(),zod.null()]).optional().describe('Filter by minimum price'),
-  "maxPrice": zod.union([zod.coerce.number(),zod.null()]).optional().describe('Filter by maximum price'),
-  "minInStock": zod.union([zod.coerce.number(),zod.null()]).optional().describe('Filter by minimum stock quantity'),
-  "maxInStock": zod.union([zod.coerce.number(),zod.null()]).optional().describe('Filter by maximum stock quantity'),
-  "hsCode": zod.union([zod.coerce.string().max(getInventoriesQueryHsCodeMaxOne),zod.null()]).optional().describe('Filter by HS code'),
-  "originCountry": zod.union([zod.coerce.string().max(getInventoriesQueryOriginCountryMaxOne),zod.null()]).optional().describe('Filter by origin country')
-})
+  skip: zod.coerce
+    .number()
+    .min(getInventoriesQuerySkipMin)
+    .describe("Number of records to skip"),
+  limit: zod.coerce
+    .number()
+    .min(1)
+    .max(getInventoriesQueryLimitMax)
+    .describe("Maximum number of records to return"),
+  storeId: zod
+    .union([zod.uuid(), zod.null()])
+    .optional()
+    .describe("Filter by store ID"),
+  locationId: zod
+    .union([zod.uuid(), zod.null()])
+    .optional()
+    .describe("Filter by location ID"),
+  variantId: zod
+    .union([zod.uuid(), zod.null()])
+    .optional()
+    .describe("Filter by variant ID"),
+  warehouseCode: zod
+    .union([
+      zod.coerce.string().max(getInventoriesQueryWarehouseCodeMaxOne),
+      zod.null(),
+    ])
+    .optional()
+    .describe("Filter by warehouse code"),
+  batchNumber: zod
+    .union([
+      zod.coerce.string().max(getInventoriesQueryBatchNumberMaxOne),
+      zod.null(),
+    ])
+    .optional()
+    .describe("Filter by batch number"),
+  isLowStock: zod
+    .union([zod.coerce.boolean(), zod.null()])
+    .optional()
+    .describe("Filter by low stock status"),
+  minPrice: zod
+    .union([zod.coerce.number(), zod.null()])
+    .optional()
+    .describe("Filter by minimum price"),
+  maxPrice: zod
+    .union([zod.coerce.number(), zod.null()])
+    .optional()
+    .describe("Filter by maximum price"),
+  minInStock: zod
+    .union([zod.coerce.number(), zod.null()])
+    .optional()
+    .describe("Filter by minimum stock quantity"),
+  maxInStock: zod
+    .union([zod.coerce.number(), zod.null()])
+    .optional()
+    .describe("Filter by maximum stock quantity"),
+  hsCode: zod
+    .union([
+      zod.coerce.string().max(getInventoriesQueryHsCodeMaxOne),
+      zod.null(),
+    ])
+    .optional()
+    .describe("Filter by HS code"),
+  originCountry: zod
+    .union([
+      zod.coerce.string().max(getInventoriesQueryOriginCountryMaxOne),
+      zod.null(),
+    ])
+    .optional()
+    .describe("Filter by origin country"),
+});
 
-export const getInventoriesResponse = zod.object({
-  "success": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Operation status')
-}).describe('Standard API response format').describe('List of inventories response')
+export const getInventoriesResponse = zod
+  .object({
+    success: zod
+      .union([zod.coerce.boolean(), zod.null()])
+      .optional()
+      .describe("Operation status"),
+  })
+  .describe("Standard API response format")
+  .describe("List of inventories response");
 
 /**
  * Get a single inventory item by ID
  */
 export const getInventoriesIdParams = zod.object({
-  "id": zod.uuid().describe('Inventory ID')
-})
+  id: zod.uuid().describe("Inventory ID"),
+});
 
-export const getInventoriesIdResponse = zod.object({
-  "success": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Operation status')
-}).describe('Standard API response format').describe('Single inventory response')
+export const getInventoriesIdResponse = zod
+  .object({
+    success: zod
+      .union([zod.coerce.boolean(), zod.null()])
+      .optional()
+      .describe("Operation status"),
+  })
+  .describe("Standard API response format")
+  .describe("Single inventory response");
 
 /**
  * Update an inventory item
  */
 export const patchInventoriesIdParams = zod.object({
-  "id": zod.uuid().describe('Inventory ID')
-})
+  id: zod.uuid().describe("Inventory ID"),
+});
 
 export const patchInventoriesIdBodyBatchNumberMaxOne = 200;
 export const patchInventoriesIdBodyWarehouseCodeMaxOne = 200;
@@ -99,37 +216,100 @@ export const patchInventoriesIdBodyHsCodeMaxOne = 200;
 export const patchInventoriesIdBodyOriginCountryMaxOne = 200;
 export const patchInventoriesIdBodyPackageDimensionsMaxOne = 200;
 
+export const patchInventoriesIdBody = zod
+  .object({
+    storeId: zod.uuid().optional().describe("Store ID"),
+    locationId: zod.uuid().optional().describe("Location ID"),
+    variantId: zod.uuid().optional().describe("Variant ID"),
+    price: zod.coerce.number().optional().describe("Base price"),
+    priceOverride: zod
+      .union([zod.coerce.number(), zod.null()])
+      .optional()
+      .describe("Override price for this inventory item"),
+    discount: zod.coerce.number().optional().describe("Discount percentage"),
+    discountPrice: zod.coerce
+      .number()
+      .optional()
+      .describe("Price after discount"),
+    inStock: zod.coerce.number().optional().describe("Current stock quantity"),
+    costPriceOverride: zod
+      .union([zod.coerce.number(), zod.null()])
+      .optional()
+      .describe("Override cost price for this batch"),
+    batchNumber: zod
+      .union([
+        zod.coerce.string().max(patchInventoriesIdBodyBatchNumberMaxOne),
+        zod.null(),
+      ])
+      .optional()
+      .describe("Batch number for tracking"),
+    expiryDate: zod
+      .union([zod.iso.datetime({}), zod.null()])
+      .optional()
+      .describe("Expiry date for perishable items"),
+    warehouseCode: zod
+      .union([
+        zod.coerce.string().max(patchInventoriesIdBodyWarehouseCodeMaxOne),
+        zod.null(),
+      ])
+      .optional()
+      .describe("Warehouse code"),
+    shelfCode: zod
+      .union([
+        zod.coerce.string().max(patchInventoriesIdBodyShelfCodeMaxOne),
+        zod.null(),
+      ])
+      .optional()
+      .describe("Shelf code for location in warehouse"),
+    leadTimeDays: zod
+      .union([zod.coerce.number(), zod.null()])
+      .optional()
+      .describe("Lead time in days to prepare for shipping"),
+    hsCode: zod
+      .union([
+        zod.coerce.string().max(patchInventoriesIdBodyHsCodeMaxOne),
+        zod.null(),
+      ])
+      .optional()
+      .describe("Harmonized System code for customs"),
+    originCountry: zod
+      .union([
+        zod.coerce.string().max(patchInventoriesIdBodyOriginCountryMaxOne),
+        zod.null(),
+      ])
+      .optional()
+      .describe("Country of manufacture/origin"),
+    packageWeight: zod
+      .union([zod.coerce.number(), zod.null()])
+      .optional()
+      .describe("Gross weight including packaging (kg)"),
+    packageDimensions: zod
+      .union([
+        zod.coerce.string().max(patchInventoriesIdBodyPackageDimensionsMaxOne),
+        zod.null(),
+      ])
+      .optional()
+      .describe("Packaged dimensions: length x width x height"),
+    lowStockThreshold: zod.coerce
+      .number()
+      .optional()
+      .describe("Low stock alert threshold"),
+  })
+  .describe("Inventory update payload");
 
-export const patchInventoriesIdBody = zod.object({
-  "storeId": zod.uuid().optional().describe('Store ID'),
-  "locationId": zod.uuid().optional().describe('Location ID'),
-  "variantId": zod.uuid().optional().describe('Variant ID'),
-  "price": zod.coerce.number().optional().describe('Base price'),
-  "priceOverride": zod.union([zod.coerce.number(),zod.null()]).optional().describe('Override price for this inventory item'),
-  "discount": zod.coerce.number().optional().describe('Discount percentage'),
-  "discountPrice": zod.coerce.number().optional().describe('Price after discount'),
-  "inStock": zod.coerce.number().optional().describe('Current stock quantity'),
-  "costPriceOverride": zod.union([zod.coerce.number(),zod.null()]).optional().describe('Override cost price for this batch'),
-  "batchNumber": zod.union([zod.coerce.string().max(patchInventoriesIdBodyBatchNumberMaxOne),zod.null()]).optional().describe('Batch number for tracking'),
-  "expiryDate": zod.union([zod.iso.datetime({}),zod.null()]).optional().describe('Expiry date for perishable items'),
-  "warehouseCode": zod.union([zod.coerce.string().max(patchInventoriesIdBodyWarehouseCodeMaxOne),zod.null()]).optional().describe('Warehouse code'),
-  "shelfCode": zod.union([zod.coerce.string().max(patchInventoriesIdBodyShelfCodeMaxOne),zod.null()]).optional().describe('Shelf code for location in warehouse'),
-  "leadTimeDays": zod.union([zod.coerce.number(),zod.null()]).optional().describe('Lead time in days to prepare for shipping'),
-  "hsCode": zod.union([zod.coerce.string().max(patchInventoriesIdBodyHsCodeMaxOne),zod.null()]).optional().describe('Harmonized System code for customs'),
-  "originCountry": zod.union([zod.coerce.string().max(patchInventoriesIdBodyOriginCountryMaxOne),zod.null()]).optional().describe('Country of manufacture/origin'),
-  "packageWeight": zod.union([zod.coerce.number(),zod.null()]).optional().describe('Gross weight including packaging (kg)'),
-  "packageDimensions": zod.union([zod.coerce.string().max(patchInventoriesIdBodyPackageDimensionsMaxOne),zod.null()]).optional().describe('Packaged dimensions: length x width x height'),
-  "lowStockThreshold": zod.coerce.number().optional().describe('Low stock alert threshold')
-}).describe('Inventory update payload')
-
-export const patchInventoriesIdResponse = zod.object({
-  "success": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Operation status')
-}).describe('Standard API response format').describe('Single inventory response')
+export const patchInventoriesIdResponse = zod
+  .object({
+    success: zod
+      .union([zod.coerce.boolean(), zod.null()])
+      .optional()
+      .describe("Operation status"),
+  })
+  .describe("Standard API response format")
+  .describe("Single inventory response");
 
 /**
  * Delete an inventory item
  */
 export const deleteInventoriesIdParams = zod.object({
-  "id": zod.uuid().describe('Inventory ID')
-})
-
+  id: zod.uuid().describe("Inventory ID"),
+});

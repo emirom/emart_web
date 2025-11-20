@@ -4,18 +4,18 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { ListInventoriesResponseDataItemDeletedAt } from './listInventoriesResponseDataItemDeletedAt';
-import type { ListInventoriesResponseDataItemPriceOverride } from './listInventoriesResponseDataItemPriceOverride';
-import type { ListInventoriesResponseDataItemCostPriceOverride } from './listInventoriesResponseDataItemCostPriceOverride';
-import type { ListInventoriesResponseDataItemBatchNumber } from './listInventoriesResponseDataItemBatchNumber';
-import type { ListInventoriesResponseDataItemExpiryDate } from './listInventoriesResponseDataItemExpiryDate';
-import type { ListInventoriesResponseDataItemWarehouseCode } from './listInventoriesResponseDataItemWarehouseCode';
-import type { ListInventoriesResponseDataItemShelfCode } from './listInventoriesResponseDataItemShelfCode';
-import type { ListInventoriesResponseDataItemLeadTimeDays } from './listInventoriesResponseDataItemLeadTimeDays';
-import type { ListInventoriesResponseDataItemHsCode } from './listInventoriesResponseDataItemHsCode';
-import type { ListInventoriesResponseDataItemOriginCountry } from './listInventoriesResponseDataItemOriginCountry';
-import type { ListInventoriesResponseDataItemPackageWeight } from './listInventoriesResponseDataItemPackageWeight';
-import type { ListInventoriesResponseDataItemPackageDimensions } from './listInventoriesResponseDataItemPackageDimensions';
+import type { ListInventoriesResponseDataItemDeletedAt } from "./listInventoriesResponseDataItemDeletedAt";
+import type { ListInventoriesResponseDataItemPriceOverride } from "./listInventoriesResponseDataItemPriceOverride";
+import type { ListInventoriesResponseDataItemCostPriceOverride } from "./listInventoriesResponseDataItemCostPriceOverride";
+import type { ListInventoriesResponseDataItemBatchNumber } from "./listInventoriesResponseDataItemBatchNumber";
+import type { ListInventoriesResponseDataItemExpiryDate } from "./listInventoriesResponseDataItemExpiryDate";
+import type { ListInventoriesResponseDataItemWarehouseCode } from "./listInventoriesResponseDataItemWarehouseCode";
+import type { ListInventoriesResponseDataItemShelfCode } from "./listInventoriesResponseDataItemShelfCode";
+import type { ListInventoriesResponseDataItemLeadTimeDays } from "./listInventoriesResponseDataItemLeadTimeDays";
+import type { ListInventoriesResponseDataItemHsCode } from "./listInventoriesResponseDataItemHsCode";
+import type { ListInventoriesResponseDataItemOriginCountry } from "./listInventoriesResponseDataItemOriginCountry";
+import type { ListInventoriesResponseDataItemPackageWeight } from "./listInventoriesResponseDataItemPackageWeight";
+import type { ListInventoriesResponseDataItemPackageDimensions } from "./listInventoriesResponseDataItemPackageDimensions";
 
 export type ListInventoriesResponseDataItem = {
   /** Unique identifier (UUIDv4) */

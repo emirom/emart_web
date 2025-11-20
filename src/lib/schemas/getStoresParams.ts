@@ -6,43 +6,43 @@
  */
 
 export type GetStoresParams = {
-/**
- * Number of records to skip
- * @minimum 0
- */
-skip: number;
-/**
- * Maximum number of records to return
- * @minimum 1
- * @maximum 20
- */
-limit: number;
-/**
- * Filter by store name
- */
-name?: string | null;
-/**
- * Filter by store slug
- */
-slug?: string | null;
-/**
- * Filter by owner ID
- */
-ownerId?: string | null;
-/**
- * Filter by active status
- */
-isActive?: boolean | null;
-/**
- * Filter by approval status
- */
-isApproved?: boolean | null;
-/**
- * Filter by email
- */
-email?: string | null;
-/**
- * Filter by phone
- */
-phone?: string | null;
+  /**
+   * Number of records to skip
+   * @minimum 0
+   */
+  skip: number;
+  /**
+   * Maximum number of records to return
+   * @minimum 1
+   * @maximum 20
+   */
+  limit: number;
+  /**
+   * Filter by store name
+   */
+  name?: string | null;
+  /**
+   * Filter by store slug
+   */
+  slug?: string | null;
+  /**
+   * Filter by owner ID
+   */
+  ownerId?: string | null;
+  /**
+   * Filter by active status
+   */
+  isActive?: boolean | null;
+  /**
+   * Filter by approval status
+   */
+  isApproved?: boolean | null;
+  /**
+   * Filter by email
+   */
+  email?: string | null;
+  /**
+   * Filter by phone
+   */
+  phone?: string | null;
 };

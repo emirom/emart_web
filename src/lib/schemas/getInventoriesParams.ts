@@ -6,63 +6,63 @@
  */
 
 export type GetInventoriesParams = {
-/**
- * Number of records to skip
- * @minimum 0
- */
-skip: number;
-/**
- * Maximum number of records to return
- * @minimum 1
- * @maximum 20
- */
-limit: number;
-/**
- * Filter by store ID
- */
-storeId?: string | null;
-/**
- * Filter by location ID
- */
-locationId?: string | null;
-/**
- * Filter by variant ID
- */
-variantId?: string | null;
-/**
- * Filter by warehouse code
- */
-warehouseCode?: string | null;
-/**
- * Filter by batch number
- */
-batchNumber?: string | null;
-/**
- * Filter by low stock status
- */
-isLowStock?: boolean | null;
-/**
- * Filter by minimum price
- */
-minPrice?: number | null;
-/**
- * Filter by maximum price
- */
-maxPrice?: number | null;
-/**
- * Filter by minimum stock quantity
- */
-minInStock?: number | null;
-/**
- * Filter by maximum stock quantity
- */
-maxInStock?: number | null;
-/**
- * Filter by HS code
- */
-hsCode?: string | null;
-/**
- * Filter by origin country
- */
-originCountry?: string | null;
+  /**
+   * Number of records to skip
+   * @minimum 0
+   */
+  skip: number;
+  /**
+   * Maximum number of records to return
+   * @minimum 1
+   * @maximum 20
+   */
+  limit: number;
+  /**
+   * Filter by store ID
+   */
+  storeId?: string | null;
+  /**
+   * Filter by location ID
+   */
+  locationId?: string | null;
+  /**
+   * Filter by variant ID
+   */
+  variantId?: string | null;
+  /**
+   * Filter by warehouse code
+   */
+  warehouseCode?: string | null;
+  /**
+   * Filter by batch number
+   */
+  batchNumber?: string | null;
+  /**
+   * Filter by low stock status
+   */
+  isLowStock?: boolean | null;
+  /**
+   * Filter by minimum price
+   */
+  minPrice?: number | null;
+  /**
+   * Filter by maximum price
+   */
+  maxPrice?: number | null;
+  /**
+   * Filter by minimum stock quantity
+   */
+  minInStock?: number | null;
+  /**
+   * Filter by maximum stock quantity
+   */
+  maxInStock?: number | null;
+  /**
+   * Filter by HS code
+   */
+  hsCode?: string | null;
+  /**
+   * Filter by origin country
+   */
+  originCountry?: string | null;
 };

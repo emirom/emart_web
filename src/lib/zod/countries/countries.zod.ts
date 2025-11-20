@@ -4,10 +4,7 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import {
-  z as zod
-} from 'zod';
-
+import { z as zod } from "zod";
 
 /**
  * Create a new country
@@ -19,19 +16,34 @@ export const postCountriesBodyIsoCodeMin = 2;
 
 export const postCountriesBodyIsoCodeMax = 2;
 
-export const postCountriesBodyIsoCodeRegExp = new RegExp('^[A-Z]{2}$');
+export const postCountriesBodyIsoCodeRegExp = new RegExp("^[A-Z]{2}$");
 export const postCountriesBodyPhoneCodeMin = 2;
 
 export const postCountriesBodyPhoneCodeMax = 5;
 
-export const postCountriesBodyPhoneCodeRegExp = new RegExp('^\\+\\d{1,4}$');
+export const postCountriesBodyPhoneCodeRegExp = new RegExp("^\\+\\d{1,4}$");
 
-
-export const postCountriesBody = zod.object({
-  "name": zod.coerce.string().min(postCountriesBodyNameMin).max(postCountriesBodyNameMax).describe('Country name in native language'),
-  "isoCode": zod.coerce.string().min(postCountriesBodyIsoCodeMin).max(postCountriesBodyIsoCodeMax).regex(postCountriesBodyIsoCodeRegExp).describe('ISO 3166-1 alpha-2 country code'),
-  "phoneCode": zod.coerce.string().min(postCountriesBodyPhoneCodeMin).max(postCountriesBodyPhoneCodeMax).regex(postCountriesBodyPhoneCodeRegExp).describe('International telephone prefix')
-}).describe('Country creation payload')
+export const postCountriesBody = zod
+  .object({
+    name: zod.coerce
+      .string()
+      .min(postCountriesBodyNameMin)
+      .max(postCountriesBodyNameMax)
+      .describe("Country name in native language"),
+    isoCode: zod.coerce
+      .string()
+      .min(postCountriesBodyIsoCodeMin)
+      .max(postCountriesBodyIsoCodeMax)
+      .regex(postCountriesBodyIsoCodeRegExp)
+      .describe("ISO 3166-1 alpha-2 country code"),
+    phoneCode: zod.coerce
+      .string()
+      .min(postCountriesBodyPhoneCodeMin)
+      .max(postCountriesBodyPhoneCodeMax)
+      .regex(postCountriesBodyPhoneCodeRegExp)
+      .describe("International telephone prefix"),
+  })
+  .describe("Country creation payload");
 
 /**
  * Get all countries with pagination and filters
@@ -42,36 +54,69 @@ export const getCountriesQueryNameMaxOne = 200;
 export const getCountriesQueryIsoCodeMaxOne = 200;
 export const getCountriesQueryPhoneCodeMaxOne = 200;
 
-
 export const getCountriesQueryParams = zod.object({
-  "skip": zod.coerce.number().min(getCountriesQuerySkipMin).describe('Number of records to skip'),
-  "limit": zod.coerce.number().min(1).max(getCountriesQueryLimitMax).describe('Maximum number of records to return'),
-  "name": zod.union([zod.coerce.string().max(getCountriesQueryNameMaxOne),zod.null()]).optional().describe('Filter by country name'),
-  "isoCode": zod.union([zod.coerce.string().max(getCountriesQueryIsoCodeMaxOne),zod.null()]).optional().describe('Filter by ISO country code'),
-  "phoneCode": zod.union([zod.coerce.string().max(getCountriesQueryPhoneCodeMaxOne),zod.null()]).optional().describe('Filter by phone code')
-})
+  skip: zod.coerce
+    .number()
+    .min(getCountriesQuerySkipMin)
+    .describe("Number of records to skip"),
+  limit: zod.coerce
+    .number()
+    .min(1)
+    .max(getCountriesQueryLimitMax)
+    .describe("Maximum number of records to return"),
+  name: zod
+    .union([zod.coerce.string().max(getCountriesQueryNameMaxOne), zod.null()])
+    .optional()
+    .describe("Filter by country name"),
+  isoCode: zod
+    .union([
+      zod.coerce.string().max(getCountriesQueryIsoCodeMaxOne),
+      zod.null(),
+    ])
+    .optional()
+    .describe("Filter by ISO country code"),
+  phoneCode: zod
+    .union([
+      zod.coerce.string().max(getCountriesQueryPhoneCodeMaxOne),
+      zod.null(),
+    ])
+    .optional()
+    .describe("Filter by phone code"),
+});
 
-export const getCountriesResponse = zod.object({
-  "success": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Operation status')
-}).describe('Standard API response format').describe('Response for list country operations')
+export const getCountriesResponse = zod
+  .object({
+    success: zod
+      .union([zod.coerce.boolean(), zod.null()])
+      .optional()
+      .describe("Operation status"),
+  })
+  .describe("Standard API response format")
+  .describe("Response for list country operations");
 
 /**
  * Get a single country by ID
  */
 export const getCountriesIdParams = zod.object({
-  "id": zod.uuid().describe('Country ID')
-})
+  id: zod.uuid().describe("Country ID"),
+});
 
-export const getCountriesIdResponse = zod.object({
-  "success": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Operation status')
-}).describe('Standard API response format').describe('Response for single country operations')
+export const getCountriesIdResponse = zod
+  .object({
+    success: zod
+      .union([zod.coerce.boolean(), zod.null()])
+      .optional()
+      .describe("Operation status"),
+  })
+  .describe("Standard API response format")
+  .describe("Response for single country operations");
 
 /**
  * Update a country
  */
 export const patchCountriesIdParams = zod.object({
-  "id": zod.uuid().describe('Country ID')
-})
+  id: zod.uuid().describe("Country ID"),
+});
 
 export const patchCountriesIdBodyNameMin = 2;
 
@@ -80,28 +125,51 @@ export const patchCountriesIdBodyIsoCodeMin = 2;
 
 export const patchCountriesIdBodyIsoCodeMax = 2;
 
-export const patchCountriesIdBodyIsoCodeRegExp = new RegExp('^[A-Z]{2}$');
+export const patchCountriesIdBodyIsoCodeRegExp = new RegExp("^[A-Z]{2}$");
 export const patchCountriesIdBodyPhoneCodeMin = 2;
 
 export const patchCountriesIdBodyPhoneCodeMax = 5;
 
-export const patchCountriesIdBodyPhoneCodeRegExp = new RegExp('^\\+\\d{1,4}$');
+export const patchCountriesIdBodyPhoneCodeRegExp = new RegExp("^\\+\\d{1,4}$");
 
+export const patchCountriesIdBody = zod
+  .object({
+    name: zod.coerce
+      .string()
+      .min(patchCountriesIdBodyNameMin)
+      .max(patchCountriesIdBodyNameMax)
+      .optional()
+      .describe("Country name in native language"),
+    isoCode: zod.coerce
+      .string()
+      .min(patchCountriesIdBodyIsoCodeMin)
+      .max(patchCountriesIdBodyIsoCodeMax)
+      .regex(patchCountriesIdBodyIsoCodeRegExp)
+      .optional()
+      .describe("ISO 3166-1 alpha-2 country code"),
+    phoneCode: zod.coerce
+      .string()
+      .min(patchCountriesIdBodyPhoneCodeMin)
+      .max(patchCountriesIdBodyPhoneCodeMax)
+      .regex(patchCountriesIdBodyPhoneCodeRegExp)
+      .optional()
+      .describe("International telephone prefix"),
+  })
+  .describe("Country update payload");
 
-export const patchCountriesIdBody = zod.object({
-  "name": zod.coerce.string().min(patchCountriesIdBodyNameMin).max(patchCountriesIdBodyNameMax).optional().describe('Country name in native language'),
-  "isoCode": zod.coerce.string().min(patchCountriesIdBodyIsoCodeMin).max(patchCountriesIdBodyIsoCodeMax).regex(patchCountriesIdBodyIsoCodeRegExp).optional().describe('ISO 3166-1 alpha-2 country code'),
-  "phoneCode": zod.coerce.string().min(patchCountriesIdBodyPhoneCodeMin).max(patchCountriesIdBodyPhoneCodeMax).regex(patchCountriesIdBodyPhoneCodeRegExp).optional().describe('International telephone prefix')
-}).describe('Country update payload')
-
-export const patchCountriesIdResponse = zod.object({
-  "success": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Operation status')
-}).describe('Standard API response format').describe('Response for single country operations')
+export const patchCountriesIdResponse = zod
+  .object({
+    success: zod
+      .union([zod.coerce.boolean(), zod.null()])
+      .optional()
+      .describe("Operation status"),
+  })
+  .describe("Standard API response format")
+  .describe("Response for single country operations");
 
 /**
  * Delete a country
  */
 export const deleteCountriesIdParams = zod.object({
-  "id": zod.uuid().describe('Country ID')
-})
-
+  id: zod.uuid().describe("Country ID"),
+});
