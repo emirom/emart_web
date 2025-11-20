@@ -3,6 +3,7 @@
 import { CustomDataTable } from "@components/CustomDataTable";
 import { Color } from "@lib/schemas";
 import { useGetColors } from "@lib/services/colors/colors";
+import { ColorFilter } from "@lib/types/filter-generator";
 import { ColumnDef } from "@tanstack/react-table";
 import { useSearchParams } from "next/navigation";
 import ColorsAction from "./ColorAction";
@@ -16,16 +17,17 @@ type InitialQuery = {
 export default function ColorTable({
   initialQuery,
 }: {
-  initialQuery?: InitialQuery;
+  initialQuery?: ColorFilter;
 }) {
   const searchParams = useSearchParams();
-  const page = Number(searchParams?.get("page") ?? initialQuery?.page ?? 0);
-  const name = searchParams?.get("search") ?? initialQuery?.name ?? "";
 
   const { data: colors } = useGetColors({
-    skip: page * 4,
-    limit: 4,
-    name,
+    skip: initialQuery?.page ?? 0,
+    limit: 10,
+    name: searchParams?.get("name") ?? initialQuery?.name,
+    enName: searchParams?.get("enName") ?? initialQuery?.enName,
+    displayName: searchParams?.get("displayName") ?? initialQuery?.displayName,
+    hex: searchParams?.get("hex") ?? initialQuery?.hex,
   });
 
   const columns: ColumnDef<Color>[] = [

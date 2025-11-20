@@ -3,6 +3,7 @@ import { HeaderWithLink } from "@components/HeaderWithLink";
 import { TablePagination } from "@components/TablePagination";
 import { queryClient } from "@lib/apis/queryClient";
 import { getColors } from "@lib/services/colors/colors";
+import { ColorFilter } from "@lib/types/filter-generator";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import { Metadata } from "next";
 
@@ -18,21 +19,34 @@ export default async function Page({
 }) {
   const sp = searchParams ? await searchParams : {};
 
-  const initialQuery = {
-    page: Number(sp?.page ?? 0),
-    name: sp?.search ?? "",
+  const initialQuery: ColorFilter = {
+    page: Number(sp.page ?? 0) * 10,
+    name: sp?.name,
+    enName: sp?.enName,
+    displayName: sp?.displayName,
+    hex: sp?.hex,
   };
 
   await queryClient.prefetchQuery({
     queryKey: [
       "/colors",
-      { skip: initialQuery.page * 4, limit: 4, name: initialQuery.name },
+      {
+        skip: initialQuery.page,
+        limit: 10,
+        name: initialQuery.name,
+        enName: initialQuery.enName,
+        displayName: initialQuery.displayName,
+        hex: initialQuery.hex,
+      },
     ],
     queryFn: () =>
       getColors({
-        skip: initialQuery.page * 4,
-        limit: 4,
+        skip: initialQuery.page,
+        limit: 10,
         name: initialQuery.name,
+        enName: initialQuery.enName,
+        displayName: initialQuery.displayName,
+        hex: initialQuery.hex,
       }),
   });
 

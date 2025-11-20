@@ -29,7 +29,7 @@ export default async function Page({
       "/products",
       {
         limit: 10,
-        skip: initialQuery.page * 10,
+        skip: initialQuery.page,
         name: sp.name,
         enName: sp.enName,
         categoryId: sp.categoryId,
@@ -39,7 +39,7 @@ export default async function Page({
     queryFn: () =>
       getProducts({
         limit: 10,
-        skip: initialQuery.page * 10,
+        skip: initialQuery.page,
         name: sp.name,
         enName: sp.enName,
         categoryId: sp.categoryId,

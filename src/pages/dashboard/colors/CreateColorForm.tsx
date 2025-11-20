@@ -10,8 +10,9 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
 export default function CreateColorForm() {
-  const { handleSubmit, control, formState, reset } =
-    useForm<CreateColorInput>();
+  const { handleSubmit, control, formState, reset } = useForm<CreateColorInput>(
+    { defaultValues: { hex: "#000000" } },
+  );
   const onSubmit: SubmitHandler<CreateColorInput> = async (data) => {
     try {
       await postColorAction(data);
