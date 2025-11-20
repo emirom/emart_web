@@ -1,4 +1,4 @@
-import CreateGuarantee from "@/pages/dashboard/guarantees/CreateGuaranteeForm";
+import CreateInsuranceForm from "@/pages/dashboard/insurances/CreateInsuranceForm";
 import { Metadata } from "next";
 import Link from "next/link";
 
@@ -21,7 +21,7 @@ export default async function Page() {
           ← بازگشت
         </Link>
       </header>
-      <CreateGuarantee />
+      <CreateInsuranceForm />
     </>
   );
 }

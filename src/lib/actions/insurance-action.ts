@@ -10,7 +10,7 @@ import { revalidatePath } from "next/cache";
 
 export async function postInsuranceAction(data: CreateInsuranceInput) {
   await postInsurances(data);
-  revalidatePath("/dashboard/insurance");
+  revalidatePath("/dashboard/insurances");
 }
 
 export async function patchInsuranceAction(
