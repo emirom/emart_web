@@ -23,7 +23,7 @@ export default async function Page({
   params: Record<string, string>;
 }) {
   const { id } = await params;
-  const variant = await getVariantsId(id);
+  await getVariantsId(id);
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <HeaderWithLink

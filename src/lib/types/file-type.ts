@@ -355,22 +355,6 @@ export const unauthorizedErrorSchema = BaseError.extend({
 export type BaseResponse = z.infer<typeof BaseResponseSchema>;
 export type FilterSchemaInput = z.infer<typeof FilterSchema>;
 
-// File validation constants
-const MAX_SINGLE_FILE_SIZE = 50 * 1024 * 1024; // 50MB
-const MAX_BULK_TOTAL_SIZE = 1000 * 1024 * 1024; // 200MB for bulk uploads
-
-// File validation functions
-const validateFileSize = (
-  file: MulterFile,
-  maxSize: number = MAX_SINGLE_FILE_SIZE,
-): boolean => {
-  return file.size <= maxSize;
-};
-
-const validateMimeType = (mimetype: string): boolean => {
-  return allowedMimeTypes.includes(mimetype as AllowedMimeType);
-};
-
 // Custom Zod refinements for file validation
 const fileValidation = z.custom<MulterFile>();
 

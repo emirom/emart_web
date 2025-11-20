@@ -2,6 +2,7 @@
 
 import React, { useRef, useState, useCallback } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { FileWithPreview } from "@lib/types/file-with-preview";
 import { toast } from "react-toastify";
 
@@ -132,11 +133,14 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({
 
       {previewImage ? (
         <div className="relative w-full h-full min-h-32">
-          <img
+          <Image
             key={previewImage.preview} // Force re-render when preview URL changes
             src={previewImage.preview}
             alt="Preview"
+            width={128}
+            height={128}
             className="object-cover w-full h-full"
+            unoptimized
             onError={() => {
               console.error("Image failed to load:", previewImage?.preview);
             }}

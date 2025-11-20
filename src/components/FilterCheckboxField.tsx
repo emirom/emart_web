@@ -1,7 +1,7 @@
 "use client";
 
 import { FilterSchemaInput } from "@lib/types/file-type";
-import { Control, Controller, FieldValues } from "react-hook-form";
+import { Control, Controller, FieldValues, Path } from "react-hook-form";
 import { cn } from "./lib/utils";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
@@ -17,7 +17,7 @@ const FilterCheckboxField = <T extends FieldValues>({
 }: CheckboxFieldProps<T>) => {
   return (
     <Controller
-      name={config.service as any}
+      name={config.service as Path<T>}
       control={control}
       render={({ field, fieldState }) => (
         <div className="flex items-start space-x-3">

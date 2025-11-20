@@ -3,12 +3,7 @@ import { fieldMapper } from "@lib/helper/fieldMapper";
 import { FilterSchemaInput } from "@lib/types/file-type";
 import { Funnel } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
-import {
-  FieldValues,
-  FormProvider,
-  SubmitHandler,
-  useForm,
-} from "react-hook-form";
+import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { Button } from "./ui/button";
 import {
   Sheet,
@@ -20,20 +15,18 @@ import {
   SheetTrigger,
 } from "./ui/sheet";
 
-type FormGeneratorProps<T extends FieldValues> = {
+type FormGeneratorProps = {
   configs: FilterSchemaInput[] | null | undefined;
 };
 
-export default function FilterGenerator<T extends FieldValues>({
-  configs,
-}: FormGeneratorProps<T>) {
-  const methods = useForm<T>();
+export default function FilterGenerator({ configs }: FormGeneratorProps) {
+  const methods = useForm<Record<string, unknown>>();
   const { handleSubmit, control } = methods;
 
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const onSubmit: SubmitHandler<T> = (data) => {
+  const onSubmit: SubmitHandler<Record<string, unknown>> = (data) => {
     const params = new URLSearchParams(searchParams!.toString());
 
     Object.entries(data).forEach(([key, value]) => {
@@ -68,7 +61,8 @@ export default function FilterGenerator<T extends FieldValues>({
             <div className="px-4 flex-1 overflow-y-auto flex flex-col gap-3">
               {Array.isArray(configs) ? (
                 configs.map((config, index) => {
-                  const Component = fieldMapper<T>(config);
+                  const Component =
+                    fieldMapper<Record<string, unknown>>(config);
                   return (
                     <Component key={index} config={config} control={control} />
                   );

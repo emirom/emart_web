@@ -26,8 +26,6 @@ import {
   TableRow,
 } from "./ui/table";
 
-import { FieldValues } from "react-hook-form";
-
 import { FilterSchemaInput } from "@lib/types/file-type";
 
 type FilterConfig =
@@ -134,8 +132,7 @@ export function CustomDataTable<TData>({
           )}
 
           {filterConfigs && (
-            <FilterGenerator<FieldValues>
-              onSubmit={(v) => console.log("submitted filters:", v)}
+            <FilterGenerator
               configs={filterConfigs as FilterSchemaInput[] | null | undefined}
             />
           )}

@@ -54,7 +54,7 @@ export default function ProductComparisonFilterLink({ id }: { id: string }) {
       <ListFilter width={19} height={19} />
       <div className="flex items-center gap-6 w-full">
         {filters.map((filter) => {
-          const isActive = activeSegment === filter.segment;
+          // const isActive = activeSegment === filter.segment;
           return (
             <Link
               key={filter.segment}

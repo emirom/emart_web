@@ -43,7 +43,7 @@ const ProductForm: React.FC = () => {
         isActive: true,
       };
 
-      const response = await postProducts(productRequest);
+      await postProducts(productRequest);
 
       toast.success("Product created successfully!");
       reset();

@@ -67,7 +67,7 @@ export default function OtpStepForm() {
             required: "کد پیامکی الزامی است",
             pattern: { value: /^\d{6}$/, message: "کد باید ۶ رقم عددی باشد" },
           }}
-          render={({ field }) => (
+          render={({ field: _field }) => (
             <InputOTP
               ref={inputOtpRef}
               id="otp"

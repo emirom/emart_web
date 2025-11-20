@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 
 export default function CreateBrandForm() {
   const { handleSubmit, control, formState, reset } = useForm<CreateBrandInput>(
-    { defaultValues: { logoUrl: "https://example.com/logo.png" } }
+    { defaultValues: { logoUrl: "https://example.com/logo.png" } },
   );
   const onSubmit: SubmitHandler<CreateBrandInput> = async (data) => {
     try {

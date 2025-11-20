@@ -140,9 +140,11 @@ export default function CustomDropzone({
               className="relative w-full h-aut border rounded-md overflow-hidden flex flex-col items-center"
             >
               <div className="w-full h-24">
-                <img
+                <Image
                   src={constructImageUrl(img.url)}
                   alt={img.altText || "product image"}
+                  width={96}
+                  height={96}
                   className="w-full h-24 object-cover"
                   style={{ width: "100%", height: "100%" }}
                   loading="lazy"
@@ -152,6 +154,7 @@ export default function CustomDropzone({
                     target.src =
                       "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOTYiIGhlaWdodD0iOTYiIHZpZXdCb3g9IjAgMCA5NiA5NiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9Ijk2IiBoZWlnaHQ9Ijk2IiBmaWxsPSIjRjVGNUY1Ii8+CjxwYXRoIGQ9Ik03MiA3Mkg4MFM5NiA1NiA5NiAzMiA4MCAzMiA4MCAzMiA2NCAzMiA0OCAzMiA0OCA0OCA0OCA0OCA0OCA0OCIgc3Ryb2tlPSIjRTNFNEU0IiBzdHJva2Utd2lkdGg9IjgiIGZpbGw9Im5vbmUiLz4KPHBhdGggZD0iTTE2IDE2TDMwLjQgMzAuNFoiIHN0cm9rZT0iI0UzRTRFNCIgc3Ryb2tlLXdpZHRoPSI2IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPC9zdmc+Cg==";
                   }}
+                  unoptimized
                 />
               </div>
               <div className="p-1 text-xs text-center truncate w-full">

@@ -2,7 +2,7 @@
 import { DashboardCustomModal } from "@components/DashboardCustomModal";
 import { useAppStore } from "@lib/stores/store";
 import { useEffect, useState } from "react";
-import UploadImageForm from "./UploadImageForm";
+// import UploadImageForm from "./UploadImageForm";
 
 export default function ProductModal() {
   const { currentFile } = useAppStore((state) => state);
@@ -18,7 +18,7 @@ export default function ProductModal() {
     <DashboardCustomModal
       title="آپلود‌تصویر"
       open={open}
-      element={<UploadImageForm />}
+      element={<></>}
       onOpenChange={setOpen}
     />
   );

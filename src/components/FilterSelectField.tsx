@@ -1,7 +1,7 @@
 "use client";
 
 import { FilterSchemaInput } from "@lib/types/file-type";
-import { Control, Controller, FieldValues } from "react-hook-form";
+import { Control, Controller, FieldValues, Path } from "react-hook-form";
 
 type SelectFieldProps<T extends FieldValues = FieldValues> = {
   control: Control<T>;
@@ -13,14 +13,14 @@ const FilterSelectedField = <T extends FieldValues>({
   control,
 }: SelectFieldProps<T>) => {
   const options: { label: string; value: string }[] = Array.isArray(
-    config.enumOptions
+    config.enumOptions,
   )
     ? config.enumOptions.map((opt: string) => ({ label: opt, value: opt }))
     : [];
 
   return (
     <Controller
-      name={config.service as any}
+      name={config.service as Path<T>}
       control={control}
       render={({ field, fieldState }) => (
         <div className="flex flex-col space-y-1">
