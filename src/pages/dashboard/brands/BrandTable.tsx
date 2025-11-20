@@ -8,13 +8,9 @@ import { useGetBrands } from "@lib/services/brands/brands";
 import { ColumnDef } from "@tanstack/react-table";
 import { useSearchParams } from "next/navigation";
 
+import { BrandFilter } from "@lib/types/filter-generator";
 import BrandsAction from "./BrandsAction";
 import CreateBrand from "./CreateBrand";
-
-type Props = {
-  page?: number;
-  name?: string;
-};
 
 const columns: ColumnDef<Brand>[] = [
   {
@@ -108,15 +104,19 @@ const columns: ColumnDef<Brand>[] = [
   },
 ];
 
-export default function BrandTable({ initialQuery }: { initialQuery?: Props }) {
+export default function BrandTable({
+  initialQuery,
+}: {
+  initialQuery?: BrandFilter;
+}) {
   const searchParams = useSearchParams();
-  const page = Number(searchParams?.get("page") ?? initialQuery?.page ?? 0);
-  const name = searchParams?.get("search") ?? initialQuery?.name;
 
   const { data: brands } = useGetBrands({
-    skip: page * 10,
+    skip: initialQuery?.page ?? 0,
     limit: 10,
-    name,
+    name: searchParams?.get("name") ?? initialQuery?.name,
+    enName: searchParams?.get("enName") ?? initialQuery?.enName,
+    website: searchParams?.get("website") ?? initialQuery?.website,
   });
 
   return (
@@ -128,6 +128,7 @@ export default function BrandTable({ initialQuery }: { initialQuery?: Props }) {
       filterColumnKey="name"
       filterPlaceholder="جستجو برند"
       title="برند ها"
+      filterConfigs={brands?.filters}
     />
   );
 }

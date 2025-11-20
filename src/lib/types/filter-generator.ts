@@ -1,5 +1,6 @@
 import {
   GetAttributesParams,
+  GetBrandsParams,
   GetColorsParams,
   GetLabelsParams,
   GetProductsParams,
@@ -20,3 +21,4 @@ export type FilterAttribute = Partial<GetAttributesParams> & PageFilter;
 export type LabelFilter = Partial<GetLabelsParams> & PageFilter;
 
 export type UnitFilter = Partial<GetUnitsParams> & PageFilter;
+export type BrandFilter = Partial<GetBrandsParams> & PageFilter;
