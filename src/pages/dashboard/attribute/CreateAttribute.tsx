@@ -2,7 +2,7 @@
 
 import { DashboardCustomModal } from "@components/DashboardCustomModal";
 import { Button } from "@components/ui/button";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import CreateAttributeForm from "./CreateAttributeForm";
 
 export default function CreateAttribute() {
@@ -13,7 +13,7 @@ export default function CreateAttribute() {
   }, []);
 
   if (!isClient) {
-    return null; // Render nothing on the server to prevent hydration mismatch
+    return null;
   }
 
   return (
