@@ -1,3 +1,4 @@
+import FilterComparisonProducts from "@/pages/product-comparison/FilterComparisonProducts";
 import ProductComparisonFilterLink from "@/pages/product-comparison/ProductComparisonFilterLink";
 import Container from "@components/Container";
 import React, { ReactNode } from "react";
@@ -13,8 +14,8 @@ export default async function Layout({ children, params, tabs }: Props) {
     <>
       <div>{children}</div>
       <Container className="grid  gap-4 items-stretch  md:grid-cols-12">
-        <div className="col-span-2">right</div>
-        <section className="col-span-10">
+        <FilterComparisonProducts />
+        <section className="col-span-9">
           <ProductComparisonFilterLink id={id} />
           <div>{tabs}</div>
         </section>
