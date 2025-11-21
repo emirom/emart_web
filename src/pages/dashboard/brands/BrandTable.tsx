@@ -36,7 +36,7 @@ const columns: ColumnDef<Brand>[] = [
           (max-width: 1280px) 10vw,8vw"
           className={cn(
             " w-[40%] h-[48%] mx-auto  aspect-[16/15] transition-opacity duration-300",
-            "!opacity-100 !duration-0"
+            "!opacity-100 !duration-0",
           )}
           style={{ opacity: 1, transition: "none" }}
           itemProp="image"
