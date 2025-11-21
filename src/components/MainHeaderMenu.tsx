@@ -57,7 +57,7 @@ export function MainHeaderMenu() {
                         "w-[3px] h-full inline rounded-tl-lg rounded-bl-lg",
                         activeIndex === i
                           ? "bg-tint-blue-500"
-                          : "bg-transparent",
+                          : "bg-transparent"
                       )}
                     ></span>
                     <span className="w-[1.125rem] h-[1.5625rem]">
@@ -79,7 +79,7 @@ export function MainHeaderMenu() {
                       <h4 className="font-medium text-sm text-tint-blue-500 flex items-center gap-3">
                         <span
                           className={cn(
-                            "w-[3px] h-[75%] inline rounded-tl-lg rounded-bl-lg bg-tint-blue-500",
+                            "w-[3px] h-[75%] inline rounded-tl-lg rounded-bl-lg bg-tint-blue-500"
                           )}
                         ></span>
                         {section.title}
