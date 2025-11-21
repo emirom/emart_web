@@ -96,6 +96,8 @@ export const postInventoriesBody = zod
 /**
  * List all inventory items with pagination and filters
  */
+export const getInventoriesQueryFieldMaxOne = 200;
+export const getInventoriesQueryOrderDefaultOne = "desc";
 export const getInventoriesQuerySkipMin = 0;
 export const getInventoriesQueryLimitMax = 20;
 export const getInventoriesQueryWarehouseCodeMaxOne = 200;
@@ -104,6 +106,17 @@ export const getInventoriesQueryHsCodeMaxOne = 200;
 export const getInventoriesQueryOriginCountryMaxOne = 200;
 
 export const getInventoriesQueryParams = zod.object({
+  field: zod
+    .union([
+      zod.coerce.string().max(getInventoriesQueryFieldMaxOne),
+      zod.null(),
+    ])
+    .optional()
+    .describe("Field to sort by"),
+  order: zod
+    .union([zod.enum(["asc", "desc"]), zod.null()])
+    .optional()
+    .describe("Sort order"),
   skip: zod.coerce
     .number()
     .min(getInventoriesQuerySkipMin)

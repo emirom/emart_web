@@ -9,14 +9,14 @@ import type { BaseError } from "./baseError";
 export type InternalError = BaseError & {
   /** Error code */
   code: string;
-  /** Error detials */
+  /** Error details */
   details?: unknown;
 } & Required<
     Pick<
       BaseError & {
         /** Error code */
         code: string;
-        /** Error detials */
+        /** Error details */
         details?: unknown;
       },
       "code"

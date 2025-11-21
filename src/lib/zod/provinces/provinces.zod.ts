@@ -32,12 +32,22 @@ export const postProvincesBody = zod
 /**
  * Get all provinces with pagination and filters
  */
+export const getProvincesQueryFieldMaxOne = 200;
+export const getProvincesQueryOrderDefaultOne = "desc";
 export const getProvincesQuerySkipMin = 0;
 export const getProvincesQueryLimitMax = 20;
 export const getProvincesQueryNameMaxOne = 200;
 export const getProvincesQueryAbbMaxOne = 200;
 
 export const getProvincesQueryParams = zod.object({
+  field: zod
+    .union([zod.coerce.string().max(getProvincesQueryFieldMaxOne), zod.null()])
+    .optional()
+    .describe("Field to sort by"),
+  order: zod
+    .union([zod.enum(["asc", "desc"]), zod.null()])
+    .optional()
+    .describe("Sort order"),
   skip: zod.coerce
     .number()
     .min(getProvincesQuerySkipMin)

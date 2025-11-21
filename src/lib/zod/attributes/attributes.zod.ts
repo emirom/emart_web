@@ -46,11 +46,21 @@ export const postAttributesBody = zod
 /**
  * List all attributes with pagination and filters
  */
+export const getAttributesQueryFieldMaxOne = 200;
+export const getAttributesQueryOrderDefaultOne = "desc";
 export const getAttributesQuerySkipMin = 0;
 export const getAttributesQueryLimitMax = 20;
 export const getAttributesQueryTitleMaxOne = 200;
 
 export const getAttributesQueryParams = zod.object({
+  field: zod
+    .union([zod.coerce.string().max(getAttributesQueryFieldMaxOne), zod.null()])
+    .optional()
+    .describe("Field to sort by"),
+  order: zod
+    .union([zod.enum(["asc", "desc"]), zod.null()])
+    .optional()
+    .describe("Sort order"),
   skip: zod.coerce
     .number()
     .min(getAttributesQuerySkipMin)

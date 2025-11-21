@@ -99,6 +99,8 @@ export const postVariantsBody = zod
 /**
  * Get all variants with pagination and filtering
  */
+export const getVariantsQueryFieldMaxOne = 200;
+export const getVariantsQueryOrderDefaultOne = "desc";
 export const getVariantsQuerySkipMin = 0;
 export const getVariantsQueryLimitMax = 20;
 export const getVariantsQuerySkuMaxOne = 200;
@@ -106,6 +108,14 @@ export const getVariantsQueryBarcodeMaxOne = 200;
 export const getVariantsQueryMpnMaxOne = 200;
 
 export const getVariantsQueryParams = zod.object({
+  field: zod
+    .union([zod.coerce.string().max(getVariantsQueryFieldMaxOne), zod.null()])
+    .optional()
+    .describe("Field to sort by"),
+  order: zod
+    .union([zod.enum(["asc", "desc"]), zod.null()])
+    .optional()
+    .describe("Sort order"),
   skip: zod.coerce
     .number()
     .min(getVariantsQuerySkipMin)

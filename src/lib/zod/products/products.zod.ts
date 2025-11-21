@@ -27,10 +27,7 @@ export const postProductsBody = zod
       .max(postProductsBodyEnNameMax)
       .describe("English product name for SEO and international users"),
     categoryId: zod.uuid().describe("Category ID this product belongs to"),
-    brandId: zod
-      .union([zod.uuid(), zod.null()])
-      .optional()
-      .describe("Brand ID (optional)"),
+    brandId: zod.uuid().describe("Brand ID (optional)"),
     isActive: zod.coerce
       .boolean()
       .default(postProductsBodyIsActiveDefault)
@@ -46,53 +43,28 @@ export const postProductsBody = zod
       ])
       .optional()
       .describe("Connected label IDs"),
-    medias: zod
-      .union([
-        zod.array(
-          zod.object({
-            id: zod.uuid(),
-            url: zod.coerce.string(),
-            altText: zod.coerce.string().nullable(),
-            caption: zod.coerce.string().nullable(),
-          }),
-        ),
-        zod.null(),
-      ])
-      .optional()
-      .describe("Product media"),
-    descriptions: zod
-      .union([
-        zod.array(
-          zod.object({
-            id: zod.uuid(),
-            text: zod.coerce.string().nullable(),
-            mediaSide: zod
-              .union([
-                zod.literal("LEFT"),
-                zod.literal("CENTER"),
-                zod.literal("RIGHT"),
-                zod.literal(null),
-              ])
-              .nullable(),
-            mediaId: zod.uuid().nullable(),
-          }),
-        ),
-        zod.null(),
-      ])
-      .optional()
-      .describe("Product descriptions"),
   })
   .describe("Complete mobile phone product entity");
 
 /**
  * Get all products with pagination and filtering
  */
+export const getProductsQueryFieldMaxOne = 200;
+export const getProductsQueryOrderDefaultOne = "desc";
 export const getProductsQuerySkipMin = 0;
 export const getProductsQueryLimitMax = 20;
 export const getProductsQueryNameMaxOne = 200;
 export const getProductsQueryEnNameMaxOne = 200;
 
 export const getProductsQueryParams = zod.object({
+  field: zod
+    .union([zod.coerce.string().max(getProductsQueryFieldMaxOne), zod.null()])
+    .optional()
+    .describe("Field to sort by"),
+  order: zod
+    .union([zod.enum(["asc", "desc"]), zod.null()])
+    .optional()
+    .describe("Sort order"),
   skip: zod.coerce
     .number()
     .min(getProductsQuerySkipMin)
@@ -186,10 +158,7 @@ export const patchProductsIdBody = zod
       .uuid()
       .optional()
       .describe("Category ID this product belongs to"),
-    brandId: zod
-      .union([zod.uuid(), zod.null()])
-      .optional()
-      .describe("Brand ID (optional)"),
+    brandId: zod.uuid().optional().describe("Brand ID (optional)"),
     isActive: zod.coerce
       .boolean()
       .default(patchProductsIdBodyIsActiveDefault)
@@ -205,41 +174,6 @@ export const patchProductsIdBody = zod
       ])
       .optional()
       .describe("Connected label IDs"),
-    medias: zod
-      .union([
-        zod.array(
-          zod.object({
-            id: zod.uuid(),
-            url: zod.coerce.string(),
-            altText: zod.coerce.string().nullable(),
-            caption: zod.coerce.string().nullable(),
-          }),
-        ),
-        zod.null(),
-      ])
-      .optional()
-      .describe("Product media"),
-    descriptions: zod
-      .union([
-        zod.array(
-          zod.object({
-            id: zod.uuid(),
-            text: zod.coerce.string().nullable(),
-            mediaSide: zod
-              .union([
-                zod.literal("LEFT"),
-                zod.literal("CENTER"),
-                zod.literal("RIGHT"),
-                zod.literal(null),
-              ])
-              .nullable(),
-            mediaId: zod.uuid().nullable(),
-          }),
-        ),
-        zod.null(),
-      ])
-      .optional()
-      .describe("Product descriptions"),
   })
   .describe("Complete mobile phone product entity");
 
@@ -278,10 +212,7 @@ export const patchProductsIdResponse = zod
           .max(patchProductsIdResponseDataEnNameMax)
           .describe("English product name for SEO and international users"),
         categoryId: zod.uuid().describe("Category ID this product belongs to"),
-        brandId: zod
-          .union([zod.uuid(), zod.null()])
-          .optional()
-          .describe("Brand ID (optional)"),
+        brandId: zod.uuid().describe("Brand ID (optional)"),
         isActive: zod.coerce
           .boolean()
           .describe("Whether product is active and visible"),

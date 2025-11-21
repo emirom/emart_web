@@ -30,11 +30,21 @@ export const postCitiesBody = zod.object({
 /**
  * Get all cities with pagination and filters
  */
+export const getCitiesQueryFieldMaxOne = 200;
+export const getCitiesQueryOrderDefaultOne = "desc";
 export const getCitiesQuerySkipMin = 0;
 export const getCitiesQueryLimitMax = 20;
 export const getCitiesQuerySearchMaxOne = 100;
 
 export const getCitiesQueryParams = zod.object({
+  field: zod
+    .union([zod.coerce.string().max(getCitiesQueryFieldMaxOne), zod.null()])
+    .optional()
+    .describe("Field to sort by"),
+  order: zod
+    .union([zod.enum(["asc", "desc"]), zod.null()])
+    .optional()
+    .describe("Sort order"),
   skip: zod.coerce
     .number()
     .min(getCitiesQuerySkipMin)

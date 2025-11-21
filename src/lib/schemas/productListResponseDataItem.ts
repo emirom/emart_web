@@ -5,7 +5,6 @@
  * OpenAPI spec version: 1.0.0
  */
 import type { ProductListResponseDataItemDeletedAt } from "./productListResponseDataItemDeletedAt";
-import type { ProductListResponseDataItemBrandId } from "./productListResponseDataItemBrandId";
 import type { ProductListResponseDataItemAverageRating } from "./productListResponseDataItemAverageRating";
 import type { ProductListResponseDataItemTotalReviews } from "./productListResponseDataItemTotalReviews";
 import type { ProductListResponseDataItemLabels } from "./productListResponseDataItemLabels";
@@ -36,7 +35,7 @@ export type ProductListResponseDataItem = {
   /** Category ID this product belongs to */
   categoryId: string;
   /** Brand ID (optional) */
-  brandId?: ProductListResponseDataItemBrandId;
+  brandId: string;
   /** Whether product is active and visible */
   isActive: boolean;
   /** Computed average rating from 0 to 5, from inventory reviews */

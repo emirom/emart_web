@@ -6,6 +6,8 @@
  */
 import { z as zod } from "zod";
 
+export const getProductMediasQueryFieldMaxOne = 200;
+export const getProductMediasQueryOrderDefaultOne = "desc";
 export const getProductMediasQuerySkipMin = 0;
 export const getProductMediasQueryLimitMax = 20;
 export const getProductMediasQueryMimetypeMaxOne = 200;
@@ -14,6 +16,17 @@ export const getProductMediasQuerySortByDefaultOne = "order";
 export const getProductMediasQuerySortOrderDefaultOne = "asc";
 
 export const getProductMediasQueryParams = zod.object({
+  field: zod
+    .union([
+      zod.coerce.string().max(getProductMediasQueryFieldMaxOne),
+      zod.null(),
+    ])
+    .optional()
+    .describe("Field to sort by"),
+  order: zod
+    .union([zod.enum(["asc", "desc"]), zod.null()])
+    .optional()
+    .describe("Sort order"),
   skip: zod.coerce
     .number()
     .min(getProductMediasQuerySkipMin)

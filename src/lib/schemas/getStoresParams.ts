@@ -7,6 +7,14 @@
 
 export type GetStoresParams = {
   /**
+   * Field to sort by
+   */
+  field?: string | null;
+  /**
+   * Sort order
+   */
+  order?: "asc" | "desc" | null;
+  /**
    * Number of records to skip
    * @minimum 0
    */

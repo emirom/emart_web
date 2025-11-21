@@ -38,12 +38,22 @@ export const postLocationsBody = zod
 /**
  * List all locations with pagination and filters
  */
+export const getLocationsQueryFieldMaxOne = 200;
+export const getLocationsQueryOrderDefaultOne = "desc";
 export const getLocationsQuerySkipMin = 0;
 export const getLocationsQueryLimitMax = 20;
 export const getLocationsQueryPostalCodeMaxOne = 200;
 export const getLocationsQueryStreetMaxOne = 200;
 
 export const getLocationsQueryParams = zod.object({
+  field: zod
+    .union([zod.coerce.string().max(getLocationsQueryFieldMaxOne), zod.null()])
+    .optional()
+    .describe("Field to sort by"),
+  order: zod
+    .union([zod.enum(["asc", "desc"]), zod.null()])
+    .optional()
+    .describe("Sort order"),
   skip: zod.coerce
     .number()
     .min(getLocationsQuerySkipMin)

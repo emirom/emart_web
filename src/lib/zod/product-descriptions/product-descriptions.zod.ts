@@ -42,11 +42,24 @@ export const postProductDescriptionsBody = zod
 /**
  * Get all product descriptions with pagination and filters
  */
+export const getProductDescriptionsQueryFieldMaxOne = 200;
+export const getProductDescriptionsQueryOrderDefaultOne = "desc";
 export const getProductDescriptionsQuerySkipMin = 0;
 export const getProductDescriptionsQueryLimitMax = 20;
 export const getProductDescriptionsQueryTitleMaxOne = 200;
 
 export const getProductDescriptionsQueryParams = zod.object({
+  field: zod
+    .union([
+      zod.coerce.string().max(getProductDescriptionsQueryFieldMaxOne),
+      zod.null(),
+    ])
+    .optional()
+    .describe("Field to sort by"),
+  order: zod
+    .union([zod.enum(["asc", "desc"]), zod.null()])
+    .optional()
+    .describe("Sort order"),
   skip: zod.coerce
     .number()
     .min(getProductDescriptionsQuerySkipMin)

@@ -5,7 +5,6 @@
  * OpenAPI spec version: 1.0.0
  */
 import type { ProductDeletedAt } from "./productDeletedAt";
-import type { ProductBrandId } from "./productBrandId";
 import type { ProductAverageRating } from "./productAverageRating";
 import type { ProductTotalReviews } from "./productTotalReviews";
 import type { ProductLabels } from "./productLabels";
@@ -39,7 +38,7 @@ export interface Product {
   /** Category ID this product belongs to */
   categoryId: string;
   /** Brand ID (optional) */
-  brandId?: ProductBrandId;
+  brandId: string;
   /** Whether product is active and visible */
   isActive: boolean;
   /** Computed average rating from 0 to 5, from inventory reviews */

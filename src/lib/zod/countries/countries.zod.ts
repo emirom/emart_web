@@ -48,6 +48,8 @@ export const postCountriesBody = zod
 /**
  * Get all countries with pagination and filters
  */
+export const getCountriesQueryFieldMaxOne = 200;
+export const getCountriesQueryOrderDefaultOne = "desc";
 export const getCountriesQuerySkipMin = 0;
 export const getCountriesQueryLimitMax = 20;
 export const getCountriesQueryNameMaxOne = 200;
@@ -55,6 +57,14 @@ export const getCountriesQueryIsoCodeMaxOne = 200;
 export const getCountriesQueryPhoneCodeMaxOne = 200;
 
 export const getCountriesQueryParams = zod.object({
+  field: zod
+    .union([zod.coerce.string().max(getCountriesQueryFieldMaxOne), zod.null()])
+    .optional()
+    .describe("Field to sort by"),
+  order: zod
+    .union([zod.enum(["asc", "desc"]), zod.null()])
+    .optional()
+    .describe("Sort order"),
   skip: zod.coerce
     .number()
     .min(getCountriesQuerySkipMin)

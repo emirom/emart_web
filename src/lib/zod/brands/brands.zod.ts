@@ -49,6 +49,8 @@ export const postBrandsBody = zod.object({
 /**
  * Get all brands with pagination and filters
  */
+export const getBrandsQueryFieldMaxOne = 200;
+export const getBrandsQueryOrderDefaultOne = "desc";
 export const getBrandsQuerySkipMin = 0;
 export const getBrandsQueryLimitMax = 20;
 export const getBrandsQueryNameMaxOne = 200;
@@ -56,6 +58,14 @@ export const getBrandsQueryEnNameMaxOne = 200;
 export const getBrandsQueryWebsiteMaxOne = 200;
 
 export const getBrandsQueryParams = zod.object({
+  field: zod
+    .union([zod.coerce.string().max(getBrandsQueryFieldMaxOne), zod.null()])
+    .optional()
+    .describe("Field to sort by"),
+  order: zod
+    .union([zod.enum(["asc", "desc"]), zod.null()])
+    .optional()
+    .describe("Sort order"),
   skip: zod.coerce
     .number()
     .min(getBrandsQuerySkipMin)

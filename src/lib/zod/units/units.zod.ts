@@ -23,11 +23,21 @@ export const postUnitsBody = zod
 /**
  * Get all units with pagination and filtering
  */
+export const getUnitsQueryFieldMaxOne = 200;
+export const getUnitsQueryOrderDefaultOne = "desc";
 export const getUnitsQuerySkipMin = 0;
 export const getUnitsQueryLimitMax = 20;
 export const getUnitsQueryTitleMaxOne = 200;
 
 export const getUnitsQueryParams = zod.object({
+  field: zod
+    .union([zod.coerce.string().max(getUnitsQueryFieldMaxOne), zod.null()])
+    .optional()
+    .describe("Field to sort by"),
+  order: zod
+    .union([zod.enum(["asc", "desc"]), zod.null()])
+    .optional()
+    .describe("Sort order"),
   skip: zod.coerce
     .number()
     .min(getUnitsQuerySkipMin)

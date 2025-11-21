@@ -34,12 +34,25 @@ export const postAttributeValuesBody = zod
 /**
  * List all attribute values with pagination and filters
  */
+export const getAttributeValuesQueryFieldMaxOne = 200;
+export const getAttributeValuesQueryOrderDefaultOne = "desc";
 export const getAttributeValuesQuerySkipMin = 0;
 export const getAttributeValuesQueryLimitMax = 20;
 export const getAttributeValuesQueryValueMaxOne = 200;
 export const getAttributeValuesQueryAttributeTypeDefaultOne = "text";
 
 export const getAttributeValuesQueryParams = zod.object({
+  field: zod
+    .union([
+      zod.coerce.string().max(getAttributeValuesQueryFieldMaxOne),
+      zod.null(),
+    ])
+    .optional()
+    .describe("Field to sort by"),
+  order: zod
+    .union([zod.enum(["asc", "desc"]), zod.null()])
+    .optional()
+    .describe("Sort order"),
   skip: zod.coerce
     .number()
     .min(getAttributeValuesQuerySkipMin)

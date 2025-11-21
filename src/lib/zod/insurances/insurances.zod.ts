@@ -106,12 +106,22 @@ export const postInsurancesBody = zod
 /**
  * Get all insurance plans with pagination and filtering
  */
+export const getInsurancesQueryFieldMaxOne = 200;
+export const getInsurancesQueryOrderDefaultOne = "desc";
 export const getInsurancesQuerySkipMin = 0;
 export const getInsurancesQueryLimitMax = 20;
 export const getInsurancesQueryTitleMaxOne = 200;
 export const getInsurancesQueryProviderNameMaxOne = 200;
 
 export const getInsurancesQueryParams = zod.object({
+  field: zod
+    .union([zod.coerce.string().max(getInsurancesQueryFieldMaxOne), zod.null()])
+    .optional()
+    .describe("Field to sort by"),
+  order: zod
+    .union([zod.enum(["asc", "desc"]), zod.null()])
+    .optional()
+    .describe("Sort order"),
   skip: zod.coerce
     .number()
     .min(getInsurancesQuerySkipMin)

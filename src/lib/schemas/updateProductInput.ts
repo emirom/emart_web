@@ -4,10 +4,7 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { UpdateProductInputBrandId } from "./updateProductInputBrandId";
 import type { UpdateProductInputLabels } from "./updateProductInputLabels";
-import type { UpdateProductInputMedias } from "./updateProductInputMedias";
-import type { UpdateProductInputDescriptions } from "./updateProductInputDescriptions";
 
 /**
  * Complete mobile phone product entity
@@ -28,13 +25,9 @@ export interface UpdateProductInput {
   /** Category ID this product belongs to */
   categoryId?: string;
   /** Brand ID (optional) */
-  brandId?: UpdateProductInputBrandId;
+  brandId?: string;
   /** Whether product is active and visible */
   isActive?: boolean;
   /** Connected label IDs */
   labels?: UpdateProductInputLabels;
-  /** Product media */
-  medias?: UpdateProductInputMedias;
-  /** Product descriptions */
-  descriptions?: UpdateProductInputDescriptions;
 }

@@ -64,6 +64,8 @@ export const postCategoriesBody = zod
 /**
  * Get all categories with pagination and filters
  */
+export const getCategoriesQueryFieldMaxOne = 200;
+export const getCategoriesQueryOrderDefaultOne = "desc";
 export const getCategoriesQuerySkipMin = 0;
 export const getCategoriesQueryLimitMax = 20;
 export const getCategoriesQueryNameMaxOne = 200;
@@ -72,6 +74,14 @@ export const getCategoriesQueryIconUrlMaxOne = 200;
 export const getCategoriesQueryDescMaxOne = 200;
 
 export const getCategoriesQueryParams = zod.object({
+  field: zod
+    .union([zod.coerce.string().max(getCategoriesQueryFieldMaxOne), zod.null()])
+    .optional()
+    .describe("Field to sort by"),
+  order: zod
+    .union([zod.enum(["asc", "desc"]), zod.null()])
+    .optional()
+    .describe("Sort order"),
   skip: zod.coerce
     .number()
     .min(getCategoriesQuerySkipMin)

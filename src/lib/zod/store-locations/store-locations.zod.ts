@@ -31,10 +31,23 @@ export const postStoreLocationsBody = zod
 /**
  * List all store-location assignments with pagination and filters
  */
+export const getStoreLocationsQueryFieldMaxOne = 200;
+export const getStoreLocationsQueryOrderDefaultOne = "desc";
 export const getStoreLocationsQuerySkipMin = 0;
 export const getStoreLocationsQueryLimitMax = 20;
 
 export const getStoreLocationsQueryParams = zod.object({
+  field: zod
+    .union([
+      zod.coerce.string().max(getStoreLocationsQueryFieldMaxOne),
+      zod.null(),
+    ])
+    .optional()
+    .describe("Field to sort by"),
+  order: zod
+    .union([zod.enum(["asc", "desc"]), zod.null()])
+    .optional()
+    .describe("Sort order"),
   skip: zod.coerce
     .number()
     .min(getStoreLocationsQuerySkipMin)
@@ -151,10 +164,25 @@ export const getStoreLocationsWarehouseStoreIdParams = zod.object({
   storeId: zod.uuid().describe("Store ID"),
 });
 
+export const getStoreLocationsWarehouseStoreIdQueryFieldMaxOne = 200;
+export const getStoreLocationsWarehouseStoreIdQueryOrderDefaultOne = "desc";
 export const getStoreLocationsWarehouseStoreIdQuerySkipMin = 0;
 export const getStoreLocationsWarehouseStoreIdQueryLimitMax = 20;
 
 export const getStoreLocationsWarehouseStoreIdQueryParams = zod.object({
+  field: zod
+    .union([
+      zod.coerce
+        .string()
+        .max(getStoreLocationsWarehouseStoreIdQueryFieldMaxOne),
+      zod.null(),
+    ])
+    .optional()
+    .describe("Field to sort by"),
+  order: zod
+    .union([zod.enum(["asc", "desc"]), zod.null()])
+    .optional()
+    .describe("Sort order"),
   skip: zod.coerce
     .number()
     .min(getStoreLocationsWarehouseStoreIdQuerySkipMin)

@@ -120,6 +120,8 @@ export const postGuaranteesBody = zod
 /**
  * Get all guarantees with pagination and filtering
  */
+export const getGuaranteesQueryFieldMaxOne = 200;
+export const getGuaranteesQueryOrderDefaultOne = "desc";
 export const getGuaranteesQuerySkipMin = 0;
 export const getGuaranteesQueryLimitMax = 20;
 export const getGuaranteesQueryTitleMaxOne = 200;
@@ -127,6 +129,14 @@ export const getGuaranteesQueryProviderNameMaxOne = 200;
 export const getGuaranteesQueryProviderCodeMaxOne = 200;
 
 export const getGuaranteesQueryParams = zod.object({
+  field: zod
+    .union([zod.coerce.string().max(getGuaranteesQueryFieldMaxOne), zod.null()])
+    .optional()
+    .describe("Field to sort by"),
+  order: zod
+    .union([zod.enum(["asc", "desc"]), zod.null()])
+    .optional()
+    .describe("Sort order"),
   skip: zod.coerce
     .number()
     .min(getGuaranteesQuerySkipMin)

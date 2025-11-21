@@ -71,6 +71,8 @@ export const postStoresBody = zod
 /**
  * List all stores with pagination and filters
  */
+export const getStoresQueryFieldMaxOne = 200;
+export const getStoresQueryOrderDefaultOne = "desc";
 export const getStoresQuerySkipMin = 0;
 export const getStoresQueryLimitMax = 20;
 export const getStoresQueryNameMaxOne = 200;
@@ -79,6 +81,14 @@ export const getStoresQueryEmailMaxOne = 200;
 export const getStoresQueryPhoneMaxOne = 200;
 
 export const getStoresQueryParams = zod.object({
+  field: zod
+    .union([zod.coerce.string().max(getStoresQueryFieldMaxOne), zod.null()])
+    .optional()
+    .describe("Field to sort by"),
+  order: zod
+    .union([zod.enum(["asc", "desc"]), zod.null()])
+    .optional()
+    .describe("Sort order"),
   skip: zod.coerce
     .number()
     .min(getStoresQuerySkipMin)

@@ -8,6 +8,14 @@ import type { LocationType } from "./locationType";
 
 export type GetStoreLocationsWarehouseStoreIdParams = {
   /**
+   * Field to sort by
+   */
+  field?: string | null;
+  /**
+   * Sort order
+   */
+  order?: "asc" | "desc" | null;
+  /**
    * Number of records to skip
    * @minimum 0
    */

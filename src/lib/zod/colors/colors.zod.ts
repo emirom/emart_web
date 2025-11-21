@@ -43,6 +43,8 @@ export const postColorsBody = zod
 /**
  * Get all colors with pagination and filters
  */
+export const getColorsQueryFieldMaxOne = 200;
+export const getColorsQueryOrderDefaultOne = "desc";
 export const getColorsQuerySkipMin = 0;
 export const getColorsQueryLimitMax = 20;
 export const getColorsQueryNameMaxOne = 200;
@@ -55,6 +57,14 @@ export const getColorsQueryHexRegExpOne = new RegExp(
 );
 
 export const getColorsQueryParams = zod.object({
+  field: zod
+    .union([zod.coerce.string().max(getColorsQueryFieldMaxOne), zod.null()])
+    .optional()
+    .describe("Field to sort by"),
+  order: zod
+    .union([zod.enum(["asc", "desc"]), zod.null()])
+    .optional()
+    .describe("Sort order"),
   skip: zod.coerce
     .number()
     .min(getColorsQuerySkipMin)

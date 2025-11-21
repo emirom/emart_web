@@ -30,11 +30,21 @@ export const postLabelsBody = zod
 /**
  * Get all labels with pagination and filtering
  */
+export const getLabelsQueryFieldMaxOne = 200;
+export const getLabelsQueryOrderDefaultOne = "desc";
 export const getLabelsQuerySkipMin = 0;
 export const getLabelsQueryLimitMax = 20;
 export const getLabelsQueryNameMaxOne = 200;
 
 export const getLabelsQueryParams = zod.object({
+  field: zod
+    .union([zod.coerce.string().max(getLabelsQueryFieldMaxOne), zod.null()])
+    .optional()
+    .describe("Field to sort by"),
+  order: zod
+    .union([zod.enum(["asc", "desc"]), zod.null()])
+    .optional()
+    .describe("Sort order"),
   skip: zod.coerce
     .number()
     .min(getLabelsQuerySkipMin)
