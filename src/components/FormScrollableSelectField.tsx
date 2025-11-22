@@ -44,7 +44,7 @@ export function FormScrollableSelectField<
   }, [options, getOptionLabel, getOptionValue]);
 
   return (
-    <div className="w-full">
+    <div className="w-full flex flex-col gap-1">
       <label className={cn("block text-xs font-medium text-tint-blue-500")}>
         {label}
       </label>
@@ -54,53 +54,60 @@ export function FormScrollableSelectField<
         render={({ field, fieldState }) => {
           const currentValue = String(field.value ?? "");
           const selectedOption = mappedOptions.find(
-            (o) => o.stringValue === currentValue,
+            (o) => o.stringValue === currentValue
           );
           const selectedLabel = selectedOption ? selectedOption.labelText : "";
 
           return (
-            <Select
-              value={currentValue}
-              onValueChange={(val: string) => {
-                const matched = mappedOptions.find(
-                  (opt) => opt.stringValue === val,
-                );
-                if (matched) {
-                  field.onChange(matched.rawValue);
-                } else {
-                  field.onChange(val);
-                }
-              }}
-            >
-              <SelectTrigger
-                className={cn(
-                  "w-full mt-2 flex items-center justify-between flex-row-reverse",
-                  fieldState.error?.message && "border-destructive",
-                )}
-                id={String(name)}
-              >
-                <SelectValue
-                  placeholder={
-                    field.value ? undefined : placeholder || "انتخاب کنید"
+            <>
+              <Select
+                value={currentValue}
+                onValueChange={(val: string) => {
+                  const matched = mappedOptions.find(
+                    (opt) => opt.stringValue === val
+                  );
+                  if (matched) {
+                    field.onChange(matched.rawValue);
+                  } else {
+                    field.onChange(val);
                   }
+                }}
+              >
+                <SelectTrigger
+                  className={cn(
+                    "w-full  flex items-center justify-between flex-row-reverse",
+                    fieldState.error?.message && "border-destructive"
+                  )}
+                  id={String(name)}
                 >
-                  {selectedLabel}
-                </SelectValue>
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  {mappedOptions.map((opt) => (
-                    <SelectItem
-                      className="flex justify-between w-full flex-row-reverse"
-                      key={opt.key}
-                      value={opt.stringValue}
-                    >
-                      {opt.labelText}
-                    </SelectItem>
-                  ))}
-                </SelectGroup>
-              </SelectContent>
-            </Select>
+                  <SelectValue
+                    placeholder={
+                      field.value ? undefined : placeholder || "انتخاب کنید"
+                    }
+                  >
+                    {selectedLabel}
+                  </SelectValue>
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    {mappedOptions.map((opt) => (
+                      <SelectItem
+                        className="flex justify-between w-full flex-row-reverse"
+                        key={opt.key}
+                        value={opt.stringValue}
+                      >
+                        {opt.labelText}
+                      </SelectItem>
+                    ))}
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+              {fieldState?.error && (
+                <p className="text-destructive text-xs mt-[0.125rem]">
+                  {fieldState.error.message}
+                </p>
+              )}
+            </>
           );
         }}
       />
