@@ -3,12 +3,14 @@ import { SubmitButton } from "@components/BtnWithIcon";
 import FormAutocomplete from "@components/FormAutoCompleteField";
 import { FormInputField } from "@components/FormInputField";
 import { FormScrollableSelectField } from "@components/FormScrollableSelectField";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { putAttributeAction } from "@lib/actions/attribute-action";
 import { queryClient } from "@lib/apis/queryClient";
 import { attributeUnits } from "@lib/constants/attribute-units";
 import { UpdateAttributeInput } from "@lib/schemas";
 import { useGetAttributesId } from "@lib/services/attributes/attributes";
 import { useGetCategories } from "@lib/services/categories/categories";
+import { patchAttributesIdBody } from "@lib/validations/attribute.validation";
 import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
@@ -18,8 +20,19 @@ export default function EditAttributeForm({ id }: { id: string }) {
     query: { queryKey: ["/attributes", id] },
   });
   const { data: categories } = useGetCategories({ skip: 0, limit: 10 });
-  const { handleSubmit, control, formState, reset } =
-    useForm<Partial<UpdateAttributeInput>>();
+  const { handleSubmit, control, formState, reset } = useForm<
+    Partial<UpdateAttributeInput>
+  >({
+    defaultValues: {
+      categoryId: "",
+      title: "",
+      unit: "",
+      type: "text",
+      iconUrl: "",
+    },
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    resolver: zodResolver(patchAttributesIdBody) as any,
+  });
 
   useEffect(() => {
     reset({
@@ -46,10 +59,10 @@ export default function EditAttributeForm({ id }: { id: string }) {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="w-full grid gap-4 items-end
+      className="w-full grid gap-4 items-stretch
                  grid-cols-1
                  sm:grid-cols-2
-                 lg:grid-cols-3"
+                "
     >
       <div className="col-span-1 sm:col-span-2 lg:col-span-1">
         <FormAutocomplete
@@ -81,8 +94,11 @@ export default function EditAttributeForm({ id }: { id: string }) {
         />
       </div>
 
-      <div className="col-span-1 sm:col-span-2 lg:col-span-1 w-full">
-        <SubmitButton className="w-full" disabled={!formState.isDirty} />
+      <div className="col-span-1 sm:col-span-2  w-full">
+        <SubmitButton
+          className="w-full"
+          disabled={!formState.isDirty || formState.isSubmitting}
+        />
       </div>
     </form>
   );

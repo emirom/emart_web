@@ -1,9 +1,11 @@
 import { SubmitButton } from "@components/BtnWithIcon";
 import { FormInputField } from "@components/FormInputField";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { updateUnitAction } from "@lib/actions/units-actions";
 import { queryClient } from "@lib/apis/queryClient";
 import { UpdateUnitInput } from "@lib/schemas";
 import { useGetUnitsId } from "@lib/services/units/units";
+import { patchUnitsIdBody } from "@lib/validations/unit.validation";
 import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
@@ -12,8 +14,10 @@ export default function EditAttributeForm({ id }: { id: string }) {
   const { data: unit } = useGetUnitsId(id, {
     query: { queryKey: ["/units", id] },
   });
-  const { handleSubmit, control, formState, reset } =
-    useForm<UpdateUnitInput>();
+  const { handleSubmit, control, formState, reset } = useForm<UpdateUnitInput>({
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    resolver: zodResolver(patchUnitsIdBody) as any,
+  });
   useEffect(() => {
     reset({ ...unit?.data });
   }, [unit, reset]);

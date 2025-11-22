@@ -197,9 +197,8 @@ const InternalAutocompleteField = <
           </ul>
         )}
       </div>
-
       {fieldState?.error && (
-        <p className="text-destructive text-sm mt-1">
+        <p className="text-destructive text-[0.625rem] font-medium mt-[0.125rem]">
           {fieldState.error.message}
         </p>
       )}

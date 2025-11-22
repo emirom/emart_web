@@ -3,15 +3,28 @@
 import { SubmitButton } from "@components/BtnWithIcon";
 import { FormInputField } from "@components/FormInputField";
 import { FormScrollableSelectField } from "@components/FormScrollableSelectField";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { postBrandAction } from "@lib/actions/brand-action";
 import { queryClient } from "@lib/apis/queryClient";
 import { CreateBrandInput } from "@lib/schemas";
+import { postBrandsBody } from "@lib/validations/brand.validation";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
 export default function CreateBrandForm() {
   const { handleSubmit, control, formState, reset } = useForm<CreateBrandInput>(
-    { defaultValues: { logoUrl: "https://example.com/logo.png" } },
+    {
+      defaultValues: {
+        logoUrl: "https://example.com/logo.png",
+        name: "",
+        enName: "",
+        isActive: true,
+        sortOrder: 0,
+        website: "",
+      },
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      resolver: zodResolver(postBrandsBody) as any,
+    },
   );
   const onSubmit: SubmitHandler<CreateBrandInput> = async (data) => {
     try {

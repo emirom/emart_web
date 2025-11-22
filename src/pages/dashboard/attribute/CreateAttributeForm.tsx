@@ -4,11 +4,13 @@ import { SubmitButton } from "@components/BtnWithIcon";
 import FormAutocomplete from "@components/FormAutoCompleteField";
 import { FormInputField } from "@components/FormInputField";
 import { FormScrollableSelectField } from "@components/FormScrollableSelectField";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { postAttributeAction } from "@lib/actions/attribute-action";
 import { queryClient } from "@lib/apis/queryClient";
 import { attributeUnits } from "@lib/constants/attribute-units";
 import { CreateAttributeInput } from "@lib/schemas";
 import { useGetCategories } from "@lib/services/categories/categories";
+import { postAttributesBody } from "@lib/validations/attribute.validation";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
@@ -17,7 +19,13 @@ export default function CreateAttributeForm() {
     useForm<CreateAttributeInput>({
       defaultValues: {
         iconUrl: "https://example.com/icons/size.png",
+        categoryId: "",
+        title: "",
+        unit: "",
+        type: "text",
       },
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      resolver: zodResolver(postAttributesBody) as any,
     });
   const { data: categories } = useGetCategories({ skip: 0, limit: 10 });
   const onSubmit: SubmitHandler<CreateAttributeInput> = async (data) => {
@@ -37,7 +45,7 @@ export default function CreateAttributeForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="w-full grid gap-2 items-end
+      className="w-full grid gap-2 items-stretch
                       grid-cols-1
                       sm:grid-cols-2
                       "

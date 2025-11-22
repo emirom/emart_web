@@ -1,16 +1,40 @@
 "use client";
 import { SubmitButton } from "@components/BtnWithIcon";
+import FormDatePickerField from "@components/FormDatePickerField";
 import { FormInputField } from "@components/FormInputField";
 import { FormScrollableSelectField } from "@components/FormScrollableSelectField";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { postInsuranceAction } from "@lib/actions/insurance-action";
 import { queryClient } from "@lib/apis/queryClient";
 import { CreateInsuranceInput } from "@lib/schemas";
+import { postInsurancesBody } from "@lib/validations/insurance.validation";
 import { useRouter } from "next/navigation";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
 export default function CreateInsuranceForm() {
-  const { handleSubmit, control, formState } = useForm<CreateInsuranceInput>();
+  const { handleSubmit, control, formState } = useForm<CreateInsuranceInput>({
+    defaultValues: {
+      title: "",
+      price: 0,
+      start: "",
+      months: 0,
+      days: 0,
+      logo: "",
+      providerName: "",
+      coverage: "",
+      exclusions: "",
+      claimLimit: 0,
+      deductible: 0,
+      claimProcess: "",
+      isActive: true,
+      minOrderValue: 0,
+      maxOrderValue: 0,
+      sortOrder: 0,
+    },
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    resolver: zodResolver(postInsurancesBody) as any,
+  });
   const router = useRouter();
 
   const onSubmit: SubmitHandler<CreateInsuranceInput> = async (data) => {
@@ -27,11 +51,11 @@ export default function CreateInsuranceForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="grid grid-cols-1 md:grid-cols-2 gap-2 items-end"
+      className="grid grid-cols-1 md:grid-cols-2 gap-2 items-stretch"
     >
       <FormInputField control={control} name="title" label="عنوان" />
 
-      <FormInputField control={control} name="start" label="تاریخ شروع" />
+      <FormDatePickerField control={control} name="start" label="تاریخ شروع" />
       <FormInputField
         control={control}
         name="months"

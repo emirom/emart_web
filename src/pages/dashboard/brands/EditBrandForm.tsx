@@ -3,17 +3,30 @@
 import { SubmitButton } from "@components/BtnWithIcon";
 import { FormInputField } from "@components/FormInputField";
 import { FormScrollableSelectField } from "@components/FormScrollableSelectField";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { patchBrandAction } from "@lib/actions/brand-action";
 import { queryClient } from "@lib/apis/queryClient";
 import { UpdateBrandInput } from "@lib/schemas";
 import { useGetBrandsId } from "@lib/services/brands/brands";
+import { patchBrandsIdBody } from "@lib/validations/brand.validation";
 import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
 export default function EditBrandForm({ id }: { id: string }) {
   const { handleSubmit, control, formState, reset } = useForm<UpdateBrandInput>(
-    { defaultValues: { isActive: false } },
+    {
+      defaultValues: {
+        isActive: false,
+        sortOrder: 0,
+        website: "",
+        name: "",
+        enName: "",
+        logoUrl: "",
+      },
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      resolver: zodResolver(patchBrandsIdBody) as any,
+    },
   );
   const { data: brand } = useGetBrandsId(id, {
     query: { queryKey: ["/brands", id] },
@@ -61,6 +74,7 @@ export default function EditBrandForm({ id }: { id: string }) {
         control={control}
         label="ترتیب مرتب‌سازی"
         type="number"
+        min={1}
       />
 
       <div className="w-full flex flex-wrap gap-2 items-end justify-between">

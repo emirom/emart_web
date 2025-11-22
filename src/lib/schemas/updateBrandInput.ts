@@ -4,10 +4,10 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
+import type { UpdateBrandInputDescription } from "./updateBrandInputDescription";
 import type { UpdateBrandInputEnName } from "./updateBrandInputEnName";
 import type { UpdateBrandInputLogoUrl } from "./updateBrandInputLogoUrl";
 import type { UpdateBrandInputWebsite } from "./updateBrandInputWebsite";
-import type { UpdateBrandInputDescription } from "./updateBrandInputDescription";
 
 export interface UpdateBrandInput {
   /**

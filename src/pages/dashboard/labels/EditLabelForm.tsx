@@ -2,17 +2,24 @@
 
 import { SubmitButton } from "@components/BtnWithIcon";
 import { FormInputField } from "@components/FormInputField";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { patchLabelAction } from "@lib/actions/label-action";
 import { queryClient } from "@lib/apis/queryClient";
 import { UpdateLabelInput } from "@lib/schemas";
 import { useGetLabelsId } from "@lib/services/labels/labels";
+import { patchLabelsIdBody } from "@lib/validations/label.validation";
 import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
 export default function EditLabelForm({ id }: { id: string }) {
-  const { handleSubmit, control, formState, reset } =
-    useForm<UpdateLabelInput>();
+  const { handleSubmit, control, formState, reset } = useForm<UpdateLabelInput>(
+    {
+      defaultValues: { pageId: "", name: "" },
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      resolver: zodResolver(patchLabelsIdBody) as any,
+    },
+  );
   const { data: label } = useGetLabelsId(id, {
     query: { queryKey: ["/labels", id] },
   });
@@ -37,7 +44,7 @@ export default function EditLabelForm({ id }: { id: string }) {
 
   return (
     <form
-      className="grid grid-cols-1 gap-2 md:grid-cols-2  items-center"
+      className="grid grid-cols-1 gap-2 md:grid-cols-2  items-stretch"
       onSubmit={handleSubmit(onSubmit)}
     >
       <FormInputField control={control} label="نام برچسب" name="name" />

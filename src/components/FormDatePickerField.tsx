@@ -33,7 +33,7 @@ const jalaliKey = (date: JalaliDate) => {
 type CustomDatePickerProps<T extends FieldValues> = {
   name: Path<T>;
   control: Control<T>;
-  label: string;
+  label?: string;
   rules?: Omit<
     RegisterOptions<T, Path<T>>,
     "setValueAs" | "disabled" | "valueAsNumber" | "valueAsDate"
@@ -71,14 +71,29 @@ function toDate(value: unknown): Date | null {
   return isNaN(d.getTime()) ? null : d;
 }
 
+function toISOStringWithoutTimeZone(date: Date) {
+  return new Date(
+    Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()),
+  ).toISOString();
+}
+
 function FormDatePickerField<T extends FieldValues>({
   control,
   name,
   rules,
   placeholder,
+  label,
 }: CustomDatePickerProps<T>) {
   return (
-    <>
+    <div className="w-full grow flex flex-col gap-1">
+      {label && (
+        <label
+          className={cn("block text-xs font-medium text-tint-blue-500 w-full")}
+        >
+          {label}
+        </label>
+      )}
+
       <Controller
         name={name}
         control={control}
@@ -92,7 +107,7 @@ function FormDatePickerField<T extends FieldValues>({
                 onChange={(val: unknown) => {
                   const d = toDate(val);
                   if (d === null) return field.onChange(null);
-                  field.onChange(d);
+                  field.onChange(toISOStringWithoutTimeZone(d));
                 }}
                 calendar={persian}
                 locale={persian_fa}
@@ -112,15 +127,23 @@ function FormDatePickerField<T extends FieldValues>({
                     readOnly
                     id={name}
                     placeholder={placeholder}
-                    className={cn(fieldState?.error && "border-destructive")}
+                    className={cn(
+                      fieldState?.error && "border-destructive",
+                      "w-full",
+                    )}
                   />
                 )}
               />
+              {fieldState?.error && (
+                <p className="text-destructive text-[0.625rem] font-medium mt-[0.125rem]">
+                  {fieldState.error.message}
+                </p>
+              )}
             </>
           );
         }}
       />
-    </>
+    </div>
   );
 }
 

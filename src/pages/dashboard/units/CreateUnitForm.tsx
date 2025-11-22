@@ -4,12 +4,14 @@ import { SubmitButton } from "@components/BtnWithIcon";
 import { DashboardCustomModal } from "@components/DashboardCustomModal";
 import { FormInputField } from "@components/FormInputField";
 import { Button } from "@components/ui/button";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { postUnitAction } from "@lib/actions/units-actions";
 import { queryClient } from "@lib/apis/queryClient";
 import { CreateUnitInput } from "@lib/schemas";
+import { postUnitsBody } from "@lib/validations/unit.validation";
+import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { useState, useEffect } from "react";
 
 export default function CreateUnit() {
   const [isClient, setIsClient] = useState(false);
@@ -19,7 +21,7 @@ export default function CreateUnit() {
   }, []);
 
   if (!isClient) {
-    return null; // Render nothing on the server to prevent hydration mismatch
+    return null;
   }
 
   return (
@@ -35,8 +37,13 @@ export default function CreateUnit() {
   );
 }
 export function CreateUnitForm() {
-  const { handleSubmit, control, formState, reset } =
-    useForm<CreateUnitInput>();
+  const { handleSubmit, control, formState, reset } = useForm<CreateUnitInput>({
+    defaultValues: {
+      title: "",
+    },
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    resolver: zodResolver(postUnitsBody) as any,
+  });
   const onSubmit: SubmitHandler<CreateUnitInput> = async (data) => {
     try {
       await postUnitAction(data);

@@ -25,7 +25,7 @@ export default function EditColorForm({ id }: { id: string }) {
       },
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       resolver: zodResolver(patchColorsIdBody) as any,
-    }
+    },
   );
   const { data: color } = useGetColorsId(id, {
     query: { queryKey: ["/colors", id] },

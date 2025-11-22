@@ -1,16 +1,41 @@
 "use client";
 import { SubmitButton } from "@components/BtnWithIcon";
+import FormDatePickerField from "@components/FormDatePickerField";
 import { FormInputField } from "@components/FormInputField";
 import { FormScrollableSelectField } from "@components/FormScrollableSelectField";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { postGuaranteeAction } from "@lib/actions/guarantee-action";
 import { queryClient } from "@lib/apis/queryClient";
 import { CreateGuaranteeInput } from "@lib/schemas";
+import { postGuaranteesBody } from "@lib/validations/guarantee.zod";
 import { useRouter } from "next/navigation";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
 export default function CreateGuarantee() {
-  const { handleSubmit, control, formState } = useForm<CreateGuaranteeInput>();
+  const { handleSubmit, control, formState } = useForm<CreateGuaranteeInput>({
+    defaultValues: {
+      title: "",
+      start: "",
+      months: 0,
+      days: 0,
+      logo: "",
+      providerName: "",
+      providerAddress: "",
+      providerPhone: "",
+      providerCode: "",
+      termsUrl: "",
+      claimProcess: "",
+      responseTime: 0,
+      isInternational: false,
+      isActive: true,
+      isRegisteredWithTax: false,
+      sortOrder: 0,
+      sepidarGuaranteeId: "",
+    },
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    resolver: zodResolver(postGuaranteesBody) as any,
+  });
   const router = useRouter();
   const onSubmit: SubmitHandler<CreateGuaranteeInput> = async (data) => {
     try {
@@ -26,10 +51,10 @@ export default function CreateGuarantee() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="grid grid-cols-1 md:grid-cols-2  gap-2 items-end"
+      className="grid grid-cols-1 md:grid-cols-2  gap-2 items-stretch"
     >
       <FormInputField control={control} name="title" label="عنوان گارانتی" />
-      <FormInputField control={control} name="start" label="تاریخ شروع" />
+      <FormDatePickerField control={control} name="start" label="تاریخ شروع" />
       <FormInputField
         control={control}
         name="months"
@@ -129,7 +154,7 @@ export default function CreateGuarantee() {
       />
 
       <SubmitButton
-        className="w-full md:w-auto"
+        className="w-full md:w-auto self-end"
         disabled={!formState.isDirty}
       />
     </form>

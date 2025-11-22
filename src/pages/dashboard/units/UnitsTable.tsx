@@ -6,7 +6,7 @@ import { useGetUnits } from "@lib/services/units/units";
 import { UnitFilter } from "@lib/types/filter-generator";
 import { ColumnDef } from "@tanstack/react-table";
 import { useSearchParams } from "next/navigation";
-import CreateUnit from "./CreateUnit";
+import CreateUnit from "./CreateUnitForm";
 import UnitsActions from "./UnitsActions";
 
 export default function UnitsTable({

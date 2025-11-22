@@ -2,10 +2,12 @@
 import { SubmitButton } from "@components/BtnWithIcon";
 import { FormInputField } from "@components/FormInputField";
 import { FormScrollableSelectField } from "@components/FormScrollableSelectField";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { patchGuaranteeAction } from "@lib/actions/guarantee-action";
 import { queryClient } from "@lib/apis/queryClient";
 import { UpdateGuaranteeInput } from "@lib/schemas";
 import { useGetGuaranteesId } from "@lib/services/guarantees/guarantees";
+import { patchGuaranteesIdBody } from "@lib/validations/guarantee.zod";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -13,7 +15,29 @@ import { toast } from "react-toastify";
 
 export default function EditGuaranteeForm({ id }: { id: string }) {
   const { handleSubmit, control, formState, reset } =
-    useForm<UpdateGuaranteeInput>();
+    useForm<UpdateGuaranteeInput>({
+      defaultValues: {
+        title: "",
+        start: "",
+        months: 0,
+        days: 0,
+        logo: "",
+        providerName: "",
+        providerAddress: "",
+        providerPhone: "",
+        providerCode: "",
+        termsUrl: "",
+        claimProcess: "",
+        responseTime: 0,
+        isInternational: false,
+        isActive: true,
+        isRegisteredWithTax: false,
+        sortOrder: 0,
+        sepidarGuaranteeId: "",
+      },
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      resolver: zodResolver(patchGuaranteesIdBody) as any,
+    });
   const router = useRouter();
 
   const { data: guarantee } = useGetGuaranteesId(id, {

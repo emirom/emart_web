@@ -72,7 +72,7 @@ export const getProductsQueryParams = zod.object({
     .union([zod.uuid("شناسه برند معتبر نیست"), zod.null()])
     .optional(),
   isActive: zod.union([zod.coerce.boolean(), zod.null()]).optional(),
-  labels: zod.array(zod.uuid("شناسه لیبل معتبر نیست")).optional(),
+  labels: zod.array(zod.uuid("شناسه برچسب معتبر نیست")).optional(),
 });
 
 export const getProductsResponse = zod.object({
