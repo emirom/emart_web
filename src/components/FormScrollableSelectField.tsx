@@ -54,7 +54,7 @@ export function FormScrollableSelectField<
         render={({ field, fieldState }) => {
           const currentValue = String(field.value ?? "");
           const selectedOption = mappedOptions.find(
-            (o) => o.stringValue === currentValue
+            (o) => o.stringValue === currentValue,
           );
           const selectedLabel = selectedOption ? selectedOption.labelText : "";
 
@@ -64,7 +64,7 @@ export function FormScrollableSelectField<
                 value={currentValue}
                 onValueChange={(val: string) => {
                   const matched = mappedOptions.find(
-                    (opt) => opt.stringValue === val
+                    (opt) => opt.stringValue === val,
                   );
                   if (matched) {
                     field.onChange(matched.rawValue);
@@ -76,7 +76,7 @@ export function FormScrollableSelectField<
                 <SelectTrigger
                   className={cn(
                     "w-full  flex items-center justify-between flex-row-reverse",
-                    fieldState.error?.message && "border-destructive"
+                    fieldState.error?.message && "border-destructive",
                   )}
                   id={String(name)}
                 >
