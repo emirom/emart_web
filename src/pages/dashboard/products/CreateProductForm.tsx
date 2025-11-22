@@ -3,12 +3,14 @@ import { SubmitButton } from "@components/BtnWithIcon";
 import FormAutocomplete from "@components/FormAutoCompleteField";
 import { FormInputField } from "@components/FormInputField";
 import { FormScrollableSelectField } from "@components/FormScrollableSelectField";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { postProductAction } from "@lib/actions/product-action";
 import { queryClient } from "@lib/apis/queryClient";
 import { CreateProductInput } from "@lib/schemas";
 import { useGetBrands } from "@lib/services/brands/brands";
 import { useGetCategories } from "@lib/services/categories/categories";
 import { useGetLabels } from "@lib/services/labels/labels";
+import { postProductsBody } from "@lib/validations/product.validation";
 import { useRouter } from "next/navigation";
 import { useEffect, useState, useTransition } from "react";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
@@ -23,8 +25,21 @@ export default function CreateProductForm() {
   const [selectedLabels, setSelectedLabels] = useState<Label[]>([]);
   const [productId, setProductId] = useState<string | null>(null);
 
-  const { handleSubmit, control, reset } = useForm<CreateProductInput>({
-    defaultValues: { labels: [], isActive: false },
+  const {
+    handleSubmit,
+    control,
+    reset,
+    formState: { isDirty },
+  } = useForm<CreateProductInput>({
+    defaultValues: {
+      labels: [],
+      isActive: false,
+      name: "",
+      enName: "",
+      categoryId: "",
+      brandId: "",
+    },
+    resolver: zodResolver(postProductsBody) as any,
   });
 
   const { append, fields, remove } = useFieldArray({ control, name: "labels" });
@@ -87,7 +102,7 @@ export default function CreateProductForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="grid sm:grid-cols-2 lg:grid-cols-3 items-end gap-2"
+      className="grid sm:grid-cols-2 lg:grid-cols-3 items-stretch gap-2"
     >
       <FormInputField control={control} name="name" label="نام محصول" />
       <FormInputField
