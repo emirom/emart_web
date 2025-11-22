@@ -23,7 +23,7 @@ export const postProductsBody = zod.object({
       zod.array(
         zod.object({
           id: zod.uuid("شناسه لیبل معتبر نیست"),
-        })
+        }),
       ),
       zod.null(),
     ])
@@ -33,9 +33,7 @@ export const postProductsBody = zod.object({
 export const getProductsQueryParams = zod.object({
   field: zod
     .union([
-      zod
-        .coerce.string()
-        .max(200, "نام فیلد بیش از حد طولانی است"),
+      zod.coerce.string().max(200, "نام فیلد بیش از حد طولانی است"),
       zod.null(),
     ])
     .optional(),
@@ -47,9 +45,7 @@ export const getProductsQueryParams = zod.object({
       zod.null(),
     ])
     .optional(),
-  skip: zod.coerce
-    .number()
-    .min(0, "مقدار skip نمی‌تواند منفی باشد"),
+  skip: zod.coerce.number().min(0, "مقدار skip نمی‌تواند منفی باشد"),
   limit: zod.coerce
     .number()
     .min(1, "حداقل یک رکورد باید درخواست شود")
@@ -75,12 +71,8 @@ export const getProductsQueryParams = zod.object({
   brandId: zod
     .union([zod.uuid("شناسه برند معتبر نیست"), zod.null()])
     .optional(),
-  isActive: zod
-    .union([zod.coerce.boolean(), zod.null()])
-    .optional(),
-  labels: zod
-    .array(zod.uuid("شناسه لیبل معتبر نیست"))
-    .optional(),
+  isActive: zod.union([zod.coerce.boolean(), zod.null()]).optional(),
+  labels: zod.array(zod.uuid("شناسه لیبل معتبر نیست")).optional(),
 });
 
 export const getProductsResponse = zod.object({
@@ -118,7 +110,7 @@ export const patchProductsIdBody = zod.object({
       zod.array(
         zod.object({
           id: zod.uuid("شناسه لیبل معتبر نیست"),
-        })
+        }),
       ),
       zod.null(),
     ])
@@ -135,12 +127,12 @@ export const patchProductsIdResponse = zod.object({
       zod.iso.datetime({ message: "فرمت تاریخ معتبر نیست" }),
       zod.null(),
     ]),
-    name: zod
-      .coerce.string()
+    name: zod.coerce
+      .string()
       .min(2, "نام باید حداقل ۲ کاراکتر باشد")
       .max(200, "نام نمی‌تواند بیشتر از ۲۰۰ کاراکتر باشد"),
-    enName: zod
-      .coerce.string()
+    enName: zod.coerce
+      .string()
       .min(2, "نام انگلیسی باید حداقل ۲ کاراکتر باشد")
       .max(200, "نام انگلیسی نمی‌تواند بیشتر از ۲۰۰ کاراکتر باشد"),
     categoryId: zod.uuid(),
@@ -153,7 +145,7 @@ export const patchProductsIdResponse = zod.object({
         zod.object({
           id: zod.uuid(),
           name: zod.coerce.string(),
-        })
+        }),
       ),
       zod.null(),
     ]),
@@ -164,7 +156,7 @@ export const patchProductsIdResponse = zod.object({
           url: zod.coerce.string(),
           altText: zod.coerce.string().nullable(),
           caption: zod.coerce.string().nullable(),
-        })
+        }),
       ),
       zod.null(),
     ]),
@@ -182,7 +174,7 @@ export const patchProductsIdResponse = zod.object({
             ])
             .nullable(),
           mediaId: zod.uuid().nullable(),
-        })
+        }),
       ),
       zod.null(),
     ]),
