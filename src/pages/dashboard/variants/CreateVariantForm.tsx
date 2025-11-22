@@ -5,11 +5,13 @@ import FormComboboxField from "@components/FormComboboxField";
 import { FormInputField } from "@components/FormInputField";
 import FormSwitchField from "@components/FormSwitchField";
 import { FormTextareaField } from "@components/FormTextareaField";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { postVariantAction } from "@lib/actions/variants-action";
 import { queryClient } from "@lib/apis/queryClient";
 import { CreateVariantInput } from "@lib/schemas";
 import { useGetColors } from "@lib/services/colors/colors";
 import { useGetProducts } from "@lib/services/products/products";
+import { postVariantsBody } from "@lib/validations/variant.validation";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
@@ -17,7 +19,26 @@ export default function CreateVariantForm() {
   const { data: products } = useGetProducts({ skip: 0, limit: 10 });
   const { data: colors } = useGetColors({ skip: 0, limit: 10 });
 
-  const { handleSubmit, control, reset } = useForm<CreateVariantInput>();
+  const { handleSubmit, control, reset } = useForm<CreateVariantInput>({
+    defaultValues: {
+      productId: "",
+      colorId: "",
+      sku: "",
+      publicId: "",
+      barcode: "",
+      mpn: "",
+      titleOverride: "",
+      descriptionOverride: "",
+      isActive: false,
+      isApproved: false,
+      slug: "",
+      metaTitle: "",
+      metaDescription: "",
+      attributeComboKey: "",
+    },
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    resolver: zodResolver(postVariantsBody) as any,
+  });
 
   const onSubmit: SubmitHandler<CreateVariantInput> = async (data) => {
     try {
@@ -37,7 +58,7 @@ export default function CreateVariantForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="grid grid-cols-1 items-end gap-x-2 gap-y-3 md:grid-cols-2 lg:grid-cols-3"
+      className="grid grid-cols-1 items-stretch gap-x-2 gap-y-3 md:grid-cols-2 lg:grid-cols-3"
     >
       <FormComboboxField
         control={control}

@@ -6,12 +6,14 @@ import { FormInputField } from "@components/FormInputField";
 import FormSwitchField from "@components/FormSwitchField";
 import { FormTextareaField } from "@components/FormTextareaField";
 import { cn } from "@components/lib/utils";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { patchVariantAction } from "@lib/actions/variants-action";
 import { queryClient } from "@lib/apis/queryClient";
 import { UpdateVariantInput } from "@lib/schemas";
 import { useGetColors } from "@lib/services/colors/colors";
 import { useGetProducts } from "@lib/services/products/products";
 import { useGetVariantsId } from "@lib/services/variants/variants";
+import { patchVariantsIdBody } from "@lib/validations/variant.validation";
 import Link from "next/link";
 import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -23,7 +25,26 @@ export default function EditVariantForm({ id }: { id: string }) {
   const { data: variant } = useGetVariantsId(id, {
     query: { queryKey: ["/variants", id] },
   });
-  const { handleSubmit, control, reset } = useForm<UpdateVariantInput>();
+  const { handleSubmit, control, reset } = useForm<UpdateVariantInput>({
+    defaultValues: {
+      productId: variant?.data.productId,
+      colorId: variant?.data.colorId,
+      sku: variant?.data.sku,
+      publicId: variant?.data.publicId,
+      barcode: variant?.data.barcode,
+      mpn: variant?.data.mpn,
+      titleOverride: variant?.data.titleOverride,
+      slug: variant?.data.slug,
+      metaTitle: variant?.data.metaTitle,
+      attributeComboKey: variant?.data.attributeComboKey,
+      isActive: variant?.data.isActive,
+      isApproved: variant?.data.isApproved,
+      metaDescription: variant?.data.metaDescription,
+      descriptionOverride: variant?.data.descriptionOverride,
+    },
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    resolver: zodResolver(patchVariantsIdBody) as any,
+  });
   useEffect(() => {
     reset({ ...variant?.data });
   }, [variant, reset]);
@@ -113,7 +134,7 @@ export default function EditVariantForm({ id }: { id: string }) {
         <SubmitButton />
         <Link
           className={cn(
-            "flex items-center justify-center rounded-md px-3 bg-green-300 text-white focus-visible:ring-2 focus-visible:ring-offset-2 transition-colors",
+            "flex items-center justify-center rounded-md px-3 bg-green-300 text-white focus-visible:ring-2 focus-visible:ring-offset-2 transition-colors"
           )}
           href={`/dashboard/variants/add/${id}`}
         >

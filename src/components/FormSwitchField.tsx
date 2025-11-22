@@ -33,7 +33,7 @@ const FormSwitchField = <T extends FieldValues>({
       control={control}
       defaultValue={defaultValue as PathValue<T, Path<T>>}
       rules={rules}
-      render={({ field: { value, onChange }, fieldState: { error } }) => {
+      render={({ field: { value, onChange }, fieldState }) => {
         const isActive = value;
         const toggle = () => {
           onChange(!isActive);
@@ -65,9 +65,9 @@ const FormSwitchField = <T extends FieldValues>({
                 <span>غیر فعال</span>
               </div>
             </button>
-            {error && (
-              <p className="text-red-500 text-sm mt-[0] select-none">
-                {error.message}
+            {fieldState?.error && (
+              <p className="text-destructive text-[0.625rem] font-medium mt-[0.125rem]">
+                {fieldState.error.message}
               </p>
             )}
           </div>
