@@ -25,12 +25,7 @@ export default function CreateProductForm() {
   const [selectedLabels, setSelectedLabels] = useState<Label[]>([]);
   const [productId, setProductId] = useState<string | null>(null);
 
-  const {
-    handleSubmit,
-    control,
-    reset,
-    formState: { isDirty },
-  } = useForm<CreateProductInput>({
+  const { handleSubmit, control, reset } = useForm<CreateProductInput>({
     defaultValues: {
       labels: [],
       isActive: false,
@@ -39,6 +34,7 @@ export default function CreateProductForm() {
       categoryId: "",
       brandId: "",
     },
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     resolver: zodResolver(postProductsBody) as any,
   });
 

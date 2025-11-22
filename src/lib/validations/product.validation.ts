@@ -184,3 +184,5 @@ export const patchProductsIdResponse = zod.object({
 export const deleteProductsIdParams = zod.object({
   id: zod.uuid("شناسه محصول معتبر نیست"),
 });
+
+export type PostProductsBodyType = zod.infer<typeof postProductsBody>;

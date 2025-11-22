@@ -16,17 +16,17 @@ export default function LabelList({
     <div className="mt-5 col-span-1 sm:col-span-2 lg:col-span-3">
       <label
         className={cn(
-          "block text-xs text-nowrap text-tint-blue-500 font-medium mb-2",
+          "block text-xs text-nowrap text-tint-blue-500 font-medium mb-2"
         )}
       >
         لیست برچسب‌های انتخاب شده
       </label>
-      <div className="flex items-center gap-2 flex-wrap border border-gray-100 p-2 rounded-lg">
-        {!!selectedLabels ? (
+      <div className="flex items-center gap-2 flex-wrap border-[0.125rem] border-dashed   border-gray-100 p-2 py-4 text-sm font-medium rounded-lg">
+        {selectedLabels && selectedLabels.length > 0 ? (
           selectedLabels.map((label) => (
             <div
               key={label.id}
-              className="flex items-center gap-1 bg-blue-50 text-blue-700 px-2 py-1 rounded-full text-xs font-medium"
+              className="flex items-center gap-1 bg-blue-50 text-blue-700 px-2 py-1 rounded-full text-sm font-bold"
             >
               {label.name}
               <button
