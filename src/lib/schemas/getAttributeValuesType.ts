@@ -8,7 +8,6 @@
 export type GetAttributeValuesType =
   (typeof GetAttributeValuesType)[keyof typeof GetAttributeValuesType];
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
 export const GetAttributeValuesType = {
   text: "text",
   number: "number",

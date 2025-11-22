@@ -11,7 +11,6 @@
 export type ProductDescriptionMediaSide =
   (typeof ProductDescriptionMediaSide)[keyof typeof ProductDescriptionMediaSide];
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
 export const ProductDescriptionMediaSide = {
   LEFT: "LEFT",
   CENTER: "CENTER",

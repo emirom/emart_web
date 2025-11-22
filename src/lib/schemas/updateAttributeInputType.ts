@@ -11,7 +11,6 @@
 export type UpdateAttributeInputType =
   (typeof UpdateAttributeInputType)[keyof typeof UpdateAttributeInputType];
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
 export const UpdateAttributeInputType = {
   text: "text",
   number: "number",

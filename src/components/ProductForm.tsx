@@ -11,12 +11,14 @@ interface ProductFormData {
   name: string;
   enName: string;
   categoryId: string;
+  brandId?: string;
 }
 
 const productSchema = z.object({
   name: z.string().min(1, "Product name is required"),
   enName: z.string().min(1, "English name is required"),
   categoryId: z.string().min(1, "Category ID is required"),
+  brandId: z.string().optional(),
 });
 
 const ProductForm: React.FC = () => {
@@ -40,6 +42,7 @@ const ProductForm: React.FC = () => {
         name: data.name,
         enName: data.enName,
         categoryId: data.categoryId,
+        brandId: data.brandId || "", // Provide empty string if brandId is not set
         isActive: true,
       };
 

@@ -11,7 +11,6 @@
 export type ProductMediaMimetype =
   (typeof ProductMediaMimetype)[keyof typeof ProductMediaMimetype];
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
 export const ProductMediaMimetype = {
   "image/jpeg": "image/jpeg",
   "image/jpg": "image/jpg",

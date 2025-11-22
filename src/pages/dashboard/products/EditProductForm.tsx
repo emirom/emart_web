@@ -25,7 +25,7 @@ export default function EditProductId({ editId }: { editId: string }) {
   const [productId, setProductId] = useState<string | null>(null);
 
   const { handleSubmit, control, reset } = useForm<UpdateProductInput>({
-    defaultValues: { labels: [], isActive: false, descriptions: null },
+    defaultValues: { labels: [], isActive: false },
   });
 
   const { append, fields, remove } = useFieldArray({ control, name: "labels" });

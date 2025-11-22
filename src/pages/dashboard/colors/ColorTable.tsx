@@ -9,11 +9,6 @@ import { useSearchParams } from "next/navigation";
 import ColorsAction from "./ColorAction";
 import CreateColor from "./CreateColor";
 
-type InitialQuery = {
-  page?: number;
-  name?: string;
-};
-
 export default function ColorTable({
   initialQuery,
 }: {

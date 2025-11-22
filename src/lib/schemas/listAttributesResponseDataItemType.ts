@@ -11,7 +11,6 @@
 export type ListAttributesResponseDataItemType =
   (typeof ListAttributesResponseDataItemType)[keyof typeof ListAttributesResponseDataItemType];
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
 export const ListAttributesResponseDataItemType = {
   text: "text",
   number: "number",

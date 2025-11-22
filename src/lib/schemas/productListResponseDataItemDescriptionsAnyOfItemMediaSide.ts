@@ -12,7 +12,6 @@ export type ProductListResponseDataItemDescriptionsAnyOfItemMediaSide =
   | (typeof ProductListResponseDataItemDescriptionsAnyOfItemMediaSide)[keyof typeof ProductListResponseDataItemDescriptionsAnyOfItemMediaSide]
   | null;
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
 export const ProductListResponseDataItemDescriptionsAnyOfItemMediaSide = {
   LEFT: "LEFT",
   CENTER: "CENTER",
