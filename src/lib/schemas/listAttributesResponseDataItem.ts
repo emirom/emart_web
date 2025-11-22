@@ -4,9 +4,9 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { ListAttributesResponseDataItemType } from "./listAttributesResponseDataItemType";
-import type { ListAttributesResponseDataItemUnit } from "./listAttributesResponseDataItemUnit";
-import type { ListAttributesResponseDataItemIconUrl } from "./listAttributesResponseDataItemIconUrl";
+import type { ListAttributesResponseDataItemType } from './listAttributesResponseDataItemType';
+import type { ListAttributesResponseDataItemUnit } from './listAttributesResponseDataItemUnit';
+import type { ListAttributesResponseDataItemIconUrl } from './listAttributesResponseDataItemIconUrl';
 
 export type ListAttributesResponseDataItem = {
   /** Unique identifier (UUIDv4) */

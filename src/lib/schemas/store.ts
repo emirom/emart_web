@@ -4,12 +4,12 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { StoreLogo } from "./storeLogo";
-import type { StoreDescription } from "./storeDescription";
-import type { StoreEmail } from "./storeEmail";
-import type { StorePhone } from "./storePhone";
-import type { StoreWebsite } from "./storeWebsite";
-import type { StoreOwnerId } from "./storeOwnerId";
+import type { StoreLogo } from './storeLogo';
+import type { StoreDescription } from './storeDescription';
+import type { StoreEmail } from './storeEmail';
+import type { StorePhone } from './storePhone';
+import type { StoreWebsite } from './storeWebsite';
+import type { StoreOwnerId } from './storeOwnerId';
 
 /**
  * Store entity

@@ -4,17 +4,18 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { UpdateInventoryInputPriceOverride } from "./updateInventoryInputPriceOverride";
-import type { UpdateInventoryInputCostPriceOverride } from "./updateInventoryInputCostPriceOverride";
-import type { UpdateInventoryInputBatchNumber } from "./updateInventoryInputBatchNumber";
-import type { UpdateInventoryInputExpiryDate } from "./updateInventoryInputExpiryDate";
-import type { UpdateInventoryInputWarehouseCode } from "./updateInventoryInputWarehouseCode";
-import type { UpdateInventoryInputShelfCode } from "./updateInventoryInputShelfCode";
-import type { UpdateInventoryInputLeadTimeDays } from "./updateInventoryInputLeadTimeDays";
-import type { UpdateInventoryInputHsCode } from "./updateInventoryInputHsCode";
-import type { UpdateInventoryInputOriginCountry } from "./updateInventoryInputOriginCountry";
-import type { UpdateInventoryInputPackageWeight } from "./updateInventoryInputPackageWeight";
-import type { UpdateInventoryInputPackageDimensions } from "./updateInventoryInputPackageDimensions";
+import type { UpdateInventoryInputGuaranteeId } from './updateInventoryInputGuaranteeId';
+import type { UpdateInventoryInputInsuranceId } from './updateInventoryInputInsuranceId';
+import type { UpdateInventoryInputLeasingId } from './updateInventoryInputLeasingId';
+import type { UpdateInventoryInputChequeId } from './updateInventoryInputChequeId';
+import type { UpdateInventoryInputCost } from './updateInventoryInputCost';
+import type { UpdateInventoryInputExpiryDate } from './updateInventoryInputExpiryDate';
+import type { UpdateInventoryInputWarehouseCode } from './updateInventoryInputWarehouseCode';
+import type { UpdateInventoryInputShelfCode } from './updateInventoryInputShelfCode';
+import type { UpdateInventoryInputHsCode } from './updateInventoryInputHsCode';
+import type { UpdateInventoryInputOriginCountry } from './updateInventoryInputOriginCountry';
+import type { UpdateInventoryInputPackageWeight } from './updateInventoryInputPackageWeight';
+import type { UpdateInventoryInputPackageDimensions } from './updateInventoryInputPackageDimensions';
 
 /**
  * Inventory update payload
@@ -26,28 +27,42 @@ export interface UpdateInventoryInput {
   locationId?: string;
   /** Variant ID */
   variantId?: string;
+  /** Guarantee ID */
+  guaranteeId?: UpdateInventoryInputGuaranteeId;
+  /** Insurance ID */
+  insuranceId?: UpdateInventoryInputInsuranceId;
+  /** Leasing ID */
+  leasingId?: UpdateInventoryInputLeasingId;
+  /** Cheque ID */
+  chequeId?: UpdateInventoryInputChequeId;
+  /** Cost price */
+  cost?: UpdateInventoryInputCost;
   /** Base price */
   price?: number;
-  /** Override price for this inventory item */
-  priceOverride?: UpdateInventoryInputPriceOverride;
-  /** Discount percentage */
-  discount?: number;
-  /** Price after discount */
+  /**
+   * Discount percentage
+   * @minimum 0
+   * @maximum 100
+   */
+  discountPercent?: number;
+  /** Price after discount (calculated) */
   discountPrice?: number;
-  /** Current stock quantity */
+  /**
+   * Current stock quantity
+   * @minimum 0
+   */
   inStock?: number;
-  /** Override cost price for this batch */
-  costPriceOverride?: UpdateInventoryInputCostPriceOverride;
-  /** Batch number for tracking */
-  batchNumber?: UpdateInventoryInputBatchNumber;
+  /**
+   * Low stock alert threshold
+   * @minimum 0
+   */
+  lowStockThreshold?: number;
   /** Expiry date for perishable items */
   expiryDate?: UpdateInventoryInputExpiryDate;
   /** Warehouse code */
   warehouseCode?: UpdateInventoryInputWarehouseCode;
   /** Shelf code for location in warehouse */
   shelfCode?: UpdateInventoryInputShelfCode;
-  /** Lead time in days to prepare for shipping */
-  leadTimeDays?: UpdateInventoryInputLeadTimeDays;
   /** Harmonized System code for customs */
   hsCode?: UpdateInventoryInputHsCode;
   /** Country of manufacture/origin */
@@ -56,6 +71,4 @@ export interface UpdateInventoryInput {
   packageWeight?: UpdateInventoryInputPackageWeight;
   /** Packaged dimensions: length x width x height */
   packageDimensions?: UpdateInventoryInputPackageDimensions;
-  /** Low stock alert threshold */
-  lowStockThreshold?: number;
 }

@@ -6,39 +6,39 @@
  */
 
 export type GetLocationsParams = {
-  /**
-   * Field to sort by
-   */
-  field?: string | null;
-  /**
-   * Sort order
-   */
-  order?: "asc" | "desc" | null;
-  /**
-   * Number of records to skip
-   * @minimum 0
-   */
-  skip: number;
-  /**
-   * Maximum number of records to return
-   * @minimum 1
-   * @maximum 20
-   */
-  limit: number;
-  /**
-   * Filter by province ID
-   */
-  provinceId?: string | null;
-  /**
-   * Filter by city ID
-   */
-  cityId?: string | null;
-  /**
-   * Filter by postal code
-   */
-  postalCode?: string | null;
-  /**
-   * Filter by street name
-   */
-  street?: string | null;
+/**
+ * Field to sort by
+ */
+field?: string | null;
+/**
+ * Sort order
+ */
+order?: 'asc' | 'desc' | null;
+/**
+ * Number of records to skip
+ * @minimum 0
+ */
+skip: number;
+/**
+ * Maximum number of records to return
+ * @minimum 1
+ * @maximum 20
+ */
+limit: number;
+/**
+ * Filter by province ID
+ */
+provinceId?: string | null;
+/**
+ * Filter by city ID
+ */
+cityId?: string | null;
+/**
+ * Filter by postal code
+ */
+postalCode?: string | null;
+/**
+ * Filter by street name
+ */
+street?: string | null;
 };

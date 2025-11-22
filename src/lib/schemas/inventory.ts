@@ -4,18 +4,18 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { InventoryDeletedAt } from "./inventoryDeletedAt";
-import type { InventoryPriceOverride } from "./inventoryPriceOverride";
-import type { InventoryCostPriceOverride } from "./inventoryCostPriceOverride";
-import type { InventoryBatchNumber } from "./inventoryBatchNumber";
-import type { InventoryExpiryDate } from "./inventoryExpiryDate";
-import type { InventoryWarehouseCode } from "./inventoryWarehouseCode";
-import type { InventoryShelfCode } from "./inventoryShelfCode";
-import type { InventoryLeadTimeDays } from "./inventoryLeadTimeDays";
-import type { InventoryHsCode } from "./inventoryHsCode";
-import type { InventoryOriginCountry } from "./inventoryOriginCountry";
-import type { InventoryPackageWeight } from "./inventoryPackageWeight";
-import type { InventoryPackageDimensions } from "./inventoryPackageDimensions";
+import type { InventoryGuaranteeId } from './inventoryGuaranteeId';
+import type { InventoryInsuranceId } from './inventoryInsuranceId';
+import type { InventoryLeasingId } from './inventoryLeasingId';
+import type { InventoryChequeId } from './inventoryChequeId';
+import type { InventoryCost } from './inventoryCost';
+import type { InventoryExpiryDate } from './inventoryExpiryDate';
+import type { InventoryWarehouseCode } from './inventoryWarehouseCode';
+import type { InventoryShelfCode } from './inventoryShelfCode';
+import type { InventoryHsCode } from './inventoryHsCode';
+import type { InventoryOriginCountry } from './inventoryOriginCountry';
+import type { InventoryPackageWeight } from './inventoryPackageWeight';
+import type { InventoryPackageDimensions } from './inventoryPackageDimensions';
 
 /**
  * Inventory item representing stock at a specific location
@@ -27,40 +27,59 @@ export interface Inventory {
   createdAt: string;
   /** Last update timestamp (ISO 8601) */
   updatedAt: string;
-  /** Deletion timestamp (ISO 8601) when soft deleted */
-  deletedAt?: InventoryDeletedAt;
   /** Store ID */
   storeId: string;
   /** Location ID */
   locationId: string;
   /** Variant ID */
   variantId: string;
+  /** Guarantee ID */
+  guaranteeId?: InventoryGuaranteeId;
+  /** Insurance ID */
+  insuranceId?: InventoryInsuranceId;
+  /** Leasing ID */
+  leasingId?: InventoryLeasingId;
+  /** Cheque ID */
+  chequeId?: InventoryChequeId;
+  /** Cost price */
+  cost?: InventoryCost;
   /** Base price */
   price: number;
-  /** Override price for this inventory item */
-  priceOverride?: InventoryPriceOverride;
-  /** Discount percentage */
-  discount: number;
-  /** Price after discount */
+  /**
+   * Discount percentage
+   * @minimum 0
+   * @maximum 100
+   */
+  discountPercent: number;
+  /** Price after discount (calculated) */
   discountPrice: number;
-  /** Current stock quantity */
+  /**
+   * Current stock quantity
+   * @minimum 0
+   */
   inStock: number;
-  /** Total sold quantity */
+  /**
+   * Total sold quantity
+   * @minimum 0
+   */
   sold: number;
-  /** Average rating */
+  /**
+   * Average rating
+   * @minimum 0
+   * @maximum 5
+   */
   rate: number;
-  /** Override cost price for this batch */
-  costPriceOverride?: InventoryCostPriceOverride;
-  /** Batch number for tracking */
-  batchNumber?: InventoryBatchNumber;
+  /**
+   * Low stock alert threshold
+   * @minimum 0
+   */
+  lowStockThreshold: number;
   /** Expiry date for perishable items */
   expiryDate?: InventoryExpiryDate;
   /** Warehouse code */
   warehouseCode?: InventoryWarehouseCode;
   /** Shelf code for location in warehouse */
   shelfCode?: InventoryShelfCode;
-  /** Lead time in days to prepare for shipping */
-  leadTimeDays?: InventoryLeadTimeDays;
   /** Harmonized System code for customs */
   hsCode?: InventoryHsCode;
   /** Country of manufacture/origin */
@@ -69,8 +88,4 @@ export interface Inventory {
   packageWeight?: InventoryPackageWeight;
   /** Packaged dimensions: length x width x height */
   packageDimensions?: InventoryPackageDimensions;
-  /** Low stock alert threshold */
-  lowStockThreshold: number;
-  /** Whether stock is below threshold */
-  isLowStock: boolean;
 }

@@ -4,7 +4,10 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import { z as zod } from "zod";
+import {
+  z as zod
+} from 'zod';
+
 
 /**
  * Create a new variant
@@ -19,173 +22,70 @@ export const postVariantsBodyBarcodeMaxOne = 50;
 export const postVariantsBodyMpnMaxOne = 100;
 export const postVariantsBodyTitleOverrideMaxOne = 200;
 export const postVariantsBodyDescriptionOverrideMaxOne = 500;
-export const postVariantsBodyIsActiveDefault = true;
-export const postVariantsBodyIsApprovedDefault = false;
-export const postVariantsBodySlugMaxOne = 100;
+export const postVariantsBodyIsActiveDefault = true;export const postVariantsBodyIsApprovedDefault = false;export const postVariantsBodySlugMaxOne = 100;
 export const postVariantsBodyMetaTitleMaxOne = 200;
 export const postVariantsBodyMetaDescriptionMaxOne = 500;
 
-export const postVariantsBody = zod
-  .object({
-    productId: zod.uuid().describe("Associated product ID"),
-    colorId: zod.uuid().describe("Color ID"),
-    sku: zod.coerce
-      .string()
-      .min(postVariantsBodySkuMin)
-      .max(postVariantsBodySkuMax)
-      .describe("Stock Keeping Unit (unique)"),
-    publicId: zod.coerce
-      .string()
-      .min(postVariantsBodyPublicIdMin)
-      .max(postVariantsBodyPublicIdMax)
-      .describe("Stock Keeping Unit (unique)"),
-    barcode: zod
-      .union([
-        zod.coerce.string().max(postVariantsBodyBarcodeMaxOne),
-        zod.null(),
-      ])
-      .optional()
-      .describe("Barcode (EAN/UPC)"),
-    mpn: zod
-      .union([zod.coerce.string().max(postVariantsBodyMpnMaxOne), zod.null()])
-      .optional()
-      .describe("Manufacturer Part Number"),
-    titleOverride: zod
-      .union([
-        zod.coerce.string().max(postVariantsBodyTitleOverrideMaxOne),
-        zod.null(),
-      ])
-      .optional()
-      .describe("Custom title for this variant"),
-    descriptionOverride: zod
-      .union([
-        zod.coerce.string().max(postVariantsBodyDescriptionOverrideMaxOne),
-        zod.null(),
-      ])
-      .optional()
-      .describe("Custom description"),
-    isActive: zod.coerce
-      .boolean()
-      .default(postVariantsBodyIsActiveDefault)
-      .describe("Is variant active?"),
-    isApproved: zod.coerce
-      .boolean()
-      .optional()
-      .describe("Is variant approved for sale?"),
-    slug: zod
-      .union([zod.coerce.string().max(postVariantsBodySlugMaxOne), zod.null()])
-      .optional()
-      .describe("URL-friendly slug"),
-    metaTitle: zod
-      .union([
-        zod.coerce.string().max(postVariantsBodyMetaTitleMaxOne),
-        zod.null(),
-      ])
-      .optional()
-      .describe("SEO meta title"),
-    metaDescription: zod
-      .union([
-        zod.coerce.string().max(postVariantsBodyMetaDescriptionMaxOne),
-        zod.null(),
-      ])
-      .optional()
-      .describe("SEO meta description"),
-    attributeComboKey: zod.coerce
-      .string()
-      .describe("Unique attribute combination key"),
-  })
-  .describe("Product variant entity");
+
+export const postVariantsBody = zod.object({
+  "productId": zod.uuid().describe('Associated product ID'),
+  "colorId": zod.uuid().describe('Color ID'),
+  "sku": zod.coerce.string().min(postVariantsBodySkuMin).max(postVariantsBodySkuMax).describe('Stock Keeping Unit (unique)'),
+  "publicId": zod.coerce.string().min(postVariantsBodyPublicIdMin).max(postVariantsBodyPublicIdMax).describe('Stock Keeping Unit (unique)'),
+  "barcode": zod.union([zod.coerce.string().max(postVariantsBodyBarcodeMaxOne),zod.null()]).optional().describe('Barcode (EAN/UPC)'),
+  "mpn": zod.union([zod.coerce.string().max(postVariantsBodyMpnMaxOne),zod.null()]).optional().describe('Manufacturer Part Number'),
+  "titleOverride": zod.union([zod.coerce.string().max(postVariantsBodyTitleOverrideMaxOne),zod.null()]).optional().describe('Custom title for this variant'),
+  "descriptionOverride": zod.union([zod.coerce.string().max(postVariantsBodyDescriptionOverrideMaxOne),zod.null()]).optional().describe('Custom description'),
+  "isActive": zod.coerce.boolean().default(postVariantsBodyIsActiveDefault).describe('Is variant active?'),
+  "isApproved": zod.coerce.boolean().optional().describe('Is variant approved for sale?'),
+  "slug": zod.union([zod.coerce.string().max(postVariantsBodySlugMaxOne),zod.null()]).optional().describe('URL-friendly slug'),
+  "metaTitle": zod.union([zod.coerce.string().max(postVariantsBodyMetaTitleMaxOne),zod.null()]).optional().describe('SEO meta title'),
+  "metaDescription": zod.union([zod.coerce.string().max(postVariantsBodyMetaDescriptionMaxOne),zod.null()]).optional().describe('SEO meta description'),
+  "attributeComboKey": zod.coerce.string().describe('Unique attribute combination key')
+}).describe('Product variant entity')
 
 /**
  * Get all variants with pagination and filtering
  */
+export const getVariantsQueryFieldDefaultOne = "createdAt";
 export const getVariantsQueryFieldMaxOne = 200;
-export const getVariantsQueryOrderDefaultOne = "desc";
-export const getVariantsQuerySkipMin = 0;
+export const getVariantsQueryOrderDefaultOne = "desc";export const getVariantsQuerySkipMin = 0;
 export const getVariantsQueryLimitMax = 20;
 export const getVariantsQuerySkuMaxOne = 200;
 export const getVariantsQueryBarcodeMaxOne = 200;
 export const getVariantsQueryMpnMaxOne = 200;
 
-export const getVariantsQueryParams = zod.object({
-  field: zod
-    .union([zod.coerce.string().max(getVariantsQueryFieldMaxOne), zod.null()])
-    .optional()
-    .describe("Field to sort by"),
-  order: zod
-    .union([zod.enum(["asc", "desc"]), zod.null()])
-    .optional()
-    .describe("Sort order"),
-  skip: zod.coerce
-    .number()
-    .min(getVariantsQuerySkipMin)
-    .describe("Number of records to skip"),
-  limit: zod.coerce
-    .number()
-    .min(1)
-    .max(getVariantsQueryLimitMax)
-    .describe("Maximum number of records to return"),
-  deletedAt: zod
-    .union([zod.iso.datetime({}), zod.null()])
-    .optional()
-    .describe("Optional date input, usually null"),
-  sku: zod
-    .union([zod.coerce.string().max(getVariantsQuerySkuMaxOne), zod.null()])
-    .optional()
-    .describe("Filter by SKU"),
-  barcode: zod
-    .union([zod.coerce.string().max(getVariantsQueryBarcodeMaxOne), zod.null()])
-    .optional()
-    .describe("Filter by barcode"),
-  mpn: zod
-    .union([zod.coerce.string().max(getVariantsQueryMpnMaxOne), zod.null()])
-    .optional()
-    .describe("Filter by MPN"),
-  publicId: zod
-    .union([zod.uuid(), zod.null()])
-    .optional()
-    .describe("Filter by product ID"),
-  productId: zod
-    .union([zod.uuid(), zod.null()])
-    .optional()
-    .describe("Filter by product ID"),
-  isActive: zod
-    .union([zod.coerce.boolean(), zod.null()])
-    .optional()
-    .describe("Filter by active status"),
-  isApproved: zod
-    .union([zod.coerce.boolean(), zod.null()])
-    .optional()
-    .describe("Filter by approval status"),
-});
 
-export const getVariantsResponse = zod
-  .object({
-    success: zod
-      .union([zod.coerce.boolean(), zod.null()])
-      .optional()
-      .describe("Operation status"),
-  })
-  .describe("Standard API response format")
-  .describe("Paginated list of variants");
+export const getVariantsQueryParams = zod.object({
+  "field": zod.union([zod.coerce.string().max(getVariantsQueryFieldMaxOne),zod.null()]).optional().describe('Field to sort by'),
+  "order": zod.union([zod.enum(['asc', 'desc']),zod.null()]).optional().describe('Sort order'),
+  "skip": zod.coerce.number().min(getVariantsQuerySkipMin).describe('Number of records to skip'),
+  "limit": zod.coerce.number().min(1).max(getVariantsQueryLimitMax).describe('Maximum number of records to return'),
+  "deletedAt": zod.union([zod.iso.datetime({}),zod.null()]).optional().describe('Optional date input, usually null'),
+  "sku": zod.union([zod.coerce.string().max(getVariantsQuerySkuMaxOne),zod.null()]).optional().describe('Filter by SKU'),
+  "barcode": zod.union([zod.coerce.string().max(getVariantsQueryBarcodeMaxOne),zod.null()]).optional().describe('Filter by barcode'),
+  "mpn": zod.union([zod.coerce.string().max(getVariantsQueryMpnMaxOne),zod.null()]).optional().describe('Filter by MPN'),
+  "publicId": zod.union([zod.uuid(),zod.null()]).optional().describe('Filter by product ID'),
+  "productId": zod.union([zod.uuid(),zod.null()]).optional().describe('Filter by product ID'),
+  "isActive": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Filter by active status'),
+  "isApproved": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Filter by approval status')
+})
+
+export const getVariantsResponse = zod.object({
+  "success": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Operation status')
+}).describe('Standard API response format').describe('Paginated list of variants')
 
 export const getVariantsIdParams = zod.object({
-  id: zod.uuid().describe("Unique variant identifier"),
-});
+  "id": zod.uuid().describe('Unique variant identifier')
+})
 
-export const getVariantsIdResponse = zod
-  .object({
-    success: zod
-      .union([zod.coerce.boolean(), zod.null()])
-      .optional()
-      .describe("Operation status"),
-  })
-  .describe("Standard API response format")
-  .describe("Response for single variant operations");
+export const getVariantsIdResponse = zod.object({
+  "success": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Operation status')
+}).describe('Standard API response format').describe('Response for single variant operations')
 
 export const patchVariantsIdParams = zod.object({
-  id: zod.uuid().describe("Unique variant identifier"),
-});
+  "id": zod.uuid().describe('Unique variant identifier')
+})
 
 export const patchVariantsIdBodySkuMin = 2;
 
@@ -197,102 +97,33 @@ export const patchVariantsIdBodyBarcodeMaxOne = 50;
 export const patchVariantsIdBodyMpnMaxOne = 100;
 export const patchVariantsIdBodyTitleOverrideMaxOne = 200;
 export const patchVariantsIdBodyDescriptionOverrideMaxOne = 500;
-export const patchVariantsIdBodyIsActiveDefault = true;
-export const patchVariantsIdBodyIsApprovedDefault = false;
-export const patchVariantsIdBodySlugMaxOne = 100;
+export const patchVariantsIdBodyIsActiveDefault = true;export const patchVariantsIdBodyIsApprovedDefault = false;export const patchVariantsIdBodySlugMaxOne = 100;
 export const patchVariantsIdBodyMetaTitleMaxOne = 200;
 export const patchVariantsIdBodyMetaDescriptionMaxOne = 500;
 
-export const patchVariantsIdBody = zod
-  .object({
-    productId: zod.uuid().optional().describe("Associated product ID"),
-    colorId: zod.uuid().optional().describe("Color ID"),
-    sku: zod.coerce
-      .string()
-      .min(patchVariantsIdBodySkuMin)
-      .max(patchVariantsIdBodySkuMax)
-      .optional()
-      .describe("Stock Keeping Unit (unique)"),
-    publicId: zod.coerce
-      .string()
-      .min(patchVariantsIdBodyPublicIdMin)
-      .max(patchVariantsIdBodyPublicIdMax)
-      .optional()
-      .describe("Stock Keeping Unit (unique)"),
-    barcode: zod
-      .union([
-        zod.coerce.string().max(patchVariantsIdBodyBarcodeMaxOne),
-        zod.null(),
-      ])
-      .optional()
-      .describe("Barcode (EAN/UPC)"),
-    mpn: zod
-      .union([
-        zod.coerce.string().max(patchVariantsIdBodyMpnMaxOne),
-        zod.null(),
-      ])
-      .optional()
-      .describe("Manufacturer Part Number"),
-    titleOverride: zod
-      .union([
-        zod.coerce.string().max(patchVariantsIdBodyTitleOverrideMaxOne),
-        zod.null(),
-      ])
-      .optional()
-      .describe("Custom title for this variant"),
-    descriptionOverride: zod
-      .union([
-        zod.coerce.string().max(patchVariantsIdBodyDescriptionOverrideMaxOne),
-        zod.null(),
-      ])
-      .optional()
-      .describe("Custom description"),
-    isActive: zod.coerce
-      .boolean()
-      .default(patchVariantsIdBodyIsActiveDefault)
-      .describe("Is variant active?"),
-    isApproved: zod.coerce
-      .boolean()
-      .optional()
-      .describe("Is variant approved for sale?"),
-    slug: zod
-      .union([
-        zod.coerce.string().max(patchVariantsIdBodySlugMaxOne),
-        zod.null(),
-      ])
-      .optional()
-      .describe("URL-friendly slug"),
-    metaTitle: zod
-      .union([
-        zod.coerce.string().max(patchVariantsIdBodyMetaTitleMaxOne),
-        zod.null(),
-      ])
-      .optional()
-      .describe("SEO meta title"),
-    metaDescription: zod
-      .union([
-        zod.coerce.string().max(patchVariantsIdBodyMetaDescriptionMaxOne),
-        zod.null(),
-      ])
-      .optional()
-      .describe("SEO meta description"),
-    attributeComboKey: zod.coerce
-      .string()
-      .optional()
-      .describe("Unique attribute combination key"),
-  })
-  .describe("Product variant entity");
 
-export const patchVariantsIdResponse = zod
-  .object({
-    success: zod
-      .union([zod.coerce.boolean(), zod.null()])
-      .optional()
-      .describe("Operation status"),
-  })
-  .describe("Standard API response format")
-  .describe("Response for single variant operations");
+export const patchVariantsIdBody = zod.object({
+  "productId": zod.uuid().optional().describe('Associated product ID'),
+  "colorId": zod.uuid().optional().describe('Color ID'),
+  "sku": zod.coerce.string().min(patchVariantsIdBodySkuMin).max(patchVariantsIdBodySkuMax).optional().describe('Stock Keeping Unit (unique)'),
+  "publicId": zod.coerce.string().min(patchVariantsIdBodyPublicIdMin).max(patchVariantsIdBodyPublicIdMax).optional().describe('Stock Keeping Unit (unique)'),
+  "barcode": zod.union([zod.coerce.string().max(patchVariantsIdBodyBarcodeMaxOne),zod.null()]).optional().describe('Barcode (EAN/UPC)'),
+  "mpn": zod.union([zod.coerce.string().max(patchVariantsIdBodyMpnMaxOne),zod.null()]).optional().describe('Manufacturer Part Number'),
+  "titleOverride": zod.union([zod.coerce.string().max(patchVariantsIdBodyTitleOverrideMaxOne),zod.null()]).optional().describe('Custom title for this variant'),
+  "descriptionOverride": zod.union([zod.coerce.string().max(patchVariantsIdBodyDescriptionOverrideMaxOne),zod.null()]).optional().describe('Custom description'),
+  "isActive": zod.coerce.boolean().default(patchVariantsIdBodyIsActiveDefault).describe('Is variant active?'),
+  "isApproved": zod.coerce.boolean().optional().describe('Is variant approved for sale?'),
+  "slug": zod.union([zod.coerce.string().max(patchVariantsIdBodySlugMaxOne),zod.null()]).optional().describe('URL-friendly slug'),
+  "metaTitle": zod.union([zod.coerce.string().max(patchVariantsIdBodyMetaTitleMaxOne),zod.null()]).optional().describe('SEO meta title'),
+  "metaDescription": zod.union([zod.coerce.string().max(patchVariantsIdBodyMetaDescriptionMaxOne),zod.null()]).optional().describe('SEO meta description'),
+  "attributeComboKey": zod.coerce.string().optional().describe('Unique attribute combination key')
+}).describe('Product variant entity')
+
+export const patchVariantsIdResponse = zod.object({
+  "success": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Operation status')
+}).describe('Standard API response format').describe('Response for single variant operations')
 
 export const deleteVariantsIdParams = zod.object({
-  id: zod.uuid().describe("Unique variant identifier"),
-});
+  "id": zod.uuid().describe('Unique variant identifier')
+})
+

@@ -4,17 +4,18 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { CreateInventoryInputPriceOverride } from "./createInventoryInputPriceOverride";
-import type { CreateInventoryInputCostPriceOverride } from "./createInventoryInputCostPriceOverride";
-import type { CreateInventoryInputBatchNumber } from "./createInventoryInputBatchNumber";
-import type { CreateInventoryInputExpiryDate } from "./createInventoryInputExpiryDate";
-import type { CreateInventoryInputWarehouseCode } from "./createInventoryInputWarehouseCode";
-import type { CreateInventoryInputShelfCode } from "./createInventoryInputShelfCode";
-import type { CreateInventoryInputLeadTimeDays } from "./createInventoryInputLeadTimeDays";
-import type { CreateInventoryInputHsCode } from "./createInventoryInputHsCode";
-import type { CreateInventoryInputOriginCountry } from "./createInventoryInputOriginCountry";
-import type { CreateInventoryInputPackageWeight } from "./createInventoryInputPackageWeight";
-import type { CreateInventoryInputPackageDimensions } from "./createInventoryInputPackageDimensions";
+import type { CreateInventoryInputGuaranteeId } from './createInventoryInputGuaranteeId';
+import type { CreateInventoryInputInsuranceId } from './createInventoryInputInsuranceId';
+import type { CreateInventoryInputLeasingId } from './createInventoryInputLeasingId';
+import type { CreateInventoryInputChequeId } from './createInventoryInputChequeId';
+import type { CreateInventoryInputCost } from './createInventoryInputCost';
+import type { CreateInventoryInputExpiryDate } from './createInventoryInputExpiryDate';
+import type { CreateInventoryInputWarehouseCode } from './createInventoryInputWarehouseCode';
+import type { CreateInventoryInputShelfCode } from './createInventoryInputShelfCode';
+import type { CreateInventoryInputHsCode } from './createInventoryInputHsCode';
+import type { CreateInventoryInputOriginCountry } from './createInventoryInputOriginCountry';
+import type { CreateInventoryInputPackageWeight } from './createInventoryInputPackageWeight';
+import type { CreateInventoryInputPackageDimensions } from './createInventoryInputPackageDimensions';
 
 /**
  * Inventory creation payload
@@ -26,28 +27,42 @@ export interface CreateInventoryInput {
   locationId: string;
   /** Variant ID */
   variantId: string;
+  /** Guarantee ID */
+  guaranteeId?: CreateInventoryInputGuaranteeId;
+  /** Insurance ID */
+  insuranceId?: CreateInventoryInputInsuranceId;
+  /** Leasing ID */
+  leasingId?: CreateInventoryInputLeasingId;
+  /** Cheque ID */
+  chequeId?: CreateInventoryInputChequeId;
+  /** Cost price */
+  cost?: CreateInventoryInputCost;
   /** Base price */
   price: number;
-  /** Override price for this inventory item */
-  priceOverride?: CreateInventoryInputPriceOverride;
-  /** Discount percentage */
-  discount: number;
-  /** Price after discount */
+  /**
+   * Discount percentage
+   * @minimum 0
+   * @maximum 100
+   */
+  discountPercent: number;
+  /** Price after discount (calculated) */
   discountPrice: number;
-  /** Current stock quantity */
+  /**
+   * Current stock quantity
+   * @minimum 0
+   */
   inStock: number;
-  /** Override cost price for this batch */
-  costPriceOverride?: CreateInventoryInputCostPriceOverride;
-  /** Batch number for tracking */
-  batchNumber?: CreateInventoryInputBatchNumber;
+  /**
+   * Low stock alert threshold
+   * @minimum 0
+   */
+  lowStockThreshold: number;
   /** Expiry date for perishable items */
   expiryDate?: CreateInventoryInputExpiryDate;
   /** Warehouse code */
   warehouseCode?: CreateInventoryInputWarehouseCode;
   /** Shelf code for location in warehouse */
   shelfCode?: CreateInventoryInputShelfCode;
-  /** Lead time in days to prepare for shipping */
-  leadTimeDays?: CreateInventoryInputLeadTimeDays;
   /** Harmonized System code for customs */
   hsCode?: CreateInventoryInputHsCode;
   /** Country of manufacture/origin */
@@ -56,6 +71,4 @@ export interface CreateInventoryInput {
   packageWeight?: CreateInventoryInputPackageWeight;
   /** Packaged dimensions: length x width x height */
   packageDimensions?: CreateInventoryInputPackageDimensions;
-  /** Low stock alert threshold */
-  lowStockThreshold: number;
 }

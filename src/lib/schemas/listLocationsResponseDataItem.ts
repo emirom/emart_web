@@ -4,8 +4,8 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { ListLocationsResponseDataItemStreetNumber } from "./listLocationsResponseDataItemStreetNumber";
-import type { ListLocationsResponseDataItemIsActive } from "./listLocationsResponseDataItemIsActive";
+import type { ListLocationsResponseDataItemStreetNumber } from './listLocationsResponseDataItemStreetNumber';
+import type { ListLocationsResponseDataItemIsActive } from './listLocationsResponseDataItemIsActive';
 
 export type ListLocationsResponseDataItem = {
   /** Unique identifier (UUIDv4) */

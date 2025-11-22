@@ -8,11 +8,13 @@
 /**
  * Type of store-location assignment
  */
-export type LocationType = (typeof LocationType)[keyof typeof LocationType];
+export type LocationType = typeof LocationType[keyof typeof LocationType];
 
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
 export const LocationType = {
-  FULFILLMENT_CENTER: "FULFILLMENT_CENTER",
-  RETAIL_STORE: "RETAIL_STORE",
-  RETURN_CENTER: "RETURN_CENTER",
-  TEMPORARY_STORAGE: "TEMPORARY_STORAGE",
+  FULFILLMENT_CENTER: 'FULFILLMENT_CENTER',
+  RETAIL_STORE: 'RETAIL_STORE',
+  RETURN_CENTER: 'RETURN_CENTER',
+  TEMPORARY_STORAGE: 'TEMPORARY_STORAGE',
 } as const;

@@ -4,250 +4,122 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import { z as zod } from "zod";
+import {
+  z as zod
+} from 'zod';
+
 
 /**
  * Assign a location to a store (create warehouse/store assignment)
  */
-export const postStoreLocationsBody = zod
-  .object({
-    storeId: zod.uuid().describe("Store ID"),
-    locationId: zod.uuid().describe("Location ID"),
-    isActive: zod.coerce
-      .boolean()
-      .describe("Whether this assignment is currently active"),
-    type: zod
-      .enum([
-        "FULFILLMENT_CENTER",
-        "RETAIL_STORE",
-        "RETURN_CENTER",
-        "TEMPORARY_STORAGE",
-      ])
-      .describe("Type of store-location assignment")
-      .describe("Type of location assignment"),
-  })
-  .describe("Store-Location assignment creation payload");
+export const postStoreLocationsBody = zod.object({
+  "storeId": zod.uuid().describe('Store ID'),
+  "locationId": zod.uuid().describe('Location ID'),
+  "isActive": zod.coerce.boolean().describe('Whether this assignment is currently active'),
+  "type": zod.enum(['FULFILLMENT_CENTER', 'RETAIL_STORE', 'RETURN_CENTER', 'TEMPORARY_STORAGE']).describe('Type of store-location assignment').describe('Type of location assignment')
+}).describe('Store-Location assignment creation payload')
 
 /**
  * List all store-location assignments with pagination and filters
  */
+export const getStoreLocationsQueryFieldDefaultOne = "createdAt";
 export const getStoreLocationsQueryFieldMaxOne = 200;
-export const getStoreLocationsQueryOrderDefaultOne = "desc";
-export const getStoreLocationsQuerySkipMin = 0;
+export const getStoreLocationsQueryOrderDefaultOne = "desc";export const getStoreLocationsQuerySkipMin = 0;
 export const getStoreLocationsQueryLimitMax = 20;
 
-export const getStoreLocationsQueryParams = zod.object({
-  field: zod
-    .union([
-      zod.coerce.string().max(getStoreLocationsQueryFieldMaxOne),
-      zod.null(),
-    ])
-    .optional()
-    .describe("Field to sort by"),
-  order: zod
-    .union([zod.enum(["asc", "desc"]), zod.null()])
-    .optional()
-    .describe("Sort order"),
-  skip: zod.coerce
-    .number()
-    .min(getStoreLocationsQuerySkipMin)
-    .describe("Number of records to skip"),
-  limit: zod.coerce
-    .number()
-    .min(1)
-    .max(getStoreLocationsQueryLimitMax)
-    .describe("Maximum number of records to return"),
-  storeId: zod
-    .union([zod.uuid(), zod.null()])
-    .optional()
-    .describe("Filter by store ID"),
-  locationId: zod
-    .union([zod.uuid(), zod.null()])
-    .optional()
-    .describe("Filter by location ID"),
-  isActive: zod
-    .union([zod.coerce.boolean(), zod.null()])
-    .optional()
-    .describe("Filter by active status"),
-  type: zod
-    .enum([
-      "FULFILLMENT_CENTER",
-      "RETAIL_STORE",
-      "RETURN_CENTER",
-      "TEMPORARY_STORAGE",
-    ])
-    .describe("Type of store-location assignment")
-    .optional()
-    .describe("Filter by location type"),
-  assignedById: zod
-    .union([zod.uuid(), zod.null()])
-    .optional()
-    .describe("Filter by assigner user ID"),
-});
 
-export const getStoreLocationsResponse = zod
-  .object({
-    success: zod
-      .union([zod.coerce.boolean(), zod.null()])
-      .optional()
-      .describe("Operation status"),
-  })
-  .describe("Standard API response format")
-  .describe("List of store-location assignments response");
+export const getStoreLocationsQueryParams = zod.object({
+  "field": zod.union([zod.coerce.string().max(getStoreLocationsQueryFieldMaxOne),zod.null()]).optional().describe('Field to sort by'),
+  "order": zod.union([zod.enum(['asc', 'desc']),zod.null()]).optional().describe('Sort order'),
+  "skip": zod.coerce.number().min(getStoreLocationsQuerySkipMin).describe('Number of records to skip'),
+  "limit": zod.coerce.number().min(1).max(getStoreLocationsQueryLimitMax).describe('Maximum number of records to return'),
+  "storeId": zod.union([zod.uuid(),zod.null()]).optional().describe('Filter by store ID'),
+  "locationId": zod.union([zod.uuid(),zod.null()]).optional().describe('Filter by location ID'),
+  "isActive": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Filter by active status'),
+  "type": zod.enum(['FULFILLMENT_CENTER', 'RETAIL_STORE', 'RETURN_CENTER', 'TEMPORARY_STORAGE']).describe('Type of store-location assignment').optional().describe('Filter by location type'),
+  "assignedById": zod.union([zod.uuid(),zod.null()]).optional().describe('Filter by assigner user ID')
+})
+
+export const getStoreLocationsResponse = zod.object({
+  "success": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Operation status')
+}).describe('Standard API response format').describe('List of store-location assignments response')
 
 /**
  * Get a single store-location assignment by ID
  */
 export const getStoreLocationsIdParams = zod.object({
-  id: zod.uuid().describe("Store-Location assignment ID"),
-});
+  "id": zod.uuid().describe('Store-Location assignment ID')
+})
 
-export const getStoreLocationsIdResponse = zod
-  .object({
-    success: zod
-      .union([zod.coerce.boolean(), zod.null()])
-      .optional()
-      .describe("Operation status"),
-  })
-  .describe("Standard API response format")
-  .describe("Single store-location assignment response");
+export const getStoreLocationsIdResponse = zod.object({
+  "success": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Operation status')
+}).describe('Standard API response format').describe('Single store-location assignment response')
 
 /**
  * Update a store-location assignment
  */
 export const patchStoreLocationsIdParams = zod.object({
-  id: zod.uuid().describe("Store-Location assignment ID"),
-});
+  "id": zod.uuid().describe('Store-Location assignment ID')
+})
 
-export const patchStoreLocationsIdBody = zod
-  .object({
-    storeId: zod.uuid().optional().describe("Store ID"),
-    locationId: zod.uuid().optional().describe("Location ID"),
-    isActive: zod.coerce
-      .boolean()
-      .optional()
-      .describe("Whether this assignment is currently active"),
-    type: zod
-      .enum([
-        "FULFILLMENT_CENTER",
-        "RETAIL_STORE",
-        "RETURN_CENTER",
-        "TEMPORARY_STORAGE",
-      ])
-      .describe("Type of store-location assignment")
-      .optional()
-      .describe("Type of location assignment"),
-  })
-  .describe("Store-Location assignment update payload");
+export const patchStoreLocationsIdBody = zod.object({
+  "storeId": zod.uuid().optional().describe('Store ID'),
+  "locationId": zod.uuid().optional().describe('Location ID'),
+  "isActive": zod.coerce.boolean().optional().describe('Whether this assignment is currently active'),
+  "type": zod.enum(['FULFILLMENT_CENTER', 'RETAIL_STORE', 'RETURN_CENTER', 'TEMPORARY_STORAGE']).describe('Type of store-location assignment').optional().describe('Type of location assignment')
+}).describe('Store-Location assignment update payload')
 
-export const patchStoreLocationsIdResponse = zod
-  .object({
-    success: zod
-      .union([zod.coerce.boolean(), zod.null()])
-      .optional()
-      .describe("Operation status"),
-  })
-  .describe("Standard API response format")
-  .describe("Single store-location assignment response");
+export const patchStoreLocationsIdResponse = zod.object({
+  "success": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Operation status')
+}).describe('Standard API response format').describe('Single store-location assignment response')
 
 /**
  * Deactivate a store-location assignment (soft delete)
  */
 export const deleteStoreLocationsIdParams = zod.object({
-  id: zod.uuid().describe("Store-Location assignment ID"),
-});
+  "id": zod.uuid().describe('Store-Location assignment ID')
+})
 
 /**
  * Get warehouse locations for a specific store
  */
 export const getStoreLocationsWarehouseStoreIdParams = zod.object({
-  storeId: zod.uuid().describe("Store ID"),
-});
+  "storeId": zod.uuid().describe('Store ID')
+})
 
+export const getStoreLocationsWarehouseStoreIdQueryFieldDefaultOne = "createdAt";
 export const getStoreLocationsWarehouseStoreIdQueryFieldMaxOne = 200;
-export const getStoreLocationsWarehouseStoreIdQueryOrderDefaultOne = "desc";
-export const getStoreLocationsWarehouseStoreIdQuerySkipMin = 0;
+export const getStoreLocationsWarehouseStoreIdQueryOrderDefaultOne = "desc";export const getStoreLocationsWarehouseStoreIdQuerySkipMin = 0;
 export const getStoreLocationsWarehouseStoreIdQueryLimitMax = 20;
 
-export const getStoreLocationsWarehouseStoreIdQueryParams = zod.object({
-  field: zod
-    .union([
-      zod.coerce
-        .string()
-        .max(getStoreLocationsWarehouseStoreIdQueryFieldMaxOne),
-      zod.null(),
-    ])
-    .optional()
-    .describe("Field to sort by"),
-  order: zod
-    .union([zod.enum(["asc", "desc"]), zod.null()])
-    .optional()
-    .describe("Sort order"),
-  skip: zod.coerce
-    .number()
-    .min(getStoreLocationsWarehouseStoreIdQuerySkipMin)
-    .describe("Number of records to skip"),
-  limit: zod.coerce
-    .number()
-    .min(1)
-    .max(getStoreLocationsWarehouseStoreIdQueryLimitMax)
-    .describe("Maximum number of records to return"),
-  type: zod
-    .enum([
-      "FULFILLMENT_CENTER",
-      "RETAIL_STORE",
-      "RETURN_CENTER",
-      "TEMPORARY_STORAGE",
-    ])
-    .describe("Type of store-location assignment")
-    .optional()
-    .describe("Filter by location type"),
-});
 
-export const getStoreLocationsWarehouseStoreIdResponse = zod
-  .object({
-    success: zod
-      .union([zod.coerce.boolean(), zod.null()])
-      .optional()
-      .describe("Operation status"),
-  })
-  .describe("Standard API response format")
-  .describe("List of store-location assignments response");
+export const getStoreLocationsWarehouseStoreIdQueryParams = zod.object({
+  "field": zod.union([zod.coerce.string().max(getStoreLocationsWarehouseStoreIdQueryFieldMaxOne),zod.null()]).optional().describe('Field to sort by'),
+  "order": zod.union([zod.enum(['asc', 'desc']),zod.null()]).optional().describe('Sort order'),
+  "skip": zod.coerce.number().min(getStoreLocationsWarehouseStoreIdQuerySkipMin).describe('Number of records to skip'),
+  "limit": zod.coerce.number().min(1).max(getStoreLocationsWarehouseStoreIdQueryLimitMax).describe('Maximum number of records to return'),
+  "type": zod.enum(['FULFILLMENT_CENTER', 'RETAIL_STORE', 'RETURN_CENTER', 'TEMPORARY_STORAGE']).describe('Type of store-location assignment').optional().describe('Filter by location type')
+})
+
+export const getStoreLocationsWarehouseStoreIdResponse = zod.object({
+  "success": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Operation status')
+}).describe('Standard API response format').describe('List of store-location assignments response')
 
 /**
  * Toggle warehouse active status (soft delete/restore)
  */
 export const patchStoreLocationsIdToggleParams = zod.object({
-  id: zod.uuid().describe("Store-Location assignment ID"),
-});
+  "id": zod.uuid().describe('Store-Location assignment ID')
+})
 
-export const patchStoreLocationsIdToggleBody = zod
-  .object({
-    storeId: zod.uuid().optional().describe("Store ID"),
-    locationId: zod.uuid().optional().describe("Location ID"),
-    isActive: zod.coerce
-      .boolean()
-      .optional()
-      .describe("Whether this assignment is currently active"),
-    type: zod
-      .enum([
-        "FULFILLMENT_CENTER",
-        "RETAIL_STORE",
-        "RETURN_CENTER",
-        "TEMPORARY_STORAGE",
-      ])
-      .describe("Type of store-location assignment")
-      .optional()
-      .describe("Type of location assignment"),
-  })
-  .describe("Store-Location assignment update payload");
+export const patchStoreLocationsIdToggleBody = zod.object({
+  "storeId": zod.uuid().optional().describe('Store ID'),
+  "locationId": zod.uuid().optional().describe('Location ID'),
+  "isActive": zod.coerce.boolean().optional().describe('Whether this assignment is currently active'),
+  "type": zod.enum(['FULFILLMENT_CENTER', 'RETAIL_STORE', 'RETURN_CENTER', 'TEMPORARY_STORAGE']).describe('Type of store-location assignment').optional().describe('Type of location assignment')
+}).describe('Store-Location assignment update payload')
 
-export const patchStoreLocationsIdToggleResponse = zod
-  .object({
-    success: zod
-      .union([zod.coerce.boolean(), zod.null()])
-      .optional()
-      .describe("Operation status"),
-  })
-  .describe("Standard API response format")
-  .describe("Single store-location assignment response");
+export const patchStoreLocationsIdToggleResponse = zod.object({
+  "success": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Operation status')
+}).describe('Standard API response format').describe('Single store-location assignment response')
+

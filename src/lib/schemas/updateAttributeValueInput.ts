@@ -4,10 +4,10 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { UpdateAttributeValueInputTextValue } from "./updateAttributeValueInputTextValue";
-import type { UpdateAttributeValueInputDateValue } from "./updateAttributeValueInputDateValue";
-import type { UpdateAttributeValueInputNumberValue } from "./updateAttributeValueInputNumberValue";
-import type { UpdateAttributeValueInputBoolValue } from "./updateAttributeValueInputBoolValue";
+import type { UpdateAttributeValueInputTextValue } from './updateAttributeValueInputTextValue';
+import type { UpdateAttributeValueInputDateValue } from './updateAttributeValueInputDateValue';
+import type { UpdateAttributeValueInputNumberValue } from './updateAttributeValueInputNumberValue';
+import type { UpdateAttributeValueInputBoolValue } from './updateAttributeValueInputBoolValue';
 
 /**
  * Attribute value update payload

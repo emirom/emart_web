@@ -8,23 +8,24 @@
 /**
  * Comprehensive list of supported MIME types for product media
  */
-export type ProductMediaMimetype =
-  (typeof ProductMediaMimetype)[keyof typeof ProductMediaMimetype];
+export type ProductMediaMimetype = typeof ProductMediaMimetype[keyof typeof ProductMediaMimetype];
 
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
 export const ProductMediaMimetype = {
-  "image/jpeg": "image/jpeg",
-  "image/jpg": "image/jpg",
-  "image/png": "image/png",
-  "image/webp": "image/webp",
-  "image/gif": "image/gif",
-  "image/avif": "image/avif",
-  "image/svg+xml": "image/svg+xml",
-  "image/bmp": "image/bmp",
-  "image/tiff": "image/tiff",
-  "video/mp4": "video/mp4",
-  "video/webm": "video/webm",
-  "video/ogg": "video/ogg",
-  "video/quicktime": "video/quicktime",
-  "video/x-msvideo": "video/x-msvideo",
-  "video/x-ms-wmv": "video/x-ms-wmv",
+  'image/jpeg': 'image/jpeg',
+  'image/jpg': 'image/jpg',
+  'image/png': 'image/png',
+  'image/webp': 'image/webp',
+  'image/gif': 'image/gif',
+  'image/avif': 'image/avif',
+  'image/svg+xml': 'image/svg+xml',
+  'image/bmp': 'image/bmp',
+  'image/tiff': 'image/tiff',
+  'video/mp4': 'video/mp4',
+  'video/webm': 'video/webm',
+  'video/ogg': 'video/ogg',
+  'video/quicktime': 'video/quicktime',
+  'video/x-msvideo': 'video/x-msvideo',
+  'video/x-ms-wmv': 'video/x-ms-wmv',
 } as const;

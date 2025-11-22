@@ -4,7 +4,10 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import { z as zod } from "zod";
+import {
+  z as zod
+} from 'zod';
+
 
 /**
  * Create a new attribute
@@ -15,108 +18,56 @@ export const postAttributesBodyTitleMax = 50;
 export const postAttributesBodyUnitMaxOne = 200;
 export const postAttributesBodyIconUrlMaxOne = 200;
 
-export const postAttributesBody = zod
-  .object({
-    title: zod.coerce
-      .string()
-      .min(postAttributesBodyTitleMin)
-      .max(postAttributesBodyTitleMax)
-      .describe("Attribute title"),
-    type: zod
-      .enum(["text", "number", "boolean", "date"])
-      .describe("Attribute type"),
-    unit: zod
-      .union([
-        zod.coerce.string().max(postAttributesBodyUnitMaxOne),
-        zod.null(),
-      ])
-      .optional()
-      .describe("Attribute type"),
-    iconUrl: zod
-      .union([
-        zod.coerce.string().max(postAttributesBodyIconUrlMaxOne),
-        zod.null(),
-      ])
-      .optional()
-      .describe("URL to attribute icon"),
-    categoryId: zod.uuid().describe("Category ID this attribute belongs to"),
-  })
-  .describe("Attribute creation payload");
+
+export const postAttributesBody = zod.object({
+  "title": zod.coerce.string().min(postAttributesBodyTitleMin).max(postAttributesBodyTitleMax).describe('Attribute title'),
+  "type": zod.enum(['text', 'number', 'boolean', 'date']).describe('Attribute type'),
+  "unit": zod.union([zod.coerce.string().max(postAttributesBodyUnitMaxOne),zod.null()]).optional().describe('Attribute type'),
+  "iconUrl": zod.union([zod.coerce.string().max(postAttributesBodyIconUrlMaxOne),zod.null()]).optional().describe('URL to attribute icon'),
+  "categoryId": zod.uuid().describe('Category ID this attribute belongs to')
+}).describe('Attribute creation payload')
 
 /**
  * List all attributes with pagination and filters
  */
+export const getAttributesQueryFieldDefaultOne = "createdAt";
 export const getAttributesQueryFieldMaxOne = 200;
-export const getAttributesQueryOrderDefaultOne = "desc";
-export const getAttributesQuerySkipMin = 0;
+export const getAttributesQueryOrderDefaultOne = "desc";export const getAttributesQuerySkipMin = 0;
 export const getAttributesQueryLimitMax = 20;
 export const getAttributesQueryTitleMaxOne = 200;
 
-export const getAttributesQueryParams = zod.object({
-  field: zod
-    .union([zod.coerce.string().max(getAttributesQueryFieldMaxOne), zod.null()])
-    .optional()
-    .describe("Field to sort by"),
-  order: zod
-    .union([zod.enum(["asc", "desc"]), zod.null()])
-    .optional()
-    .describe("Sort order"),
-  skip: zod.coerce
-    .number()
-    .min(getAttributesQuerySkipMin)
-    .describe("Number of records to skip"),
-  limit: zod.coerce
-    .number()
-    .min(1)
-    .max(getAttributesQueryLimitMax)
-    .describe("Maximum number of records to return"),
-  title: zod
-    .union([zod.coerce.string().max(getAttributesQueryTitleMaxOne), zod.null()])
-    .optional()
-    .describe("Filter by attribute title"),
-  type: zod
-    .union([zod.enum(["text", "number", "boolean", "date"]), zod.null()])
-    .optional()
-    .describe("Filter by attribute type"),
-  categoryId: zod
-    .union([zod.uuid(), zod.null()])
-    .optional()
-    .describe("Filter by category ID"),
-});
 
-export const getAttributesResponse = zod
-  .object({
-    success: zod
-      .union([zod.coerce.boolean(), zod.null()])
-      .optional()
-      .describe("Operation status"),
-  })
-  .describe("Standard API response format")
-  .describe("List of attributes response");
+export const getAttributesQueryParams = zod.object({
+  "field": zod.union([zod.coerce.string().max(getAttributesQueryFieldMaxOne),zod.null()]).optional().describe('Field to sort by'),
+  "order": zod.union([zod.enum(['asc', 'desc']),zod.null()]).optional().describe('Sort order'),
+  "skip": zod.coerce.number().min(getAttributesQuerySkipMin).describe('Number of records to skip'),
+  "limit": zod.coerce.number().min(1).max(getAttributesQueryLimitMax).describe('Maximum number of records to return'),
+  "title": zod.union([zod.coerce.string().max(getAttributesQueryTitleMaxOne),zod.null()]).optional().describe('Filter by attribute title'),
+  "type": zod.union([zod.enum(['text', 'number', 'boolean', 'date']),zod.null()]).optional().describe('Filter by attribute type'),
+  "categoryId": zod.union([zod.uuid(),zod.null()]).optional().describe('Filter by category ID')
+})
+
+export const getAttributesResponse = zod.object({
+  "success": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Operation status')
+}).describe('Standard API response format').describe('List of attributes response')
 
 /**
  * Get a single attribute by ID
  */
 export const getAttributesIdParams = zod.object({
-  id: zod.uuid().describe("Attribute ID"),
-});
+  "id": zod.uuid().describe('Attribute ID')
+})
 
-export const getAttributesIdResponse = zod
-  .object({
-    success: zod
-      .union([zod.coerce.boolean(), zod.null()])
-      .optional()
-      .describe("Operation status"),
-  })
-  .describe("Standard API response format")
-  .describe("Single attribute response");
+export const getAttributesIdResponse = zod.object({
+  "success": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Operation status')
+}).describe('Standard API response format').describe('Single attribute response')
 
 /**
  * Update an attribute
  */
 export const patchAttributesIdParams = zod.object({
-  id: zod.uuid().describe("Attribute ID"),
-});
+  "id": zod.uuid().describe('Attribute ID')
+})
 
 export const patchAttributesIdBodyTitleMin = 2;
 
@@ -124,52 +75,23 @@ export const patchAttributesIdBodyTitleMax = 50;
 export const patchAttributesIdBodyUnitMaxOne = 200;
 export const patchAttributesIdBodyIconUrlMaxOne = 200;
 
-export const patchAttributesIdBody = zod
-  .object({
-    title: zod.coerce
-      .string()
-      .min(patchAttributesIdBodyTitleMin)
-      .max(patchAttributesIdBodyTitleMax)
-      .optional()
-      .describe("Attribute title"),
-    type: zod
-      .enum(["text", "number", "boolean", "date"])
-      .optional()
-      .describe("Attribute type"),
-    unit: zod
-      .union([
-        zod.coerce.string().max(patchAttributesIdBodyUnitMaxOne),
-        zod.null(),
-      ])
-      .optional()
-      .describe("Attribute type"),
-    iconUrl: zod
-      .union([
-        zod.coerce.string().max(patchAttributesIdBodyIconUrlMaxOne),
-        zod.null(),
-      ])
-      .optional()
-      .describe("URL to attribute icon"),
-    categoryId: zod
-      .uuid()
-      .optional()
-      .describe("Category ID this attribute belongs to"),
-  })
-  .describe("Attribute update payload");
 
-export const patchAttributesIdResponse = zod
-  .object({
-    success: zod
-      .union([zod.coerce.boolean(), zod.null()])
-      .optional()
-      .describe("Operation status"),
-  })
-  .describe("Standard API response format")
-  .describe("Single attribute response");
+export const patchAttributesIdBody = zod.object({
+  "title": zod.coerce.string().min(patchAttributesIdBodyTitleMin).max(patchAttributesIdBodyTitleMax).optional().describe('Attribute title'),
+  "type": zod.enum(['text', 'number', 'boolean', 'date']).optional().describe('Attribute type'),
+  "unit": zod.union([zod.coerce.string().max(patchAttributesIdBodyUnitMaxOne),zod.null()]).optional().describe('Attribute type'),
+  "iconUrl": zod.union([zod.coerce.string().max(patchAttributesIdBodyIconUrlMaxOne),zod.null()]).optional().describe('URL to attribute icon'),
+  "categoryId": zod.uuid().optional().describe('Category ID this attribute belongs to')
+}).describe('Attribute update payload')
+
+export const patchAttributesIdResponse = zod.object({
+  "success": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Operation status')
+}).describe('Standard API response format').describe('Single attribute response')
 
 /**
  * Delete an attribute
  */
 export const deleteAttributesIdParams = zod.object({
-  id: zod.uuid().describe("Attribute ID"),
-});
+  "id": zod.uuid().describe('Attribute ID')
+})
+

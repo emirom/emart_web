@@ -4,7 +4,10 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import { z as zod } from "zod";
+import {
+  z as zod
+} from 'zod';
+
 
 /**
  * Create a new category
@@ -18,157 +21,69 @@ export const postCategoriesBodyEnNameMax = 50;
 export const postCategoriesBodyIconUrlMaxOne = 200;
 export const postCategoriesBodyDescMaxOne = 1000;
 
-export const postCategoriesBody = zod
-  .object({
-    name: zod.coerce
-      .string()
-      .min(postCategoriesBodyNameMin)
-      .max(postCategoriesBodyNameMax)
-      .describe("Category name in native language"),
-    enName: zod.coerce
-      .string()
-      .min(postCategoriesBodyEnNameMin)
-      .max(postCategoriesBodyEnNameMax)
-      .describe("English name for internationalization"),
-    parentId: zod
-      .union([zod.uuid(), zod.null()])
-      .optional()
-      .describe("Parent category ID if exists"),
-    level: zod.coerce.number().describe("the level of category in hirarchy"),
-    unitId: zod.uuid().describe("Unit ID"),
-    iconUrl: zod
-      .union([
-        zod.coerce.string().max(postCategoriesBodyIconUrlMaxOne),
-        zod.null(),
-      ])
-      .optional()
-      .describe("Icon URL"),
-    desc: zod
-      .union([
-        zod.coerce.string().max(postCategoriesBodyDescMaxOne),
-        zod.null(),
-      ])
-      .optional()
-      .describe("Category description in native language"),
-    isActive: zod
-      .union([zod.coerce.boolean(), zod.null()])
-      .optional()
-      .describe("Active status"),
-    showInMenu: zod
-      .union([zod.coerce.boolean(), zod.null()])
-      .optional()
-      .describe("Show in menu status"),
-  })
-  .describe("Category creation payload");
+
+export const postCategoriesBody = zod.object({
+  "name": zod.coerce.string().min(postCategoriesBodyNameMin).max(postCategoriesBodyNameMax).describe('Category name in native language'),
+  "enName": zod.coerce.string().min(postCategoriesBodyEnNameMin).max(postCategoriesBodyEnNameMax).describe('English name for internationalization'),
+  "parentId": zod.union([zod.uuid(),zod.null()]).optional().describe('Parent category ID if exists'),
+  "level": zod.coerce.number().describe('the level of category in hirarchy'),
+  "unitId": zod.uuid().describe('Unit ID'),
+  "iconUrl": zod.union([zod.coerce.string().max(postCategoriesBodyIconUrlMaxOne),zod.null()]).optional().describe('Icon URL'),
+  "desc": zod.union([zod.coerce.string().max(postCategoriesBodyDescMaxOne),zod.null()]).optional().describe('Category description in native language'),
+  "isActive": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Active status'),
+  "showInMenu": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Show in menu status')
+}).describe('Category creation payload')
 
 /**
  * Get all categories with pagination and filters
  */
+export const getCategoriesQueryFieldDefaultOne = "createdAt";
 export const getCategoriesQueryFieldMaxOne = 200;
-export const getCategoriesQueryOrderDefaultOne = "desc";
-export const getCategoriesQuerySkipMin = 0;
+export const getCategoriesQueryOrderDefaultOne = "desc";export const getCategoriesQuerySkipMin = 0;
 export const getCategoriesQueryLimitMax = 20;
 export const getCategoriesQueryNameMaxOne = 200;
 export const getCategoriesQueryEnNameMaxOne = 200;
 export const getCategoriesQueryIconUrlMaxOne = 200;
 export const getCategoriesQueryDescMaxOne = 200;
 
-export const getCategoriesQueryParams = zod.object({
-  field: zod
-    .union([zod.coerce.string().max(getCategoriesQueryFieldMaxOne), zod.null()])
-    .optional()
-    .describe("Field to sort by"),
-  order: zod
-    .union([zod.enum(["asc", "desc"]), zod.null()])
-    .optional()
-    .describe("Sort order"),
-  skip: zod.coerce
-    .number()
-    .min(getCategoriesQuerySkipMin)
-    .describe("Number of records to skip"),
-  limit: zod.coerce
-    .number()
-    .min(1)
-    .max(getCategoriesQueryLimitMax)
-    .describe("Maximum number of records to return"),
-  deletedAt: zod
-    .union([zod.iso.datetime({}), zod.null()])
-    .optional()
-    .describe("Optional date input, usually null"),
-  name: zod
-    .union([zod.coerce.string().max(getCategoriesQueryNameMaxOne), zod.null()])
-    .optional()
-    .describe("Filter by category name"),
-  enName: zod
-    .union([
-      zod.coerce.string().max(getCategoriesQueryEnNameMaxOne),
-      zod.null(),
-    ])
-    .optional()
-    .describe("Filter by category enName"),
-  parentId: zod
-    .union([zod.uuid(), zod.null()])
-    .optional()
-    .describe("Filter by parent category ID"),
-  unitId: zod
-    .union([zod.uuid(), zod.null()])
-    .optional()
-    .describe("Filter by unit ID"),
-  iconUrl: zod
-    .union([
-      zod.coerce.string().max(getCategoriesQueryIconUrlMaxOne),
-      zod.null(),
-    ])
-    .optional()
-    .describe("Filter by icon URL"),
-  isActive: zod
-    .union([zod.coerce.boolean(), zod.null()])
-    .optional()
-    .describe("Filter by active status"),
-  desc: zod
-    .union([zod.coerce.string().max(getCategoriesQueryDescMaxOne), zod.null()])
-    .optional()
-    .describe("Filter by desc"),
-  showInMenu: zod
-    .union([zod.coerce.boolean(), zod.null()])
-    .optional()
-    .describe("Filter by show in menu status"),
-});
 
-export const getCategoriesResponse = zod
-  .object({
-    success: zod
-      .union([zod.coerce.boolean(), zod.null()])
-      .optional()
-      .describe("Operation status"),
-  })
-  .describe("Standard API response format")
-  .describe(
-    "Response schema for listing categories with pagination and metadata",
-  );
+export const getCategoriesQueryParams = zod.object({
+  "field": zod.union([zod.coerce.string().max(getCategoriesQueryFieldMaxOne),zod.null()]).optional().describe('Field to sort by'),
+  "order": zod.union([zod.enum(['asc', 'desc']),zod.null()]).optional().describe('Sort order'),
+  "skip": zod.coerce.number().min(getCategoriesQuerySkipMin).describe('Number of records to skip'),
+  "limit": zod.coerce.number().min(1).max(getCategoriesQueryLimitMax).describe('Maximum number of records to return'),
+  "deletedAt": zod.union([zod.iso.datetime({}),zod.null()]).optional().describe('Optional date input, usually null'),
+  "name": zod.union([zod.coerce.string().max(getCategoriesQueryNameMaxOne),zod.null()]).optional().describe('Filter by category name'),
+  "enName": zod.union([zod.coerce.string().max(getCategoriesQueryEnNameMaxOne),zod.null()]).optional().describe('Filter by category enName'),
+  "parentId": zod.union([zod.uuid(),zod.null()]).optional().describe('Filter by parent category ID'),
+  "unitId": zod.union([zod.uuid(),zod.null()]).optional().describe('Filter by unit ID'),
+  "iconUrl": zod.union([zod.coerce.string().max(getCategoriesQueryIconUrlMaxOne),zod.null()]).optional().describe('Filter by icon URL'),
+  "isActive": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Filter by active status'),
+  "desc": zod.union([zod.coerce.string().max(getCategoriesQueryDescMaxOne),zod.null()]).optional().describe('Filter by desc'),
+  "showInMenu": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Filter by show in menu status')
+})
+
+export const getCategoriesResponse = zod.object({
+  "success": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Operation status')
+}).describe('Standard API response format').describe('Response schema for listing categories with pagination and metadata')
 
 /**
  * Get a single category by ID
  */
 export const getCategoriesIdParams = zod.object({
-  id: zod.uuid().describe("Category ID"),
-});
+  "id": zod.uuid().describe('Category ID')
+})
 
-export const getCategoriesIdResponse = zod
-  .object({
-    success: zod
-      .union([zod.coerce.boolean(), zod.null()])
-      .optional()
-      .describe("Operation status"),
-  })
-  .describe("Standard API response format");
+export const getCategoriesIdResponse = zod.object({
+  "success": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Operation status')
+}).describe('Standard API response format')
 
 /**
  * Update a category
  */
 export const patchCategoriesIdParams = zod.object({
-  id: zod.uuid().describe("Category ID"),
-});
+  "id": zod.uuid().describe('Category ID')
+})
 
 export const patchCategoriesIdBodyNameMin = 2;
 
@@ -179,66 +94,27 @@ export const patchCategoriesIdBodyEnNameMax = 50;
 export const patchCategoriesIdBodyIconUrlMaxOne = 200;
 export const patchCategoriesIdBodyDescMaxOne = 1000;
 
-export const patchCategoriesIdBody = zod
-  .object({
-    name: zod.coerce
-      .string()
-      .min(patchCategoriesIdBodyNameMin)
-      .max(patchCategoriesIdBodyNameMax)
-      .optional()
-      .describe("Category name in native language"),
-    enName: zod.coerce
-      .string()
-      .min(patchCategoriesIdBodyEnNameMin)
-      .max(patchCategoriesIdBodyEnNameMax)
-      .optional()
-      .describe("English name for internationalization"),
-    parentId: zod
-      .union([zod.uuid(), zod.null()])
-      .optional()
-      .describe("Parent category ID if exists"),
-    level: zod.coerce
-      .number()
-      .optional()
-      .describe("the level of category in hirarchy"),
-    unitId: zod.uuid().optional().describe("Unit ID"),
-    iconUrl: zod
-      .union([
-        zod.coerce.string().max(patchCategoriesIdBodyIconUrlMaxOne),
-        zod.null(),
-      ])
-      .optional()
-      .describe("Icon URL"),
-    desc: zod
-      .union([
-        zod.coerce.string().max(patchCategoriesIdBodyDescMaxOne),
-        zod.null(),
-      ])
-      .optional()
-      .describe("Category description in native language"),
-    isActive: zod
-      .union([zod.coerce.boolean(), zod.null()])
-      .optional()
-      .describe("Active status"),
-    showInMenu: zod
-      .union([zod.coerce.boolean(), zod.null()])
-      .optional()
-      .describe("Show in menu status"),
-  })
-  .describe("Category update payload");
 
-export const patchCategoriesIdResponse = zod
-  .object({
-    success: zod
-      .union([zod.coerce.boolean(), zod.null()])
-      .optional()
-      .describe("Operation status"),
-  })
-  .describe("Standard API response format");
+export const patchCategoriesIdBody = zod.object({
+  "name": zod.coerce.string().min(patchCategoriesIdBodyNameMin).max(patchCategoriesIdBodyNameMax).optional().describe('Category name in native language'),
+  "enName": zod.coerce.string().min(patchCategoriesIdBodyEnNameMin).max(patchCategoriesIdBodyEnNameMax).optional().describe('English name for internationalization'),
+  "parentId": zod.union([zod.uuid(),zod.null()]).optional().describe('Parent category ID if exists'),
+  "level": zod.coerce.number().optional().describe('the level of category in hirarchy'),
+  "unitId": zod.uuid().optional().describe('Unit ID'),
+  "iconUrl": zod.union([zod.coerce.string().max(patchCategoriesIdBodyIconUrlMaxOne),zod.null()]).optional().describe('Icon URL'),
+  "desc": zod.union([zod.coerce.string().max(patchCategoriesIdBodyDescMaxOne),zod.null()]).optional().describe('Category description in native language'),
+  "isActive": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Active status'),
+  "showInMenu": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Show in menu status')
+}).describe('Category update payload')
+
+export const patchCategoriesIdResponse = zod.object({
+  "success": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Operation status')
+}).describe('Standard API response format')
 
 /**
  * Delete a category
  */
 export const deleteCategoriesIdParams = zod.object({
-  id: zod.uuid().describe("Category ID"),
-});
+  "id": zod.uuid().describe('Category ID')
+})
+

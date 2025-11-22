@@ -4,10 +4,10 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { AttributeValueTextValue } from "./attributeValueTextValue";
-import type { AttributeValueDateValue } from "./attributeValueDateValue";
-import type { AttributeValueNumberValue } from "./attributeValueNumberValue";
-import type { AttributeValueBoolValue } from "./attributeValueBoolValue";
+import type { AttributeValueTextValue } from './attributeValueTextValue';
+import type { AttributeValueDateValue } from './attributeValueDateValue';
+import type { AttributeValueNumberValue } from './attributeValueNumberValue';
+import type { AttributeValueBoolValue } from './attributeValueBoolValue';
 
 /**
  * Attribute value entity

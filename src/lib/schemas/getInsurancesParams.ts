@@ -6,47 +6,47 @@
  */
 
 export type GetInsurancesParams = {
-  /**
-   * Field to sort by
-   */
-  field?: string | null;
-  /**
-   * Sort order
-   */
-  order?: "asc" | "desc" | null;
-  /**
-   * Number of records to skip
-   * @minimum 0
-   */
-  skip: number;
-  /**
-   * Maximum number of records to return
-   * @minimum 1
-   * @maximum 20
-   */
-  limit: number;
-  /**
-   * Optional date input, usually null
-   */
-  deletedAt?: string | null;
-  /**
-   * Filter by insurance title
-   */
-  title?: string | null;
-  /**
-   * Filter by provider name
-   */
-  providerName?: string | null;
-  /**
-   * Filter by active status
-   */
-  isActive?: boolean | null;
-  /**
-   * Filter by minimum price
-   */
-  minPrice?: number | null;
-  /**
-   * Filter by maximum price
-   */
-  maxPrice?: number | null;
+/**
+ * Field to sort by
+ */
+field?: string | null;
+/**
+ * Sort order
+ */
+order?: 'asc' | 'desc' | null;
+/**
+ * Number of records to skip
+ * @minimum 0
+ */
+skip: number;
+/**
+ * Maximum number of records to return
+ * @minimum 1
+ * @maximum 20
+ */
+limit: number;
+/**
+ * Optional date input, usually null
+ */
+deletedAt?: string | null;
+/**
+ * Filter by insurance title
+ */
+title?: string | null;
+/**
+ * Filter by provider name
+ */
+providerName?: string | null;
+/**
+ * Filter by active status
+ */
+isActive?: boolean | null;
+/**
+ * Filter by minimum price
+ */
+minPrice?: number | null;
+/**
+ * Filter by maximum price
+ */
+maxPrice?: number | null;
 };
