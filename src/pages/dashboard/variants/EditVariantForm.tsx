@@ -134,7 +134,7 @@ export default function EditVariantForm({ id }: { id: string }) {
         <SubmitButton />
         <Link
           className={cn(
-            "flex items-center justify-center rounded-md px-3 bg-green-300 text-white focus-visible:ring-2 focus-visible:ring-offset-2 transition-colors"
+            "flex items-center justify-center rounded-md px-3 bg-green-300 text-white focus-visible:ring-2 focus-visible:ring-offset-2 transition-colors",
           )}
           href={`/dashboard/variants/add/${id}`}
         >

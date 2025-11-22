@@ -23,7 +23,7 @@ export default function CreateColorForm() {
       },
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       resolver: zodResolver(postColorsBody) as any,
-    }
+    },
   );
   const onSubmit: SubmitHandler<CreateColorInput> = async (data) => {
     try {

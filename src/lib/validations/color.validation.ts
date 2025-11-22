@@ -9,22 +9,38 @@ export const postColorsBody = zod.object({
   name: zod.coerce
     .string()
     .min(1, "نام رنگ نمی‌تواند خالی باشد")
-    .max(postColorsBodyNameMax, `نام رنگ نمی‌تواند بیش از ${postColorsBodyNameMax} کاراکتر باشد`),
+    .max(
+      postColorsBodyNameMax,
+      `نام رنگ نمی‌تواند بیش از ${postColorsBodyNameMax} کاراکتر باشد`,
+    ),
   enName: zod
     .union([
-      zod.coerce.string().max(postColorsBodyEnNameMaxOne, `نام انگلیسی نمی‌تواند بیش از ${postColorsBodyEnNameMaxOne} کاراکتر باشد`),
+      zod.coerce
+        .string()
+        .max(
+          postColorsBodyEnNameMaxOne,
+          `نام انگلیسی نمی‌تواند بیش از ${postColorsBodyEnNameMaxOne} کاراکتر باشد`,
+        ),
       zod.null(),
     ])
     .optional(),
   displayName: zod
     .union([
-      zod.coerce.string().max(postColorsBodyDisplayNameMaxOne, `نام نمایشی نمی‌تواند بیش از ${postColorsBodyDisplayNameMaxOne} کاراکتر باشد`),
+      zod.coerce
+        .string()
+        .max(
+          postColorsBodyDisplayNameMaxOne,
+          `نام نمایشی نمی‌تواند بیش از ${postColorsBodyDisplayNameMaxOne} کاراکتر باشد`,
+        ),
       zod.null(),
     ])
     .optional(),
   hex: zod.coerce
     .string()
-    .regex(postColorsBodyHexRegExp, "کد رنگ باید فرمت هگزادسیمال معتبر داشته باشد، مثال: #FFFFFF"),
+    .regex(
+      postColorsBodyHexRegExp,
+      "کد رنگ باید فرمت هگزادسیمال معتبر داشته باشد، مثال: #FFFFFF",
+    ),
   isActive: zod.coerce.boolean().describe("وضعیت فعال بودن رنگ"),
 });
 
@@ -33,20 +49,39 @@ export const getColorsQueryParams = zod.object({
     .union([zod.coerce.string().max(200, "نام فیلد طولانی است"), zod.null()])
     .optional(),
   order: zod
-    .union([zod.enum(["asc", "desc"], { message: "ترتیب مرتب‌سازی باید asc یا desc باشد" }), zod.null()])
+    .union([
+      zod.enum(["asc", "desc"], {
+        message: "ترتیب مرتب‌سازی باید asc یا desc باشد",
+      }),
+      zod.null(),
+    ])
     .optional(),
   skip: zod.coerce.number().min(0, "مقدار skip نمی‌تواند منفی باشد"),
-  limit: zod.coerce.number().min(1, "حداقل یک رکورد باید درخواست شود").max(20, "حداکثر تعداد رکورد ۲۰ است"),
-  deletedAt: zod.union([zod.iso.datetime({ message: "فرمت تاریخ معتبر نیست" }), zod.null()]).optional(),
-  name: zod.union([zod.coerce.string().max(200, "نام رنگ طولانی است"), zod.null()]).optional(),
-  enName: zod.union([zod.coerce.string().max(200, "نام انگلیسی طولانی است"), zod.null()]).optional(),
-  displayName: zod.union([zod.coerce.string().max(200, "نام نمایشی طولانی است"), zod.null()]).optional(),
+  limit: zod.coerce
+    .number()
+    .min(1, "حداقل یک رکورد باید درخواست شود")
+    .max(20, "حداکثر تعداد رکورد ۲۰ است"),
+  deletedAt: zod
+    .union([zod.iso.datetime({ message: "فرمت تاریخ معتبر نیست" }), zod.null()])
+    .optional(),
+  name: zod
+    .union([zod.coerce.string().max(200, "نام رنگ طولانی است"), zod.null()])
+    .optional(),
+  enName: zod
+    .union([zod.coerce.string().max(200, "نام انگلیسی طولانی است"), zod.null()])
+    .optional(),
+  displayName: zod
+    .union([zod.coerce.string().max(200, "نام نمایشی طولانی است"), zod.null()])
+    .optional(),
   hex: zod
     .union([
       zod.coerce
         .string()
         .max(7, "کد رنگ طولانی است")
-        .regex(/^#([0-9A-Fa-f]{3}){1,2}$/, "کد رنگ باید فرمت هگزادسیمال معتبر داشته باشد، مثال: #FFFFFF"),
+        .regex(
+          /^#([0-9A-Fa-f]{3}){1,2}$/,
+          "کد رنگ باید فرمت هگزادسیمال معتبر داشته باشد، مثال: #FFFFFF",
+        ),
       zod.null(),
     ])
     .optional(),
@@ -70,10 +105,24 @@ export const patchColorsIdParams = zod.object({
 });
 
 export const patchColorsIdBody = zod.object({
-  name: zod.coerce.string().min(1, "نام رنگ نمی‌تواند خالی باشد").max(50, "نام رنگ نمی‌تواند بیش از ۵۰ کاراکتر باشد").optional(),
-  enName: zod.union([zod.coerce.string().max(200, "نام انگلیسی طولانی است"), zod.null()]).optional(),
-  displayName: zod.union([zod.coerce.string().max(200, "نام نمایشی طولانی است"), zod.null()]).optional(),
-  hex: zod.coerce.string().regex(/^#([0-9A-Fa-f]{3}){1,2}$/, "کد رنگ باید فرمت هگزادسیمال معتبر داشته باشد، مثال: #FFFFFF").optional(),
+  name: zod.coerce
+    .string()
+    .min(1, "نام رنگ نمی‌تواند خالی باشد")
+    .max(50, "نام رنگ نمی‌تواند بیش از ۵۰ کاراکتر باشد")
+    .optional(),
+  enName: zod
+    .union([zod.coerce.string().max(200, "نام انگلیسی طولانی است"), zod.null()])
+    .optional(),
+  displayName: zod
+    .union([zod.coerce.string().max(200, "نام نمایشی طولانی است"), zod.null()])
+    .optional(),
+  hex: zod.coerce
+    .string()
+    .regex(
+      /^#([0-9A-Fa-f]{3}){1,2}$/,
+      "کد رنگ باید فرمت هگزادسیمال معتبر داشته باشد، مثال: #FFFFFF",
+    )
+    .optional(),
   isActive: zod.coerce.boolean().optional(),
 });
 
