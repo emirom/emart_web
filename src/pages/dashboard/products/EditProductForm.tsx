@@ -3,6 +3,7 @@ import { SubmitButton } from "@components/BtnWithIcon";
 import FormAutocomplete from "@components/FormAutoCompleteField";
 import { FormInputField } from "@components/FormInputField";
 import { FormScrollableSelectField } from "@components/FormScrollableSelectField";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { patchProductAction } from "@lib/actions/product-action";
 import { queryClient } from "@lib/apis/queryClient";
 import { UpdateProductInput } from "@lib/schemas";
@@ -10,6 +11,7 @@ import { useGetBrands } from "@lib/services/brands/brands";
 import { useGetCategories } from "@lib/services/categories/categories";
 import { useGetLabels } from "@lib/services/labels/labels";
 import { useGetProductsId } from "@lib/services/products/products";
+import { patchProductsIdBody } from "@lib/validations/product.validation";
 import { useRouter } from "next/navigation";
 import { useEffect, useState, useTransition } from "react";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
@@ -25,7 +27,16 @@ export default function EditProductId({ editId }: { editId: string }) {
   const [productId, setProductId] = useState<string | null>(null);
 
   const { handleSubmit, control, reset } = useForm<UpdateProductInput>({
-    defaultValues: { labels: [], isActive: false },
+    defaultValues: {
+      labels: [],
+      isActive: false,
+      name: "",
+      enName: "",
+      categoryId: "",
+      brandId: "",
+    },
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    resolver: zodResolver(patchProductsIdBody) as any,
   });
 
   const { append, fields, remove } = useFieldArray({ control, name: "labels" });
