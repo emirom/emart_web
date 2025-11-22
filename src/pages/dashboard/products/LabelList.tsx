@@ -16,7 +16,7 @@ export default function LabelList({
     <div className="mt-5 col-span-1 sm:col-span-2 lg:col-span-3">
       <label
         className={cn(
-          "block text-xs text-nowrap text-tint-blue-500 font-medium mb-2"
+          "block text-xs text-nowrap text-tint-blue-500 font-medium mb-2",
         )}
       >
         لیست برچسب‌های انتخاب شده
