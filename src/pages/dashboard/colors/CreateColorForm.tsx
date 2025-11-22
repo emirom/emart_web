@@ -3,15 +3,27 @@
 import { SubmitButton } from "@components/BtnWithIcon";
 import { FormInputField } from "@components/FormInputField";
 import { FormScrollableSelectField } from "@components/FormScrollableSelectField";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { postColorAction } from "@lib/actions/color-action";
 import { queryClient } from "@lib/apis/queryClient";
 import { CreateColorInput } from "@lib/schemas";
+import { postColorsBody } from "@lib/validations/color.validation";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
 export default function CreateColorForm() {
   const { handleSubmit, control, formState, reset } = useForm<CreateColorInput>(
-    { defaultValues: { hex: "#000000" } },
+    {
+      defaultValues: {
+        hex: "#000000",
+        isActive: true,
+        name: "",
+        enName: "",
+        displayName: "",
+      },
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      resolver: zodResolver(postColorsBody) as any,
+    }
   );
   const onSubmit: SubmitHandler<CreateColorInput> = async (data) => {
     try {
@@ -30,7 +42,7 @@ export default function CreateColorForm() {
 
   return (
     <form
-      className="grid grid-cols-1 gap-2 md:grid-cols-2  items-center"
+      className="items-stretch grid grid-cols-1 gap-2 md:grid-cols-2  "
       onSubmit={handleSubmit(onSubmit)}
     >
       <FormInputField control={control} label="نام رنگ" name="name" />

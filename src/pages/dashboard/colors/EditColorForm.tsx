@@ -3,17 +3,30 @@
 import { SubmitButton } from "@components/BtnWithIcon";
 import { FormInputField } from "@components/FormInputField";
 import { FormScrollableSelectField } from "@components/FormScrollableSelectField";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { patchColorAction } from "@lib/actions/color-action";
 import { queryClient } from "@lib/apis/queryClient";
 import { UpdateColorInput } from "@lib/schemas";
 import { useGetColorsId } from "@lib/services/colors/colors";
+import { patchColorsIdBody } from "@lib/validations/color.validation";
 import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
 export default function EditColorForm({ id }: { id: string }) {
-  const { handleSubmit, control, formState, reset } =
-    useForm<UpdateColorInput>();
+  const { handleSubmit, control, formState, reset } = useForm<UpdateColorInput>(
+    {
+      defaultValues: {
+        hex: "#000000",
+        isActive: true,
+        name: "",
+        enName: "",
+        displayName: "",
+      },
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      resolver: zodResolver(patchColorsIdBody) as any,
+    }
+  );
   const { data: color } = useGetColorsId(id, {
     query: { queryKey: ["/colors", id] },
   });
@@ -39,7 +52,7 @@ export default function EditColorForm({ id }: { id: string }) {
 
   return (
     <form
-      className="grid grid-cols-1 gap-2 md:grid-cols-2  items-center"
+      className="items-stretch grid grid-cols-1 gap-2 md:grid-cols-2 "
       onSubmit={handleSubmit(onSubmit)}
     >
       <FormInputField control={control} label="نام رنگ" name="name" />
@@ -72,7 +85,7 @@ export default function EditColorForm({ id }: { id: string }) {
       <div className="md:col-span-2 lg:col-span-4 flex justify-end mt-2">
         <SubmitButton
           className="w-full md:w-auto"
-          disabled={!formState.isDirty}
+          disabled={!formState.isDirty || formState.isSubmitting}
         />
       </div>
     </form>
