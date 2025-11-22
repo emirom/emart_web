@@ -4,18 +4,18 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { CreateInventoryInputGuaranteeId } from './createInventoryInputGuaranteeId';
-import type { CreateInventoryInputInsuranceId } from './createInventoryInputInsuranceId';
-import type { CreateInventoryInputLeasingId } from './createInventoryInputLeasingId';
-import type { CreateInventoryInputChequeId } from './createInventoryInputChequeId';
-import type { CreateInventoryInputCost } from './createInventoryInputCost';
-import type { CreateInventoryInputExpiryDate } from './createInventoryInputExpiryDate';
-import type { CreateInventoryInputWarehouseCode } from './createInventoryInputWarehouseCode';
-import type { CreateInventoryInputShelfCode } from './createInventoryInputShelfCode';
-import type { CreateInventoryInputHsCode } from './createInventoryInputHsCode';
-import type { CreateInventoryInputOriginCountry } from './createInventoryInputOriginCountry';
-import type { CreateInventoryInputPackageWeight } from './createInventoryInputPackageWeight';
-import type { CreateInventoryInputPackageDimensions } from './createInventoryInputPackageDimensions';
+import type { CreateInventoryInputGuaranteeId } from "./createInventoryInputGuaranteeId";
+import type { CreateInventoryInputInsuranceId } from "./createInventoryInputInsuranceId";
+import type { CreateInventoryInputLeasingId } from "./createInventoryInputLeasingId";
+import type { CreateInventoryInputChequeId } from "./createInventoryInputChequeId";
+import type { CreateInventoryInputCost } from "./createInventoryInputCost";
+import type { CreateInventoryInputExpiryDate } from "./createInventoryInputExpiryDate";
+import type { CreateInventoryInputWarehouseCode } from "./createInventoryInputWarehouseCode";
+import type { CreateInventoryInputShelfCode } from "./createInventoryInputShelfCode";
+import type { CreateInventoryInputHsCode } from "./createInventoryInputHsCode";
+import type { CreateInventoryInputOriginCountry } from "./createInventoryInputOriginCountry";
+import type { CreateInventoryInputPackageWeight } from "./createInventoryInputPackageWeight";
+import type { CreateInventoryInputPackageDimensions } from "./createInventoryInputPackageDimensions";
 
 /**
  * Inventory creation payload

@@ -4,10 +4,7 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import {
-  z as zod
-} from 'zod';
-
+import { z as zod } from "zod";
 
 /**
  * Create a new location
@@ -16,78 +13,152 @@ export const postLocationsBodyStreetNumberMaxOne = 200;
 export const postLocationsBodyPostalCodeMin = 3;
 export const postLocationsBodyIsActiveDefaultOne = true;
 
-export const postLocationsBody = zod.object({
-  "street": zod.coerce.string().min(1).describe('Street name'),
-  "streetNumber": zod.union([zod.coerce.string().max(postLocationsBodyStreetNumberMaxOne),zod.null()]).optional().describe('Street number'),
-  "postalCode": zod.coerce.string().min(postLocationsBodyPostalCodeMin).describe('Postal/ZIP code'),
-  "cityId": zod.uuid().describe('City ID'),
-  "isActive": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Whether the location is active')
-}).describe('Location creation payload')
+export const postLocationsBody = zod
+  .object({
+    street: zod.coerce.string().min(1).describe("Street name"),
+    streetNumber: zod
+      .union([
+        zod.coerce.string().max(postLocationsBodyStreetNumberMaxOne),
+        zod.null(),
+      ])
+      .optional()
+      .describe("Street number"),
+    postalCode: zod.coerce
+      .string()
+      .min(postLocationsBodyPostalCodeMin)
+      .describe("Postal/ZIP code"),
+    cityId: zod.uuid().describe("City ID"),
+    isActive: zod
+      .union([zod.coerce.boolean(), zod.null()])
+      .optional()
+      .describe("Whether the location is active"),
+  })
+  .describe("Location creation payload");
 
 /**
  * List all locations with pagination and filters
  */
 export const getLocationsQueryFieldDefaultOne = "createdAt";
 export const getLocationsQueryFieldMaxOne = 200;
-export const getLocationsQueryOrderDefaultOne = "desc";export const getLocationsQuerySkipMin = 0;
+export const getLocationsQueryOrderDefaultOne = "desc";
+export const getLocationsQuerySkipMin = 0;
 export const getLocationsQueryLimitMax = 20;
 export const getLocationsQueryPostalCodeMaxOne = 200;
 export const getLocationsQueryStreetMaxOne = 200;
 
-
 export const getLocationsQueryParams = zod.object({
-  "field": zod.union([zod.coerce.string().max(getLocationsQueryFieldMaxOne),zod.null()]).optional().describe('Field to sort by'),
-  "order": zod.union([zod.enum(['asc', 'desc']),zod.null()]).optional().describe('Sort order'),
-  "skip": zod.coerce.number().min(getLocationsQuerySkipMin).describe('Number of records to skip'),
-  "limit": zod.coerce.number().min(1).max(getLocationsQueryLimitMax).describe('Maximum number of records to return'),
-  "provinceId": zod.union([zod.uuid(),zod.null()]).optional().describe('Filter by province ID'),
-  "cityId": zod.union([zod.uuid(),zod.null()]).optional().describe('Filter by city ID'),
-  "postalCode": zod.union([zod.coerce.string().max(getLocationsQueryPostalCodeMaxOne),zod.null()]).optional().describe('Filter by postal code'),
-  "street": zod.union([zod.coerce.string().max(getLocationsQueryStreetMaxOne),zod.null()]).optional().describe('Filter by street name')
-})
+  field: zod
+    .union([zod.coerce.string().max(getLocationsQueryFieldMaxOne), zod.null()])
+    .optional()
+    .describe("Field to sort by"),
+  order: zod
+    .union([zod.enum(["asc", "desc"]), zod.null()])
+    .optional()
+    .describe("Sort order"),
+  skip: zod.coerce
+    .number()
+    .min(getLocationsQuerySkipMin)
+    .describe("Number of records to skip"),
+  limit: zod.coerce
+    .number()
+    .min(1)
+    .max(getLocationsQueryLimitMax)
+    .describe("Maximum number of records to return"),
+  provinceId: zod
+    .union([zod.uuid(), zod.null()])
+    .optional()
+    .describe("Filter by province ID"),
+  cityId: zod
+    .union([zod.uuid(), zod.null()])
+    .optional()
+    .describe("Filter by city ID"),
+  postalCode: zod
+    .union([
+      zod.coerce.string().max(getLocationsQueryPostalCodeMaxOne),
+      zod.null(),
+    ])
+    .optional()
+    .describe("Filter by postal code"),
+  street: zod
+    .union([zod.coerce.string().max(getLocationsQueryStreetMaxOne), zod.null()])
+    .optional()
+    .describe("Filter by street name"),
+});
 
-export const getLocationsResponse = zod.object({
-  "success": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Operation status')
-}).describe('Standard API response format').describe('List of locations response')
+export const getLocationsResponse = zod
+  .object({
+    success: zod
+      .union([zod.coerce.boolean(), zod.null()])
+      .optional()
+      .describe("Operation status"),
+  })
+  .describe("Standard API response format")
+  .describe("List of locations response");
 
 /**
  * Get a single location by ID
  */
 export const getLocationsIdParams = zod.object({
-  "id": zod.uuid().describe('Location ID')
-})
+  id: zod.uuid().describe("Location ID"),
+});
 
-export const getLocationsIdResponse = zod.object({
-  "success": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Operation status')
-}).describe('Standard API response format').describe('Single location response')
+export const getLocationsIdResponse = zod
+  .object({
+    success: zod
+      .union([zod.coerce.boolean(), zod.null()])
+      .optional()
+      .describe("Operation status"),
+  })
+  .describe("Standard API response format")
+  .describe("Single location response");
 
 /**
  * Update a location
  */
 export const patchLocationsIdParams = zod.object({
-  "id": zod.uuid().describe('Location ID')
-})
+  id: zod.uuid().describe("Location ID"),
+});
 
 export const patchLocationsIdBodyStreetNumberMaxOne = 200;
 export const patchLocationsIdBodyPostalCodeMin = 3;
 export const patchLocationsIdBodyIsActiveDefaultOne = true;
 
-export const patchLocationsIdBody = zod.object({
-  "street": zod.coerce.string().min(1).optional().describe('Street name'),
-  "streetNumber": zod.union([zod.coerce.string().max(patchLocationsIdBodyStreetNumberMaxOne),zod.null()]).optional().describe('Street number'),
-  "postalCode": zod.coerce.string().min(patchLocationsIdBodyPostalCodeMin).optional().describe('Postal/ZIP code'),
-  "cityId": zod.uuid().optional().describe('City ID'),
-  "isActive": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Whether the location is active')
-}).describe('Location update payload')
+export const patchLocationsIdBody = zod
+  .object({
+    street: zod.coerce.string().min(1).optional().describe("Street name"),
+    streetNumber: zod
+      .union([
+        zod.coerce.string().max(patchLocationsIdBodyStreetNumberMaxOne),
+        zod.null(),
+      ])
+      .optional()
+      .describe("Street number"),
+    postalCode: zod.coerce
+      .string()
+      .min(patchLocationsIdBodyPostalCodeMin)
+      .optional()
+      .describe("Postal/ZIP code"),
+    cityId: zod.uuid().optional().describe("City ID"),
+    isActive: zod
+      .union([zod.coerce.boolean(), zod.null()])
+      .optional()
+      .describe("Whether the location is active"),
+  })
+  .describe("Location update payload");
 
-export const patchLocationsIdResponse = zod.object({
-  "success": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Operation status')
-}).describe('Standard API response format').describe('Single location response')
+export const patchLocationsIdResponse = zod
+  .object({
+    success: zod
+      .union([zod.coerce.boolean(), zod.null()])
+      .optional()
+      .describe("Operation status"),
+  })
+  .describe("Standard API response format")
+  .describe("Single location response");
 
 /**
  * Delete a location
  */
 export const deleteLocationsIdParams = zod.object({
-  "id": zod.uuid().describe('Location ID')
-})
-
+  id: zod.uuid().describe("Location ID"),
+});

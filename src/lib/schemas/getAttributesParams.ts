@@ -6,35 +6,35 @@
  */
 
 export type GetAttributesParams = {
-/**
- * Field to sort by
- */
-field?: string | null;
-/**
- * Sort order
- */
-order?: 'asc' | 'desc' | null;
-/**
- * Number of records to skip
- * @minimum 0
- */
-skip: number;
-/**
- * Maximum number of records to return
- * @minimum 1
- * @maximum 20
- */
-limit: number;
-/**
- * Filter by attribute title
- */
-title?: string | null;
-/**
- * Filter by attribute type
- */
-type?: 'text' | 'number' | 'boolean' | 'date' | null;
-/**
- * Filter by category ID
- */
-categoryId?: string | null;
+  /**
+   * Field to sort by
+   */
+  field?: string | null;
+  /**
+   * Sort order
+   */
+  order?: "asc" | "desc" | null;
+  /**
+   * Number of records to skip
+   * @minimum 0
+   */
+  skip: number;
+  /**
+   * Maximum number of records to return
+   * @minimum 1
+   * @maximum 20
+   */
+  limit: number;
+  /**
+   * Filter by attribute title
+   */
+  title?: string | null;
+  /**
+   * Filter by attribute type
+   */
+  type?: "text" | "number" | "boolean" | "date" | null;
+  /**
+   * Filter by category ID
+   */
+  categoryId?: string | null;
 };

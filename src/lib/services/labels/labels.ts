@@ -4,10 +4,7 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import {
-  useMutation,
-  useQuery
-} from '@tanstack/react-query';
+import { useMutation, useQuery } from "@tanstack/react-query";
 import type {
   DataTag,
   DefinedInitialDataOptions,
@@ -20,8 +17,8 @@ import type {
   UseMutationOptions,
   UseMutationResult,
   UseQueryOptions,
-  UseQueryResult
-} from '@tanstack/react-query';
+  UseQueryResult,
+} from "@tanstack/react-query";
 
 import type {
   BaseResponse,
@@ -33,361 +30,528 @@ import type {
   LabelListResponse,
   LabelResponse,
   NotfoundError,
-  UpdateLabelInput
-} from '../../schemas';
+  UpdateLabelInput,
+} from "../../schemas";
 
-import { axiosInstance } from '../../configs/axios-instance';
-
-
-
+import { axiosInstance } from "../../configs/axios-instance";
 
 /**
  * Create a new label
  */
 export const postLabels = (
-    createLabelInput: CreateLabelInput,
- signal?: AbortSignal
+  createLabelInput: CreateLabelInput,
+  signal?: AbortSignal,
 ) => {
-      
-      
-      return axiosInstance<LabelResponse>(
-      {url: `/labels`, method: 'POST',
-      headers: {'Content-Type': 'application/json', },
-      data: createLabelInput, signal
-    },
-      );
-    }
-  
+  return axiosInstance<LabelResponse>({
+    url: `/labels`,
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    data: createLabelInput,
+    signal,
+  });
+};
 
+export const getPostLabelsMutationOptions = <
+  TError = ErrorResponse | ConflictError | InternalError,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof postLabels>>,
+    TError,
+    { data: CreateLabelInput },
+    TContext
+  >;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof postLabels>>,
+  TError,
+  { data: CreateLabelInput },
+  TContext
+> => {
+  const mutationKey = ["postLabels"];
+  const { mutation: mutationOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey } };
 
-export const getPostLabelsMutationOptions = <TError = ErrorResponse | ConflictError | InternalError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postLabels>>, TError,{data: CreateLabelInput}, TContext>, }
-): UseMutationOptions<Awaited<ReturnType<typeof postLabels>>, TError,{data: CreateLabelInput}, TContext> => {
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof postLabels>>,
+    { data: CreateLabelInput }
+  > = (props) => {
+    const { data } = props ?? {};
 
-const mutationKey = ['postLabels'];
-const {mutation: mutationOptions} = options ?
-      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
-      options
-      : {...options, mutation: {...options.mutation, mutationKey}}
-      : {mutation: { mutationKey, }};
+    return postLabels(data);
+  };
 
-      
+  return { mutationFn, ...mutationOptions };
+};
 
+export type PostLabelsMutationResult = NonNullable<
+  Awaited<ReturnType<typeof postLabels>>
+>;
+export type PostLabelsMutationBody = CreateLabelInput;
+export type PostLabelsMutationError =
+  | ErrorResponse
+  | ConflictError
+  | InternalError;
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postLabels>>, {data: CreateLabelInput}> = (props) => {
-          const {data} = props ?? {};
+export const usePostLabels = <
+  TError = ErrorResponse | ConflictError | InternalError,
+  TContext = unknown,
+>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof postLabels>>,
+      TError,
+      { data: CreateLabelInput },
+      TContext
+    >;
+  },
+  queryClient?: QueryClient,
+): UseMutationResult<
+  Awaited<ReturnType<typeof postLabels>>,
+  TError,
+  { data: CreateLabelInput },
+  TContext
+> => {
+  const mutationOptions = getPostLabelsMutationOptions(options);
 
-          return  postLabels(data,)
-        }
-
-        
-
-
-  return  { mutationFn, ...mutationOptions }}
-
-    export type PostLabelsMutationResult = NonNullable<Awaited<ReturnType<typeof postLabels>>>
-    export type PostLabelsMutationBody = CreateLabelInput
-    export type PostLabelsMutationError = ErrorResponse | ConflictError | InternalError
-
-    export const usePostLabels = <TError = ErrorResponse | ConflictError | InternalError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postLabels>>, TError,{data: CreateLabelInput}, TContext>, }
- , queryClient?: QueryClient): UseMutationResult<
-        Awaited<ReturnType<typeof postLabels>>,
-        TError,
-        {data: CreateLabelInput},
-        TContext
-      > => {
-
-      const mutationOptions = getPostLabelsMutationOptions(options);
-
-      return useMutation(mutationOptions , queryClient);
-    }
-    /**
+  return useMutation(mutationOptions, queryClient);
+};
+/**
  * Get all labels with pagination and filtering
  */
-export const getLabels = (
-    params: GetLabelsParams,
- signal?: AbortSignal
+export const getLabels = (params: GetLabelsParams, signal?: AbortSignal) => {
+  return axiosInstance<LabelListResponse>({
+    url: `/labels`,
+    method: "GET",
+    params,
+    signal,
+  });
+};
+
+export const getGetLabelsQueryKey = (params?: GetLabelsParams) => {
+  return [`/labels`, ...(params ? [params] : [])] as const;
+};
+
+export const getGetLabelsQueryOptions = <
+  TData = Awaited<ReturnType<typeof getLabels>>,
+  TError = InternalError,
+>(
+  params: GetLabelsParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof getLabels>>, TError, TData>
+    >;
+  },
 ) => {
-      
-      
-      return axiosInstance<LabelListResponse>(
-      {url: `/labels`, method: 'GET',
-        params, signal
-    },
-      );
-    }
-  
+  const { query: queryOptions } = options ?? {};
 
-export const getGetLabelsQueryKey = (params?: GetLabelsParams,) => {
-    return [`/labels`, ...(params ? [params]: [])] as const;
-    }
+  const queryKey = queryOptions?.queryKey ?? getGetLabelsQueryKey(params);
 
-    
-export const getGetLabelsQueryOptions = <TData = Awaited<ReturnType<typeof getLabels>>, TError = InternalError>(params: GetLabelsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getLabels>>, TError, TData>>, }
-) => {
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getLabels>>> = ({
+    signal,
+  }) => getLabels(params, signal);
 
-const {query: queryOptions} = options ?? {};
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof getLabels>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
+};
 
-  const queryKey =  queryOptions?.queryKey ?? getGetLabelsQueryKey(params);
+export type GetLabelsQueryResult = NonNullable<
+  Awaited<ReturnType<typeof getLabels>>
+>;
+export type GetLabelsQueryError = InternalError;
 
-  
-
-    const queryFn: QueryFunction<Awaited<ReturnType<typeof getLabels>>> = ({ signal }) => getLabels(params, signal);
-
-      
-
-      
-
-   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getLabels>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
-}
-
-export type GetLabelsQueryResult = NonNullable<Awaited<ReturnType<typeof getLabels>>>
-export type GetLabelsQueryError = InternalError
-
-
-export function useGetLabels<TData = Awaited<ReturnType<typeof getLabels>>, TError = InternalError>(
- params: GetLabelsParams, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getLabels>>, TError, TData>> & Pick<
+export function useGetLabels<
+  TData = Awaited<ReturnType<typeof getLabels>>,
+  TError = InternalError,
+>(
+  params: GetLabelsParams,
+  options: {
+    query: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof getLabels>>, TError, TData>
+    > &
+      Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof getLabels>>,
           TError,
           Awaited<ReturnType<typeof getLabels>>
-        > , 'initialData'
-      >, }
- , queryClient?: QueryClient
-  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetLabels<TData = Awaited<ReturnType<typeof getLabels>>, TError = InternalError>(
- params: GetLabelsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getLabels>>, TError, TData>> & Pick<
+        >,
+        "initialData"
+      >;
+  },
+  queryClient?: QueryClient,
+): DefinedUseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+};
+export function useGetLabels<
+  TData = Awaited<ReturnType<typeof getLabels>>,
+  TError = InternalError,
+>(
+  params: GetLabelsParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof getLabels>>, TError, TData>
+    > &
+      Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof getLabels>>,
           TError,
           Awaited<ReturnType<typeof getLabels>>
-        > , 'initialData'
-      >, }
- , queryClient?: QueryClient
-  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetLabels<TData = Awaited<ReturnType<typeof getLabels>>, TError = InternalError>(
- params: GetLabelsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getLabels>>, TError, TData>>, }
- , queryClient?: QueryClient
-  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+        >,
+        "initialData"
+      >;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+};
+export function useGetLabels<
+  TData = Awaited<ReturnType<typeof getLabels>>,
+  TError = InternalError,
+>(
+  params: GetLabelsParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof getLabels>>, TError, TData>
+    >;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+};
 
-export function useGetLabels<TData = Awaited<ReturnType<typeof getLabels>>, TError = InternalError>(
- params: GetLabelsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getLabels>>, TError, TData>>, }
- , queryClient?: QueryClient 
- ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+export function useGetLabels<
+  TData = Awaited<ReturnType<typeof getLabels>>,
+  TError = InternalError,
+>(
+  params: GetLabelsParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof getLabels>>, TError, TData>
+    >;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+} {
+  const queryOptions = getGetLabelsQueryOptions(params, options);
 
-  const queryOptions = getGetLabelsQueryOptions(params,options)
+  const query = useQuery(queryOptions, queryClient) as UseQueryResult<
+    TData,
+    TError
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
 
-  const query = useQuery(queryOptions , queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
-
-  query.queryKey = queryOptions.queryKey ;
+  query.queryKey = queryOptions.queryKey;
 
   return query;
 }
-
-
 
 /**
  * Get a single label by ID
  */
-export const getLabelsId = (
-    id: string,
- signal?: AbortSignal
+export const getLabelsId = (id: string, signal?: AbortSignal) => {
+  return axiosInstance<LabelResponse>({
+    url: `/labels/${id}`,
+    method: "GET",
+    signal,
+  });
+};
+
+export const getGetLabelsIdQueryKey = (id?: string) => {
+  return [`/labels/${id}`] as const;
+};
+
+export const getGetLabelsIdQueryOptions = <
+  TData = Awaited<ReturnType<typeof getLabelsId>>,
+  TError = ErrorResponse | NotfoundError | InternalError,
+>(
+  id: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof getLabelsId>>, TError, TData>
+    >;
+  },
 ) => {
-      
-      
-      return axiosInstance<LabelResponse>(
-      {url: `/labels/${id}`, method: 'GET', signal
-    },
-      );
-    }
-  
+  const { query: queryOptions } = options ?? {};
 
-export const getGetLabelsIdQueryKey = (id?: string,) => {
-    return [`/labels/${id}`] as const;
-    }
+  const queryKey = queryOptions?.queryKey ?? getGetLabelsIdQueryKey(id);
 
-    
-export const getGetLabelsIdQueryOptions = <TData = Awaited<ReturnType<typeof getLabelsId>>, TError = ErrorResponse | NotfoundError | InternalError>(id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getLabelsId>>, TError, TData>>, }
-) => {
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getLabelsId>>> = ({
+    signal,
+  }) => getLabelsId(id, signal);
 
-const {query: queryOptions} = options ?? {};
+  return {
+    queryKey,
+    queryFn,
+    enabled: !!id,
+    ...queryOptions,
+  } as UseQueryOptions<
+    Awaited<ReturnType<typeof getLabelsId>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
+};
 
-  const queryKey =  queryOptions?.queryKey ?? getGetLabelsIdQueryKey(id);
+export type GetLabelsIdQueryResult = NonNullable<
+  Awaited<ReturnType<typeof getLabelsId>>
+>;
+export type GetLabelsIdQueryError =
+  | ErrorResponse
+  | NotfoundError
+  | InternalError;
 
-  
-
-    const queryFn: QueryFunction<Awaited<ReturnType<typeof getLabelsId>>> = ({ signal }) => getLabelsId(id, signal);
-
-      
-
-      
-
-   return  { queryKey, queryFn, enabled: !!(id), ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getLabelsId>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
-}
-
-export type GetLabelsIdQueryResult = NonNullable<Awaited<ReturnType<typeof getLabelsId>>>
-export type GetLabelsIdQueryError = ErrorResponse | NotfoundError | InternalError
-
-
-export function useGetLabelsId<TData = Awaited<ReturnType<typeof getLabelsId>>, TError = ErrorResponse | NotfoundError | InternalError>(
- id: string, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getLabelsId>>, TError, TData>> & Pick<
+export function useGetLabelsId<
+  TData = Awaited<ReturnType<typeof getLabelsId>>,
+  TError = ErrorResponse | NotfoundError | InternalError,
+>(
+  id: string,
+  options: {
+    query: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof getLabelsId>>, TError, TData>
+    > &
+      Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof getLabelsId>>,
           TError,
           Awaited<ReturnType<typeof getLabelsId>>
-        > , 'initialData'
-      >, }
- , queryClient?: QueryClient
-  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetLabelsId<TData = Awaited<ReturnType<typeof getLabelsId>>, TError = ErrorResponse | NotfoundError | InternalError>(
- id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getLabelsId>>, TError, TData>> & Pick<
+        >,
+        "initialData"
+      >;
+  },
+  queryClient?: QueryClient,
+): DefinedUseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+};
+export function useGetLabelsId<
+  TData = Awaited<ReturnType<typeof getLabelsId>>,
+  TError = ErrorResponse | NotfoundError | InternalError,
+>(
+  id: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof getLabelsId>>, TError, TData>
+    > &
+      Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof getLabelsId>>,
           TError,
           Awaited<ReturnType<typeof getLabelsId>>
-        > , 'initialData'
-      >, }
- , queryClient?: QueryClient
-  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetLabelsId<TData = Awaited<ReturnType<typeof getLabelsId>>, TError = ErrorResponse | NotfoundError | InternalError>(
- id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getLabelsId>>, TError, TData>>, }
- , queryClient?: QueryClient
-  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+        >,
+        "initialData"
+      >;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+};
+export function useGetLabelsId<
+  TData = Awaited<ReturnType<typeof getLabelsId>>,
+  TError = ErrorResponse | NotfoundError | InternalError,
+>(
+  id: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof getLabelsId>>, TError, TData>
+    >;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+};
 
-export function useGetLabelsId<TData = Awaited<ReturnType<typeof getLabelsId>>, TError = ErrorResponse | NotfoundError | InternalError>(
- id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getLabelsId>>, TError, TData>>, }
- , queryClient?: QueryClient 
- ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+export function useGetLabelsId<
+  TData = Awaited<ReturnType<typeof getLabelsId>>,
+  TError = ErrorResponse | NotfoundError | InternalError,
+>(
+  id: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof getLabelsId>>, TError, TData>
+    >;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+} {
+  const queryOptions = getGetLabelsIdQueryOptions(id, options);
 
-  const queryOptions = getGetLabelsIdQueryOptions(id,options)
+  const query = useQuery(queryOptions, queryClient) as UseQueryResult<
+    TData,
+    TError
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
 
-  const query = useQuery(queryOptions , queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
-
-  query.queryKey = queryOptions.queryKey ;
+  query.queryKey = queryOptions.queryKey;
 
   return query;
 }
-
-
 
 /**
  * Update a label
  */
 export const patchLabelsId = (
-    id: string,
-    updateLabelInput: UpdateLabelInput,
- ) => {
-      
-      
-      return axiosInstance<LabelResponse>(
-      {url: `/labels/${id}`, method: 'PATCH',
-      headers: {'Content-Type': 'application/json', },
-      data: updateLabelInput
-    },
-      );
-    }
-  
+  id: string,
+  updateLabelInput: UpdateLabelInput,
+) => {
+  return axiosInstance<LabelResponse>({
+    url: `/labels/${id}`,
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    data: updateLabelInput,
+  });
+};
 
+export const getPatchLabelsIdMutationOptions = <
+  TError = ErrorResponse | NotfoundError | ConflictError | InternalError,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof patchLabelsId>>,
+    TError,
+    { id: string; data: UpdateLabelInput },
+    TContext
+  >;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof patchLabelsId>>,
+  TError,
+  { id: string; data: UpdateLabelInput },
+  TContext
+> => {
+  const mutationKey = ["patchLabelsId"];
+  const { mutation: mutationOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey } };
 
-export const getPatchLabelsIdMutationOptions = <TError = ErrorResponse | NotfoundError | ConflictError | InternalError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof patchLabelsId>>, TError,{id: string;data: UpdateLabelInput}, TContext>, }
-): UseMutationOptions<Awaited<ReturnType<typeof patchLabelsId>>, TError,{id: string;data: UpdateLabelInput}, TContext> => {
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof patchLabelsId>>,
+    { id: string; data: UpdateLabelInput }
+  > = (props) => {
+    const { id, data } = props ?? {};
 
-const mutationKey = ['patchLabelsId'];
-const {mutation: mutationOptions} = options ?
-      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
-      options
-      : {...options, mutation: {...options.mutation, mutationKey}}
-      : {mutation: { mutationKey, }};
+    return patchLabelsId(id, data);
+  };
 
-      
+  return { mutationFn, ...mutationOptions };
+};
 
+export type PatchLabelsIdMutationResult = NonNullable<
+  Awaited<ReturnType<typeof patchLabelsId>>
+>;
+export type PatchLabelsIdMutationBody = UpdateLabelInput;
+export type PatchLabelsIdMutationError =
+  | ErrorResponse
+  | NotfoundError
+  | ConflictError
+  | InternalError;
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof patchLabelsId>>, {id: string;data: UpdateLabelInput}> = (props) => {
-          const {id,data} = props ?? {};
+export const usePatchLabelsId = <
+  TError = ErrorResponse | NotfoundError | ConflictError | InternalError,
+  TContext = unknown,
+>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof patchLabelsId>>,
+      TError,
+      { id: string; data: UpdateLabelInput },
+      TContext
+    >;
+  },
+  queryClient?: QueryClient,
+): UseMutationResult<
+  Awaited<ReturnType<typeof patchLabelsId>>,
+  TError,
+  { id: string; data: UpdateLabelInput },
+  TContext
+> => {
+  const mutationOptions = getPatchLabelsIdMutationOptions(options);
 
-          return  patchLabelsId(id,data,)
-        }
-
-        
-
-
-  return  { mutationFn, ...mutationOptions }}
-
-    export type PatchLabelsIdMutationResult = NonNullable<Awaited<ReturnType<typeof patchLabelsId>>>
-    export type PatchLabelsIdMutationBody = UpdateLabelInput
-    export type PatchLabelsIdMutationError = ErrorResponse | NotfoundError | ConflictError | InternalError
-
-    export const usePatchLabelsId = <TError = ErrorResponse | NotfoundError | ConflictError | InternalError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof patchLabelsId>>, TError,{id: string;data: UpdateLabelInput}, TContext>, }
- , queryClient?: QueryClient): UseMutationResult<
-        Awaited<ReturnType<typeof patchLabelsId>>,
-        TError,
-        {id: string;data: UpdateLabelInput},
-        TContext
-      > => {
-
-      const mutationOptions = getPatchLabelsIdMutationOptions(options);
-
-      return useMutation(mutationOptions , queryClient);
-    }
-    /**
+  return useMutation(mutationOptions, queryClient);
+};
+/**
  * Delete a label
  */
-export const deleteLabelsId = (
-    id: string,
- ) => {
-      
-      
-      return axiosInstance<BaseResponse>(
-      {url: `/labels/${id}`, method: 'DELETE'
-    },
-      );
-    }
-  
+export const deleteLabelsId = (id: string) => {
+  return axiosInstance<BaseResponse>({
+    url: `/labels/${id}`,
+    method: "DELETE",
+  });
+};
 
+export const getDeleteLabelsIdMutationOptions = <
+  TError = ErrorResponse | NotfoundError | InternalError,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof deleteLabelsId>>,
+    TError,
+    { id: string },
+    TContext
+  >;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof deleteLabelsId>>,
+  TError,
+  { id: string },
+  TContext
+> => {
+  const mutationKey = ["deleteLabelsId"];
+  const { mutation: mutationOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey } };
 
-export const getDeleteLabelsIdMutationOptions = <TError = ErrorResponse | NotfoundError | InternalError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteLabelsId>>, TError,{id: string}, TContext>, }
-): UseMutationOptions<Awaited<ReturnType<typeof deleteLabelsId>>, TError,{id: string}, TContext> => {
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof deleteLabelsId>>,
+    { id: string }
+  > = (props) => {
+    const { id } = props ?? {};
 
-const mutationKey = ['deleteLabelsId'];
-const {mutation: mutationOptions} = options ?
-      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
-      options
-      : {...options, mutation: {...options.mutation, mutationKey}}
-      : {mutation: { mutationKey, }};
+    return deleteLabelsId(id);
+  };
 
-      
+  return { mutationFn, ...mutationOptions };
+};
 
+export type DeleteLabelsIdMutationResult = NonNullable<
+  Awaited<ReturnType<typeof deleteLabelsId>>
+>;
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteLabelsId>>, {id: string}> = (props) => {
-          const {id} = props ?? {};
+export type DeleteLabelsIdMutationError =
+  | ErrorResponse
+  | NotfoundError
+  | InternalError;
 
-          return  deleteLabelsId(id,)
-        }
+export const useDeleteLabelsId = <
+  TError = ErrorResponse | NotfoundError | InternalError,
+  TContext = unknown,
+>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof deleteLabelsId>>,
+      TError,
+      { id: string },
+      TContext
+    >;
+  },
+  queryClient?: QueryClient,
+): UseMutationResult<
+  Awaited<ReturnType<typeof deleteLabelsId>>,
+  TError,
+  { id: string },
+  TContext
+> => {
+  const mutationOptions = getDeleteLabelsIdMutationOptions(options);
 
-        
-
-
-  return  { mutationFn, ...mutationOptions }}
-
-    export type DeleteLabelsIdMutationResult = NonNullable<Awaited<ReturnType<typeof deleteLabelsId>>>
-    
-    export type DeleteLabelsIdMutationError = ErrorResponse | NotfoundError | InternalError
-
-    export const useDeleteLabelsId = <TError = ErrorResponse | NotfoundError | InternalError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteLabelsId>>, TError,{id: string}, TContext>, }
- , queryClient?: QueryClient): UseMutationResult<
-        Awaited<ReturnType<typeof deleteLabelsId>>,
-        TError,
-        {id: string},
-        TContext
-      > => {
-
-      const mutationOptions = getDeleteLabelsIdMutationOptions(options);
-
-      return useMutation(mutationOptions , queryClient);
-    }
-    
+  return useMutation(mutationOptions, queryClient);
+};

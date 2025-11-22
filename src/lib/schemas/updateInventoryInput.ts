@@ -4,18 +4,18 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { UpdateInventoryInputGuaranteeId } from './updateInventoryInputGuaranteeId';
-import type { UpdateInventoryInputInsuranceId } from './updateInventoryInputInsuranceId';
-import type { UpdateInventoryInputLeasingId } from './updateInventoryInputLeasingId';
-import type { UpdateInventoryInputChequeId } from './updateInventoryInputChequeId';
-import type { UpdateInventoryInputCost } from './updateInventoryInputCost';
-import type { UpdateInventoryInputExpiryDate } from './updateInventoryInputExpiryDate';
-import type { UpdateInventoryInputWarehouseCode } from './updateInventoryInputWarehouseCode';
-import type { UpdateInventoryInputShelfCode } from './updateInventoryInputShelfCode';
-import type { UpdateInventoryInputHsCode } from './updateInventoryInputHsCode';
-import type { UpdateInventoryInputOriginCountry } from './updateInventoryInputOriginCountry';
-import type { UpdateInventoryInputPackageWeight } from './updateInventoryInputPackageWeight';
-import type { UpdateInventoryInputPackageDimensions } from './updateInventoryInputPackageDimensions';
+import type { UpdateInventoryInputGuaranteeId } from "./updateInventoryInputGuaranteeId";
+import type { UpdateInventoryInputInsuranceId } from "./updateInventoryInputInsuranceId";
+import type { UpdateInventoryInputLeasingId } from "./updateInventoryInputLeasingId";
+import type { UpdateInventoryInputChequeId } from "./updateInventoryInputChequeId";
+import type { UpdateInventoryInputCost } from "./updateInventoryInputCost";
+import type { UpdateInventoryInputExpiryDate } from "./updateInventoryInputExpiryDate";
+import type { UpdateInventoryInputWarehouseCode } from "./updateInventoryInputWarehouseCode";
+import type { UpdateInventoryInputShelfCode } from "./updateInventoryInputShelfCode";
+import type { UpdateInventoryInputHsCode } from "./updateInventoryInputHsCode";
+import type { UpdateInventoryInputOriginCountry } from "./updateInventoryInputOriginCountry";
+import type { UpdateInventoryInputPackageWeight } from "./updateInventoryInputPackageWeight";
+import type { UpdateInventoryInputPackageDimensions } from "./updateInventoryInputPackageDimensions";
 
 /**
  * Inventory update payload

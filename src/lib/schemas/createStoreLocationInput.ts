@@ -4,7 +4,7 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { LocationType } from './locationType';
+import type { LocationType } from "./locationType";
 
 /**
  * Store-Location assignment creation payload

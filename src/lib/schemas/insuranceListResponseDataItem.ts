@@ -4,19 +4,19 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { InsuranceListResponseDataItemDeletedAt } from './insuranceListResponseDataItemDeletedAt';
-import type { InsuranceListResponseDataItemStart } from './insuranceListResponseDataItemStart';
-import type { InsuranceListResponseDataItemMonths } from './insuranceListResponseDataItemMonths';
-import type { InsuranceListResponseDataItemDays } from './insuranceListResponseDataItemDays';
-import type { InsuranceListResponseDataItemLogo } from './insuranceListResponseDataItemLogo';
-import type { InsuranceListResponseDataItemProviderName } from './insuranceListResponseDataItemProviderName';
-import type { InsuranceListResponseDataItemCoverage } from './insuranceListResponseDataItemCoverage';
-import type { InsuranceListResponseDataItemExclusions } from './insuranceListResponseDataItemExclusions';
-import type { InsuranceListResponseDataItemClaimLimit } from './insuranceListResponseDataItemClaimLimit';
-import type { InsuranceListResponseDataItemDeductible } from './insuranceListResponseDataItemDeductible';
-import type { InsuranceListResponseDataItemClaimProcess } from './insuranceListResponseDataItemClaimProcess';
-import type { InsuranceListResponseDataItemMinOrderValue } from './insuranceListResponseDataItemMinOrderValue';
-import type { InsuranceListResponseDataItemMaxOrderValue } from './insuranceListResponseDataItemMaxOrderValue';
+import type { InsuranceListResponseDataItemDeletedAt } from "./insuranceListResponseDataItemDeletedAt";
+import type { InsuranceListResponseDataItemStart } from "./insuranceListResponseDataItemStart";
+import type { InsuranceListResponseDataItemMonths } from "./insuranceListResponseDataItemMonths";
+import type { InsuranceListResponseDataItemDays } from "./insuranceListResponseDataItemDays";
+import type { InsuranceListResponseDataItemLogo } from "./insuranceListResponseDataItemLogo";
+import type { InsuranceListResponseDataItemProviderName } from "./insuranceListResponseDataItemProviderName";
+import type { InsuranceListResponseDataItemCoverage } from "./insuranceListResponseDataItemCoverage";
+import type { InsuranceListResponseDataItemExclusions } from "./insuranceListResponseDataItemExclusions";
+import type { InsuranceListResponseDataItemClaimLimit } from "./insuranceListResponseDataItemClaimLimit";
+import type { InsuranceListResponseDataItemDeductible } from "./insuranceListResponseDataItemDeductible";
+import type { InsuranceListResponseDataItemClaimProcess } from "./insuranceListResponseDataItemClaimProcess";
+import type { InsuranceListResponseDataItemMinOrderValue } from "./insuranceListResponseDataItemMinOrderValue";
+import type { InsuranceListResponseDataItemMaxOrderValue } from "./insuranceListResponseDataItemMaxOrderValue";
 
 export type InsuranceListResponseDataItem = {
   /** Unique identifier (UUIDv4) */

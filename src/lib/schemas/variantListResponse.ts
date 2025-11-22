@@ -4,10 +4,10 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { BaseResponse } from './baseResponse';
-import type { VariantListResponseDetails } from './variantListResponseDetails';
-import type { VariantListResponseFiltersItem } from './variantListResponseFiltersItem';
-import type { VariantListResponseDataItem } from './variantListResponseDataItem';
+import type { BaseResponse } from "./baseResponse";
+import type { VariantListResponseDetails } from "./variantListResponseDetails";
+import type { VariantListResponseFiltersItem } from "./variantListResponseFiltersItem";
+import type { VariantListResponseDataItem } from "./variantListResponseDataItem";
 
 /**
  * Paginated list of variants
@@ -17,9 +17,14 @@ export type VariantListResponse = BaseResponse & {
   details?: VariantListResponseDetails;
   filters: VariantListResponseFiltersItem[];
   data: VariantListResponseDataItem[];
-} & Required<Pick<BaseResponse & {
-  /** Pagination metadata */
-  details?: VariantListResponseDetails;
-  filters: VariantListResponseFiltersItem[];
-  data: VariantListResponseDataItem[];
-}, 'filters' | 'data'>>;
+} & Required<
+    Pick<
+      BaseResponse & {
+        /** Pagination metadata */
+        details?: VariantListResponseDetails;
+        filters: VariantListResponseFiltersItem[];
+        data: VariantListResponseDataItem[];
+      },
+      "filters" | "data"
+    >
+  >;

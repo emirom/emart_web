@@ -8,13 +8,12 @@
 /**
  * Attribute type
  */
-export type AttributeType = typeof AttributeType[keyof typeof AttributeType];
-
+export type AttributeType = (typeof AttributeType)[keyof typeof AttributeType];
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const AttributeType = {
-  text: 'text',
-  number: 'number',
-  boolean: 'boolean',
-  date: 'date',
+  text: "text",
+  number: "number",
+  boolean: "boolean",
+  date: "date",
 } as const;

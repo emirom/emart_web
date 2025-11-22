@@ -4,7 +4,7 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { CreateProvinceInputAbb } from './createProvinceInputAbb';
+import type { CreateProvinceInputAbb } from "./createProvinceInputAbb";
 
 /**
  * Province creation payload

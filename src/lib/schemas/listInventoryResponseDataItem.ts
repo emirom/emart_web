@@ -4,18 +4,18 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { ListInventoryResponseDataItemGuaranteeId } from './listInventoryResponseDataItemGuaranteeId';
-import type { ListInventoryResponseDataItemInsuranceId } from './listInventoryResponseDataItemInsuranceId';
-import type { ListInventoryResponseDataItemLeasingId } from './listInventoryResponseDataItemLeasingId';
-import type { ListInventoryResponseDataItemChequeId } from './listInventoryResponseDataItemChequeId';
-import type { ListInventoryResponseDataItemCost } from './listInventoryResponseDataItemCost';
-import type { ListInventoryResponseDataItemExpiryDate } from './listInventoryResponseDataItemExpiryDate';
-import type { ListInventoryResponseDataItemWarehouseCode } from './listInventoryResponseDataItemWarehouseCode';
-import type { ListInventoryResponseDataItemShelfCode } from './listInventoryResponseDataItemShelfCode';
-import type { ListInventoryResponseDataItemHsCode } from './listInventoryResponseDataItemHsCode';
-import type { ListInventoryResponseDataItemOriginCountry } from './listInventoryResponseDataItemOriginCountry';
-import type { ListInventoryResponseDataItemPackageWeight } from './listInventoryResponseDataItemPackageWeight';
-import type { ListInventoryResponseDataItemPackageDimensions } from './listInventoryResponseDataItemPackageDimensions';
+import type { ListInventoryResponseDataItemGuaranteeId } from "./listInventoryResponseDataItemGuaranteeId";
+import type { ListInventoryResponseDataItemInsuranceId } from "./listInventoryResponseDataItemInsuranceId";
+import type { ListInventoryResponseDataItemLeasingId } from "./listInventoryResponseDataItemLeasingId";
+import type { ListInventoryResponseDataItemChequeId } from "./listInventoryResponseDataItemChequeId";
+import type { ListInventoryResponseDataItemCost } from "./listInventoryResponseDataItemCost";
+import type { ListInventoryResponseDataItemExpiryDate } from "./listInventoryResponseDataItemExpiryDate";
+import type { ListInventoryResponseDataItemWarehouseCode } from "./listInventoryResponseDataItemWarehouseCode";
+import type { ListInventoryResponseDataItemShelfCode } from "./listInventoryResponseDataItemShelfCode";
+import type { ListInventoryResponseDataItemHsCode } from "./listInventoryResponseDataItemHsCode";
+import type { ListInventoryResponseDataItemOriginCountry } from "./listInventoryResponseDataItemOriginCountry";
+import type { ListInventoryResponseDataItemPackageWeight } from "./listInventoryResponseDataItemPackageWeight";
+import type { ListInventoryResponseDataItemPackageDimensions } from "./listInventoryResponseDataItemPackageDimensions";
 
 export type ListInventoryResponseDataItem = {
   /** Unique identifier (UUIDv4) */

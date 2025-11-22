@@ -4,9 +4,9 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { CreateAttributeValueInputValue } from './createAttributeValueInputValue';
-import type { CreateAttributeValueInputAttributeId } from './createAttributeValueInputAttributeId';
-import type { CreateAttributeValueInputVariantId } from './createAttributeValueInputVariantId';
+import type { CreateAttributeValueInputValue } from "./createAttributeValueInputValue";
+import type { CreateAttributeValueInputAttributeId } from "./createAttributeValueInputAttributeId";
+import type { CreateAttributeValueInputVariantId } from "./createAttributeValueInputVariantId";
 
 /**
  * Attribute value creation payload

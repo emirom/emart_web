@@ -6,67 +6,67 @@
  */
 
 export type GetInventoriesParams = {
-/**
- * Field to sort by
- */
-field?: string | null;
-/**
- * Sort order
- */
-order?: 'asc' | 'desc' | null;
-/**
- * Number of records to skip
- * @minimum 0
- */
-skip: number;
-/**
- * Maximum number of records to return
- * @minimum 1
- * @maximum 20
- */
-limit: number;
-/**
- * Filter by store ID
- */
-storeId?: string | null;
-/**
- * Filter by location ID
- */
-locationId?: string | null;
-/**
- * Filter by variant ID
- */
-variantId?: string | null;
-/**
- * Filter by warehouse code
- */
-warehouseCode?: string | null;
-/**
- * Minimum price
- */
-minPrice?: number | null;
-/**
- * Maximum price
- */
-maxPrice?: number | null;
-/**
- * Minimum price
- */
-minCost?: number | null;
-/**
- * Maximum price
- */
-maxCost?: number | null;
-/**
- * Minimum stock quantity
- */
-minInStock?: number | null;
-/**
- * Maximum stock quantity
- */
-maxInStock?: number | null;
-/**
- * Filter by low stock status
- */
-isLowStock?: boolean | null;
+  /**
+   * Field to sort by
+   */
+  field?: string | null;
+  /**
+   * Sort order
+   */
+  order?: "asc" | "desc" | null;
+  /**
+   * Number of records to skip
+   * @minimum 0
+   */
+  skip: number;
+  /**
+   * Maximum number of records to return
+   * @minimum 1
+   * @maximum 20
+   */
+  limit: number;
+  /**
+   * Filter by store ID
+   */
+  storeId?: string | null;
+  /**
+   * Filter by location ID
+   */
+  locationId?: string | null;
+  /**
+   * Filter by variant ID
+   */
+  variantId?: string | null;
+  /**
+   * Filter by warehouse code
+   */
+  warehouseCode?: string | null;
+  /**
+   * Minimum price
+   */
+  minPrice?: number | null;
+  /**
+   * Maximum price
+   */
+  maxPrice?: number | null;
+  /**
+   * Minimum price
+   */
+  minCost?: number | null;
+  /**
+   * Maximum price
+   */
+  maxCost?: number | null;
+  /**
+   * Minimum stock quantity
+   */
+  minInStock?: number | null;
+  /**
+   * Maximum stock quantity
+   */
+  maxInStock?: number | null;
+  /**
+   * Filter by low stock status
+   */
+  isLowStock?: boolean | null;
 };

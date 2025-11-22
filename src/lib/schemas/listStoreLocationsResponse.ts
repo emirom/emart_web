@@ -4,10 +4,10 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { BaseResponse } from './baseResponse';
-import type { ListStoreLocationsResponseDetails } from './listStoreLocationsResponseDetails';
-import type { ListStoreLocationsResponseFiltersItem } from './listStoreLocationsResponseFiltersItem';
-import type { ListStoreLocationsResponseDataItem } from './listStoreLocationsResponseDataItem';
+import type { BaseResponse } from "./baseResponse";
+import type { ListStoreLocationsResponseDetails } from "./listStoreLocationsResponseDetails";
+import type { ListStoreLocationsResponseFiltersItem } from "./listStoreLocationsResponseFiltersItem";
+import type { ListStoreLocationsResponseDataItem } from "./listStoreLocationsResponseDataItem";
 
 /**
  * List of store-location assignments response
@@ -17,9 +17,14 @@ export type ListStoreLocationsResponse = BaseResponse & {
   details?: ListStoreLocationsResponseDetails;
   filters: ListStoreLocationsResponseFiltersItem[];
   data: ListStoreLocationsResponseDataItem[];
-} & Required<Pick<BaseResponse & {
-  /** Pagination metadata */
-  details?: ListStoreLocationsResponseDetails;
-  filters: ListStoreLocationsResponseFiltersItem[];
-  data: ListStoreLocationsResponseDataItem[];
-}, 'filters' | 'data'>>;
+} & Required<
+    Pick<
+      BaseResponse & {
+        /** Pagination metadata */
+        details?: ListStoreLocationsResponseDetails;
+        filters: ListStoreLocationsResponseFiltersItem[];
+        data: ListStoreLocationsResponseDataItem[];
+      },
+      "filters" | "data"
+    >
+  >;

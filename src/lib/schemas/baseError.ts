@@ -4,8 +4,8 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { BaseErrorSuccess } from './baseErrorSuccess';
-import type { BaseErrorError } from './baseErrorError';
+import type { BaseErrorSuccess } from "./baseErrorSuccess";
+import type { BaseErrorError } from "./baseErrorError";
 
 /**
  * Standard API error format
