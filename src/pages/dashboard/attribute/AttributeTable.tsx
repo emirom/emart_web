@@ -3,7 +3,7 @@
 import { CustomDataTable } from "@components/CustomDataTable";
 import { Attribute } from "@lib/schemas/attribute";
 import { useGetAttributes } from "@lib/services/attributes/attributes";
-import { FilterAttribute } from "@lib/types/filter-generator";
+import { AttributeFilter } from "@lib/types/filter-generator";
 import { ColumnDef } from "@tanstack/react-table";
 import { useSearchParams } from "next/navigation";
 import AttributeActions from "./AttributeAction";
@@ -12,7 +12,7 @@ import CreateAttribute from "./CreateAttribute";
 export default function AttributeTable({
   initialQuery,
 }: {
-  initialQuery?: FilterAttribute;
+  initialQuery?: AttributeFilter;
 }) {
   const searchParams = useSearchParams();
 

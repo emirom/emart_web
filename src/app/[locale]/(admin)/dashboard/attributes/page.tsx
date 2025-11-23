@@ -5,7 +5,7 @@ import { HeaderWithLink } from "@components/HeaderWithLink";
 import { TablePagination } from "@components/TablePagination";
 import { queryClient } from "@lib/apis/queryClient";
 import { getAttributes } from "@lib/services/attributes/attributes";
-import { FilterAttribute } from "@lib/types/filter-generator";
+import { AttributeFilter } from "@lib/types/filter-generator";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 
 export const metadata: Metadata = {
@@ -19,7 +19,7 @@ export default async function Page({
   searchParams: Promise<Record<string, string>>;
 }) {
   const sp = searchParams ? await searchParams : {};
-  const initialQuery: FilterAttribute = {
+  const initialQuery: AttributeFilter = {
     page: Number(sp?.page ?? 0),
     title: sp.title,
   };

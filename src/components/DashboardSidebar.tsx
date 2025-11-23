@@ -1,42 +1,12 @@
 "use client";
 
 import { cn } from "@components/lib/utils";
-import {
-  ClipboardClock,
-  Flag,
-  Home,
-  LandPlot,
-  Package,
-  PackageSearch,
-  PaintBucket,
-  Scale,
-  Settings,
-  ShieldCheck,
-  Tags,
-  Umbrella,
-  Users,
-} from "lucide-react";
+import { navItems } from "@lib/constants/dashboard-navbar-items";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 export default function DashboardSidebar() {
   const pathname = usePathname();
-
-  const navItems = [
-    { href: "/", label: "صفحه اصلی", icon: Home },
-    { href: "/dashboard/products", label: "محصولات", icon: Package },
-    { href: "/dashboard/inventory", label: "موجودی", icon: ClipboardClock },
-    { href: "/dashboard/variants", label: "تنوع محصول", icon: PackageSearch },
-    { href: "/dashboard/users", label: "کاربران", icon: Users },
-    { href: "/dashboard/colors", label: "رنگ‌ها", icon: PaintBucket },
-    { href: "/dashboard/attributes", label: "ویژگی‌ها", icon: LandPlot },
-    { href: "/dashboard/labels", label: "برچسب‌ها", icon: Tags },
-    { href: "/dashboard/units", label: "کمیت ها", icon: Scale },
-    { href: "/dashboard/brands", label: "برندها", icon: Flag },
-    { href: "/dashboard/guarantees", label: "گارانتی ها", icon: ShieldCheck },
-    { href: "/dashboard/insurances", label: "بیمه ها", icon: Umbrella },
-    { href: "/settings", label: "تنظیمات", icon: Settings },
-  ];
 
   return (
     <nav aria-label="منوی اصلی پنل مدیریت" className="space-y-3 text-gray-800">
