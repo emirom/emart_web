@@ -5,6 +5,7 @@ import {
   GetCountriesParams,
   GetLabelsParams,
   GetProductsParams,
+  GetProvincesParams,
   GetUnitsParams,
   GetVariantsParams,
 } from "@lib/schemas";
@@ -26,3 +27,5 @@ export type UnitFilter = Partial<GetUnitsParams> & PageFilter;
 export type BrandFilter = Partial<GetBrandsParams> & PageFilter;
 
 export type CountryFilter = Partial<GetCountriesParams> & PageFilter;
+
+export type ProvinceFilter = Partial<GetProvincesParams> & PageFilter;
