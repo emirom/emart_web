@@ -38,6 +38,6 @@ export const navItems = [
     label: " استان ها",
     icon: ProvincesIcon,
   },
-  { href: "/dashboard/city", label: "شهرها", icon: CityIcon },
+  { href: "/dashboard/cities", label: "شهرها", icon: CityIcon },
   { href: "/settings", label: "تنظیمات", icon: Settings },
 ];

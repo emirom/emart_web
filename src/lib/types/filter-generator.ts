@@ -1,6 +1,7 @@
 import {
   GetAttributesParams,
   GetBrandsParams,
+  GetCitiesParams,
   GetColorsParams,
   GetCountriesParams,
   GetLabelsParams,
@@ -29,3 +30,5 @@ export type BrandFilter = Partial<GetBrandsParams> & PageFilter;
 export type CountryFilter = Partial<GetCountriesParams> & PageFilter;
 
 export type ProvinceFilter = Partial<GetProvincesParams> & PageFilter;
+
+export type CityFilter = Partial<GetCitiesParams> & PageFilter;
