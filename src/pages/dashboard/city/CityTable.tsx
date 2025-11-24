@@ -6,7 +6,6 @@ import { useGetCities } from "@lib/services/cities/cities";
 import { CityFilter } from "@lib/types/filter-generator";
 import { ColumnDef } from "@tanstack/react-table";
 import { useSearchParams } from "next/navigation";
-import { useEffect } from "react";
 import CityAction from "./CityAction";
 import CreateCity from "./CreateCity";
 
@@ -32,21 +31,12 @@ export default function CityTable({
   const page = Number(searchParams!.get("page") ?? initialQuery?.page ?? 0);
   const skip = page * 10;
 
-  const { data: cities, refetch } = useGetCities({
+  const { data: cities } = useGetCities({
     skip,
     limit: 10,
     provinceId: searchParams!.get("provinceId") ?? initialQuery?.provinceId,
     search: searchParams!.get("search") ?? initialQuery?.search,
   });
-
-  // Refetch data after component mounts to ensure fresh data after potential mutations
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      refetch();
-    }, 10); // Small delay to allow hydration to complete
-
-    return () => clearTimeout(timer);
-  }, [refetch]);
 
   return (
     <CustomDataTable
