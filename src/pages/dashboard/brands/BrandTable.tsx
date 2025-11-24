@@ -7,6 +7,7 @@ import { Brand } from "@lib/schemas";
 import { useGetBrands } from "@lib/services/brands/brands";
 import { ColumnDef } from "@tanstack/react-table";
 import { useSearchParams } from "next/navigation";
+import { useEffect } from "react";
 
 import { BrandFilter } from "@lib/types/filter-generator";
 import BrandsAction from "./BrandsAction";
@@ -36,7 +37,7 @@ const columns: ColumnDef<Brand>[] = [
           (max-width: 1280px) 10vw,8vw"
           className={cn(
             " w-[40%] h-[48%] mx-auto  aspect-[16/15] transition-opacity duration-300",
-            "!opacity-100 !duration-0",
+            "!opacity-100 !duration-0"
           )}
           style={{ opacity: 1, transition: "none" }}
           itemProp="image"
@@ -111,13 +112,22 @@ export default function BrandTable({
 }) {
   const searchParams = useSearchParams();
 
-  const { data: brands } = useGetBrands({
+  const { data: brands, refetch } = useGetBrands({
     skip: initialQuery?.page ?? 0,
     limit: 10,
     name: searchParams?.get("name") ?? initialQuery?.name,
     enName: searchParams?.get("enName") ?? initialQuery?.enName,
     website: searchParams?.get("website") ?? initialQuery?.website,
   });
+
+  // Refetch data after component mounts to ensure fresh data after potential mutations
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      refetch();
+    }, 100); // Small delay to allow hydration to complete
+
+    return () => clearTimeout(timer);
+  }, [refetch]);
 
   return (
     <CustomDataTable

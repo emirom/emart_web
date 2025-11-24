@@ -48,7 +48,6 @@ export default function ProductMobileTab() {
                 key={tab.id}
                 role="tab"
                 id={`tab-${tab.id.replace("#", "")}`}
-                aria-controls={tab.id.replace("#", "")}
                 aria-selected={tabActive === tab.id}
                 onClick={() => handleSmoothScroll(tab.id)}
                 className={`py-2 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-tint-blue-500 focus-visible:rounded-md ${

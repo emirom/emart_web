@@ -27,7 +27,7 @@ export default function MobileProductSpecifications() {
       <div
         className={cn(
           "relative border border-tint-blue-500 rounded-lg shadow-sm bg-white p-3 transition-[height] duration-300 ease-in-out will-change-transform",
-          open ? "h-fit overflow-visible" : "h-[10vh] overflow-hidden",
+          open ? "h-fit overflow-visible" : "h-[10vh] overflow-hidden"
         )}
         id="product-specs-content"
       >
@@ -64,7 +64,6 @@ export default function MobileProductSpecifications() {
           onClick={toggleOpen}
           className="text-tint-blue-500 bg-white border border-tint-blue-500 rounded-tl-none rounded-tr-none border-t-0 py-[0.125rem] mx-auto cursor-pointer text-xs"
           aria-expanded={open}
-          aria-controls="product-specs-content"
           type="button"
         >
           {open ? "بستن" : "بیشتر"}

@@ -6,6 +6,7 @@ import { FormScrollableSelectField } from "@components/FormScrollableSelectField
 import { zodResolver } from "@hookform/resolvers/zod";
 import { putAttributeAction } from "@lib/actions/attribute-action";
 import { queryClient } from "@lib/apis/queryClient";
+import { invalidateEntityQueries } from "@lib/utils/react-query-utils";
 import { attributeUnits } from "@lib/constants/attribute-units";
 import { UpdateAttributeInput } from "@lib/schemas";
 import { useGetAttributesId } from "@lib/services/attributes/attributes";
@@ -45,7 +46,8 @@ export default function EditAttributeForm({ id }: { id: string }) {
   ) => {
     try {
       await putAttributeAction(id, data);
-      queryClient.invalidateQueries({ queryKey: ["/attributes"] });
+      // Invalidate all queries that start with "/attributes" and refetch
+      await invalidateEntityQueries(queryClient, "/attributes");
       toast.success("ویژگی ویرایش شد");
     } catch (error: unknown) {
       if (error instanceof Error) {

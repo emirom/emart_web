@@ -7,6 +7,7 @@ import { FormScrollableSelectField } from "@components/FormScrollableSelectField
 import { zodResolver } from "@hookform/resolvers/zod";
 import { postAttributeAction } from "@lib/actions/attribute-action";
 import { queryClient } from "@lib/apis/queryClient";
+import { invalidateEntityQueries } from "@lib/utils/react-query-utils";
 import { attributeUnits } from "@lib/constants/attribute-units";
 import { CreateAttributeInput } from "@lib/schemas";
 import { useGetCategories } from "@lib/services/categories/categories";
@@ -31,7 +32,8 @@ export default function CreateAttributeForm() {
   const onSubmit: SubmitHandler<CreateAttributeInput> = async (data) => {
     try {
       await postAttributeAction(data);
-      queryClient.invalidateQueries({ queryKey: ["/attributes"] });
+      // Invalidate all queries that start with "/attributes" and refetch
+      await invalidateEntityQueries(queryClient, "/attributes");
       toast.success("ویژگی اضافه شد");
       reset();
     } catch (error: unknown) {

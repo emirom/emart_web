@@ -6,6 +6,7 @@ import { FormScrollableSelectField } from "@components/FormScrollableSelectField
 import { zodResolver } from "@hookform/resolvers/zod";
 import { patchBrandAction } from "@lib/actions/brand-action";
 import { queryClient } from "@lib/apis/queryClient";
+import { invalidateEntityQueries } from "@lib/utils/react-query-utils";
 import { UpdateBrandInput } from "@lib/schemas";
 import { useGetBrandsId } from "@lib/services/brands/brands";
 import { patchBrandsIdBody } from "@lib/validations/brand.validation";
@@ -37,7 +38,8 @@ export default function EditBrandForm({ id }: { id: string }) {
   const onSubmit: SubmitHandler<UpdateBrandInput> = async (data) => {
     try {
       await patchBrandAction(id, data);
-      queryClient.invalidateQueries({ queryKey: ["/brands"] });
+      // Invalidate all queries that start with "/brands" and refetch
+      await invalidateEntityQueries(queryClient, "/brands");
       toast.success("برند ویرایش  شد");
       reset();
     } catch (error: unknown) {

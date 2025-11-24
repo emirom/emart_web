@@ -6,6 +6,7 @@ import { FormScrollableSelectField } from "@components/FormScrollableSelectField
 import { zodResolver } from "@hookform/resolvers/zod";
 import { patchCityAction } from "@lib/actions/city-action";
 import { queryClient } from "@lib/apis/queryClient";
+import { invalidateEntityQueries } from "@lib/utils/react-query-utils";
 import { UpdateCity } from "@lib/schemas";
 import { useGetCitiesId } from "@lib/services/cities/cities";
 import { useGetProvinces } from "@lib/services/provinces/provinces";
@@ -33,7 +34,8 @@ export default function EditCityForm({ id }: { id: string }) {
   const onSubmit: SubmitHandler<UpdateCity> = async (data) => {
     try {
       await patchCityAction(id, data);
-      queryClient.invalidateQueries({ queryKey: ["/cities"] });
+      // Invalidate all queries that start with "/cities" and refetch
+      await invalidateEntityQueries(queryClient, "/cities");
       toast.success("شهر اضافه شد");
       reset();
     } catch (error: unknown) {

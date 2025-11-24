@@ -6,6 +6,7 @@ import { FormScrollableSelectField } from "@components/FormScrollableSelectField
 import { zodResolver } from "@hookform/resolvers/zod";
 import { postBrandAction } from "@lib/actions/brand-action";
 import { queryClient } from "@lib/apis/queryClient";
+import { invalidateEntityQueries } from "@lib/utils/react-query-utils";
 import { CreateBrandInput } from "@lib/schemas";
 import { postBrandsBody } from "@lib/validations/brand.validation";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -29,7 +30,8 @@ export default function CreateBrandForm() {
   const onSubmit: SubmitHandler<CreateBrandInput> = async (data) => {
     try {
       await postBrandAction(data);
-      queryClient.invalidateQueries({ queryKey: ["/brands"] });
+      // Invalidate all queries that start with "/brands" and refetch
+      await invalidateEntityQueries(queryClient, "/brands");
       toast.success("برند اضافه شد");
       reset();
     } catch (error: unknown) {

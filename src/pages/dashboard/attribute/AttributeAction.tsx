@@ -5,6 +5,7 @@ import { DeleteButton, EditButton } from "@components/BtnWithIcon";
 import { DashboardCustomModal } from "@components/DashboardCustomModal";
 import { deleteAttributeAction } from "@lib/actions/attribute-action";
 import { queryClient } from "@lib/apis/queryClient";
+import { invalidateEntityQueries } from "@lib/utils/react-query-utils";
 import { toast } from "react-toastify";
 import { useState, useEffect } from "react";
 import EditAttributeForm from "./EditAttributeForm";
@@ -19,7 +20,8 @@ export default function AttributeActions({ id }: { id: string }) {
   const handleDelete = async () => {
     try {
       await deleteAttributeAction(id);
-      queryClient.invalidateQueries({ queryKey: ["/attributes"] });
+      // Invalidate all queries that start with "/attributes" and refetch
+      await invalidateEntityQueries(queryClient, "/attributes");
       toast.success("ویژگی حذف شد");
     } catch (error: unknown) {
       if (error instanceof Error) {

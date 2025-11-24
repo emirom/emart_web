@@ -5,11 +5,12 @@ import { DeleteButton, EditButton } from "@components/BtnWithIcon";
 import { DashboardCustomModal } from "@components/DashboardCustomModal";
 import { deleteCityAction } from "@lib/actions/city-action";
 import { queryClient } from "@lib/apis/queryClient";
+import { invalidateEntityQueries } from "@lib/utils/react-query-utils";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import EditCityForm from "./EditCityForm";
 
-export default function ProvincesAction({ id }: { id: string }) {
+export default function CityAction({ id }: { id: string }) {
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
@@ -19,11 +20,12 @@ export default function ProvincesAction({ id }: { id: string }) {
   const handleDelete = async () => {
     try {
       await deleteCityAction(id);
-      queryClient.invalidateQueries({ queryKey: ["/cities"] });
+      // Invalidate all queries that start with "/cities" and refetch
+      await invalidateEntityQueries(queryClient, "/cities");
       toast.success("شهر  حذف شد");
     } catch (error: unknown) {
       if (error instanceof Error) {
-        toast.error(error.message);
+        toast.error("خطایی رخ داده است");
       } else {
         toast.error("خطایی رخ داده است");
       }

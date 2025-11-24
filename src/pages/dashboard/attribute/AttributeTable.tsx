@@ -6,6 +6,8 @@ import { useGetAttributes } from "@lib/services/attributes/attributes";
 import { AttributeFilter } from "@lib/types/filter-generator";
 import { ColumnDef } from "@tanstack/react-table";
 import { useSearchParams } from "next/navigation";
+import { useEffect } from "react";
+import { queryClient } from "@lib/apis/queryClient";
 import AttributeActions from "./AttributeAction";
 import CreateAttribute from "./CreateAttribute";
 
@@ -31,11 +33,20 @@ export default function AttributeTable({
     },
   ];
 
-  const { data: attributes } = useGetAttributes({
+  const { data: attributes, refetch } = useGetAttributes({
     skip: initialQuery?.page || 0,
     limit: 10,
     title: searchParams?.get("title") ?? initialQuery?.title,
   });
+
+  // Refetch data after component mounts to ensure fresh data after potential mutations
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      refetch();
+    }, 100); // Small delay to allow hydration to complete
+
+    return () => clearTimeout(timer);
+  }, [refetch]);
 
   return (
     <CustomDataTable
