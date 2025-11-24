@@ -25,11 +25,11 @@ export default async function Page({
   await queryClient.prefetchQuery({
     queryKey: [
       "/labels",
-      { skip: initialQuery.page, limit: 10, name: initialQuery.name },
+      { skip: initialQuery.page ?? 0, limit: 10, name: initialQuery.name },
     ],
     queryFn: () =>
       getLabels({
-        skip: initialQuery.page,
+        skip: initialQuery.page ?? 0,
         limit: 10,
         name: initialQuery.name,
       }),

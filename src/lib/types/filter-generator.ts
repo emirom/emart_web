@@ -11,7 +11,7 @@ import {
   GetVariantsParams,
 } from "@lib/schemas";
 type PageFilter = {
-  page: number;
+  page?: number;
 };
 export type VariantFilter = Partial<GetVariantsParams> & PageFilter;
 

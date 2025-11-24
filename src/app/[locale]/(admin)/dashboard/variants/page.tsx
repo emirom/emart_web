@@ -29,7 +29,7 @@ export default async function Page({
     queryKey: [
       "/variants",
       {
-        skip: initialQuery.page * 10,
+        skip: (initialQuery.page ?? 0) * 10,
         limit: 10,
         sku: initialQuery.sku,
         barcode: initialQuery.barcode,
@@ -38,7 +38,7 @@ export default async function Page({
     ],
     queryFn: () =>
       getVariants({
-        skip: initialQuery.page,
+        skip: initialQuery.page ?? 0,
         limit: 10,
         sku: initialQuery.sku,
         barcode: initialQuery.barcode,

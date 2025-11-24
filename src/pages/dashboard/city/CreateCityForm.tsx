@@ -24,8 +24,8 @@ export default function CreateCityForm() {
   });
   const onSubmit: SubmitHandler<CreateCity> = async (data) => {
     try {
-      queryClient.invalidateQueries({ queryKey: ["/cities"] });
       await postCityAction(data);
+      queryClient.invalidateQueries({ queryKey: ["/cities"] });
       toast.success("شهر اضافه شد");
       reset();
     } catch (error: unknown) {

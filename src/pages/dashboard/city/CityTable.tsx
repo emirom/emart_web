@@ -24,7 +24,7 @@ const columns: ColumnDef<City>[] = [
 export default function CityTable({
   initialQuery,
 }: {
-  initialQuery?: CityFilter;
+  initialQuery: CityFilter;
 }) {
   const searchParams = useSearchParams();
 
@@ -35,7 +35,6 @@ export default function CityTable({
     skip,
     limit: 10,
     provinceId: searchParams!.get("provinceId") ?? initialQuery?.provinceId,
-
     search: searchParams!.get("search") ?? initialQuery?.search,
   });
 

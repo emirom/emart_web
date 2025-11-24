@@ -25,11 +25,11 @@ export default async function Page({
   await queryClient.prefetchQuery({
     queryKey: [
       "/units",
-      { skip: initialQuery.page, limit: 10, title: initialQuery.title },
+      { skip: initialQuery.page ?? 0, limit: 10, title: initialQuery.title },
     ],
     queryFn: () =>
       getUnits({
-        skip: initialQuery.page,
+        skip: initialQuery.page ?? 0,
         limit: 10,
         title: initialQuery.title,
       }),

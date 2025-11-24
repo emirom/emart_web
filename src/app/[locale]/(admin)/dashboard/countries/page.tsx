@@ -29,7 +29,7 @@ export default async function Page({
     queryKey: [
       "/countries",
       {
-        skip: initialQuery.page,
+        skip: initialQuery.page ?? 0,
         limit: 10,
         name: initialQuery.name,
         isoCode: initialQuery.isoCode,
@@ -38,7 +38,7 @@ export default async function Page({
     ],
     queryFn: () =>
       getCountries({
-        skip: initialQuery.page,
+        skip: initialQuery.page ?? 0,
         limit: 10,
         name: initialQuery.name,
         isoCode: initialQuery.isoCode,

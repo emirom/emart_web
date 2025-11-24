@@ -26,10 +26,14 @@ export default async function Page({
   await queryClient.prefetchQuery({
     queryKey: [
       "/attributes",
-      { skip: initialQuery.page, limit: 10, title: initialQuery.title },
+      { skip: initialQuery.page ?? 0, limit: 10, title: initialQuery.title },
     ],
     queryFn: () =>
-      getAttributes({ skip: initialQuery.page, limit: 10, title: sp.title }),
+      getAttributes({
+        skip: initialQuery.page ?? 0,
+        limit: 10,
+        title: sp.title,
+      }),
   });
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>

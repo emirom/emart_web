@@ -28,7 +28,7 @@ export default async function Page({
     queryKey: [
       "/brands",
       {
-        skip: initialQuery.page,
+        skip: initialQuery.page ?? 0,
         limit: 10,
         name: initialQuery.name,
         enName: initialQuery.enName,
@@ -38,7 +38,7 @@ export default async function Page({
     queryFn: () =>
       getBrands({
         limit: 10,
-        skip: initialQuery.page,
+        skip: initialQuery.page ?? 0,
         name: initialQuery.name,
         enName: initialQuery.enName,
         website: initialQuery?.website,

@@ -24,14 +24,14 @@ export default async function Page({
     queryKey: [
       "/guarantees",
       {
-        skip: initialQuery.page * 10,
+        skip: (initialQuery.page ?? 0) * 10,
         limit: 10,
         title: initialQuery.title,
       },
     ],
     queryFn: () =>
       getGuarantees({
-        skip: initialQuery.page * 10,
+        skip: (initialQuery.page ?? 0) * 10,
         limit: 10,
         title: initialQuery.title,
       }),

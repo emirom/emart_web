@@ -25,14 +25,14 @@ export default async function Page({
     queryKey: [
       "/insurances",
       {
-        skip: initialQuery.page * 10,
+        skip: (initialQuery.page ?? 0) * 10,
         limit: 10,
         title: initialQuery.title,
       },
     ],
     queryFn: () =>
       getInsurances({
-        skip: initialQuery.page * 10,
+        skip: (initialQuery.page ?? 0) * 10,
         limit: 10,
         title: initialQuery.title,
       }),

@@ -37,7 +37,6 @@ export async function deleteCityAction(id: string) {
   try {
     await deleteCitiesId(id);
     revalidatePath("/dashboard/cities");
-    revalidatePath("/dashboard/cities/" + id);
   } catch (error) {
     if (error instanceof Error) {
       throw error.message;

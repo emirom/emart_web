@@ -19,12 +19,8 @@ export default async function Page({
 }) {
   const sp = searchParams ? await searchParams : {};
 
-  const page = Number(sp.page ?? 0);
-  const skip = page * 10;
-
   const initialQuery: CityFilter = {
-    page,
-    skip,
+    skip: Number(sp.page ?? 0) * 10,
     limit: 10,
     provinceId: sp?.provinceId,
     search: sp?.search,
@@ -34,7 +30,7 @@ export default async function Page({
     queryKey: [
       "/cities",
       {
-        skip,
+        skip: initialQuery.skip ?? 0,
         limit: 10,
         provinceId: initialQuery.provinceId,
         search: initialQuery.search,
@@ -42,7 +38,7 @@ export default async function Page({
     ],
     queryFn: () =>
       getCities({
-        skip,
+        skip: initialQuery.skip ?? 0,
         limit: 10,
         provinceId: initialQuery.provinceId,
         search: initialQuery.search,
