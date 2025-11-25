@@ -3,17 +3,16 @@
 import { AlertDialogModal } from "@components/AlertDialogModal";
 import { DeleteButton, EditButton } from "@components/BtnWithIcon";
 import { DashboardCustomModal } from "@components/DashboardCustomModal";
-import { deleteLabelAction } from "@lib/actions/label-action";
-import { queryClient } from "@lib/apis/queryClient";
+import { deleteLocationAction } from "@lib/actions/location-action";
 import { toast } from "react-toastify";
-import EditLabelForm from "./EditLabelForm";
+import EditLocationForm from "./EditLocationForm";
 
-export default function LabelAction({ id }: { id: string }) {
+export default function LocationAction({ id }: { id: string }) {
   const handleDelete = async () => {
     try {
-      await deleteLabelAction(id);
-      queryClient.invalidateQueries({ queryKey: ["/labels"] });
-      toast.success("برچسب حذف شد");
+      await deleteLocationAction(id);
+
+      toast.success("آدرس حذف شد");
     } catch (error) {
       if (error instanceof Error) {
         toast.error(error.message);
@@ -26,14 +25,14 @@ export default function LabelAction({ id }: { id: string }) {
   return (
     <div className="flex items-center justify-center w-full">
       <AlertDialogModal
-        alertTitle="آیا از حذف این برچسب اطمینان دارید؟"
+        alertTitle="آیا از حذف این آدرس اطمینان دارید؟"
         button={<DeleteButton />}
         onConfirm={handleDelete}
       />
       <DashboardCustomModal
-        title="ویرایش برچسب"
+        title="ویرایش آدرس"
         button={<EditButton />}
-        element={<EditLabelForm id={id} />}
+        element={<EditLocationForm id={id} />}
       />
     </div>
   );
