@@ -33,20 +33,11 @@ export default function AttributeTable({
     },
   ];
 
-  const { data: attributes, refetch } = useGetAttributes({
+  const { data: attributes } = useGetAttributes({
     skip: initialQuery?.page || 0,
     limit: 10,
     title: searchParams?.get("title") ?? initialQuery?.title,
   });
-
-  // Refetch data after component mounts to ensure fresh data after potential mutations
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      refetch();
-    }, 100); // Small delay to allow hydration to complete
-
-    return () => clearTimeout(timer);
-  }, [refetch]);
 
   return (
     <CustomDataTable

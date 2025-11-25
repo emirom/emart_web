@@ -95,8 +95,8 @@ export default function StoreTable({ data }: { data: ListStoresResponse }) {
       columns={columns}
       // filterConfigs={data?.filters}
       emptyMessage="فروشگاهی یافت نشد"
-      filterColumnKey="name"
       filterPlaceholder="نام فروشگاه را وارد نمایید"
+      filterColumnKey="name"
     />
   );
 }
