@@ -1,11 +1,16 @@
 "use client";
 import { CustomDataTable } from "@components/CustomDataTable";
 import { Currency, CurrencyListResponse } from "@lib/schemas";
+import { RowNumber } from "@lib/types/row-number";
 import { ColumnDef } from "@tanstack/react-table";
 import CreateCurrency from "./CreateCurrency";
 import CurrencyAction from "./CurrencyAction";
 
-const columns: ColumnDef<Currency>[] = [
+const columns: ColumnDef<Currency & RowNumber>[] = [
+  {
+    accessorKey: "rowNumber",
+    header: "",
+  },
   {
     accessorKey: "name",
     header: "نام ارز",
