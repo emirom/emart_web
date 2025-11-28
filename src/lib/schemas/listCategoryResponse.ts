@@ -4,10 +4,10 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { BaseResponse } from './baseResponse';
-import type { ListCategoryResponseDetails } from './listCategoryResponseDetails';
-import type { ListCategoryResponseFiltersItem } from './listCategoryResponseFiltersItem';
-import type { ListCategoryResponseDataItem } from './listCategoryResponseDataItem';
+import type { BaseResponse } from "./baseResponse";
+import type { ListCategoryResponseDetails } from "./listCategoryResponseDetails";
+import type { ListCategoryResponseFiltersItem } from "./listCategoryResponseFiltersItem";
+import type { ListCategoryResponseDataItem } from "./listCategoryResponseDataItem";
 
 /**
  * Response schema for listing categories with pagination and metadata
@@ -18,10 +18,15 @@ export type ListCategoryResponse = BaseResponse & {
   filters: ListCategoryResponseFiltersItem[];
   /** Array of categories matching the query */
   data: ListCategoryResponseDataItem[];
-} & Required<Pick<BaseResponse & {
-  /** Pagination metadata */
-  details?: ListCategoryResponseDetails;
-  filters: ListCategoryResponseFiltersItem[];
-  /** Array of categories matching the query */
-  data: ListCategoryResponseDataItem[];
-}, 'filters' | 'data'>>;
+} & Required<
+    Pick<
+      BaseResponse & {
+        /** Pagination metadata */
+        details?: ListCategoryResponseDetails;
+        filters: ListCategoryResponseFiltersItem[];
+        /** Array of categories matching the query */
+        data: ListCategoryResponseDataItem[];
+      },
+      "filters" | "data"
+    >
+  >;

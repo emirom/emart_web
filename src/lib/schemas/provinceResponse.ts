@@ -4,8 +4,8 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { BaseResponse } from './baseResponse';
-import type { Province } from './province';
+import type { BaseResponse } from "./baseResponse";
+import type { Province } from "./province";
 
 /**
  * Response for single province operations

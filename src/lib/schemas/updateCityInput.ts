@@ -4,7 +4,7 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { UpdateCityInputAbb } from './updateCityInputAbb';
+import type { UpdateCityInputAbb } from "./updateCityInputAbb";
 
 /**
  * City entity with province reference

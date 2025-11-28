@@ -4,11 +4,11 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { GuaranteeListResponseFiltersItemLabel } from './guaranteeListResponseFiltersItemLabel';
-import type { GuaranteeListResponseFiltersItemModel } from './guaranteeListResponseFiltersItemModel';
-import type { GuaranteeListResponseFiltersItemField } from './guaranteeListResponseFiltersItemField';
-import type { GuaranteeListResponseFiltersItemAdvanced } from './guaranteeListResponseFiltersItemAdvanced';
-import type { GuaranteeListResponseFiltersItemEnumOptions } from './guaranteeListResponseFiltersItemEnumOptions';
+import type { GuaranteeListResponseFiltersItemLabel } from "./guaranteeListResponseFiltersItemLabel";
+import type { GuaranteeListResponseFiltersItemModel } from "./guaranteeListResponseFiltersItemModel";
+import type { GuaranteeListResponseFiltersItemField } from "./guaranteeListResponseFiltersItemField";
+import type { GuaranteeListResponseFiltersItemAdvanced } from "./guaranteeListResponseFiltersItemAdvanced";
+import type { GuaranteeListResponseFiltersItemEnumOptions } from "./guaranteeListResponseFiltersItemEnumOptions";
 
 export type GuaranteeListResponseFiltersItem = {
   /** The key representing the service associated with the filter. */

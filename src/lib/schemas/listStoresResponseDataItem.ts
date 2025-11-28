@@ -4,12 +4,12 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { ListStoresResponseDataItemLogo } from './listStoresResponseDataItemLogo';
-import type { ListStoresResponseDataItemDescription } from './listStoresResponseDataItemDescription';
-import type { ListStoresResponseDataItemEmail } from './listStoresResponseDataItemEmail';
-import type { ListStoresResponseDataItemPhone } from './listStoresResponseDataItemPhone';
-import type { ListStoresResponseDataItemWebsite } from './listStoresResponseDataItemWebsite';
-import type { ListStoresResponseDataItemOwnerId } from './listStoresResponseDataItemOwnerId';
+import type { ListStoresResponseDataItemLogo } from "./listStoresResponseDataItemLogo";
+import type { ListStoresResponseDataItemDescription } from "./listStoresResponseDataItemDescription";
+import type { ListStoresResponseDataItemEmail } from "./listStoresResponseDataItemEmail";
+import type { ListStoresResponseDataItemPhone } from "./listStoresResponseDataItemPhone";
+import type { ListStoresResponseDataItemWebsite } from "./listStoresResponseDataItemWebsite";
+import type { ListStoresResponseDataItemOwnerId } from "./listStoresResponseDataItemOwnerId";
 
 export type ListStoresResponseDataItem = {
   /** Unique identifier (UUIDv4) */

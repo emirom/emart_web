@@ -4,9 +4,9 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { CreateAttributeInputType } from './createAttributeInputType';
-import type { CreateAttributeInputUnit } from './createAttributeInputUnit';
-import type { CreateAttributeInputIconUrl } from './createAttributeInputIconUrl';
+import type { CreateAttributeInputType } from "./createAttributeInputType";
+import type { CreateAttributeInputUnit } from "./createAttributeInputUnit";
+import type { CreateAttributeInputIconUrl } from "./createAttributeInputIconUrl";
 
 /**
  * Attribute creation payload

@@ -4,11 +4,11 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { LabelListResponseFiltersItemLabel } from './labelListResponseFiltersItemLabel';
-import type { LabelListResponseFiltersItemModel } from './labelListResponseFiltersItemModel';
-import type { LabelListResponseFiltersItemField } from './labelListResponseFiltersItemField';
-import type { LabelListResponseFiltersItemAdvanced } from './labelListResponseFiltersItemAdvanced';
-import type { LabelListResponseFiltersItemEnumOptions } from './labelListResponseFiltersItemEnumOptions';
+import type { LabelListResponseFiltersItemLabel } from "./labelListResponseFiltersItemLabel";
+import type { LabelListResponseFiltersItemModel } from "./labelListResponseFiltersItemModel";
+import type { LabelListResponseFiltersItemField } from "./labelListResponseFiltersItemField";
+import type { LabelListResponseFiltersItemAdvanced } from "./labelListResponseFiltersItemAdvanced";
+import type { LabelListResponseFiltersItemEnumOptions } from "./labelListResponseFiltersItemEnumOptions";
 
 export type LabelListResponseFiltersItem = {
   /** The key representing the service associated with the filter. */

@@ -4,8 +4,8 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { ListStoreLocationsResponseDataItemAssignedById } from './listStoreLocationsResponseDataItemAssignedById';
-import type { LocationType } from './locationType';
+import type { ListStoreLocationsResponseDataItemAssignedById } from "./listStoreLocationsResponseDataItemAssignedById";
+import type { LocationType } from "./locationType";
 
 export type ListStoreLocationsResponseDataItem = {
   /** Unique identifier (UUIDv4) */

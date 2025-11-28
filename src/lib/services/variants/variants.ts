@@ -4,10 +4,7 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import {
-  useMutation,
-  useQuery
-} from '@tanstack/react-query';
+import { useMutation, useQuery } from "@tanstack/react-query";
 import type {
   DataTag,
   DefinedInitialDataOptions,
@@ -20,8 +17,8 @@ import type {
   UseMutationOptions,
   UseMutationResult,
   UseQueryOptions,
-  UseQueryResult
-} from '@tanstack/react-query';
+  UseQueryResult,
+} from "@tanstack/react-query";
 
 import type {
   BaseResponse,
@@ -33,352 +30,509 @@ import type {
   NotfoundError,
   UpdateVariantInput,
   VariantListResponse,
-  VariantResponse
-} from '../../schemas';
+  VariantResponse,
+} from "../../schemas";
 
-import { axiosInstance } from '../../configs/axios-instance';
-
-
-
+import { axiosInstance } from "../../configs/axios-instance";
 
 /**
  * Create a new variant
  */
 export const postVariants = (
-    createVariantInput: CreateVariantInput,
- signal?: AbortSignal
+  createVariantInput: CreateVariantInput,
+  signal?: AbortSignal,
 ) => {
-      
-      
-      return axiosInstance<VariantResponse>(
-      {url: `/variants`, method: 'POST',
-      headers: {'Content-Type': 'application/json', },
-      data: createVariantInput, signal
-    },
-      );
-    }
-  
+  return axiosInstance<VariantResponse>({
+    url: `/variants`,
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    data: createVariantInput,
+    signal,
+  });
+};
 
+export const getPostVariantsMutationOptions = <
+  TError = ErrorResponse | ConflictError,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof postVariants>>,
+    TError,
+    { data: CreateVariantInput },
+    TContext
+  >;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof postVariants>>,
+  TError,
+  { data: CreateVariantInput },
+  TContext
+> => {
+  const mutationKey = ["postVariants"];
+  const { mutation: mutationOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey } };
 
-export const getPostVariantsMutationOptions = <TError = ErrorResponse | ConflictError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postVariants>>, TError,{data: CreateVariantInput}, TContext>, }
-): UseMutationOptions<Awaited<ReturnType<typeof postVariants>>, TError,{data: CreateVariantInput}, TContext> => {
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof postVariants>>,
+    { data: CreateVariantInput }
+  > = (props) => {
+    const { data } = props ?? {};
 
-const mutationKey = ['postVariants'];
-const {mutation: mutationOptions} = options ?
-      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
-      options
-      : {...options, mutation: {...options.mutation, mutationKey}}
-      : {mutation: { mutationKey, }};
+    return postVariants(data);
+  };
 
-      
+  return { mutationFn, ...mutationOptions };
+};
 
+export type PostVariantsMutationResult = NonNullable<
+  Awaited<ReturnType<typeof postVariants>>
+>;
+export type PostVariantsMutationBody = CreateVariantInput;
+export type PostVariantsMutationError = ErrorResponse | ConflictError;
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postVariants>>, {data: CreateVariantInput}> = (props) => {
-          const {data} = props ?? {};
+export const usePostVariants = <
+  TError = ErrorResponse | ConflictError,
+  TContext = unknown,
+>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof postVariants>>,
+      TError,
+      { data: CreateVariantInput },
+      TContext
+    >;
+  },
+  queryClient?: QueryClient,
+): UseMutationResult<
+  Awaited<ReturnType<typeof postVariants>>,
+  TError,
+  { data: CreateVariantInput },
+  TContext
+> => {
+  const mutationOptions = getPostVariantsMutationOptions(options);
 
-          return  postVariants(data,)
-        }
-
-        
-
-
-  return  { mutationFn, ...mutationOptions }}
-
-    export type PostVariantsMutationResult = NonNullable<Awaited<ReturnType<typeof postVariants>>>
-    export type PostVariantsMutationBody = CreateVariantInput
-    export type PostVariantsMutationError = ErrorResponse | ConflictError
-
-    export const usePostVariants = <TError = ErrorResponse | ConflictError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postVariants>>, TError,{data: CreateVariantInput}, TContext>, }
- , queryClient?: QueryClient): UseMutationResult<
-        Awaited<ReturnType<typeof postVariants>>,
-        TError,
-        {data: CreateVariantInput},
-        TContext
-      > => {
-
-      const mutationOptions = getPostVariantsMutationOptions(options);
-
-      return useMutation(mutationOptions , queryClient);
-    }
-    /**
+  return useMutation(mutationOptions, queryClient);
+};
+/**
  * Get all variants with pagination and filtering
  */
 export const getVariants = (
-    params: GetVariantsParams,
- signal?: AbortSignal
+  params: GetVariantsParams,
+  signal?: AbortSignal,
 ) => {
-      
-      
-      return axiosInstance<VariantListResponse>(
-      {url: `/variants`, method: 'GET',
-        params, signal
-    },
-      );
-    }
-  
+  return axiosInstance<VariantListResponse>({
+    url: `/variants`,
+    method: "GET",
+    params,
+    signal,
+  });
+};
 
-export const getGetVariantsQueryKey = (params?: GetVariantsParams,) => {
-    return [`/variants`, ...(params ? [params]: [])] as const;
-    }
+export const getGetVariantsQueryKey = (params?: GetVariantsParams) => {
+  return [`/variants`, ...(params ? [params] : [])] as const;
+};
 
-    
-export const getGetVariantsQueryOptions = <TData = Awaited<ReturnType<typeof getVariants>>, TError = InternalError>(params: GetVariantsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getVariants>>, TError, TData>>, }
+export const getGetVariantsQueryOptions = <
+  TData = Awaited<ReturnType<typeof getVariants>>,
+  TError = InternalError,
+>(
+  params: GetVariantsParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof getVariants>>, TError, TData>
+    >;
+  },
 ) => {
+  const { query: queryOptions } = options ?? {};
 
-const {query: queryOptions} = options ?? {};
+  const queryKey = queryOptions?.queryKey ?? getGetVariantsQueryKey(params);
 
-  const queryKey =  queryOptions?.queryKey ?? getGetVariantsQueryKey(params);
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getVariants>>> = ({
+    signal,
+  }) => getVariants(params, signal);
 
-  
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof getVariants>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
+};
 
-    const queryFn: QueryFunction<Awaited<ReturnType<typeof getVariants>>> = ({ signal }) => getVariants(params, signal);
+export type GetVariantsQueryResult = NonNullable<
+  Awaited<ReturnType<typeof getVariants>>
+>;
+export type GetVariantsQueryError = InternalError;
 
-      
-
-      
-
-   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getVariants>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
-}
-
-export type GetVariantsQueryResult = NonNullable<Awaited<ReturnType<typeof getVariants>>>
-export type GetVariantsQueryError = InternalError
-
-
-export function useGetVariants<TData = Awaited<ReturnType<typeof getVariants>>, TError = InternalError>(
- params: GetVariantsParams, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getVariants>>, TError, TData>> & Pick<
+export function useGetVariants<
+  TData = Awaited<ReturnType<typeof getVariants>>,
+  TError = InternalError,
+>(
+  params: GetVariantsParams,
+  options: {
+    query: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof getVariants>>, TError, TData>
+    > &
+      Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof getVariants>>,
           TError,
           Awaited<ReturnType<typeof getVariants>>
-        > , 'initialData'
-      >, }
- , queryClient?: QueryClient
-  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetVariants<TData = Awaited<ReturnType<typeof getVariants>>, TError = InternalError>(
- params: GetVariantsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getVariants>>, TError, TData>> & Pick<
+        >,
+        "initialData"
+      >;
+  },
+  queryClient?: QueryClient,
+): DefinedUseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+};
+export function useGetVariants<
+  TData = Awaited<ReturnType<typeof getVariants>>,
+  TError = InternalError,
+>(
+  params: GetVariantsParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof getVariants>>, TError, TData>
+    > &
+      Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof getVariants>>,
           TError,
           Awaited<ReturnType<typeof getVariants>>
-        > , 'initialData'
-      >, }
- , queryClient?: QueryClient
-  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetVariants<TData = Awaited<ReturnType<typeof getVariants>>, TError = InternalError>(
- params: GetVariantsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getVariants>>, TError, TData>>, }
- , queryClient?: QueryClient
-  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+        >,
+        "initialData"
+      >;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+};
+export function useGetVariants<
+  TData = Awaited<ReturnType<typeof getVariants>>,
+  TError = InternalError,
+>(
+  params: GetVariantsParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof getVariants>>, TError, TData>
+    >;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+};
 
-export function useGetVariants<TData = Awaited<ReturnType<typeof getVariants>>, TError = InternalError>(
- params: GetVariantsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getVariants>>, TError, TData>>, }
- , queryClient?: QueryClient 
- ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+export function useGetVariants<
+  TData = Awaited<ReturnType<typeof getVariants>>,
+  TError = InternalError,
+>(
+  params: GetVariantsParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof getVariants>>, TError, TData>
+    >;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+} {
+  const queryOptions = getGetVariantsQueryOptions(params, options);
 
-  const queryOptions = getGetVariantsQueryOptions(params,options)
+  const query = useQuery(queryOptions, queryClient) as UseQueryResult<
+    TData,
+    TError
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
 
-  const query = useQuery(queryOptions , queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
-
-  query.queryKey = queryOptions.queryKey ;
+  query.queryKey = queryOptions.queryKey;
 
   return query;
 }
 
+export const getVariantsId = (id: string, signal?: AbortSignal) => {
+  return axiosInstance<VariantResponse>({
+    url: `/variants/${id}`,
+    method: "GET",
+    signal,
+  });
+};
 
+export const getGetVariantsIdQueryKey = (id?: string) => {
+  return [`/variants/${id}`] as const;
+};
 
-export const getVariantsId = (
-    id: string,
- signal?: AbortSignal
+export const getGetVariantsIdQueryOptions = <
+  TData = Awaited<ReturnType<typeof getVariantsId>>,
+  TError = NotfoundError,
+>(
+  id: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof getVariantsId>>, TError, TData>
+    >;
+  },
 ) => {
-      
-      
-      return axiosInstance<VariantResponse>(
-      {url: `/variants/${id}`, method: 'GET', signal
-    },
-      );
-    }
-  
+  const { query: queryOptions } = options ?? {};
 
-export const getGetVariantsIdQueryKey = (id?: string,) => {
-    return [`/variants/${id}`] as const;
-    }
+  const queryKey = queryOptions?.queryKey ?? getGetVariantsIdQueryKey(id);
 
-    
-export const getGetVariantsIdQueryOptions = <TData = Awaited<ReturnType<typeof getVariantsId>>, TError = NotfoundError>(id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getVariantsId>>, TError, TData>>, }
-) => {
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getVariantsId>>> = ({
+    signal,
+  }) => getVariantsId(id, signal);
 
-const {query: queryOptions} = options ?? {};
+  return {
+    queryKey,
+    queryFn,
+    enabled: !!id,
+    ...queryOptions,
+  } as UseQueryOptions<
+    Awaited<ReturnType<typeof getVariantsId>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
+};
 
-  const queryKey =  queryOptions?.queryKey ?? getGetVariantsIdQueryKey(id);
+export type GetVariantsIdQueryResult = NonNullable<
+  Awaited<ReturnType<typeof getVariantsId>>
+>;
+export type GetVariantsIdQueryError = NotfoundError;
 
-  
-
-    const queryFn: QueryFunction<Awaited<ReturnType<typeof getVariantsId>>> = ({ signal }) => getVariantsId(id, signal);
-
-      
-
-      
-
-   return  { queryKey, queryFn, enabled: !!(id), ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getVariantsId>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
-}
-
-export type GetVariantsIdQueryResult = NonNullable<Awaited<ReturnType<typeof getVariantsId>>>
-export type GetVariantsIdQueryError = NotfoundError
-
-
-export function useGetVariantsId<TData = Awaited<ReturnType<typeof getVariantsId>>, TError = NotfoundError>(
- id: string, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getVariantsId>>, TError, TData>> & Pick<
+export function useGetVariantsId<
+  TData = Awaited<ReturnType<typeof getVariantsId>>,
+  TError = NotfoundError,
+>(
+  id: string,
+  options: {
+    query: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof getVariantsId>>, TError, TData>
+    > &
+      Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof getVariantsId>>,
           TError,
           Awaited<ReturnType<typeof getVariantsId>>
-        > , 'initialData'
-      >, }
- , queryClient?: QueryClient
-  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetVariantsId<TData = Awaited<ReturnType<typeof getVariantsId>>, TError = NotfoundError>(
- id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getVariantsId>>, TError, TData>> & Pick<
+        >,
+        "initialData"
+      >;
+  },
+  queryClient?: QueryClient,
+): DefinedUseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+};
+export function useGetVariantsId<
+  TData = Awaited<ReturnType<typeof getVariantsId>>,
+  TError = NotfoundError,
+>(
+  id: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof getVariantsId>>, TError, TData>
+    > &
+      Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof getVariantsId>>,
           TError,
           Awaited<ReturnType<typeof getVariantsId>>
-        > , 'initialData'
-      >, }
- , queryClient?: QueryClient
-  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetVariantsId<TData = Awaited<ReturnType<typeof getVariantsId>>, TError = NotfoundError>(
- id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getVariantsId>>, TError, TData>>, }
- , queryClient?: QueryClient
-  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+        >,
+        "initialData"
+      >;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+};
+export function useGetVariantsId<
+  TData = Awaited<ReturnType<typeof getVariantsId>>,
+  TError = NotfoundError,
+>(
+  id: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof getVariantsId>>, TError, TData>
+    >;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+};
 
-export function useGetVariantsId<TData = Awaited<ReturnType<typeof getVariantsId>>, TError = NotfoundError>(
- id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getVariantsId>>, TError, TData>>, }
- , queryClient?: QueryClient 
- ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+export function useGetVariantsId<
+  TData = Awaited<ReturnType<typeof getVariantsId>>,
+  TError = NotfoundError,
+>(
+  id: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof getVariantsId>>, TError, TData>
+    >;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+} {
+  const queryOptions = getGetVariantsIdQueryOptions(id, options);
 
-  const queryOptions = getGetVariantsIdQueryOptions(id,options)
+  const query = useQuery(queryOptions, queryClient) as UseQueryResult<
+    TData,
+    TError
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
 
-  const query = useQuery(queryOptions , queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
-
-  query.queryKey = queryOptions.queryKey ;
+  query.queryKey = queryOptions.queryKey;
 
   return query;
 }
-
-
 
 export const patchVariantsId = (
-    id: string,
-    updateVariantInput: UpdateVariantInput,
- ) => {
-      
-      
-      return axiosInstance<VariantResponse>(
-      {url: `/variants/${id}`, method: 'PATCH',
-      headers: {'Content-Type': 'application/json', },
-      data: updateVariantInput
-    },
-      );
-    }
-  
+  id: string,
+  updateVariantInput: UpdateVariantInput,
+) => {
+  return axiosInstance<VariantResponse>({
+    url: `/variants/${id}`,
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    data: updateVariantInput,
+  });
+};
 
+export const getPatchVariantsIdMutationOptions = <
+  TError = ErrorResponse | NotfoundError,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof patchVariantsId>>,
+    TError,
+    { id: string; data: UpdateVariantInput },
+    TContext
+  >;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof patchVariantsId>>,
+  TError,
+  { id: string; data: UpdateVariantInput },
+  TContext
+> => {
+  const mutationKey = ["patchVariantsId"];
+  const { mutation: mutationOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey } };
 
-export const getPatchVariantsIdMutationOptions = <TError = ErrorResponse | NotfoundError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof patchVariantsId>>, TError,{id: string;data: UpdateVariantInput}, TContext>, }
-): UseMutationOptions<Awaited<ReturnType<typeof patchVariantsId>>, TError,{id: string;data: UpdateVariantInput}, TContext> => {
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof patchVariantsId>>,
+    { id: string; data: UpdateVariantInput }
+  > = (props) => {
+    const { id, data } = props ?? {};
 
-const mutationKey = ['patchVariantsId'];
-const {mutation: mutationOptions} = options ?
-      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
-      options
-      : {...options, mutation: {...options.mutation, mutationKey}}
-      : {mutation: { mutationKey, }};
+    return patchVariantsId(id, data);
+  };
 
-      
+  return { mutationFn, ...mutationOptions };
+};
 
+export type PatchVariantsIdMutationResult = NonNullable<
+  Awaited<ReturnType<typeof patchVariantsId>>
+>;
+export type PatchVariantsIdMutationBody = UpdateVariantInput;
+export type PatchVariantsIdMutationError = ErrorResponse | NotfoundError;
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof patchVariantsId>>, {id: string;data: UpdateVariantInput}> = (props) => {
-          const {id,data} = props ?? {};
+export const usePatchVariantsId = <
+  TError = ErrorResponse | NotfoundError,
+  TContext = unknown,
+>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof patchVariantsId>>,
+      TError,
+      { id: string; data: UpdateVariantInput },
+      TContext
+    >;
+  },
+  queryClient?: QueryClient,
+): UseMutationResult<
+  Awaited<ReturnType<typeof patchVariantsId>>,
+  TError,
+  { id: string; data: UpdateVariantInput },
+  TContext
+> => {
+  const mutationOptions = getPatchVariantsIdMutationOptions(options);
 
-          return  patchVariantsId(id,data,)
-        }
+  return useMutation(mutationOptions, queryClient);
+};
+export const deleteVariantsId = (id: string) => {
+  return axiosInstance<BaseResponse>({
+    url: `/variants/${id}`,
+    method: "DELETE",
+  });
+};
 
-        
+export const getDeleteVariantsIdMutationOptions = <
+  TError = NotfoundError | ConflictError,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof deleteVariantsId>>,
+    TError,
+    { id: string },
+    TContext
+  >;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof deleteVariantsId>>,
+  TError,
+  { id: string },
+  TContext
+> => {
+  const mutationKey = ["deleteVariantsId"];
+  const { mutation: mutationOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey } };
 
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof deleteVariantsId>>,
+    { id: string }
+  > = (props) => {
+    const { id } = props ?? {};
 
-  return  { mutationFn, ...mutationOptions }}
+    return deleteVariantsId(id);
+  };
 
-    export type PatchVariantsIdMutationResult = NonNullable<Awaited<ReturnType<typeof patchVariantsId>>>
-    export type PatchVariantsIdMutationBody = UpdateVariantInput
-    export type PatchVariantsIdMutationError = ErrorResponse | NotfoundError
+  return { mutationFn, ...mutationOptions };
+};
 
-    export const usePatchVariantsId = <TError = ErrorResponse | NotfoundError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof patchVariantsId>>, TError,{id: string;data: UpdateVariantInput}, TContext>, }
- , queryClient?: QueryClient): UseMutationResult<
-        Awaited<ReturnType<typeof patchVariantsId>>,
-        TError,
-        {id: string;data: UpdateVariantInput},
-        TContext
-      > => {
+export type DeleteVariantsIdMutationResult = NonNullable<
+  Awaited<ReturnType<typeof deleteVariantsId>>
+>;
 
-      const mutationOptions = getPatchVariantsIdMutationOptions(options);
+export type DeleteVariantsIdMutationError = NotfoundError | ConflictError;
 
-      return useMutation(mutationOptions , queryClient);
-    }
-    export const deleteVariantsId = (
-    id: string,
- ) => {
-      
-      
-      return axiosInstance<BaseResponse>(
-      {url: `/variants/${id}`, method: 'DELETE'
-    },
-      );
-    }
-  
+export const useDeleteVariantsId = <
+  TError = NotfoundError | ConflictError,
+  TContext = unknown,
+>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof deleteVariantsId>>,
+      TError,
+      { id: string },
+      TContext
+    >;
+  },
+  queryClient?: QueryClient,
+): UseMutationResult<
+  Awaited<ReturnType<typeof deleteVariantsId>>,
+  TError,
+  { id: string },
+  TContext
+> => {
+  const mutationOptions = getDeleteVariantsIdMutationOptions(options);
 
-
-export const getDeleteVariantsIdMutationOptions = <TError = NotfoundError | ConflictError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteVariantsId>>, TError,{id: string}, TContext>, }
-): UseMutationOptions<Awaited<ReturnType<typeof deleteVariantsId>>, TError,{id: string}, TContext> => {
-
-const mutationKey = ['deleteVariantsId'];
-const {mutation: mutationOptions} = options ?
-      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
-      options
-      : {...options, mutation: {...options.mutation, mutationKey}}
-      : {mutation: { mutationKey, }};
-
-      
-
-
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteVariantsId>>, {id: string}> = (props) => {
-          const {id} = props ?? {};
-
-          return  deleteVariantsId(id,)
-        }
-
-        
-
-
-  return  { mutationFn, ...mutationOptions }}
-
-    export type DeleteVariantsIdMutationResult = NonNullable<Awaited<ReturnType<typeof deleteVariantsId>>>
-    
-    export type DeleteVariantsIdMutationError = NotfoundError | ConflictError
-
-    export const useDeleteVariantsId = <TError = NotfoundError | ConflictError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteVariantsId>>, TError,{id: string}, TContext>, }
- , queryClient?: QueryClient): UseMutationResult<
-        Awaited<ReturnType<typeof deleteVariantsId>>,
-        TError,
-        {id: string},
-        TContext
-      > => {
-
-      const mutationOptions = getDeleteVariantsIdMutationOptions(options);
-
-      return useMutation(mutationOptions , queryClient);
-    }
-    
+  return useMutation(mutationOptions, queryClient);
+};

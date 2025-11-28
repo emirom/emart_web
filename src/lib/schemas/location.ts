@@ -4,8 +4,8 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { LocationStreetNumber } from './locationStreetNumber';
-import type { LocationIsActive } from './locationIsActive';
+import type { LocationStreetNumber } from "./locationStreetNumber";
+import type { LocationIsActive } from "./locationIsActive";
 
 /**
  * Location entity representing a physical address

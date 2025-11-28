@@ -4,7 +4,7 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { Unit } from './unit';
+import type { Unit } from "./unit";
 
 /**
  * Response format for unit update operations

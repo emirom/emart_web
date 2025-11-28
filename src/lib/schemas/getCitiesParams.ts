@@ -6,39 +6,39 @@
  */
 
 export type GetCitiesParams = {
-/**
- * Field to sort by
- */
-field?: string | null;
-/**
- * Sort order
- */
-order?: 'asc' | 'desc' | null;
-/**
- * Number of records to skip
- * @minimum 0
- */
-skip: number;
-/**
- * Maximum number of records to return
- * @minimum 1
- * @maximum 20
- */
-limit: number;
-/**
- * Optional date input, usually null
- */
-deletedAt?: string | null;
-/**
- * Filter by city name
- */
-name?: string | null;
-/**
- * Filter by city abbreviation
- */
-abb?: string | null;
-/**
- * Filter by province ID
- */
-provinceId?: string | null;
+  /**
+   * Field to sort by
+   */
+  field?: string | null;
+  /**
+   * Sort order
+   */
+  order?: "asc" | "desc" | null;
+  /**
+   * Number of records to skip
+   * @minimum 0
+   */
+  skip: number;
+  /**
+   * Maximum number of records to return
+   * @minimum 1
+   * @maximum 20
+   */
+  limit: number;
+  /**
+   * Optional date input, usually null
+   */
+  deletedAt?: string | null;
+  /**
+   * Filter by city name
+   */
+  name?: string | null;
+  /**
+   * Filter by city abbreviation
+   */
+  abb?: string | null;
+  /**
+   * Filter by province ID
+   */
+  provinceId?: string | null;
 };

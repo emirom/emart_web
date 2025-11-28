@@ -4,8 +4,8 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { UpdateProvinceInputDeletedAt } from './updateProvinceInputDeletedAt';
-import type { UpdateProvinceInputAbb } from './updateProvinceInputAbb';
+import type { UpdateProvinceInputDeletedAt } from "./updateProvinceInputDeletedAt";
+import type { UpdateProvinceInputAbb } from "./updateProvinceInputAbb";
 
 /**
  * Province update payload

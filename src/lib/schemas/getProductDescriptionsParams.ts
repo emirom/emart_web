@@ -6,31 +6,31 @@
  */
 
 export type GetProductDescriptionsParams = {
-/**
- * Field to sort by
- */
-field?: string | null;
-/**
- * Sort order
- */
-order?: 'asc' | 'desc' | null;
-/**
- * Number of records to skip
- * @minimum 0
- */
-skip: number;
-/**
- * Maximum number of records to return
- * @minimum 1
- * @maximum 20
- */
-limit: number;
-/**
- * Filter by product ID
- */
-productId?: string | null;
-/**
- * Filter by title content
- */
-title?: string | null;
+  /**
+   * Field to sort by
+   */
+  field?: string | null;
+  /**
+   * Sort order
+   */
+  order?: "asc" | "desc" | null;
+  /**
+   * Number of records to skip
+   * @minimum 0
+   */
+  skip: number;
+  /**
+   * Maximum number of records to return
+   * @minimum 1
+   * @maximum 20
+   */
+  limit: number;
+  /**
+   * Filter by product ID
+   */
+  productId?: string | null;
+  /**
+   * Filter by title content
+   */
+  title?: string | null;
 };

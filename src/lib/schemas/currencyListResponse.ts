@@ -4,10 +4,10 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { BaseResponse } from './baseResponse';
-import type { CurrencyListResponseDetails } from './currencyListResponseDetails';
-import type { CurrencyListResponseFiltersItem } from './currencyListResponseFiltersItem';
-import type { CurrencyListResponseDataItem } from './currencyListResponseDataItem';
+import type { BaseResponse } from "./baseResponse";
+import type { CurrencyListResponseDetails } from "./currencyListResponseDetails";
+import type { CurrencyListResponseFiltersItem } from "./currencyListResponseFiltersItem";
+import type { CurrencyListResponseDataItem } from "./currencyListResponseDataItem";
 
 /**
  * Paginated list of currencies
@@ -17,9 +17,14 @@ export type CurrencyListResponse = BaseResponse & {
   details?: CurrencyListResponseDetails;
   filters: CurrencyListResponseFiltersItem[];
   data: CurrencyListResponseDataItem[];
-} & Required<Pick<BaseResponse & {
-  /** Pagination metadata */
-  details?: CurrencyListResponseDetails;
-  filters: CurrencyListResponseFiltersItem[];
-  data: CurrencyListResponseDataItem[];
-}, 'filters' | 'data'>>;
+} & Required<
+    Pick<
+      BaseResponse & {
+        /** Pagination metadata */
+        details?: CurrencyListResponseDetails;
+        filters: CurrencyListResponseFiltersItem[];
+        data: CurrencyListResponseDataItem[];
+      },
+      "filters" | "data"
+    >
+  >;
