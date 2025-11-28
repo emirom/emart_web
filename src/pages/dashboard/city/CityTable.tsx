@@ -35,7 +35,7 @@ export default function CityTable({
     skip,
     limit: 10,
     provinceId: searchParams!.get("provinceId") ?? initialQuery?.provinceId,
-    search: searchParams!.get("search") ?? initialQuery?.search,
+    name: searchParams!.get("search") ?? initialQuery?.name,
   });
 
   return (

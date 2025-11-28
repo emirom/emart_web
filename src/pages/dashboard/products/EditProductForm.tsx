@@ -56,19 +56,22 @@ export default function EditProductId({ editId }: { editId: string }) {
   });
 
   useEffect(() => {
-    if (product?.data) {
+    if (product?.data && labels?.data) {
       reset({
         name: product.data.name,
         enName: product.data.name,
         brandId: product.data.brandId,
         categoryId: product.data.categoryId,
         isActive: product.data.isActive,
-        labels:
-          product.data.labels?.map((lbl: Label) => ({ id: lbl.id })) ?? [],
+        labels: product.data.labels?.map((lbl) => ({ id: lbl.id })) ?? [],
       });
-      setSelectedLabels(product.data.labels ?? []);
+      const labelIds = product.data.labels?.map((lbl) => lbl.id) || [];
+      const selectedLabelsData = labels.data.filter((label) =>
+        labelIds.includes(label.id),
+      );
+      setSelectedLabels(selectedLabelsData);
     }
-  }, [product, reset]);
+  }, [product, labels, reset]);
 
   const onSubmit: SubmitHandler<UpdateProductInput> = async (data) => {
     try {

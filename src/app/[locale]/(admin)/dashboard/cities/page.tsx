@@ -23,7 +23,7 @@ export default async function Page({
     skip: Number(sp.page ?? 0) * 10,
     limit: 10,
     provinceId: sp?.provinceId,
-    search: sp?.search,
+    name: sp?.search,
   };
 
   await queryClient.prefetchQuery({
@@ -33,7 +33,7 @@ export default async function Page({
         skip: initialQuery.skip ?? 0,
         limit: 10,
         provinceId: initialQuery.provinceId,
-        search: initialQuery.search,
+        name: initialQuery.name,
       },
     ],
     queryFn: () =>
@@ -41,7 +41,7 @@ export default async function Page({
         skip: initialQuery.skip ?? 0,
         limit: 10,
         provinceId: initialQuery.provinceId,
-        search: initialQuery.search,
+        name: initialQuery.name,
       }),
   });
 
