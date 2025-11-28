@@ -77,6 +77,10 @@ export const postInsurancesBody = zod
       .union([zod.coerce.number(), zod.null()])
       .optional()
       .describe("Buyer pays first amount (deductible)"),
+    currencyId: zod
+      .union([zod.uuid(), zod.null()])
+      .optional()
+      .describe("Currency ID"),
     claimProcess: zod
       .union([
         zod.coerce.string().max(postInsurancesBodyClaimProcessMaxOne),
@@ -259,6 +263,10 @@ export const patchInsurancesIdBody = zod
       .union([zod.coerce.number(), zod.null()])
       .optional()
       .describe("Buyer pays first amount (deductible)"),
+    currencyId: zod
+      .union([zod.uuid(), zod.null()])
+      .optional()
+      .describe("Currency ID"),
     claimProcess: zod
       .union([
         zod.coerce.string().max(patchInsurancesIdBodyClaimProcessMaxOne),

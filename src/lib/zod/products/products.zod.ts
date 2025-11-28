@@ -100,7 +100,7 @@ export const getProductsQueryParams = zod.object({
     .optional()
     .describe("Filter products by active status"),
   labels: zod
-    .array(zod.uuid())
+    .union([zod.array(zod.uuid()), zod.null()])
     .optional()
     .describe("Filter products by associated labels (array of UUIDs)"),
 });
@@ -232,7 +232,6 @@ export const patchProductsIdResponse = zod
             zod.array(
               zod.object({
                 id: zod.uuid(),
-                name: zod.coerce.string(),
               }),
             ),
             zod.null(),

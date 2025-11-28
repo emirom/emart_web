@@ -46,6 +46,10 @@ export type GetCategoriesParams = {
    */
   unitId?: string | null;
   /**
+   * Filter by promotion ID
+   */
+  promotionId?: string | null;
+  /**
    * Filter by icon URL
    */
   iconUrl?: string | null;

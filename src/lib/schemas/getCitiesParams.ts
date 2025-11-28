@@ -25,9 +25,20 @@ export type GetCitiesParams = {
    * @maximum 20
    */
   limit: number;
-  provinceId?: string | null;
   /**
-   * Search term for city name
+   * Optional date input, usually null
    */
-  search?: string | null;
+  deletedAt?: string | null;
+  /**
+   * Filter by city name
+   */
+  name?: string | null;
+  /**
+   * Filter by city abbreviation
+   */
+  abb?: string | null;
+  /**
+   * Filter by province ID
+   */
+  provinceId?: string | null;
 };

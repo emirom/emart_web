@@ -4,6 +4,7 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
+import type { CreateInventoryInputCurrencyId } from "./createInventoryInputCurrencyId";
 import type { CreateInventoryInputGuaranteeId } from "./createInventoryInputGuaranteeId";
 import type { CreateInventoryInputInsuranceId } from "./createInventoryInputInsuranceId";
 import type { CreateInventoryInputLeasingId } from "./createInventoryInputLeasingId";
@@ -23,6 +24,8 @@ import type { CreateInventoryInputPackageDimensions } from "./createInventoryInp
 export interface CreateInventoryInput {
   /** Store ID */
   storeId: string;
+  /** Currency ID */
+  currencyId?: CreateInventoryInputCurrencyId;
   /** Location ID */
   locationId: string;
   /** Variant ID */
@@ -33,7 +36,7 @@ export interface CreateInventoryInput {
   insuranceId?: CreateInventoryInputInsuranceId;
   /** Leasing ID */
   leasingId?: CreateInventoryInputLeasingId;
-  /** Cheque ID */
+  /** Cheque ID, for sale */
   chequeId?: CreateInventoryInputChequeId;
   /** Cost price */
   cost?: CreateInventoryInputCost;

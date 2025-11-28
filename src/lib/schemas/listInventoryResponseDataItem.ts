@@ -4,6 +4,7 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
+import type { ListInventoryResponseDataItemCurrencyId } from "./listInventoryResponseDataItemCurrencyId";
 import type { ListInventoryResponseDataItemGuaranteeId } from "./listInventoryResponseDataItemGuaranteeId";
 import type { ListInventoryResponseDataItemInsuranceId } from "./listInventoryResponseDataItemInsuranceId";
 import type { ListInventoryResponseDataItemLeasingId } from "./listInventoryResponseDataItemLeasingId";
@@ -26,6 +27,8 @@ export type ListInventoryResponseDataItem = {
   updatedAt: string;
   /** Store ID */
   storeId: string;
+  /** Currency ID */
+  currencyId?: ListInventoryResponseDataItemCurrencyId;
   /** Location ID */
   locationId: string;
   /** Variant ID */
@@ -36,7 +39,7 @@ export type ListInventoryResponseDataItem = {
   insuranceId?: ListInventoryResponseDataItemInsuranceId;
   /** Leasing ID */
   leasingId?: ListInventoryResponseDataItemLeasingId;
-  /** Cheque ID */
+  /** Cheque ID, for sale */
   chequeId?: ListInventoryResponseDataItemChequeId;
   /** Cost price */
   cost?: ListInventoryResponseDataItemCost;

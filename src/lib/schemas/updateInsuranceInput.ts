@@ -13,6 +13,7 @@ import type { UpdateInsuranceInputCoverage } from "./updateInsuranceInputCoverag
 import type { UpdateInsuranceInputExclusions } from "./updateInsuranceInputExclusions";
 import type { UpdateInsuranceInputClaimLimit } from "./updateInsuranceInputClaimLimit";
 import type { UpdateInsuranceInputDeductible } from "./updateInsuranceInputDeductible";
+import type { UpdateInsuranceInputCurrencyId } from "./updateInsuranceInputCurrencyId";
 import type { UpdateInsuranceInputClaimProcess } from "./updateInsuranceInputClaimProcess";
 import type { UpdateInsuranceInputMinOrderValue } from "./updateInsuranceInputMinOrderValue";
 import type { UpdateInsuranceInputMaxOrderValue } from "./updateInsuranceInputMaxOrderValue";
@@ -50,6 +51,8 @@ export interface UpdateInsuranceInput {
   claimLimit?: UpdateInsuranceInputClaimLimit;
   /** Buyer pays first amount (deductible) */
   deductible?: UpdateInsuranceInputDeductible;
+  /** Currency ID */
+  currencyId?: UpdateInsuranceInputCurrencyId;
   /** How to file a claim */
   claimProcess?: UpdateInsuranceInputClaimProcess;
   /** Is this insurance active for new sales? */

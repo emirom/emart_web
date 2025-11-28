@@ -7,5 +7,4 @@
 
 export type ProductListResponseDataItemLabelsAnyOfItem = {
   id: string;
-  name: string;
 };

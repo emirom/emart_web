@@ -4,10 +4,19 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
+import type { BaseResponse } from "./baseResponse";
 import type { City } from "./city";
 
-export interface CityResponse {
-  /** Operation status */
-  success: boolean;
+/**
+ * Response for single city operations
+ */
+export type CityResponse = BaseResponse & {
   data: City;
-}
+} & Required<
+    Pick<
+      BaseResponse & {
+        data: City;
+      },
+      "data"
+    >
+  >;

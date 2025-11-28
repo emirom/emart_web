@@ -6,6 +6,7 @@
  */
 import type { ListCategoryResponseDataItemDeletedAt } from "./listCategoryResponseDataItemDeletedAt";
 import type { ListCategoryResponseDataItemParentId } from "./listCategoryResponseDataItemParentId";
+import type { ListCategoryResponseDataItemPromotionId } from "./listCategoryResponseDataItemPromotionId";
 import type { ListCategoryResponseDataItemIconUrl } from "./listCategoryResponseDataItemIconUrl";
 import type { ListCategoryResponseDataItemDesc } from "./listCategoryResponseDataItemDesc";
 import type { ListCategoryResponseDataItemIsActive } from "./listCategoryResponseDataItemIsActive";
@@ -38,6 +39,8 @@ export type ListCategoryResponseDataItem = {
   level: number;
   /** Unit ID */
   unitId: string;
+  /** Filter by promotion ID */
+  promotionId?: ListCategoryResponseDataItemPromotionId;
   /** Icon URL */
   iconUrl?: ListCategoryResponseDataItemIconUrl;
   /** Category description in native language */

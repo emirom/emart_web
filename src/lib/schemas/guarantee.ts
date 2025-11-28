@@ -11,6 +11,7 @@ import type { GuaranteeDays } from "./guaranteeDays";
 import type { GuaranteeLogo } from "./guaranteeLogo";
 import type { GuaranteeProviderName } from "./guaranteeProviderName";
 import type { GuaranteeProviderAddress } from "./guaranteeProviderAddress";
+import type { GuaranteeCurrencyId } from "./guaranteeCurrencyId";
 import type { GuaranteeProviderPhone } from "./guaranteeProviderPhone";
 import type { GuaranteeProviderCode } from "./guaranteeProviderCode";
 import type { GuaranteeTermsUrl } from "./guaranteeTermsUrl";
@@ -48,6 +49,8 @@ export interface Guarantee {
   providerName?: GuaranteeProviderName;
   /** Physical address of provider */
   providerAddress?: GuaranteeProviderAddress;
+  /** Currency ID of guarantee price */
+  currencyId?: GuaranteeCurrencyId;
   /** Contact phone of provider */
   providerPhone?: GuaranteeProviderPhone;
   /** Internal provider code */

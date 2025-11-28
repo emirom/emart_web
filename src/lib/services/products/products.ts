@@ -23,11 +23,11 @@ import type {
 import type {
   BaseResponse,
   ConflictError,
-  CreateProductInput,
   ErrorResponse,
   GetProductsParams,
   InternalError,
   NotfoundError,
+  PostProductsBody,
   ProductListResponse,
   ProductResponse,
   ProductUpdateResponse,
@@ -37,14 +37,14 @@ import type {
 import { axiosInstance } from "../../configs/axios-instance";
 
 export const postProducts = (
-  createProductInput: CreateProductInput,
+  postProductsBody: PostProductsBody,
   signal?: AbortSignal,
 ) => {
   return axiosInstance<ProductResponse>({
     url: `/products`,
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    data: createProductInput,
+    data: postProductsBody,
     signal,
   });
 };
@@ -56,13 +56,13 @@ export const getPostProductsMutationOptions = <
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof postProducts>>,
     TError,
-    { data: CreateProductInput },
+    { data: PostProductsBody },
     TContext
   >;
 }): UseMutationOptions<
   Awaited<ReturnType<typeof postProducts>>,
   TError,
-  { data: CreateProductInput },
+  { data: PostProductsBody },
   TContext
 > => {
   const mutationKey = ["postProducts"];
@@ -76,7 +76,7 @@ export const getPostProductsMutationOptions = <
 
   const mutationFn: MutationFunction<
     Awaited<ReturnType<typeof postProducts>>,
-    { data: CreateProductInput }
+    { data: PostProductsBody }
   > = (props) => {
     const { data } = props ?? {};
 
@@ -89,7 +89,7 @@ export const getPostProductsMutationOptions = <
 export type PostProductsMutationResult = NonNullable<
   Awaited<ReturnType<typeof postProducts>>
 >;
-export type PostProductsMutationBody = CreateProductInput;
+export type PostProductsMutationBody = PostProductsBody;
 export type PostProductsMutationError = ErrorResponse | ConflictError;
 
 export const usePostProducts = <
@@ -100,7 +100,7 @@ export const usePostProducts = <
     mutation?: UseMutationOptions<
       Awaited<ReturnType<typeof postProducts>>,
       TError,
-      { data: CreateProductInput },
+      { data: PostProductsBody },
       TContext
     >;
   },
@@ -108,7 +108,7 @@ export const usePostProducts = <
 ): UseMutationResult<
   Awaited<ReturnType<typeof postProducts>>,
   TError,
-  { data: CreateProductInput },
+  { data: PostProductsBody },
   TContext
 > => {
   const mutationOptions = getPostProductsMutationOptions(options);

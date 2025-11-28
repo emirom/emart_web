@@ -6,6 +6,6 @@
  */
 
 /**
- * Cheque ID
+ * Cheque ID, for sale
  */
 export type UpdateInventoryInputChequeId = string | null;

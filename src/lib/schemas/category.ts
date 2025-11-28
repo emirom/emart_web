@@ -6,6 +6,7 @@
  */
 import type { CategoryDeletedAt } from "./categoryDeletedAt";
 import type { CategoryParentId } from "./categoryParentId";
+import type { CategoryPromotionId } from "./categoryPromotionId";
 import type { CategoryIconUrl } from "./categoryIconUrl";
 import type { CategoryDesc } from "./categoryDesc";
 import type { CategoryIsActive } from "./categoryIsActive";
@@ -41,6 +42,8 @@ export interface Category {
   level: number;
   /** Unit ID */
   unitId: string;
+  /** Filter by promotion ID */
+  promotionId?: CategoryPromotionId;
   /** Icon URL */
   iconUrl?: CategoryIconUrl;
   /** Category description in native language */

@@ -10,6 +10,7 @@ import type { CreateGuaranteeInputDays } from "./createGuaranteeInputDays";
 import type { CreateGuaranteeInputLogo } from "./createGuaranteeInputLogo";
 import type { CreateGuaranteeInputProviderName } from "./createGuaranteeInputProviderName";
 import type { CreateGuaranteeInputProviderAddress } from "./createGuaranteeInputProviderAddress";
+import type { CreateGuaranteeInputCurrencyId } from "./createGuaranteeInputCurrencyId";
 import type { CreateGuaranteeInputProviderPhone } from "./createGuaranteeInputProviderPhone";
 import type { CreateGuaranteeInputProviderCode } from "./createGuaranteeInputProviderCode";
 import type { CreateGuaranteeInputTermsUrl } from "./createGuaranteeInputTermsUrl";
@@ -39,6 +40,8 @@ export interface CreateGuaranteeInput {
   providerName?: CreateGuaranteeInputProviderName;
   /** Physical address of provider */
   providerAddress?: CreateGuaranteeInputProviderAddress;
+  /** Currency ID of guarantee price */
+  currencyId?: CreateGuaranteeInputCurrencyId;
   /** Contact phone of provider */
   providerPhone?: CreateGuaranteeInputProviderPhone;
   /** Internal provider code */

@@ -7,5 +7,4 @@
 
 export type ProductLabelsAnyOfItem = {
   id: string;
-  name: string;
 };

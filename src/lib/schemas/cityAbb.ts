@@ -6,6 +6,6 @@
  */
 
 /**
- * City abbreviation
+ * City abbreviation (e.g., THR for Tehran)
  */
 export type CityAbb = string | null;

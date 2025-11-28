@@ -4,12 +4,15 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
+import type { UpdateProvinceInputDeletedAt } from "./updateProvinceInputDeletedAt";
 import type { UpdateProvinceInputAbb } from "./updateProvinceInputAbb";
 
 /**
  * Province update payload
  */
 export interface UpdateProvinceInput {
+  /** Deletion timestamp (ISO 8601) when soft deleted */
+  deletedAt?: UpdateProvinceInputDeletedAt;
   /**
    * Province name in native language
    * @minLength 2

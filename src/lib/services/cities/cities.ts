@@ -22,15 +22,15 @@ import type {
 
 import type {
   BaseResponse,
-  CitiesResponse,
+  CityListResponse,
   CityResponse,
   ConflictError,
-  CreateCity,
+  CreateCityInput,
   ErrorResponse,
   GetCitiesParams,
   InternalError,
   NotfoundError,
-  UpdateCity,
+  UpdateCityInput,
 } from "../../schemas";
 
 import { axiosInstance } from "../../configs/axios-instance";
@@ -38,30 +38,33 @@ import { axiosInstance } from "../../configs/axios-instance";
 /**
  * Create a new city
  */
-export const postCities = (createCity: CreateCity, signal?: AbortSignal) => {
+export const postCities = (
+  createCityInput: CreateCityInput,
+  signal?: AbortSignal,
+) => {
   return axiosInstance<CityResponse>({
     url: `/cities`,
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    data: createCity,
+    data: createCityInput,
     signal,
   });
 };
 
 export const getPostCitiesMutationOptions = <
-  TError = ErrorResponse | ConflictError | InternalError,
+  TError = ErrorResponse | ConflictError,
   TContext = unknown,
 >(options?: {
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof postCities>>,
     TError,
-    { data: CreateCity },
+    { data: CreateCityInput },
     TContext
   >;
 }): UseMutationOptions<
   Awaited<ReturnType<typeof postCities>>,
   TError,
-  { data: CreateCity },
+  { data: CreateCityInput },
   TContext
 > => {
   const mutationKey = ["postCities"];
@@ -75,7 +78,7 @@ export const getPostCitiesMutationOptions = <
 
   const mutationFn: MutationFunction<
     Awaited<ReturnType<typeof postCities>>,
-    { data: CreateCity }
+    { data: CreateCityInput }
   > = (props) => {
     const { data } = props ?? {};
 
@@ -88,21 +91,18 @@ export const getPostCitiesMutationOptions = <
 export type PostCitiesMutationResult = NonNullable<
   Awaited<ReturnType<typeof postCities>>
 >;
-export type PostCitiesMutationBody = CreateCity;
-export type PostCitiesMutationError =
-  | ErrorResponse
-  | ConflictError
-  | InternalError;
+export type PostCitiesMutationBody = CreateCityInput;
+export type PostCitiesMutationError = ErrorResponse | ConflictError;
 
 export const usePostCities = <
-  TError = ErrorResponse | ConflictError | InternalError,
+  TError = ErrorResponse | ConflictError,
   TContext = unknown,
 >(
   options?: {
     mutation?: UseMutationOptions<
       Awaited<ReturnType<typeof postCities>>,
       TError,
-      { data: CreateCity },
+      { data: CreateCityInput },
       TContext
     >;
   },
@@ -110,7 +110,7 @@ export const usePostCities = <
 ): UseMutationResult<
   Awaited<ReturnType<typeof postCities>>,
   TError,
-  { data: CreateCity },
+  { data: CreateCityInput },
   TContext
 > => {
   const mutationOptions = getPostCitiesMutationOptions(options);
@@ -118,10 +118,10 @@ export const usePostCities = <
   return useMutation(mutationOptions, queryClient);
 };
 /**
- * Get all cities with pagination and filters
+ * Get all cities with pagination and filtering
  */
 export const getCities = (params: GetCitiesParams, signal?: AbortSignal) => {
-  return axiosInstance<CitiesResponse>({
+  return axiosInstance<CityListResponse>({
     url: `/cities`,
     method: "GET",
     params,
@@ -249,9 +249,6 @@ export function useGetCities<
   return query;
 }
 
-/**
- * Get a single city by ID
- */
 export const getCitiesId = (id: string, signal?: AbortSignal) => {
   return axiosInstance<CityResponse>({
     url: `/cities/${id}`,
@@ -266,7 +263,7 @@ export const getGetCitiesIdQueryKey = (id?: string) => {
 
 export const getGetCitiesIdQueryOptions = <
   TData = Awaited<ReturnType<typeof getCitiesId>>,
-  TError = ErrorResponse | NotfoundError | InternalError,
+  TError = NotfoundError,
 >(
   id: string,
   options?: {
@@ -298,14 +295,11 @@ export const getGetCitiesIdQueryOptions = <
 export type GetCitiesIdQueryResult = NonNullable<
   Awaited<ReturnType<typeof getCitiesId>>
 >;
-export type GetCitiesIdQueryError =
-  | ErrorResponse
-  | NotfoundError
-  | InternalError;
+export type GetCitiesIdQueryError = NotfoundError;
 
 export function useGetCitiesId<
   TData = Awaited<ReturnType<typeof getCitiesId>>,
-  TError = ErrorResponse | NotfoundError | InternalError,
+  TError = NotfoundError,
 >(
   id: string,
   options: {
@@ -327,7 +321,7 @@ export function useGetCitiesId<
 };
 export function useGetCitiesId<
   TData = Awaited<ReturnType<typeof getCitiesId>>,
-  TError = ErrorResponse | NotfoundError | InternalError,
+  TError = NotfoundError,
 >(
   id: string,
   options?: {
@@ -349,7 +343,7 @@ export function useGetCitiesId<
 };
 export function useGetCitiesId<
   TData = Awaited<ReturnType<typeof getCitiesId>>,
-  TError = ErrorResponse | NotfoundError | InternalError,
+  TError = NotfoundError,
 >(
   id: string,
   options?: {
@@ -364,7 +358,7 @@ export function useGetCitiesId<
 
 export function useGetCitiesId<
   TData = Awaited<ReturnType<typeof getCitiesId>>,
-  TError = ErrorResponse | NotfoundError | InternalError,
+  TError = NotfoundError,
 >(
   id: string,
   options?: {
@@ -388,32 +382,29 @@ export function useGetCitiesId<
   return query;
 }
 
-/**
- * Update a city
- */
-export const patchCitiesId = (id: string, updateCity: UpdateCity) => {
+export const patchCitiesId = (id: string, updateCityInput: UpdateCityInput) => {
   return axiosInstance<CityResponse>({
     url: `/cities/${id}`,
     method: "PATCH",
     headers: { "Content-Type": "application/json" },
-    data: updateCity,
+    data: updateCityInput,
   });
 };
 
 export const getPatchCitiesIdMutationOptions = <
-  TError = ErrorResponse | NotfoundError | ConflictError | InternalError,
+  TError = ErrorResponse | NotfoundError | ConflictError,
   TContext = unknown,
 >(options?: {
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof patchCitiesId>>,
     TError,
-    { id: string; data: UpdateCity },
+    { id: string; data: UpdateCityInput },
     TContext
   >;
 }): UseMutationOptions<
   Awaited<ReturnType<typeof patchCitiesId>>,
   TError,
-  { id: string; data: UpdateCity },
+  { id: string; data: UpdateCityInput },
   TContext
 > => {
   const mutationKey = ["patchCitiesId"];
@@ -427,7 +418,7 @@ export const getPatchCitiesIdMutationOptions = <
 
   const mutationFn: MutationFunction<
     Awaited<ReturnType<typeof patchCitiesId>>,
-    { id: string; data: UpdateCity }
+    { id: string; data: UpdateCityInput }
   > = (props) => {
     const { id, data } = props ?? {};
 
@@ -440,22 +431,21 @@ export const getPatchCitiesIdMutationOptions = <
 export type PatchCitiesIdMutationResult = NonNullable<
   Awaited<ReturnType<typeof patchCitiesId>>
 >;
-export type PatchCitiesIdMutationBody = UpdateCity;
+export type PatchCitiesIdMutationBody = UpdateCityInput;
 export type PatchCitiesIdMutationError =
   | ErrorResponse
   | NotfoundError
-  | ConflictError
-  | InternalError;
+  | ConflictError;
 
 export const usePatchCitiesId = <
-  TError = ErrorResponse | NotfoundError | ConflictError | InternalError,
+  TError = ErrorResponse | NotfoundError | ConflictError,
   TContext = unknown,
 >(
   options?: {
     mutation?: UseMutationOptions<
       Awaited<ReturnType<typeof patchCitiesId>>,
       TError,
-      { id: string; data: UpdateCity },
+      { id: string; data: UpdateCityInput },
       TContext
     >;
   },
@@ -463,16 +453,13 @@ export const usePatchCitiesId = <
 ): UseMutationResult<
   Awaited<ReturnType<typeof patchCitiesId>>,
   TError,
-  { id: string; data: UpdateCity },
+  { id: string; data: UpdateCityInput },
   TContext
 > => {
   const mutationOptions = getPatchCitiesIdMutationOptions(options);
 
   return useMutation(mutationOptions, queryClient);
 };
-/**
- * Delete a city
- */
 export const deleteCitiesId = (id: string) => {
   return axiosInstance<BaseResponse>({
     url: `/cities/${id}`,
@@ -481,7 +468,7 @@ export const deleteCitiesId = (id: string) => {
 };
 
 export const getDeleteCitiesIdMutationOptions = <
-  TError = ErrorResponse | NotfoundError | InternalError,
+  TError = NotfoundError | ConflictError,
   TContext = unknown,
 >(options?: {
   mutation?: UseMutationOptions<
@@ -521,13 +508,10 @@ export type DeleteCitiesIdMutationResult = NonNullable<
   Awaited<ReturnType<typeof deleteCitiesId>>
 >;
 
-export type DeleteCitiesIdMutationError =
-  | ErrorResponse
-  | NotfoundError
-  | InternalError;
+export type DeleteCitiesIdMutationError = NotfoundError | ConflictError;
 
 export const useDeleteCitiesId = <
-  TError = ErrorResponse | NotfoundError | InternalError,
+  TError = NotfoundError | ConflictError,
   TContext = unknown,
 >(
   options?: {

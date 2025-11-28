@@ -36,6 +36,10 @@ export const postCategoriesBody = zod
       .describe("Parent category ID if exists"),
     level: zod.coerce.number().describe("the level of category in hirarchy"),
     unitId: zod.uuid().describe("Unit ID"),
+    promotionId: zod
+      .union([zod.uuid(), zod.null()])
+      .optional()
+      .describe("Filter by promotion ID"),
     iconUrl: zod
       .union([
         zod.coerce.string().max(postCategoriesBodyIconUrlMaxOne),
@@ -115,6 +119,10 @@ export const getCategoriesQueryParams = zod.object({
     .union([zod.uuid(), zod.null()])
     .optional()
     .describe("Filter by unit ID"),
+  promotionId: zod
+    .union([zod.uuid(), zod.null()])
+    .optional()
+    .describe("Filter by promotion ID"),
   iconUrl: zod
     .union([
       zod.coerce.string().max(getCategoriesQueryIconUrlMaxOne),
@@ -203,6 +211,10 @@ export const patchCategoriesIdBody = zod
       .optional()
       .describe("the level of category in hirarchy"),
     unitId: zod.uuid().optional().describe("Unit ID"),
+    promotionId: zod
+      .union([zod.uuid(), zod.null()])
+      .optional()
+      .describe("Filter by promotion ID"),
     iconUrl: zod
       .union([
         zod.coerce.string().max(patchCategoriesIdBodyIconUrlMaxOne),

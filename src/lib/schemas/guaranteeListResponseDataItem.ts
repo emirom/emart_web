@@ -11,6 +11,7 @@ import type { GuaranteeListResponseDataItemDays } from "./guaranteeListResponseD
 import type { GuaranteeListResponseDataItemLogo } from "./guaranteeListResponseDataItemLogo";
 import type { GuaranteeListResponseDataItemProviderName } from "./guaranteeListResponseDataItemProviderName";
 import type { GuaranteeListResponseDataItemProviderAddress } from "./guaranteeListResponseDataItemProviderAddress";
+import type { GuaranteeListResponseDataItemCurrencyId } from "./guaranteeListResponseDataItemCurrencyId";
 import type { GuaranteeListResponseDataItemProviderPhone } from "./guaranteeListResponseDataItemProviderPhone";
 import type { GuaranteeListResponseDataItemProviderCode } from "./guaranteeListResponseDataItemProviderCode";
 import type { GuaranteeListResponseDataItemTermsUrl } from "./guaranteeListResponseDataItemTermsUrl";
@@ -45,6 +46,8 @@ export type GuaranteeListResponseDataItem = {
   providerName?: GuaranteeListResponseDataItemProviderName;
   /** Physical address of provider */
   providerAddress?: GuaranteeListResponseDataItemProviderAddress;
+  /** Currency ID of guarantee price */
+  currencyId?: GuaranteeListResponseDataItemCurrencyId;
   /** Contact phone of provider */
   providerPhone?: GuaranteeListResponseDataItemProviderPhone;
   /** Internal provider code */

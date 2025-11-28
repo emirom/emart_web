@@ -16,6 +16,10 @@ export const postProvincesBodyAbbMaxOne = 200;
 
 export const postProvincesBody = zod
   .object({
+    deletedAt: zod
+      .union([zod.iso.datetime({}), zod.null()])
+      .optional()
+      .describe("Deletion timestamp (ISO 8601) when soft deleted"),
     name: zod.coerce
       .string()
       .min(postProvincesBodyNameMin)
@@ -113,6 +117,10 @@ export const patchProvincesIdBodyAbbMaxOne = 200;
 
 export const patchProvincesIdBody = zod
   .object({
+    deletedAt: zod
+      .union([zod.iso.datetime({}), zod.null()])
+      .optional()
+      .describe("Deletion timestamp (ISO 8601) when soft deleted"),
     name: zod.coerce
       .string()
       .min(patchProvincesIdBodyNameMin)

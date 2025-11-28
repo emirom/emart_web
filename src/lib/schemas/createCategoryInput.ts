@@ -5,6 +5,7 @@
  * OpenAPI spec version: 1.0.0
  */
 import type { CreateCategoryInputParentId } from "./createCategoryInputParentId";
+import type { CreateCategoryInputPromotionId } from "./createCategoryInputPromotionId";
 import type { CreateCategoryInputIconUrl } from "./createCategoryInputIconUrl";
 import type { CreateCategoryInputDesc } from "./createCategoryInputDesc";
 import type { CreateCategoryInputIsActive } from "./createCategoryInputIsActive";
@@ -32,6 +33,8 @@ export interface CreateCategoryInput {
   level: number;
   /** Unit ID */
   unitId: string;
+  /** Filter by promotion ID */
+  promotionId?: CreateCategoryInputPromotionId;
   /** Icon URL */
   iconUrl?: CreateCategoryInputIconUrl;
   /** Category description in native language */

@@ -62,6 +62,10 @@ export const postGuaranteesBody = zod
       ])
       .optional()
       .describe("Physical address of provider"),
+    currencyId: zod
+      .union([zod.uuid(), zod.null()])
+      .optional()
+      .describe("Currency ID of guarantee price"),
     providerPhone: zod
       .union([
         zod.coerce.string().max(postGuaranteesBodyProviderPhoneMaxOne),
@@ -261,6 +265,10 @@ export const patchGuaranteesIdBody = zod
       ])
       .optional()
       .describe("Physical address of provider"),
+    currencyId: zod
+      .union([zod.uuid(), zod.null()])
+      .optional()
+      .describe("Currency ID of guarantee price"),
     providerPhone: zod
       .union([
         zod.coerce.string().max(patchGuaranteesIdBodyProviderPhoneMaxOne),

@@ -23,6 +23,10 @@ export const postInventoriesBodyPackageDimensionsMaxOne = 200;
 export const postInventoriesBody = zod
   .object({
     storeId: zod.uuid().describe("Store ID"),
+    currencyId: zod
+      .union([zod.uuid(), zod.null()])
+      .optional()
+      .describe("Currency ID"),
     locationId: zod.uuid().describe("Location ID"),
     variantId: zod.uuid().describe("Variant ID"),
     guaranteeId: zod
@@ -40,7 +44,7 @@ export const postInventoriesBody = zod
     chequeId: zod
       .union([zod.uuid(), zod.null()])
       .optional()
-      .describe("Cheque ID"),
+      .describe("Cheque ID, for sale"),
     cost: zod
       .union([zod.coerce.number(), zod.null()])
       .optional()
@@ -236,6 +240,10 @@ export const patchInventoriesIdBodyPackageDimensionsMaxOne = 200;
 export const patchInventoriesIdBody = zod
   .object({
     storeId: zod.uuid().optional().describe("Store ID"),
+    currencyId: zod
+      .union([zod.uuid(), zod.null()])
+      .optional()
+      .describe("Currency ID"),
     locationId: zod.uuid().optional().describe("Location ID"),
     variantId: zod.uuid().optional().describe("Variant ID"),
     guaranteeId: zod
@@ -253,7 +261,7 @@ export const patchInventoriesIdBody = zod
     chequeId: zod
       .union([zod.uuid(), zod.null()])
       .optional()
-      .describe("Cheque ID"),
+      .describe("Cheque ID, for sale"),
     cost: zod
       .union([zod.coerce.number(), zod.null()])
       .optional()

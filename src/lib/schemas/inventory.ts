@@ -4,6 +4,7 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
+import type { InventoryCurrencyId } from "./inventoryCurrencyId";
 import type { InventoryGuaranteeId } from "./inventoryGuaranteeId";
 import type { InventoryInsuranceId } from "./inventoryInsuranceId";
 import type { InventoryLeasingId } from "./inventoryLeasingId";
@@ -29,6 +30,8 @@ export interface Inventory {
   updatedAt: string;
   /** Store ID */
   storeId: string;
+  /** Currency ID */
+  currencyId?: InventoryCurrencyId;
   /** Location ID */
   locationId: string;
   /** Variant ID */
@@ -39,7 +42,7 @@ export interface Inventory {
   insuranceId?: InventoryInsuranceId;
   /** Leasing ID */
   leasingId?: InventoryLeasingId;
-  /** Cheque ID */
+  /** Cheque ID, for sale */
   chequeId?: InventoryChequeId;
   /** Cost price */
   cost?: InventoryCost;

@@ -4,8 +4,12 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
+import type { CityDeletedAt } from "./cityDeletedAt";
 import type { CityAbb } from "./cityAbb";
 
+/**
+ * City entity with province reference
+ */
 export interface City {
   /** Unique identifier (UUIDv4) */
   id: string;
@@ -13,10 +17,16 @@ export interface City {
   createdAt: string;
   /** Last update timestamp (ISO 8601) */
   updatedAt: string;
-  /** City name */
+  /** Deletion timestamp (ISO 8601) when soft deleted */
+  deletedAt?: CityDeletedAt;
+  /**
+   * City name in native language
+   * @minLength 2
+   * @maxLength 100
+   */
   name: string;
-  /** City abbreviation */
+  /** City abbreviation (e.g., THR for Tehran) */
   abb?: CityAbb;
-  /** Province ID */
+  /** Associated province ID */
   provinceId: string;
 }

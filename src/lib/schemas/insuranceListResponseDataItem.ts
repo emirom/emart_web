@@ -14,6 +14,7 @@ import type { InsuranceListResponseDataItemCoverage } from "./insuranceListRespo
 import type { InsuranceListResponseDataItemExclusions } from "./insuranceListResponseDataItemExclusions";
 import type { InsuranceListResponseDataItemClaimLimit } from "./insuranceListResponseDataItemClaimLimit";
 import type { InsuranceListResponseDataItemDeductible } from "./insuranceListResponseDataItemDeductible";
+import type { InsuranceListResponseDataItemCurrencyId } from "./insuranceListResponseDataItemCurrencyId";
 import type { InsuranceListResponseDataItemClaimProcess } from "./insuranceListResponseDataItemClaimProcess";
 import type { InsuranceListResponseDataItemMinOrderValue } from "./insuranceListResponseDataItemMinOrderValue";
 import type { InsuranceListResponseDataItemMaxOrderValue } from "./insuranceListResponseDataItemMaxOrderValue";
@@ -56,6 +57,8 @@ export type InsuranceListResponseDataItem = {
   claimLimit?: InsuranceListResponseDataItemClaimLimit;
   /** Buyer pays first amount (deductible) */
   deductible?: InsuranceListResponseDataItemDeductible;
+  /** Currency ID */
+  currencyId?: InsuranceListResponseDataItemCurrencyId;
   /** How to file a claim */
   claimProcess?: InsuranceListResponseDataItemClaimProcess;
   /** Is this insurance active for new sales? */

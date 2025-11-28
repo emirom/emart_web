@@ -4,6 +4,7 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
+import type { ProvinceDeletedAt } from "./provinceDeletedAt";
 import type { ProvinceAbb } from "./provinceAbb";
 
 /**
@@ -16,6 +17,8 @@ export interface Province {
   createdAt: string;
   /** Last update timestamp (ISO 8601) */
   updatedAt: string;
+  /** Deletion timestamp (ISO 8601) when soft deleted */
+  deletedAt?: ProvinceDeletedAt;
   /**
    * Province name in native language
    * @minLength 2

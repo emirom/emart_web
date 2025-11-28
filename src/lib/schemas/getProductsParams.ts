@@ -52,5 +52,5 @@ export type GetProductsParams = {
   /**
    * Filter products by associated labels (array of UUIDs)
    */
-  labels?: string[];
+  labels?: string[] | null;
 };

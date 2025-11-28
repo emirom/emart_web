@@ -19,7 +19,7 @@ import {
   Store,
   Tags,
   Umbrella,
-  Users
+  Users,
 } from "lucide-react";
 
 export const navItems = [

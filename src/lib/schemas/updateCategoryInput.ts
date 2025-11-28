@@ -5,6 +5,7 @@
  * OpenAPI spec version: 1.0.0
  */
 import type { UpdateCategoryInputParentId } from "./updateCategoryInputParentId";
+import type { UpdateCategoryInputPromotionId } from "./updateCategoryInputPromotionId";
 import type { UpdateCategoryInputIconUrl } from "./updateCategoryInputIconUrl";
 import type { UpdateCategoryInputDesc } from "./updateCategoryInputDesc";
 import type { UpdateCategoryInputIsActive } from "./updateCategoryInputIsActive";
@@ -32,6 +33,8 @@ export interface UpdateCategoryInput {
   level?: number;
   /** Unit ID */
   unitId?: string;
+  /** Filter by promotion ID */
+  promotionId?: UpdateCategoryInputPromotionId;
   /** Icon URL */
   iconUrl?: UpdateCategoryInputIconUrl;
   /** Category description in native language */

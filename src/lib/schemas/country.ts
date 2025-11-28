@@ -4,6 +4,7 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
+import type { CountryDeletedAt } from "./countryDeletedAt";
 
 /**
  * Country entity with international standards
@@ -15,6 +16,8 @@ export interface Country {
   createdAt: string;
   /** Last update timestamp (ISO 8601) */
   updatedAt: string;
+  /** Deletion timestamp (ISO 8601) when soft deleted */
+  deletedAt?: CountryDeletedAt;
   /**
    * Country name in native language
    * @minLength 2

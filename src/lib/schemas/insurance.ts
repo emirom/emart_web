@@ -14,6 +14,7 @@ import type { InsuranceCoverage } from "./insuranceCoverage";
 import type { InsuranceExclusions } from "./insuranceExclusions";
 import type { InsuranceClaimLimit } from "./insuranceClaimLimit";
 import type { InsuranceDeductible } from "./insuranceDeductible";
+import type { InsuranceCurrencyId } from "./insuranceCurrencyId";
 import type { InsuranceClaimProcess } from "./insuranceClaimProcess";
 import type { InsuranceMinOrderValue } from "./insuranceMinOrderValue";
 import type { InsuranceMaxOrderValue } from "./insuranceMaxOrderValue";
@@ -59,6 +60,8 @@ export interface Insurance {
   claimLimit?: InsuranceClaimLimit;
   /** Buyer pays first amount (deductible) */
   deductible?: InsuranceDeductible;
+  /** Currency ID */
+  currencyId?: InsuranceCurrencyId;
   /** How to file a claim */
   claimProcess?: InsuranceClaimProcess;
   /** Is this insurance active for new sales? */
