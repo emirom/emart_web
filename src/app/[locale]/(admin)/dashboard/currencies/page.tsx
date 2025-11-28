@@ -1,4 +1,9 @@
+import CurrenciesTable from "@/pages/dashboard/currencies/CurrenciesTable";
+import { HeaderWithLink } from "@components/HeaderWithLink";
+import { TablePagination } from "@components/TablePagination";
 import { queryClient } from "@lib/apis/queryClient";
+import { CurrencyListResponse } from "@lib/schemas";
+import { getCurrencies } from "@lib/services/currencies/currencies";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import { Metadata } from "next";
 
@@ -17,17 +22,23 @@ export default async function Page({
   const sp = searchParams ? await searchParams : {};
   const page = Number(sp.page || 0);
   const skip = page * 10;
-  const queryKey = ["/currencies", { skip, limit: 10 }];
+  const queryKey = [
+    "/currencies",
+    { skip, limit: 10, name: sp.name, symbol: sp.symbol },
+  ];
   await queryClient.prefetchQuery({
     queryKey: queryKey,
-    queryFn: () => queryClient.getQueryData(queryKey),
+    queryFn: () =>
+      getCurrencies({ skip, limit: 10, name: sp.name, symbol: sp.symbol }),
   });
 
-  const cachedData = queryClient.getQueryData(queryKey);
+  const cachedData = queryClient.getQueryData(queryKey) as CurrencyListResponse;
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <div>currencies</div>
+      <HeaderWithLink title="ارزها" linkTitle="بازگشت" linkHref="/dashboard" />
+      <CurrenciesTable data={cachedData} />
+      <TablePagination />
     </HydrationBoundary>
   );
 }
