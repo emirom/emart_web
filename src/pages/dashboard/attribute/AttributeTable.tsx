@@ -6,8 +6,6 @@ import { useGetAttributes } from "@lib/services/attributes/attributes";
 import { AttributeFilter } from "@lib/types/filter-generator";
 import { ColumnDef } from "@tanstack/react-table";
 import { useSearchParams } from "next/navigation";
-import { useEffect } from "react";
-import { queryClient } from "@lib/apis/queryClient";
 import AttributeActions from "./AttributeAction";
 import CreateAttribute from "./CreateAttribute";
 

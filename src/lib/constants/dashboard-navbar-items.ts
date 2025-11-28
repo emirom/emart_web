@@ -4,6 +4,7 @@ import {
   ProvincesIcon,
 } from "@components/icons/DashboardIcon";
 import {
+  BadgeDollarSignIcon,
   ClipboardClock,
   Flag,
   Home,
@@ -18,7 +19,7 @@ import {
   Store,
   Tags,
   Umbrella,
-  Users,
+  Users
 } from "lucide-react";
 
 export const navItems = [
@@ -43,5 +44,6 @@ export const navItems = [
     icon: ProvincesIcon,
   },
   { href: "/dashboard/cities", label: "شهرها", icon: CityIcon },
+  { href: "/currencies", label: "ارزها", icon: BadgeDollarSignIcon },
   { href: "/settings", label: "تنظیمات", icon: Settings },
 ];
