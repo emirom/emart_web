@@ -4,8 +4,8 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { BaseResponse } from "./baseResponse";
-import type { StoreLocation } from "./storeLocation";
+import type { BaseResponse } from './baseResponse';
+import type { StoreLocation } from './storeLocation';
 
 /**
  * Single store-location assignment response

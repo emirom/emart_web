@@ -4,11 +4,9 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { ProductListResponseDataItemMediasAnyOfItem } from "./productListResponseDataItemMediasAnyOfItem";
+import type { ProductListResponseDataItemMediasAnyOfItem } from './productListResponseDataItemMediasAnyOfItem';
 
 /**
  * Product media
  */
-export type ProductListResponseDataItemMedias =
-  | ProductListResponseDataItemMediasAnyOfItem[]
-  | null;
+export type ProductListResponseDataItemMedias = ProductListResponseDataItemMediasAnyOfItem[] | null;

@@ -4,12 +4,12 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { UpdateStoreInputLogo } from "./updateStoreInputLogo";
-import type { UpdateStoreInputDescription } from "./updateStoreInputDescription";
-import type { UpdateStoreInputEmail } from "./updateStoreInputEmail";
-import type { UpdateStoreInputPhone } from "./updateStoreInputPhone";
-import type { UpdateStoreInputWebsite } from "./updateStoreInputWebsite";
-import type { UpdateStoreInputOwnerId } from "./updateStoreInputOwnerId";
+import type { UpdateStoreInputLogo } from './updateStoreInputLogo';
+import type { UpdateStoreInputDescription } from './updateStoreInputDescription';
+import type { UpdateStoreInputEmail } from './updateStoreInputEmail';
+import type { UpdateStoreInputPhone } from './updateStoreInputPhone';
+import type { UpdateStoreInputWebsite } from './updateStoreInputWebsite';
+import type { UpdateStoreInputOwnerId } from './updateStoreInputOwnerId';
 
 /**
  * Store update payload

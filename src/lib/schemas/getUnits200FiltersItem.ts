@@ -4,11 +4,11 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { GetUnits200FiltersItemLabel } from "./getUnits200FiltersItemLabel";
-import type { GetUnits200FiltersItemModel } from "./getUnits200FiltersItemModel";
-import type { GetUnits200FiltersItemField } from "./getUnits200FiltersItemField";
-import type { GetUnits200FiltersItemAdvanced } from "./getUnits200FiltersItemAdvanced";
-import type { GetUnits200FiltersItemEnumOptions } from "./getUnits200FiltersItemEnumOptions";
+import type { GetUnits200FiltersItemLabel } from './getUnits200FiltersItemLabel';
+import type { GetUnits200FiltersItemModel } from './getUnits200FiltersItemModel';
+import type { GetUnits200FiltersItemField } from './getUnits200FiltersItemField';
+import type { GetUnits200FiltersItemAdvanced } from './getUnits200FiltersItemAdvanced';
+import type { GetUnits200FiltersItemEnumOptions } from './getUnits200FiltersItemEnumOptions';
 
 export type GetUnits200FiltersItem = {
   /** The key representing the service associated with the filter. */

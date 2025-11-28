@@ -4,8 +4,8 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { ProvinceDeletedAt } from "./provinceDeletedAt";
-import type { ProvinceAbb } from "./provinceAbb";
+import type { ProvinceDeletedAt } from './provinceDeletedAt';
+import type { ProvinceAbb } from './provinceAbb';
 
 /**
  * Province entity with country relation

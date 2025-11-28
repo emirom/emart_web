@@ -4,7 +4,10 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import { useMutation, useQuery } from "@tanstack/react-query";
+import {
+  useMutation,
+  useQuery
+} from '@tanstack/react-query';
 import type {
   DataTag,
   DefinedInitialDataOptions,
@@ -17,8 +20,8 @@ import type {
   UseMutationOptions,
   UseMutationResult,
   UseQueryOptions,
-  UseQueryResult,
-} from "@tanstack/react-query";
+  UseQueryResult
+} from '@tanstack/react-query';
 
 import type {
   BaseResponse,
@@ -30,528 +33,361 @@ import type {
   InternalError,
   ListColorResponse,
   NotfoundError,
-  UpdateColorInput,
-} from "../../schemas";
+  UpdateColorInput
+} from '../../schemas';
 
-import { axiosInstance } from "../../configs/axios-instance";
+import { axiosInstance } from '../../configs/axios-instance';
+
+
+
 
 /**
  * Create a new color
  */
 export const postColors = (
-  createColorInput: CreateColorInput,
-  signal?: AbortSignal,
+    createColorInput: CreateColorInput,
+ signal?: AbortSignal
 ) => {
-  return axiosInstance<ColorResponse>({
-    url: `/colors`,
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    data: createColorInput,
-    signal,
-  });
-};
+      
+      
+      return axiosInstance<ColorResponse>(
+      {url: `/colors`, method: 'POST',
+      headers: {'Content-Type': 'application/json', },
+      data: createColorInput, signal
+    },
+      );
+    }
+  
 
-export const getPostColorsMutationOptions = <
-  TError = ErrorResponse | ConflictError | InternalError,
-  TContext = unknown,
->(options?: {
-  mutation?: UseMutationOptions<
-    Awaited<ReturnType<typeof postColors>>,
-    TError,
-    { data: CreateColorInput },
-    TContext
-  >;
-}): UseMutationOptions<
-  Awaited<ReturnType<typeof postColors>>,
-  TError,
-  { data: CreateColorInput },
-  TContext
-> => {
-  const mutationKey = ["postColors"];
-  const { mutation: mutationOptions } = options
-    ? options.mutation &&
-      "mutationKey" in options.mutation &&
-      options.mutation.mutationKey
-      ? options
-      : { ...options, mutation: { ...options.mutation, mutationKey } }
-    : { mutation: { mutationKey } };
 
-  const mutationFn: MutationFunction<
-    Awaited<ReturnType<typeof postColors>>,
-    { data: CreateColorInput }
-  > = (props) => {
-    const { data } = props ?? {};
+export const getPostColorsMutationOptions = <TError = ErrorResponse | ConflictError | InternalError,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postColors>>, TError,{data: CreateColorInput}, TContext>, }
+): UseMutationOptions<Awaited<ReturnType<typeof postColors>>, TError,{data: CreateColorInput}, TContext> => {
 
-    return postColors(data);
-  };
+const mutationKey = ['postColors'];
+const {mutation: mutationOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }};
 
-  return { mutationFn, ...mutationOptions };
-};
+      
 
-export type PostColorsMutationResult = NonNullable<
-  Awaited<ReturnType<typeof postColors>>
->;
-export type PostColorsMutationBody = CreateColorInput;
-export type PostColorsMutationError =
-  | ErrorResponse
-  | ConflictError
-  | InternalError;
 
-export const usePostColors = <
-  TError = ErrorResponse | ConflictError | InternalError,
-  TContext = unknown,
->(
-  options?: {
-    mutation?: UseMutationOptions<
-      Awaited<ReturnType<typeof postColors>>,
-      TError,
-      { data: CreateColorInput },
-      TContext
-    >;
-  },
-  queryClient?: QueryClient,
-): UseMutationResult<
-  Awaited<ReturnType<typeof postColors>>,
-  TError,
-  { data: CreateColorInput },
-  TContext
-> => {
-  const mutationOptions = getPostColorsMutationOptions(options);
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postColors>>, {data: CreateColorInput}> = (props) => {
+          const {data} = props ?? {};
 
-  return useMutation(mutationOptions, queryClient);
-};
-/**
+          return  postColors(data,)
+        }
+
+        
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type PostColorsMutationResult = NonNullable<Awaited<ReturnType<typeof postColors>>>
+    export type PostColorsMutationBody = CreateColorInput
+    export type PostColorsMutationError = ErrorResponse | ConflictError | InternalError
+
+    export const usePostColors = <TError = ErrorResponse | ConflictError | InternalError,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postColors>>, TError,{data: CreateColorInput}, TContext>, }
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof postColors>>,
+        TError,
+        {data: CreateColorInput},
+        TContext
+      > => {
+
+      const mutationOptions = getPostColorsMutationOptions(options);
+
+      return useMutation(mutationOptions , queryClient);
+    }
+    /**
  * Get all colors with pagination and filters
  */
-export const getColors = (params: GetColorsParams, signal?: AbortSignal) => {
-  return axiosInstance<ListColorResponse>({
-    url: `/colors`,
-    method: "GET",
-    params,
-    signal,
-  });
-};
-
-export const getGetColorsQueryKey = (params?: GetColorsParams) => {
-  return [`/colors`, ...(params ? [params] : [])] as const;
-};
-
-export const getGetColorsQueryOptions = <
-  TData = Awaited<ReturnType<typeof getColors>>,
-  TError = InternalError,
->(
-  params: GetColorsParams,
-  options?: {
-    query?: Partial<
-      UseQueryOptions<Awaited<ReturnType<typeof getColors>>, TError, TData>
-    >;
-  },
+export const getColors = (
+    params: GetColorsParams,
+ signal?: AbortSignal
 ) => {
-  const { query: queryOptions } = options ?? {};
+      
+      
+      return axiosInstance<ListColorResponse>(
+      {url: `/colors`, method: 'GET',
+        params, signal
+    },
+      );
+    }
+  
 
-  const queryKey = queryOptions?.queryKey ?? getGetColorsQueryKey(params);
+export const getGetColorsQueryKey = (params?: GetColorsParams,) => {
+    return [`/colors`, ...(params ? [params]: [])] as const;
+    }
 
-  const queryFn: QueryFunction<Awaited<ReturnType<typeof getColors>>> = ({
-    signal,
-  }) => getColors(params, signal);
+    
+export const getGetColorsQueryOptions = <TData = Awaited<ReturnType<typeof getColors>>, TError = InternalError>(params: GetColorsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getColors>>, TError, TData>>, }
+) => {
 
-  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
-    Awaited<ReturnType<typeof getColors>>,
-    TError,
-    TData
-  > & { queryKey: DataTag<QueryKey, TData, TError> };
-};
+const {query: queryOptions} = options ?? {};
 
-export type GetColorsQueryResult = NonNullable<
-  Awaited<ReturnType<typeof getColors>>
->;
-export type GetColorsQueryError = InternalError;
+  const queryKey =  queryOptions?.queryKey ?? getGetColorsQueryKey(params);
 
-export function useGetColors<
-  TData = Awaited<ReturnType<typeof getColors>>,
-  TError = InternalError,
->(
-  params: GetColorsParams,
-  options: {
-    query: Partial<
-      UseQueryOptions<Awaited<ReturnType<typeof getColors>>, TError, TData>
-    > &
-      Pick<
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getColors>>> = ({ signal }) => getColors(params, signal);
+
+      
+
+      
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getColors>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type GetColorsQueryResult = NonNullable<Awaited<ReturnType<typeof getColors>>>
+export type GetColorsQueryError = InternalError
+
+
+export function useGetColors<TData = Awaited<ReturnType<typeof getColors>>, TError = InternalError>(
+ params: GetColorsParams, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getColors>>, TError, TData>> & Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof getColors>>,
           TError,
           Awaited<ReturnType<typeof getColors>>
-        >,
-        "initialData"
-      >;
-  },
-  queryClient?: QueryClient,
-): DefinedUseQueryResult<TData, TError> & {
-  queryKey: DataTag<QueryKey, TData, TError>;
-};
-export function useGetColors<
-  TData = Awaited<ReturnType<typeof getColors>>,
-  TError = InternalError,
->(
-  params: GetColorsParams,
-  options?: {
-    query?: Partial<
-      UseQueryOptions<Awaited<ReturnType<typeof getColors>>, TError, TData>
-    > &
-      Pick<
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetColors<TData = Awaited<ReturnType<typeof getColors>>, TError = InternalError>(
+ params: GetColorsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getColors>>, TError, TData>> & Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof getColors>>,
           TError,
           Awaited<ReturnType<typeof getColors>>
-        >,
-        "initialData"
-      >;
-  },
-  queryClient?: QueryClient,
-): UseQueryResult<TData, TError> & {
-  queryKey: DataTag<QueryKey, TData, TError>;
-};
-export function useGetColors<
-  TData = Awaited<ReturnType<typeof getColors>>,
-  TError = InternalError,
->(
-  params: GetColorsParams,
-  options?: {
-    query?: Partial<
-      UseQueryOptions<Awaited<ReturnType<typeof getColors>>, TError, TData>
-    >;
-  },
-  queryClient?: QueryClient,
-): UseQueryResult<TData, TError> & {
-  queryKey: DataTag<QueryKey, TData, TError>;
-};
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetColors<TData = Awaited<ReturnType<typeof getColors>>, TError = InternalError>(
+ params: GetColorsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getColors>>, TError, TData>>, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 
-export function useGetColors<
-  TData = Awaited<ReturnType<typeof getColors>>,
-  TError = InternalError,
->(
-  params: GetColorsParams,
-  options?: {
-    query?: Partial<
-      UseQueryOptions<Awaited<ReturnType<typeof getColors>>, TError, TData>
-    >;
-  },
-  queryClient?: QueryClient,
-): UseQueryResult<TData, TError> & {
-  queryKey: DataTag<QueryKey, TData, TError>;
-} {
-  const queryOptions = getGetColorsQueryOptions(params, options);
+export function useGetColors<TData = Awaited<ReturnType<typeof getColors>>, TError = InternalError>(
+ params: GetColorsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getColors>>, TError, TData>>, }
+ , queryClient?: QueryClient 
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
 
-  const query = useQuery(queryOptions, queryClient) as UseQueryResult<
-    TData,
-    TError
-  > & { queryKey: DataTag<QueryKey, TData, TError> };
+  const queryOptions = getGetColorsQueryOptions(params,options)
 
-  query.queryKey = queryOptions.queryKey;
+  const query = useQuery(queryOptions , queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  query.queryKey = queryOptions.queryKey ;
 
   return query;
 }
+
+
 
 /**
  * Get a single color by ID
  */
-export const getColorsId = (id: string, signal?: AbortSignal) => {
-  return axiosInstance<ColorResponse>({
-    url: `/colors/${id}`,
-    method: "GET",
-    signal,
-  });
-};
-
-export const getGetColorsIdQueryKey = (id?: string) => {
-  return [`/colors/${id}`] as const;
-};
-
-export const getGetColorsIdQueryOptions = <
-  TData = Awaited<ReturnType<typeof getColorsId>>,
-  TError = ErrorResponse | NotfoundError | InternalError,
->(
-  id: string,
-  options?: {
-    query?: Partial<
-      UseQueryOptions<Awaited<ReturnType<typeof getColorsId>>, TError, TData>
-    >;
-  },
+export const getColorsId = (
+    id: string,
+ signal?: AbortSignal
 ) => {
-  const { query: queryOptions } = options ?? {};
+      
+      
+      return axiosInstance<ColorResponse>(
+      {url: `/colors/${id}`, method: 'GET', signal
+    },
+      );
+    }
+  
 
-  const queryKey = queryOptions?.queryKey ?? getGetColorsIdQueryKey(id);
+export const getGetColorsIdQueryKey = (id?: string,) => {
+    return [`/colors/${id}`] as const;
+    }
 
-  const queryFn: QueryFunction<Awaited<ReturnType<typeof getColorsId>>> = ({
-    signal,
-  }) => getColorsId(id, signal);
+    
+export const getGetColorsIdQueryOptions = <TData = Awaited<ReturnType<typeof getColorsId>>, TError = ErrorResponse | NotfoundError | InternalError>(id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getColorsId>>, TError, TData>>, }
+) => {
 
-  return {
-    queryKey,
-    queryFn,
-    enabled: !!id,
-    ...queryOptions,
-  } as UseQueryOptions<
-    Awaited<ReturnType<typeof getColorsId>>,
-    TError,
-    TData
-  > & { queryKey: DataTag<QueryKey, TData, TError> };
-};
+const {query: queryOptions} = options ?? {};
 
-export type GetColorsIdQueryResult = NonNullable<
-  Awaited<ReturnType<typeof getColorsId>>
->;
-export type GetColorsIdQueryError =
-  | ErrorResponse
-  | NotfoundError
-  | InternalError;
+  const queryKey =  queryOptions?.queryKey ?? getGetColorsIdQueryKey(id);
 
-export function useGetColorsId<
-  TData = Awaited<ReturnType<typeof getColorsId>>,
-  TError = ErrorResponse | NotfoundError | InternalError,
->(
-  id: string,
-  options: {
-    query: Partial<
-      UseQueryOptions<Awaited<ReturnType<typeof getColorsId>>, TError, TData>
-    > &
-      Pick<
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getColorsId>>> = ({ signal }) => getColorsId(id, signal);
+
+      
+
+      
+
+   return  { queryKey, queryFn, enabled: !!(id), ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getColorsId>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type GetColorsIdQueryResult = NonNullable<Awaited<ReturnType<typeof getColorsId>>>
+export type GetColorsIdQueryError = ErrorResponse | NotfoundError | InternalError
+
+
+export function useGetColorsId<TData = Awaited<ReturnType<typeof getColorsId>>, TError = ErrorResponse | NotfoundError | InternalError>(
+ id: string, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getColorsId>>, TError, TData>> & Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof getColorsId>>,
           TError,
           Awaited<ReturnType<typeof getColorsId>>
-        >,
-        "initialData"
-      >;
-  },
-  queryClient?: QueryClient,
-): DefinedUseQueryResult<TData, TError> & {
-  queryKey: DataTag<QueryKey, TData, TError>;
-};
-export function useGetColorsId<
-  TData = Awaited<ReturnType<typeof getColorsId>>,
-  TError = ErrorResponse | NotfoundError | InternalError,
->(
-  id: string,
-  options?: {
-    query?: Partial<
-      UseQueryOptions<Awaited<ReturnType<typeof getColorsId>>, TError, TData>
-    > &
-      Pick<
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetColorsId<TData = Awaited<ReturnType<typeof getColorsId>>, TError = ErrorResponse | NotfoundError | InternalError>(
+ id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getColorsId>>, TError, TData>> & Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof getColorsId>>,
           TError,
           Awaited<ReturnType<typeof getColorsId>>
-        >,
-        "initialData"
-      >;
-  },
-  queryClient?: QueryClient,
-): UseQueryResult<TData, TError> & {
-  queryKey: DataTag<QueryKey, TData, TError>;
-};
-export function useGetColorsId<
-  TData = Awaited<ReturnType<typeof getColorsId>>,
-  TError = ErrorResponse | NotfoundError | InternalError,
->(
-  id: string,
-  options?: {
-    query?: Partial<
-      UseQueryOptions<Awaited<ReturnType<typeof getColorsId>>, TError, TData>
-    >;
-  },
-  queryClient?: QueryClient,
-): UseQueryResult<TData, TError> & {
-  queryKey: DataTag<QueryKey, TData, TError>;
-};
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetColorsId<TData = Awaited<ReturnType<typeof getColorsId>>, TError = ErrorResponse | NotfoundError | InternalError>(
+ id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getColorsId>>, TError, TData>>, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 
-export function useGetColorsId<
-  TData = Awaited<ReturnType<typeof getColorsId>>,
-  TError = ErrorResponse | NotfoundError | InternalError,
->(
-  id: string,
-  options?: {
-    query?: Partial<
-      UseQueryOptions<Awaited<ReturnType<typeof getColorsId>>, TError, TData>
-    >;
-  },
-  queryClient?: QueryClient,
-): UseQueryResult<TData, TError> & {
-  queryKey: DataTag<QueryKey, TData, TError>;
-} {
-  const queryOptions = getGetColorsIdQueryOptions(id, options);
+export function useGetColorsId<TData = Awaited<ReturnType<typeof getColorsId>>, TError = ErrorResponse | NotfoundError | InternalError>(
+ id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getColorsId>>, TError, TData>>, }
+ , queryClient?: QueryClient 
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
 
-  const query = useQuery(queryOptions, queryClient) as UseQueryResult<
-    TData,
-    TError
-  > & { queryKey: DataTag<QueryKey, TData, TError> };
+  const queryOptions = getGetColorsIdQueryOptions(id,options)
 
-  query.queryKey = queryOptions.queryKey;
+  const query = useQuery(queryOptions , queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  query.queryKey = queryOptions.queryKey ;
 
   return query;
 }
+
+
 
 /**
  * Update a color
  */
 export const patchColorsId = (
-  id: string,
-  updateColorInput: UpdateColorInput,
-) => {
-  return axiosInstance<ColorResponse>({
-    url: `/colors/${id}`,
-    method: "PATCH",
-    headers: { "Content-Type": "application/json" },
-    data: updateColorInput,
-  });
-};
+    id: string,
+    updateColorInput: UpdateColorInput,
+ ) => {
+      
+      
+      return axiosInstance<ColorResponse>(
+      {url: `/colors/${id}`, method: 'PATCH',
+      headers: {'Content-Type': 'application/json', },
+      data: updateColorInput
+    },
+      );
+    }
+  
 
-export const getPatchColorsIdMutationOptions = <
-  TError = ErrorResponse | NotfoundError | ConflictError | InternalError,
-  TContext = unknown,
->(options?: {
-  mutation?: UseMutationOptions<
-    Awaited<ReturnType<typeof patchColorsId>>,
-    TError,
-    { id: string; data: UpdateColorInput },
-    TContext
-  >;
-}): UseMutationOptions<
-  Awaited<ReturnType<typeof patchColorsId>>,
-  TError,
-  { id: string; data: UpdateColorInput },
-  TContext
-> => {
-  const mutationKey = ["patchColorsId"];
-  const { mutation: mutationOptions } = options
-    ? options.mutation &&
-      "mutationKey" in options.mutation &&
-      options.mutation.mutationKey
-      ? options
-      : { ...options, mutation: { ...options.mutation, mutationKey } }
-    : { mutation: { mutationKey } };
 
-  const mutationFn: MutationFunction<
-    Awaited<ReturnType<typeof patchColorsId>>,
-    { id: string; data: UpdateColorInput }
-  > = (props) => {
-    const { id, data } = props ?? {};
+export const getPatchColorsIdMutationOptions = <TError = ErrorResponse | NotfoundError | ConflictError | InternalError,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof patchColorsId>>, TError,{id: string;data: UpdateColorInput}, TContext>, }
+): UseMutationOptions<Awaited<ReturnType<typeof patchColorsId>>, TError,{id: string;data: UpdateColorInput}, TContext> => {
 
-    return patchColorsId(id, data);
-  };
+const mutationKey = ['patchColorsId'];
+const {mutation: mutationOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }};
 
-  return { mutationFn, ...mutationOptions };
-};
+      
 
-export type PatchColorsIdMutationResult = NonNullable<
-  Awaited<ReturnType<typeof patchColorsId>>
->;
-export type PatchColorsIdMutationBody = UpdateColorInput;
-export type PatchColorsIdMutationError =
-  | ErrorResponse
-  | NotfoundError
-  | ConflictError
-  | InternalError;
 
-export const usePatchColorsId = <
-  TError = ErrorResponse | NotfoundError | ConflictError | InternalError,
-  TContext = unknown,
->(
-  options?: {
-    mutation?: UseMutationOptions<
-      Awaited<ReturnType<typeof patchColorsId>>,
-      TError,
-      { id: string; data: UpdateColorInput },
-      TContext
-    >;
-  },
-  queryClient?: QueryClient,
-): UseMutationResult<
-  Awaited<ReturnType<typeof patchColorsId>>,
-  TError,
-  { id: string; data: UpdateColorInput },
-  TContext
-> => {
-  const mutationOptions = getPatchColorsIdMutationOptions(options);
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof patchColorsId>>, {id: string;data: UpdateColorInput}> = (props) => {
+          const {id,data} = props ?? {};
 
-  return useMutation(mutationOptions, queryClient);
-};
-/**
+          return  patchColorsId(id,data,)
+        }
+
+        
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type PatchColorsIdMutationResult = NonNullable<Awaited<ReturnType<typeof patchColorsId>>>
+    export type PatchColorsIdMutationBody = UpdateColorInput
+    export type PatchColorsIdMutationError = ErrorResponse | NotfoundError | ConflictError | InternalError
+
+    export const usePatchColorsId = <TError = ErrorResponse | NotfoundError | ConflictError | InternalError,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof patchColorsId>>, TError,{id: string;data: UpdateColorInput}, TContext>, }
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof patchColorsId>>,
+        TError,
+        {id: string;data: UpdateColorInput},
+        TContext
+      > => {
+
+      const mutationOptions = getPatchColorsIdMutationOptions(options);
+
+      return useMutation(mutationOptions , queryClient);
+    }
+    /**
  * Delete a color
  */
-export const deleteColorsId = (id: string) => {
-  return axiosInstance<BaseResponse>({
-    url: `/colors/${id}`,
-    method: "DELETE",
-  });
-};
+export const deleteColorsId = (
+    id: string,
+ ) => {
+      
+      
+      return axiosInstance<BaseResponse>(
+      {url: `/colors/${id}`, method: 'DELETE'
+    },
+      );
+    }
+  
 
-export const getDeleteColorsIdMutationOptions = <
-  TError = ErrorResponse | NotfoundError | InternalError,
-  TContext = unknown,
->(options?: {
-  mutation?: UseMutationOptions<
-    Awaited<ReturnType<typeof deleteColorsId>>,
-    TError,
-    { id: string },
-    TContext
-  >;
-}): UseMutationOptions<
-  Awaited<ReturnType<typeof deleteColorsId>>,
-  TError,
-  { id: string },
-  TContext
-> => {
-  const mutationKey = ["deleteColorsId"];
-  const { mutation: mutationOptions } = options
-    ? options.mutation &&
-      "mutationKey" in options.mutation &&
-      options.mutation.mutationKey
-      ? options
-      : { ...options, mutation: { ...options.mutation, mutationKey } }
-    : { mutation: { mutationKey } };
 
-  const mutationFn: MutationFunction<
-    Awaited<ReturnType<typeof deleteColorsId>>,
-    { id: string }
-  > = (props) => {
-    const { id } = props ?? {};
+export const getDeleteColorsIdMutationOptions = <TError = ErrorResponse | NotfoundError | InternalError,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteColorsId>>, TError,{id: string}, TContext>, }
+): UseMutationOptions<Awaited<ReturnType<typeof deleteColorsId>>, TError,{id: string}, TContext> => {
 
-    return deleteColorsId(id);
-  };
+const mutationKey = ['deleteColorsId'];
+const {mutation: mutationOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }};
 
-  return { mutationFn, ...mutationOptions };
-};
+      
 
-export type DeleteColorsIdMutationResult = NonNullable<
-  Awaited<ReturnType<typeof deleteColorsId>>
->;
 
-export type DeleteColorsIdMutationError =
-  | ErrorResponse
-  | NotfoundError
-  | InternalError;
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteColorsId>>, {id: string}> = (props) => {
+          const {id} = props ?? {};
 
-export const useDeleteColorsId = <
-  TError = ErrorResponse | NotfoundError | InternalError,
-  TContext = unknown,
->(
-  options?: {
-    mutation?: UseMutationOptions<
-      Awaited<ReturnType<typeof deleteColorsId>>,
-      TError,
-      { id: string },
-      TContext
-    >;
-  },
-  queryClient?: QueryClient,
-): UseMutationResult<
-  Awaited<ReturnType<typeof deleteColorsId>>,
-  TError,
-  { id: string },
-  TContext
-> => {
-  const mutationOptions = getDeleteColorsIdMutationOptions(options);
+          return  deleteColorsId(id,)
+        }
 
-  return useMutation(mutationOptions, queryClient);
-};
+        
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type DeleteColorsIdMutationResult = NonNullable<Awaited<ReturnType<typeof deleteColorsId>>>
+    
+    export type DeleteColorsIdMutationError = ErrorResponse | NotfoundError | InternalError
+
+    export const useDeleteColorsId = <TError = ErrorResponse | NotfoundError | InternalError,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteColorsId>>, TError,{id: string}, TContext>, }
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof deleteColorsId>>,
+        TError,
+        {id: string},
+        TContext
+      > => {
+
+      const mutationOptions = getDeleteColorsIdMutationOptions(options);
+
+      return useMutation(mutationOptions , queryClient);
+    }
+    

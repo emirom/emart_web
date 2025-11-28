@@ -4,8 +4,8 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { BaseResponse } from "./baseResponse";
-import type { ProductMedia } from "./productMedia";
+import type { BaseResponse } from './baseResponse';
+import type { ProductMedia } from './productMedia';
 
 /**
  * Response schema for single product media operations

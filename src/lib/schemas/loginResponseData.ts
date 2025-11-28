@@ -4,8 +4,8 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { LoginResponseDataUser } from "./loginResponseDataUser";
-import type { LoginResponseDataTokens } from "./loginResponseDataTokens";
+import type { LoginResponseDataUser } from './loginResponseDataUser';
+import type { LoginResponseDataTokens } from './loginResponseDataTokens';
 
 export type LoginResponseData = {
   user: LoginResponseDataUser;

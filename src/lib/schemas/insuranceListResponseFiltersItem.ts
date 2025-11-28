@@ -4,11 +4,11 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { InsuranceListResponseFiltersItemLabel } from "./insuranceListResponseFiltersItemLabel";
-import type { InsuranceListResponseFiltersItemModel } from "./insuranceListResponseFiltersItemModel";
-import type { InsuranceListResponseFiltersItemField } from "./insuranceListResponseFiltersItemField";
-import type { InsuranceListResponseFiltersItemAdvanced } from "./insuranceListResponseFiltersItemAdvanced";
-import type { InsuranceListResponseFiltersItemEnumOptions } from "./insuranceListResponseFiltersItemEnumOptions";
+import type { InsuranceListResponseFiltersItemLabel } from './insuranceListResponseFiltersItemLabel';
+import type { InsuranceListResponseFiltersItemModel } from './insuranceListResponseFiltersItemModel';
+import type { InsuranceListResponseFiltersItemField } from './insuranceListResponseFiltersItemField';
+import type { InsuranceListResponseFiltersItemAdvanced } from './insuranceListResponseFiltersItemAdvanced';
+import type { InsuranceListResponseFiltersItemEnumOptions } from './insuranceListResponseFiltersItemEnumOptions';
 
 export type InsuranceListResponseFiltersItem = {
   /** The key representing the service associated with the filter. */

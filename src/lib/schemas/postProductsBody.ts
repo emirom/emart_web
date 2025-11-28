@@ -4,7 +4,7 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { PostProductsBodyLabels } from "./postProductsBodyLabels";
+import type { PostProductsBodyLabels } from './postProductsBodyLabels';
 
 /**
  * Complete mobile phone product entity

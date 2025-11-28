@@ -8,6 +8,4 @@
 /**
  * The name of the model to search in.
  */
-export type ProductDescriptionListResponseWithMetaFiltersItemModel =
-  | string
-  | null;
+export type ProductDescriptionListResponseWithMetaFiltersItemModel = string | null;

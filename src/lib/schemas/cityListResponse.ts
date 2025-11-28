@@ -4,10 +4,10 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { BaseResponse } from "./baseResponse";
-import type { CityListResponseDetails } from "./cityListResponseDetails";
-import type { CityListResponseFiltersItem } from "./cityListResponseFiltersItem";
-import type { CityListResponseDataItem } from "./cityListResponseDataItem";
+import type { BaseResponse } from './baseResponse';
+import type { CityListResponseDetails } from './cityListResponseDetails';
+import type { CityListResponseFiltersItem } from './cityListResponseFiltersItem';
+import type { CityListResponseDataItem } from './cityListResponseDataItem';
 
 /**
  * Paginated list of cities
@@ -17,14 +17,9 @@ export type CityListResponse = BaseResponse & {
   details?: CityListResponseDetails;
   filters: CityListResponseFiltersItem[];
   data: CityListResponseDataItem[];
-} & Required<
-    Pick<
-      BaseResponse & {
-        /** Pagination metadata */
-        details?: CityListResponseDetails;
-        filters: CityListResponseFiltersItem[];
-        data: CityListResponseDataItem[];
-      },
-      "filters" | "data"
-    >
-  >;
+} & Required<Pick<BaseResponse & {
+  /** Pagination metadata */
+  details?: CityListResponseDetails;
+  filters: CityListResponseFiltersItem[];
+  data: CityListResponseDataItem[];
+}, 'filters' | 'data'>>;
