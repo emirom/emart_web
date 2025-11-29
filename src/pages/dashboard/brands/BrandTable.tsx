@@ -111,7 +111,7 @@ export default function BrandTable({
 }) {
   const searchParams = useSearchParams();
 
-  const { data: brands, refetch } = useGetBrands({
+  const { data: brands } = useGetBrands({
     skip: initialQuery?.page ?? 0,
     limit: 10,
     name: searchParams?.get("name") ?? initialQuery?.name,

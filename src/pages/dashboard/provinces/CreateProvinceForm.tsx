@@ -27,7 +27,7 @@ export default function CreateProvinceForm() {
     try {
       await postProvinceAction(data);
       queryClient.invalidateQueries({ queryKey: ["/provinces"] });
-      toast.success("استان اضافه شد");
+      toast.success("فروشگاه اضافه شد");
       reset();
     } catch (error: unknown) {
       if (error instanceof Error) {
@@ -52,7 +52,7 @@ export default function CreateProvinceForm() {
         getOptionLabel={(opt) => opt.name}
         getOptionValue={(opt) => opt.id}
       />
-      <FormInputField control={control} label="نام استان" name="name" />
+      <FormInputField control={control} label="نام فروشگاه" name="name" />
       <FormInputField
         control={control}
         label="نام مخفف اصتان(abb)"

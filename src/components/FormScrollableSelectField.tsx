@@ -20,6 +20,7 @@ interface Props<T extends FieldValues = FieldValues, TOption = unknown> {
   placeholder?: string;
   getOptionLabel: (option: TOption) => string;
   getOptionValue: (option: TOption) => string | boolean | number;
+  className?: string;
 }
 
 export function FormScrollableSelectField<
@@ -33,6 +34,7 @@ export function FormScrollableSelectField<
   getOptionLabel,
   getOptionValue,
   label,
+  className,
 }: Props<T, TOption>) {
   const mappedOptions = useMemo(() => {
     return options.map((option) => {
@@ -44,7 +46,7 @@ export function FormScrollableSelectField<
   }, [options, getOptionLabel, getOptionValue]);
 
   return (
-    <div className="w-full flex flex-col gap-1">
+    <div className={cn("w-full flex flex-col gap-1", className)}>
       <label className={cn("block text-xs font-medium text-tint-blue-500")}>
         {label}
       </label>

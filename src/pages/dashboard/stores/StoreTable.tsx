@@ -3,6 +3,8 @@ import { CustomDataTable } from "@components/CustomDataTable";
 import { ListStoresResponse, Store } from "@lib/schemas";
 import { ColumnDef } from "@tanstack/react-table";
 import Link from "next/link";
+import CreateStore from "./CreateStore";
+import StoreAction from "./StoreAction";
 
 const columns: ColumnDef<Store>[] = [
   {
@@ -85,6 +87,11 @@ const columns: ColumnDef<Store>[] = [
     cell: ({ row }) =>
       `📅 ${new Date(row.original.updatedAt).toLocaleDateString("fa-IR")}`,
   },
+  {
+    accessorKey: "id",
+    header: "",
+    cell: ({ row }) => <StoreAction id={row.original.id} />,
+  },
 ];
 
 export default function StoreTable({ data }: { data: ListStoresResponse }) {
@@ -97,6 +104,7 @@ export default function StoreTable({ data }: { data: ListStoresResponse }) {
       emptyMessage="فروشگاهی یافت نشد"
       filterPlaceholder="نام فروشگاه را وارد نمایید"
       filterColumnKey="name"
+      customButton={<CreateStore />}
     />
   );
 }
