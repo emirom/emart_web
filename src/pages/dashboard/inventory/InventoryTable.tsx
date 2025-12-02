@@ -1,5 +1,131 @@
+"use client";
 import { CustomDataTable } from "@components/CustomDataTable";
+import { Inventory, ListInventoryResponse } from "@lib/schemas";
+import { RowNumber } from "@lib/types/row-number";
+import { ColumnDef } from "@tanstack/react-table";
+import Link from "next/link";
+import InventoryAction from "./InventoryAction";
 
-export default function InventoryTable() {
-  return <CustomDataTable data={[]} columns={[]} />;
+const columns: ColumnDef<Inventory & RowNumber>[] = [
+  {
+    accessorKey: "rowNumber",
+    header: "#",
+  },
+
+  {
+    accessorKey: "storeId",
+    header: "فروشگاه",
+  },
+  {
+    accessorKey: "locationId",
+    header: "مکان",
+  },
+  {
+    accessorKey: "variantId",
+    header: "شناسه واریانت",
+  },
+  {
+    accessorKey: "price",
+    header: "قیمت پایه",
+    cell: ({ row }) => row.original.price.toLocaleString(),
+  },
+  {
+    accessorKey: "discountPercent",
+    header: "درصد تخفیف",
+    cell: ({ row }) => `${row.original.discountPercent}%`,
+  },
+  {
+    accessorKey: "discountPrice",
+    header: "قیمت با تخفیف",
+    cell: ({ row }) => row.original.discountPrice.toLocaleString(),
+  },
+  {
+    accessorKey: "inStock",
+    header: "موجودی",
+  },
+  {
+    accessorKey: "sold",
+    header: "فروش رفته",
+  },
+  {
+    accessorKey: "rate",
+    header: "امتیاز",
+  },
+  {
+    accessorKey: "lowStockThreshold",
+    header: "آستانه هشدار موجودی",
+  },
+  {
+    accessorKey: "expiryDate",
+    header: "تاریخ انقضا",
+    cell: ({ row }) =>
+      row.original.expiryDate
+        ? new Date(row.original.expiryDate).toLocaleDateString()
+        : "-",
+  },
+  {
+    accessorKey: "warehouseCode",
+    header: "کد انبار",
+  },
+  {
+    accessorKey: "shelfCode",
+    header: "کد قفسه",
+  },
+  {
+    accessorKey: "hsCode",
+    header: "کد HS",
+  },
+  {
+    accessorKey: "originCountry",
+    header: "کشور مبدا",
+  },
+  {
+    accessorKey: "packageWeight",
+    header: "وزن بسته (کیلوگرم)",
+  },
+  {
+    accessorKey: "packageDimensions",
+    header: "ابعاد بسته",
+    cell: ({ row }) =>
+      row.original.packageDimensions
+        ? `${row.original.packageDimensions.length}x${row.original.packageDimensions}`
+        : "-",
+  },
+  {
+    accessorKey: "createdAt",
+    header: "تاریخ ایجاد",
+    cell: ({ row }) => new Date(row.original.createdAt).toLocaleString(),
+  },
+  {
+    accessorKey: "updatedAt",
+    header: "آخرین بروزرسانی",
+    cell: ({ row }) => new Date(row.original.updatedAt).toLocaleString(),
+  },
+
+  {
+    accessorKey: "id",
+    header: "",
+    cell: ({ row }) => <InventoryAction id={row.original.id} />,
+  },
+];
+
+export default function InventoryTable({
+  data,
+}: {
+  data?: ListInventoryResponse;
+}) {
+  return (
+    <CustomDataTable
+      data={data?.data}
+      columns={columns}
+      title="موجودی کالا"
+      filterConfigs={data?.filters}
+      emptyMessage="موجودی کالایی یافت نشد"
+      filterColumnKey="storeId"
+      filterPlaceholder="آیدی‌فروشگاه‌راواردنمایید"
+      customButton={
+        <Link href="/dashboard/inventory/add">افزودن موجودی کالا</Link>
+      }
+    />
+  );
 }

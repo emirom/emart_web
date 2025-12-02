@@ -1,0 +1,39 @@
+"use client";
+
+import { AlertDialogModal } from "@components/AlertDialogModal";
+import { DeleteButton, EditButton } from "@components/BtnWithIcon";
+import { DashboardCustomModal } from "@components/DashboardCustomModal";
+import { deleteCountryAction } from "@lib/actions/country-action";
+import { queryClient } from "@lib/apis/queryClient";
+import { toast } from "react-toastify";
+
+export default function InventoryAction({ id }: { id: string }) {
+  const handleDelete = async () => {
+    try {
+      await deleteCountryAction(id);
+      queryClient.invalidateQueries({ queryKey: ["/countries"] });
+      toast.success("کشور حذف شد");
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        toast.error(error.message);
+      } else {
+        toast.error("خطایی رخ داده است");
+      }
+    }
+  };
+
+  return (
+    <div className="flex items-center justify-center w-full">
+      <AlertDialogModal
+        alertTitle="آیا از حذف این رنگ اطمینان دارید؟"
+        button={<DeleteButton />}
+        onConfirm={handleDelete}
+      />
+      <DashboardCustomModal
+        title="ویرایش کمیت"
+        button={<EditButton />}
+        element={<></>}
+      />
+    </div>
+  );
+}
