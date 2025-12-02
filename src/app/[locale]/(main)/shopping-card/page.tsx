@@ -1,5 +1,5 @@
-import ProductShoppingList from "@/pages/home/shopping-card/ProductShoppingList";
-import ShoppingStep from "@/pages/home/shopping-card/ShoppingStep";
+import ShoppingCardDesktopMode from "@/pages/home/shopping-card/ShoppingCardDesktopMode";
+import ShoppingCardMobileMode from "@/pages/home/shopping-card/ShoppingCardMobileMode";
 import Container from "@components/Container";
 import { queryClient } from "@lib/apis/queryClient";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
@@ -12,9 +12,9 @@ export const metadata: Metadata = {
 export default function ShoppingCard() {
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <Container className="flex items-stretch h-full  gap-3">
-        <ProductShoppingList />
-        <ShoppingStep />
+      <Container>
+        <ShoppingCardMobileMode />
+        <ShoppingCardDesktopMode />
       </Container>
     </HydrationBoundary>
   );
