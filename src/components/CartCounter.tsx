@@ -20,7 +20,7 @@ export default memo(function CartCounter() {
 
   return (
     <div
-      className="flex items-stretch gap-2 border border-sky-500 rounded-lg p-2"
+      className="flex items-stretch gap-2 border border-sky-500 rounded-lg p-1 "
       role="group"
       aria-label="کنترل تعداد محصول"
     >
