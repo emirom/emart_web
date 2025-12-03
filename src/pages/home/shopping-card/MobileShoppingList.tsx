@@ -1,3 +1,4 @@
+import CartCounter from "@components/CartCounter";
 import CustomImage from "@components/CustomImage";
 import { Button } from "@components/ui/button";
 import {
@@ -40,7 +41,6 @@ export default function MobileShoppingList() {
               </div>
             </div>
 
-            {/* IMAGE */}
             <figure className="aspect-square my-3" role="figure">
               <CustomImage
                 className="w-full h-full"
@@ -52,9 +52,9 @@ export default function MobileShoppingList() {
                 تصویر محصول آیفون ۱۶ پرومکس
               </figcaption>
             </figure>
+            <CartCounter />
           </div>
 
-          {/* RIGHT SIDE */}
           <div className="col-span-7 text-tint-blue-500">
             <h2 className="text-sm font-semibold">آیفون ۱۶ پرومکس</h2>
 
@@ -97,7 +97,6 @@ export default function MobileShoppingList() {
             </div>
           </div>
 
-          {/* INSURANCE BOX */}
           <div
             className="col-span-12 p-3 py-4 flex items-center gap-3 rounded-lg border border-tint-blue-500 mb-2"
             role="group"
