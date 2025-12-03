@@ -5,6 +5,7 @@
  * OpenAPI spec version: 1.0.0
  */
 import type { CreateLocationInputStreetNumber } from "./createLocationInputStreetNumber";
+import type { CreateLocationInputStoreId } from "./createLocationInputStoreId";
 import type { CreateLocationInputIsActive } from "./createLocationInputIsActive";
 
 /**
@@ -23,6 +24,8 @@ export interface CreateLocationInput {
    * @minLength 3
    */
   postalCode: string;
+  /** Store ID */
+  storeId?: CreateLocationInputStoreId;
   /** City ID */
   cityId: string;
   /** Whether the location is active */

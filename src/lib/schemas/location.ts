@@ -5,6 +5,7 @@
  * OpenAPI spec version: 1.0.0
  */
 import type { LocationStreetNumber } from "./locationStreetNumber";
+import type { LocationStoreId } from "./locationStoreId";
 import type { LocationIsActive } from "./locationIsActive";
 
 /**
@@ -31,6 +32,8 @@ export interface Location {
   postalCode: string;
   /** Province ID */
   provinceId: string;
+  /** Store ID */
+  storeId?: LocationStoreId;
   /** City ID */
   cityId: string;
   /** Whether the location is active */

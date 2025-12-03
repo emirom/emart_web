@@ -5,6 +5,7 @@
  * OpenAPI spec version: 1.0.0
  */
 import type { ListLocationsResponseDataItemStreetNumber } from "./listLocationsResponseDataItemStreetNumber";
+import type { ListLocationsResponseDataItemStoreId } from "./listLocationsResponseDataItemStoreId";
 import type { ListLocationsResponseDataItemIsActive } from "./listLocationsResponseDataItemIsActive";
 
 export type ListLocationsResponseDataItem = {
@@ -28,6 +29,8 @@ export type ListLocationsResponseDataItem = {
   postalCode: string;
   /** Province ID */
   provinceId: string;
+  /** Store ID */
+  storeId?: ListLocationsResponseDataItemStoreId;
   /** City ID */
   cityId: string;
   /** Whether the location is active */

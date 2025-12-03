@@ -27,6 +27,10 @@ export const postLocationsBody = zod
       .string()
       .min(postLocationsBodyPostalCodeMin)
       .describe("Postal/ZIP code"),
+    storeId: zod
+      .union([zod.uuid(), zod.null()])
+      .optional()
+      .describe("Store ID"),
     cityId: zod.uuid().describe("City ID"),
     isActive: zod
       .union([zod.coerce.boolean(), zod.null()])
@@ -138,6 +142,10 @@ export const patchLocationsIdBody = zod
       .min(patchLocationsIdBodyPostalCodeMin)
       .optional()
       .describe("Postal/ZIP code"),
+    storeId: zod
+      .union([zod.uuid(), zod.null()])
+      .optional()
+      .describe("Store ID"),
     cityId: zod.uuid().optional().describe("City ID"),
     isActive: zod
       .union([zod.coerce.boolean(), zod.null()])
