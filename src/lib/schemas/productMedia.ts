@@ -4,6 +4,7 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
+import type { ProductMediaVariantId } from "./productMediaVariantId";
 import type { ProductMediaTitle } from "./productMediaTitle";
 import type { ProductMediaThumbnailUrl } from "./productMediaThumbnailUrl";
 import type { ProductMediaAltText } from "./productMediaAltText";
@@ -23,6 +24,8 @@ export interface ProductMedia {
   updatedAt: string;
   /** UUID of the associated product */
   productId: string;
+  /** UUID of the associated variant */
+  variantId?: ProductMediaVariantId;
   /**
    * Relative or absolute URL path to the media file
    * @minLength 1

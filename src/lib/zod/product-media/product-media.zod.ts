@@ -41,6 +41,10 @@ export const getProductMediasQueryParams = zod.object({
     .union([zod.uuid(), zod.null()])
     .optional()
     .describe("Filter by specific product UUID"),
+  variantId: zod
+    .union([zod.uuid(), zod.null()])
+    .optional()
+    .describe("Filter by specific variant UUID"),
   mimetype: zod
     .union([
       zod.coerce.string().max(getProductMediasQueryMimetypeMaxOne),

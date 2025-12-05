@@ -30,6 +30,10 @@ export type GetProductMediasParams = {
    */
   productId?: string | null;
   /**
+   * Filter by specific variant UUID
+   */
+  variantId?: string | null;
+  /**
    * Filter by specific MIME type
    */
   mimetype?: string | null;
