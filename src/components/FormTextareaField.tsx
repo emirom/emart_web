@@ -34,6 +34,7 @@ export function FormTextareaField<T extends FieldValues>({
                 placeholder={placeholder}
                 id={name}
                 {...field}
+                value={field.value ?? ""}
                 className={cn(
                   "text-xs ",
                   `${fieldState?.error && "border-destructive ring-destructive"}`,

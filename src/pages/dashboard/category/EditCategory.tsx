@@ -4,14 +4,16 @@ import { SubmitButton } from "@components/BtnWithIcon";
 import FormAutocomplete from "@components/FormAutoCompleteField";
 import { FormInputField } from "@components/FormInputField";
 import FormSwitchField from "@components/FormSwitchField";
+import { FormTextareaField } from "@components/FormTextareaField";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { putCategoryAction } from "@lib/actions/category-action";
-import { queryClient } from "@lib/apis/queryClient";
-import { CreateCategoryInput } from "@lib/schemas";
+import { UpdateCategoryInput } from "@lib/schemas";
 import {
   useGetCategories,
   useGetCategoriesId,
 } from "@lib/services/categories/categories";
 import { useGetUnits } from "@lib/services/units/units";
+import { patchCategoriesIdBody } from "@lib/validations/category.validation";
 import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
@@ -22,11 +24,22 @@ export default function EditCategory({ id }: { id: string }) {
     handleSubmit,
     reset,
     formState: { isDirty },
-  } = useForm<CreateCategoryInput>({
+  } = useForm<UpdateCategoryInput>({
     defaultValues: {
       iconUrl: "https://example.com/icon.png",
-      level: 2,
+      level: 0,
+      name: "",
+      enName: "",
+      parentId: null,
+      unitId: "",
+      promotionId: null,
+      desc: "",
+      isActive: true,
+      showInMenu: true,
     },
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
+    resolver: zodResolver(patchCategoriesIdBody) as any,
   });
   const { data: categories } = useGetCategories({ skip: 0, limit: 10 });
   const { data: units } = useGetUnits({ skip: 0, limit: 10 });
@@ -37,10 +50,10 @@ export default function EditCategory({ id }: { id: string }) {
     reset({ ...category?.data });
   }, [category, reset]);
 
-  const onSubmit: SubmitHandler<CreateCategoryInput> = async (data) => {
+  const onSubmit: SubmitHandler<UpdateCategoryInput> = async (data) => {
     try {
       await putCategoryAction(id, data);
-      queryClient.invalidateQueries({ queryKey: ["/categories"] });
+
       toast.success("ویرایش دسته بندی انجام شد");
     } catch (error: unknown) {
       if (error instanceof Error) {
@@ -52,7 +65,7 @@ export default function EditCategory({ id }: { id: string }) {
   };
   return (
     <div className="w-full ">
-      <h2 className="text-tint-blue-500">ویرایش {category?.data?.name}</h2>
+      <h2 className="text-tint-blue-500">افزودن دسته بندی</h2>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="w-full flex flex-col gap-2 p-2"
@@ -100,8 +113,16 @@ export default function EditCategory({ id }: { id: string }) {
               control={control}
             />
           </div>
-          <SubmitButton className="py-5" disabled={!isDirty} />
         </div>
+        <div className="w-full">
+          <FormTextareaField
+            control={control}
+            name="desc"
+            label="توضیحات"
+            placeholder="توضیحات دسته بندی"
+          />
+        </div>
+        <SubmitButton className="py-5" disabled={!isDirty} />
       </form>
     </div>
   );
