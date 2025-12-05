@@ -18,7 +18,7 @@ import { toast } from "react-toastify";
 import FormDatePickerField from "../../../components/FormDatePickerField";
 
 export default function CreateInventoryForm() {
-  const { handleSubmit, control, formState } = useForm<CreateInventoryInput>({
+  const { handleSubmit, control } = useForm<CreateInventoryInput>({
     defaultValues: {
       insuranceId: null,
       guaranteeId: null,

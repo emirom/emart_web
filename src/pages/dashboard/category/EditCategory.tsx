@@ -38,7 +38,6 @@ export default function EditCategory({ id }: { id: string }) {
       showInMenu: true,
     },
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-
     resolver: zodResolver(patchCategoriesIdBody) as any,
   });
   const { data: categories } = useGetCategories({ skip: 0, limit: 10 });
