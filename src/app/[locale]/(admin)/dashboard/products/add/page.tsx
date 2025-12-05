@@ -3,8 +3,8 @@ import { HeaderWithLink } from "@components/HeaderWithLink";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "صفحه اصلی",
-  description: "صفحه اصلی",
+  title: " محصولات  ",
+  description: "محصولات",
 };
 
 export default async function Page() {

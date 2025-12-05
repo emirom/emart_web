@@ -7,6 +7,7 @@ import FormSwitchField from "@components/FormSwitchField";
 import { FormTextareaField } from "@components/FormTextareaField";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { postCategoryAction } from "@lib/actions/category-action";
+import { queryClient } from "@lib/apis/queryClient";
 import { CreateCategoryInput } from "@lib/schemas";
 import { useGetCategories } from "@lib/services/categories/categories";
 import { useGetUnits } from "@lib/services/units/units";
@@ -37,6 +38,7 @@ export default function CreateCategoryPage() {
   const onSubmit: SubmitHandler<CreateCategoryInput> = async (data) => {
     try {
       await postCategoryAction(data);
+      queryClient.invalidateQueries({ queryKey: ["/categories"] });
       toast.success("دسته بندی اضافه شد");
       reset();
     } catch (error: unknown) {

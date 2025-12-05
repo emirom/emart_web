@@ -28,7 +28,7 @@ export default function CreateProductForm() {
   const { handleSubmit, control, reset } = useForm<CreateProductInput>({
     defaultValues: {
       labels: [],
-      isActive: false,
+      isActive: true,
       name: "",
       enName: "",
       categoryId: "",
