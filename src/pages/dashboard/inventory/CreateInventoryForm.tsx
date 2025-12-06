@@ -7,6 +7,7 @@ import { useGetCurrencies } from "@lib/services/currencies/currencies";
 import { useGetGuarantees } from "@lib/services/guarantees/guarantees";
 import { useGetInsurances } from "@lib/services/insurances/insurances";
 
+import { SubmitButton } from "@components/BtnWithIcon";
 import { postInventoryAction } from "@lib/actions/inventory-action";
 import { useGetLocations } from "@lib/services/locations/locations";
 import { useGetStores } from "@lib/services/stores/stores";
@@ -198,12 +199,13 @@ export default function CreateInventoryForm() {
         label="ابعاد بسته (L x W x H)"
       />
 
-      <button
+      {/* <button
         type="submit"
         className="col-span-full bg-blue-600 text-white rounded-md p-2"
       >
         ثبت موجودی
-      </button>
+      </button> */}
+      <SubmitButton label="ثبت موجودی" />
     </form>
   );
 }

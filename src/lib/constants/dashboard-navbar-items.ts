@@ -36,7 +36,7 @@ export const navItems = [
   { href: "/dashboard/guarantees", label: "گارانتی ها", icon: ShieldCheck },
   { href: "/dashboard/insurances", label: "بیمه ها", icon: Umbrella },
   { href: "/dashboard/stores", label: " فروشگاه ها", icon: Store },
-  { href: "/dashboard/locations", label: " آدرس ها", icon: MapPinHouse },
+  { href: "/dashboard/locations", label: "مکان ها", icon: MapPinHouse },
   { href: "/dashboard/countries", label: " کشورها", icon: CountryIcon },
   {
     href: "/dashboard/provinces",
