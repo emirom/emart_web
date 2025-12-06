@@ -1,46 +1,25 @@
 "use server";
 
 import { axiosInstance } from "@lib/configs/axios-instance";
+import { ProductMediaResponse } from "@lib/schemas";
 import { AxiosError } from "axios";
-import { revalidatePath } from "next/cache";
 
-export async function postProductImageAction(
-  file: File,
-  {
-    productId,
-    title,
-    altText,
-    caption,
-    order,
-  }: {
-    productId: string;
-    title?: string | null;
-    altText?: string | null;
-    caption?: string | null;
-    order?: number | null;
-  },
-) {
+export async function postProductImageAction(formData: FormData) {
   try {
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("productId", productId);
-
-    if (title != null && title !== "") formData.append("title", title);
-    if (altText != null && altText !== "") formData.append("altText", altText);
-    if (caption != null && caption !== "") formData.append("caption", caption);
-    if (order != null) formData.append("order", order.toString());
-
-    const response = await axiosInstance({
-      method: "POST",
+    const response = await axiosInstance<ProductMediaResponse>({
       url: "/product-medias",
+      method: "POST",
       data: formData,
       headers: { "Content-Type": "multipart/form-data" },
     });
-    revalidatePath(`/dashboard/products/add/${productId}`);
-    return response;
+
+    return response.data;
   } catch (error) {
     if (error instanceof AxiosError) {
       throw new Error(error.response?.data?.message || "خطا در آپلود تصویر");
+    }
+    if (error instanceof Error) {
+      throw error;
     }
     throw new Error("خطای ناشناخته در آپلود تصویر");
   }

@@ -1,5 +1,4 @@
-import ProductModal from "@/pages/dashboard/products/ProductModal";
-import ImageUploader from "@components/ui/image-uploader/ImageUploader";
+import ProductImageModal from "@/pages/dashboard/products/ProductImageModal";
 import { HeaderWithLink } from "@components/HeaderWithLink";
 
 export default async function Page({
@@ -16,8 +15,8 @@ export default async function Page({
         linkHref="/dashboard/products"
         linkTitle="بازگشت"
       />
-      <ImageUploader />
-      <ProductModal productId={id} />
+
+      <ProductImageModal productId={id} />
     </>
   );
 }

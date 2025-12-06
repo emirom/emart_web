@@ -15,7 +15,7 @@ interface Props<T extends FieldValues>
   extends InputHTMLAttributes<HTMLInputElement> {
   name: Path<T>;
   control: Control<T>;
-  label: string;
+  label?: string;
   rules?: RegisterOptions<T, Path<T>>;
 }
 

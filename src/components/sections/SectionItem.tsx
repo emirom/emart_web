@@ -1,13 +1,12 @@
 "use client";
 
+import { useSectionImageHandlers } from "@/libs/hooks/sections/useSectionImageHandlers";
 import { useSectionImages } from "@/libs/hooks/sections/useSectionImages";
 import { FileWithPreview } from "@lib/types/file-with-preview";
 import { motion } from "framer-motion";
 import { Plus, Trash2 } from "lucide-react";
 import React, { useCallback } from "react";
-import ImageUploader from "../ui/image-uploader/ImageUploader";
 import QuillEditorWrapper from "../ui/richtext-editor/QuillEditorWrapper";
-import { useSectionImageHandlers } from "@/libs/hooks/sections/useSectionImageHandlers";
 
 interface SectionItemProps {
   sectionId: string;
@@ -216,7 +215,7 @@ const SectionItemComponent: React.FC<SectionItemProps> = ({
       </div>
       <div className="grid grid-cols-1 items-stretch lg:grid-cols-12 gap-2">
         <div className="lg:col-span-12 mb-4">
-          <ImageUploader
+          {/* <ImageUploader
             onImageChange={handleTopImageChange}
             onRemove={handleRemoveTopImage}
             previewImage={topImage}
@@ -225,11 +224,11 @@ const SectionItemComponent: React.FC<SectionItemProps> = ({
             hasOtherImages={
               topHandlers.hasOtherImages || topHandlers.hasCurrentImage
             }
-          />
+          /> */}
         </div>
 
         <div className="lg:col-span-2 flex">
-          <ImageUploader
+          {/* <ImageUploader
             onImageChange={handleLeftImageChange}
             onRemove={handleRemoveLeftImage}
             previewImage={leftImage}
@@ -238,7 +237,7 @@ const SectionItemComponent: React.FC<SectionItemProps> = ({
             hasOtherImages={
               leftHandlers.hasOtherImages || leftHandlers.hasCurrentImage
             }
-          />
+          /> */}
         </div>
 
         <div className="lg:col-span-8 flex">
@@ -250,7 +249,7 @@ const SectionItemComponent: React.FC<SectionItemProps> = ({
         </div>
 
         <div className="lg:col-span-2 flex">
-          <ImageUploader
+          {/* <ImageUploader
             onImageChange={handleRightImageChange}
             onRemove={handleRemoveRightImage}
             previewImage={rightImage}
@@ -259,7 +258,7 @@ const SectionItemComponent: React.FC<SectionItemProps> = ({
             hasOtherImages={
               rightHandlers.hasOtherImages || rightHandlers.hasCurrentImage
             }
-          />
+          /> */}
         </div>
       </div>
     </motion.div>

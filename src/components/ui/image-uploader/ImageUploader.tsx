@@ -1,245 +1,102 @@
 "use client";
 
-import { FileWithPreview } from "@lib/types/file-with-preview";
-import { motion } from "framer-motion";
 import Image from "next/image";
-import React, { useCallback, useRef, useState } from "react";
-import { toast } from "react-toastify";
-import { useAppStore } from "@lib/stores/store";
+import { ChangeEvent, useRef } from "react";
+import { Control, Controller, FieldValues, Path } from "react-hook-form";
 
-interface ImageUploaderProps {
-  onImageChange?: (file: FileWithPreview) => Promise<void> | void;
-  onRemove?: () => void;
-  previewImage?: FileWithPreview;
-  placeholderText?: string;
-  className?: string;
-  disabled?: boolean;
-  hasOtherImages?: boolean;
+export interface FileWithPreview extends File {
+  preview: string;
 }
 
-const ImageUploader: React.FC<ImageUploaderProps> = ({
-  onImageChange,
-  onRemove,
-  previewImage,
-  placeholderText = "بارگذاری تصویر",
-  className = "",
+interface Props<T extends FieldValues> {
+  name: Path<T>;
+  control: Control<T>;
+  label?: string;
+  disabled?: boolean;
+  className?: string;
+  placeholderText?: string;
+}
+
+export function ImageUploader<T extends FieldValues>({
+  name,
+  control,
+  label,
   disabled = false,
-  hasOtherImages = false,
-}) => {
-  const [isDragging, setIsDragging] = useState(false);
-  const fileInputRef = useRef<HTMLInputElement>(null);
-  const setCurrentFile = useAppStore((state) => state.setCurrentFile);
+  className = "",
+  placeholderText = "بارگذاری تصویر",
+}: Props<T>) {
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
-  const handleImageChange = useCallback(
-    async (e: React.ChangeEvent<HTMLInputElement>) => {
-      if (hasOtherImages) {
-        toast.warning(
-          "لطفاً تصویر فعلی را حذف کنید قبل از بارگذاری تصویر جدید.",
-        );
-        return;
-      }
+  const handleClick = () => {
+    if (!disabled) inputRef.current?.click();
+  };
 
-      const file = e.target.files?.[0];
-      if (file) {
-        // Validate file type
-        if (!file.type.startsWith("image/")) {
-          toast.error("لطفاً یک فایل تصویر معتبر انتخاب کنید");
-          return;
-        }
+  const createPreviewFile = (file: File): FileWithPreview => {
+    return Object.assign(file, { preview: URL.createObjectURL(file) });
+  };
 
-        // Validate file size (max 10MB)
-        if (file.size > 10 * 1024 * 1024) {
-          toast.error("اندازه تصویر بیش از حد مجاز است (حداکثر 10 مگابایت)");
-          return;
-        }
+  const handleFileChange = (
+    e: ChangeEvent<HTMLInputElement>,
+    onChange: (file: FileWithPreview | null) => void,
+  ) => {
+    const file = e.target.files?.[0] ?? null;
+    const fileWithPreview = file ? createPreviewFile(file) : null;
 
-        const fileWithPreview: FileWithPreview = {
-          file: file,
-          preview: URL.createObjectURL(file),
-        };
-
-        // Set the file in the store to trigger the modal
-        setCurrentFile(fileWithPreview);
-
-        // Call the prop callback if provided
-        if (onImageChange) {
-          await onImageChange(fileWithPreview);
-        }
-      }
-    },
-    [onImageChange, hasOtherImages, setCurrentFile],
-  );
-
-  const handleDragOver = useCallback(
-    (e: React.DragEvent<HTMLDivElement>) => {
-      e.preventDefault();
-      if (hasOtherImages) {
-        return;
-      }
-      setIsDragging(true);
-    },
-    [hasOtherImages],
-  );
-
-  const handleDragLeave = useCallback((e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    setIsDragging(false);
-  }, []);
-
-  const handleDrop = useCallback(
-    async (e: React.DragEvent<HTMLDivElement>) => {
-      if (hasOtherImages) {
-        toast.warning(
-          "لطفاً تصویر فعلی را حذف کنید قبل از بارگذاری تصویر جدید.",
-        );
-        return;
-      }
-
-      e.preventDefault();
-      setIsDragging(false);
-
-      const file = e.dataTransfer.files?.[0];
-      if (file) {
-        // Validate file type
-        if (!file.type.startsWith("image/")) {
-          toast.error("لطفاً یک فایل تصویر معتبر رها کنید");
-          return;
-        }
-
-        // Validate file size (max 10MB)
-        if (file.size > 10 * 1024 * 1024) {
-          toast.error("اندازه تصویر بیش از حد مجاز است (حداکثر 10 مگابایت)");
-          return;
-        }
-
-        const fileWithPreview: FileWithPreview = {
-          file: file,
-          preview: URL.createObjectURL(file),
-        };
-
-        // Set the file in the store to trigger the modal
-        setCurrentFile(fileWithPreview);
-
-        // Call the prop callback if provided
-        if (onImageChange) {
-          await onImageChange(fileWithPreview);
-        }
-      }
-    },
-    [onImageChange, hasOtherImages, setCurrentFile],
-  );
-
-  const handleClick = useCallback(() => {
-    if (disabled) {
-      return; // If the component is disabled, do nothing
-    }
-
-    if (hasOtherImages) {
-      toast.warning("لطفاً تصویر فعلی را حذف کنید قبل از بارگذاری تصویر جدید.");
-      return;
-    }
-
-    if (fileInputRef.current) {
-      fileInputRef.current.click();
-    }
-  }, [disabled, hasOtherImages]);
-
-  const handleRemove = useCallback(
-    (e: React.MouseEvent) => {
-      e.stopPropagation();
-      if (onRemove) {
-        onRemove();
-      }
-    },
-    [onRemove],
-  );
+    onChange(fileWithPreview);
+  };
 
   return (
-    <div
-      className={`relative flex flex-col items-center justify-center border-2 border-dashed rounded-lg overflow-hidden
-        ${isDragging ? "border-blue-500 bg-blue-50" : "border-gray-300 hover:border-gray-400"}
-        ${disabled ? "opacity-50 cursor-not-allowed" : ""}
-        ${hasOtherImages && !previewImage ? "opacity-50 cursor-not-allowed" : !disabled ? "cursor-pointer" : ""}
-        ${previewImage ? (!disabled ? "cursor-pointer" : "") : ""}
-        ${className}`}
-      onDragOver={handleDragOver}
-      onDragLeave={handleDragLeave}
-      onDrop={handleDrop}
-      onClick={handleClick}
-    >
-      <input
-        type="file"
-        ref={fileInputRef}
-        onChange={handleImageChange}
-        accept="image/*"
-        className="hidden"
-        disabled={disabled || hasOtherImages}
-      />
-
-      {previewImage ? (
-        <div className="relative w-full h-full min-h-32">
-          <Image
-            key={previewImage.preview}
-            src={previewImage.preview}
-            alt="Preview"
-            width={128}
-            height={128}
-            className="object-cover w-full h-full"
-            unoptimized
-            onError={() => {
-              console.error("Image failed to load:", previewImage?.preview);
-            }}
-            onLoad={() => {
-              console.log("Image loaded successfully:", previewImage.preview);
-            }}
-          />
-          {!disabled && (
-            <button
-              type="button"
-              onClick={handleRemove}
-              className="absolute top-2 right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600 transition-colors z-10"
-              aria-label="حذف تصویر"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-4 w-4"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </button>
+    <Controller
+      name={name}
+      control={control}
+      render={({ field: { value, onChange } }) => (
+        <div className={`flex flex-col gap-2 ${className}`}>
+          {label && (
+            <label className="text-sm font-medium text-gray-700">{label}</label>
           )}
-        </div>
-      ) : (
-        <motion.div
-          className="flex flex-col items-center justify-center p-6 text-gray-500"
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-10 w-10 mb-2 text-gray-400"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-            />
-          </svg>
-          <p className="text-sm text-center">{placeholderText}</p>
-        </motion.div>
-      )}
-    </div>
-  );
-};
 
-export default ImageUploader;
+          <div
+            className={`border border-gray-300 rounded-xl p-3 flex flex-col items-center justify-center cursor-pointer transition hover:bg-gray-50 ${
+              disabled ? "opacity-50 cursor-not-allowed" : ""
+            }`}
+            onClick={handleClick}
+          >
+            {!value ? (
+              <div className="flex flex-col items-center justify-center py-6">
+                <span className="text-sm text-gray-500">{placeholderText}</span>
+              </div>
+            ) : (
+              <div className="relative w-40 h-40">
+                <Image
+                  src={value.preview}
+                  fill
+                  alt="preview"
+                  className="rounded-lg object-cover"
+                />
+                <button
+                  type="button"
+                  className="absolute top-2 right-2 bg-black/60 text-white px-2 py-1 rounded-md text-xs"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onChange(null);
+                  }}
+                >
+                  حذف
+                </button>
+              </div>
+            )}
+          </div>
+
+          <input
+            ref={inputRef}
+            type="file"
+            accept="image/*"
+            className="hidden"
+            disabled={disabled}
+            onChange={(e) => handleFileChange(e, onChange)}
+          />
+        </div>
+      )}
+    />
+  );
+}
