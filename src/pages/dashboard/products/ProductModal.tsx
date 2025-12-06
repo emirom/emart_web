@@ -2,9 +2,13 @@
 import { DashboardCustomModal } from "@components/DashboardCustomModal";
 import { useAppStore } from "@lib/stores/store";
 import { useEffect, useState } from "react";
-// import UploadImageForm from "./UploadImageForm";
+import UploadImageForm from "./UploadImageForm";
 
-export default function ProductModal() {
+interface ProductModalProps {
+  productId: string;
+}
+
+export default function ProductModal({ productId }: ProductModalProps) {
   const { currentFile } = useAppStore((state) => state);
   const [open, setOpen] = useState<boolean>(false);
 
@@ -14,11 +18,15 @@ export default function ProductModal() {
     }
   }, [currentFile, setOpen]);
 
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
     <DashboardCustomModal
-      title="آپلود‌تصویر"
+      title="آپلود تصویر"
       open={open}
-      element={<></>}
+      element={<UploadImageForm productId={productId} onClose={handleClose} />}
       onOpenChange={setOpen}
     />
   );

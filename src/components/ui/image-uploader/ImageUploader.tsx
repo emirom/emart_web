@@ -1,19 +1,20 @@
 "use client";
 
-import React, { useRef, useState, useCallback } from "react";
+import { FileWithPreview } from "@lib/types/file-with-preview";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { FileWithPreview } from "@lib/types/file-with-preview";
+import React, { useCallback, useRef, useState } from "react";
 import { toast } from "react-toastify";
+import { useAppStore } from "@lib/stores/store";
 
 interface ImageUploaderProps {
-  onImageChange: (file: FileWithPreview) => Promise<void> | void;
+  onImageChange?: (file: FileWithPreview) => Promise<void> | void;
   onRemove?: () => void;
   previewImage?: FileWithPreview;
   placeholderText?: string;
   className?: string;
   disabled?: boolean;
-  hasOtherImages?: boolean; // Added prop to indicate if other images exist
+  hasOtherImages?: boolean;
 }
 
 const ImageUploader: React.FC<ImageUploaderProps> = ({
@@ -23,10 +24,11 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({
   placeholderText = "بارگذاری تصویر",
   className = "",
   disabled = false,
-  hasOtherImages = false, // Default to false
+  hasOtherImages = false,
 }) => {
   const [isDragging, setIsDragging] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const setCurrentFile = useAppStore((state) => state.setCurrentFile);
 
   const handleImageChange = useCallback(
     async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -39,21 +41,40 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({
 
       const file = e.target.files?.[0];
       if (file) {
+        // Validate file type
+        if (!file.type.startsWith("image/")) {
+          toast.error("لطفاً یک فایل تصویر معتبر انتخاب کنید");
+          return;
+        }
+
+        // Validate file size (max 10MB)
+        if (file.size > 10 * 1024 * 1024) {
+          toast.error("اندازه تصویر بیش از حد مجاز است (حداکثر 10 مگابایت)");
+          return;
+        }
+
         const fileWithPreview: FileWithPreview = {
           file: file,
           preview: URL.createObjectURL(file),
         };
-        await onImageChange(fileWithPreview);
+
+        // Set the file in the store to trigger the modal
+        setCurrentFile(fileWithPreview);
+
+        // Call the prop callback if provided
+        if (onImageChange) {
+          await onImageChange(fileWithPreview);
+        }
       }
     },
-    [onImageChange, hasOtherImages],
+    [onImageChange, hasOtherImages, setCurrentFile],
   );
 
   const handleDragOver = useCallback(
     (e: React.DragEvent<HTMLDivElement>) => {
       e.preventDefault();
       if (hasOtherImages) {
-        return; // Prevent drag over if other images exist
+        return;
       }
       setIsDragging(true);
     },
@@ -78,24 +99,47 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({
       setIsDragging(false);
 
       const file = e.dataTransfer.files?.[0];
-      if (file && file.type.startsWith("image/")) {
+      if (file) {
+        // Validate file type
+        if (!file.type.startsWith("image/")) {
+          toast.error("لطفاً یک فایل تصویر معتبر رها کنید");
+          return;
+        }
+
+        // Validate file size (max 10MB)
+        if (file.size > 10 * 1024 * 1024) {
+          toast.error("اندازه تصویر بیش از حد مجاز است (حداکثر 10 مگابایت)");
+          return;
+        }
+
         const fileWithPreview: FileWithPreview = {
           file: file,
           preview: URL.createObjectURL(file),
         };
-        await onImageChange(fileWithPreview);
+
+        // Set the file in the store to trigger the modal
+        setCurrentFile(fileWithPreview);
+
+        // Call the prop callback if provided
+        if (onImageChange) {
+          await onImageChange(fileWithPreview);
+        }
       }
     },
-    [onImageChange, hasOtherImages],
+    [onImageChange, hasOtherImages, setCurrentFile],
   );
 
   const handleClick = useCallback(() => {
+    if (disabled) {
+      return; // If the component is disabled, do nothing
+    }
+
     if (hasOtherImages) {
       toast.warning("لطفاً تصویر فعلی را حذف کنید قبل از بارگذاری تصویر جدید.");
       return;
     }
 
-    if (fileInputRef.current && !disabled) {
+    if (fileInputRef.current) {
       fileInputRef.current.click();
     }
   }, [disabled, hasOtherImages]);
@@ -114,8 +158,9 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({
     <div
       className={`relative flex flex-col items-center justify-center border-2 border-dashed rounded-lg overflow-hidden
         ${isDragging ? "border-blue-500 bg-blue-50" : "border-gray-300 hover:border-gray-400"}
-        ${hasOtherImages && !previewImage ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}
-        ${previewImage ? "cursor-pointer" : ""}
+        ${disabled ? "opacity-50 cursor-not-allowed" : ""}
+        ${hasOtherImages && !previewImage ? "opacity-50 cursor-not-allowed" : !disabled ? "cursor-pointer" : ""}
+        ${previewImage ? (!disabled ? "cursor-pointer" : "") : ""}
         ${className}`}
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
@@ -134,7 +179,7 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({
       {previewImage ? (
         <div className="relative w-full h-full min-h-32">
           <Image
-            key={previewImage.preview} // Force re-render when preview URL changes
+            key={previewImage.preview}
             src={previewImage.preview}
             alt="Preview"
             width={128}
