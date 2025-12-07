@@ -1,45 +1,25 @@
 "use server";
 
-import { axiosInstance } from "@lib/configs/axios-instance";
-import { ProductMediaResponse } from "@lib/schemas";
-import { AxiosError } from "axios";
 
 export async function postProductImageAction(formData: FormData) {
   try {
-    const response = await axiosInstance<ProductMediaResponse>({
-      url: "/product-medias",
+    const response = await fetch("http://localhost:3010/product-medias", {
       method: "POST",
-      data: formData,
-      headers: { "Content-Type": "multipart/form-data" },
+      body: formData,
     });
 
-    return response.data;
-  } catch (error) {
-    if (error instanceof AxiosError) {
-      throw new Error(error.response?.data?.message || "خطا در آپلود تصویر");
-    }
-    if (error instanceof Error) {
-      throw error;
-    }
-    throw new Error("خطای ناشناخته در آپلود تصویر");
-  }
-}
+    const data = await response.json();
 
-export async function deleteProductImageAction(id: string) {
-  try {
-    const response = await axiosInstance<ProductMediaResponse>({
-      url: `/product-medias/${id}`,
-      method: "DELETE",
-    });
+    if (!response.ok) {
+      console.error("API Upload Error:", response.status, data);
+      throw new Error(data?.error || "خطا در آپلود تصویر");
+    }
 
-    return response.data;
-  } catch (error) {
-    if (error instanceof AxiosError) {
-      throw new Error(error.response?.data?.message || "خطا در حذف تصویر");
-    }
-    if (error instanceof Error) {
-      throw error;
-    }
-    throw new Error("خطای ناشناخته در حذف تصویر");
+
+
+    return data;
+  } catch (error: any) {
+    console.error("postProductImageAction ERROR:", error);
+    throw new Error(error.message || "خطای ناشناخته");
   }
 }
