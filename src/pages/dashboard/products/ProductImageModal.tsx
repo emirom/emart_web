@@ -1,33 +1,105 @@
 "use client";
+
 import { DashboardCustomModal } from "@components/DashboardCustomModal";
+import UploadedImagesGallery from "@components/UploadedImagesGallery";
+import { queryClient } from "@lib/apis/queryClient";
+import {
+  useDeleteProductMediasId,
+  useGetProductMedias,
+} from "@lib/services/product-media/product-media";
 import { useAppStore } from "@lib/stores/store";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { toast } from "react-toastify";
 import AddProductImageForm from "./AddProductImageForm";
 
-interface ProductModalProps {
+interface Props {
   productId: string;
 }
 
-export default function ProductImageModal({ productId }: ProductModalProps) {
+export default function ProductImageModal({ productId }: Props) {
   const { currentFile } = useAppStore((state) => state);
   const [open, setOpen] = useState<boolean>(false);
+
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (currentFile) {
       setOpen(true);
     }
-  }, [currentFile, setOpen]);
+  }, [currentFile]);
 
+  const handleUploaderClick = () => {
+    setOpen(true);
+  };
+  const { data: productImages } = useGetProductMedias({
+    skip: 0,
+    limit: 10,
+    productId,
+  });
+
+  const deleteMutation = useDeleteProductMediasId({
+    mutation: {
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ["/product-medias"] });
+        toast.success("تصویر با موفقیت حذف شد");
+      },
+      onError: (error: any) => {
+        let errorMessage = "خطا در حذف تصویر";
+        if (error?.response?.data?.message) {
+          errorMessage = error.response.data.message;
+        } else if (error instanceof Error) {
+          errorMessage = error.message;
+        }
+        toast.error(errorMessage);
+      },
+    },
+  });
+
+  const onDelete = async (id: string) => {
+    deleteMutation.mutate({ id });
+  };
   return (
     <>
-      <button onClick={() => setOpen(true)}>Add Image</button>
+      <div
+        onClick={handleUploaderClick}
+        className="flex items-center justify-center w-full mx-auto p-6 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer transition-all hover:border-blue-500 hover:bg-blue-50"
+      >
+        <span className="text-gray-500 text-center">
+          برای آپلود تصویر کلیک کنید
+        </span>
+      </div>
+
+      <input
+        type="file"
+        ref={fileInputRef}
+        className="hidden"
+        onChange={(e) => {
+          if (e.target.files && e.target.files.length > 0) {
+            // const file = e.target.files[0];
+            // const newImage: ImageItem = {
+            //   id: crypto.randomUUID(),
+            //   src: URL.createObjectURL(file),
+            // };
+          }
+        }}
+      />
+
       <DashboardCustomModal
         title="آپلود تصویر"
         open={open}
         element={<AddProductImageForm productId={productId} />}
         onOpenChange={setOpen}
       />
-      <div></div>
+      <h1 className="mt-3 ">تصاویر محصول</h1>
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 mt-4">
+        {productImages?.data.map((image) => (
+          <UploadedImagesGallery
+            key={image.id}
+            {...image}
+            onDelete={onDelete}
+          />
+        ))}
+      </div>
     </>
   );
 }

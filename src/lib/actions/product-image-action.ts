@@ -24,3 +24,22 @@ export async function postProductImageAction(formData: FormData) {
     throw new Error("خطای ناشناخته در آپلود تصویر");
   }
 }
+
+export async function deleteProductImageAction(id: string) {
+  try {
+    const response = await axiosInstance<ProductMediaResponse>({
+      url: `/product-medias/${id}`,
+      method: "DELETE",
+    });
+
+    return response.data;
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      throw new Error(error.response?.data?.message || "خطا در حذف تصویر");
+    }
+    if (error instanceof Error) {
+      throw error;
+    }
+    throw new Error("خطای ناشناخته در حذف تصویر");
+  }
+}
