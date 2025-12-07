@@ -90,15 +90,24 @@ export default function ProductImageModal({ productId }: Props) {
         element={<AddProductImageForm productId={productId} />}
         onOpenChange={setOpen}
       />
-      <h1 className="mt-3 ">تصاویر محصول</h1>
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 mt-4">
-        {productImages?.data.map((image) => (
-          <UploadedImagesGallery
-            key={image.id}
-            {...image}
-            onDelete={onDelete}
-          />
-        ))}
+      <h1 className="mt-3">تصاویر محصول</h1>
+
+      <div className="mt-4">
+        {productImages?.data?.length ? (
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+            {productImages.data.map((image) => (
+              <UploadedImagesGallery
+                key={image.id}
+                {...image}
+                onDelete={onDelete}
+              />
+            ))}
+          </div>
+        ) : (
+          <div className="w-full p-6 border-2 border-dashed border-gray-300 rounded-lg bg-gray-50 text-center text-gray-500">
+            هنوز هیچ تصویری برای این محصول افزوده نشده است
+          </div>
+        )}
       </div>
     </>
   );

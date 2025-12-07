@@ -1,7 +1,7 @@
 import { FileWithPreview } from "@lib/types/file-with-preview";
 import { SubmitButton } from "./BtnWithIcon";
 type ImageUploadButtonProps = {
-  onClose: () => void;
+  onClose?: () => void;
   currentFile?: FileWithPreview | null;
 };
 export default function ImageUploadButton({

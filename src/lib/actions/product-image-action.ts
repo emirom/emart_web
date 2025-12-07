@@ -1,6 +1,5 @@
 "use server";
 
-
 export async function postProductImageAction(formData: FormData) {
   try {
     const response = await fetch("http://localhost:3010/product-medias", {
@@ -14,8 +13,6 @@ export async function postProductImageAction(formData: FormData) {
       console.error("API Upload Error:", response.status, data);
       throw new Error(data?.error || "خطا در آپلود تصویر");
     }
-
-
 
     return data;
   } catch (error: any) {

@@ -2,8 +2,12 @@
 
 import { FormInputField } from "@components/FormInputField";
 import { FormTextareaField } from "@components/FormTextareaField";
+import ImageUploadButton from "@components/ImageUploadButton";
 import { ImageUploader } from "@components/ui/image-uploader/ImageUploader";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { postProductImageAction } from "@lib/actions/product-image-action";
+import { queryClient } from "@lib/apis/queryClient";
+import { postProductMediasBody } from "@lib/validations/product-medias.validation";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
@@ -26,6 +30,9 @@ export default function AddProductImageForm({
       altText: "",
       caption: "",
     },
+    mode: "onChange",
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    resolver: zodResolver(postProductMediasBody) as any,
   });
 
   const onSubmit: SubmitHandler<UploadProductImageInput> = async (data) => {
@@ -44,7 +51,7 @@ export default function AddProductImageForm({
 
     try {
       const result = await postProductImageAction(formData);
-
+      queryClient.invalidateQueries({ queryKey: ["/product-medias"] });
       if (result.success) {
         toast.success("تصویر با موفقیت آپلود شد");
         reset({ productId, file: null });
@@ -76,9 +83,7 @@ export default function AddProductImageForm({
         placeholder="توضیحات مربوط به تصویر محصول را وارد نمایید "
       />
 
-      <button type="submit" className="bg-blue-600 text-white py-2 rounded-md">
-        آپلود تصویر
-      </button>
+      <ImageUploadButton />
     </form>
   );
 }
