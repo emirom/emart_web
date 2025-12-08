@@ -29,6 +29,9 @@ interface Props<
   emptyMessage?: string;
   getOptionLabel: (option: TOption) => string;
   getOptionValue: (option: TOption) => TValue;
+
+  /** 🔥 Optional callback → return full selected object */
+  onSelected?: (option: TOption) => void;
 }
 
 function FormComboboxField<
@@ -45,13 +48,16 @@ function FormComboboxField<
   getOptionLabel,
   getOptionValue,
   label,
+  onSelected,
 }: Props<T, TOption, TValue>) {
   const [open, setOpen] = useState(false);
+
   return (
     <div className="flex flex-col gap-1 w-full">
       <label className={cn("block text-xs font-medium text-tint-blue-500")}>
         {label}
       </label>
+
       <Controller
         name={name}
         control={control}
@@ -59,17 +65,25 @@ function FormComboboxField<
           const selectedOption = options.find(
             (opt) => String(getOptionValue(opt)) === String(field.value),
           );
+
           const handleSelect = (currentValue: string) => {
             const matchedOption = options.find(
               (opt) => String(getOptionValue(opt)) === currentValue,
             );
             if (!matchedOption) return;
-            field.onChange(getOptionValue(matchedOption) as unknown as TValue);
+
+            // ۱) تغییر مقدار فرم
+            field.onChange(getOptionValue(matchedOption) as TValue);
+
+            // ۲) فراخوانی callback جدید
+            if (onSelected) onSelected(matchedOption);
+
+            // ۳) بستن پاپ‌اور
             setOpen(false);
           };
 
           return (
-            <div className="flex flex-col gap-1 ">
+            <div className="flex flex-col gap-1">
               <Popover open={open} onOpenChange={setOpen}>
                 <PopoverTrigger asChild>
                   <Button
@@ -84,6 +98,7 @@ function FormComboboxField<
                     {selectedOption
                       ? getOptionLabel(selectedOption)
                       : placeholder}
+
                     <ChevronDown
                       className={cn(
                         "ml-2 h-4 w-4 opacity-50 transition-transform",
@@ -99,8 +114,9 @@ function FormComboboxField<
                       placeholder={searchPlaceholder}
                       className="h-9 w-full px-2 mb-2"
                     />
+
                     <CommandList>
-                      <CommandEmpty className="w-full text-center">
+                      <CommandEmpty className="text-center w-full">
                         {emptyMessage}
                       </CommandEmpty>
 
@@ -109,6 +125,7 @@ function FormComboboxField<
                           const value = getOptionValue(option);
                           const label = getOptionLabel(option);
                           const stringValue = String(value);
+
                           return (
                             <CommandItem
                               className="flex items-center justify-between w-full"
@@ -119,7 +136,7 @@ function FormComboboxField<
                               {label}
                               <Check
                                 className={cn(
-                                  " h-4 w-4",
+                                  "h-4 w-4",
                                   String(field.value) === stringValue
                                     ? "opacity-100"
                                     : "opacity-0",
@@ -133,7 +150,8 @@ function FormComboboxField<
                   </Command>
                 </PopoverContent>
               </Popover>
-              {fieldState?.error && (
+
+              {fieldState.error && (
                 <p className="text-destructive text-[0.625rem] font-medium mt-[0.125rem]">
                   {fieldState.error.message}
                 </p>

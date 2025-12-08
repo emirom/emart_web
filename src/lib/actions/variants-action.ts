@@ -9,8 +9,16 @@ import {
 import { revalidatePath } from "next/cache";
 
 export async function postVariantAction(data: CreateVariantInput) {
-  await postVariants(data);
-  revalidatePath("/dashboard/variants");
+  try {
+    const response = await postVariants(data);
+    revalidatePath("/dashboard/variants");
+    return response;
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(error.message);
+    }
+    throw new Error("خطای ناشناخته‌ای رخ داده است");
+  }
 }
 
 export async function deleteVariantAction(id: string) {

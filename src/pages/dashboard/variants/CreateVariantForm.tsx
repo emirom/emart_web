@@ -12,13 +12,16 @@ import { CreateVariantInput } from "@lib/schemas";
 import { useGetColors } from "@lib/services/colors/colors";
 import { useGetProducts } from "@lib/services/products/products";
 import { postVariantsBody } from "@lib/validations/variant.validation";
+import { useRouter } from "next/navigation";
+import { useState, useTransition } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
 export default function CreateVariantForm() {
   const { data: products } = useGetProducts({ skip: 0, limit: 10 });
   const { data: colors } = useGetColors({ skip: 0, limit: 10 });
-
+  const [productId, setProductId] = useState<string | null>(null);
+  const [variantId, setVariantId] = useState<string | null>(null);
   const { handleSubmit, control, reset } = useForm<CreateVariantInput>({
     defaultValues: {
       productId: "",
@@ -39,10 +42,12 @@ export default function CreateVariantForm() {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     resolver: zodResolver(postVariantsBody) as any,
   });
-
+  const [isPending, startTransition] = useTransition();
+  const router = useRouter();
   const onSubmit: SubmitHandler<CreateVariantInput> = async (data) => {
     try {
-      await postVariantAction(data);
+      const response = await postVariantAction(data);
+      setVariantId(response.data.id);
       queryClient.invalidateQueries({ queryKey: ["/variants"] });
       toast.success("تنوع افزوده شد");
       reset();
@@ -54,7 +59,14 @@ export default function CreateVariantForm() {
       }
     }
   };
-
+  const handleGoToUpload = () => {
+    if (!productId) return;
+    startTransition(() => {
+      router.push(
+        `/dashboard/variants/add/${productId}?variantId=${variantId}`,
+      );
+    });
+  };
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -70,6 +82,9 @@ export default function CreateVariantForm() {
         emptyMessage="محصول یافت نشد"
         searchPlaceholder="جستجوی محصول"
         placeholder="انتخاب محصول"
+        onSelected={(opt) => {
+          setProductId(opt.id);
+        }}
       />
       <FormComboboxField
         control={control}
@@ -78,9 +93,6 @@ export default function CreateVariantForm() {
         options={colors?.data ?? []}
         getOptionLabel={(opt) => opt.name}
         getOptionValue={(opt) => opt.id}
-        emptyMessage="رنگ یافت نشد"
-        searchPlaceholder="جستجوی رنگ"
-        placeholder="انتخاب رنگ"
       />
       <FormInputField control={control} name="sku" label="SKU (کد فروشگاه)" />
       <FormInputField control={control} name="publicId" label="شناسه عمومی" />
@@ -122,7 +134,18 @@ export default function CreateVariantForm() {
           placeholder="بازنویسی عنوان "
         />
       </div>
-      <SubmitButton />
+      <div className="flex items-center gap-2">
+        <SubmitButton />
+        {productId && variantId && (
+          <SubmitButton
+            type="button"
+            disabled={isPending}
+            className="col-span-1"
+            label={isPending ? "در حال انتقال..." : "افزودن تصاویر محصول"}
+            onClick={handleGoToUpload}
+          />
+        )}
+      </div>
     </form>
   );
 }

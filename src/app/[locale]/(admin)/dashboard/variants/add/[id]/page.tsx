@@ -1,8 +1,22 @@
+import VariantUploadModal from "@/pages/dashboard/variants/VariantUploadModal";
+import { HeaderWithLink } from "@components/HeaderWithLink";
+
 export default async function Page({
   params,
 }: {
-  params: Promise<Record<string, string>>;
+  params: Promise<{ id: string }>;
 }) {
-  await params;
-  return <></>;
+  const { id } = await params;
+
+  return (
+    <>
+      <HeaderWithLink
+        title="آپلود تصویر موجودی"
+        linkHref="/dashboard/products"
+        linkTitle="بازگشت"
+      />
+
+      <VariantUploadModal productId={id} />
+    </>
+  );
 }
