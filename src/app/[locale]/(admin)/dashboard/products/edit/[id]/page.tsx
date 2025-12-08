@@ -27,7 +27,7 @@ export default async function Page({
         linkHref="/dashboard/products/add"
         linkTitle="بازگشت"
       />
-      <EditProductForm editId={id} />
+      <EditProductForm id={id} />
     </HydrationBoundary>
   );
 }

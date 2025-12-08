@@ -51,7 +51,8 @@ export default function UploadProductImageAction({ id }: { id: string }) {
           <Button
             onClick={() => console.log("hellow rodl")}
             className="w-7 h-7 bg-blue-500 rounded-full flex items-center justify-center cursor-pointer"
-            aria-label="حذف تصویر"
+            aria-label="ویرایش تصویر"
+            type="button"
           >
             <Edit size={16} />
           </Button>

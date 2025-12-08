@@ -12,20 +12,16 @@ import { useGetCategories } from "@lib/services/categories/categories";
 import { useGetLabels } from "@lib/services/labels/labels";
 import { useGetProductsId } from "@lib/services/products/products";
 import { patchProductsIdBody } from "@lib/validations/product.validation";
-import { useRouter } from "next/navigation";
-import { useEffect, useState, useTransition } from "react";
+import { useEffect, useState } from "react";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import LabelList from "./LabelList";
+import ProductImageModal from "./ProductImageModal";
 
 type Label = { id: string; name: string };
 
-export default function EditProductId({ editId }: { editId: string }) {
-  const router = useRouter();
-  const [isPending, startTransition] = useTransition();
+export default function EditProductId({ id }: { id: string }) {
   const [selectedLabels, setSelectedLabels] = useState<Label[]>([]);
-  const [productId, setProductId] = useState<string | null>(null);
-
   const { handleSubmit, control, reset } = useForm<UpdateProductInput>({
     defaultValues: {
       labels: [],
@@ -45,14 +41,8 @@ export default function EditProductId({ editId }: { editId: string }) {
   const { data: brands } = useGetBrands({ skip: 0, limit: 10 });
   const { data: labels } = useGetLabels({ skip: 0, limit: 10 });
 
-  useEffect(() => {
-    const savedId = localStorage.getItem("lastCreatedProductId");
-    if (savedId) setProductId(savedId);
-    return () => localStorage.removeItem("lastCreatedProductId");
-  }, []);
-
-  const { data: product } = useGetProductsId(editId, {
-    query: { queryKey: ["/products", editId] },
+  const { data: product } = useGetProductsId(id, {
+    query: { queryKey: ["/products", id] },
   });
 
   useEffect(() => {
@@ -75,7 +65,7 @@ export default function EditProductId({ editId }: { editId: string }) {
 
   const onSubmit: SubmitHandler<UpdateProductInput> = async (data) => {
     try {
-      await patchProductAction(editId, data);
+      await patchProductAction(id, data);
       queryClient.invalidateQueries({ queryKey: ["/products"] });
       toast.success("محصول با موفقیت ویرایش شد");
       reset();
@@ -101,17 +91,10 @@ export default function EditProductId({ editId }: { editId: string }) {
     setSelectedLabels((prev) => prev.filter((lbl) => lbl.id !== id));
   };
 
-  const handleGoToUpload = () => {
-    if (!productId) return;
-    startTransition(() => {
-      router.push(`/dashboard/products/add/${productId}`);
-    });
-  };
-
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="grid sm:grid-cols-2 lg:grid-cols-3 items-end gap-2"
+      className="grid sm:grid-cols-2 lg:grid-cols-3 items-stretch gap-2"
     >
       <FormInputField control={control} name="name" label="نام محصول" />
       <FormInputField
@@ -159,16 +142,10 @@ export default function EditProductId({ editId }: { editId: string }) {
         selectedLabels={selectedLabels}
         handleRemoveLabel={handleRemoveLabel}
       />
-      <SubmitButton className="col-span-1" label="ثبت محصول" />
-      {productId && (
-        <SubmitButton
-          type="button"
-          disabled={isPending}
-          className="col-span-1"
-          label={isPending ? "در حال انتقال..." : "افزودن تصاویر محصول"}
-          onClick={handleGoToUpload}
-        />
-      )}
+      <div className="sm:col-span-2 lg:col-span-3">
+        <ProductImageModal productId={id} />
+      </div>
+      <SubmitButton className="col-span-1 mt-2" label="ثبت ویرایش" />
     </form>
   );
 }

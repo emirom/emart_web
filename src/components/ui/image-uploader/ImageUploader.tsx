@@ -37,7 +37,7 @@ export function ImageUploader<T extends FieldValues>({
 
   const handleFileChange = (
     e: ChangeEvent<HTMLInputElement>,
-    onChange: (file: FileWithPreview | null) => void
+    onChange: (file: FileWithPreview | null) => void,
   ) => {
     const file = e.target.files?.[0] ?? null;
     const fileWithPreview = file ? createPreviewFile(file) : null;
