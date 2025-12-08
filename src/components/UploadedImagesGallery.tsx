@@ -28,7 +28,7 @@ export default function UploadedImagesGallery({
       <div
         className="
       absolute bottom-0 w-full h-10 bg-white/30 backdrop-blur-xs rounded-t-lg
-      opacity-0 group-hover:opacity-100 transition-opacity duration-200
+       transition-opacity duration-200
     "
       >
         <div className="absolute bottom-0 flex items-center justify-between w-full h-12 px-2">

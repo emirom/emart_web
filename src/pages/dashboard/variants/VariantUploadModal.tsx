@@ -2,8 +2,9 @@
 
 import { DashboardCustomModal } from "@components/DashboardCustomModal";
 import { useAppStore } from "@lib/stores/store";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import ProductImagesGalleryList from "../products/ProductImagesGalleryList";
+import VariantUploadImageGallery from "./VariantImageGallery";
 import VariantUploadImageForm from "./VariantUploadImageForm";
 
 interface Props {
@@ -25,7 +26,8 @@ export default function VariantUploadModal({ productId }: Props) {
   const handleUploaderClick = () => {
     setOpen(true);
   };
-
+  const searchParams = useSearchParams();
+  const variant = searchParams!.get("variantId");
   return (
     <>
       <div
@@ -58,7 +60,7 @@ export default function VariantUploadModal({ productId }: Props) {
         element={<VariantUploadImageForm productId={productId} />}
         onOpenChange={setOpen}
       />
-      <ProductImagesGalleryList id={productId} />
+      <VariantUploadImageGallery id={variant!} />
     </>
   );
 }
