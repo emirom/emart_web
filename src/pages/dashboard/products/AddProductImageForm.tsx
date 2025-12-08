@@ -35,36 +35,49 @@ export default function AddProductImageForm({
     resolver: zodResolver(postProductMediasBody) as any,
   });
 
-  const onSubmit: SubmitHandler<UploadProductImageInput> = async (data) => {
-    if (!data.file) {
-      toast.error("لطفاً یک فایل انتخاب کنید");
-      return;
-    }
-
+  const buildFormData = (data: UploadProductImageInput) => {
     const formData = new FormData();
-
-    formData.append("file", data.file);
+    formData.append("file", data.file as File);
     formData.append("productId", data.productId);
-
     if (data.altText) formData.append("altText", data.altText);
     if (data.caption) formData.append("caption", data.caption);
 
+    return formData;
+  };
+
+  const onSubmit: SubmitHandler<UploadProductImageInput> = async (data) => {
+    if (!data.file) {
+      toast.error("لطفاً یک تصویر انتخاب کنید");
+      return;
+    }
+
     try {
-      const result = await postProductImageAction(formData);
+      const result = await postProductImageAction(buildFormData(data));
+
       queryClient.invalidateQueries({ queryKey: ["/product-medias"] });
+
       if (result.success) {
         toast.success("تصویر با موفقیت آپلود شد");
-        reset({ productId, file: null });
+
+        reset({
+          productId,
+          file: null,
+          altText: "",
+          caption: "",
+        });
       } else {
         toast.error(result.error || "خطا در آپلود تصویر");
       }
-    } catch (err: any) {
-      toast.error(err.message || "خطا در آپلود");
+    } catch (error) {
+      if (error instanceof Error) {
+        toast.error(error.message);
+      }
+      toast.error("خطا در آپلود تصویر");
     }
   };
 
   return (
-    <form className="flex flex-col gap-2" onSubmit={handleSubmit(onSubmit)}>
+    <form className="flex flex-col gap-3" onSubmit={handleSubmit(onSubmit)}>
       <ImageUploader
         control={control}
         name="file"
@@ -76,11 +89,12 @@ export default function AddProductImageForm({
         name="altText"
         label="متن جایگزین (alt)"
       />
+
       <FormTextareaField
         control={control}
         name="caption"
         label="توضیحات"
-        placeholder="توضیحات مربوط به تصویر محصول را وارد نمایید "
+        placeholder="توضیحات مربوط به تصویر محصول را وارد نمایید"
       />
 
       <ImageUploadButton />

@@ -15,8 +15,12 @@ export async function postProductImageAction(formData: FormData) {
     }
 
     return data;
-  } catch (error: any) {
-    console.error("postProductImageAction ERROR:", error);
-    throw new Error(error.message || "خطای ناشناخته");
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error("postProductImageAction ERROR:", error);
+      throw new Error(error.message);
+    } else {
+      throw new Error("خطا در آپلود تصویر");
+    }
   }
 }

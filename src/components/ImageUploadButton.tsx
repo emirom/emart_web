@@ -1,16 +1,15 @@
-import { FileWithPreview } from "@lib/types/file-with-preview";
 import { SubmitButton } from "./BtnWithIcon";
 type ImageUploadButtonProps = {
   onClose?: () => void;
-  currentFile?: FileWithPreview | null;
+  // currentFile?: FileWithPreview | null;
 };
 export default function ImageUploadButton({
   onClose,
 
-  currentFile,
+  // currentFile,
 }: ImageUploadButtonProps) {
   return (
-    <div className="flex justify-between">
+    <div className="flex justify-between ">
       <SubmitButton
         // label={isUploading ? "در حال آپلود..." : "آپلود تصویر"}
         label={"آپلود تصویر"}

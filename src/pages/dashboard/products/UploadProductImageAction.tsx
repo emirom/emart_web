@@ -5,9 +5,14 @@ import { DashboardCustomModal } from "@components/DashboardCustomModal";
 import { Button } from "@components/ui/button";
 import { queryClient } from "@lib/apis/queryClient";
 import { useDeleteProductMediasId } from "@lib/services/product-media/product-media";
+import { AxiosError } from "axios";
 import { Edit, TrashIcon } from "lucide-react";
 import { toast } from "react-toastify";
 import EditProductImageForm from "./EditProductImageForm";
+
+interface ErrorResponseData {
+  message?: string;
+}
 
 export default function UploadProductImageAction({ id }: { id: string }) {
   const deleteMutation = useDeleteProductMediasId({
@@ -16,21 +21,20 @@ export default function UploadProductImageAction({ id }: { id: string }) {
         queryClient.invalidateQueries({ queryKey: ["/product-medias"] });
         toast.success("تصویر با موفقیت حذف شد");
       },
-      onError: (error: any) => {
-        let errorMessage = "خطا در حذف تصویر";
-        if (error?.response?.data?.message) {
-          errorMessage = error.response.data.message;
-        } else if (error instanceof Error) {
-          errorMessage = error.message;
-        }
+
+      onError: (error: AxiosError<ErrorResponseData>) => {
+        const errorMessage =
+          error.response?.data?.message ?? error.message ?? "خطا در حذف تصویر";
+
         toast.error(errorMessage);
       },
     },
   });
 
-  const onDelete = async () => {
+  const onDelete = () => {
     deleteMutation.mutate({ id });
   };
+
   return (
     <div className="flex items-center justify-between w-full">
       <AlertDialogModal
@@ -45,11 +49,11 @@ export default function UploadProductImageAction({ id }: { id: string }) {
         }
         onConfirm={onDelete}
       />
+
       <DashboardCustomModal
         title="ویرایش تصویر محصول"
         button={
           <Button
-            onClick={() => console.log("hellow rodl")}
             className="w-7 h-7 bg-blue-500 rounded-full flex items-center justify-center cursor-pointer"
             aria-label="ویرایش تصویر"
             type="button"

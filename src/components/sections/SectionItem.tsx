@@ -1,11 +1,8 @@
 "use client";
 
-import { useSectionImageHandlers } from "@/libs/hooks/sections/useSectionImageHandlers";
-import { useSectionImages } from "@/libs/hooks/sections/useSectionImages";
-import { FileWithPreview } from "@lib/types/file-with-preview";
 import { motion } from "framer-motion";
 import { Plus, Trash2 } from "lucide-react";
-import React, { useCallback } from "react";
+import React from "react";
 import QuillEditorWrapper from "../ui/richtext-editor/QuillEditorWrapper";
 
 interface SectionItemProps {
@@ -29,150 +26,150 @@ interface SectionItemProps {
 }
 
 const SectionItemComponent: React.FC<SectionItemProps> = ({
-  sectionId,
+  // sectionId,
   index,
   title,
   content,
-  productId,
+  // productId,
   onTitleChange,
   onContentChange,
   onRemove,
   onAddSection,
-  onMediaInfoChange,
+  // onMediaInfoChange,
 }) => {
-  const {
-    topImage,
-    leftImage,
-    rightImage,
-    setTopImage,
-    setLeftImage,
-    setRightImage,
-    removeTopImage,
-    removeLeftImage,
-    removeRightImage,
-  } = useSectionImages(sectionId);
+  // const {
+  //   topImage,
+  //   leftImage,
+  //   rightImage,
+  //   setTopImage,
+  //   setLeftImage,
+  //   setRightImage,
+  //   removeTopImage,
+  //   removeLeftImage,
+  //   removeRightImage,
+  // } = useSectionImages(sectionId);
 
   // Use the new hook for each side with productId
-  const topHandlers = useSectionImageHandlers({
-    sectionId,
-    side: "top",
-    productId,
-  });
-  const leftHandlers = useSectionImageHandlers({
-    sectionId,
-    side: "left",
-    productId,
-  });
-  const rightHandlers = useSectionImageHandlers({
-    sectionId,
-    side: "right",
-    productId,
-  });
+  // const topHandlers = useSectionImageHandlers({
+  //   sectionId,
+  //   side: "top",
+  //   productId,
+  // });
+  // const leftHandlers = useSectionImageHandlers({
+  //   sectionId,
+  //   side: "left",
+  //   productId,
+  // });
+  // const rightHandlers = useSectionImageHandlers({
+  //   sectionId,
+  //   side: "right",
+  //   productId,
+  // });
 
-  React.useEffect(() => {
-    return () => {
-      if (topImage?.preview) {
-        URL.revokeObjectURL(topImage.preview);
-      }
-      if (leftImage?.preview) {
-        URL.revokeObjectURL(leftImage.preview);
-      }
-      if (rightImage?.preview) {
-        URL.revokeObjectURL(rightImage.preview);
-      }
-    };
-  }, [topImage, leftImage, rightImage]);
+  // React.useEffect(() => {
+  //   return () => {
+  //     if (topImage?.preview) {
+  //       URL.revokeObjectURL(topImage.preview);
+  //     }
+  //     if (leftImage?.preview) {
+  //       URL.revokeObjectURL(leftImage.preview);
+  //     }
+  //     if (rightImage?.preview) {
+  //       URL.revokeObjectURL(rightImage.preview);
+  //     }
+  //   };
+  // }, [topImage, leftImage, rightImage]);
 
-  const handleTopImageChange = useCallback(
-    async (file: FileWithPreview) => {
-      const success = await topHandlers.handleImageUpload(file);
-      if (success) {
-        if (topImage?.preview) {
-          URL.revokeObjectURL(topImage.preview);
-        }
-        setTopImage(file);
-      }
-    },
-    [topHandlers, setTopImage, topImage],
-  );
+  // const handleTopImageChange = useCallback(
+  //   async (file: FileWithPreview) => {
+  //     const success = await topHandlers.handleImageUpload(file);
+  //     if (success) {
+  //       if (topImage?.preview) {
+  //         URL.revokeObjectURL(topImage.preview);
+  //       }
+  //       setTopImage(file);
+  //     }
+  //   },
+  //   [topHandlers, setTopImage, topImage],
+  // );
 
-  const handleLeftImageChange = useCallback(
-    async (file: FileWithPreview) => {
-      const success = await leftHandlers.handleImageUpload(file);
-      if (success) {
-        if (leftImage?.preview) {
-          URL.revokeObjectURL(leftImage.preview);
-        }
-        setLeftImage(file);
-      }
-    },
-    [leftHandlers, setLeftImage, leftImage],
-  );
+  // const handleLeftImageChange = useCallback(
+  //   async (file: FileWithPreview) => {
+  //     const success = await leftHandlers.handleImageUpload(file);
+  //     if (success) {
+  //       if (leftImage?.preview) {
+  //         URL.revokeObjectURL(leftImage.preview);
+  //       }
+  //       setLeftImage(file);
+  //     }
+  //   },
+  //   [leftHandlers, setLeftImage, leftImage]
+  // );
 
-  const handleRightImageChange = useCallback(
-    async (file: FileWithPreview) => {
-      const success = await rightHandlers.handleImageUpload(file);
-      if (success) {
-        if (rightImage?.preview) {
-          URL.revokeObjectURL(rightImage.preview);
-        }
-        setRightImage(file);
-      }
-    },
-    [rightHandlers, setRightImage, rightImage],
-  );
+  // const handleRightImageChange = useCallback(
+  //   async (file: FileWithPreview) => {
+  //     const success = await rightHandlers.handleImageUpload(file);
+  //     if (success) {
+  //       if (rightImage?.preview) {
+  //         URL.revokeObjectURL(rightImage.preview);
+  //       }
+  //       setRightImage(file);
+  //     }
+  //   },
+  //   [rightHandlers, setRightImage, rightImage]
+  // );
 
-  const handleRemoveTopImage = useCallback(async () => {
-    if (topImage?.preview) {
-      URL.revokeObjectURL(topImage.preview);
-    }
-    // Get the media ID if it exists and delete it
-    const mediaId = topImage?.path; // Assuming path contains the media ID
-    await topHandlers.handleImageRemove(mediaId);
-    removeTopImage();
-  }, [removeTopImage, topHandlers, topImage]);
+  // const handleRemoveTopImage = useCallback(async () => {
+  //   if (topImage?.preview) {
+  //     URL.revokeObjectURL(topImage.preview);
+  //   }
+  //   // Get the media ID if it exists and delete it
+  //   const mediaId = topImage?.path; // Assuming path contains the media ID
+  //   await topHandlers.handleImageRemove(mediaId);
+  //   removeTopImage();
+  // }, [removeTopImage, topHandlers, topImage]);
 
-  const handleRemoveLeftImage = useCallback(async () => {
-    if (leftImage?.preview) {
-      URL.revokeObjectURL(leftImage.preview);
-    }
-    // Get the media ID if it exists and delete it
-    const mediaId = leftImage?.path; // Assuming path contains the media ID
-    await leftHandlers.handleImageRemove(mediaId);
-    removeLeftImage();
-  }, [removeLeftImage, leftHandlers, leftImage]);
+  // const handleRemoveLeftImage = useCallback(async () => {
+  //   if (leftImage?.preview) {
+  //     URL.revokeObjectURL(leftImage.preview);
+  //   }
+  //   // Get the media ID if it exists and delete it
+  //   const mediaId = leftImage?.path; // Assuming path contains the media ID
+  //   await leftHandlers.handleImageRemove(mediaId);
+  //   removeLeftImage();
+  // }, [removeLeftImage, leftHandlers, leftImage]);
 
-  const handleRemoveRightImage = useCallback(async () => {
-    if (rightImage?.preview) {
-      URL.revokeObjectURL(rightImage.preview);
-    }
-    // Get the media ID if it exists and delete it
-    const mediaId = rightImage?.path; // Assuming path contains the media ID
-    await rightHandlers.handleImageRemove(mediaId);
-    removeRightImage();
-  }, [removeRightImage, rightHandlers, rightImage]);
+  // const handleRemoveRightImage = useCallback(async () => {
+  //   if (rightImage?.preview) {
+  //     URL.revokeObjectURL(rightImage.preview);
+  //   }
+  //   // Get the media ID if it exists and delete it
+  //   const mediaId = rightImage?.path; // Assuming path contains the media ID
+  //   await rightHandlers.handleImageRemove(mediaId);
+  //   removeRightImage();
+  // }, [removeRightImage, rightHandlers, rightImage]);
 
   // Custom effect to trigger media info change when images are updated
-  React.useEffect(() => {
-    if (onMediaInfoChange) {
-      onMediaInfoChange({
-        topImageId: topImage?.path,
-        topImageUrl: topImage?.preview,
-        leftImageId: leftImage?.path,
-        leftImageUrl: leftImage?.preview,
-        rightImageId: rightImage?.path,
-        rightImageUrl: rightImage?.preview,
-      });
-    }
-  }, [
-    topImage?.path,
-    topImage?.preview,
-    leftImage?.path,
-    leftImage?.preview,
-    rightImage?.path,
-    rightImage?.preview,
-    onMediaInfoChange,
-  ]);
+  // React.useEffect(() => {
+  //   if (onMediaInfoChange) {
+  //     onMediaInfoChange({
+  //       topImageId: topImage?.path,
+  //       topImageUrl: topImage?.preview,
+  //       leftImageId: leftImage?.path,
+  //       leftImageUrl: leftImage?.preview,
+  //       rightImageId: rightImage?.path,
+  //       rightImageUrl: rightImage?.preview,
+  //     });
+  //   }
+  // }, [
+  //   topImage?.path,
+  //   topImage?.preview,
+  //   leftImage?.path,
+  //   leftImage?.preview,
+  //   rightImage?.path,
+  //   rightImage?.preview,
+  //   onMediaInfoChange,
+  // ]);
 
   return (
     <motion.div

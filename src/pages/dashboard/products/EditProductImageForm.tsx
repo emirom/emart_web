@@ -8,6 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { postProductImageAction } from "@lib/actions/product-image-action";
 import { queryClient } from "@lib/apis/queryClient";
 import { patchProductMediasIdBody } from "@lib/validations/product-medias.validation";
+import { AxiosError } from "axios";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
@@ -42,24 +43,31 @@ export default function EditProductImageForm({
     }
 
     const formData = new FormData();
-
     formData.append("file", data.file);
     formData.append("productId", data.productId);
-
     if (data.altText) formData.append("altText", data.altText);
     if (data.caption) formData.append("caption", data.caption);
 
     try {
       const result = await postProductImageAction(formData);
       queryClient.invalidateQueries({ queryKey: ["/product-medias"] });
+
       if (result.success) {
         toast.success("تصویر با موفقیت ویرایش شد");
         reset({ productId, file: null });
       } else {
         toast.error(result.error || "خطا در ویرایش تصویر");
       }
-    } catch (err: any) {
-      toast.error(err.message || "خطا در ویرایش");
+    } catch (err: unknown) {
+      let message = "خطا در ویرایش";
+
+      if (err instanceof AxiosError) {
+        message = err.response?.data?.message ?? err.message;
+      } else if (err instanceof Error) {
+        message = err.message;
+      }
+
+      toast.error(message);
     }
   };
 
@@ -76,6 +84,7 @@ export default function EditProductImageForm({
         name="altText"
         label="متن جایگزین (alt)"
       />
+
       <FormTextareaField
         control={control}
         name="caption"
