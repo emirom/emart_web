@@ -2,10 +2,13 @@
 
 export async function postProductImageAction(formData: FormData) {
   try {
-    const response = await fetch("http://localhost:3010/product-medias", {
-      method: "POST",
-      body: formData,
-    });
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}product-medias`,
+      {
+        method: "POST",
+        body: formData,
+      },
+    );
 
     const data = await response.json();
 
