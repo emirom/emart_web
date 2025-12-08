@@ -39,7 +39,7 @@ export function DashboardCustomModal({
       <Dialog open={open} onOpenChange={onOpenChange}>
         <DialogTrigger asChild>
           <span
-            className="bg-white text-tint-blue-500 text-sm"
+            className=" text-tint-blue-500 text-sm"
             aria-label={title}
             title={title}
           >

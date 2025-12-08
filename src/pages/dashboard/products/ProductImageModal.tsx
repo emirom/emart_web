@@ -2,15 +2,11 @@
 
 import { DashboardCustomModal } from "@components/DashboardCustomModal";
 import UploadedImagesGallery from "@components/UploadedImagesGallery";
-import { queryClient } from "@lib/apis/queryClient";
-import {
-  useDeleteProductMediasId,
-  useGetProductMedias,
-} from "@lib/services/product-media/product-media";
+import { useGetProductMedias } from "@lib/services/product-media/product-media";
 import { useAppStore } from "@lib/stores/store";
 import { useEffect, useRef, useState } from "react";
-import { toast } from "react-toastify";
 import AddProductImageForm from "./AddProductImageForm";
+import UploadProductImageAction from "./UploadProductImageAction";
 
 interface Props {
   productId: string;
@@ -37,27 +33,6 @@ export default function ProductImageModal({ productId }: Props) {
     productId,
   });
 
-  const deleteMutation = useDeleteProductMediasId({
-    mutation: {
-      onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: ["/product-medias"] });
-        toast.success("تصویر با موفقیت حذف شد");
-      },
-      onError: (error: any) => {
-        let errorMessage = "خطا در حذف تصویر";
-        if (error?.response?.data?.message) {
-          errorMessage = error.response.data.message;
-        } else if (error instanceof Error) {
-          errorMessage = error.message;
-        }
-        toast.error(errorMessage);
-      },
-    },
-  });
-
-  const onDelete = async (id: string) => {
-    deleteMutation.mutate({ id });
-  };
   return (
     <>
       <div
@@ -99,7 +74,7 @@ export default function ProductImageModal({ productId }: Props) {
               <UploadedImagesGallery
                 key={image.id}
                 {...image}
-                onDelete={onDelete}
+                buttonsAction={<UploadProductImageAction id={image.id} />}
               />
             ))}
           </div>

@@ -22,7 +22,7 @@ export function ImageUploader<T extends FieldValues>({
   control,
   label,
   disabled = false,
-  className = "",
+  className,
   placeholderText = "بارگذاری تصویر",
 }: Props<T>) {
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -37,7 +37,7 @@ export function ImageUploader<T extends FieldValues>({
 
   const handleFileChange = (
     e: ChangeEvent<HTMLInputElement>,
-    onChange: (file: FileWithPreview | null) => void,
+    onChange: (file: FileWithPreview | null) => void
   ) => {
     const file = e.target.files?.[0] ?? null;
     const fileWithPreview = file ? createPreviewFile(file) : null;
@@ -56,7 +56,7 @@ export function ImageUploader<T extends FieldValues>({
           )}
 
           <div
-            className={`border border-gray-300 rounded-xl p-3 flex flex-col items-center justify-center cursor-pointer transition hover:bg-gray-50 ${
+            className={`border relative border-gray-300 rounded-xl p-3 flex flex-col items-center justify-center cursor-pointer transition hover:bg-gray-50 ${
               disabled ? "opacity-50 cursor-not-allowed" : ""
             }`}
             onClick={handleClick}
@@ -73,17 +73,19 @@ export function ImageUploader<T extends FieldValues>({
                   alt="preview"
                   className="rounded-lg object-cover"
                 />
-                <button
-                  type="button"
-                  className="absolute top-2 right-2 bg-black/60 text-white px-2 py-1 rounded-md text-xs"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    onChange(null);
-                  }}
-                >
-                  حذف
-                </button>
               </div>
+            )}
+            {value && (
+              <button
+                type="button"
+                className="absolute bottom-1 right-1 bg-black/60 text-white px-1 py-1 rounded-md text-xs font-medium cursor-pointer"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onChange(null);
+                }}
+              >
+                حذف
+              </button>
             )}
           </div>
 

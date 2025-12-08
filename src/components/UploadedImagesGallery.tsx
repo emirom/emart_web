@@ -1,21 +1,19 @@
 import { ProductMedia } from "@lib/schemas";
 import { buildMediaUrl } from "@lib/utils/build-media-url";
-import { Edit, TrashIcon } from "lucide-react";
+import { ReactNode } from "react";
 import CustomImage from "./CustomImage";
-import { Button } from "./ui/button";
 
 interface UploadedImagesGalleryProps
   extends Pick<ProductMedia, "id" | "url" | "altText"> {
-  onDelete: (id: string) => void;
-  edit?: true;
+  buttonsAction: ReactNode;
 }
 
 export default function UploadedImagesGallery({
   id,
   url,
   altText,
-  onDelete,
-  edit,
+
+  buttonsAction,
 }: UploadedImagesGalleryProps) {
   return (
     <div className="relative group border rounded-lg overflow-hidden">
@@ -34,22 +32,7 @@ export default function UploadedImagesGallery({
     "
       >
         <div className="absolute bottom-0 flex items-center justify-between w-full h-12 px-2">
-          <Button
-            onClick={() => onDelete?.(id)}
-            className="w-7 h-7 bg-red-500 text-white rounded-full flex items-center justify-center cursor-pointer"
-            aria-label="حذف تصویر"
-          >
-            <TrashIcon size={16} />
-          </Button>
-          {edit && (
-            <Button
-              onClick={() => onDelete?.(id)}
-              className="w-7 h-7 bg-blue-500 text-white rounded-full flex items-center justify-center cursor-pointer"
-              aria-label="حذف تصویر"
-            >
-              <Edit size={16} />
-            </Button>
-          )}
+          {id && buttonsAction}
         </div>
       </div>
     </div>
