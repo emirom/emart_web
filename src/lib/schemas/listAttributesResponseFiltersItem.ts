@@ -5,6 +5,7 @@
  * OpenAPI spec version: 1.0.0
  */
 import type { ListAttributesResponseFiltersItemLabel } from "./listAttributesResponseFiltersItemLabel";
+import type { ListAttributesResponseFiltersItemUrl } from "./listAttributesResponseFiltersItemUrl";
 import type { ListAttributesResponseFiltersItemModel } from "./listAttributesResponseFiltersItemModel";
 import type { ListAttributesResponseFiltersItemField } from "./listAttributesResponseFiltersItemField";
 import type { ListAttributesResponseFiltersItemAdvanced } from "./listAttributesResponseFiltersItemAdvanced";
@@ -15,6 +16,8 @@ export type ListAttributesResponseFiltersItem = {
   service: string;
   /** A user-friendly label for the filter. */
   label?: ListAttributesResponseFiltersItemLabel;
+  /** URL for the filter  */
+  url?: ListAttributesResponseFiltersItemUrl;
   /** Indicates whether the filter is currently open (active). */
   open: boolean;
   /** The type of filter, which determines how it behaves. */

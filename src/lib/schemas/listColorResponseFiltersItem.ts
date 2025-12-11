@@ -5,6 +5,7 @@
  * OpenAPI spec version: 1.0.0
  */
 import type { ListColorResponseFiltersItemLabel } from "./listColorResponseFiltersItemLabel";
+import type { ListColorResponseFiltersItemUrl } from "./listColorResponseFiltersItemUrl";
 import type { ListColorResponseFiltersItemModel } from "./listColorResponseFiltersItemModel";
 import type { ListColorResponseFiltersItemField } from "./listColorResponseFiltersItemField";
 import type { ListColorResponseFiltersItemAdvanced } from "./listColorResponseFiltersItemAdvanced";
@@ -15,6 +16,8 @@ export type ListColorResponseFiltersItem = {
   service: string;
   /** A user-friendly label for the filter. */
   label?: ListColorResponseFiltersItemLabel;
+  /** URL for the filter  */
+  url?: ListColorResponseFiltersItemUrl;
   /** Indicates whether the filter is currently open (active). */
   open: boolean;
   /** The type of filter, which determines how it behaves. */

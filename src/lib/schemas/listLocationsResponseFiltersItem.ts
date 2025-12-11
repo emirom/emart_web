@@ -5,6 +5,7 @@
  * OpenAPI spec version: 1.0.0
  */
 import type { ListLocationsResponseFiltersItemLabel } from "./listLocationsResponseFiltersItemLabel";
+import type { ListLocationsResponseFiltersItemUrl } from "./listLocationsResponseFiltersItemUrl";
 import type { ListLocationsResponseFiltersItemModel } from "./listLocationsResponseFiltersItemModel";
 import type { ListLocationsResponseFiltersItemField } from "./listLocationsResponseFiltersItemField";
 import type { ListLocationsResponseFiltersItemAdvanced } from "./listLocationsResponseFiltersItemAdvanced";
@@ -15,6 +16,8 @@ export type ListLocationsResponseFiltersItem = {
   service: string;
   /** A user-friendly label for the filter. */
   label?: ListLocationsResponseFiltersItemLabel;
+  /** URL for the filter  */
+  url?: ListLocationsResponseFiltersItemUrl;
   /** Indicates whether the filter is currently open (active). */
   open: boolean;
   /** The type of filter, which determines how it behaves. */

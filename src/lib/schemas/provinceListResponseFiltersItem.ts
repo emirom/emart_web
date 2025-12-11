@@ -5,6 +5,7 @@
  * OpenAPI spec version: 1.0.0
  */
 import type { ProvinceListResponseFiltersItemLabel } from "./provinceListResponseFiltersItemLabel";
+import type { ProvinceListResponseFiltersItemUrl } from "./provinceListResponseFiltersItemUrl";
 import type { ProvinceListResponseFiltersItemModel } from "./provinceListResponseFiltersItemModel";
 import type { ProvinceListResponseFiltersItemField } from "./provinceListResponseFiltersItemField";
 import type { ProvinceListResponseFiltersItemAdvanced } from "./provinceListResponseFiltersItemAdvanced";
@@ -15,6 +16,8 @@ export type ProvinceListResponseFiltersItem = {
   service: string;
   /** A user-friendly label for the filter. */
   label?: ProvinceListResponseFiltersItemLabel;
+  /** URL for the filter  */
+  url?: ProvinceListResponseFiltersItemUrl;
   /** Indicates whether the filter is currently open (active). */
   open: boolean;
   /** The type of filter, which determines how it behaves. */

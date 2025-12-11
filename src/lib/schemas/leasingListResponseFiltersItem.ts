@@ -5,6 +5,7 @@
  * OpenAPI spec version: 1.0.0
  */
 import type { LeasingListResponseFiltersItemLabel } from "./leasingListResponseFiltersItemLabel";
+import type { LeasingListResponseFiltersItemUrl } from "./leasingListResponseFiltersItemUrl";
 import type { LeasingListResponseFiltersItemModel } from "./leasingListResponseFiltersItemModel";
 import type { LeasingListResponseFiltersItemField } from "./leasingListResponseFiltersItemField";
 import type { LeasingListResponseFiltersItemAdvanced } from "./leasingListResponseFiltersItemAdvanced";
@@ -15,6 +16,8 @@ export type LeasingListResponseFiltersItem = {
   service: string;
   /** A user-friendly label for the filter. */
   label?: LeasingListResponseFiltersItemLabel;
+  /** URL for the filter  */
+  url?: LeasingListResponseFiltersItemUrl;
   /** Indicates whether the filter is currently open (active). */
   open: boolean;
   /** The type of filter, which determines how it behaves. */

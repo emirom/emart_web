@@ -5,6 +5,7 @@
  * OpenAPI spec version: 1.0.0
  */
 import type { CurrencyListResponseFiltersItemLabel } from "./currencyListResponseFiltersItemLabel";
+import type { CurrencyListResponseFiltersItemUrl } from "./currencyListResponseFiltersItemUrl";
 import type { CurrencyListResponseFiltersItemModel } from "./currencyListResponseFiltersItemModel";
 import type { CurrencyListResponseFiltersItemField } from "./currencyListResponseFiltersItemField";
 import type { CurrencyListResponseFiltersItemAdvanced } from "./currencyListResponseFiltersItemAdvanced";
@@ -15,6 +16,8 @@ export type CurrencyListResponseFiltersItem = {
   service: string;
   /** A user-friendly label for the filter. */
   label?: CurrencyListResponseFiltersItemLabel;
+  /** URL for the filter  */
+  url?: CurrencyListResponseFiltersItemUrl;
   /** Indicates whether the filter is currently open (active). */
   open: boolean;
   /** The type of filter, which determines how it behaves. */

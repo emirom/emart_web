@@ -5,6 +5,7 @@
  * OpenAPI spec version: 1.0.0
  */
 import type { ProductDescriptionListResponseWithMetaFiltersItemLabel } from "./productDescriptionListResponseWithMetaFiltersItemLabel";
+import type { ProductDescriptionListResponseWithMetaFiltersItemUrl } from "./productDescriptionListResponseWithMetaFiltersItemUrl";
 import type { ProductDescriptionListResponseWithMetaFiltersItemModel } from "./productDescriptionListResponseWithMetaFiltersItemModel";
 import type { ProductDescriptionListResponseWithMetaFiltersItemField } from "./productDescriptionListResponseWithMetaFiltersItemField";
 import type { ProductDescriptionListResponseWithMetaFiltersItemAdvanced } from "./productDescriptionListResponseWithMetaFiltersItemAdvanced";
@@ -15,6 +16,8 @@ export type ProductDescriptionListResponseWithMetaFiltersItem = {
   service: string;
   /** A user-friendly label for the filter. */
   label?: ProductDescriptionListResponseWithMetaFiltersItemLabel;
+  /** URL for the filter  */
+  url?: ProductDescriptionListResponseWithMetaFiltersItemUrl;
   /** Indicates whether the filter is currently open (active). */
   open: boolean;
   /** The type of filter, which determines how it behaves. */

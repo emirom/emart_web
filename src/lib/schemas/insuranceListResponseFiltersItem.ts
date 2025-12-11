@@ -5,6 +5,7 @@
  * OpenAPI spec version: 1.0.0
  */
 import type { InsuranceListResponseFiltersItemLabel } from "./insuranceListResponseFiltersItemLabel";
+import type { InsuranceListResponseFiltersItemUrl } from "./insuranceListResponseFiltersItemUrl";
 import type { InsuranceListResponseFiltersItemModel } from "./insuranceListResponseFiltersItemModel";
 import type { InsuranceListResponseFiltersItemField } from "./insuranceListResponseFiltersItemField";
 import type { InsuranceListResponseFiltersItemAdvanced } from "./insuranceListResponseFiltersItemAdvanced";
@@ -15,6 +16,8 @@ export type InsuranceListResponseFiltersItem = {
   service: string;
   /** A user-friendly label for the filter. */
   label?: InsuranceListResponseFiltersItemLabel;
+  /** URL for the filter  */
+  url?: InsuranceListResponseFiltersItemUrl;
   /** Indicates whether the filter is currently open (active). */
   open: boolean;
   /** The type of filter, which determines how it behaves. */

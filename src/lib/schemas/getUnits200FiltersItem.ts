@@ -5,6 +5,7 @@
  * OpenAPI spec version: 1.0.0
  */
 import type { GetUnits200FiltersItemLabel } from "./getUnits200FiltersItemLabel";
+import type { GetUnits200FiltersItemUrl } from "./getUnits200FiltersItemUrl";
 import type { GetUnits200FiltersItemModel } from "./getUnits200FiltersItemModel";
 import type { GetUnits200FiltersItemField } from "./getUnits200FiltersItemField";
 import type { GetUnits200FiltersItemAdvanced } from "./getUnits200FiltersItemAdvanced";
@@ -15,6 +16,8 @@ export type GetUnits200FiltersItem = {
   service: string;
   /** A user-friendly label for the filter. */
   label?: GetUnits200FiltersItemLabel;
+  /** URL for the filter  */
+  url?: GetUnits200FiltersItemUrl;
   /** Indicates whether the filter is currently open (active). */
   open: boolean;
   /** The type of filter, which determines how it behaves. */

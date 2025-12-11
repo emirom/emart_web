@@ -108,11 +108,7 @@ export const getProductMediasResponse = zod
   .describe("Response schema for listing product media with pagination");
 
 export const getProductMediasIdParams = zod.object({
-  id: zod.coerce.string(),
-});
-
-export const getProductMediasIdQueryParams = zod.object({
-  id: zod.uuid().describe("Category ID"),
+  id: zod.uuid().describe("Product media UUID identifier"),
 });
 
 export const getProductMediasIdResponse = zod

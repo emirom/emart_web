@@ -29,8 +29,6 @@ export interface UpdateCategoryInput {
   enName?: string;
   /** Parent category ID if exists */
   parentId?: UpdateCategoryInputParentId;
-  /** the level of category in hirarchy */
-  level?: number;
   /** Unit ID */
   unitId?: string;
   /** Filter by promotion ID */

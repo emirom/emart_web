@@ -5,6 +5,7 @@
  * OpenAPI spec version: 1.0.0
  */
 import type { ProductMediaListResponseFiltersItemLabel } from "./productMediaListResponseFiltersItemLabel";
+import type { ProductMediaListResponseFiltersItemUrl } from "./productMediaListResponseFiltersItemUrl";
 import type { ProductMediaListResponseFiltersItemModel } from "./productMediaListResponseFiltersItemModel";
 import type { ProductMediaListResponseFiltersItemField } from "./productMediaListResponseFiltersItemField";
 import type { ProductMediaListResponseFiltersItemAdvanced } from "./productMediaListResponseFiltersItemAdvanced";
@@ -15,6 +16,8 @@ export type ProductMediaListResponseFiltersItem = {
   service: string;
   /** A user-friendly label for the filter. */
   label?: ProductMediaListResponseFiltersItemLabel;
+  /** URL for the filter  */
+  url?: ProductMediaListResponseFiltersItemUrl;
   /** Indicates whether the filter is currently open (active). */
   open: boolean;
   /** The type of filter, which determines how it behaves. */

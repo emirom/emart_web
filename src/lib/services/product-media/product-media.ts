@@ -23,7 +23,6 @@ import type {
 import type {
   BaseResponse,
   ErrorResponse,
-  GetProductMediasIdParams,
   GetProductMediasParams,
   NotfoundError,
   ProductMediaListResponse,
@@ -260,24 +259,16 @@ export function useGetProductMedias<
   return query;
 }
 
-export const getProductMediasId = (
-  id: string,
-  params: GetProductMediasIdParams,
-  signal?: AbortSignal,
-) => {
+export const getProductMediasId = (id: string, signal?: AbortSignal) => {
   return axiosInstance<ProductMediaResponse>({
     url: `/product-medias/${id}`,
     method: "GET",
-    params,
     signal,
   });
 };
 
-export const getGetProductMediasIdQueryKey = (
-  id?: string,
-  params?: GetProductMediasIdParams,
-) => {
-  return [`/product-medias/${id}`, ...(params ? [params] : [])] as const;
+export const getGetProductMediasIdQueryKey = (id?: string) => {
+  return [`/product-medias/${id}`] as const;
 };
 
 export const getGetProductMediasIdQueryOptions = <
@@ -285,7 +276,6 @@ export const getGetProductMediasIdQueryOptions = <
   TError = NotfoundError,
 >(
   id: string,
-  params: GetProductMediasIdParams,
   options?: {
     query?: Partial<
       UseQueryOptions<
@@ -298,12 +288,11 @@ export const getGetProductMediasIdQueryOptions = <
 ) => {
   const { query: queryOptions } = options ?? {};
 
-  const queryKey =
-    queryOptions?.queryKey ?? getGetProductMediasIdQueryKey(id, params);
+  const queryKey = queryOptions?.queryKey ?? getGetProductMediasIdQueryKey(id);
 
   const queryFn: QueryFunction<
     Awaited<ReturnType<typeof getProductMediasId>>
-  > = ({ signal }) => getProductMediasId(id, params, signal);
+  > = ({ signal }) => getProductMediasId(id, signal);
 
   return {
     queryKey,
@@ -327,7 +316,6 @@ export function useGetProductMediasId<
   TError = NotfoundError,
 >(
   id: string,
-  params: GetProductMediasIdParams,
   options: {
     query: Partial<
       UseQueryOptions<
@@ -354,7 +342,6 @@ export function useGetProductMediasId<
   TError = NotfoundError,
 >(
   id: string,
-  params: GetProductMediasIdParams,
   options?: {
     query?: Partial<
       UseQueryOptions<
@@ -381,7 +368,6 @@ export function useGetProductMediasId<
   TError = NotfoundError,
 >(
   id: string,
-  params: GetProductMediasIdParams,
   options?: {
     query?: Partial<
       UseQueryOptions<
@@ -401,7 +387,6 @@ export function useGetProductMediasId<
   TError = NotfoundError,
 >(
   id: string,
-  params: GetProductMediasIdParams,
   options?: {
     query?: Partial<
       UseQueryOptions<
@@ -415,7 +400,7 @@ export function useGetProductMediasId<
 ): UseQueryResult<TData, TError> & {
   queryKey: DataTag<QueryKey, TData, TError>;
 } {
-  const queryOptions = getGetProductMediasIdQueryOptions(id, params, options);
+  const queryOptions = getGetProductMediasIdQueryOptions(id, options);
 
   const query = useQuery(queryOptions, queryClient) as UseQueryResult<
     TData,

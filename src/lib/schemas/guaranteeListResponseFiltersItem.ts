@@ -5,6 +5,7 @@
  * OpenAPI spec version: 1.0.0
  */
 import type { GuaranteeListResponseFiltersItemLabel } from "./guaranteeListResponseFiltersItemLabel";
+import type { GuaranteeListResponseFiltersItemUrl } from "./guaranteeListResponseFiltersItemUrl";
 import type { GuaranteeListResponseFiltersItemModel } from "./guaranteeListResponseFiltersItemModel";
 import type { GuaranteeListResponseFiltersItemField } from "./guaranteeListResponseFiltersItemField";
 import type { GuaranteeListResponseFiltersItemAdvanced } from "./guaranteeListResponseFiltersItemAdvanced";
@@ -15,6 +16,8 @@ export type GuaranteeListResponseFiltersItem = {
   service: string;
   /** A user-friendly label for the filter. */
   label?: GuaranteeListResponseFiltersItemLabel;
+  /** URL for the filter  */
+  url?: GuaranteeListResponseFiltersItemUrl;
   /** Indicates whether the filter is currently open (active). */
   open: boolean;
   /** The type of filter, which determines how it behaves. */

@@ -5,6 +5,7 @@
  * OpenAPI spec version: 1.0.0
  */
 import type { CountryListResponseFiltersItemLabel } from "./countryListResponseFiltersItemLabel";
+import type { CountryListResponseFiltersItemUrl } from "./countryListResponseFiltersItemUrl";
 import type { CountryListResponseFiltersItemModel } from "./countryListResponseFiltersItemModel";
 import type { CountryListResponseFiltersItemField } from "./countryListResponseFiltersItemField";
 import type { CountryListResponseFiltersItemAdvanced } from "./countryListResponseFiltersItemAdvanced";
@@ -15,6 +16,8 @@ export type CountryListResponseFiltersItem = {
   service: string;
   /** A user-friendly label for the filter. */
   label?: CountryListResponseFiltersItemLabel;
+  /** URL for the filter  */
+  url?: CountryListResponseFiltersItemUrl;
   /** Indicates whether the filter is currently open (active). */
   open: boolean;
   /** The type of filter, which determines how it behaves. */

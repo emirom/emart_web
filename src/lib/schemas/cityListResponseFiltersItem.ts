@@ -5,6 +5,7 @@
  * OpenAPI spec version: 1.0.0
  */
 import type { CityListResponseFiltersItemLabel } from "./cityListResponseFiltersItemLabel";
+import type { CityListResponseFiltersItemUrl } from "./cityListResponseFiltersItemUrl";
 import type { CityListResponseFiltersItemModel } from "./cityListResponseFiltersItemModel";
 import type { CityListResponseFiltersItemField } from "./cityListResponseFiltersItemField";
 import type { CityListResponseFiltersItemAdvanced } from "./cityListResponseFiltersItemAdvanced";
@@ -15,6 +16,8 @@ export type CityListResponseFiltersItem = {
   service: string;
   /** A user-friendly label for the filter. */
   label?: CityListResponseFiltersItemLabel;
+  /** URL for the filter  */
+  url?: CityListResponseFiltersItemUrl;
   /** Indicates whether the filter is currently open (active). */
   open: boolean;
   /** The type of filter, which determines how it behaves. */

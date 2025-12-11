@@ -5,6 +5,7 @@
  * OpenAPI spec version: 1.0.0
  */
 import type { VariantListResponseFiltersItemLabel } from "./variantListResponseFiltersItemLabel";
+import type { VariantListResponseFiltersItemUrl } from "./variantListResponseFiltersItemUrl";
 import type { VariantListResponseFiltersItemModel } from "./variantListResponseFiltersItemModel";
 import type { VariantListResponseFiltersItemField } from "./variantListResponseFiltersItemField";
 import type { VariantListResponseFiltersItemAdvanced } from "./variantListResponseFiltersItemAdvanced";
@@ -15,6 +16,8 @@ export type VariantListResponseFiltersItem = {
   service: string;
   /** A user-friendly label for the filter. */
   label?: VariantListResponseFiltersItemLabel;
+  /** URL for the filter  */
+  url?: VariantListResponseFiltersItemUrl;
   /** Indicates whether the filter is currently open (active). */
   open: boolean;
   /** The type of filter, which determines how it behaves. */

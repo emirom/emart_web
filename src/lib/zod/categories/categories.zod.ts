@@ -34,7 +34,6 @@ export const postCategoriesBody = zod
       .union([zod.uuid(), zod.null()])
       .optional()
       .describe("Parent category ID if exists"),
-    level: zod.coerce.number().describe("the level of category in hirarchy"),
     unitId: zod.uuid().describe("Unit ID"),
     promotionId: zod
       .union([zod.uuid(), zod.null()])
@@ -206,10 +205,6 @@ export const patchCategoriesIdBody = zod
       .union([zod.uuid(), zod.null()])
       .optional()
       .describe("Parent category ID if exists"),
-    level: zod.coerce
-      .number()
-      .optional()
-      .describe("the level of category in hirarchy"),
     unitId: zod.uuid().optional().describe("Unit ID"),
     promotionId: zod
       .union([zod.uuid(), zod.null()])
