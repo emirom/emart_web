@@ -4,7 +4,7 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { UnitDeletedAt } from "./unitDeletedAt";
+import type { UnitDeletedAt } from './unitDeletedAt';
 
 /**
  * Complete unit entity for product measurements

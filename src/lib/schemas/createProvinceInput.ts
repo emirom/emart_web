@@ -4,15 +4,12 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { CreateProvinceInputDeletedAt } from "./createProvinceInputDeletedAt";
-import type { CreateProvinceInputAbb } from "./createProvinceInputAbb";
+import type { CreateProvinceInputAbb } from './createProvinceInputAbb';
 
 /**
  * Province creation payload
  */
 export interface CreateProvinceInput {
-  /** Deletion timestamp (ISO 8601) when soft deleted */
-  deletedAt?: CreateProvinceInputDeletedAt;
   /**
    * Province name in native language
    * @minLength 2

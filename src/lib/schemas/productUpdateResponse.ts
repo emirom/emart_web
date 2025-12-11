@@ -4,7 +4,7 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { Product } from "./product";
+import type { Product } from './product';
 
 /**
  * Response format for product update operations

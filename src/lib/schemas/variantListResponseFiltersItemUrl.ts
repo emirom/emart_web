@@ -6,6 +6,6 @@
  */
 
 /**
- * URL for the filter
+ * URL for the filter 
  */
 export type VariantListResponseFiltersItemUrl = string | null;

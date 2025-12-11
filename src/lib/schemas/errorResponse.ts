@@ -4,17 +4,12 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { BaseError } from "./baseError";
+import type { BaseError } from './baseError';
 
 export type ErrorResponse = BaseError & {
   /** Error code */
   code: string;
-} & Required<
-    Pick<
-      BaseError & {
-        /** Error code */
-        code: string;
-      },
-      "code"
-    >
-  >;
+} & Required<Pick<BaseError & {
+  /** Error code */
+  code: string;
+}, 'code'>>;

@@ -4,8 +4,8 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { ConflictErrorSuccess } from "./conflictErrorSuccess";
-import type { ConflictErrorDetails } from "./conflictErrorDetails";
+import type { ConflictErrorSuccess } from './conflictErrorSuccess';
+import type { ConflictErrorDetails } from './conflictErrorDetails';
 
 /**
  * Standard API error format

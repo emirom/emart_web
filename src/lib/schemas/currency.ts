@@ -4,7 +4,7 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { CurrencyDeletedAt } from "./currencyDeletedAt";
+import type { CurrencyDeletedAt } from './currencyDeletedAt';
 
 /**
  * Currency entity for pricing

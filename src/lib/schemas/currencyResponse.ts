@@ -4,19 +4,14 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { BaseResponse } from "./baseResponse";
-import type { Currency } from "./currency";
+import type { BaseResponse } from './baseResponse';
+import type { Currency } from './currency';
 
 /**
  * Response for single currency operations
  */
 export type CurrencyResponse = BaseResponse & {
   data: Currency;
-} & Required<
-    Pick<
-      BaseResponse & {
-        data: Currency;
-      },
-      "data"
-    >
-  >;
+} & Required<Pick<BaseResponse & {
+  data: Currency;
+}, 'data'>>;

@@ -4,7 +4,7 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { CurrencyListResponseDataItemDeletedAt } from "./currencyListResponseDataItemDeletedAt";
+import type { CurrencyListResponseDataItemDeletedAt } from './currencyListResponseDataItemDeletedAt';
 
 export type CurrencyListResponseDataItem = {
   /** Unique identifier (UUIDv4) */

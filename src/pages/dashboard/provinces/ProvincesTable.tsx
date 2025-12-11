@@ -13,7 +13,7 @@ const columns: ColumnDef<Province>[] = [
   { accessorKey: "name", header: "نام" },
   { accessorKey: "abb", header: " نام مخفف (abb)" },
   {
-    accessorKey: "countryId",
+    accessorKey: "country.name",
     header: "کشور",
     cell: (row) => <>{row.getValue()}</>,
   },

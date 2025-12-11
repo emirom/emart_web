@@ -4,12 +4,12 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { CountryListResponseFiltersItemLabel } from "./countryListResponseFiltersItemLabel";
-import type { CountryListResponseFiltersItemUrl } from "./countryListResponseFiltersItemUrl";
-import type { CountryListResponseFiltersItemModel } from "./countryListResponseFiltersItemModel";
-import type { CountryListResponseFiltersItemField } from "./countryListResponseFiltersItemField";
-import type { CountryListResponseFiltersItemAdvanced } from "./countryListResponseFiltersItemAdvanced";
-import type { CountryListResponseFiltersItemEnumOptions } from "./countryListResponseFiltersItemEnumOptions";
+import type { CountryListResponseFiltersItemLabel } from './countryListResponseFiltersItemLabel';
+import type { CountryListResponseFiltersItemUrl } from './countryListResponseFiltersItemUrl';
+import type { CountryListResponseFiltersItemModel } from './countryListResponseFiltersItemModel';
+import type { CountryListResponseFiltersItemField } from './countryListResponseFiltersItemField';
+import type { CountryListResponseFiltersItemAdvanced } from './countryListResponseFiltersItemAdvanced';
+import type { CountryListResponseFiltersItemEnumOptions } from './countryListResponseFiltersItemEnumOptions';
 
 export type CountryListResponseFiltersItem = {
   /** The key representing the service associated with the filter. */

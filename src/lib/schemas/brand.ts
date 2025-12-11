@@ -4,11 +4,11 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { BrandDeletedAt } from "./brandDeletedAt";
-import type { BrandEnName } from "./brandEnName";
-import type { BrandLogoUrl } from "./brandLogoUrl";
-import type { BrandWebsite } from "./brandWebsite";
-import type { BrandDescription } from "./brandDescription";
+import type { BrandDeletedAt } from './brandDeletedAt';
+import type { BrandEnName } from './brandEnName';
+import type { BrandLogoUrl } from './brandLogoUrl';
+import type { BrandWebsite } from './brandWebsite';
+import type { BrandDescription } from './brandDescription';
 
 export interface Brand {
   /** Unique identifier (UUIDv4) */

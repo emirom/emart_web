@@ -4,12 +4,12 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { LeasingListResponseFiltersItemLabel } from "./leasingListResponseFiltersItemLabel";
-import type { LeasingListResponseFiltersItemUrl } from "./leasingListResponseFiltersItemUrl";
-import type { LeasingListResponseFiltersItemModel } from "./leasingListResponseFiltersItemModel";
-import type { LeasingListResponseFiltersItemField } from "./leasingListResponseFiltersItemField";
-import type { LeasingListResponseFiltersItemAdvanced } from "./leasingListResponseFiltersItemAdvanced";
-import type { LeasingListResponseFiltersItemEnumOptions } from "./leasingListResponseFiltersItemEnumOptions";
+import type { LeasingListResponseFiltersItemLabel } from './leasingListResponseFiltersItemLabel';
+import type { LeasingListResponseFiltersItemUrl } from './leasingListResponseFiltersItemUrl';
+import type { LeasingListResponseFiltersItemModel } from './leasingListResponseFiltersItemModel';
+import type { LeasingListResponseFiltersItemField } from './leasingListResponseFiltersItemField';
+import type { LeasingListResponseFiltersItemAdvanced } from './leasingListResponseFiltersItemAdvanced';
+import type { LeasingListResponseFiltersItemEnumOptions } from './leasingListResponseFiltersItemEnumOptions';
 
 export type LeasingListResponseFiltersItem = {
   /** The key representing the service associated with the filter. */

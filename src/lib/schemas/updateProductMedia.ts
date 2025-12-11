@@ -4,9 +4,9 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { UpdateProductMediaAltText } from "./updateProductMediaAltText";
-import type { UpdateProductMediaCaption } from "./updateProductMediaCaption";
-import type { UpdateProductMediaOrder } from "./updateProductMediaOrder";
+import type { UpdateProductMediaAltText } from './updateProductMediaAltText';
+import type { UpdateProductMediaCaption } from './updateProductMediaCaption';
+import type { UpdateProductMediaOrder } from './updateProductMediaOrder';
 
 /**
  * Schema for updating existing product media metadata

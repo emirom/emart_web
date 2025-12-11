@@ -4,16 +4,16 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { LeasingDeletedAt } from "./leasingDeletedAt";
-import type { LeasingDescription } from "./leasingDescription";
-import type { LeasingCurrency } from "./leasingCurrency";
-import type { LeasingIsActive } from "./leasingIsActive";
-import type { LeasingBankId } from "./leasingBankId";
-import type { LeasingCurrencyId } from "./leasingCurrencyId";
-import type { LeasingContractTemplateUrl } from "./leasingContractTemplateUrl";
-import type { LeasingTotalLeaseAmount } from "./leasingTotalLeaseAmount";
-import type { LeasingAccountingRefId } from "./leasingAccountingRefId";
-import type { LeasingIsRegisteredWithTax } from "./leasingIsRegisteredWithTax";
+import type { LeasingDeletedAt } from './leasingDeletedAt';
+import type { LeasingDescription } from './leasingDescription';
+import type { LeasingCurrency } from './leasingCurrency';
+import type { LeasingIsActive } from './leasingIsActive';
+import type { LeasingBankId } from './leasingBankId';
+import type { LeasingCurrencyId } from './leasingCurrencyId';
+import type { LeasingContractTemplateUrl } from './leasingContractTemplateUrl';
+import type { LeasingTotalLeaseAmount } from './leasingTotalLeaseAmount';
+import type { LeasingAccountingRefId } from './leasingAccountingRefId';
+import type { LeasingIsRegisteredWithTax } from './leasingIsRegisteredWithTax';
 
 /**
  * Product leasing plan for B2B/B2C

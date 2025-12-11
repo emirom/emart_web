@@ -4,7 +4,10 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import { z as zod } from "zod";
+import {
+  z as zod
+} from 'zod';
+
 
 /**
  * Create a new currency
@@ -15,102 +18,49 @@ export const postCurrenciesBodyNameMax = 100;
 export const postCurrenciesBodySymbolMax = 10;
 export const postCurrenciesBodyIsDefaultDefault = false;
 
-export const postCurrenciesBody = zod
-  .object({
-    name: zod.coerce
-      .string()
-      .min(postCurrenciesBodyNameMin)
-      .max(postCurrenciesBodyNameMax)
-      .describe("Currency name"),
-    symbol: zod.coerce
-      .string()
-      .min(1)
-      .max(postCurrenciesBodySymbolMax)
-      .describe("Currency symbol"),
-    isDefault: zod.coerce
-      .boolean()
-      .optional()
-      .describe("Is this the default currency?"),
-  })
-  .describe("Currency entity for pricing");
+export const postCurrenciesBody = zod.object({
+  "name": zod.coerce.string().min(postCurrenciesBodyNameMin).max(postCurrenciesBodyNameMax).describe('Currency name'),
+  "symbol": zod.coerce.string().min(1).max(postCurrenciesBodySymbolMax).describe('Currency symbol'),
+  "isDefault": zod.coerce.boolean().optional().describe('Is this the default currency?')
+}).describe('Currency entity for pricing')
 
 /**
  * Get all currencies with pagination and filtering
  */
 export const getCurrenciesQueryFieldDefaultOne = "createdAt";
 export const getCurrenciesQueryFieldMaxOne = 200;
-export const getCurrenciesQueryOrderDefaultOne = "desc";
-export const getCurrenciesQuerySkipMin = 0;
+export const getCurrenciesQueryOrderDefaultOne = "desc";export const getCurrenciesQuerySkipMin = 0;
 export const getCurrenciesQueryLimitMax = 20;
 export const getCurrenciesQueryNameMaxOne = 200;
 export const getCurrenciesQuerySymbolMaxOne = 200;
 
-export const getCurrenciesQueryParams = zod.object({
-  field: zod
-    .union([zod.coerce.string().max(getCurrenciesQueryFieldMaxOne), zod.null()])
-    .optional()
-    .describe("Field to sort by"),
-  order: zod
-    .union([zod.enum(["asc", "desc"]), zod.null()])
-    .optional()
-    .describe("Sort order"),
-  skip: zod.coerce
-    .number()
-    .min(getCurrenciesQuerySkipMin)
-    .describe("Number of records to skip"),
-  limit: zod.coerce
-    .number()
-    .min(1)
-    .max(getCurrenciesQueryLimitMax)
-    .describe("Maximum number of records to return"),
-  deletedAt: zod
-    .union([zod.iso.datetime({}), zod.null()])
-    .optional()
-    .describe("Optional date input, usually null"),
-  name: zod
-    .union([zod.coerce.string().max(getCurrenciesQueryNameMaxOne), zod.null()])
-    .optional()
-    .describe("Filter by currency name"),
-  symbol: zod
-    .union([
-      zod.coerce.string().max(getCurrenciesQuerySymbolMaxOne),
-      zod.null(),
-    ])
-    .optional()
-    .describe("Filter by currency symbol"),
-  isDefault: zod.coerce
-    .boolean()
-    .optional()
-    .describe("Filter by default status"),
-});
 
-export const getCurrenciesResponse = zod
-  .object({
-    success: zod
-      .union([zod.coerce.boolean(), zod.null()])
-      .optional()
-      .describe("Operation status"),
-  })
-  .describe("Standard API response format")
-  .describe("Paginated list of currencies");
+export const getCurrenciesQueryParams = zod.object({
+  "field": zod.union([zod.coerce.string().max(getCurrenciesQueryFieldMaxOne),zod.null()]).optional().describe('Field to sort by'),
+  "order": zod.union([zod.enum(['asc', 'desc']),zod.null()]).optional().describe('Sort order'),
+  "skip": zod.coerce.number().min(getCurrenciesQuerySkipMin).describe('Number of records to skip'),
+  "limit": zod.coerce.number().min(1).max(getCurrenciesQueryLimitMax).describe('Maximum number of records to return'),
+  "deletedAt": zod.union([zod.iso.datetime({}),zod.null()]).optional().describe('Optional date input, usually null'),
+  "name": zod.union([zod.coerce.string().max(getCurrenciesQueryNameMaxOne),zod.null()]).optional().describe('Filter by currency name'),
+  "symbol": zod.union([zod.coerce.string().max(getCurrenciesQuerySymbolMaxOne),zod.null()]).optional().describe('Filter by currency symbol'),
+  "isDefault": zod.coerce.boolean().optional().describe('Filter by default status')
+})
+
+export const getCurrenciesResponse = zod.object({
+  "success": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Operation status')
+}).describe('Standard API response format').describe('Paginated list of currencies')
 
 export const getCurrenciesIdParams = zod.object({
-  id: zod.uuid().describe("Unique currency identifier"),
-});
+  "id": zod.uuid().describe('Unique currency identifier')
+})
 
-export const getCurrenciesIdResponse = zod
-  .object({
-    success: zod
-      .union([zod.coerce.boolean(), zod.null()])
-      .optional()
-      .describe("Operation status"),
-  })
-  .describe("Standard API response format")
-  .describe("Response for single currency operations");
+export const getCurrenciesIdResponse = zod.object({
+  "success": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Operation status')
+}).describe('Standard API response format').describe('Response for single currency operations')
 
 export const patchCurrenciesIdParams = zod.object({
-  id: zod.uuid().describe("Unique currency identifier"),
-});
+  "id": zod.uuid().describe('Unique currency identifier')
+})
 
 export const patchCurrenciesIdBodyNameMin = 2;
 
@@ -118,37 +68,17 @@ export const patchCurrenciesIdBodyNameMax = 100;
 export const patchCurrenciesIdBodySymbolMax = 10;
 export const patchCurrenciesIdBodyIsDefaultDefault = false;
 
-export const patchCurrenciesIdBody = zod
-  .object({
-    name: zod.coerce
-      .string()
-      .min(patchCurrenciesIdBodyNameMin)
-      .max(patchCurrenciesIdBodyNameMax)
-      .optional()
-      .describe("Currency name"),
-    symbol: zod.coerce
-      .string()
-      .min(1)
-      .max(patchCurrenciesIdBodySymbolMax)
-      .optional()
-      .describe("Currency symbol"),
-    isDefault: zod.coerce
-      .boolean()
-      .optional()
-      .describe("Is this the default currency?"),
-  })
-  .describe("Currency entity for pricing");
+export const patchCurrenciesIdBody = zod.object({
+  "name": zod.coerce.string().min(patchCurrenciesIdBodyNameMin).max(patchCurrenciesIdBodyNameMax).optional().describe('Currency name'),
+  "symbol": zod.coerce.string().min(1).max(patchCurrenciesIdBodySymbolMax).optional().describe('Currency symbol'),
+  "isDefault": zod.coerce.boolean().optional().describe('Is this the default currency?')
+}).describe('Currency entity for pricing')
 
-export const patchCurrenciesIdResponse = zod
-  .object({
-    success: zod
-      .union([zod.coerce.boolean(), zod.null()])
-      .optional()
-      .describe("Operation status"),
-  })
-  .describe("Standard API response format")
-  .describe("Response for single currency operations");
+export const patchCurrenciesIdResponse = zod.object({
+  "success": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Operation status')
+}).describe('Standard API response format').describe('Response for single currency operations')
 
 export const deleteCurrenciesIdParams = zod.object({
-  id: zod.uuid().describe("Unique currency identifier"),
-});
+  "id": zod.uuid().describe('Unique currency identifier')
+})
+

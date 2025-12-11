@@ -4,19 +4,14 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { BaseResponse } from "./baseResponse";
-import type { City } from "./city";
+import type { BaseResponse } from './baseResponse';
+import type { City } from './city';
 
 /**
  * Response for single city operations
  */
 export type CityResponse = BaseResponse & {
   data: City;
-} & Required<
-    Pick<
-      BaseResponse & {
-        data: City;
-      },
-      "data"
-    >
-  >;
+} & Required<Pick<BaseResponse & {
+  data: City;
+}, 'data'>>;

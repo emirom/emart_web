@@ -4,10 +4,10 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { BaseResponse } from "./baseResponse";
-import type { ProductMediaListResponseDetails } from "./productMediaListResponseDetails";
-import type { ProductMediaListResponseFiltersItem } from "./productMediaListResponseFiltersItem";
-import type { ProductMedia } from "./productMedia";
+import type { BaseResponse } from './baseResponse';
+import type { ProductMediaListResponseDetails } from './productMediaListResponseDetails';
+import type { ProductMediaListResponseFiltersItem } from './productMediaListResponseFiltersItem';
+import type { ProductMedia } from './productMedia';
 
 /**
  * Response schema for listing product media with pagination
@@ -17,14 +17,9 @@ export type ProductMediaListResponse = BaseResponse & {
   details?: ProductMediaListResponseDetails;
   filters: ProductMediaListResponseFiltersItem[];
   data: ProductMedia[];
-} & Required<
-    Pick<
-      BaseResponse & {
-        /** Pagination metadata */
-        details?: ProductMediaListResponseDetails;
-        filters: ProductMediaListResponseFiltersItem[];
-        data: ProductMedia[];
-      },
-      "filters" | "data"
-    >
-  >;
+} & Required<Pick<BaseResponse & {
+  /** Pagination metadata */
+  details?: ProductMediaListResponseDetails;
+  filters: ProductMediaListResponseFiltersItem[];
+  data: ProductMedia[];
+}, 'filters' | 'data'>>;

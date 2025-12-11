@@ -4,12 +4,12 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { CurrencyListResponseFiltersItemLabel } from "./currencyListResponseFiltersItemLabel";
-import type { CurrencyListResponseFiltersItemUrl } from "./currencyListResponseFiltersItemUrl";
-import type { CurrencyListResponseFiltersItemModel } from "./currencyListResponseFiltersItemModel";
-import type { CurrencyListResponseFiltersItemField } from "./currencyListResponseFiltersItemField";
-import type { CurrencyListResponseFiltersItemAdvanced } from "./currencyListResponseFiltersItemAdvanced";
-import type { CurrencyListResponseFiltersItemEnumOptions } from "./currencyListResponseFiltersItemEnumOptions";
+import type { CurrencyListResponseFiltersItemLabel } from './currencyListResponseFiltersItemLabel';
+import type { CurrencyListResponseFiltersItemUrl } from './currencyListResponseFiltersItemUrl';
+import type { CurrencyListResponseFiltersItemModel } from './currencyListResponseFiltersItemModel';
+import type { CurrencyListResponseFiltersItemField } from './currencyListResponseFiltersItemField';
+import type { CurrencyListResponseFiltersItemAdvanced } from './currencyListResponseFiltersItemAdvanced';
+import type { CurrencyListResponseFiltersItemEnumOptions } from './currencyListResponseFiltersItemEnumOptions';
 
 export type CurrencyListResponseFiltersItem = {
   /** The key representing the service associated with the filter. */

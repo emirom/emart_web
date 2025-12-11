@@ -8,6 +8,4 @@
 /**
  * The scope of the search for this filter, providing context for filtering.
  */
-export type ProductDescriptionListResponseWithMetaFiltersItemField =
-  | string
-  | null;
+export type ProductDescriptionListResponseWithMetaFiltersItemField = string | null;

@@ -4,7 +4,7 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { ProductDescriptionsAnyOfItemMediaSide } from "./productDescriptionsAnyOfItemMediaSide";
+import type { ProductDescriptionsAnyOfItemMediaSide } from './productDescriptionsAnyOfItemMediaSide';
 
 export type ProductDescriptionsAnyOfItem = {
   id: string;

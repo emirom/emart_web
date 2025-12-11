@@ -4,10 +4,10 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { BaseResponse } from "./baseResponse";
-import type { ProductDescriptionListResponseWithMetaDetails } from "./productDescriptionListResponseWithMetaDetails";
-import type { ProductDescriptionListResponseWithMetaFiltersItem } from "./productDescriptionListResponseWithMetaFiltersItem";
-import type { ProductDescription } from "./productDescription";
+import type { BaseResponse } from './baseResponse';
+import type { ProductDescriptionListResponseWithMetaDetails } from './productDescriptionListResponseWithMetaDetails';
+import type { ProductDescriptionListResponseWithMetaFiltersItem } from './productDescriptionListResponseWithMetaFiltersItem';
+import type { ProductDescription } from './productDescription';
 
 /**
  * Response schema for listing product descriptions with pagination and metadata
@@ -18,15 +18,10 @@ export type ProductDescriptionListResponseWithMeta = BaseResponse & {
   filters: ProductDescriptionListResponseWithMetaFiltersItem[];
   /** Array of product descriptions matching the query */
   data: ProductDescription[];
-} & Required<
-    Pick<
-      BaseResponse & {
-        /** Pagination metadata */
-        details?: ProductDescriptionListResponseWithMetaDetails;
-        filters: ProductDescriptionListResponseWithMetaFiltersItem[];
-        /** Array of product descriptions matching the query */
-        data: ProductDescription[];
-      },
-      "filters" | "data"
-    >
-  >;
+} & Required<Pick<BaseResponse & {
+  /** Pagination metadata */
+  details?: ProductDescriptionListResponseWithMetaDetails;
+  filters: ProductDescriptionListResponseWithMetaFiltersItem[];
+  /** Array of product descriptions matching the query */
+  data: ProductDescription[];
+}, 'filters' | 'data'>>;
