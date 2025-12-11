@@ -4,8 +4,8 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { CityListResponseDataItemDeletedAt } from './cityListResponseDataItemDeletedAt';
-import type { CityListResponseDataItemAbb } from './cityListResponseDataItemAbb';
+import type { CityListResponseDataItemDeletedAt } from "./cityListResponseDataItemDeletedAt";
+import type { CityListResponseDataItemAbb } from "./cityListResponseDataItemAbb";
 
 export type CityListResponseDataItem = {
   /** Unique identifier (UUIDv4) */

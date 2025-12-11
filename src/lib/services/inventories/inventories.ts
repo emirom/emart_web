@@ -4,10 +4,7 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import {
-  useMutation,
-  useQuery
-} from '@tanstack/react-query';
+import { useMutation, useQuery } from "@tanstack/react-query";
 import type {
   DataTag,
   DefinedInitialDataOptions,
@@ -20,8 +17,8 @@ import type {
   UseMutationOptions,
   UseMutationResult,
   UseQueryOptions,
-  UseQueryResult
-} from '@tanstack/react-query';
+  UseQueryResult,
+} from "@tanstack/react-query";
 
 import type {
   BaseResponse,
@@ -33,361 +30,545 @@ import type {
   InventoryResponse,
   ListInventoryResponse,
   NotfoundError,
-  UpdateInventoryInput
-} from '../../schemas';
+  UpdateInventoryInput,
+} from "../../schemas";
 
-import { axiosInstance } from '../../configs/axios-instance';
-
-
-
+import { axiosInstance } from "../../configs/axios-instance";
 
 /**
  * Create a new inventory item
  */
 export const postInventories = (
-    createInventoryInput: CreateInventoryInput,
- signal?: AbortSignal
+  createInventoryInput: CreateInventoryInput,
+  signal?: AbortSignal,
 ) => {
-      
-      
-      return axiosInstance<InventoryResponse>(
-      {url: `/inventories`, method: 'POST',
-      headers: {'Content-Type': 'application/json', },
-      data: createInventoryInput, signal
-    },
-      );
-    }
-  
+  return axiosInstance<InventoryResponse>({
+    url: `/inventories`,
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    data: createInventoryInput,
+    signal,
+  });
+};
 
+export const getPostInventoriesMutationOptions = <
+  TError = ErrorResponse | ConflictError | InternalError,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof postInventories>>,
+    TError,
+    { data: CreateInventoryInput },
+    TContext
+  >;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof postInventories>>,
+  TError,
+  { data: CreateInventoryInput },
+  TContext
+> => {
+  const mutationKey = ["postInventories"];
+  const { mutation: mutationOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey } };
 
-export const getPostInventoriesMutationOptions = <TError = ErrorResponse | ConflictError | InternalError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postInventories>>, TError,{data: CreateInventoryInput}, TContext>, }
-): UseMutationOptions<Awaited<ReturnType<typeof postInventories>>, TError,{data: CreateInventoryInput}, TContext> => {
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof postInventories>>,
+    { data: CreateInventoryInput }
+  > = (props) => {
+    const { data } = props ?? {};
 
-const mutationKey = ['postInventories'];
-const {mutation: mutationOptions} = options ?
-      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
-      options
-      : {...options, mutation: {...options.mutation, mutationKey}}
-      : {mutation: { mutationKey, }};
+    return postInventories(data);
+  };
 
-      
+  return { mutationFn, ...mutationOptions };
+};
 
+export type PostInventoriesMutationResult = NonNullable<
+  Awaited<ReturnType<typeof postInventories>>
+>;
+export type PostInventoriesMutationBody = CreateInventoryInput;
+export type PostInventoriesMutationError =
+  | ErrorResponse
+  | ConflictError
+  | InternalError;
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postInventories>>, {data: CreateInventoryInput}> = (props) => {
-          const {data} = props ?? {};
+export const usePostInventories = <
+  TError = ErrorResponse | ConflictError | InternalError,
+  TContext = unknown,
+>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof postInventories>>,
+      TError,
+      { data: CreateInventoryInput },
+      TContext
+    >;
+  },
+  queryClient?: QueryClient,
+): UseMutationResult<
+  Awaited<ReturnType<typeof postInventories>>,
+  TError,
+  { data: CreateInventoryInput },
+  TContext
+> => {
+  const mutationOptions = getPostInventoriesMutationOptions(options);
 
-          return  postInventories(data,)
-        }
-
-        
-
-
-  return  { mutationFn, ...mutationOptions }}
-
-    export type PostInventoriesMutationResult = NonNullable<Awaited<ReturnType<typeof postInventories>>>
-    export type PostInventoriesMutationBody = CreateInventoryInput
-    export type PostInventoriesMutationError = ErrorResponse | ConflictError | InternalError
-
-    export const usePostInventories = <TError = ErrorResponse | ConflictError | InternalError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postInventories>>, TError,{data: CreateInventoryInput}, TContext>, }
- , queryClient?: QueryClient): UseMutationResult<
-        Awaited<ReturnType<typeof postInventories>>,
-        TError,
-        {data: CreateInventoryInput},
-        TContext
-      > => {
-
-      const mutationOptions = getPostInventoriesMutationOptions(options);
-
-      return useMutation(mutationOptions , queryClient);
-    }
-    /**
+  return useMutation(mutationOptions, queryClient);
+};
+/**
  * List all inventory items with pagination and filters
  */
 export const getInventories = (
-    params: GetInventoriesParams,
- signal?: AbortSignal
+  params: GetInventoriesParams,
+  signal?: AbortSignal,
 ) => {
-      
-      
-      return axiosInstance<ListInventoryResponse>(
-      {url: `/inventories`, method: 'GET',
-        params, signal
-    },
-      );
-    }
-  
+  return axiosInstance<ListInventoryResponse>({
+    url: `/inventories`,
+    method: "GET",
+    params,
+    signal,
+  });
+};
 
-export const getGetInventoriesQueryKey = (params?: GetInventoriesParams,) => {
-    return [`/inventories`, ...(params ? [params]: [])] as const;
-    }
+export const getGetInventoriesQueryKey = (params?: GetInventoriesParams) => {
+  return [`/inventories`, ...(params ? [params] : [])] as const;
+};
 
-    
-export const getGetInventoriesQueryOptions = <TData = Awaited<ReturnType<typeof getInventories>>, TError = InternalError>(params: GetInventoriesParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getInventories>>, TError, TData>>, }
+export const getGetInventoriesQueryOptions = <
+  TData = Awaited<ReturnType<typeof getInventories>>,
+  TError = InternalError,
+>(
+  params: GetInventoriesParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof getInventories>>, TError, TData>
+    >;
+  },
 ) => {
+  const { query: queryOptions } = options ?? {};
 
-const {query: queryOptions} = options ?? {};
+  const queryKey = queryOptions?.queryKey ?? getGetInventoriesQueryKey(params);
 
-  const queryKey =  queryOptions?.queryKey ?? getGetInventoriesQueryKey(params);
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getInventories>>> = ({
+    signal,
+  }) => getInventories(params, signal);
 
-  
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof getInventories>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
+};
 
-    const queryFn: QueryFunction<Awaited<ReturnType<typeof getInventories>>> = ({ signal }) => getInventories(params, signal);
+export type GetInventoriesQueryResult = NonNullable<
+  Awaited<ReturnType<typeof getInventories>>
+>;
+export type GetInventoriesQueryError = InternalError;
 
-      
-
-      
-
-   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getInventories>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
-}
-
-export type GetInventoriesQueryResult = NonNullable<Awaited<ReturnType<typeof getInventories>>>
-export type GetInventoriesQueryError = InternalError
-
-
-export function useGetInventories<TData = Awaited<ReturnType<typeof getInventories>>, TError = InternalError>(
- params: GetInventoriesParams, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getInventories>>, TError, TData>> & Pick<
+export function useGetInventories<
+  TData = Awaited<ReturnType<typeof getInventories>>,
+  TError = InternalError,
+>(
+  params: GetInventoriesParams,
+  options: {
+    query: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof getInventories>>, TError, TData>
+    > &
+      Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof getInventories>>,
           TError,
           Awaited<ReturnType<typeof getInventories>>
-        > , 'initialData'
-      >, }
- , queryClient?: QueryClient
-  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetInventories<TData = Awaited<ReturnType<typeof getInventories>>, TError = InternalError>(
- params: GetInventoriesParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getInventories>>, TError, TData>> & Pick<
+        >,
+        "initialData"
+      >;
+  },
+  queryClient?: QueryClient,
+): DefinedUseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+};
+export function useGetInventories<
+  TData = Awaited<ReturnType<typeof getInventories>>,
+  TError = InternalError,
+>(
+  params: GetInventoriesParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof getInventories>>, TError, TData>
+    > &
+      Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof getInventories>>,
           TError,
           Awaited<ReturnType<typeof getInventories>>
-        > , 'initialData'
-      >, }
- , queryClient?: QueryClient
-  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetInventories<TData = Awaited<ReturnType<typeof getInventories>>, TError = InternalError>(
- params: GetInventoriesParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getInventories>>, TError, TData>>, }
- , queryClient?: QueryClient
-  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+        >,
+        "initialData"
+      >;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+};
+export function useGetInventories<
+  TData = Awaited<ReturnType<typeof getInventories>>,
+  TError = InternalError,
+>(
+  params: GetInventoriesParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof getInventories>>, TError, TData>
+    >;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+};
 
-export function useGetInventories<TData = Awaited<ReturnType<typeof getInventories>>, TError = InternalError>(
- params: GetInventoriesParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getInventories>>, TError, TData>>, }
- , queryClient?: QueryClient 
- ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+export function useGetInventories<
+  TData = Awaited<ReturnType<typeof getInventories>>,
+  TError = InternalError,
+>(
+  params: GetInventoriesParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof getInventories>>, TError, TData>
+    >;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+} {
+  const queryOptions = getGetInventoriesQueryOptions(params, options);
 
-  const queryOptions = getGetInventoriesQueryOptions(params,options)
+  const query = useQuery(queryOptions, queryClient) as UseQueryResult<
+    TData,
+    TError
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
 
-  const query = useQuery(queryOptions , queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
-
-  query.queryKey = queryOptions.queryKey ;
+  query.queryKey = queryOptions.queryKey;
 
   return query;
 }
-
-
 
 /**
  * Get a single inventory item by ID
  */
-export const getInventoriesId = (
-    id: string,
- signal?: AbortSignal
+export const getInventoriesId = (id: string, signal?: AbortSignal) => {
+  return axiosInstance<InventoryResponse>({
+    url: `/inventories/${id}`,
+    method: "GET",
+    signal,
+  });
+};
+
+export const getGetInventoriesIdQueryKey = (id?: string) => {
+  return [`/inventories/${id}`] as const;
+};
+
+export const getGetInventoriesIdQueryOptions = <
+  TData = Awaited<ReturnType<typeof getInventoriesId>>,
+  TError = NotfoundError | InternalError,
+>(
+  id: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof getInventoriesId>>,
+        TError,
+        TData
+      >
+    >;
+  },
 ) => {
-      
-      
-      return axiosInstance<InventoryResponse>(
-      {url: `/inventories/${id}`, method: 'GET', signal
-    },
-      );
-    }
-  
+  const { query: queryOptions } = options ?? {};
 
-export const getGetInventoriesIdQueryKey = (id?: string,) => {
-    return [`/inventories/${id}`] as const;
-    }
+  const queryKey = queryOptions?.queryKey ?? getGetInventoriesIdQueryKey(id);
 
-    
-export const getGetInventoriesIdQueryOptions = <TData = Awaited<ReturnType<typeof getInventoriesId>>, TError = NotfoundError | InternalError>(id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getInventoriesId>>, TError, TData>>, }
-) => {
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<typeof getInventoriesId>>
+  > = ({ signal }) => getInventoriesId(id, signal);
 
-const {query: queryOptions} = options ?? {};
+  return {
+    queryKey,
+    queryFn,
+    enabled: !!id,
+    ...queryOptions,
+  } as UseQueryOptions<
+    Awaited<ReturnType<typeof getInventoriesId>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
+};
 
-  const queryKey =  queryOptions?.queryKey ?? getGetInventoriesIdQueryKey(id);
+export type GetInventoriesIdQueryResult = NonNullable<
+  Awaited<ReturnType<typeof getInventoriesId>>
+>;
+export type GetInventoriesIdQueryError = NotfoundError | InternalError;
 
-  
-
-    const queryFn: QueryFunction<Awaited<ReturnType<typeof getInventoriesId>>> = ({ signal }) => getInventoriesId(id, signal);
-
-      
-
-      
-
-   return  { queryKey, queryFn, enabled: !!(id), ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getInventoriesId>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
-}
-
-export type GetInventoriesIdQueryResult = NonNullable<Awaited<ReturnType<typeof getInventoriesId>>>
-export type GetInventoriesIdQueryError = NotfoundError | InternalError
-
-
-export function useGetInventoriesId<TData = Awaited<ReturnType<typeof getInventoriesId>>, TError = NotfoundError | InternalError>(
- id: string, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getInventoriesId>>, TError, TData>> & Pick<
+export function useGetInventoriesId<
+  TData = Awaited<ReturnType<typeof getInventoriesId>>,
+  TError = NotfoundError | InternalError,
+>(
+  id: string,
+  options: {
+    query: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof getInventoriesId>>,
+        TError,
+        TData
+      >
+    > &
+      Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof getInventoriesId>>,
           TError,
           Awaited<ReturnType<typeof getInventoriesId>>
-        > , 'initialData'
-      >, }
- , queryClient?: QueryClient
-  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetInventoriesId<TData = Awaited<ReturnType<typeof getInventoriesId>>, TError = NotfoundError | InternalError>(
- id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getInventoriesId>>, TError, TData>> & Pick<
+        >,
+        "initialData"
+      >;
+  },
+  queryClient?: QueryClient,
+): DefinedUseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+};
+export function useGetInventoriesId<
+  TData = Awaited<ReturnType<typeof getInventoriesId>>,
+  TError = NotfoundError | InternalError,
+>(
+  id: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof getInventoriesId>>,
+        TError,
+        TData
+      >
+    > &
+      Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof getInventoriesId>>,
           TError,
           Awaited<ReturnType<typeof getInventoriesId>>
-        > , 'initialData'
-      >, }
- , queryClient?: QueryClient
-  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetInventoriesId<TData = Awaited<ReturnType<typeof getInventoriesId>>, TError = NotfoundError | InternalError>(
- id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getInventoriesId>>, TError, TData>>, }
- , queryClient?: QueryClient
-  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+        >,
+        "initialData"
+      >;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+};
+export function useGetInventoriesId<
+  TData = Awaited<ReturnType<typeof getInventoriesId>>,
+  TError = NotfoundError | InternalError,
+>(
+  id: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof getInventoriesId>>,
+        TError,
+        TData
+      >
+    >;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+};
 
-export function useGetInventoriesId<TData = Awaited<ReturnType<typeof getInventoriesId>>, TError = NotfoundError | InternalError>(
- id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getInventoriesId>>, TError, TData>>, }
- , queryClient?: QueryClient 
- ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+export function useGetInventoriesId<
+  TData = Awaited<ReturnType<typeof getInventoriesId>>,
+  TError = NotfoundError | InternalError,
+>(
+  id: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof getInventoriesId>>,
+        TError,
+        TData
+      >
+    >;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+} {
+  const queryOptions = getGetInventoriesIdQueryOptions(id, options);
 
-  const queryOptions = getGetInventoriesIdQueryOptions(id,options)
+  const query = useQuery(queryOptions, queryClient) as UseQueryResult<
+    TData,
+    TError
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
 
-  const query = useQuery(queryOptions , queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
-
-  query.queryKey = queryOptions.queryKey ;
+  query.queryKey = queryOptions.queryKey;
 
   return query;
 }
-
-
 
 /**
  * Update an inventory item
  */
 export const patchInventoriesId = (
-    id: string,
-    updateInventoryInput: UpdateInventoryInput,
- ) => {
-      
-      
-      return axiosInstance<InventoryResponse>(
-      {url: `/inventories/${id}`, method: 'PATCH',
-      headers: {'Content-Type': 'application/json', },
-      data: updateInventoryInput
-    },
-      );
-    }
-  
+  id: string,
+  updateInventoryInput: UpdateInventoryInput,
+) => {
+  return axiosInstance<InventoryResponse>({
+    url: `/inventories/${id}`,
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    data: updateInventoryInput,
+  });
+};
 
+export const getPatchInventoriesIdMutationOptions = <
+  TError = ErrorResponse | NotfoundError | ConflictError | InternalError,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof patchInventoriesId>>,
+    TError,
+    { id: string; data: UpdateInventoryInput },
+    TContext
+  >;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof patchInventoriesId>>,
+  TError,
+  { id: string; data: UpdateInventoryInput },
+  TContext
+> => {
+  const mutationKey = ["patchInventoriesId"];
+  const { mutation: mutationOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey } };
 
-export const getPatchInventoriesIdMutationOptions = <TError = ErrorResponse | NotfoundError | ConflictError | InternalError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof patchInventoriesId>>, TError,{id: string;data: UpdateInventoryInput}, TContext>, }
-): UseMutationOptions<Awaited<ReturnType<typeof patchInventoriesId>>, TError,{id: string;data: UpdateInventoryInput}, TContext> => {
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof patchInventoriesId>>,
+    { id: string; data: UpdateInventoryInput }
+  > = (props) => {
+    const { id, data } = props ?? {};
 
-const mutationKey = ['patchInventoriesId'];
-const {mutation: mutationOptions} = options ?
-      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
-      options
-      : {...options, mutation: {...options.mutation, mutationKey}}
-      : {mutation: { mutationKey, }};
+    return patchInventoriesId(id, data);
+  };
 
-      
+  return { mutationFn, ...mutationOptions };
+};
 
+export type PatchInventoriesIdMutationResult = NonNullable<
+  Awaited<ReturnType<typeof patchInventoriesId>>
+>;
+export type PatchInventoriesIdMutationBody = UpdateInventoryInput;
+export type PatchInventoriesIdMutationError =
+  | ErrorResponse
+  | NotfoundError
+  | ConflictError
+  | InternalError;
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof patchInventoriesId>>, {id: string;data: UpdateInventoryInput}> = (props) => {
-          const {id,data} = props ?? {};
+export const usePatchInventoriesId = <
+  TError = ErrorResponse | NotfoundError | ConflictError | InternalError,
+  TContext = unknown,
+>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof patchInventoriesId>>,
+      TError,
+      { id: string; data: UpdateInventoryInput },
+      TContext
+    >;
+  },
+  queryClient?: QueryClient,
+): UseMutationResult<
+  Awaited<ReturnType<typeof patchInventoriesId>>,
+  TError,
+  { id: string; data: UpdateInventoryInput },
+  TContext
+> => {
+  const mutationOptions = getPatchInventoriesIdMutationOptions(options);
 
-          return  patchInventoriesId(id,data,)
-        }
-
-        
-
-
-  return  { mutationFn, ...mutationOptions }}
-
-    export type PatchInventoriesIdMutationResult = NonNullable<Awaited<ReturnType<typeof patchInventoriesId>>>
-    export type PatchInventoriesIdMutationBody = UpdateInventoryInput
-    export type PatchInventoriesIdMutationError = ErrorResponse | NotfoundError | ConflictError | InternalError
-
-    export const usePatchInventoriesId = <TError = ErrorResponse | NotfoundError | ConflictError | InternalError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof patchInventoriesId>>, TError,{id: string;data: UpdateInventoryInput}, TContext>, }
- , queryClient?: QueryClient): UseMutationResult<
-        Awaited<ReturnType<typeof patchInventoriesId>>,
-        TError,
-        {id: string;data: UpdateInventoryInput},
-        TContext
-      > => {
-
-      const mutationOptions = getPatchInventoriesIdMutationOptions(options);
-
-      return useMutation(mutationOptions , queryClient);
-    }
-    /**
+  return useMutation(mutationOptions, queryClient);
+};
+/**
  * Soft delete an inventory item
  */
-export const deleteInventoriesId = (
-    id: string,
- ) => {
-      
-      
-      return axiosInstance<BaseResponse>(
-      {url: `/inventories/${id}`, method: 'DELETE'
-    },
-      );
-    }
-  
+export const deleteInventoriesId = (id: string) => {
+  return axiosInstance<BaseResponse>({
+    url: `/inventories/${id}`,
+    method: "DELETE",
+  });
+};
 
+export const getDeleteInventoriesIdMutationOptions = <
+  TError = NotfoundError | InternalError,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof deleteInventoriesId>>,
+    TError,
+    { id: string },
+    TContext
+  >;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof deleteInventoriesId>>,
+  TError,
+  { id: string },
+  TContext
+> => {
+  const mutationKey = ["deleteInventoriesId"];
+  const { mutation: mutationOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey } };
 
-export const getDeleteInventoriesIdMutationOptions = <TError = NotfoundError | InternalError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteInventoriesId>>, TError,{id: string}, TContext>, }
-): UseMutationOptions<Awaited<ReturnType<typeof deleteInventoriesId>>, TError,{id: string}, TContext> => {
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof deleteInventoriesId>>,
+    { id: string }
+  > = (props) => {
+    const { id } = props ?? {};
 
-const mutationKey = ['deleteInventoriesId'];
-const {mutation: mutationOptions} = options ?
-      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
-      options
-      : {...options, mutation: {...options.mutation, mutationKey}}
-      : {mutation: { mutationKey, }};
+    return deleteInventoriesId(id);
+  };
 
-      
+  return { mutationFn, ...mutationOptions };
+};
 
+export type DeleteInventoriesIdMutationResult = NonNullable<
+  Awaited<ReturnType<typeof deleteInventoriesId>>
+>;
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteInventoriesId>>, {id: string}> = (props) => {
-          const {id} = props ?? {};
+export type DeleteInventoriesIdMutationError = NotfoundError | InternalError;
 
-          return  deleteInventoriesId(id,)
-        }
+export const useDeleteInventoriesId = <
+  TError = NotfoundError | InternalError,
+  TContext = unknown,
+>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof deleteInventoriesId>>,
+      TError,
+      { id: string },
+      TContext
+    >;
+  },
+  queryClient?: QueryClient,
+): UseMutationResult<
+  Awaited<ReturnType<typeof deleteInventoriesId>>,
+  TError,
+  { id: string },
+  TContext
+> => {
+  const mutationOptions = getDeleteInventoriesIdMutationOptions(options);
 
-        
-
-
-  return  { mutationFn, ...mutationOptions }}
-
-    export type DeleteInventoriesIdMutationResult = NonNullable<Awaited<ReturnType<typeof deleteInventoriesId>>>
-    
-    export type DeleteInventoriesIdMutationError = NotfoundError | InternalError
-
-    export const useDeleteInventoriesId = <TError = NotfoundError | InternalError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteInventoriesId>>, TError,{id: string}, TContext>, }
- , queryClient?: QueryClient): UseMutationResult<
-        Awaited<ReturnType<typeof deleteInventoriesId>>,
-        TError,
-        {id: string},
-        TContext
-      > => {
-
-      const mutationOptions = getDeleteInventoriesIdMutationOptions(options);
-
-      return useMutation(mutationOptions , queryClient);
-    }
-    
+  return useMutation(mutationOptions, queryClient);
+};

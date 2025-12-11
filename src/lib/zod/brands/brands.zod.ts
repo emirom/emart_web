@@ -4,10 +4,7 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import {
-  z as zod
-} from 'zod';
-
+import { z as zod } from "zod";
 
 /**
  * Create a new brand
@@ -20,63 +17,119 @@ export const postBrandsBodyLogoUrlMaxOne = 1000;
 export const postBrandsBodyWebsiteMaxOne = 1000;
 export const postBrandsBodyDescriptionMaxOne = 200;
 
-
 export const postBrandsBody = zod.object({
-  "name": zod.coerce.string().min(postBrandsBodyNameMin).max(postBrandsBodyNameMax).describe('Brand name in native language'),
-  "enName": zod.union([zod.coerce.string().max(postBrandsBodyEnNameMaxOne),zod.null()]).optional().describe('English brand name'),
-  "logoUrl": zod.union([zod.url().max(postBrandsBodyLogoUrlMaxOne),zod.null()]).optional().describe('Logo image URL'),
-  "website": zod.union([zod.url().max(postBrandsBodyWebsiteMaxOne),zod.null()]).optional().describe('Official website'),
-  "description": zod.union([zod.coerce.string().max(postBrandsBodyDescriptionMaxOne),zod.null()]).optional().describe('Brand description'),
-  "sortOrder": zod.coerce.number().describe('Sorting priority'),
-  "isActive": zod.coerce.boolean().describe('Filter by active status')
-})
+  name: zod.coerce
+    .string()
+    .min(postBrandsBodyNameMin)
+    .max(postBrandsBodyNameMax)
+    .describe("Brand name in native language"),
+  enName: zod
+    .union([zod.coerce.string().max(postBrandsBodyEnNameMaxOne), zod.null()])
+    .optional()
+    .describe("English brand name"),
+  logoUrl: zod
+    .union([zod.url().max(postBrandsBodyLogoUrlMaxOne), zod.null()])
+    .optional()
+    .describe("Logo image URL"),
+  website: zod
+    .union([zod.url().max(postBrandsBodyWebsiteMaxOne), zod.null()])
+    .optional()
+    .describe("Official website"),
+  description: zod
+    .union([
+      zod.coerce.string().max(postBrandsBodyDescriptionMaxOne),
+      zod.null(),
+    ])
+    .optional()
+    .describe("Brand description"),
+  sortOrder: zod.coerce.number().describe("Sorting priority"),
+  isActive: zod.coerce.boolean().describe("Filter by active status"),
+});
 
 /**
  * Get all brands with pagination and filters
  */
 export const getBrandsQueryFieldDefaultOne = "createdAt";
 export const getBrandsQueryFieldMaxOne = 200;
-export const getBrandsQueryOrderDefaultOne = "desc";export const getBrandsQuerySkipMin = 0;
+export const getBrandsQueryOrderDefaultOne = "desc";
+export const getBrandsQuerySkipMin = 0;
 export const getBrandsQueryLimitMax = 20;
 export const getBrandsQueryNameMaxOne = 200;
 export const getBrandsQueryEnNameMaxOne = 200;
 export const getBrandsQueryWebsiteMaxOne = 200;
 
-
 export const getBrandsQueryParams = zod.object({
-  "field": zod.union([zod.coerce.string().max(getBrandsQueryFieldMaxOne),zod.null()]).optional().describe('Field to sort by'),
-  "order": zod.union([zod.enum(['asc', 'desc']),zod.null()]).optional().describe('Sort order'),
-  "skip": zod.coerce.number().min(getBrandsQuerySkipMin).describe('Number of records to skip'),
-  "limit": zod.coerce.number().min(1).max(getBrandsQueryLimitMax).describe('Maximum number of records to return'),
-  "deletedAt": zod.union([zod.iso.datetime({}),zod.null()]).optional().describe('Optional date input, usually null'),
-  "name": zod.union([zod.coerce.string().max(getBrandsQueryNameMaxOne),zod.null()]).optional().describe('Filter by brand name'),
-  "enName": zod.union([zod.coerce.string().max(getBrandsQueryEnNameMaxOne),zod.null()]).optional().describe('Filter by English name'),
-  "website": zod.union([zod.coerce.string().max(getBrandsQueryWebsiteMaxOne),zod.null()]).optional().describe('Filter by website'),
-  "sortOrder": zod.coerce.number().optional().describe('Filter by sort order'),
-  "isActive": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Filter by active status')
-})
+  field: zod
+    .union([zod.coerce.string().max(getBrandsQueryFieldMaxOne), zod.null()])
+    .optional()
+    .describe("Field to sort by"),
+  order: zod
+    .union([zod.enum(["asc", "desc"]), zod.null()])
+    .optional()
+    .describe("Sort order"),
+  skip: zod.coerce
+    .number()
+    .min(getBrandsQuerySkipMin)
+    .describe("Number of records to skip"),
+  limit: zod.coerce
+    .number()
+    .min(1)
+    .max(getBrandsQueryLimitMax)
+    .describe("Maximum number of records to return"),
+  deletedAt: zod
+    .union([zod.iso.datetime({}), zod.null()])
+    .optional()
+    .describe("Optional date input, usually null"),
+  name: zod
+    .union([zod.coerce.string().max(getBrandsQueryNameMaxOne), zod.null()])
+    .optional()
+    .describe("Filter by brand name"),
+  enName: zod
+    .union([zod.coerce.string().max(getBrandsQueryEnNameMaxOne), zod.null()])
+    .optional()
+    .describe("Filter by English name"),
+  website: zod
+    .union([zod.coerce.string().max(getBrandsQueryWebsiteMaxOne), zod.null()])
+    .optional()
+    .describe("Filter by website"),
+  sortOrder: zod.coerce.number().optional().describe("Filter by sort order"),
+  isActive: zod
+    .union([zod.coerce.boolean(), zod.null()])
+    .optional()
+    .describe("Filter by active status"),
+});
 
-export const getBrandsResponse = zod.object({
-  "success": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Operation status')
-}).describe('Standard API response format')
+export const getBrandsResponse = zod
+  .object({
+    success: zod
+      .union([zod.coerce.boolean(), zod.null()])
+      .optional()
+      .describe("Operation status"),
+  })
+  .describe("Standard API response format");
 
 /**
  * Get a single brand by ID
  */
 export const getBrandsIdParams = zod.object({
-  "id": zod.uuid().describe('Brand ID')
-})
+  id: zod.uuid().describe("Brand ID"),
+});
 
-export const getBrandsIdResponse = zod.object({
-  "success": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Operation status')
-}).describe('Standard API response format')
+export const getBrandsIdResponse = zod
+  .object({
+    success: zod
+      .union([zod.coerce.boolean(), zod.null()])
+      .optional()
+      .describe("Operation status"),
+  })
+  .describe("Standard API response format");
 
 /**
  * Update a brand
  */
 export const patchBrandsIdParams = zod.object({
-  "id": zod.uuid().describe('Brand ID')
-})
+  id: zod.uuid().describe("Brand ID"),
+});
 
 export const patchBrandsIdBodyNameMin = 2;
 
@@ -86,25 +139,48 @@ export const patchBrandsIdBodyLogoUrlMaxOne = 1000;
 export const patchBrandsIdBodyWebsiteMaxOne = 1000;
 export const patchBrandsIdBodyDescriptionMaxOne = 200;
 
-
 export const patchBrandsIdBody = zod.object({
-  "name": zod.coerce.string().min(patchBrandsIdBodyNameMin).max(patchBrandsIdBodyNameMax).optional().describe('Brand name in native language'),
-  "enName": zod.union([zod.coerce.string().max(patchBrandsIdBodyEnNameMaxOne),zod.null()]).optional().describe('English brand name'),
-  "logoUrl": zod.union([zod.url().max(patchBrandsIdBodyLogoUrlMaxOne),zod.null()]).optional().describe('Logo image URL'),
-  "website": zod.union([zod.url().max(patchBrandsIdBodyWebsiteMaxOne),zod.null()]).optional().describe('Official website'),
-  "description": zod.union([zod.coerce.string().max(patchBrandsIdBodyDescriptionMaxOne),zod.null()]).optional().describe('Brand description'),
-  "sortOrder": zod.coerce.number().optional().describe('Sorting priority'),
-  "isActive": zod.coerce.boolean().optional().describe('Filter by active status')
-})
+  name: zod.coerce
+    .string()
+    .min(patchBrandsIdBodyNameMin)
+    .max(patchBrandsIdBodyNameMax)
+    .optional()
+    .describe("Brand name in native language"),
+  enName: zod
+    .union([zod.coerce.string().max(patchBrandsIdBodyEnNameMaxOne), zod.null()])
+    .optional()
+    .describe("English brand name"),
+  logoUrl: zod
+    .union([zod.url().max(patchBrandsIdBodyLogoUrlMaxOne), zod.null()])
+    .optional()
+    .describe("Logo image URL"),
+  website: zod
+    .union([zod.url().max(patchBrandsIdBodyWebsiteMaxOne), zod.null()])
+    .optional()
+    .describe("Official website"),
+  description: zod
+    .union([
+      zod.coerce.string().max(patchBrandsIdBodyDescriptionMaxOne),
+      zod.null(),
+    ])
+    .optional()
+    .describe("Brand description"),
+  sortOrder: zod.coerce.number().optional().describe("Sorting priority"),
+  isActive: zod.coerce.boolean().optional().describe("Filter by active status"),
+});
 
-export const patchBrandsIdResponse = zod.object({
-  "success": zod.union([zod.coerce.boolean(),zod.null()]).optional().describe('Operation status')
-}).describe('Standard API response format')
+export const patchBrandsIdResponse = zod
+  .object({
+    success: zod
+      .union([zod.coerce.boolean(), zod.null()])
+      .optional()
+      .describe("Operation status"),
+  })
+  .describe("Standard API response format");
 
 /**
  * Delete a brand
  */
 export const deleteBrandsIdParams = zod.object({
-  "id": zod.uuid().describe('Brand ID')
-})
-
+  id: zod.uuid().describe("Brand ID"),
+});

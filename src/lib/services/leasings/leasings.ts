@@ -4,10 +4,7 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import {
-  useMutation,
-  useQuery
-} from '@tanstack/react-query';
+import { useMutation, useQuery } from "@tanstack/react-query";
 import type {
   DataTag,
   DefinedInitialDataOptions,
@@ -20,8 +17,8 @@ import type {
   UseMutationOptions,
   UseMutationResult,
   UseQueryOptions,
-  UseQueryResult
-} from '@tanstack/react-query';
+  UseQueryResult,
+} from "@tanstack/react-query";
 
 import type {
   BaseResponse,
@@ -33,352 +30,509 @@ import type {
   LeasingListResponse,
   LeasingResponse,
   NotfoundError,
-  UpdateLeasingInput
-} from '../../schemas';
+  UpdateLeasingInput,
+} from "../../schemas";
 
-import { axiosInstance } from '../../configs/axios-instance';
-
-
-
+import { axiosInstance } from "../../configs/axios-instance";
 
 /**
  * Create a new leasing plan
  */
 export const postLeasings = (
-    createLeasingInput: CreateLeasingInput,
- signal?: AbortSignal
+  createLeasingInput: CreateLeasingInput,
+  signal?: AbortSignal,
 ) => {
-      
-      
-      return axiosInstance<LeasingResponse>(
-      {url: `/leasings`, method: 'POST',
-      headers: {'Content-Type': 'application/json', },
-      data: createLeasingInput, signal
-    },
-      );
-    }
-  
+  return axiosInstance<LeasingResponse>({
+    url: `/leasings`,
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    data: createLeasingInput,
+    signal,
+  });
+};
 
+export const getPostLeasingsMutationOptions = <
+  TError = ErrorResponse | ConflictError,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof postLeasings>>,
+    TError,
+    { data: CreateLeasingInput },
+    TContext
+  >;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof postLeasings>>,
+  TError,
+  { data: CreateLeasingInput },
+  TContext
+> => {
+  const mutationKey = ["postLeasings"];
+  const { mutation: mutationOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey } };
 
-export const getPostLeasingsMutationOptions = <TError = ErrorResponse | ConflictError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postLeasings>>, TError,{data: CreateLeasingInput}, TContext>, }
-): UseMutationOptions<Awaited<ReturnType<typeof postLeasings>>, TError,{data: CreateLeasingInput}, TContext> => {
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof postLeasings>>,
+    { data: CreateLeasingInput }
+  > = (props) => {
+    const { data } = props ?? {};
 
-const mutationKey = ['postLeasings'];
-const {mutation: mutationOptions} = options ?
-      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
-      options
-      : {...options, mutation: {...options.mutation, mutationKey}}
-      : {mutation: { mutationKey, }};
+    return postLeasings(data);
+  };
 
-      
+  return { mutationFn, ...mutationOptions };
+};
 
+export type PostLeasingsMutationResult = NonNullable<
+  Awaited<ReturnType<typeof postLeasings>>
+>;
+export type PostLeasingsMutationBody = CreateLeasingInput;
+export type PostLeasingsMutationError = ErrorResponse | ConflictError;
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postLeasings>>, {data: CreateLeasingInput}> = (props) => {
-          const {data} = props ?? {};
+export const usePostLeasings = <
+  TError = ErrorResponse | ConflictError,
+  TContext = unknown,
+>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof postLeasings>>,
+      TError,
+      { data: CreateLeasingInput },
+      TContext
+    >;
+  },
+  queryClient?: QueryClient,
+): UseMutationResult<
+  Awaited<ReturnType<typeof postLeasings>>,
+  TError,
+  { data: CreateLeasingInput },
+  TContext
+> => {
+  const mutationOptions = getPostLeasingsMutationOptions(options);
 
-          return  postLeasings(data,)
-        }
-
-        
-
-
-  return  { mutationFn, ...mutationOptions }}
-
-    export type PostLeasingsMutationResult = NonNullable<Awaited<ReturnType<typeof postLeasings>>>
-    export type PostLeasingsMutationBody = CreateLeasingInput
-    export type PostLeasingsMutationError = ErrorResponse | ConflictError
-
-    export const usePostLeasings = <TError = ErrorResponse | ConflictError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postLeasings>>, TError,{data: CreateLeasingInput}, TContext>, }
- , queryClient?: QueryClient): UseMutationResult<
-        Awaited<ReturnType<typeof postLeasings>>,
-        TError,
-        {data: CreateLeasingInput},
-        TContext
-      > => {
-
-      const mutationOptions = getPostLeasingsMutationOptions(options);
-
-      return useMutation(mutationOptions , queryClient);
-    }
-    /**
+  return useMutation(mutationOptions, queryClient);
+};
+/**
  * Get all leasing plans with pagination and filtering
  */
 export const getLeasings = (
-    params: GetLeasingsParams,
- signal?: AbortSignal
+  params: GetLeasingsParams,
+  signal?: AbortSignal,
 ) => {
-      
-      
-      return axiosInstance<LeasingListResponse>(
-      {url: `/leasings`, method: 'GET',
-        params, signal
-    },
-      );
-    }
-  
+  return axiosInstance<LeasingListResponse>({
+    url: `/leasings`,
+    method: "GET",
+    params,
+    signal,
+  });
+};
 
-export const getGetLeasingsQueryKey = (params?: GetLeasingsParams,) => {
-    return [`/leasings`, ...(params ? [params]: [])] as const;
-    }
+export const getGetLeasingsQueryKey = (params?: GetLeasingsParams) => {
+  return [`/leasings`, ...(params ? [params] : [])] as const;
+};
 
-    
-export const getGetLeasingsQueryOptions = <TData = Awaited<ReturnType<typeof getLeasings>>, TError = InternalError>(params: GetLeasingsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getLeasings>>, TError, TData>>, }
+export const getGetLeasingsQueryOptions = <
+  TData = Awaited<ReturnType<typeof getLeasings>>,
+  TError = InternalError,
+>(
+  params: GetLeasingsParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof getLeasings>>, TError, TData>
+    >;
+  },
 ) => {
+  const { query: queryOptions } = options ?? {};
 
-const {query: queryOptions} = options ?? {};
+  const queryKey = queryOptions?.queryKey ?? getGetLeasingsQueryKey(params);
 
-  const queryKey =  queryOptions?.queryKey ?? getGetLeasingsQueryKey(params);
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getLeasings>>> = ({
+    signal,
+  }) => getLeasings(params, signal);
 
-  
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof getLeasings>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
+};
 
-    const queryFn: QueryFunction<Awaited<ReturnType<typeof getLeasings>>> = ({ signal }) => getLeasings(params, signal);
+export type GetLeasingsQueryResult = NonNullable<
+  Awaited<ReturnType<typeof getLeasings>>
+>;
+export type GetLeasingsQueryError = InternalError;
 
-      
-
-      
-
-   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getLeasings>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
-}
-
-export type GetLeasingsQueryResult = NonNullable<Awaited<ReturnType<typeof getLeasings>>>
-export type GetLeasingsQueryError = InternalError
-
-
-export function useGetLeasings<TData = Awaited<ReturnType<typeof getLeasings>>, TError = InternalError>(
- params: GetLeasingsParams, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getLeasings>>, TError, TData>> & Pick<
+export function useGetLeasings<
+  TData = Awaited<ReturnType<typeof getLeasings>>,
+  TError = InternalError,
+>(
+  params: GetLeasingsParams,
+  options: {
+    query: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof getLeasings>>, TError, TData>
+    > &
+      Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof getLeasings>>,
           TError,
           Awaited<ReturnType<typeof getLeasings>>
-        > , 'initialData'
-      >, }
- , queryClient?: QueryClient
-  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetLeasings<TData = Awaited<ReturnType<typeof getLeasings>>, TError = InternalError>(
- params: GetLeasingsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getLeasings>>, TError, TData>> & Pick<
+        >,
+        "initialData"
+      >;
+  },
+  queryClient?: QueryClient,
+): DefinedUseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+};
+export function useGetLeasings<
+  TData = Awaited<ReturnType<typeof getLeasings>>,
+  TError = InternalError,
+>(
+  params: GetLeasingsParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof getLeasings>>, TError, TData>
+    > &
+      Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof getLeasings>>,
           TError,
           Awaited<ReturnType<typeof getLeasings>>
-        > , 'initialData'
-      >, }
- , queryClient?: QueryClient
-  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetLeasings<TData = Awaited<ReturnType<typeof getLeasings>>, TError = InternalError>(
- params: GetLeasingsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getLeasings>>, TError, TData>>, }
- , queryClient?: QueryClient
-  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+        >,
+        "initialData"
+      >;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+};
+export function useGetLeasings<
+  TData = Awaited<ReturnType<typeof getLeasings>>,
+  TError = InternalError,
+>(
+  params: GetLeasingsParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof getLeasings>>, TError, TData>
+    >;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+};
 
-export function useGetLeasings<TData = Awaited<ReturnType<typeof getLeasings>>, TError = InternalError>(
- params: GetLeasingsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getLeasings>>, TError, TData>>, }
- , queryClient?: QueryClient 
- ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+export function useGetLeasings<
+  TData = Awaited<ReturnType<typeof getLeasings>>,
+  TError = InternalError,
+>(
+  params: GetLeasingsParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof getLeasings>>, TError, TData>
+    >;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+} {
+  const queryOptions = getGetLeasingsQueryOptions(params, options);
 
-  const queryOptions = getGetLeasingsQueryOptions(params,options)
+  const query = useQuery(queryOptions, queryClient) as UseQueryResult<
+    TData,
+    TError
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
 
-  const query = useQuery(queryOptions , queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
-
-  query.queryKey = queryOptions.queryKey ;
+  query.queryKey = queryOptions.queryKey;
 
   return query;
 }
 
+export const getLeasingsId = (id: string, signal?: AbortSignal) => {
+  return axiosInstance<LeasingResponse>({
+    url: `/leasings/${id}`,
+    method: "GET",
+    signal,
+  });
+};
 
+export const getGetLeasingsIdQueryKey = (id?: string) => {
+  return [`/leasings/${id}`] as const;
+};
 
-export const getLeasingsId = (
-    id: string,
- signal?: AbortSignal
+export const getGetLeasingsIdQueryOptions = <
+  TData = Awaited<ReturnType<typeof getLeasingsId>>,
+  TError = NotfoundError,
+>(
+  id: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof getLeasingsId>>, TError, TData>
+    >;
+  },
 ) => {
-      
-      
-      return axiosInstance<LeasingResponse>(
-      {url: `/leasings/${id}`, method: 'GET', signal
-    },
-      );
-    }
-  
+  const { query: queryOptions } = options ?? {};
 
-export const getGetLeasingsIdQueryKey = (id?: string,) => {
-    return [`/leasings/${id}`] as const;
-    }
+  const queryKey = queryOptions?.queryKey ?? getGetLeasingsIdQueryKey(id);
 
-    
-export const getGetLeasingsIdQueryOptions = <TData = Awaited<ReturnType<typeof getLeasingsId>>, TError = NotfoundError>(id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getLeasingsId>>, TError, TData>>, }
-) => {
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getLeasingsId>>> = ({
+    signal,
+  }) => getLeasingsId(id, signal);
 
-const {query: queryOptions} = options ?? {};
+  return {
+    queryKey,
+    queryFn,
+    enabled: !!id,
+    ...queryOptions,
+  } as UseQueryOptions<
+    Awaited<ReturnType<typeof getLeasingsId>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
+};
 
-  const queryKey =  queryOptions?.queryKey ?? getGetLeasingsIdQueryKey(id);
+export type GetLeasingsIdQueryResult = NonNullable<
+  Awaited<ReturnType<typeof getLeasingsId>>
+>;
+export type GetLeasingsIdQueryError = NotfoundError;
 
-  
-
-    const queryFn: QueryFunction<Awaited<ReturnType<typeof getLeasingsId>>> = ({ signal }) => getLeasingsId(id, signal);
-
-      
-
-      
-
-   return  { queryKey, queryFn, enabled: !!(id), ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getLeasingsId>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
-}
-
-export type GetLeasingsIdQueryResult = NonNullable<Awaited<ReturnType<typeof getLeasingsId>>>
-export type GetLeasingsIdQueryError = NotfoundError
-
-
-export function useGetLeasingsId<TData = Awaited<ReturnType<typeof getLeasingsId>>, TError = NotfoundError>(
- id: string, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getLeasingsId>>, TError, TData>> & Pick<
+export function useGetLeasingsId<
+  TData = Awaited<ReturnType<typeof getLeasingsId>>,
+  TError = NotfoundError,
+>(
+  id: string,
+  options: {
+    query: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof getLeasingsId>>, TError, TData>
+    > &
+      Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof getLeasingsId>>,
           TError,
           Awaited<ReturnType<typeof getLeasingsId>>
-        > , 'initialData'
-      >, }
- , queryClient?: QueryClient
-  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetLeasingsId<TData = Awaited<ReturnType<typeof getLeasingsId>>, TError = NotfoundError>(
- id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getLeasingsId>>, TError, TData>> & Pick<
+        >,
+        "initialData"
+      >;
+  },
+  queryClient?: QueryClient,
+): DefinedUseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+};
+export function useGetLeasingsId<
+  TData = Awaited<ReturnType<typeof getLeasingsId>>,
+  TError = NotfoundError,
+>(
+  id: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof getLeasingsId>>, TError, TData>
+    > &
+      Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof getLeasingsId>>,
           TError,
           Awaited<ReturnType<typeof getLeasingsId>>
-        > , 'initialData'
-      >, }
- , queryClient?: QueryClient
-  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetLeasingsId<TData = Awaited<ReturnType<typeof getLeasingsId>>, TError = NotfoundError>(
- id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getLeasingsId>>, TError, TData>>, }
- , queryClient?: QueryClient
-  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+        >,
+        "initialData"
+      >;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+};
+export function useGetLeasingsId<
+  TData = Awaited<ReturnType<typeof getLeasingsId>>,
+  TError = NotfoundError,
+>(
+  id: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof getLeasingsId>>, TError, TData>
+    >;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+};
 
-export function useGetLeasingsId<TData = Awaited<ReturnType<typeof getLeasingsId>>, TError = NotfoundError>(
- id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getLeasingsId>>, TError, TData>>, }
- , queryClient?: QueryClient 
- ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+export function useGetLeasingsId<
+  TData = Awaited<ReturnType<typeof getLeasingsId>>,
+  TError = NotfoundError,
+>(
+  id: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof getLeasingsId>>, TError, TData>
+    >;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+} {
+  const queryOptions = getGetLeasingsIdQueryOptions(id, options);
 
-  const queryOptions = getGetLeasingsIdQueryOptions(id,options)
+  const query = useQuery(queryOptions, queryClient) as UseQueryResult<
+    TData,
+    TError
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
 
-  const query = useQuery(queryOptions , queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
-
-  query.queryKey = queryOptions.queryKey ;
+  query.queryKey = queryOptions.queryKey;
 
   return query;
 }
-
-
 
 export const patchLeasingsId = (
-    id: string,
-    updateLeasingInput: UpdateLeasingInput,
- ) => {
-      
-      
-      return axiosInstance<LeasingResponse>(
-      {url: `/leasings/${id}`, method: 'PATCH',
-      headers: {'Content-Type': 'application/json', },
-      data: updateLeasingInput
-    },
-      );
-    }
-  
+  id: string,
+  updateLeasingInput: UpdateLeasingInput,
+) => {
+  return axiosInstance<LeasingResponse>({
+    url: `/leasings/${id}`,
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    data: updateLeasingInput,
+  });
+};
 
+export const getPatchLeasingsIdMutationOptions = <
+  TError = ErrorResponse | NotfoundError,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof patchLeasingsId>>,
+    TError,
+    { id: string; data: UpdateLeasingInput },
+    TContext
+  >;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof patchLeasingsId>>,
+  TError,
+  { id: string; data: UpdateLeasingInput },
+  TContext
+> => {
+  const mutationKey = ["patchLeasingsId"];
+  const { mutation: mutationOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey } };
 
-export const getPatchLeasingsIdMutationOptions = <TError = ErrorResponse | NotfoundError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof patchLeasingsId>>, TError,{id: string;data: UpdateLeasingInput}, TContext>, }
-): UseMutationOptions<Awaited<ReturnType<typeof patchLeasingsId>>, TError,{id: string;data: UpdateLeasingInput}, TContext> => {
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof patchLeasingsId>>,
+    { id: string; data: UpdateLeasingInput }
+  > = (props) => {
+    const { id, data } = props ?? {};
 
-const mutationKey = ['patchLeasingsId'];
-const {mutation: mutationOptions} = options ?
-      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
-      options
-      : {...options, mutation: {...options.mutation, mutationKey}}
-      : {mutation: { mutationKey, }};
+    return patchLeasingsId(id, data);
+  };
 
-      
+  return { mutationFn, ...mutationOptions };
+};
 
+export type PatchLeasingsIdMutationResult = NonNullable<
+  Awaited<ReturnType<typeof patchLeasingsId>>
+>;
+export type PatchLeasingsIdMutationBody = UpdateLeasingInput;
+export type PatchLeasingsIdMutationError = ErrorResponse | NotfoundError;
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof patchLeasingsId>>, {id: string;data: UpdateLeasingInput}> = (props) => {
-          const {id,data} = props ?? {};
+export const usePatchLeasingsId = <
+  TError = ErrorResponse | NotfoundError,
+  TContext = unknown,
+>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof patchLeasingsId>>,
+      TError,
+      { id: string; data: UpdateLeasingInput },
+      TContext
+    >;
+  },
+  queryClient?: QueryClient,
+): UseMutationResult<
+  Awaited<ReturnType<typeof patchLeasingsId>>,
+  TError,
+  { id: string; data: UpdateLeasingInput },
+  TContext
+> => {
+  const mutationOptions = getPatchLeasingsIdMutationOptions(options);
 
-          return  patchLeasingsId(id,data,)
-        }
+  return useMutation(mutationOptions, queryClient);
+};
+export const deleteLeasingsId = (id: string) => {
+  return axiosInstance<BaseResponse>({
+    url: `/leasings/${id}`,
+    method: "DELETE",
+  });
+};
 
-        
+export const getDeleteLeasingsIdMutationOptions = <
+  TError = NotfoundError | ConflictError,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof deleteLeasingsId>>,
+    TError,
+    { id: string },
+    TContext
+  >;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof deleteLeasingsId>>,
+  TError,
+  { id: string },
+  TContext
+> => {
+  const mutationKey = ["deleteLeasingsId"];
+  const { mutation: mutationOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey } };
 
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof deleteLeasingsId>>,
+    { id: string }
+  > = (props) => {
+    const { id } = props ?? {};
 
-  return  { mutationFn, ...mutationOptions }}
+    return deleteLeasingsId(id);
+  };
 
-    export type PatchLeasingsIdMutationResult = NonNullable<Awaited<ReturnType<typeof patchLeasingsId>>>
-    export type PatchLeasingsIdMutationBody = UpdateLeasingInput
-    export type PatchLeasingsIdMutationError = ErrorResponse | NotfoundError
+  return { mutationFn, ...mutationOptions };
+};
 
-    export const usePatchLeasingsId = <TError = ErrorResponse | NotfoundError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof patchLeasingsId>>, TError,{id: string;data: UpdateLeasingInput}, TContext>, }
- , queryClient?: QueryClient): UseMutationResult<
-        Awaited<ReturnType<typeof patchLeasingsId>>,
-        TError,
-        {id: string;data: UpdateLeasingInput},
-        TContext
-      > => {
+export type DeleteLeasingsIdMutationResult = NonNullable<
+  Awaited<ReturnType<typeof deleteLeasingsId>>
+>;
 
-      const mutationOptions = getPatchLeasingsIdMutationOptions(options);
+export type DeleteLeasingsIdMutationError = NotfoundError | ConflictError;
 
-      return useMutation(mutationOptions , queryClient);
-    }
-    export const deleteLeasingsId = (
-    id: string,
- ) => {
-      
-      
-      return axiosInstance<BaseResponse>(
-      {url: `/leasings/${id}`, method: 'DELETE'
-    },
-      );
-    }
-  
+export const useDeleteLeasingsId = <
+  TError = NotfoundError | ConflictError,
+  TContext = unknown,
+>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof deleteLeasingsId>>,
+      TError,
+      { id: string },
+      TContext
+    >;
+  },
+  queryClient?: QueryClient,
+): UseMutationResult<
+  Awaited<ReturnType<typeof deleteLeasingsId>>,
+  TError,
+  { id: string },
+  TContext
+> => {
+  const mutationOptions = getDeleteLeasingsIdMutationOptions(options);
 
-
-export const getDeleteLeasingsIdMutationOptions = <TError = NotfoundError | ConflictError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteLeasingsId>>, TError,{id: string}, TContext>, }
-): UseMutationOptions<Awaited<ReturnType<typeof deleteLeasingsId>>, TError,{id: string}, TContext> => {
-
-const mutationKey = ['deleteLeasingsId'];
-const {mutation: mutationOptions} = options ?
-      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
-      options
-      : {...options, mutation: {...options.mutation, mutationKey}}
-      : {mutation: { mutationKey, }};
-
-      
-
-
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteLeasingsId>>, {id: string}> = (props) => {
-          const {id} = props ?? {};
-
-          return  deleteLeasingsId(id,)
-        }
-
-        
-
-
-  return  { mutationFn, ...mutationOptions }}
-
-    export type DeleteLeasingsIdMutationResult = NonNullable<Awaited<ReturnType<typeof deleteLeasingsId>>>
-    
-    export type DeleteLeasingsIdMutationError = NotfoundError | ConflictError
-
-    export const useDeleteLeasingsId = <TError = NotfoundError | ConflictError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteLeasingsId>>, TError,{id: string}, TContext>, }
- , queryClient?: QueryClient): UseMutationResult<
-        Awaited<ReturnType<typeof deleteLeasingsId>>,
-        TError,
-        {id: string},
-        TContext
-      > => {
-
-      const mutationOptions = getDeleteLeasingsIdMutationOptions(options);
-
-      return useMutation(mutationOptions , queryClient);
-    }
-    
+  return useMutation(mutationOptions, queryClient);
+};

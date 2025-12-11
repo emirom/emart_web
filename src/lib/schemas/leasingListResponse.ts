@@ -4,10 +4,10 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { BaseResponse } from './baseResponse';
-import type { LeasingListResponseDetails } from './leasingListResponseDetails';
-import type { LeasingListResponseFiltersItem } from './leasingListResponseFiltersItem';
-import type { LeasingListResponseDataItem } from './leasingListResponseDataItem';
+import type { BaseResponse } from "./baseResponse";
+import type { LeasingListResponseDetails } from "./leasingListResponseDetails";
+import type { LeasingListResponseFiltersItem } from "./leasingListResponseFiltersItem";
+import type { LeasingListResponseDataItem } from "./leasingListResponseDataItem";
 
 /**
  * Paginated list of leasing plans
@@ -17,9 +17,14 @@ export type LeasingListResponse = BaseResponse & {
   details?: LeasingListResponseDetails;
   filters: LeasingListResponseFiltersItem[];
   data: LeasingListResponseDataItem[];
-} & Required<Pick<BaseResponse & {
-  /** Pagination metadata */
-  details?: LeasingListResponseDetails;
-  filters: LeasingListResponseFiltersItem[];
-  data: LeasingListResponseDataItem[];
-}, 'filters' | 'data'>>;
+} & Required<
+    Pick<
+      BaseResponse & {
+        /** Pagination metadata */
+        details?: LeasingListResponseDetails;
+        filters: LeasingListResponseFiltersItem[];
+        data: LeasingListResponseDataItem[];
+      },
+      "filters" | "data"
+    >
+  >;

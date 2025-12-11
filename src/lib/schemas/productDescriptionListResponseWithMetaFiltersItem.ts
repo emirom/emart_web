@@ -4,12 +4,12 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { ProductDescriptionListResponseWithMetaFiltersItemLabel } from './productDescriptionListResponseWithMetaFiltersItemLabel';
-import type { ProductDescriptionListResponseWithMetaFiltersItemUrl } from './productDescriptionListResponseWithMetaFiltersItemUrl';
-import type { ProductDescriptionListResponseWithMetaFiltersItemModel } from './productDescriptionListResponseWithMetaFiltersItemModel';
-import type { ProductDescriptionListResponseWithMetaFiltersItemField } from './productDescriptionListResponseWithMetaFiltersItemField';
-import type { ProductDescriptionListResponseWithMetaFiltersItemAdvanced } from './productDescriptionListResponseWithMetaFiltersItemAdvanced';
-import type { ProductDescriptionListResponseWithMetaFiltersItemEnumOptions } from './productDescriptionListResponseWithMetaFiltersItemEnumOptions';
+import type { ProductDescriptionListResponseWithMetaFiltersItemLabel } from "./productDescriptionListResponseWithMetaFiltersItemLabel";
+import type { ProductDescriptionListResponseWithMetaFiltersItemUrl } from "./productDescriptionListResponseWithMetaFiltersItemUrl";
+import type { ProductDescriptionListResponseWithMetaFiltersItemModel } from "./productDescriptionListResponseWithMetaFiltersItemModel";
+import type { ProductDescriptionListResponseWithMetaFiltersItemField } from "./productDescriptionListResponseWithMetaFiltersItemField";
+import type { ProductDescriptionListResponseWithMetaFiltersItemAdvanced } from "./productDescriptionListResponseWithMetaFiltersItemAdvanced";
+import type { ProductDescriptionListResponseWithMetaFiltersItemEnumOptions } from "./productDescriptionListResponseWithMetaFiltersItemEnumOptions";
 
 export type ProductDescriptionListResponseWithMetaFiltersItem = {
   /** The key representing the service associated with the filter. */

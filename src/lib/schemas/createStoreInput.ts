@@ -4,12 +4,12 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { CreateStoreInputLogo } from './createStoreInputLogo';
-import type { CreateStoreInputDescription } from './createStoreInputDescription';
-import type { CreateStoreInputEmail } from './createStoreInputEmail';
-import type { CreateStoreInputPhone } from './createStoreInputPhone';
-import type { CreateStoreInputWebsite } from './createStoreInputWebsite';
-import type { CreateStoreInputOwnerId } from './createStoreInputOwnerId';
+import type { CreateStoreInputLogo } from "./createStoreInputLogo";
+import type { CreateStoreInputDescription } from "./createStoreInputDescription";
+import type { CreateStoreInputEmail } from "./createStoreInputEmail";
+import type { CreateStoreInputPhone } from "./createStoreInputPhone";
+import type { CreateStoreInputWebsite } from "./createStoreInputWebsite";
+import type { CreateStoreInputOwnerId } from "./createStoreInputOwnerId";
 
 /**
  * Store creation payload

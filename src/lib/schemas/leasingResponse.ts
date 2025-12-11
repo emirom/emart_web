@@ -4,14 +4,19 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { BaseResponse } from './baseResponse';
-import type { Leasing } from './leasing';
+import type { BaseResponse } from "./baseResponse";
+import type { Leasing } from "./leasing";
 
 /**
  * Response for single leasing operations
  */
 export type LeasingResponse = BaseResponse & {
   data: Leasing;
-} & Required<Pick<BaseResponse & {
-  data: Leasing;
-}, 'data'>>;
+} & Required<
+    Pick<
+      BaseResponse & {
+        data: Leasing;
+      },
+      "data"
+    >
+  >;

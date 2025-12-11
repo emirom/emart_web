@@ -4,10 +4,10 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { ListAttributeValuesResponseDataItemTextValue } from './listAttributeValuesResponseDataItemTextValue';
-import type { ListAttributeValuesResponseDataItemDateValue } from './listAttributeValuesResponseDataItemDateValue';
-import type { ListAttributeValuesResponseDataItemNumberValue } from './listAttributeValuesResponseDataItemNumberValue';
-import type { ListAttributeValuesResponseDataItemBoolValue } from './listAttributeValuesResponseDataItemBoolValue';
+import type { ListAttributeValuesResponseDataItemTextValue } from "./listAttributeValuesResponseDataItemTextValue";
+import type { ListAttributeValuesResponseDataItemDateValue } from "./listAttributeValuesResponseDataItemDateValue";
+import type { ListAttributeValuesResponseDataItemNumberValue } from "./listAttributeValuesResponseDataItemNumberValue";
+import type { ListAttributeValuesResponseDataItemBoolValue } from "./listAttributeValuesResponseDataItemBoolValue";
 
 export type ListAttributeValuesResponseDataItem = {
   /** Unique identifier (UUIDv4) */

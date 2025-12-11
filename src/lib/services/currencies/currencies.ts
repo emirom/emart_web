@@ -4,10 +4,7 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import {
-  useMutation,
-  useQuery
-} from '@tanstack/react-query';
+import { useMutation, useQuery } from "@tanstack/react-query";
 import type {
   DataTag,
   DefinedInitialDataOptions,
@@ -20,8 +17,8 @@ import type {
   UseMutationOptions,
   UseMutationResult,
   UseQueryOptions,
-  UseQueryResult
-} from '@tanstack/react-query';
+  UseQueryResult,
+} from "@tanstack/react-query";
 
 import type {
   BaseResponse,
@@ -33,352 +30,532 @@ import type {
   GetCurrenciesParams,
   InternalError,
   NotfoundError,
-  UpdateCurrencyInput
-} from '../../schemas';
+  UpdateCurrencyInput,
+} from "../../schemas";
 
-import { axiosInstance } from '../../configs/axios-instance';
-
-
-
+import { axiosInstance } from "../../configs/axios-instance";
 
 /**
  * Create a new currency
  */
 export const postCurrencies = (
-    createCurrencyInput: CreateCurrencyInput,
- signal?: AbortSignal
+  createCurrencyInput: CreateCurrencyInput,
+  signal?: AbortSignal,
 ) => {
-      
-      
-      return axiosInstance<CurrencyResponse>(
-      {url: `/currencies`, method: 'POST',
-      headers: {'Content-Type': 'application/json', },
-      data: createCurrencyInput, signal
-    },
-      );
-    }
-  
+  return axiosInstance<CurrencyResponse>({
+    url: `/currencies`,
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    data: createCurrencyInput,
+    signal,
+  });
+};
 
+export const getPostCurrenciesMutationOptions = <
+  TError = ErrorResponse | ConflictError,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof postCurrencies>>,
+    TError,
+    { data: CreateCurrencyInput },
+    TContext
+  >;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof postCurrencies>>,
+  TError,
+  { data: CreateCurrencyInput },
+  TContext
+> => {
+  const mutationKey = ["postCurrencies"];
+  const { mutation: mutationOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey } };
 
-export const getPostCurrenciesMutationOptions = <TError = ErrorResponse | ConflictError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postCurrencies>>, TError,{data: CreateCurrencyInput}, TContext>, }
-): UseMutationOptions<Awaited<ReturnType<typeof postCurrencies>>, TError,{data: CreateCurrencyInput}, TContext> => {
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof postCurrencies>>,
+    { data: CreateCurrencyInput }
+  > = (props) => {
+    const { data } = props ?? {};
 
-const mutationKey = ['postCurrencies'];
-const {mutation: mutationOptions} = options ?
-      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
-      options
-      : {...options, mutation: {...options.mutation, mutationKey}}
-      : {mutation: { mutationKey, }};
+    return postCurrencies(data);
+  };
 
-      
+  return { mutationFn, ...mutationOptions };
+};
 
+export type PostCurrenciesMutationResult = NonNullable<
+  Awaited<ReturnType<typeof postCurrencies>>
+>;
+export type PostCurrenciesMutationBody = CreateCurrencyInput;
+export type PostCurrenciesMutationError = ErrorResponse | ConflictError;
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postCurrencies>>, {data: CreateCurrencyInput}> = (props) => {
-          const {data} = props ?? {};
+export const usePostCurrencies = <
+  TError = ErrorResponse | ConflictError,
+  TContext = unknown,
+>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof postCurrencies>>,
+      TError,
+      { data: CreateCurrencyInput },
+      TContext
+    >;
+  },
+  queryClient?: QueryClient,
+): UseMutationResult<
+  Awaited<ReturnType<typeof postCurrencies>>,
+  TError,
+  { data: CreateCurrencyInput },
+  TContext
+> => {
+  const mutationOptions = getPostCurrenciesMutationOptions(options);
 
-          return  postCurrencies(data,)
-        }
-
-        
-
-
-  return  { mutationFn, ...mutationOptions }}
-
-    export type PostCurrenciesMutationResult = NonNullable<Awaited<ReturnType<typeof postCurrencies>>>
-    export type PostCurrenciesMutationBody = CreateCurrencyInput
-    export type PostCurrenciesMutationError = ErrorResponse | ConflictError
-
-    export const usePostCurrencies = <TError = ErrorResponse | ConflictError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postCurrencies>>, TError,{data: CreateCurrencyInput}, TContext>, }
- , queryClient?: QueryClient): UseMutationResult<
-        Awaited<ReturnType<typeof postCurrencies>>,
-        TError,
-        {data: CreateCurrencyInput},
-        TContext
-      > => {
-
-      const mutationOptions = getPostCurrenciesMutationOptions(options);
-
-      return useMutation(mutationOptions , queryClient);
-    }
-    /**
+  return useMutation(mutationOptions, queryClient);
+};
+/**
  * Get all currencies with pagination and filtering
  */
 export const getCurrencies = (
-    params: GetCurrenciesParams,
- signal?: AbortSignal
+  params: GetCurrenciesParams,
+  signal?: AbortSignal,
 ) => {
-      
-      
-      return axiosInstance<CurrencyListResponse>(
-      {url: `/currencies`, method: 'GET',
-        params, signal
-    },
-      );
-    }
-  
+  return axiosInstance<CurrencyListResponse>({
+    url: `/currencies`,
+    method: "GET",
+    params,
+    signal,
+  });
+};
 
-export const getGetCurrenciesQueryKey = (params?: GetCurrenciesParams,) => {
-    return [`/currencies`, ...(params ? [params]: [])] as const;
-    }
+export const getGetCurrenciesQueryKey = (params?: GetCurrenciesParams) => {
+  return [`/currencies`, ...(params ? [params] : [])] as const;
+};
 
-    
-export const getGetCurrenciesQueryOptions = <TData = Awaited<ReturnType<typeof getCurrencies>>, TError = InternalError>(params: GetCurrenciesParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getCurrencies>>, TError, TData>>, }
+export const getGetCurrenciesQueryOptions = <
+  TData = Awaited<ReturnType<typeof getCurrencies>>,
+  TError = InternalError,
+>(
+  params: GetCurrenciesParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof getCurrencies>>, TError, TData>
+    >;
+  },
 ) => {
+  const { query: queryOptions } = options ?? {};
 
-const {query: queryOptions} = options ?? {};
+  const queryKey = queryOptions?.queryKey ?? getGetCurrenciesQueryKey(params);
 
-  const queryKey =  queryOptions?.queryKey ?? getGetCurrenciesQueryKey(params);
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getCurrencies>>> = ({
+    signal,
+  }) => getCurrencies(params, signal);
 
-  
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof getCurrencies>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
+};
 
-    const queryFn: QueryFunction<Awaited<ReturnType<typeof getCurrencies>>> = ({ signal }) => getCurrencies(params, signal);
+export type GetCurrenciesQueryResult = NonNullable<
+  Awaited<ReturnType<typeof getCurrencies>>
+>;
+export type GetCurrenciesQueryError = InternalError;
 
-      
-
-      
-
-   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getCurrencies>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
-}
-
-export type GetCurrenciesQueryResult = NonNullable<Awaited<ReturnType<typeof getCurrencies>>>
-export type GetCurrenciesQueryError = InternalError
-
-
-export function useGetCurrencies<TData = Awaited<ReturnType<typeof getCurrencies>>, TError = InternalError>(
- params: GetCurrenciesParams, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getCurrencies>>, TError, TData>> & Pick<
+export function useGetCurrencies<
+  TData = Awaited<ReturnType<typeof getCurrencies>>,
+  TError = InternalError,
+>(
+  params: GetCurrenciesParams,
+  options: {
+    query: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof getCurrencies>>, TError, TData>
+    > &
+      Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof getCurrencies>>,
           TError,
           Awaited<ReturnType<typeof getCurrencies>>
-        > , 'initialData'
-      >, }
- , queryClient?: QueryClient
-  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetCurrencies<TData = Awaited<ReturnType<typeof getCurrencies>>, TError = InternalError>(
- params: GetCurrenciesParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getCurrencies>>, TError, TData>> & Pick<
+        >,
+        "initialData"
+      >;
+  },
+  queryClient?: QueryClient,
+): DefinedUseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+};
+export function useGetCurrencies<
+  TData = Awaited<ReturnType<typeof getCurrencies>>,
+  TError = InternalError,
+>(
+  params: GetCurrenciesParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof getCurrencies>>, TError, TData>
+    > &
+      Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof getCurrencies>>,
           TError,
           Awaited<ReturnType<typeof getCurrencies>>
-        > , 'initialData'
-      >, }
- , queryClient?: QueryClient
-  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetCurrencies<TData = Awaited<ReturnType<typeof getCurrencies>>, TError = InternalError>(
- params: GetCurrenciesParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getCurrencies>>, TError, TData>>, }
- , queryClient?: QueryClient
-  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+        >,
+        "initialData"
+      >;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+};
+export function useGetCurrencies<
+  TData = Awaited<ReturnType<typeof getCurrencies>>,
+  TError = InternalError,
+>(
+  params: GetCurrenciesParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof getCurrencies>>, TError, TData>
+    >;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+};
 
-export function useGetCurrencies<TData = Awaited<ReturnType<typeof getCurrencies>>, TError = InternalError>(
- params: GetCurrenciesParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getCurrencies>>, TError, TData>>, }
- , queryClient?: QueryClient 
- ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+export function useGetCurrencies<
+  TData = Awaited<ReturnType<typeof getCurrencies>>,
+  TError = InternalError,
+>(
+  params: GetCurrenciesParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof getCurrencies>>, TError, TData>
+    >;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+} {
+  const queryOptions = getGetCurrenciesQueryOptions(params, options);
 
-  const queryOptions = getGetCurrenciesQueryOptions(params,options)
+  const query = useQuery(queryOptions, queryClient) as UseQueryResult<
+    TData,
+    TError
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
 
-  const query = useQuery(queryOptions , queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
-
-  query.queryKey = queryOptions.queryKey ;
+  query.queryKey = queryOptions.queryKey;
 
   return query;
 }
 
+export const getCurrenciesId = (id: string, signal?: AbortSignal) => {
+  return axiosInstance<CurrencyResponse>({
+    url: `/currencies/${id}`,
+    method: "GET",
+    signal,
+  });
+};
 
+export const getGetCurrenciesIdQueryKey = (id?: string) => {
+  return [`/currencies/${id}`] as const;
+};
 
-export const getCurrenciesId = (
-    id: string,
- signal?: AbortSignal
+export const getGetCurrenciesIdQueryOptions = <
+  TData = Awaited<ReturnType<typeof getCurrenciesId>>,
+  TError = NotfoundError,
+>(
+  id: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof getCurrenciesId>>,
+        TError,
+        TData
+      >
+    >;
+  },
 ) => {
-      
-      
-      return axiosInstance<CurrencyResponse>(
-      {url: `/currencies/${id}`, method: 'GET', signal
-    },
-      );
-    }
-  
+  const { query: queryOptions } = options ?? {};
 
-export const getGetCurrenciesIdQueryKey = (id?: string,) => {
-    return [`/currencies/${id}`] as const;
-    }
+  const queryKey = queryOptions?.queryKey ?? getGetCurrenciesIdQueryKey(id);
 
-    
-export const getGetCurrenciesIdQueryOptions = <TData = Awaited<ReturnType<typeof getCurrenciesId>>, TError = NotfoundError>(id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getCurrenciesId>>, TError, TData>>, }
-) => {
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getCurrenciesId>>> = ({
+    signal,
+  }) => getCurrenciesId(id, signal);
 
-const {query: queryOptions} = options ?? {};
+  return {
+    queryKey,
+    queryFn,
+    enabled: !!id,
+    ...queryOptions,
+  } as UseQueryOptions<
+    Awaited<ReturnType<typeof getCurrenciesId>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
+};
 
-  const queryKey =  queryOptions?.queryKey ?? getGetCurrenciesIdQueryKey(id);
+export type GetCurrenciesIdQueryResult = NonNullable<
+  Awaited<ReturnType<typeof getCurrenciesId>>
+>;
+export type GetCurrenciesIdQueryError = NotfoundError;
 
-  
-
-    const queryFn: QueryFunction<Awaited<ReturnType<typeof getCurrenciesId>>> = ({ signal }) => getCurrenciesId(id, signal);
-
-      
-
-      
-
-   return  { queryKey, queryFn, enabled: !!(id), ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getCurrenciesId>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
-}
-
-export type GetCurrenciesIdQueryResult = NonNullable<Awaited<ReturnType<typeof getCurrenciesId>>>
-export type GetCurrenciesIdQueryError = NotfoundError
-
-
-export function useGetCurrenciesId<TData = Awaited<ReturnType<typeof getCurrenciesId>>, TError = NotfoundError>(
- id: string, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getCurrenciesId>>, TError, TData>> & Pick<
+export function useGetCurrenciesId<
+  TData = Awaited<ReturnType<typeof getCurrenciesId>>,
+  TError = NotfoundError,
+>(
+  id: string,
+  options: {
+    query: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof getCurrenciesId>>,
+        TError,
+        TData
+      >
+    > &
+      Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof getCurrenciesId>>,
           TError,
           Awaited<ReturnType<typeof getCurrenciesId>>
-        > , 'initialData'
-      >, }
- , queryClient?: QueryClient
-  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetCurrenciesId<TData = Awaited<ReturnType<typeof getCurrenciesId>>, TError = NotfoundError>(
- id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getCurrenciesId>>, TError, TData>> & Pick<
+        >,
+        "initialData"
+      >;
+  },
+  queryClient?: QueryClient,
+): DefinedUseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+};
+export function useGetCurrenciesId<
+  TData = Awaited<ReturnType<typeof getCurrenciesId>>,
+  TError = NotfoundError,
+>(
+  id: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof getCurrenciesId>>,
+        TError,
+        TData
+      >
+    > &
+      Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof getCurrenciesId>>,
           TError,
           Awaited<ReturnType<typeof getCurrenciesId>>
-        > , 'initialData'
-      >, }
- , queryClient?: QueryClient
-  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetCurrenciesId<TData = Awaited<ReturnType<typeof getCurrenciesId>>, TError = NotfoundError>(
- id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getCurrenciesId>>, TError, TData>>, }
- , queryClient?: QueryClient
-  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+        >,
+        "initialData"
+      >;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+};
+export function useGetCurrenciesId<
+  TData = Awaited<ReturnType<typeof getCurrenciesId>>,
+  TError = NotfoundError,
+>(
+  id: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof getCurrenciesId>>,
+        TError,
+        TData
+      >
+    >;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+};
 
-export function useGetCurrenciesId<TData = Awaited<ReturnType<typeof getCurrenciesId>>, TError = NotfoundError>(
- id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getCurrenciesId>>, TError, TData>>, }
- , queryClient?: QueryClient 
- ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+export function useGetCurrenciesId<
+  TData = Awaited<ReturnType<typeof getCurrenciesId>>,
+  TError = NotfoundError,
+>(
+  id: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof getCurrenciesId>>,
+        TError,
+        TData
+      >
+    >;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+} {
+  const queryOptions = getGetCurrenciesIdQueryOptions(id, options);
 
-  const queryOptions = getGetCurrenciesIdQueryOptions(id,options)
+  const query = useQuery(queryOptions, queryClient) as UseQueryResult<
+    TData,
+    TError
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
 
-  const query = useQuery(queryOptions , queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
-
-  query.queryKey = queryOptions.queryKey ;
+  query.queryKey = queryOptions.queryKey;
 
   return query;
 }
-
-
 
 export const patchCurrenciesId = (
-    id: string,
-    updateCurrencyInput: UpdateCurrencyInput,
- ) => {
-      
-      
-      return axiosInstance<CurrencyResponse>(
-      {url: `/currencies/${id}`, method: 'PATCH',
-      headers: {'Content-Type': 'application/json', },
-      data: updateCurrencyInput
-    },
-      );
-    }
-  
+  id: string,
+  updateCurrencyInput: UpdateCurrencyInput,
+) => {
+  return axiosInstance<CurrencyResponse>({
+    url: `/currencies/${id}`,
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    data: updateCurrencyInput,
+  });
+};
 
+export const getPatchCurrenciesIdMutationOptions = <
+  TError = ErrorResponse | NotfoundError | ConflictError,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof patchCurrenciesId>>,
+    TError,
+    { id: string; data: UpdateCurrencyInput },
+    TContext
+  >;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof patchCurrenciesId>>,
+  TError,
+  { id: string; data: UpdateCurrencyInput },
+  TContext
+> => {
+  const mutationKey = ["patchCurrenciesId"];
+  const { mutation: mutationOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey } };
 
-export const getPatchCurrenciesIdMutationOptions = <TError = ErrorResponse | NotfoundError | ConflictError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof patchCurrenciesId>>, TError,{id: string;data: UpdateCurrencyInput}, TContext>, }
-): UseMutationOptions<Awaited<ReturnType<typeof patchCurrenciesId>>, TError,{id: string;data: UpdateCurrencyInput}, TContext> => {
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof patchCurrenciesId>>,
+    { id: string; data: UpdateCurrencyInput }
+  > = (props) => {
+    const { id, data } = props ?? {};
 
-const mutationKey = ['patchCurrenciesId'];
-const {mutation: mutationOptions} = options ?
-      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
-      options
-      : {...options, mutation: {...options.mutation, mutationKey}}
-      : {mutation: { mutationKey, }};
+    return patchCurrenciesId(id, data);
+  };
 
-      
+  return { mutationFn, ...mutationOptions };
+};
 
+export type PatchCurrenciesIdMutationResult = NonNullable<
+  Awaited<ReturnType<typeof patchCurrenciesId>>
+>;
+export type PatchCurrenciesIdMutationBody = UpdateCurrencyInput;
+export type PatchCurrenciesIdMutationError =
+  | ErrorResponse
+  | NotfoundError
+  | ConflictError;
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof patchCurrenciesId>>, {id: string;data: UpdateCurrencyInput}> = (props) => {
-          const {id,data} = props ?? {};
+export const usePatchCurrenciesId = <
+  TError = ErrorResponse | NotfoundError | ConflictError,
+  TContext = unknown,
+>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof patchCurrenciesId>>,
+      TError,
+      { id: string; data: UpdateCurrencyInput },
+      TContext
+    >;
+  },
+  queryClient?: QueryClient,
+): UseMutationResult<
+  Awaited<ReturnType<typeof patchCurrenciesId>>,
+  TError,
+  { id: string; data: UpdateCurrencyInput },
+  TContext
+> => {
+  const mutationOptions = getPatchCurrenciesIdMutationOptions(options);
 
-          return  patchCurrenciesId(id,data,)
-        }
+  return useMutation(mutationOptions, queryClient);
+};
+export const deleteCurrenciesId = (id: string) => {
+  return axiosInstance<BaseResponse>({
+    url: `/currencies/${id}`,
+    method: "DELETE",
+  });
+};
 
-        
+export const getDeleteCurrenciesIdMutationOptions = <
+  TError = NotfoundError | ConflictError,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof deleteCurrenciesId>>,
+    TError,
+    { id: string },
+    TContext
+  >;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof deleteCurrenciesId>>,
+  TError,
+  { id: string },
+  TContext
+> => {
+  const mutationKey = ["deleteCurrenciesId"];
+  const { mutation: mutationOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey } };
 
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof deleteCurrenciesId>>,
+    { id: string }
+  > = (props) => {
+    const { id } = props ?? {};
 
-  return  { mutationFn, ...mutationOptions }}
+    return deleteCurrenciesId(id);
+  };
 
-    export type PatchCurrenciesIdMutationResult = NonNullable<Awaited<ReturnType<typeof patchCurrenciesId>>>
-    export type PatchCurrenciesIdMutationBody = UpdateCurrencyInput
-    export type PatchCurrenciesIdMutationError = ErrorResponse | NotfoundError | ConflictError
+  return { mutationFn, ...mutationOptions };
+};
 
-    export const usePatchCurrenciesId = <TError = ErrorResponse | NotfoundError | ConflictError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof patchCurrenciesId>>, TError,{id: string;data: UpdateCurrencyInput}, TContext>, }
- , queryClient?: QueryClient): UseMutationResult<
-        Awaited<ReturnType<typeof patchCurrenciesId>>,
-        TError,
-        {id: string;data: UpdateCurrencyInput},
-        TContext
-      > => {
+export type DeleteCurrenciesIdMutationResult = NonNullable<
+  Awaited<ReturnType<typeof deleteCurrenciesId>>
+>;
 
-      const mutationOptions = getPatchCurrenciesIdMutationOptions(options);
+export type DeleteCurrenciesIdMutationError = NotfoundError | ConflictError;
 
-      return useMutation(mutationOptions , queryClient);
-    }
-    export const deleteCurrenciesId = (
-    id: string,
- ) => {
-      
-      
-      return axiosInstance<BaseResponse>(
-      {url: `/currencies/${id}`, method: 'DELETE'
-    },
-      );
-    }
-  
+export const useDeleteCurrenciesId = <
+  TError = NotfoundError | ConflictError,
+  TContext = unknown,
+>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof deleteCurrenciesId>>,
+      TError,
+      { id: string },
+      TContext
+    >;
+  },
+  queryClient?: QueryClient,
+): UseMutationResult<
+  Awaited<ReturnType<typeof deleteCurrenciesId>>,
+  TError,
+  { id: string },
+  TContext
+> => {
+  const mutationOptions = getDeleteCurrenciesIdMutationOptions(options);
 
-
-export const getDeleteCurrenciesIdMutationOptions = <TError = NotfoundError | ConflictError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteCurrenciesId>>, TError,{id: string}, TContext>, }
-): UseMutationOptions<Awaited<ReturnType<typeof deleteCurrenciesId>>, TError,{id: string}, TContext> => {
-
-const mutationKey = ['deleteCurrenciesId'];
-const {mutation: mutationOptions} = options ?
-      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
-      options
-      : {...options, mutation: {...options.mutation, mutationKey}}
-      : {mutation: { mutationKey, }};
-
-      
-
-
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteCurrenciesId>>, {id: string}> = (props) => {
-          const {id} = props ?? {};
-
-          return  deleteCurrenciesId(id,)
-        }
-
-        
-
-
-  return  { mutationFn, ...mutationOptions }}
-
-    export type DeleteCurrenciesIdMutationResult = NonNullable<Awaited<ReturnType<typeof deleteCurrenciesId>>>
-    
-    export type DeleteCurrenciesIdMutationError = NotfoundError | ConflictError
-
-    export const useDeleteCurrenciesId = <TError = NotfoundError | ConflictError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteCurrenciesId>>, TError,{id: string}, TContext>, }
- , queryClient?: QueryClient): UseMutationResult<
-        Awaited<ReturnType<typeof deleteCurrenciesId>>,
-        TError,
-        {id: string},
-        TContext
-      > => {
-
-      const mutationOptions = getDeleteCurrenciesIdMutationOptions(options);
-
-      return useMutation(mutationOptions , queryClient);
-    }
-    
+  return useMutation(mutationOptions, queryClient);
+};

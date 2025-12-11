@@ -4,10 +4,7 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import {
-  useMutation,
-  useQuery
-} from '@tanstack/react-query';
+import { useMutation, useQuery } from "@tanstack/react-query";
 import type {
   DataTag,
   DefinedInitialDataOptions,
@@ -20,8 +17,8 @@ import type {
   UseMutationOptions,
   UseMutationResult,
   UseQueryOptions,
-  UseQueryResult
-} from '@tanstack/react-query';
+  UseQueryResult,
+} from "@tanstack/react-query";
 
 import type {
   BaseResponse,
@@ -33,352 +30,529 @@ import type {
   InsuranceResponse,
   InternalError,
   NotfoundError,
-  UpdateInsuranceInput
-} from '../../schemas';
+  UpdateInsuranceInput,
+} from "../../schemas";
 
-import { axiosInstance } from '../../configs/axios-instance';
-
-
-
+import { axiosInstance } from "../../configs/axios-instance";
 
 /**
  * Create a new insurance plan
  */
 export const postInsurances = (
-    createInsuranceInput: CreateInsuranceInput,
- signal?: AbortSignal
+  createInsuranceInput: CreateInsuranceInput,
+  signal?: AbortSignal,
 ) => {
-      
-      
-      return axiosInstance<InsuranceResponse>(
-      {url: `/insurances`, method: 'POST',
-      headers: {'Content-Type': 'application/json', },
-      data: createInsuranceInput, signal
-    },
-      );
-    }
-  
+  return axiosInstance<InsuranceResponse>({
+    url: `/insurances`,
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    data: createInsuranceInput,
+    signal,
+  });
+};
 
+export const getPostInsurancesMutationOptions = <
+  TError = ErrorResponse | ConflictError,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof postInsurances>>,
+    TError,
+    { data: CreateInsuranceInput },
+    TContext
+  >;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof postInsurances>>,
+  TError,
+  { data: CreateInsuranceInput },
+  TContext
+> => {
+  const mutationKey = ["postInsurances"];
+  const { mutation: mutationOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey } };
 
-export const getPostInsurancesMutationOptions = <TError = ErrorResponse | ConflictError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postInsurances>>, TError,{data: CreateInsuranceInput}, TContext>, }
-): UseMutationOptions<Awaited<ReturnType<typeof postInsurances>>, TError,{data: CreateInsuranceInput}, TContext> => {
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof postInsurances>>,
+    { data: CreateInsuranceInput }
+  > = (props) => {
+    const { data } = props ?? {};
 
-const mutationKey = ['postInsurances'];
-const {mutation: mutationOptions} = options ?
-      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
-      options
-      : {...options, mutation: {...options.mutation, mutationKey}}
-      : {mutation: { mutationKey, }};
+    return postInsurances(data);
+  };
 
-      
+  return { mutationFn, ...mutationOptions };
+};
 
+export type PostInsurancesMutationResult = NonNullable<
+  Awaited<ReturnType<typeof postInsurances>>
+>;
+export type PostInsurancesMutationBody = CreateInsuranceInput;
+export type PostInsurancesMutationError = ErrorResponse | ConflictError;
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postInsurances>>, {data: CreateInsuranceInput}> = (props) => {
-          const {data} = props ?? {};
+export const usePostInsurances = <
+  TError = ErrorResponse | ConflictError,
+  TContext = unknown,
+>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof postInsurances>>,
+      TError,
+      { data: CreateInsuranceInput },
+      TContext
+    >;
+  },
+  queryClient?: QueryClient,
+): UseMutationResult<
+  Awaited<ReturnType<typeof postInsurances>>,
+  TError,
+  { data: CreateInsuranceInput },
+  TContext
+> => {
+  const mutationOptions = getPostInsurancesMutationOptions(options);
 
-          return  postInsurances(data,)
-        }
-
-        
-
-
-  return  { mutationFn, ...mutationOptions }}
-
-    export type PostInsurancesMutationResult = NonNullable<Awaited<ReturnType<typeof postInsurances>>>
-    export type PostInsurancesMutationBody = CreateInsuranceInput
-    export type PostInsurancesMutationError = ErrorResponse | ConflictError
-
-    export const usePostInsurances = <TError = ErrorResponse | ConflictError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postInsurances>>, TError,{data: CreateInsuranceInput}, TContext>, }
- , queryClient?: QueryClient): UseMutationResult<
-        Awaited<ReturnType<typeof postInsurances>>,
-        TError,
-        {data: CreateInsuranceInput},
-        TContext
-      > => {
-
-      const mutationOptions = getPostInsurancesMutationOptions(options);
-
-      return useMutation(mutationOptions , queryClient);
-    }
-    /**
+  return useMutation(mutationOptions, queryClient);
+};
+/**
  * Get all insurance plans with pagination and filtering
  */
 export const getInsurances = (
-    params: GetInsurancesParams,
- signal?: AbortSignal
+  params: GetInsurancesParams,
+  signal?: AbortSignal,
 ) => {
-      
-      
-      return axiosInstance<InsuranceListResponse>(
-      {url: `/insurances`, method: 'GET',
-        params, signal
-    },
-      );
-    }
-  
+  return axiosInstance<InsuranceListResponse>({
+    url: `/insurances`,
+    method: "GET",
+    params,
+    signal,
+  });
+};
 
-export const getGetInsurancesQueryKey = (params?: GetInsurancesParams,) => {
-    return [`/insurances`, ...(params ? [params]: [])] as const;
-    }
+export const getGetInsurancesQueryKey = (params?: GetInsurancesParams) => {
+  return [`/insurances`, ...(params ? [params] : [])] as const;
+};
 
-    
-export const getGetInsurancesQueryOptions = <TData = Awaited<ReturnType<typeof getInsurances>>, TError = InternalError>(params: GetInsurancesParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getInsurances>>, TError, TData>>, }
+export const getGetInsurancesQueryOptions = <
+  TData = Awaited<ReturnType<typeof getInsurances>>,
+  TError = InternalError,
+>(
+  params: GetInsurancesParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof getInsurances>>, TError, TData>
+    >;
+  },
 ) => {
+  const { query: queryOptions } = options ?? {};
 
-const {query: queryOptions} = options ?? {};
+  const queryKey = queryOptions?.queryKey ?? getGetInsurancesQueryKey(params);
 
-  const queryKey =  queryOptions?.queryKey ?? getGetInsurancesQueryKey(params);
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getInsurances>>> = ({
+    signal,
+  }) => getInsurances(params, signal);
 
-  
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof getInsurances>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
+};
 
-    const queryFn: QueryFunction<Awaited<ReturnType<typeof getInsurances>>> = ({ signal }) => getInsurances(params, signal);
+export type GetInsurancesQueryResult = NonNullable<
+  Awaited<ReturnType<typeof getInsurances>>
+>;
+export type GetInsurancesQueryError = InternalError;
 
-      
-
-      
-
-   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getInsurances>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
-}
-
-export type GetInsurancesQueryResult = NonNullable<Awaited<ReturnType<typeof getInsurances>>>
-export type GetInsurancesQueryError = InternalError
-
-
-export function useGetInsurances<TData = Awaited<ReturnType<typeof getInsurances>>, TError = InternalError>(
- params: GetInsurancesParams, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getInsurances>>, TError, TData>> & Pick<
+export function useGetInsurances<
+  TData = Awaited<ReturnType<typeof getInsurances>>,
+  TError = InternalError,
+>(
+  params: GetInsurancesParams,
+  options: {
+    query: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof getInsurances>>, TError, TData>
+    > &
+      Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof getInsurances>>,
           TError,
           Awaited<ReturnType<typeof getInsurances>>
-        > , 'initialData'
-      >, }
- , queryClient?: QueryClient
-  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetInsurances<TData = Awaited<ReturnType<typeof getInsurances>>, TError = InternalError>(
- params: GetInsurancesParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getInsurances>>, TError, TData>> & Pick<
+        >,
+        "initialData"
+      >;
+  },
+  queryClient?: QueryClient,
+): DefinedUseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+};
+export function useGetInsurances<
+  TData = Awaited<ReturnType<typeof getInsurances>>,
+  TError = InternalError,
+>(
+  params: GetInsurancesParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof getInsurances>>, TError, TData>
+    > &
+      Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof getInsurances>>,
           TError,
           Awaited<ReturnType<typeof getInsurances>>
-        > , 'initialData'
-      >, }
- , queryClient?: QueryClient
-  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetInsurances<TData = Awaited<ReturnType<typeof getInsurances>>, TError = InternalError>(
- params: GetInsurancesParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getInsurances>>, TError, TData>>, }
- , queryClient?: QueryClient
-  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+        >,
+        "initialData"
+      >;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+};
+export function useGetInsurances<
+  TData = Awaited<ReturnType<typeof getInsurances>>,
+  TError = InternalError,
+>(
+  params: GetInsurancesParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof getInsurances>>, TError, TData>
+    >;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+};
 
-export function useGetInsurances<TData = Awaited<ReturnType<typeof getInsurances>>, TError = InternalError>(
- params: GetInsurancesParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getInsurances>>, TError, TData>>, }
- , queryClient?: QueryClient 
- ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+export function useGetInsurances<
+  TData = Awaited<ReturnType<typeof getInsurances>>,
+  TError = InternalError,
+>(
+  params: GetInsurancesParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof getInsurances>>, TError, TData>
+    >;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+} {
+  const queryOptions = getGetInsurancesQueryOptions(params, options);
 
-  const queryOptions = getGetInsurancesQueryOptions(params,options)
+  const query = useQuery(queryOptions, queryClient) as UseQueryResult<
+    TData,
+    TError
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
 
-  const query = useQuery(queryOptions , queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
-
-  query.queryKey = queryOptions.queryKey ;
+  query.queryKey = queryOptions.queryKey;
 
   return query;
 }
 
+export const getInsurancesId = (id: string, signal?: AbortSignal) => {
+  return axiosInstance<InsuranceResponse>({
+    url: `/insurances/${id}`,
+    method: "GET",
+    signal,
+  });
+};
 
+export const getGetInsurancesIdQueryKey = (id?: string) => {
+  return [`/insurances/${id}`] as const;
+};
 
-export const getInsurancesId = (
-    id: string,
- signal?: AbortSignal
+export const getGetInsurancesIdQueryOptions = <
+  TData = Awaited<ReturnType<typeof getInsurancesId>>,
+  TError = NotfoundError,
+>(
+  id: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof getInsurancesId>>,
+        TError,
+        TData
+      >
+    >;
+  },
 ) => {
-      
-      
-      return axiosInstance<InsuranceResponse>(
-      {url: `/insurances/${id}`, method: 'GET', signal
-    },
-      );
-    }
-  
+  const { query: queryOptions } = options ?? {};
 
-export const getGetInsurancesIdQueryKey = (id?: string,) => {
-    return [`/insurances/${id}`] as const;
-    }
+  const queryKey = queryOptions?.queryKey ?? getGetInsurancesIdQueryKey(id);
 
-    
-export const getGetInsurancesIdQueryOptions = <TData = Awaited<ReturnType<typeof getInsurancesId>>, TError = NotfoundError>(id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getInsurancesId>>, TError, TData>>, }
-) => {
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getInsurancesId>>> = ({
+    signal,
+  }) => getInsurancesId(id, signal);
 
-const {query: queryOptions} = options ?? {};
+  return {
+    queryKey,
+    queryFn,
+    enabled: !!id,
+    ...queryOptions,
+  } as UseQueryOptions<
+    Awaited<ReturnType<typeof getInsurancesId>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
+};
 
-  const queryKey =  queryOptions?.queryKey ?? getGetInsurancesIdQueryKey(id);
+export type GetInsurancesIdQueryResult = NonNullable<
+  Awaited<ReturnType<typeof getInsurancesId>>
+>;
+export type GetInsurancesIdQueryError = NotfoundError;
 
-  
-
-    const queryFn: QueryFunction<Awaited<ReturnType<typeof getInsurancesId>>> = ({ signal }) => getInsurancesId(id, signal);
-
-      
-
-      
-
-   return  { queryKey, queryFn, enabled: !!(id), ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getInsurancesId>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
-}
-
-export type GetInsurancesIdQueryResult = NonNullable<Awaited<ReturnType<typeof getInsurancesId>>>
-export type GetInsurancesIdQueryError = NotfoundError
-
-
-export function useGetInsurancesId<TData = Awaited<ReturnType<typeof getInsurancesId>>, TError = NotfoundError>(
- id: string, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getInsurancesId>>, TError, TData>> & Pick<
+export function useGetInsurancesId<
+  TData = Awaited<ReturnType<typeof getInsurancesId>>,
+  TError = NotfoundError,
+>(
+  id: string,
+  options: {
+    query: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof getInsurancesId>>,
+        TError,
+        TData
+      >
+    > &
+      Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof getInsurancesId>>,
           TError,
           Awaited<ReturnType<typeof getInsurancesId>>
-        > , 'initialData'
-      >, }
- , queryClient?: QueryClient
-  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetInsurancesId<TData = Awaited<ReturnType<typeof getInsurancesId>>, TError = NotfoundError>(
- id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getInsurancesId>>, TError, TData>> & Pick<
+        >,
+        "initialData"
+      >;
+  },
+  queryClient?: QueryClient,
+): DefinedUseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+};
+export function useGetInsurancesId<
+  TData = Awaited<ReturnType<typeof getInsurancesId>>,
+  TError = NotfoundError,
+>(
+  id: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof getInsurancesId>>,
+        TError,
+        TData
+      >
+    > &
+      Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof getInsurancesId>>,
           TError,
           Awaited<ReturnType<typeof getInsurancesId>>
-        > , 'initialData'
-      >, }
- , queryClient?: QueryClient
-  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetInsurancesId<TData = Awaited<ReturnType<typeof getInsurancesId>>, TError = NotfoundError>(
- id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getInsurancesId>>, TError, TData>>, }
- , queryClient?: QueryClient
-  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+        >,
+        "initialData"
+      >;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+};
+export function useGetInsurancesId<
+  TData = Awaited<ReturnType<typeof getInsurancesId>>,
+  TError = NotfoundError,
+>(
+  id: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof getInsurancesId>>,
+        TError,
+        TData
+      >
+    >;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+};
 
-export function useGetInsurancesId<TData = Awaited<ReturnType<typeof getInsurancesId>>, TError = NotfoundError>(
- id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getInsurancesId>>, TError, TData>>, }
- , queryClient?: QueryClient 
- ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+export function useGetInsurancesId<
+  TData = Awaited<ReturnType<typeof getInsurancesId>>,
+  TError = NotfoundError,
+>(
+  id: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof getInsurancesId>>,
+        TError,
+        TData
+      >
+    >;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+} {
+  const queryOptions = getGetInsurancesIdQueryOptions(id, options);
 
-  const queryOptions = getGetInsurancesIdQueryOptions(id,options)
+  const query = useQuery(queryOptions, queryClient) as UseQueryResult<
+    TData,
+    TError
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
 
-  const query = useQuery(queryOptions , queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
-
-  query.queryKey = queryOptions.queryKey ;
+  query.queryKey = queryOptions.queryKey;
 
   return query;
 }
-
-
 
 export const patchInsurancesId = (
-    id: string,
-    updateInsuranceInput: UpdateInsuranceInput,
- ) => {
-      
-      
-      return axiosInstance<InsuranceResponse>(
-      {url: `/insurances/${id}`, method: 'PATCH',
-      headers: {'Content-Type': 'application/json', },
-      data: updateInsuranceInput
-    },
-      );
-    }
-  
+  id: string,
+  updateInsuranceInput: UpdateInsuranceInput,
+) => {
+  return axiosInstance<InsuranceResponse>({
+    url: `/insurances/${id}`,
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    data: updateInsuranceInput,
+  });
+};
 
+export const getPatchInsurancesIdMutationOptions = <
+  TError = ErrorResponse | NotfoundError,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof patchInsurancesId>>,
+    TError,
+    { id: string; data: UpdateInsuranceInput },
+    TContext
+  >;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof patchInsurancesId>>,
+  TError,
+  { id: string; data: UpdateInsuranceInput },
+  TContext
+> => {
+  const mutationKey = ["patchInsurancesId"];
+  const { mutation: mutationOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey } };
 
-export const getPatchInsurancesIdMutationOptions = <TError = ErrorResponse | NotfoundError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof patchInsurancesId>>, TError,{id: string;data: UpdateInsuranceInput}, TContext>, }
-): UseMutationOptions<Awaited<ReturnType<typeof patchInsurancesId>>, TError,{id: string;data: UpdateInsuranceInput}, TContext> => {
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof patchInsurancesId>>,
+    { id: string; data: UpdateInsuranceInput }
+  > = (props) => {
+    const { id, data } = props ?? {};
 
-const mutationKey = ['patchInsurancesId'];
-const {mutation: mutationOptions} = options ?
-      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
-      options
-      : {...options, mutation: {...options.mutation, mutationKey}}
-      : {mutation: { mutationKey, }};
+    return patchInsurancesId(id, data);
+  };
 
-      
+  return { mutationFn, ...mutationOptions };
+};
 
+export type PatchInsurancesIdMutationResult = NonNullable<
+  Awaited<ReturnType<typeof patchInsurancesId>>
+>;
+export type PatchInsurancesIdMutationBody = UpdateInsuranceInput;
+export type PatchInsurancesIdMutationError = ErrorResponse | NotfoundError;
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof patchInsurancesId>>, {id: string;data: UpdateInsuranceInput}> = (props) => {
-          const {id,data} = props ?? {};
+export const usePatchInsurancesId = <
+  TError = ErrorResponse | NotfoundError,
+  TContext = unknown,
+>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof patchInsurancesId>>,
+      TError,
+      { id: string; data: UpdateInsuranceInput },
+      TContext
+    >;
+  },
+  queryClient?: QueryClient,
+): UseMutationResult<
+  Awaited<ReturnType<typeof patchInsurancesId>>,
+  TError,
+  { id: string; data: UpdateInsuranceInput },
+  TContext
+> => {
+  const mutationOptions = getPatchInsurancesIdMutationOptions(options);
 
-          return  patchInsurancesId(id,data,)
-        }
+  return useMutation(mutationOptions, queryClient);
+};
+export const deleteInsurancesId = (id: string) => {
+  return axiosInstance<BaseResponse>({
+    url: `/insurances/${id}`,
+    method: "DELETE",
+  });
+};
 
-        
+export const getDeleteInsurancesIdMutationOptions = <
+  TError = NotfoundError | ConflictError,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof deleteInsurancesId>>,
+    TError,
+    { id: string },
+    TContext
+  >;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof deleteInsurancesId>>,
+  TError,
+  { id: string },
+  TContext
+> => {
+  const mutationKey = ["deleteInsurancesId"];
+  const { mutation: mutationOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey } };
 
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof deleteInsurancesId>>,
+    { id: string }
+  > = (props) => {
+    const { id } = props ?? {};
 
-  return  { mutationFn, ...mutationOptions }}
+    return deleteInsurancesId(id);
+  };
 
-    export type PatchInsurancesIdMutationResult = NonNullable<Awaited<ReturnType<typeof patchInsurancesId>>>
-    export type PatchInsurancesIdMutationBody = UpdateInsuranceInput
-    export type PatchInsurancesIdMutationError = ErrorResponse | NotfoundError
+  return { mutationFn, ...mutationOptions };
+};
 
-    export const usePatchInsurancesId = <TError = ErrorResponse | NotfoundError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof patchInsurancesId>>, TError,{id: string;data: UpdateInsuranceInput}, TContext>, }
- , queryClient?: QueryClient): UseMutationResult<
-        Awaited<ReturnType<typeof patchInsurancesId>>,
-        TError,
-        {id: string;data: UpdateInsuranceInput},
-        TContext
-      > => {
+export type DeleteInsurancesIdMutationResult = NonNullable<
+  Awaited<ReturnType<typeof deleteInsurancesId>>
+>;
 
-      const mutationOptions = getPatchInsurancesIdMutationOptions(options);
+export type DeleteInsurancesIdMutationError = NotfoundError | ConflictError;
 
-      return useMutation(mutationOptions , queryClient);
-    }
-    export const deleteInsurancesId = (
-    id: string,
- ) => {
-      
-      
-      return axiosInstance<BaseResponse>(
-      {url: `/insurances/${id}`, method: 'DELETE'
-    },
-      );
-    }
-  
+export const useDeleteInsurancesId = <
+  TError = NotfoundError | ConflictError,
+  TContext = unknown,
+>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof deleteInsurancesId>>,
+      TError,
+      { id: string },
+      TContext
+    >;
+  },
+  queryClient?: QueryClient,
+): UseMutationResult<
+  Awaited<ReturnType<typeof deleteInsurancesId>>,
+  TError,
+  { id: string },
+  TContext
+> => {
+  const mutationOptions = getDeleteInsurancesIdMutationOptions(options);
 
-
-export const getDeleteInsurancesIdMutationOptions = <TError = NotfoundError | ConflictError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteInsurancesId>>, TError,{id: string}, TContext>, }
-): UseMutationOptions<Awaited<ReturnType<typeof deleteInsurancesId>>, TError,{id: string}, TContext> => {
-
-const mutationKey = ['deleteInsurancesId'];
-const {mutation: mutationOptions} = options ?
-      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
-      options
-      : {...options, mutation: {...options.mutation, mutationKey}}
-      : {mutation: { mutationKey, }};
-
-      
-
-
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteInsurancesId>>, {id: string}> = (props) => {
-          const {id} = props ?? {};
-
-          return  deleteInsurancesId(id,)
-        }
-
-        
-
-
-  return  { mutationFn, ...mutationOptions }}
-
-    export type DeleteInsurancesIdMutationResult = NonNullable<Awaited<ReturnType<typeof deleteInsurancesId>>>
-    
-    export type DeleteInsurancesIdMutationError = NotfoundError | ConflictError
-
-    export const useDeleteInsurancesId = <TError = NotfoundError | ConflictError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteInsurancesId>>, TError,{id: string}, TContext>, }
- , queryClient?: QueryClient): UseMutationResult<
-        Awaited<ReturnType<typeof deleteInsurancesId>>,
-        TError,
-        {id: string},
-        TContext
-      > => {
-
-      const mutationOptions = getDeleteInsurancesIdMutationOptions(options);
-
-      return useMutation(mutationOptions , queryClient);
-    }
-    
+  return useMutation(mutationOptions, queryClient);
+};

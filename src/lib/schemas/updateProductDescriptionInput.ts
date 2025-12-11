@@ -4,8 +4,8 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { UpdateProductDescriptionInputMediaSide } from './updateProductDescriptionInputMediaSide';
-import type { UpdateProductDescriptionInputMediaId } from './updateProductDescriptionInputMediaId';
+import type { UpdateProductDescriptionInputMediaSide } from "./updateProductDescriptionInputMediaSide";
+import type { UpdateProductDescriptionInputMediaId } from "./updateProductDescriptionInputMediaId";
 
 /**
  * Update product description fields

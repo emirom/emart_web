@@ -4,14 +4,19 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { BaseResponse } from './baseResponse';
-import type { Insurance } from './insurance';
+import type { BaseResponse } from "./baseResponse";
+import type { Insurance } from "./insurance";
 
 /**
  * Response for single insurance operations
  */
 export type InsuranceResponse = BaseResponse & {
   data: Insurance;
-} & Required<Pick<BaseResponse & {
-  data: Insurance;
-}, 'data'>>;
+} & Required<
+    Pick<
+      BaseResponse & {
+        data: Insurance;
+      },
+      "data"
+    >
+  >;

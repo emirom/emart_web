@@ -4,16 +4,16 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { LeasingListResponseDataItemDeletedAt } from './leasingListResponseDataItemDeletedAt';
-import type { LeasingListResponseDataItemDescription } from './leasingListResponseDataItemDescription';
-import type { LeasingListResponseDataItemCurrency } from './leasingListResponseDataItemCurrency';
-import type { LeasingListResponseDataItemIsActive } from './leasingListResponseDataItemIsActive';
-import type { LeasingListResponseDataItemBankId } from './leasingListResponseDataItemBankId';
-import type { LeasingListResponseDataItemCurrencyId } from './leasingListResponseDataItemCurrencyId';
-import type { LeasingListResponseDataItemContractTemplateUrl } from './leasingListResponseDataItemContractTemplateUrl';
-import type { LeasingListResponseDataItemTotalLeaseAmount } from './leasingListResponseDataItemTotalLeaseAmount';
-import type { LeasingListResponseDataItemAccountingRefId } from './leasingListResponseDataItemAccountingRefId';
-import type { LeasingListResponseDataItemIsRegisteredWithTax } from './leasingListResponseDataItemIsRegisteredWithTax';
+import type { LeasingListResponseDataItemDeletedAt } from "./leasingListResponseDataItemDeletedAt";
+import type { LeasingListResponseDataItemDescription } from "./leasingListResponseDataItemDescription";
+import type { LeasingListResponseDataItemCurrency } from "./leasingListResponseDataItemCurrency";
+import type { LeasingListResponseDataItemIsActive } from "./leasingListResponseDataItemIsActive";
+import type { LeasingListResponseDataItemBankId } from "./leasingListResponseDataItemBankId";
+import type { LeasingListResponseDataItemCurrencyId } from "./leasingListResponseDataItemCurrencyId";
+import type { LeasingListResponseDataItemContractTemplateUrl } from "./leasingListResponseDataItemContractTemplateUrl";
+import type { LeasingListResponseDataItemTotalLeaseAmount } from "./leasingListResponseDataItemTotalLeaseAmount";
+import type { LeasingListResponseDataItemAccountingRefId } from "./leasingListResponseDataItemAccountingRefId";
+import type { LeasingListResponseDataItemIsRegisteredWithTax } from "./leasingListResponseDataItemIsRegisteredWithTax";
 
 export type LeasingListResponseDataItem = {
   /** Unique identifier (UUIDv4) */
