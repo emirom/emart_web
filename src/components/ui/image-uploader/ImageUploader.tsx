@@ -1,7 +1,8 @@
 "use client";
 
+import { buildMediaUrl } from "@lib/utils/build-media-url";
 import Image from "next/image";
-import { ChangeEvent, useRef } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { Control, Controller, FieldValues, Path } from "react-hook-form";
 
 export interface FileWithPreview extends File {
@@ -15,6 +16,7 @@ interface Props<T extends FieldValues> {
   disabled?: boolean;
   className?: string;
   placeholderText?: string;
+  url?: string;
 }
 
 export function ImageUploader<T extends FieldValues>({
@@ -24,6 +26,7 @@ export function ImageUploader<T extends FieldValues>({
   disabled = false,
   className,
   placeholderText = "بارگذاری تصویر",
+  url,
 }: Props<T>) {
   const inputRef = useRef<HTMLInputElement | null>(null);
 
@@ -41,9 +44,14 @@ export function ImageUploader<T extends FieldValues>({
   ) => {
     const file = e.target.files?.[0] ?? null;
     const fileWithPreview = file ? createPreviewFile(file) : null;
-
     onChange(fileWithPreview);
   };
+
+  const [currentUrl, setCurrentUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (url) setCurrentUrl(url);
+  }, [url]);
 
   return (
     <Controller
@@ -61,27 +69,30 @@ export function ImageUploader<T extends FieldValues>({
             }`}
             onClick={handleClick}
           >
-            {!value ? (
+            {!value && !currentUrl ? (
               <div className="flex flex-col items-center justify-center py-6">
                 <span className="text-sm text-gray-500">{placeholderText}</span>
               </div>
             ) : (
               <div className="relative w-40 h-40">
                 <Image
-                  src={value.preview}
+                  src={value ? value.preview : buildMediaUrl(currentUrl!)}
                   fill
                   alt="preview"
                   className="rounded-lg object-cover"
                 />
               </div>
             )}
-            {value && (
+
+            {(value || currentUrl) && (
               <button
                 type="button"
                 className="absolute bottom-1 right-1 bg-black/60 text-white px-1 py-1 rounded-md text-xs font-medium cursor-pointer"
                 onClick={(e) => {
                   e.stopPropagation();
                   onChange(null);
+                  setCurrentUrl(null);
+                  if (inputRef.current) inputRef.current.value = "";
                 }}
               >
                 حذف
