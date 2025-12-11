@@ -6,7 +6,7 @@ import { FormScrollableSelectField } from "@components/FormScrollableSelectField
 import { zodResolver } from "@hookform/resolvers/zod";
 import { patchProvinceAction } from "@lib/actions/province-action";
 import { queryClient } from "@lib/apis/queryClient";
-import { CreateProvinceInput } from "@lib/schemas";
+import { UpdateProvinceInput } from "@lib/schemas";
 import { useGetCountries } from "@lib/services/countries/countries";
 import { useGetProvincesId } from "@lib/services/provinces/provinces";
 import { patchProvincesIdBody } from "@lib/validations/province.validation";
@@ -19,7 +19,7 @@ export default function EditProvinceForm({ id }: { id: string }) {
     query: { queryKey: ["/provinces", id] },
   });
   const { handleSubmit, control, formState, reset } =
-    useForm<CreateProvinceInput>({
+    useForm<UpdateProvinceInput>({
       defaultValues: {
         name: "",
         abb: "",
@@ -29,9 +29,9 @@ export default function EditProvinceForm({ id }: { id: string }) {
       resolver: zodResolver(patchProvincesIdBody) as any,
     });
   useEffect(() => {
-    if (province?.data) reset(province.data);
+    if (province?.data) reset({ ...province.data });
   }, [reset, province?.data]);
-  const onSubmit: SubmitHandler<CreateProvinceInput> = async (data) => {
+  const onSubmit: SubmitHandler<UpdateProvinceInput> = async (data) => {
     try {
       await patchProvinceAction(id, data);
       queryClient.invalidateQueries({ queryKey: ["/provinces"] });
@@ -63,7 +63,7 @@ export default function EditProvinceForm({ id }: { id: string }) {
       <FormInputField control={control} label="نام استان" name="name" />
       <FormInputField
         control={control}
-        label="نام مخفف اصتان(abb)"
+        label="نام مخفف استان(abb)"
         name="abb"
       />
 

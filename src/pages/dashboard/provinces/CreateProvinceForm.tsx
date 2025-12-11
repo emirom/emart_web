@@ -55,7 +55,7 @@ export default function CreateProvinceForm() {
       <FormInputField control={control} label="نام فروشگاه" name="name" />
       <FormInputField
         control={control}
-        label="نام مخفف اصتان(abb)"
+        label="نام مخفف استان(abb)"
         name="abb"
       />
 
