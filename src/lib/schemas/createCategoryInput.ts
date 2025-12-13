@@ -4,11 +4,11 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
+import type { CreateCategoryInputDesc } from "./createCategoryInputDesc";
+import type { CreateCategoryInputIconUrl } from "./createCategoryInputIconUrl";
+import type { CreateCategoryInputIsActive } from "./createCategoryInputIsActive";
 import type { CreateCategoryInputParentId } from "./createCategoryInputParentId";
 import type { CreateCategoryInputPromotionId } from "./createCategoryInputPromotionId";
-import type { CreateCategoryInputIconUrl } from "./createCategoryInputIconUrl";
-import type { CreateCategoryInputDesc } from "./createCategoryInputDesc";
-import type { CreateCategoryInputIsActive } from "./createCategoryInputIsActive";
 import type { CreateCategoryInputShowInMenu } from "./createCategoryInputShowInMenu";
 
 /**

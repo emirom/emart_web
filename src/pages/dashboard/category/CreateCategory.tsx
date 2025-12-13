@@ -20,7 +20,6 @@ export default function CreateCategoryPage() {
     useForm<CreateCategoryInput>({
       defaultValues: {
         iconUrl: "https://example.com/icon.png",
-        level: 0,
         name: "",
         enName: "",
         parentId: null,

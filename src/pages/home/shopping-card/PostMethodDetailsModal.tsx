@@ -13,7 +13,7 @@ import {
 } from "@components/ui/drawer";
 import { XIcon } from "lucide-react";
 
-export function PostMethodDetailsModal({
+export default function PostMethodDetailsModal({
   title,
   price,
   description,

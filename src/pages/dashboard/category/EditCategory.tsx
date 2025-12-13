@@ -27,7 +27,7 @@ export default function EditCategory({ id }: { id: string }) {
   } = useForm<UpdateCategoryInput>({
     defaultValues: {
       iconUrl: "https://example.com/icon.png",
-      level: 0,
+
       name: "",
       enName: "",
       parentId: null,
