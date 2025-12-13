@@ -14,20 +14,18 @@ export const postCitiesBodyNameMin = 2;
 export const postCitiesBodyNameMax = 100;
 export const postCitiesBodyAbbMaxOne = 10;
 
-export const postCitiesBody = zod
-  .object({
-    name: zod.coerce
-      .string()
-      .min(postCitiesBodyNameMin)
-      .max(postCitiesBodyNameMax)
-      .describe("City name in native language"),
-    abb: zod
-      .union([zod.coerce.string().max(postCitiesBodyAbbMaxOne), zod.null()])
-      .optional()
-      .describe("City abbreviation (e.g., THR for Tehran)"),
-    provinceId: zod.uuid().describe("Associated province ID"),
-  })
-  .describe("City entity with province reference");
+export const postCitiesBody = zod.object({
+  name: zod.coerce
+    .string()
+    .min(postCitiesBodyNameMin)
+    .max(postCitiesBodyNameMax)
+    .describe("City name in native language"),
+  abb: zod
+    .union([zod.coerce.string().max(postCitiesBodyAbbMaxOne), zod.null()])
+    .optional()
+    .describe("City abbreviation (e.g., THR for Tehran)"),
+  provinceId: zod.uuid().describe("Associated province ID"),
+});
 
 /**
  * Get all cities with pagination and filtering
@@ -109,21 +107,19 @@ export const patchCitiesIdBodyNameMin = 2;
 export const patchCitiesIdBodyNameMax = 100;
 export const patchCitiesIdBodyAbbMaxOne = 10;
 
-export const patchCitiesIdBody = zod
-  .object({
-    name: zod.coerce
-      .string()
-      .min(patchCitiesIdBodyNameMin)
-      .max(patchCitiesIdBodyNameMax)
-      .optional()
-      .describe("City name in native language"),
-    abb: zod
-      .union([zod.coerce.string().max(patchCitiesIdBodyAbbMaxOne), zod.null()])
-      .optional()
-      .describe("City abbreviation (e.g., THR for Tehran)"),
-    provinceId: zod.uuid().optional().describe("Associated province ID"),
-  })
-  .describe("City entity with province reference");
+export const patchCitiesIdBody = zod.object({
+  name: zod.coerce
+    .string()
+    .min(patchCitiesIdBodyNameMin)
+    .max(patchCitiesIdBodyNameMax)
+    .optional()
+    .describe("City name in native language"),
+  abb: zod
+    .union([zod.coerce.string().max(patchCitiesIdBodyAbbMaxOne), zod.null()])
+    .optional()
+    .describe("City abbreviation (e.g., THR for Tehran)"),
+  provinceId: zod.uuid().optional().describe("Associated province ID"),
+});
 
 export const patchCitiesIdResponse = zod
   .object({

@@ -6,9 +6,6 @@
  */
 import type { UpdateCityInputAbb } from "./updateCityInputAbb";
 
-/**
- * City entity with province reference
- */
 export interface UpdateCityInput {
   /**
    * City name in native language

@@ -5,7 +5,6 @@
  * OpenAPI spec version: 1.0.0
  */
 import type { ProductMediaVariantId } from "./productMediaVariantId";
-import type { ProductMediaTitle } from "./productMediaTitle";
 import type { ProductMediaThumbnailUrl } from "./productMediaThumbnailUrl";
 import type { ProductMediaAltText } from "./productMediaAltText";
 import type { ProductMediaCaption } from "./productMediaCaption";
@@ -32,8 +31,6 @@ export interface ProductMedia {
    * @maxLength 2048
    */
   url: string;
-  /** Optional thumbnail URL for quick preview (auto-generated for videos) */
-  title?: ProductMediaTitle;
   /** Optional thumbnail URL for quick preview (auto-generated for videos) */
   thumbnailUrl?: ProductMediaThumbnailUrl;
   /** Alternative text for accessibility and SEO optimization */

@@ -130,6 +130,9 @@ export const patchProductMediasIdBodyCaptionMaxOne = 1000;
 
 export const patchProductMediasIdBody = zod
   .object({
+    file: zod
+      .any()
+      .describe("Media file (image or video) with comprehensive validation"),
     altText: zod
       .union([
         zod.coerce.string().max(patchProductMediasIdBodyAltTextMaxOne),

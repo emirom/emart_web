@@ -6,6 +6,7 @@
  */
 import type { CityDeletedAt } from "./cityDeletedAt";
 import type { CityAbb } from "./cityAbb";
+import type { CityProvince } from "./cityProvince";
 
 /**
  * City entity with province reference
@@ -27,6 +28,5 @@ export interface City {
   name: string;
   /** City abbreviation (e.g., THR for Tehran) */
   abb?: CityAbb;
-  /** Associated province ID */
-  provinceId: string;
+  province: CityProvince;
 }

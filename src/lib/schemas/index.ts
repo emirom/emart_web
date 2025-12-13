@@ -831,3 +831,5 @@ export * from "./variantMpn";
 export * from "./variantResponse";
 export * from "./variantSlug";
 export * from "./variantTitleOverride";
+export * from "./cityListResponseDataItemProvince";
+export * from "./cityProvince";

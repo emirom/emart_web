@@ -6,6 +6,7 @@
  */
 import type { CityListResponseDataItemDeletedAt } from "./cityListResponseDataItemDeletedAt";
 import type { CityListResponseDataItemAbb } from "./cityListResponseDataItemAbb";
+import type { CityListResponseDataItemProvince } from "./cityListResponseDataItemProvince";
 
 export type CityListResponseDataItem = {
   /** Unique identifier (UUIDv4) */
@@ -24,8 +25,7 @@ export type CityListResponseDataItem = {
   name: string;
   /** City abbreviation (e.g., THR for Tehran) */
   abb?: CityListResponseDataItemAbb;
-  /** Associated province ID */
-  provinceId: string;
+  province: CityListResponseDataItemProvince;
   /** number of row in list table */
   rowNumber: number;
 };

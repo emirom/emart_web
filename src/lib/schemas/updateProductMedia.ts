@@ -12,6 +12,8 @@ import type { UpdateProductMediaOrder } from "./updateProductMediaOrder";
  * Schema for updating existing product media metadata
  */
 export interface UpdateProductMedia {
+  /** Media file (image or video) with comprehensive validation */
+  file: unknown;
   /** Update alternative text for accessibility */
   altText?: UpdateProductMediaAltText;
   /** Update media caption or description */
