@@ -4,14 +4,19 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { BaseResponse } from './baseResponse';
-import type { LoginResponseData } from './loginResponseData';
+import type { BaseResponse } from "./baseResponse";
+import type { LoginResponseData } from "./loginResponseData";
 
 /**
  * login response schema
  */
 export type LoginResponse = BaseResponse & {
   data: LoginResponseData;
-} & Required<Pick<BaseResponse & {
-  data: LoginResponseData;
-}, 'data'>>;
+} & Required<
+    Pick<
+      BaseResponse & {
+        data: LoginResponseData;
+      },
+      "data"
+    >
+  >;

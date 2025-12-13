@@ -4,14 +4,19 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { BaseResponse } from './baseResponse';
-import type { OtpResponseData } from './otpResponseData';
+import type { BaseResponse } from "./baseResponse";
+import type { OtpResponseData } from "./otpResponseData";
 
 /**
  * Otp response schema
  */
 export type OtpResponse = BaseResponse & {
   data: OtpResponseData;
-} & Required<Pick<BaseResponse & {
-  data: OtpResponseData;
-}, 'data'>>;
+} & Required<
+    Pick<
+      BaseResponse & {
+        data: OtpResponseData;
+      },
+      "data"
+    >
+  >;

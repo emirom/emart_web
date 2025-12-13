@@ -8,4 +8,6 @@
 /**
  * A user-friendly label for the filter.
  */
-export type ProductDescriptionListResponseWithMetaFiltersItemLabel = string | null;
+export type ProductDescriptionListResponseWithMetaFiltersItemLabel =
+  | string
+  | null;

@@ -4,7 +4,7 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { ProductLabelsAnyOfItem } from './productLabelsAnyOfItem';
+import type { ProductLabelsAnyOfItem } from "./productLabelsAnyOfItem";
 
 /**
  * Connected label IDs

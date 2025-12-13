@@ -4,7 +4,7 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { LabelPageId } from './labelPageId';
+import type { LabelPageId } from "./labelPageId";
 
 /**
  * Label entity for fast search of homepage products

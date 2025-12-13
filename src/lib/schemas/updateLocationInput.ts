@@ -4,9 +4,9 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { UpdateLocationInputStreetNumber } from './updateLocationInputStreetNumber';
-import type { UpdateLocationInputStoreId } from './updateLocationInputStoreId';
-import type { UpdateLocationInputIsActive } from './updateLocationInputIsActive';
+import type { UpdateLocationInputStreetNumber } from "./updateLocationInputStreetNumber";
+import type { UpdateLocationInputStoreId } from "./updateLocationInputStoreId";
+import type { UpdateLocationInputIsActive } from "./updateLocationInputIsActive";
 
 /**
  * Location update payload

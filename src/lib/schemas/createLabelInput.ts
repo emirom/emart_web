@@ -4,7 +4,7 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { CreateLabelInputPageId } from './createLabelInputPageId';
+import type { CreateLabelInputPageId } from "./createLabelInputPageId";
 
 /**
  * Label creation payload

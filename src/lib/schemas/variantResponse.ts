@@ -4,14 +4,19 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { BaseResponse } from './baseResponse';
-import type { Variant } from './variant';
+import type { BaseResponse } from "./baseResponse";
+import type { Variant } from "./variant";
 
 /**
  * Response for single variant operations
  */
 export type VariantResponse = BaseResponse & {
   data: Variant;
-} & Required<Pick<BaseResponse & {
-  data: Variant;
-}, 'data'>>;
+} & Required<
+    Pick<
+      BaseResponse & {
+        data: Variant;
+      },
+      "data"
+    >
+  >;

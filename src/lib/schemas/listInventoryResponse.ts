@@ -4,10 +4,10 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { BaseResponse } from './baseResponse';
-import type { ListInventoryResponseDetails } from './listInventoryResponseDetails';
-import type { ListInventoryResponseFiltersItem } from './listInventoryResponseFiltersItem';
-import type { ListInventoryResponseDataItem } from './listInventoryResponseDataItem';
+import type { BaseResponse } from "./baseResponse";
+import type { ListInventoryResponseDetails } from "./listInventoryResponseDetails";
+import type { ListInventoryResponseFiltersItem } from "./listInventoryResponseFiltersItem";
+import type { ListInventoryResponseDataItem } from "./listInventoryResponseDataItem";
 
 /**
  * List of inventories response
@@ -17,9 +17,14 @@ export type ListInventoryResponse = BaseResponse & {
   details?: ListInventoryResponseDetails;
   filters: ListInventoryResponseFiltersItem[];
   data: ListInventoryResponseDataItem[];
-} & Required<Pick<BaseResponse & {
-  /** Pagination metadata */
-  details?: ListInventoryResponseDetails;
-  filters: ListInventoryResponseFiltersItem[];
-  data: ListInventoryResponseDataItem[];
-}, 'filters' | 'data'>>;
+} & Required<
+    Pick<
+      BaseResponse & {
+        /** Pagination metadata */
+        details?: ListInventoryResponseDetails;
+        filters: ListInventoryResponseFiltersItem[];
+        data: ListInventoryResponseDataItem[];
+      },
+      "filters" | "data"
+    >
+  >;

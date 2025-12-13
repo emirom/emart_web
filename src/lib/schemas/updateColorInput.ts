@@ -4,8 +4,8 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { UpdateColorInputEnName } from './updateColorInputEnName';
-import type { UpdateColorInputDisplayName } from './updateColorInputDisplayName';
+import type { UpdateColorInputEnName } from "./updateColorInputEnName";
+import type { UpdateColorInputDisplayName } from "./updateColorInputDisplayName";
 
 /**
  * Color update payload (any field optional)

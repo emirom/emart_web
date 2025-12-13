@@ -4,15 +4,15 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { CreateLeasingInputDescription } from './createLeasingInputDescription';
-import type { CreateLeasingInputCurrency } from './createLeasingInputCurrency';
-import type { CreateLeasingInputIsActive } from './createLeasingInputIsActive';
-import type { CreateLeasingInputBankId } from './createLeasingInputBankId';
-import type { CreateLeasingInputCurrencyId } from './createLeasingInputCurrencyId';
-import type { CreateLeasingInputContractTemplateUrl } from './createLeasingInputContractTemplateUrl';
-import type { CreateLeasingInputTotalLeaseAmount } from './createLeasingInputTotalLeaseAmount';
-import type { CreateLeasingInputAccountingRefId } from './createLeasingInputAccountingRefId';
-import type { CreateLeasingInputIsRegisteredWithTax } from './createLeasingInputIsRegisteredWithTax';
+import type { CreateLeasingInputDescription } from "./createLeasingInputDescription";
+import type { CreateLeasingInputCurrency } from "./createLeasingInputCurrency";
+import type { CreateLeasingInputIsActive } from "./createLeasingInputIsActive";
+import type { CreateLeasingInputBankId } from "./createLeasingInputBankId";
+import type { CreateLeasingInputCurrencyId } from "./createLeasingInputCurrencyId";
+import type { CreateLeasingInputContractTemplateUrl } from "./createLeasingInputContractTemplateUrl";
+import type { CreateLeasingInputTotalLeaseAmount } from "./createLeasingInputTotalLeaseAmount";
+import type { CreateLeasingInputAccountingRefId } from "./createLeasingInputAccountingRefId";
+import type { CreateLeasingInputIsRegisteredWithTax } from "./createLeasingInputIsRegisteredWithTax";
 
 /**
  * Product leasing plan for B2B/B2C

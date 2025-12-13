@@ -4,12 +4,12 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { ListColorResponseFiltersItemLabel } from './listColorResponseFiltersItemLabel';
-import type { ListColorResponseFiltersItemUrl } from './listColorResponseFiltersItemUrl';
-import type { ListColorResponseFiltersItemModel } from './listColorResponseFiltersItemModel';
-import type { ListColorResponseFiltersItemField } from './listColorResponseFiltersItemField';
-import type { ListColorResponseFiltersItemAdvanced } from './listColorResponseFiltersItemAdvanced';
-import type { ListColorResponseFiltersItemEnumOptions } from './listColorResponseFiltersItemEnumOptions';
+import type { ListColorResponseFiltersItemLabel } from "./listColorResponseFiltersItemLabel";
+import type { ListColorResponseFiltersItemUrl } from "./listColorResponseFiltersItemUrl";
+import type { ListColorResponseFiltersItemModel } from "./listColorResponseFiltersItemModel";
+import type { ListColorResponseFiltersItemField } from "./listColorResponseFiltersItemField";
+import type { ListColorResponseFiltersItemAdvanced } from "./listColorResponseFiltersItemAdvanced";
+import type { ListColorResponseFiltersItemEnumOptions } from "./listColorResponseFiltersItemEnumOptions";
 
 export type ListColorResponseFiltersItem = {
   /** The key representing the service associated with the filter. */
