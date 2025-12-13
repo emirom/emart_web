@@ -7,7 +7,7 @@ export default function ShoppingCardList() {
       <h2 className="text-sm font-medium text-tint-blue-500 my-2">
         سبد خرید شما | 4 عدد کالا
       </h2>
-      <ul className="grid grid-cols-1 sm:grid-cols-3">
+      <ul className="grid grid-cols-2 sm:grid-cols-3">
         {Array.from({ length: 4 }, (_, i) => (
           <li key={i} className="border border-gray-100 p-2">
             <figure
@@ -24,7 +24,7 @@ export default function ShoppingCardList() {
             <CartCounter />
           </li>
         ))}
-        <li className="border border-gray-100 p-2 py-4 flex flex-col justify-between items-center text-tint-blue-500 text-center">
+        <li className="border border-gray-100 p-2 py-4 flex flex-col justify-between gap-4 items-center text-tint-blue-500 text-center">
           <span className="text-sm font-medium">خریدت تموم نشده..؟</span>
           <span className=" w-10 h-10 rounded-full bg-tint-blue-500 flex items-center justify-center text-whit-smoke font-bold text-lg leading-10">
             +

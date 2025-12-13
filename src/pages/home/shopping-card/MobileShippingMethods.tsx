@@ -6,6 +6,7 @@ import TipaxIcon from "@components/icons/TipaxIcon";
 import { cn } from "@components/lib/utils";
 import React from "react";
 import { v4 as uuidv4 } from "uuid";
+import { PostMethodDetailsModal } from "./PostMethodDetailsModal";
 
 const shippingMethods = [
   {
@@ -47,14 +48,14 @@ export default function MobileShippingMethods() {
     "NORMAL" | "LEADING" | "TIPAX" | "INPERSON" | string
   >("NORMAL");
   return (
-    <div className="border-b border-b-gray-100 py-2 mt-4">
+    <div className="py-2 mt-4 mb-10">
       <p className="text-tint-blue-500 text-xs font-medium ">شیوه ارسال</p>
 
-      <ul className="grid grid-cols-1 gap-2 mt-2 sm:grid-cols-2 text-nowrap">
+      <ul className="grid grid-cols-1 gap-y-12 gap-2 mt-2 sm:grid-cols-2 text-nowrap">
         {shippingMethods.map((method) => (
           <li
             key={method.id}
-            className="px-4 py-2 border border-tint-blue-500 rounded-lg cursor-pointer"
+            className="px-4 py-2 border border-tint-blue-500 rounded-lg cursor-pointer relative"
             onClick={() => setSelectedMethod(method.value)}
           >
             <div className="flex items-center justify-between mb-2">
@@ -83,6 +84,22 @@ export default function MobileShippingMethods() {
                 {method.price} تومان
               </span>
             </div>
+            <PostMethodDetailsModal
+              price={10000}
+              description="مورد 1
+لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ
+و با استفاده از  طراحان گرافیک است، 
+چاپگرها و متون بلکه روزنامه و مجله در ستون و  سطرآنچنان که لازم است، 
+و برای شرایط فعلی تکنولوژی مورد نیاز، 
+و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد، 
+کتابهای زیادی در شصت و سه  درصد گذشته حال و آینده، 
+شناخت فراوان جامعه و متخصصان را می طلبد، 
+مورد 2
+تا با  نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان  خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد، 
+در این صورت می توان امید  داشت که تمام و دشواری موجود در ارائه راهکارها، 
+و شرایط سخت تایپ به پایان رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی،"
+              title="بیمه تجهیزات دیجیتال | حضرت ابوالفضل"
+            />
           </li>
         ))}
       </ul>
