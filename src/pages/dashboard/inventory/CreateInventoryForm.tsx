@@ -205,7 +205,7 @@ export default function CreateInventoryForm() {
       >
         ثبت موجودی
       </button> */}
-      <SubmitButton label="ثبت موجودی" />
+      <SubmitButton label="ثبت موجودی" className="mt-auto" />
     </form>
   );
 }
