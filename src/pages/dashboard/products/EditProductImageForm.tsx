@@ -54,7 +54,6 @@ export default function EditProductImageForm({
   }, [productMedia?.data, reset]);
 
   const onSubmit: SubmitHandler<UploadProductImageInput> = async (data) => {
-    console.log(">>>>>>>>>>", data);
     if (!data.file && !productMedia?.data?.url) {
       toast.error("لطفاً یک فایل انتخاب کنید");
       return;
