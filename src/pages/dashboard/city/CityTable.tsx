@@ -11,7 +11,7 @@ import CreateCity from "./CreateCity";
 
 const columns: ColumnDef<City>[] = [
   { accessorKey: "name", header: "نام" },
-  { accessorKey: "provinceId", header: "استان" },
+  { accessorKey: "province.name", header: "استان" },
   { accessorKey: "createdAt", header: "تاریخ ایجاد" },
   { accessorKey: "updatedAt", header: "تاریخ به روزرسانی" },
   {

@@ -26,18 +26,17 @@ export default function EditProductImageForm({
 }: {
   productId: string;
 }) {
-  const { control, handleSubmit, reset, watch } =
-    useForm<UploadProductImageInput>({
-      defaultValues: {
-        productId,
-        file: null,
-        altText: "",
-        caption: "",
-      },
-      mode: "onChange",
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      resolver: zodResolver(patchProductMediasIdBody) as any,
-    });
+  const { control, handleSubmit, reset } = useForm<UploadProductImageInput>({
+    defaultValues: {
+      productId,
+      file: null,
+      altText: "",
+      caption: "",
+    },
+    mode: "onChange",
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    resolver: zodResolver(patchProductMediasIdBody) as any,
+  });
 
   const { data: productMedia } = useGetProductMediasId(productId, {
     query: { queryKey: ["/product-medias", productId] },
