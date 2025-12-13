@@ -4,7 +4,10 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import { useMutation, useQuery } from "@tanstack/react-query";
+import {
+  useMutation,
+  useQuery
+} from '@tanstack/react-query';
 import type {
   DataTag,
   DefinedInitialDataOptions,
@@ -17,8 +20,8 @@ import type {
   UseMutationOptions,
   UseMutationResult,
   UseQueryOptions,
-  UseQueryResult,
-} from "@tanstack/react-query";
+  UseQueryResult
+} from '@tanstack/react-query';
 
 import type {
   BaseResponse,
@@ -30,529 +33,352 @@ import type {
   GuaranteeResponse,
   InternalError,
   NotfoundError,
-  UpdateGuaranteeInput,
-} from "../../schemas";
+  UpdateGuaranteeInput
+} from '../../schemas';
 
-import { axiosInstance } from "../../configs/axios-instance";
+import { axiosInstance } from '../../configs/axios-instance';
+
+
+
 
 /**
  * Create a new guarantee
  */
 export const postGuarantees = (
-  createGuaranteeInput: CreateGuaranteeInput,
-  signal?: AbortSignal,
+    createGuaranteeInput: CreateGuaranteeInput,
+ signal?: AbortSignal
 ) => {
-  return axiosInstance<GuaranteeResponse>({
-    url: `/guarantees`,
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    data: createGuaranteeInput,
-    signal,
-  });
-};
+      
+      
+      return axiosInstance<GuaranteeResponse>(
+      {url: `/guarantees`, method: 'POST',
+      headers: {'Content-Type': 'application/json', },
+      data: createGuaranteeInput, signal
+    },
+      );
+    }
+  
 
-export const getPostGuaranteesMutationOptions = <
-  TError = ErrorResponse | ConflictError,
-  TContext = unknown,
->(options?: {
-  mutation?: UseMutationOptions<
-    Awaited<ReturnType<typeof postGuarantees>>,
-    TError,
-    { data: CreateGuaranteeInput },
-    TContext
-  >;
-}): UseMutationOptions<
-  Awaited<ReturnType<typeof postGuarantees>>,
-  TError,
-  { data: CreateGuaranteeInput },
-  TContext
-> => {
-  const mutationKey = ["postGuarantees"];
-  const { mutation: mutationOptions } = options
-    ? options.mutation &&
-      "mutationKey" in options.mutation &&
-      options.mutation.mutationKey
-      ? options
-      : { ...options, mutation: { ...options.mutation, mutationKey } }
-    : { mutation: { mutationKey } };
 
-  const mutationFn: MutationFunction<
-    Awaited<ReturnType<typeof postGuarantees>>,
-    { data: CreateGuaranteeInput }
-  > = (props) => {
-    const { data } = props ?? {};
+export const getPostGuaranteesMutationOptions = <TError = ErrorResponse | ConflictError,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postGuarantees>>, TError,{data: CreateGuaranteeInput}, TContext>, }
+): UseMutationOptions<Awaited<ReturnType<typeof postGuarantees>>, TError,{data: CreateGuaranteeInput}, TContext> => {
 
-    return postGuarantees(data);
-  };
+const mutationKey = ['postGuarantees'];
+const {mutation: mutationOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }};
 
-  return { mutationFn, ...mutationOptions };
-};
+      
 
-export type PostGuaranteesMutationResult = NonNullable<
-  Awaited<ReturnType<typeof postGuarantees>>
->;
-export type PostGuaranteesMutationBody = CreateGuaranteeInput;
-export type PostGuaranteesMutationError = ErrorResponse | ConflictError;
 
-export const usePostGuarantees = <
-  TError = ErrorResponse | ConflictError,
-  TContext = unknown,
->(
-  options?: {
-    mutation?: UseMutationOptions<
-      Awaited<ReturnType<typeof postGuarantees>>,
-      TError,
-      { data: CreateGuaranteeInput },
-      TContext
-    >;
-  },
-  queryClient?: QueryClient,
-): UseMutationResult<
-  Awaited<ReturnType<typeof postGuarantees>>,
-  TError,
-  { data: CreateGuaranteeInput },
-  TContext
-> => {
-  const mutationOptions = getPostGuaranteesMutationOptions(options);
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postGuarantees>>, {data: CreateGuaranteeInput}> = (props) => {
+          const {data} = props ?? {};
 
-  return useMutation(mutationOptions, queryClient);
-};
-/**
+          return  postGuarantees(data,)
+        }
+
+        
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type PostGuaranteesMutationResult = NonNullable<Awaited<ReturnType<typeof postGuarantees>>>
+    export type PostGuaranteesMutationBody = CreateGuaranteeInput
+    export type PostGuaranteesMutationError = ErrorResponse | ConflictError
+
+    export const usePostGuarantees = <TError = ErrorResponse | ConflictError,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postGuarantees>>, TError,{data: CreateGuaranteeInput}, TContext>, }
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof postGuarantees>>,
+        TError,
+        {data: CreateGuaranteeInput},
+        TContext
+      > => {
+
+      const mutationOptions = getPostGuaranteesMutationOptions(options);
+
+      return useMutation(mutationOptions , queryClient);
+    }
+    /**
  * Get all guarantees with pagination and filtering
  */
 export const getGuarantees = (
-  params: GetGuaranteesParams,
-  signal?: AbortSignal,
+    params: GetGuaranteesParams,
+ signal?: AbortSignal
 ) => {
-  return axiosInstance<GuaranteeListResponse>({
-    url: `/guarantees`,
-    method: "GET",
-    params,
-    signal,
-  });
-};
+      
+      
+      return axiosInstance<GuaranteeListResponse>(
+      {url: `/guarantees`, method: 'GET',
+        params, signal
+    },
+      );
+    }
+  
 
-export const getGetGuaranteesQueryKey = (params?: GetGuaranteesParams) => {
-  return [`/guarantees`, ...(params ? [params] : [])] as const;
-};
+export const getGetGuaranteesQueryKey = (params?: GetGuaranteesParams,) => {
+    return [`/guarantees`, ...(params ? [params]: [])] as const;
+    }
 
-export const getGetGuaranteesQueryOptions = <
-  TData = Awaited<ReturnType<typeof getGuarantees>>,
-  TError = InternalError,
->(
-  params: GetGuaranteesParams,
-  options?: {
-    query?: Partial<
-      UseQueryOptions<Awaited<ReturnType<typeof getGuarantees>>, TError, TData>
-    >;
-  },
+    
+export const getGetGuaranteesQueryOptions = <TData = Awaited<ReturnType<typeof getGuarantees>>, TError = InternalError>(params: GetGuaranteesParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getGuarantees>>, TError, TData>>, }
 ) => {
-  const { query: queryOptions } = options ?? {};
 
-  const queryKey = queryOptions?.queryKey ?? getGetGuaranteesQueryKey(params);
+const {query: queryOptions} = options ?? {};
 
-  const queryFn: QueryFunction<Awaited<ReturnType<typeof getGuarantees>>> = ({
-    signal,
-  }) => getGuarantees(params, signal);
+  const queryKey =  queryOptions?.queryKey ?? getGetGuaranteesQueryKey(params);
 
-  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
-    Awaited<ReturnType<typeof getGuarantees>>,
-    TError,
-    TData
-  > & { queryKey: DataTag<QueryKey, TData, TError> };
-};
+  
 
-export type GetGuaranteesQueryResult = NonNullable<
-  Awaited<ReturnType<typeof getGuarantees>>
->;
-export type GetGuaranteesQueryError = InternalError;
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getGuarantees>>> = ({ signal }) => getGuarantees(params, signal);
 
-export function useGetGuarantees<
-  TData = Awaited<ReturnType<typeof getGuarantees>>,
-  TError = InternalError,
->(
-  params: GetGuaranteesParams,
-  options: {
-    query: Partial<
-      UseQueryOptions<Awaited<ReturnType<typeof getGuarantees>>, TError, TData>
-    > &
-      Pick<
+      
+
+      
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getGuarantees>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type GetGuaranteesQueryResult = NonNullable<Awaited<ReturnType<typeof getGuarantees>>>
+export type GetGuaranteesQueryError = InternalError
+
+
+export function useGetGuarantees<TData = Awaited<ReturnType<typeof getGuarantees>>, TError = InternalError>(
+ params: GetGuaranteesParams, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getGuarantees>>, TError, TData>> & Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof getGuarantees>>,
           TError,
           Awaited<ReturnType<typeof getGuarantees>>
-        >,
-        "initialData"
-      >;
-  },
-  queryClient?: QueryClient,
-): DefinedUseQueryResult<TData, TError> & {
-  queryKey: DataTag<QueryKey, TData, TError>;
-};
-export function useGetGuarantees<
-  TData = Awaited<ReturnType<typeof getGuarantees>>,
-  TError = InternalError,
->(
-  params: GetGuaranteesParams,
-  options?: {
-    query?: Partial<
-      UseQueryOptions<Awaited<ReturnType<typeof getGuarantees>>, TError, TData>
-    > &
-      Pick<
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetGuarantees<TData = Awaited<ReturnType<typeof getGuarantees>>, TError = InternalError>(
+ params: GetGuaranteesParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getGuarantees>>, TError, TData>> & Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof getGuarantees>>,
           TError,
           Awaited<ReturnType<typeof getGuarantees>>
-        >,
-        "initialData"
-      >;
-  },
-  queryClient?: QueryClient,
-): UseQueryResult<TData, TError> & {
-  queryKey: DataTag<QueryKey, TData, TError>;
-};
-export function useGetGuarantees<
-  TData = Awaited<ReturnType<typeof getGuarantees>>,
-  TError = InternalError,
->(
-  params: GetGuaranteesParams,
-  options?: {
-    query?: Partial<
-      UseQueryOptions<Awaited<ReturnType<typeof getGuarantees>>, TError, TData>
-    >;
-  },
-  queryClient?: QueryClient,
-): UseQueryResult<TData, TError> & {
-  queryKey: DataTag<QueryKey, TData, TError>;
-};
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetGuarantees<TData = Awaited<ReturnType<typeof getGuarantees>>, TError = InternalError>(
+ params: GetGuaranteesParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getGuarantees>>, TError, TData>>, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 
-export function useGetGuarantees<
-  TData = Awaited<ReturnType<typeof getGuarantees>>,
-  TError = InternalError,
->(
-  params: GetGuaranteesParams,
-  options?: {
-    query?: Partial<
-      UseQueryOptions<Awaited<ReturnType<typeof getGuarantees>>, TError, TData>
-    >;
-  },
-  queryClient?: QueryClient,
-): UseQueryResult<TData, TError> & {
-  queryKey: DataTag<QueryKey, TData, TError>;
-} {
-  const queryOptions = getGetGuaranteesQueryOptions(params, options);
+export function useGetGuarantees<TData = Awaited<ReturnType<typeof getGuarantees>>, TError = InternalError>(
+ params: GetGuaranteesParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getGuarantees>>, TError, TData>>, }
+ , queryClient?: QueryClient 
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
 
-  const query = useQuery(queryOptions, queryClient) as UseQueryResult<
-    TData,
-    TError
-  > & { queryKey: DataTag<QueryKey, TData, TError> };
+  const queryOptions = getGetGuaranteesQueryOptions(params,options)
 
-  query.queryKey = queryOptions.queryKey;
+  const query = useQuery(queryOptions , queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  query.queryKey = queryOptions.queryKey ;
 
   return query;
 }
 
-export const getGuaranteesId = (id: string, signal?: AbortSignal) => {
-  return axiosInstance<GuaranteeResponse>({
-    url: `/guarantees/${id}`,
-    method: "GET",
-    signal,
-  });
-};
 
-export const getGetGuaranteesIdQueryKey = (id?: string) => {
-  return [`/guarantees/${id}`] as const;
-};
 
-export const getGetGuaranteesIdQueryOptions = <
-  TData = Awaited<ReturnType<typeof getGuaranteesId>>,
-  TError = NotfoundError,
->(
-  id: string,
-  options?: {
-    query?: Partial<
-      UseQueryOptions<
-        Awaited<ReturnType<typeof getGuaranteesId>>,
-        TError,
-        TData
-      >
-    >;
-  },
+export const getGuaranteesId = (
+    id: string,
+ signal?: AbortSignal
 ) => {
-  const { query: queryOptions } = options ?? {};
+      
+      
+      return axiosInstance<GuaranteeResponse>(
+      {url: `/guarantees/${id}`, method: 'GET', signal
+    },
+      );
+    }
+  
 
-  const queryKey = queryOptions?.queryKey ?? getGetGuaranteesIdQueryKey(id);
+export const getGetGuaranteesIdQueryKey = (id?: string,) => {
+    return [`/guarantees/${id}`] as const;
+    }
 
-  const queryFn: QueryFunction<Awaited<ReturnType<typeof getGuaranteesId>>> = ({
-    signal,
-  }) => getGuaranteesId(id, signal);
+    
+export const getGetGuaranteesIdQueryOptions = <TData = Awaited<ReturnType<typeof getGuaranteesId>>, TError = NotfoundError>(id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getGuaranteesId>>, TError, TData>>, }
+) => {
 
-  return {
-    queryKey,
-    queryFn,
-    enabled: !!id,
-    ...queryOptions,
-  } as UseQueryOptions<
-    Awaited<ReturnType<typeof getGuaranteesId>>,
-    TError,
-    TData
-  > & { queryKey: DataTag<QueryKey, TData, TError> };
-};
+const {query: queryOptions} = options ?? {};
 
-export type GetGuaranteesIdQueryResult = NonNullable<
-  Awaited<ReturnType<typeof getGuaranteesId>>
->;
-export type GetGuaranteesIdQueryError = NotfoundError;
+  const queryKey =  queryOptions?.queryKey ?? getGetGuaranteesIdQueryKey(id);
 
-export function useGetGuaranteesId<
-  TData = Awaited<ReturnType<typeof getGuaranteesId>>,
-  TError = NotfoundError,
->(
-  id: string,
-  options: {
-    query: Partial<
-      UseQueryOptions<
-        Awaited<ReturnType<typeof getGuaranteesId>>,
-        TError,
-        TData
-      >
-    > &
-      Pick<
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getGuaranteesId>>> = ({ signal }) => getGuaranteesId(id, signal);
+
+      
+
+      
+
+   return  { queryKey, queryFn, enabled: !!(id), ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getGuaranteesId>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type GetGuaranteesIdQueryResult = NonNullable<Awaited<ReturnType<typeof getGuaranteesId>>>
+export type GetGuaranteesIdQueryError = NotfoundError
+
+
+export function useGetGuaranteesId<TData = Awaited<ReturnType<typeof getGuaranteesId>>, TError = NotfoundError>(
+ id: string, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getGuaranteesId>>, TError, TData>> & Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof getGuaranteesId>>,
           TError,
           Awaited<ReturnType<typeof getGuaranteesId>>
-        >,
-        "initialData"
-      >;
-  },
-  queryClient?: QueryClient,
-): DefinedUseQueryResult<TData, TError> & {
-  queryKey: DataTag<QueryKey, TData, TError>;
-};
-export function useGetGuaranteesId<
-  TData = Awaited<ReturnType<typeof getGuaranteesId>>,
-  TError = NotfoundError,
->(
-  id: string,
-  options?: {
-    query?: Partial<
-      UseQueryOptions<
-        Awaited<ReturnType<typeof getGuaranteesId>>,
-        TError,
-        TData
-      >
-    > &
-      Pick<
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetGuaranteesId<TData = Awaited<ReturnType<typeof getGuaranteesId>>, TError = NotfoundError>(
+ id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getGuaranteesId>>, TError, TData>> & Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof getGuaranteesId>>,
           TError,
           Awaited<ReturnType<typeof getGuaranteesId>>
-        >,
-        "initialData"
-      >;
-  },
-  queryClient?: QueryClient,
-): UseQueryResult<TData, TError> & {
-  queryKey: DataTag<QueryKey, TData, TError>;
-};
-export function useGetGuaranteesId<
-  TData = Awaited<ReturnType<typeof getGuaranteesId>>,
-  TError = NotfoundError,
->(
-  id: string,
-  options?: {
-    query?: Partial<
-      UseQueryOptions<
-        Awaited<ReturnType<typeof getGuaranteesId>>,
-        TError,
-        TData
-      >
-    >;
-  },
-  queryClient?: QueryClient,
-): UseQueryResult<TData, TError> & {
-  queryKey: DataTag<QueryKey, TData, TError>;
-};
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetGuaranteesId<TData = Awaited<ReturnType<typeof getGuaranteesId>>, TError = NotfoundError>(
+ id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getGuaranteesId>>, TError, TData>>, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 
-export function useGetGuaranteesId<
-  TData = Awaited<ReturnType<typeof getGuaranteesId>>,
-  TError = NotfoundError,
->(
-  id: string,
-  options?: {
-    query?: Partial<
-      UseQueryOptions<
-        Awaited<ReturnType<typeof getGuaranteesId>>,
-        TError,
-        TData
-      >
-    >;
-  },
-  queryClient?: QueryClient,
-): UseQueryResult<TData, TError> & {
-  queryKey: DataTag<QueryKey, TData, TError>;
-} {
-  const queryOptions = getGetGuaranteesIdQueryOptions(id, options);
+export function useGetGuaranteesId<TData = Awaited<ReturnType<typeof getGuaranteesId>>, TError = NotfoundError>(
+ id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getGuaranteesId>>, TError, TData>>, }
+ , queryClient?: QueryClient 
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
 
-  const query = useQuery(queryOptions, queryClient) as UseQueryResult<
-    TData,
-    TError
-  > & { queryKey: DataTag<QueryKey, TData, TError> };
+  const queryOptions = getGetGuaranteesIdQueryOptions(id,options)
 
-  query.queryKey = queryOptions.queryKey;
+  const query = useQuery(queryOptions , queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  query.queryKey = queryOptions.queryKey ;
 
   return query;
 }
+
+
 
 export const patchGuaranteesId = (
-  id: string,
-  updateGuaranteeInput: UpdateGuaranteeInput,
-) => {
-  return axiosInstance<GuaranteeResponse>({
-    url: `/guarantees/${id}`,
-    method: "PATCH",
-    headers: { "Content-Type": "application/json" },
-    data: updateGuaranteeInput,
-  });
-};
+    id: string,
+    updateGuaranteeInput: UpdateGuaranteeInput,
+ ) => {
+      
+      
+      return axiosInstance<GuaranteeResponse>(
+      {url: `/guarantees/${id}`, method: 'PATCH',
+      headers: {'Content-Type': 'application/json', },
+      data: updateGuaranteeInput
+    },
+      );
+    }
+  
 
-export const getPatchGuaranteesIdMutationOptions = <
-  TError = ErrorResponse | NotfoundError,
-  TContext = unknown,
->(options?: {
-  mutation?: UseMutationOptions<
-    Awaited<ReturnType<typeof patchGuaranteesId>>,
-    TError,
-    { id: string; data: UpdateGuaranteeInput },
-    TContext
-  >;
-}): UseMutationOptions<
-  Awaited<ReturnType<typeof patchGuaranteesId>>,
-  TError,
-  { id: string; data: UpdateGuaranteeInput },
-  TContext
-> => {
-  const mutationKey = ["patchGuaranteesId"];
-  const { mutation: mutationOptions } = options
-    ? options.mutation &&
-      "mutationKey" in options.mutation &&
-      options.mutation.mutationKey
-      ? options
-      : { ...options, mutation: { ...options.mutation, mutationKey } }
-    : { mutation: { mutationKey } };
 
-  const mutationFn: MutationFunction<
-    Awaited<ReturnType<typeof patchGuaranteesId>>,
-    { id: string; data: UpdateGuaranteeInput }
-  > = (props) => {
-    const { id, data } = props ?? {};
+export const getPatchGuaranteesIdMutationOptions = <TError = ErrorResponse | NotfoundError,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof patchGuaranteesId>>, TError,{id: string;data: UpdateGuaranteeInput}, TContext>, }
+): UseMutationOptions<Awaited<ReturnType<typeof patchGuaranteesId>>, TError,{id: string;data: UpdateGuaranteeInput}, TContext> => {
 
-    return patchGuaranteesId(id, data);
-  };
+const mutationKey = ['patchGuaranteesId'];
+const {mutation: mutationOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }};
 
-  return { mutationFn, ...mutationOptions };
-};
+      
 
-export type PatchGuaranteesIdMutationResult = NonNullable<
-  Awaited<ReturnType<typeof patchGuaranteesId>>
->;
-export type PatchGuaranteesIdMutationBody = UpdateGuaranteeInput;
-export type PatchGuaranteesIdMutationError = ErrorResponse | NotfoundError;
 
-export const usePatchGuaranteesId = <
-  TError = ErrorResponse | NotfoundError,
-  TContext = unknown,
->(
-  options?: {
-    mutation?: UseMutationOptions<
-      Awaited<ReturnType<typeof patchGuaranteesId>>,
-      TError,
-      { id: string; data: UpdateGuaranteeInput },
-      TContext
-    >;
-  },
-  queryClient?: QueryClient,
-): UseMutationResult<
-  Awaited<ReturnType<typeof patchGuaranteesId>>,
-  TError,
-  { id: string; data: UpdateGuaranteeInput },
-  TContext
-> => {
-  const mutationOptions = getPatchGuaranteesIdMutationOptions(options);
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof patchGuaranteesId>>, {id: string;data: UpdateGuaranteeInput}> = (props) => {
+          const {id,data} = props ?? {};
 
-  return useMutation(mutationOptions, queryClient);
-};
-export const deleteGuaranteesId = (id: string) => {
-  return axiosInstance<BaseResponse>({
-    url: `/guarantees/${id}`,
-    method: "DELETE",
-  });
-};
+          return  patchGuaranteesId(id,data,)
+        }
 
-export const getDeleteGuaranteesIdMutationOptions = <
-  TError = NotfoundError | ConflictError,
-  TContext = unknown,
->(options?: {
-  mutation?: UseMutationOptions<
-    Awaited<ReturnType<typeof deleteGuaranteesId>>,
-    TError,
-    { id: string },
-    TContext
-  >;
-}): UseMutationOptions<
-  Awaited<ReturnType<typeof deleteGuaranteesId>>,
-  TError,
-  { id: string },
-  TContext
-> => {
-  const mutationKey = ["deleteGuaranteesId"];
-  const { mutation: mutationOptions } = options
-    ? options.mutation &&
-      "mutationKey" in options.mutation &&
-      options.mutation.mutationKey
-      ? options
-      : { ...options, mutation: { ...options.mutation, mutationKey } }
-    : { mutation: { mutationKey } };
+        
 
-  const mutationFn: MutationFunction<
-    Awaited<ReturnType<typeof deleteGuaranteesId>>,
-    { id: string }
-  > = (props) => {
-    const { id } = props ?? {};
 
-    return deleteGuaranteesId(id);
-  };
+  return  { mutationFn, ...mutationOptions }}
 
-  return { mutationFn, ...mutationOptions };
-};
+    export type PatchGuaranteesIdMutationResult = NonNullable<Awaited<ReturnType<typeof patchGuaranteesId>>>
+    export type PatchGuaranteesIdMutationBody = UpdateGuaranteeInput
+    export type PatchGuaranteesIdMutationError = ErrorResponse | NotfoundError
 
-export type DeleteGuaranteesIdMutationResult = NonNullable<
-  Awaited<ReturnType<typeof deleteGuaranteesId>>
->;
+    export const usePatchGuaranteesId = <TError = ErrorResponse | NotfoundError,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof patchGuaranteesId>>, TError,{id: string;data: UpdateGuaranteeInput}, TContext>, }
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof patchGuaranteesId>>,
+        TError,
+        {id: string;data: UpdateGuaranteeInput},
+        TContext
+      > => {
 
-export type DeleteGuaranteesIdMutationError = NotfoundError | ConflictError;
+      const mutationOptions = getPatchGuaranteesIdMutationOptions(options);
 
-export const useDeleteGuaranteesId = <
-  TError = NotfoundError | ConflictError,
-  TContext = unknown,
->(
-  options?: {
-    mutation?: UseMutationOptions<
-      Awaited<ReturnType<typeof deleteGuaranteesId>>,
-      TError,
-      { id: string },
-      TContext
-    >;
-  },
-  queryClient?: QueryClient,
-): UseMutationResult<
-  Awaited<ReturnType<typeof deleteGuaranteesId>>,
-  TError,
-  { id: string },
-  TContext
-> => {
-  const mutationOptions = getDeleteGuaranteesIdMutationOptions(options);
+      return useMutation(mutationOptions , queryClient);
+    }
+    export const deleteGuaranteesId = (
+    id: string,
+ ) => {
+      
+      
+      return axiosInstance<BaseResponse>(
+      {url: `/guarantees/${id}`, method: 'DELETE'
+    },
+      );
+    }
+  
 
-  return useMutation(mutationOptions, queryClient);
-};
+
+export const getDeleteGuaranteesIdMutationOptions = <TError = NotfoundError | ConflictError,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteGuaranteesId>>, TError,{id: string}, TContext>, }
+): UseMutationOptions<Awaited<ReturnType<typeof deleteGuaranteesId>>, TError,{id: string}, TContext> => {
+
+const mutationKey = ['deleteGuaranteesId'];
+const {mutation: mutationOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }};
+
+      
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteGuaranteesId>>, {id: string}> = (props) => {
+          const {id} = props ?? {};
+
+          return  deleteGuaranteesId(id,)
+        }
+
+        
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type DeleteGuaranteesIdMutationResult = NonNullable<Awaited<ReturnType<typeof deleteGuaranteesId>>>
+    
+    export type DeleteGuaranteesIdMutationError = NotfoundError | ConflictError
+
+    export const useDeleteGuaranteesId = <TError = NotfoundError | ConflictError,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteGuaranteesId>>, TError,{id: string}, TContext>, }
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof deleteGuaranteesId>>,
+        TError,
+        {id: string},
+        TContext
+      > => {
+
+      const mutationOptions = getDeleteGuaranteesIdMutationOptions(options);
+
+      return useMutation(mutationOptions , queryClient);
+    }
+    

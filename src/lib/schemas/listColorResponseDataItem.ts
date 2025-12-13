@@ -4,9 +4,9 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { ListColorResponseDataItemDeletedAt } from "./listColorResponseDataItemDeletedAt";
-import type { ListColorResponseDataItemEnName } from "./listColorResponseDataItemEnName";
-import type { ListColorResponseDataItemDisplayName } from "./listColorResponseDataItemDisplayName";
+import type { ListColorResponseDataItemDeletedAt } from './listColorResponseDataItemDeletedAt';
+import type { ListColorResponseDataItemEnName } from './listColorResponseDataItemEnName';
+import type { ListColorResponseDataItemDisplayName } from './listColorResponseDataItemDisplayName';
 
 export type ListColorResponseDataItem = {
   /** Unique identifier (UUIDv4) */

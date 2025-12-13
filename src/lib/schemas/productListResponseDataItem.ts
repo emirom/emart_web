@@ -4,12 +4,12 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { ProductListResponseDataItemDeletedAt } from "./productListResponseDataItemDeletedAt";
-import type { ProductListResponseDataItemAverageRating } from "./productListResponseDataItemAverageRating";
-import type { ProductListResponseDataItemTotalReviews } from "./productListResponseDataItemTotalReviews";
-import type { ProductListResponseDataItemLabels } from "./productListResponseDataItemLabels";
-import type { ProductListResponseDataItemMedias } from "./productListResponseDataItemMedias";
-import type { ProductListResponseDataItemDescriptions } from "./productListResponseDataItemDescriptions";
+import type { ProductListResponseDataItemDeletedAt } from './productListResponseDataItemDeletedAt';
+import type { ProductListResponseDataItemAverageRating } from './productListResponseDataItemAverageRating';
+import type { ProductListResponseDataItemTotalReviews } from './productListResponseDataItemTotalReviews';
+import type { ProductListResponseDataItemLabels } from './productListResponseDataItemLabels';
+import type { ProductListResponseDataItemMedias } from './productListResponseDataItemMedias';
+import type { ProductListResponseDataItemDescriptions } from './productListResponseDataItemDescriptions';
 
 export type ProductListResponseDataItem = {
   /** Unique identifier (UUIDv4) */

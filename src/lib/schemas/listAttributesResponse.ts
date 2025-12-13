@@ -4,10 +4,10 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { BaseResponse } from "./baseResponse";
-import type { ListAttributesResponseDetails } from "./listAttributesResponseDetails";
-import type { ListAttributesResponseFiltersItem } from "./listAttributesResponseFiltersItem";
-import type { ListAttributesResponseDataItem } from "./listAttributesResponseDataItem";
+import type { BaseResponse } from './baseResponse';
+import type { ListAttributesResponseDetails } from './listAttributesResponseDetails';
+import type { ListAttributesResponseFiltersItem } from './listAttributesResponseFiltersItem';
+import type { ListAttributesResponseDataItem } from './listAttributesResponseDataItem';
 
 /**
  * List of attributes response
@@ -17,14 +17,9 @@ export type ListAttributesResponse = BaseResponse & {
   details?: ListAttributesResponseDetails;
   filters: ListAttributesResponseFiltersItem[];
   data: ListAttributesResponseDataItem[];
-} & Required<
-    Pick<
-      BaseResponse & {
-        /** Pagination metadata */
-        details?: ListAttributesResponseDetails;
-        filters: ListAttributesResponseFiltersItem[];
-        data: ListAttributesResponseDataItem[];
-      },
-      "filters" | "data"
-    >
-  >;
+} & Required<Pick<BaseResponse & {
+  /** Pagination metadata */
+  details?: ListAttributesResponseDetails;
+  filters: ListAttributesResponseFiltersItem[];
+  data: ListAttributesResponseDataItem[];
+}, 'filters' | 'data'>>;

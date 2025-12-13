@@ -4,13 +4,13 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { UpdateVariantInputBarcode } from "./updateVariantInputBarcode";
-import type { UpdateVariantInputMpn } from "./updateVariantInputMpn";
-import type { UpdateVariantInputTitleOverride } from "./updateVariantInputTitleOverride";
-import type { UpdateVariantInputDescriptionOverride } from "./updateVariantInputDescriptionOverride";
-import type { UpdateVariantInputSlug } from "./updateVariantInputSlug";
-import type { UpdateVariantInputMetaTitle } from "./updateVariantInputMetaTitle";
-import type { UpdateVariantInputMetaDescription } from "./updateVariantInputMetaDescription";
+import type { UpdateVariantInputBarcode } from './updateVariantInputBarcode';
+import type { UpdateVariantInputMpn } from './updateVariantInputMpn';
+import type { UpdateVariantInputTitleOverride } from './updateVariantInputTitleOverride';
+import type { UpdateVariantInputDescriptionOverride } from './updateVariantInputDescriptionOverride';
+import type { UpdateVariantInputSlug } from './updateVariantInputSlug';
+import type { UpdateVariantInputMetaTitle } from './updateVariantInputMetaTitle';
+import type { UpdateVariantInputMetaDescription } from './updateVariantInputMetaDescription';
 
 /**
  * Product variant entity

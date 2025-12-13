@@ -4,7 +4,7 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { CountryDeletedAt } from "./countryDeletedAt";
+import type { CountryDeletedAt } from './countryDeletedAt';
 
 /**
  * Country entity with international standards

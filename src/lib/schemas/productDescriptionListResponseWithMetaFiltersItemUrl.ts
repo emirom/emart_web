@@ -6,8 +6,6 @@
  */
 
 /**
- * URL for the filter
+ * URL for the filter 
  */
-export type ProductDescriptionListResponseWithMetaFiltersItemUrl =
-  | string
-  | null;
+export type ProductDescriptionListResponseWithMetaFiltersItemUrl = string | null;

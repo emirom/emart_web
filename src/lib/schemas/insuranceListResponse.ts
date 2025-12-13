@@ -4,10 +4,10 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { BaseResponse } from "./baseResponse";
-import type { InsuranceListResponseDetails } from "./insuranceListResponseDetails";
-import type { InsuranceListResponseFiltersItem } from "./insuranceListResponseFiltersItem";
-import type { InsuranceListResponseDataItem } from "./insuranceListResponseDataItem";
+import type { BaseResponse } from './baseResponse';
+import type { InsuranceListResponseDetails } from './insuranceListResponseDetails';
+import type { InsuranceListResponseFiltersItem } from './insuranceListResponseFiltersItem';
+import type { InsuranceListResponseDataItem } from './insuranceListResponseDataItem';
 
 /**
  * Paginated list of insurance plans
@@ -17,14 +17,9 @@ export type InsuranceListResponse = BaseResponse & {
   details?: InsuranceListResponseDetails;
   filters: InsuranceListResponseFiltersItem[];
   data: InsuranceListResponseDataItem[];
-} & Required<
-    Pick<
-      BaseResponse & {
-        /** Pagination metadata */
-        details?: InsuranceListResponseDetails;
-        filters: InsuranceListResponseFiltersItem[];
-        data: InsuranceListResponseDataItem[];
-      },
-      "filters" | "data"
-    >
-  >;
+} & Required<Pick<BaseResponse & {
+  /** Pagination metadata */
+  details?: InsuranceListResponseDetails;
+  filters: InsuranceListResponseFiltersItem[];
+  data: InsuranceListResponseDataItem[];
+}, 'filters' | 'data'>>;

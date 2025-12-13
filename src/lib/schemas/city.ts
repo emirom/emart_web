@@ -4,9 +4,9 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { CityDeletedAt } from "./cityDeletedAt";
-import type { CityAbb } from "./cityAbb";
-import type { CityProvince } from "./cityProvince";
+import type { CityDeletedAt } from './cityDeletedAt';
+import type { CityAbb } from './cityAbb';
+import type { CityProvince } from './cityProvince';
 
 /**
  * City entity with province reference

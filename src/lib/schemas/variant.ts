@@ -4,14 +4,14 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { VariantDeletedAt } from "./variantDeletedAt";
-import type { VariantBarcode } from "./variantBarcode";
-import type { VariantMpn } from "./variantMpn";
-import type { VariantTitleOverride } from "./variantTitleOverride";
-import type { VariantDescriptionOverride } from "./variantDescriptionOverride";
-import type { VariantSlug } from "./variantSlug";
-import type { VariantMetaTitle } from "./variantMetaTitle";
-import type { VariantMetaDescription } from "./variantMetaDescription";
+import type { VariantDeletedAt } from './variantDeletedAt';
+import type { VariantBarcode } from './variantBarcode';
+import type { VariantMpn } from './variantMpn';
+import type { VariantTitleOverride } from './variantTitleOverride';
+import type { VariantDescriptionOverride } from './variantDescriptionOverride';
+import type { VariantSlug } from './variantSlug';
+import type { VariantMetaTitle } from './variantMetaTitle';
+import type { VariantMetaDescription } from './variantMetaDescription';
 
 /**
  * Product variant entity

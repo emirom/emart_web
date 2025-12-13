@@ -8,6 +8,4 @@
 /**
  * Indicates the filter options that are based on an enumeration.
  */
-export type ProductDescriptionListResponseWithMetaFiltersItemEnumOptions =
-  | string
-  | null;
+export type ProductDescriptionListResponseWithMetaFiltersItemEnumOptions = string | null;

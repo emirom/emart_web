@@ -4,9 +4,9 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { ColorDeletedAt } from "./colorDeletedAt";
-import type { ColorEnName } from "./colorEnName";
-import type { ColorDisplayName } from "./colorDisplayName";
+import type { ColorDeletedAt } from './colorDeletedAt';
+import type { ColorEnName } from './colorEnName';
+import type { ColorDisplayName } from './colorDisplayName';
 
 /**
  * Product color entity with technical and marketing names

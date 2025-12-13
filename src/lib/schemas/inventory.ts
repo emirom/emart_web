@@ -4,19 +4,19 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { InventoryCurrencyId } from "./inventoryCurrencyId";
-import type { InventoryGuaranteeId } from "./inventoryGuaranteeId";
-import type { InventoryInsuranceId } from "./inventoryInsuranceId";
-import type { InventoryLeasingId } from "./inventoryLeasingId";
-import type { InventoryChequeId } from "./inventoryChequeId";
-import type { InventoryCost } from "./inventoryCost";
-import type { InventoryExpiryDate } from "./inventoryExpiryDate";
-import type { InventoryWarehouseCode } from "./inventoryWarehouseCode";
-import type { InventoryShelfCode } from "./inventoryShelfCode";
-import type { InventoryHsCode } from "./inventoryHsCode";
-import type { InventoryOriginCountry } from "./inventoryOriginCountry";
-import type { InventoryPackageWeight } from "./inventoryPackageWeight";
-import type { InventoryPackageDimensions } from "./inventoryPackageDimensions";
+import type { InventoryCurrencyId } from './inventoryCurrencyId';
+import type { InventoryGuaranteeId } from './inventoryGuaranteeId';
+import type { InventoryInsuranceId } from './inventoryInsuranceId';
+import type { InventoryLeasingId } from './inventoryLeasingId';
+import type { InventoryChequeId } from './inventoryChequeId';
+import type { InventoryCost } from './inventoryCost';
+import type { InventoryExpiryDate } from './inventoryExpiryDate';
+import type { InventoryWarehouseCode } from './inventoryWarehouseCode';
+import type { InventoryShelfCode } from './inventoryShelfCode';
+import type { InventoryHsCode } from './inventoryHsCode';
+import type { InventoryOriginCountry } from './inventoryOriginCountry';
+import type { InventoryPackageWeight } from './inventoryPackageWeight';
+import type { InventoryPackageDimensions } from './inventoryPackageDimensions';
 
 /**
  * Inventory item representing stock at a specific location

@@ -4,8 +4,8 @@
  * hello world
  * OpenAPI spec version: 1.0.0
  */
-import type { BaseResponse } from "./baseResponse";
-import type { Unit } from "./unit";
+import type { BaseResponse } from './baseResponse';
+import type { Unit } from './unit';
 
 /**
  * Response for single unit operations
