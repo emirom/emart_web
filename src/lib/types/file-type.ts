@@ -555,6 +555,16 @@ export const CreateManyProductMediaSchema = z
 // Update schema with partial validation
 export const UpdateProductMediaSchema = z
   .object({
+    file: fileValidation.openapi({
+      description: "Media file (image or video) with comprehensive validation",
+      example: {
+        fieldname: "file",
+        originalname: "samsung-galaxy-s23-ultra-hero.jpg",
+        mimetype: "image/jpeg",
+        path: "/public/temp/samsung-galaxy-s23-ultra-hero.jpg",
+        size: 2048576,
+      },
+    }),
     altText: optionalString(500).openapi({
       description: "Update alternative text for accessibility",
       example: "Updated alternative text for better SEO",

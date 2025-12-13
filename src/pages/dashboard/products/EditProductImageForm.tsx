@@ -43,8 +43,6 @@ export default function EditProductImageForm({
     query: { queryKey: ["/product-medias", productId] },
   });
 
-  const fileValue = watch("file");
-
   useEffect(() => {
     if (productMedia?.data) {
       reset({
@@ -56,11 +54,11 @@ export default function EditProductImageForm({
   }, [productMedia?.data, reset]);
 
   const onSubmit: SubmitHandler<UploadProductImageInput> = async (data) => {
+    console.log(">>>>>>>>>>", data);
     if (!data.file && !productMedia?.data?.url) {
       toast.error("لطفاً یک فایل انتخاب کنید");
       return;
     }
-
     const formData = new FormData();
     if (data.file) formData.append("file", data.file);
     if (data.altText) formData.append("altText", data.altText);
