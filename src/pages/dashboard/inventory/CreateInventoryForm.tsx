@@ -133,6 +133,7 @@ export default function CreateInventoryForm() {
           name="cost"
           label="قیمت خرید"
           type="number"
+          nuSeparator
         />
 
         <FormInputField
@@ -140,6 +141,7 @@ export default function CreateInventoryForm() {
           name="price"
           label="قیمت پایه"
           type="number"
+          nuSeparator
         />
 
         <FormInputField
@@ -154,6 +156,7 @@ export default function CreateInventoryForm() {
           name="discountPrice"
           label="قیمت بعد از تخفیف"
           type="number"
+          nuSeparator
         />
 
         <FormInputField

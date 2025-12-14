@@ -1,5 +1,6 @@
 "use client";
 import { CustomDataTable } from "@components/CustomDataTable";
+import { localizeNumber } from "@lib/helper/localizeNumber";
 import { Inventory, ListInventoryResponse } from "@lib/schemas";
 import { RowNumber } from "@lib/types/row-number";
 import { ColumnDef } from "@tanstack/react-table";
@@ -27,7 +28,7 @@ const columns: ColumnDef<Inventory & RowNumber>[] = [
   {
     accessorKey: "price",
     header: "قیمت پایه",
-    cell: ({ row }) => row.original.price.toLocaleString(),
+    cell: ({ row }) => localizeNumber(row.original.price),
   },
   {
     accessorKey: "discountPercent",
@@ -37,7 +38,7 @@ const columns: ColumnDef<Inventory & RowNumber>[] = [
   {
     accessorKey: "discountPrice",
     header: "قیمت با تخفیف",
-    cell: ({ row }) => row.original.discountPrice.toLocaleString(),
+    cell: ({ row }) => localizeNumber(row.original.discountPrice),
   },
   {
     accessorKey: "inStock",
