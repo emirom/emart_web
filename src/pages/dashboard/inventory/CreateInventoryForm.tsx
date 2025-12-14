@@ -8,6 +8,7 @@ import { useGetGuarantees } from "@lib/services/guarantees/guarantees";
 import { useGetInsurances } from "@lib/services/insurances/insurances";
 
 import { SubmitButton } from "@components/BtnWithIcon";
+import { Card } from "@components/ui/card";
 import { postInventoryAction } from "@lib/actions/inventory-action";
 import { useGetLocations } from "@lib/services/locations/locations";
 import { useGetStores } from "@lib/services/stores/stores";
@@ -50,162 +51,168 @@ export default function CreateInventoryForm() {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 items-stretch"
-    >
-      <FormScrollableSelectField
-        control={control}
-        name="storeId"
-        label="فروشگاه"
-        options={stores?.data ?? []}
-        getOptionLabel={(opt) => opt.name}
-        getOptionValue={(opt) => opt.id}
-      />
+    <Card className="p-3">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 items-stretch"
+      >
+        <FormScrollableSelectField
+          control={control}
+          name="storeId"
+          label="فروشگاه"
+          options={stores?.data ?? []}
+          getOptionLabel={(opt) => opt.name}
+          getOptionValue={(opt) => opt.id}
+        />
 
-      <FormScrollableSelectField
-        control={control}
-        name="currencyId"
-        label="ارز"
-        options={currencies?.data ?? []}
-        getOptionLabel={(opt) => opt.name}
-        getOptionValue={(opt) => opt.id}
-      />
+        <FormScrollableSelectField
+          control={control}
+          name="currencyId"
+          label="ارز"
+          options={currencies?.data ?? []}
+          getOptionLabel={(opt) => opt.name}
+          getOptionValue={(opt) => opt.id}
+        />
 
-      <FormScrollableSelectField
-        control={control}
-        name="locationId"
-        label="مکان"
-        options={locations?.data ?? []}
-        getOptionLabel={(opt) => opt.street}
-        getOptionValue={(opt) => opt.id}
-      />
+        <FormScrollableSelectField
+          control={control}
+          name="locationId"
+          label="مکان"
+          options={locations?.data ?? []}
+          getOptionLabel={(opt) => opt.street}
+          getOptionValue={(opt) => opt.id}
+        />
 
-      <FormScrollableSelectField
-        control={control}
-        name="variantId"
-        label="شناسه تنوع"
-        options={variants?.data ?? []}
-        getOptionLabel={(opt) => opt.sku}
-        getOptionValue={(opt) => opt.id}
-      />
+        <FormScrollableSelectField
+          control={control}
+          name="variantId"
+          label="شناسه تنوع"
+          options={variants?.data ?? []}
+          getOptionLabel={(opt) => opt.sku}
+          getOptionValue={(opt) => opt.id}
+        />
 
-      <FormScrollableSelectField
-        control={control}
-        name="guaranteeId"
-        label="گارانتی"
-        options={guarantees?.data ?? []}
-        getOptionLabel={(opt) => opt.title}
-        getOptionValue={(opt) => opt.id}
-      />
+        <FormScrollableSelectField
+          control={control}
+          name="guaranteeId"
+          label="گارانتی"
+          options={guarantees?.data ?? []}
+          getOptionLabel={(opt) => opt.title}
+          getOptionValue={(opt) => opt.id}
+        />
 
-      <FormScrollableSelectField
-        control={control}
-        name="insuranceId"
-        label="بیمه"
-        options={insurances?.data ?? []}
-        getOptionLabel={(opt) => opt.title}
-        getOptionValue={(opt) => opt.id}
-      />
+        <FormScrollableSelectField
+          control={control}
+          name="insuranceId"
+          label="بیمه"
+          options={insurances?.data ?? []}
+          getOptionLabel={(opt) => opt.title}
+          getOptionValue={(opt) => opt.id}
+        />
 
-      {/* <FormScrollableSelectField
+        {/* <FormScrollableSelectField
         control={control}
         name="leasingId"
         label="لیزینگ"
         options={leasings?.data ?? []}
         getOptionLabel={(opt) => opt.title}
         getOptionValue={(opt) => opt.id}
-      /> */}
+        /> */}
 
-      {/* <FormScrollableSelectField
+        {/* <FormScrollableSelectField
         control={control}
         name="chequeId"
         label="چک"
         options={cheques?.data ?? []}
         getOptionLabel={(opt) => opt.title}
         getOptionValue={(opt) => opt.id}
-      /> */}
+        /> */}
 
-      <FormInputField
-        control={control}
-        name="cost"
-        label="قیمت خرید"
-        type="number"
-      />
+        <FormInputField
+          control={control}
+          name="cost"
+          label="قیمت خرید"
+          type="number"
+        />
 
-      <FormInputField
-        control={control}
-        name="price"
-        label="قیمت پایه"
-        type="number"
-      />
+        <FormInputField
+          control={control}
+          name="price"
+          label="قیمت پایه"
+          type="number"
+        />
 
-      <FormInputField
-        control={control}
-        name="discountPercent"
-        label="درصد تخفیف"
-        type="number"
-      />
+        <FormInputField
+          control={control}
+          name="discountPercent"
+          label="درصد تخفیف"
+          type="number"
+        />
 
-      <FormInputField
-        control={control}
-        name="discountPrice"
-        label="قیمت بعد از تخفیف"
-        type="number"
-      />
+        <FormInputField
+          control={control}
+          name="discountPrice"
+          label="قیمت بعد از تخفیف"
+          type="number"
+        />
 
-      <FormInputField
-        control={control}
-        name="inStock"
-        label="موجودی فعلی"
-        type="number"
-      />
+        <FormInputField
+          control={control}
+          name="inStock"
+          label="موجودی فعلی"
+          type="number"
+        />
 
-      <FormInputField
-        control={control}
-        name="lowStockThreshold"
-        label="آستانه هشدار کمبود"
-        type="number"
-      />
+        <FormInputField
+          control={control}
+          name="lowStockThreshold"
+          label="آستانه هشدار کمبود"
+          type="number"
+        />
 
-      <FormDatePickerField
-        control={control}
-        name="expiryDate"
-        label="تاریخ انقضا"
-      />
+        <FormDatePickerField
+          control={control}
+          name="expiryDate"
+          label="تاریخ انقضا"
+        />
 
-      <FormInputField control={control} name="warehouseCode" label="کد انبار" />
+        <FormInputField
+          control={control}
+          name="warehouseCode"
+          label="کد انبار"
+        />
 
-      <FormInputField control={control} name="shelfCode" label="کد قفسه" />
+        <FormInputField control={control} name="shelfCode" label="کد قفسه" />
 
-      <FormInputField control={control} name="hsCode" label="کد HS" />
+        <FormInputField control={control} name="hsCode" label="کد HS" />
 
-      <FormInputField
-        control={control}
-        name="originCountry"
-        label="کشور سازنده"
-      />
+        <FormInputField
+          control={control}
+          name="originCountry"
+          label="کشور سازنده"
+        />
 
-      <FormInputField
-        control={control}
-        name="packageWeight"
-        label="وزن بسته (کیلو)"
-        type="number"
-      />
+        <FormInputField
+          control={control}
+          name="packageWeight"
+          label="وزن بسته (کیلو)"
+          type="number"
+        />
 
-      <FormInputField
-        control={control}
-        name="packageDimensions"
-        label="ابعاد بسته (L x W x H)"
-      />
+        <FormInputField
+          control={control}
+          name="packageDimensions"
+          label="ابعاد بسته (L x W x H)"
+        />
 
-      {/* <button
+        {/* <button
         type="submit"
         className="col-span-full bg-blue-600 text-white rounded-md p-2"
-      >
+        >
         ثبت موجودی
-      </button> */}
-      <SubmitButton label="ثبت موجودی" className="mt-auto" />
-    </form>
+        </button> */}
+        <SubmitButton label="ثبت موجودی" className="mt-auto" />
+      </form>
+    </Card>
   );
 }
