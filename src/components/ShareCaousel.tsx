@@ -1,5 +1,6 @@
 "use client";
 
+import { localizeNumber } from "@lib/helper/localizeNumber";
 import { ArrowLeftRight, HeartIcon } from "lucide-react";
 import Link from "next/link";
 import Container from "./Container";
@@ -84,7 +85,7 @@ export default function ShareCarousel({ title, labelAria }: Props) {
                                  8vw"
                           className={cn(
                             " w-[40%] h-[48%] mx-auto  aspect-[16/15] transition-opacity duration-300",
-                            isLCP && "!opacity-100 !duration-0",
+                            isLCP && "!opacity-100 !duration-0"
                           )}
                           style={
                             isLCP
@@ -114,7 +115,7 @@ export default function ShareCarousel({ title, labelAria }: Props) {
                           itemProp="price"
                           content="90000000"
                         >
-                          90,000,000 تومان
+                          {localizeNumber(20000)} تومان
                         </p>
 
                         <p
@@ -122,7 +123,7 @@ export default function ShareCarousel({ title, labelAria }: Props) {
                           itemProp="price"
                           content="85500000"
                         >
-                          85,500,000 تومان
+                          {localizeNumber(80000)} تومان
                         </p>
 
                         <p

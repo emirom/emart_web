@@ -1,4 +1,5 @@
 import { Button } from "@components/ui/button";
+import { localizeNumber } from "@lib/helper/localizeNumber";
 import { CalendarDays } from "lucide-react";
 import SellerInformation from "./SellerInformation";
 
@@ -28,11 +29,11 @@ export default function ProductPricingSection() {
         </div>
 
         <small className="text-tint-blue-500 line-through text-xs">
-          90,000,000 تومان
+          {localizeNumber(60000)} تومان
         </small>
 
         <div className="flex items-center justify-between text-sky-500 text-sm font-medium">
-          <span>88,500,000 تومان</span>
+          <span>{localizeNumber(20000)} تومان</span>
           <div className="flex gap-2 items-center">
             <span className="w-2 h-2 rounded-full bg-green-200"></span>
             <span>موجود در انبار</span>

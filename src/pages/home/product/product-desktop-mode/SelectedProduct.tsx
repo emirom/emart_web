@@ -2,6 +2,7 @@ import CustomImage from "@components/CustomImage";
 import { Button } from "@components/ui/button";
 import { Checkbox } from "@components/ui/checkbox";
 import { Label } from "@components/ui/label";
+import { localizeNumber } from "@lib/helper/localizeNumber";
 
 export default function SelectedProduct({ tabActive }: { tabActive: string }) {
   return (
@@ -47,10 +48,10 @@ export default function SelectedProduct({ tabActive }: { tabActive: string }) {
             </form>
             <span className="block bg-white h-[1px] my-3"></span>
             <small className="line-through text-white text-xs font-medium">
-              90,000,000 تومان
+              {localizeNumber(200000)} تومان
             </small>
             <span className="text-sm font-bold my-3 block text-white">
-              88,500,000 تومان
+              {localizeNumber(18000)} تومان
             </span>
             <Button className="w-full bg-white text-tint-blue-500">
               افزودن به سبد خرید

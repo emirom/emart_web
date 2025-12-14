@@ -1,5 +1,6 @@
 import CustomImage from "@components/CustomImage";
 import { cn } from "@components/lib/utils";
+import { localizeNumber } from "@lib/helper/localizeNumber";
 
 export default function MultiPromoteProductList() {
   return (
@@ -45,7 +46,7 @@ export default function MultiPromoteProductList() {
               itemProp="price"
               content="20000000"
             >
-              ۲۰۰۰۰۰۰۰
+              {localizeNumber(2000000)}
             </span>
 
             <span
@@ -53,7 +54,7 @@ export default function MultiPromoteProductList() {
               itemProp="price"
               content="1500000"
             >
-              1,500,000 تومان
+              {localizeNumber(500000)} تومان
             </span>
           </div>
         </li>

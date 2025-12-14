@@ -23,7 +23,7 @@ const columns: ColumnDef<Inventory & RowNumber>[] = [
   },
   {
     accessorKey: "variantId",
-    header: "شناسه واریانت",
+    header: "شناسه موجودی",
   },
   {
     accessorKey: "price",

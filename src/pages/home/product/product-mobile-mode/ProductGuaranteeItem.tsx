@@ -1,5 +1,6 @@
 import { cn } from "@components/lib/utils";
 import { Button } from "@components/ui/button";
+import { localizeNumber } from "@lib/helper/localizeNumber";
 import { Shield, Store } from "lucide-react";
 import { Dispatch, SetStateAction } from "react";
 
@@ -16,7 +17,7 @@ export default function ProductGuaranteeItem({
     <li
       className={cn(
         "flex items-center justify-between rounded-lg gap-2  p-3",
-        id === selected ? "bg-sky-blue" : "bg-tint-blue-100",
+        id === selected ? "bg-sky-blue" : "bg-tint-blue-100"
       )}
       aria-label="اطلاعات فروشنده، گارانتی و قیمت محصول"
     >
@@ -72,7 +73,7 @@ export default function ProductGuaranteeItem({
           className="line-through text-start text-gray-700  text-xs"
           aria-label="قیمت قبل از تخفیف ۹۹,۰۰۰ تومان"
         >
-          ۹۹,۰۰۰
+          {localizeNumber(5000)}
         </span>
 
         <span
@@ -80,7 +81,7 @@ export default function ProductGuaranteeItem({
           title="قیمت نهایی 88,500,000 تومان"
           aria-label="قیمت نهایی: ۸۸ میلیون و پانصد هزار تومان"
         >
-          88,500,000 تومان
+          {localizeNumber(50000)} تومان
         </span>
       </div>
 

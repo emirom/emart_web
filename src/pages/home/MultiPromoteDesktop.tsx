@@ -1,5 +1,6 @@
 import CustomImage from "@components/CustomImage";
 import { Button } from "@components/ui/button";
+import { localizeNumber } from "@lib/helper/localizeNumber";
 import MultiPromoteAttribute from "./MultiPromoteAttribute";
 import MultiPromoteIcon from "./MultiPromoteIcon";
 import MultiPromoteProductList from "./MultiPromoteProductList";
@@ -46,10 +47,11 @@ export default function MultiPromoteDesktop() {
             <div className="flex items-center gap-4">
               <div>
                 <span className="text-red-500 line-through text-xs font-bold">
-                  ۱۱,۰۰۰,۰۰۰
+                  {localizeNumber(2000000)}
+                  تومان
                 </span>
                 <span className="text-red-500 block font-bold text-base">
-                  ۱۲,۰۰۰,۰۰۰ تومان
+                  {localizeNumber(400000)} تومان
                 </span>
               </div>
             </div>

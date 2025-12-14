@@ -1,3 +1,4 @@
+import { localizeNumber } from "@lib/helper/localizeNumber";
 import Link from "next/link";
 import CustomImage from "./CustomImage";
 import { cn } from "./lib/utils";
@@ -51,7 +52,7 @@ export default function SpecialOfferItem({
                    10vw"
             className={cn(
               "w-1/2 h-[75%] transition-opacity duration-300",
-              isLCP && "!opacity-100 !duration-0",
+              isLCP && "!opacity-100 !duration-0"
             )}
             style={isLCP ? { opacity: 1, transition: "none" } : undefined}
             itemProp="image"
@@ -75,14 +76,14 @@ export default function SpecialOfferItem({
             itemProp="price"
             content="88500000"
           >
-            88,500,000 تومان
+            {localizeNumber(88500000)} تومان
           </p>
           <p
             className="text-xs font-bold line-through text-gray-400"
             itemProp="price"
             content="90000000"
           >
-            <small>90,000,000 تومان</small>
+            <small>{localizeNumber(90000000)} تومان</small>
           </p>
         </div>
       </Link>

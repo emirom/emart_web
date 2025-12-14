@@ -2,6 +2,7 @@
 
 import CustomImage from "@components/CustomImage";
 import { cn } from "@components/lib/utils";
+import { localizeNumber } from "@lib/helper/localizeNumber";
 import ProductColor from "../ProductColor";
 import ProductButtonAction from "./ProductButtonAction";
 import ProductMobileWarranty from "./ProductMobileWarranty";
@@ -11,7 +12,7 @@ export default function ProductMobileInfo() {
     <article
       className={cn(
         "shadow-md rounded-lg p-3 my-4 transition-shadow hover:shadow-lg focus-within:shadow-lg outline-none",
-        "md:hidden",
+        "md:hidden"
       )}
       role="region"
       aria-label="اطلاعات محصول برای موبایل"
@@ -60,13 +61,13 @@ export default function ProductMobileInfo() {
             ۵٪
           </span>
           <span className="line-through text-gray-500 text-end text-sm">
-            ۹۹,۰۰۰
+            {localizeNumber(5000)}
           </span>
           <span
             className="text-sky-500 text-xs col-span-2 font-bold"
             title="88,500,000 تومان"
           >
-            88,500,000 تومان
+            {localizeNumber(50000)} تومان
           </span>
         </div>
       </div>
