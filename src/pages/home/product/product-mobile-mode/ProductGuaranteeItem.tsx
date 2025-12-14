@@ -17,7 +17,7 @@ export default function ProductGuaranteeItem({
     <li
       className={cn(
         "flex items-center justify-between rounded-lg gap-2  p-3",
-        id === selected ? "bg-sky-blue" : "bg-tint-blue-100"
+        id === selected ? "bg-sky-blue" : "bg-tint-blue-100",
       )}
       aria-label="اطلاعات فروشنده، گارانتی و قیمت محصول"
     >

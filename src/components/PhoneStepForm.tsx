@@ -66,7 +66,7 @@ export default function PhoneStepForm() {
           }}
           className={cn(
             "block text-sm font-medium border border-tint-blue-700 rounded-lg placeholder:text-xs placeholder:text-gray-[#c2c2c2] outline-0 ring-0",
-            formState.errors.phone ? "border-destructive" : "border-gray-300"
+            formState.errors.phone ? "border-destructive" : "border-gray-300",
           )}
           placeholder="شماره موبایل خود را وارد نمایید"
         />
@@ -81,7 +81,7 @@ export default function PhoneStepForm() {
         type="submit"
         className={cn(
           "bg-orange-700 text-white select-none",
-          !formState.isValid && "cursor-not-allowed"
+          !formState.isValid && "cursor-not-allowed",
         )}
       >
         تایید

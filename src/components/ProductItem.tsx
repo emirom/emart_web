@@ -31,7 +31,7 @@ export default function ProductItem({ isLCP }: { isLCP?: boolean }) {
                                  8vw"
             className={cn(
               " w-[40%] h-[48%] mx-auto  aspect-[16/15] transition-opacity duration-300",
-              isLCP && "!opacity-100 !duration-0"
+              isLCP && "!opacity-100 !duration-0",
             )}
             style={isLCP ? { opacity: 1, transition: "none" } : undefined}
             itemProp="image"

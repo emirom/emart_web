@@ -12,7 +12,7 @@ export default function ProductMobileInfo() {
     <article
       className={cn(
         "shadow-md rounded-lg p-3 my-4 transition-shadow hover:shadow-lg focus-within:shadow-lg outline-none",
-        "md:hidden"
+        "md:hidden",
       )}
       role="region"
       aria-label="اطلاعات محصول برای موبایل"

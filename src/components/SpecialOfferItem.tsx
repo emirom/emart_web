@@ -52,7 +52,7 @@ export default function SpecialOfferItem({
                    10vw"
             className={cn(
               "w-1/2 h-[75%] transition-opacity duration-300",
-              isLCP && "!opacity-100 !duration-0"
+              isLCP && "!opacity-100 !duration-0",
             )}
             style={isLCP ? { opacity: 1, transition: "none" } : undefined}
             itemProp="image"
