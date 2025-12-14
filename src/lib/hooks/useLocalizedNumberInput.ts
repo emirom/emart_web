@@ -31,7 +31,7 @@ export function useSmartLocalizedInput() {
   const [displayValue, setDisplayValue] = useState("");
   const [locale, setLocale] = useState<"fa" | "en">("fa");
 
-  const handleChange = useCallback(
+  const handleChangeLanguage = useCallback(
     (value: string | React.ChangeEvent<HTMLInputElement>) => {
       const rawValue = typeof value === "string" ? value : value.target.value;
       const englishValue = convertToEnglishDigits(rawValue);
@@ -42,5 +42,5 @@ export function useSmartLocalizedInput() {
     [],
   );
 
-  return { displayValue, handleChange, locale, setDisplayValue };
+  return { displayValue, handleChangeLanguage, locale, setDisplayValue };
 }

@@ -17,7 +17,7 @@ export default function OtpStepForm() {
   const { phone, clearPhone } = useAppStore();
   const { control, handleSubmit, formState, setValue } =
     useForm<Omit<PostAuthLoginBody, "phone">>();
-  const { handleChange } = useSmartLocalizedInput();
+  const { handleChangeLanguage } = useSmartLocalizedInput();
   const inputOtpRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
@@ -82,7 +82,7 @@ export default function OtpStepForm() {
               dir="ltr"
               className="w-full flex justify-center"
               onChange={(val: string) => {
-                const englishValue = handleChange(val);
+                const englishValue = handleChangeLanguage(val);
                 setValue("otp", englishValue, { shouldValidate: true });
               }}
             >

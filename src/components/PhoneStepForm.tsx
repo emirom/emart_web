@@ -31,7 +31,7 @@ export default function PhoneStepForm() {
       mode: "onChange",
     });
 
-  const { displayValue, handleChange } = useSmartLocalizedInput();
+  const { displayValue, handleChangeLanguage } = useSmartLocalizedInput();
 
   const onSubmit = async (data: PhoneFormValues) => {
     try {
@@ -61,7 +61,7 @@ export default function PhoneStepForm() {
           {...register("phone")}
           value={displayValue}
           onChange={(e) => {
-            const englishValue = handleChange(e);
+            const englishValue = handleChangeLanguage(e);
             setValue("phone", englishValue, { shouldValidate: true });
           }}
           className={cn(

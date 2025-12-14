@@ -6,9 +6,9 @@ import { FormScrollableSelectField } from "@components/FormScrollableSelectField
 import { zodResolver } from "@hookform/resolvers/zod";
 import { patchBrandAction } from "@lib/actions/brand-action";
 import { queryClient } from "@lib/apis/queryClient";
-import { invalidateEntityQueries } from "@lib/utils/react-query-utils";
 import { UpdateBrandInput } from "@lib/schemas";
 import { useGetBrandsId } from "@lib/services/brands/brands";
+import { invalidateEntityQueries } from "@lib/utils/react-query-utils";
 import { patchBrandsIdBody } from "@lib/validations/brand.validation";
 import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -76,7 +76,6 @@ export default function EditBrandForm({ id }: { id: string }) {
         control={control}
         label="ترتیب مرتب‌سازی"
         type="number"
-        min={1}
       />
 
       <div className="w-full flex flex-wrap gap-2 items-end justify-between">
