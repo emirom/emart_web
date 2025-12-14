@@ -23,7 +23,7 @@ interface Props<T extends FieldValues>
   control: Control<T>;
   label?: string;
   rules?: RegisterOptions<T, Path<T>>;
-  type?: "text" | "number";
+  type?: HTMLInputElement["type"];
 }
 
 function FormInputField<T extends FieldValues>({
