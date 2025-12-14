@@ -26,6 +26,7 @@ export default function CreateLocationForm() {
       resolver: zodResolver(postLocationsBody) as any,
     });
   const { data: cities } = useGetCities({ skip: 0, limit: 10 });
+  console.log(cities);
   const onSubmit: SubmitHandler<CreateLocationInput> = async (data) => {
     try {
       await postLocationAction(data);

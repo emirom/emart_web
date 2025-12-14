@@ -31,18 +31,18 @@ export default async function Page({
       {
         skip: initialQuery.page ?? 0,
         limit: 10,
-        name: initialQuery.name,
-        isoCode: initialQuery.isoCode,
-        phoneCode: initialQuery.phoneCode,
+        name: initialQuery.name ?? "",
+        isoCode: initialQuery.isoCode ?? "",
+        phoneCode: initialQuery.phoneCode ?? "",
       },
     ],
     queryFn: () =>
       getCountries({
         skip: initialQuery.page ?? 0,
         limit: 10,
-        name: initialQuery.name,
-        isoCode: initialQuery.isoCode,
-        phoneCode: initialQuery.phoneCode,
+        name: initialQuery.name ?? "",
+        isoCode: initialQuery.isoCode ?? "",
+        phoneCode: initialQuery.phoneCode ?? "",
       }),
   });
   return (

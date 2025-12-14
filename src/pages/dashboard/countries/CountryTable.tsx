@@ -41,9 +41,9 @@ export default function CountryTable({
   const { data: countries } = useGetCountries({
     skip: initialQuery?.page ?? 0,
     limit: 10,
-    name: searchParams?.get("name") ?? initialQuery?.name,
-    isoCode: searchParams?.get("isoCode") ?? initialQuery?.isoCode,
-    phoneCode: searchParams?.get("phoneCode") ?? initialQuery?.phoneCode,
+    name: searchParams?.get("name") ?? initialQuery?.name ?? "",
+    isoCode: searchParams?.get("isoCode") ?? initialQuery?.isoCode ?? "",
+    phoneCode: searchParams?.get("phoneCode") ?? initialQuery?.phoneCode ?? "",
   });
 
   return (
