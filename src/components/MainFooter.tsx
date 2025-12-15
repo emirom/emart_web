@@ -30,7 +30,7 @@ export default function MainFooter() {
 
         <div className="order-2 w-full lg:w-1/3 mt-2 lg:mt-0 flex flex-col">
           <section
-            className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6"
+            className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-2"
             aria-label="مجوزها و کارت‌های محصول"
             dir="rtl"
           >
@@ -44,11 +44,11 @@ export default function MainFooter() {
               >
                 <figure className="flex-shrink-0">
                   <CustomImage
-                    className="rounded-lg"
+                    className="rounded-lg w-full h-full"
                     src="/images/related-porduct.png"
                     alt="آیفون 13 پرو مکس – تصویر محصول"
-                    width={84}
-                    height={84}
+                    width={60}
+                    height={60}
                     loading="lazy"
                     itemProp="image"
                   />

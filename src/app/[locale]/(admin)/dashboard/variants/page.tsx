@@ -1,5 +1,4 @@
 import VariantsTable from "@/pages/dashboard/variants/VariantsTable";
-import { HeaderWithLink } from "@components/HeaderWithLink";
 import { queryClient } from "@lib/apis/queryClient";
 import { getVariants } from "@lib/services/variants/variants";
 import { VariantFilter } from "@lib/types/filter-generator";
@@ -47,11 +46,6 @@ export default async function Page({
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <HeaderWithLink
-        title="تنوع محصول"
-        linkTitle="بازگشت"
-        linkHref="/dashboard"
-      />
       <VariantsTable initialQuery={initialQuery} />
     </HydrationBoundary>
   );
