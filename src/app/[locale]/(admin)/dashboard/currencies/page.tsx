@@ -1,6 +1,5 @@
 import CurrenciesTable from "@/pages/dashboard/currencies/CurrenciesTable";
 import { HeaderWithLink } from "@components/HeaderWithLink";
-import { TablePagination } from "@components/TablePagination";
 import { queryClient } from "@lib/apis/queryClient";
 import { CurrencyListResponse } from "@lib/schemas";
 import { getCurrencies } from "@lib/services/currencies/currencies";
@@ -38,7 +37,6 @@ export default async function Page({
     <HydrationBoundary state={dehydrate(queryClient)}>
       <HeaderWithLink title="ارزها" linkTitle="بازگشت" linkHref="/dashboard" />
       <CurrenciesTable data={cachedData} />
-      <TablePagination />
     </HydrationBoundary>
   );
 }

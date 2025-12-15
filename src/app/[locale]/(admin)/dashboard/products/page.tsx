@@ -1,5 +1,4 @@
 import ProductTable from "@/pages/dashboard/products/ProductTable";
-import { TablePagination } from "@components/TablePagination";
 import { queryClient } from "@lib/apis/queryClient";
 import { getProducts } from "@lib/services/products/products";
 import { ProductFilter } from "@lib/types/filter-generator";
@@ -50,7 +49,6 @@ export default async function Page({
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <ProductTable initialQuery={initialQuery} />
-      <TablePagination />
     </HydrationBoundary>
   );
 }

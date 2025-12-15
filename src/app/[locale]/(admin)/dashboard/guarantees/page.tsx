@@ -1,6 +1,5 @@
 import GuaranteeTable from "@/pages/dashboard/guarantees/GuaranteeTable";
 import { HeaderWithLink } from "@components/HeaderWithLink";
-import { TablePagination } from "@components/TablePagination";
 import { queryClient } from "@lib/apis/queryClient";
 import { getGuarantees } from "@lib/services/guarantees/guarantees";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
@@ -44,7 +43,6 @@ export default async function Page({
         linkHref="/dashboard"
       />
       <GuaranteeTable initialQuery={initialQuery} />
-      <TablePagination />
     </HydrationBoundary>
   );
 }

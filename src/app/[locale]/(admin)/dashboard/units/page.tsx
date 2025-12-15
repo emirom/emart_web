@@ -1,6 +1,5 @@
 import UnitsTable from "@/pages/dashboard/units/UnitsTable";
 import { HeaderWithLink } from "@components/HeaderWithLink";
-import { TablePagination } from "@components/TablePagination";
 import { queryClient } from "@lib/apis/queryClient";
 import { getUnits } from "@lib/services/units/units";
 import { UnitFilter } from "@lib/types/filter-generator";
@@ -43,7 +42,6 @@ export default async function Page({
         linkHref="/dashboard"
       />
       <UnitsTable initialQuery={initialQuery} />
-      <TablePagination />
     </HydrationBoundary>
   );
 }

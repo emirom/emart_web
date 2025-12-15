@@ -1,6 +1,5 @@
 import ProvincesTable from "@/pages/dashboard/provinces/ProvincesTable";
 import { HeaderWithLink } from "@components/HeaderWithLink";
-import { TablePagination } from "@components/TablePagination";
 import { queryClient } from "@lib/apis/queryClient";
 import { getProvinces } from "@lib/services/provinces/provinces";
 import { ProvinceFilter } from "@lib/types/filter-generator";
@@ -60,7 +59,6 @@ export default async function Page({
         linkHref="/dashboard"
       />
       <ProvincesTable initialQuery={initialQuery} />
-      <TablePagination />
     </HydrationBoundary>
   );
 }

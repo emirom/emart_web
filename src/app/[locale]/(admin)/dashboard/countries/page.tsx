@@ -1,6 +1,5 @@
 import CountryTable from "@/pages/dashboard/countries/CountryTable";
 import { HeaderWithLink } from "@components/HeaderWithLink";
-import { TablePagination } from "@components/TablePagination";
 import { queryClient } from "@lib/apis/queryClient";
 import { getCountries } from "@lib/services/countries/countries";
 import { CountryFilter } from "@lib/types/filter-generator";
@@ -53,7 +52,6 @@ export default async function Page({
         title="افزودن کشور"
       />
       <CountryTable initialQuery={initialQuery} />
-      <TablePagination />
     </HydrationBoundary>
   );
 }

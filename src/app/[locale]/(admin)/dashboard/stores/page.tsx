@@ -1,6 +1,5 @@
 import StoreTable from "@/pages/dashboard/stores/StoreTable";
 import { HeaderWithLink } from "@components/HeaderWithLink";
-import { TablePagination } from "@components/TablePagination";
 import { queryClient } from "@lib/apis/queryClient";
 import { ListStoresResponse } from "@lib/schemas";
 import { getStores } from "@lib/services/stores/stores";
@@ -37,7 +36,6 @@ export default async function Page({
         linkHref="/dashboard"
       />
       <StoreTable data={cachedData} />
-      <TablePagination />
     </HydrationBoundary>
   );
 }

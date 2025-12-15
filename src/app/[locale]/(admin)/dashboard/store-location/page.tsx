@@ -1,6 +1,5 @@
 import StoreLocationTable from "@/pages/dashboard/store-location/StoreLocationTable";
 import { HeaderWithLink } from "@components/HeaderWithLink";
-import { TablePagination } from "@components/TablePagination";
 import { queryClient } from "@lib/apis/queryClient";
 import { ListStoreLocationsResponse } from "@lib/schemas";
 import { getStoreLocations } from "@lib/services/store-locations/store-locations";
@@ -28,7 +27,7 @@ export default async function Page({
     queryFn: () => getStoreLocations({ skip, limit: 10 }),
   });
   const cachedData = queryClient.getQueryData(
-    queryKey,
+    queryKey
   ) as ListStoreLocationsResponse;
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
@@ -38,7 +37,6 @@ export default async function Page({
         linkHref="/dashboard/stores"
       />
       <StoreLocationTable data={cachedData} />
-      <TablePagination />
     </HydrationBoundary>
   );
 }

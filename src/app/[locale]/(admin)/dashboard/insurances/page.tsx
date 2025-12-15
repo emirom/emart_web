@@ -1,6 +1,5 @@
 import InsuranceTable from "@/pages/dashboard/insurances/InsuranceTable";
 import { HeaderWithLink } from "@components/HeaderWithLink";
-import { TablePagination } from "@components/TablePagination";
 import { queryClient } from "@lib/apis/queryClient";
 import { getInsurances } from "@lib/services/insurances/insurances";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
@@ -46,7 +45,6 @@ export default async function Page({
         linkHref="/dashboard"
       />
       <InsuranceTable initialQuery={initialQuery} />
-      <TablePagination />
     </HydrationBoundary>
   );
 }

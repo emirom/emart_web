@@ -1,6 +1,5 @@
 import CityTable from "@/pages/dashboard/city/CityTable";
 import { HeaderWithLink } from "@components/HeaderWithLink";
-import { TablePagination } from "@components/TablePagination";
 import { queryClient } from "@lib/apis/queryClient";
 import { getCities } from "@lib/services/cities/cities";
 import { CityFilter } from "@lib/types/filter-generator";
@@ -49,7 +48,6 @@ export default async function Page({
     <HydrationBoundary state={dehydrate(queryClient)}>
       <HeaderWithLink title="شهرها" linkTitle="بازگشت" linkHref="/dashboard" />
       <CityTable initialQuery={initialQuery} />
-      <TablePagination />
     </HydrationBoundary>
   );
 }

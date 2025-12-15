@@ -1,6 +1,5 @@
 import LabelTable from "@/pages/dashboard/labels/LabelTable";
 import { HeaderWithLink } from "@components/HeaderWithLink";
-import { TablePagination } from "@components/TablePagination";
 import { queryClient } from "@lib/apis/queryClient";
 import { getLabels } from "@lib/services/labels/labels";
 import { LabelFilter } from "@lib/types/filter-generator";
@@ -38,7 +37,6 @@ export default async function Page({
     <HydrationBoundary state={dehydrate(queryClient)}>
       <HeaderWithLink title=" برچسب" linkTitle="بازگشت" linkHref="/dashboard" />
       <LabelTable initialQuery={initialQuery} />
-      <TablePagination />
     </HydrationBoundary>
   );
 }

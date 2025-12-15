@@ -1,6 +1,5 @@
 import LocationTable from "@/pages/dashboard/locations/LocationTable";
 import { HeaderWithLink } from "@components/HeaderWithLink";
-import { TablePagination } from "@components/TablePagination";
 import { queryClient } from "@lib/apis/queryClient";
 import { ListLocationsResponse } from "@lib/schemas";
 import { getLocations } from "@lib/services/locations/locations";
@@ -39,7 +38,7 @@ export default async function Page({
       }),
   });
   const cachedData = queryClient.getQueryData(
-    queryKey,
+    queryKey
   ) as ListLocationsResponse;
 
   return (
@@ -50,7 +49,6 @@ export default async function Page({
         linkTitle="بازگشت"
       />
       <LocationTable data={cachedData} />
-      <TablePagination />
     </HydrationBoundary>
   );
 }
