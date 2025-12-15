@@ -2,7 +2,6 @@ import { Metadata } from "next";
 
 import AttributeTable from "@/pages/dashboard/attribute/AttributeTable";
 import { HeaderWithLink } from "@components/HeaderWithLink";
-import { TablePagination } from "@components/TablePagination";
 import { queryClient } from "@lib/apis/queryClient";
 import { getAttributes } from "@lib/services/attributes/attributes";
 import { AttributeFilter } from "@lib/types/filter-generator";
@@ -43,7 +42,6 @@ export default async function Page({
         linkHref="/dashboard"
       />
       <AttributeTable initialQuery={initialQuery} />
-      <TablePagination />
     </HydrationBoundary>
   );
 }

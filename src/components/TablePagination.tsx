@@ -1,6 +1,5 @@
 "use client";
 
-import PaginationPortalWrapper from "@/pages/dashboard/PaginationPortalWrapper";
 import {
   Pagination,
   PaginationContent,
@@ -26,24 +25,22 @@ export function TablePagination() {
   };
 
   return (
-    <PaginationPortalWrapper>
-      <Pagination>
-        <PaginationContent>
-          <PaginationItem>
-            <PaginationNext onClick={() => handlePageChange(currentPage + 1)} />
-          </PaginationItem>
+    <Pagination>
+      <PaginationContent>
+        <PaginationItem>
+          <PaginationNext onClick={() => handlePageChange(currentPage + 1)} />
+        </PaginationItem>
 
-          <PaginationItem className="p-0 m-0 inline">
-            <PaginationLink>{currentPage + 1}</PaginationLink>
-          </PaginationItem>
+        <PaginationItem className="p-0 m-0 inline">
+          <PaginationLink>{currentPage + 1}</PaginationLink>
+        </PaginationItem>
 
-          <PaginationItem>
-            <PaginationPrevious
-              onClick={() => handlePageChange(currentPage - 1)}
-            />
-          </PaginationItem>
-        </PaginationContent>
-      </Pagination>
-    </PaginationPortalWrapper>
+        <PaginationItem>
+          <PaginationPrevious
+            onClick={() => handlePageChange(currentPage - 1)}
+          />
+        </PaginationItem>
+      </PaginationContent>
+    </Pagination>
   );
 }

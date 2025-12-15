@@ -1,6 +1,5 @@
 import ColorTable from "@/pages/dashboard/colors/ColorTable";
 import { HeaderWithLink } from "@components/HeaderWithLink";
-import { TablePagination } from "@components/TablePagination";
 import { queryClient } from "@lib/apis/queryClient";
 import { getColors } from "@lib/services/colors/colors";
 import { ColorFilter } from "@lib/types/filter-generator";
@@ -54,7 +53,6 @@ export default async function Page({
     <HydrationBoundary state={dehydrate(queryClient)}>
       <HeaderWithLink title="رنگ‌ها" linkTitle="بازگشت" linkHref="/dashboard" />
       <ColorTable initialQuery={initialQuery} />
-      <TablePagination />
     </HydrationBoundary>
   );
 }

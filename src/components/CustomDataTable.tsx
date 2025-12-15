@@ -15,7 +15,6 @@ import {
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import * as React from "react";
 import FilterGenerator from "./FilterGenerator";
-import { cn } from "./lib/utils";
 import { Input } from "./ui/input";
 import {
   Table,
@@ -28,6 +27,7 @@ import {
 
 import { FilterSchemaInput } from "@lib/types/file-type";
 import { ClearFilterButton } from "./ClearFilterButton";
+import { TablePagination } from "./TablePagination";
 
 type FilterConfig =
   | FilterSchemaInput[]
@@ -196,11 +196,7 @@ export function CustomDataTable<TData>({
           </TableBody>
         </Table>
       </div>
-
-      <div
-        id="pagination"
-        className={cn("flex items-center justify-center my-2")}
-      />
+      <TablePagination />
     </div>
   );
 }
