@@ -101,7 +101,7 @@ export default function GuaranteeTable({
   });
   return (
     <CustomDataTable
-      data={guarantees?.data ?? []}
+      response={guarantees}
       columns={columns}
       filterColumnKey="title"
       customButton={

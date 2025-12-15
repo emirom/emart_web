@@ -104,13 +104,12 @@ export default function ProductTable({
 
   return (
     <CustomDataTable
-      data={products?.data ?? []}
+      response={products}
       columns={columns}
       title="محصولات"
       filterColumnKey="name"
       emptyMessage="محصولی یافت نشد"
       filterPlaceholder="جستجوی محصول..."
-      filterConfigs={products?.filters}
       customButton={
         <Link
           href="/dashboard/products/add"

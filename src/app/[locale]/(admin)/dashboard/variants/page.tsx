@@ -1,6 +1,5 @@
 import VariantsTable from "@/pages/dashboard/variants/VariantsTable";
 import { HeaderWithLink } from "@components/HeaderWithLink";
-import { TablePagination } from "@components/TablePagination";
 import { queryClient } from "@lib/apis/queryClient";
 import { getVariants } from "@lib/services/variants/variants";
 import { VariantFilter } from "@lib/types/filter-generator";
@@ -54,7 +53,6 @@ export default async function Page({
         linkHref="/dashboard"
       />
       <VariantsTable initialQuery={initialQuery} />
-      <TablePagination />
     </HydrationBoundary>
   );
 }

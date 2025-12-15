@@ -76,14 +76,13 @@ export default function ColorTable({
 
   return (
     <CustomDataTable
-      title="رنگ‌ها"
-      data={colors?.data ?? []}
+      title="لیست رنگ ها"
+      response={colors}
       columns={columns}
-      emptyMessage="رنگ مورد نظر یافت نشد"
       filterColumnKey="name"
-      filterPlaceholder="جستجو رنگ"
       customButton={<CreateColor />}
-      filterConfigs={colors?.filters}
+      emptyMessage="رنگ مورد نظر یافت نشد"
+      filterPlaceholder="جستجو رنگ"
     />
   );
 }

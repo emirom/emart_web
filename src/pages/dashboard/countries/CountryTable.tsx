@@ -49,8 +49,7 @@ export default function CountryTable({
   return (
     <CustomDataTable
       columns={columns}
-      data={countries?.data}
-      filterConfigs={countries?.filters}
+      response={countries}
       filterColumnKey="name"
       filterPlaceholder="جستجو کشور"
       emptyMessage="کشور مورد نظریافت نشد"

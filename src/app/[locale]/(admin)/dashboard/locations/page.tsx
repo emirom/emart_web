@@ -38,7 +38,7 @@ export default async function Page({
       }),
   });
   const cachedData = queryClient.getQueryData(
-    queryKey
+    queryKey,
   ) as ListLocationsResponse;
 
   return (

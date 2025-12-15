@@ -60,10 +60,9 @@ export default function LocationTable({
     <CustomDataTable
       title="آدرس فروشنده ها"
       columns={columns}
-      data={data?.data}
+      response={data}
       filterColumnKey="street"
       filterPlaceholder="جستجو براساس نام خیابان"
-      filterConfigs={data?.filters}
       emptyMessage="آدرسی یافت نشد"
       customButton={<CreateLocation />}
     />

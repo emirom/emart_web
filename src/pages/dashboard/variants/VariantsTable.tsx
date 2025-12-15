@@ -84,7 +84,7 @@ export default function VariantsTable({
   return (
     <CustomDataTable
       columns={columns}
-      data={variants?.data ?? []}
+      response={variants}
       customButton={
         <Link
           href="/dashboard/variants/add"
@@ -98,7 +98,6 @@ export default function VariantsTable({
       title="لیست تنوع محصولات"
       filterPlaceholder="جستجو‌تنوع‌محصول"
       filterColumnKey="attributeComboKey"
-      filterConfigs={variants?.filters}
     />
   );
 }

@@ -57,9 +57,8 @@ export default function CurrenciesTable({
   return (
     <CustomDataTable
       columns={columns}
-      data={data?.data}
+      response={data}
       title="ارزها"
-      filterConfigs={data?.filters}
       emptyMessage="ارزی یافت نشد"
       customButton={<CreateCurrency />}
       filterColumnKey="name"

@@ -33,13 +33,12 @@ export default function UnitsTable({
 
   return (
     <CustomDataTable
-      data={units?.data ?? []}
+      response={units}
       columns={columns}
       filterColumnKey="title"
       filterPlaceholder="جستجو"
       emptyMessage="هیچ واحدی پیدا نشد"
       customButton={<CreateUnit />}
-      filterConfigs={units?.filters}
     />
   );
 }

@@ -57,7 +57,7 @@ function FormInputField<T extends FieldValues>({
               ? ""
               : type === "number" && nuSeparator
                 ? toPersianDigits(
-                    String(field.value).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                    String(field.value).replace(/\B(?=(\d{3})+(?!\d))/g, ","),
                   )
                 : String(field.value);
 
@@ -80,7 +80,7 @@ function FormInputField<T extends FieldValues>({
                 }}
                 className={cn(
                   fieldState.error && "border border-destructive text-black",
-                  className
+                  className,
                 )}
               />
               {fieldState.error && (

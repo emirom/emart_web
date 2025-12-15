@@ -98,9 +98,8 @@ export default function StoreTable({ data }: { data: ListStoresResponse }) {
   return (
     <CustomDataTable
       title="فروشگاه‌ها"
-      data={data?.data}
+      response={data}
       columns={columns}
-      // filterConfigs={data?.filters}
       emptyMessage="فروشگاهی یافت نشد"
       filterPlaceholder="نام فروشگاه را وارد نمایید"
       filterColumnKey="name"

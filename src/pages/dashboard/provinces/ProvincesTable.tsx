@@ -51,8 +51,7 @@ export default function ProvincesTable({
   return (
     <CustomDataTable
       columns={columns}
-      data={provinces?.data}
-      filterConfigs={provinces?.filters}
+      response={provinces}
       filterColumnKey="name"
       filterPlaceholder="جستجو استان"
       emptyMessage="موردی یافت نشد"

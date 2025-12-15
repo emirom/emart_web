@@ -41,13 +41,12 @@ export default function CityTable({
   return (
     <CustomDataTable
       columns={columns}
-      data={cities?.data}
+      response={cities}
       title="شهرها"
       filterColumnKey="name"
       filterPlaceholder="جستجو شهر"
       emptyMessage="شهری یافت نشد"
       customButton={<CreateCity />}
-      filterConfigs={cities?.filters}
     />
   );
 }

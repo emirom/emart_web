@@ -115,7 +115,7 @@ export default function InsuranceTable({
 
   return (
     <CustomDataTable
-      data={insurances?.data ?? []}
+      response={insurances}
       columns={columns}
       filterColumnKey="title"
       customButton={

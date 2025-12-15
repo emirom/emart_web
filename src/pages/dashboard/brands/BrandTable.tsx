@@ -122,13 +122,12 @@ export default function BrandTable({
   return (
     <CustomDataTable
       columns={columns}
-      data={brands?.data ?? []}
+      response={brands}
       customButton={<CreateBrand />}
       emptyMessage="برند‌مورد‌نظریافت نشد"
       filterColumnKey="name"
       filterPlaceholder="جستجو برند"
       title="برند ها"
-      filterConfigs={brands?.filters}
     />
   );
 }

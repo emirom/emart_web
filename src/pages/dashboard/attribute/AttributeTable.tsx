@@ -39,13 +39,12 @@ export default function AttributeTable({
 
   return (
     <CustomDataTable
-      data={attributes?.data ?? []}
+      response={attributes}
       columns={columns}
       filterColumnKey="title"
       filterPlaceholder="جستجو"
       emptyMessage="هیچ ویژگی پیدا نشد"
       customButton={<CreateAttribute />}
-      filterConfigs={attributes?.filters}
     />
   );
 }

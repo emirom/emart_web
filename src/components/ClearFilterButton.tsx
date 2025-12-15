@@ -8,7 +8,6 @@ export function ClearFilterButton() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-
   const hasQuery = !!searchParams && searchParams.size > 0;
 
   const handleClearFilters = () => {

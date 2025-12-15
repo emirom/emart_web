@@ -117,10 +117,9 @@ export default function InventoryTable({
 }) {
   return (
     <CustomDataTable
-      data={data?.data}
+      response={data}
       columns={columns}
       title="موجودی کالا"
-      filterConfigs={data?.filters}
       emptyMessage="موجودی کالایی یافت نشد"
       filterColumnKey="storeId"
       filterPlaceholder="آیدی‌فروشگاه‌راواردنمایید"

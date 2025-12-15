@@ -85,14 +85,13 @@ export default function LabelTable({
 
   return (
     <CustomDataTable
-      data={labels?.data ?? []}
+      response={labels}
       columns={columns}
       filterColumnKey="name"
       customButton={<CreateLabel />}
       emptyMessage="برچسبی یافت نشد"
       filterPlaceholder="جستجو"
       title="برچسب‌ها"
-      filterConfigs={labels?.filters}
     />
   );
 }

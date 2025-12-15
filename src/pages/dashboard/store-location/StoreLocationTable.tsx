@@ -54,10 +54,9 @@ export default function StoreLocationTable({
   return (
     <CustomDataTable
       title="تخصیص آدرس فروشگاه‌ها"
-      data={data?.data}
+      response={data}
       columns={columns}
       emptyMessage="هیچ تخصیصی یافت نشد"
-      // filterConfigs={data?.filters}
       customButton={<div>Add Location</div>}
       filterColumnKey="nam"
     />

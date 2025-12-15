@@ -14,7 +14,9 @@ import {
 } from "@tanstack/react-table";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import * as React from "react";
+import { ClearFilterButton } from "./ClearFilterButton";
 import FilterGenerator from "./FilterGenerator";
+import { TablePagination } from "./TablePagination";
 import { Input } from "./ui/input";
 import {
   Table,
@@ -25,48 +27,62 @@ import {
   TableRow,
 } from "./ui/table";
 
-import { FilterSchemaInput } from "@lib/types/file-type";
-import { ClearFilterButton } from "./ClearFilterButton";
-import { TablePagination } from "./TablePagination";
+export type ApiListDetails = {
+  skip: number;
+  limit: number;
+  total: number;
+  pages: number;
+};
 
-type FilterConfig =
-  | FilterSchemaInput[]
-  | {
-      service: string;
-      label?: string | null;
-      open: boolean;
-      type: string;
-      model?: string | null;
-      field?: string | null;
-      advanced?: boolean | null;
-      enumOptions?: string | null;
-    }[]
-  | null;
+export type ApiListResponse<TData, TFilter = unknown> = {
+  success: boolean;
+  data: TData[];
+  filters: TFilter[];
+  details: ApiListDetails;
+};
 
-interface CustomDataTableProps<TData> {
+export interface CustomDataTableProps<
+  TResponse extends ApiListResponse<any, any>, // eslint-disable-line @typescript-eslint/no-explicit-any
+> {
   title?: string;
-  data?: TData[];
-  columns: ColumnDef<TData>[];
+  response?: Partial<{
+    success: boolean | null;
+    data: TResponse["data"];
+    filters: TResponse["filters"];
+    details: Partial<ApiListDetails>;
+  }>;
+  columns: ColumnDef<TResponse["data"][number]>[];
   filterColumnKey?: string;
   filterPlaceholder?: string;
   emptyMessage?: string;
   customButton?: React.ReactNode;
-  filterConfigs?: FilterConfig;
 }
 
-export function CustomDataTable<TData>({
+export function CustomDataTable<TResponse extends ApiListResponse<any, any>>({
+  // eslint-disable-line @typescript-eslint/no-explicit-any
   title,
-  data,
+  response,
   columns,
   filterColumnKey,
   filterPlaceholder = "Filter...",
   emptyMessage = "No results found.",
   customButton,
-  filterConfigs,
-}: CustomDataTableProps<TData>) {
+}: CustomDataTableProps<TResponse>) {
+  type TData = TResponse["data"][number];
+  type TFilter = TResponse["filters"][number];
+
+  const data: TData[] = response?.data ?? [];
+  const filters: TFilter[] = response?.filters ?? [];
+  const details: ApiListDetails = {
+    skip: response?.details?.skip ?? 0,
+    limit: response?.details?.limit ?? data.length,
+    total: response?.details?.total ?? data.length,
+    pages: response?.details?.pages ?? 1,
+  };
+
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    []
+    [],
   );
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
@@ -79,22 +95,24 @@ export function CustomDataTable<TData>({
   const pathname = usePathname();
 
   const table = useReactTable({
-    data: data ?? [],
+    data,
     columns,
-    onSortingChange: setSorting,
-    onColumnFiltersChange: setColumnFilters,
-    getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-    getSortedRowModel: getSortedRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
-    onColumnVisibilityChange: setColumnVisibility,
-    onRowSelectionChange: setRowSelection,
     state: {
       sorting,
       columnFilters,
       columnVisibility,
       rowSelection,
     },
+    onSortingChange: setSorting,
+    onColumnFiltersChange: setColumnFilters,
+    onColumnVisibilityChange: setColumnVisibility,
+    onRowSelectionChange: setRowSelection,
+    getCoreRowModel: getCoreRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    manualPagination: true,
+    pageCount: details.pages,
   });
 
   const filterColumn = filterColumnKey
@@ -109,18 +127,18 @@ export function CustomDataTable<TData>({
         </h2>
       )}
 
-      <div className="flex items-center justify-between gap-2 mb-2 rounded-lg p-2">
+      <div className="flex items-center justify-between gap-2 mb-2 ">
         <div className="flex items-stretch gap-2">
           {filterColumn && (
             <Input
               placeholder={filterPlaceholder}
               value={(filterColumn.getFilterValue() as string) ?? ""}
-              onChange={(event) => {
-                const value = event.target.value;
+              onChange={(e) => {
+                const value = e.target.value;
                 filterColumn.setFilterValue(value);
 
                 const params = new URLSearchParams(
-                  searchParams ? Array.from(searchParams.entries()) : []
+                  searchParams ? Array.from(searchParams.entries()) : [],
                 );
 
                 if (value) params.set("search", value);
@@ -128,17 +146,13 @@ export function CustomDataTable<TData>({
 
                 router.replace(`${pathname}?${params.toString()}`);
               }}
-              className="max-w-xs text-[0.75rem] font-medium placeholder:text-xs placeholder:font-medium border border-gray-300 rounded-lg"
+              className="max-w-xs text-[0.75rem] font-medium border border-gray-300 rounded-lg"
             />
           )}
 
-          {filterConfigs && (
-            <div className="flex items-stretch gap-2">
-              <FilterGenerator
-                configs={
-                  filterConfigs as FilterSchemaInput[] | null | undefined
-                }
-              />
+          {filters.length > 0 && (
+            <div className="flex gap-2">
+              <FilterGenerator configs={filters} />
               <ClearFilterButton />
             </div>
           )}
@@ -158,7 +172,7 @@ export function CustomDataTable<TData>({
                       ? null
                       : flexRender(
                           header.column.columnDef.header,
-                          header.getContext()
+                          header.getContext(),
                         )}
                   </TableHead>
                 ))}
@@ -167,17 +181,14 @@ export function CustomDataTable<TData>({
           </TableHeader>
 
           <TableBody>
-            {Array.isArray(data) && data.length > 0 ? (
+            {data.length > 0 ? (
               table.getRowModel().rows.map((row) => (
-                <TableRow
-                  key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
-                >
+                <TableRow key={row.id}>
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell className="text-xs" key={cell.id}>
+                    <TableCell key={cell.id} className="text-xs">
                       {flexRender(
                         cell.column.columnDef.cell,
-                        cell.getContext()
+                        cell.getContext(),
                       )}
                     </TableCell>
                   ))}
@@ -196,7 +207,8 @@ export function CustomDataTable<TData>({
           </TableBody>
         </Table>
       </div>
-      <TablePagination />
+
+      {details.total > 10 && <TablePagination total={details.total} />}
     </div>
   );
 }

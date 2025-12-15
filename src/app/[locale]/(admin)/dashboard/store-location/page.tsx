@@ -27,7 +27,7 @@ export default async function Page({
     queryFn: () => getStoreLocations({ skip, limit: 10 }),
   });
   const cachedData = queryClient.getQueryData(
-    queryKey
+    queryKey,
   ) as ListStoreLocationsResponse;
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
