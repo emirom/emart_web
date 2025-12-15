@@ -1,5 +1,4 @@
 import BrandTable from "@/pages/dashboard/brands/BrandTable";
-import { HeaderWithLink } from "@components/HeaderWithLink";
 import { queryClient } from "@lib/apis/queryClient";
 import { getBrands } from "@lib/services/brands/brands";
 import { BrandFilter } from "@lib/types/filter-generator";
@@ -45,7 +44,6 @@ export default async function Page({
   });
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <HeaderWithLink title="برندها" linkTitle="بازگشت" linkHref="/dashboard" />
       <BrandTable initialQuery={initialQuery} />
     </HydrationBoundary>
   );

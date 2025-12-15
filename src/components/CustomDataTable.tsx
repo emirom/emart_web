@@ -82,7 +82,7 @@ export function CustomDataTable<TResponse extends ApiListResponse<any, any>>({
 
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    [],
+    []
   );
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
@@ -138,7 +138,7 @@ export function CustomDataTable<TResponse extends ApiListResponse<any, any>>({
                 filterColumn.setFilterValue(value);
 
                 const params = new URLSearchParams(
-                  searchParams ? Array.from(searchParams.entries()) : [],
+                  searchParams ? Array.from(searchParams.entries()) : []
                 );
 
                 if (value) params.set("search", value);
@@ -172,7 +172,7 @@ export function CustomDataTable<TResponse extends ApiListResponse<any, any>>({
                       ? null
                       : flexRender(
                           header.column.columnDef.header,
-                          header.getContext(),
+                          header.getContext()
                         )}
                   </TableHead>
                 ))}
@@ -188,7 +188,7 @@ export function CustomDataTable<TResponse extends ApiListResponse<any, any>>({
                     <TableCell key={cell.id} className="text-xs">
                       {flexRender(
                         cell.column.columnDef.cell,
-                        cell.getContext(),
+                        cell.getContext()
                       )}
                     </TableCell>
                   ))}

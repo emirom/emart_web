@@ -6,8 +6,8 @@ import { DashboardCustomModal } from "@components/DashboardCustomModal";
 import { deleteAttributeAction } from "@lib/actions/attribute-action";
 import { queryClient } from "@lib/apis/queryClient";
 import { invalidateEntityQueries } from "@lib/utils/react-query-utils";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { useState, useEffect } from "react";
 import EditAttributeForm from "./EditAttributeForm";
 
 export default function AttributeActions({ id }: { id: string }) {
