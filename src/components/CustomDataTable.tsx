@@ -27,6 +27,7 @@ import {
 } from "./ui/table";
 
 import { FilterSchemaInput } from "@lib/types/file-type";
+import { ClearFilterButton } from "./ClearFilterButton";
 
 type FilterConfig =
   | FilterSchemaInput[]
@@ -65,7 +66,7 @@ export function CustomDataTable<TData>({
 }: CustomDataTableProps<TData>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    [],
+    []
   );
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
@@ -119,7 +120,7 @@ export function CustomDataTable<TData>({
                 filterColumn.setFilterValue(value);
 
                 const params = new URLSearchParams(
-                  searchParams ? Array.from(searchParams.entries()) : [],
+                  searchParams ? Array.from(searchParams.entries()) : []
                 );
 
                 if (value) params.set("search", value);
@@ -132,9 +133,14 @@ export function CustomDataTable<TData>({
           )}
 
           {filterConfigs && (
-            <FilterGenerator
-              configs={filterConfigs as FilterSchemaInput[] | null | undefined}
-            />
+            <div className="flex items-stretch gap-2">
+              <FilterGenerator
+                configs={
+                  filterConfigs as FilterSchemaInput[] | null | undefined
+                }
+              />
+              <ClearFilterButton />
+            </div>
           )}
         </div>
 
@@ -152,7 +158,7 @@ export function CustomDataTable<TData>({
                       ? null
                       : flexRender(
                           header.column.columnDef.header,
-                          header.getContext(),
+                          header.getContext()
                         )}
                   </TableHead>
                 ))}
@@ -171,7 +177,7 @@ export function CustomDataTable<TData>({
                     <TableCell className="text-xs" key={cell.id}>
                       {flexRender(
                         cell.column.columnDef.cell,
-                        cell.getContext(),
+                        cell.getContext()
                       )}
                     </TableCell>
                   ))}
