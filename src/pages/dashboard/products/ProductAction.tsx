@@ -26,7 +26,7 @@ export default function ProductAction({ id }: { id: string }) {
   return (
     <div className="flex  items-stretch justify-center w-full">
       <AlertDialogModal
-        alertTitle="آیا از حذف این بیمه اطمینان دارید؟"
+        alertTitle="آیا از حذف این محصول اطمینان دارید؟"
         button={<DeleteButton />}
         onConfirm={handleDelete}
       />

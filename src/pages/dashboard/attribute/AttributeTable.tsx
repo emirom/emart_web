@@ -16,7 +16,7 @@ export default function AttributeTable({
 }) {
   const searchParams = useSearchParams();
 
-  const columns: ColumnDef<Partial<Attribute>>[] = [
+  const columns: ColumnDef<Attribute>[] = [
     { accessorKey: "title", header: "نام ویژگی" },
     { accessorKey: "unit", header: "واحد ویژگی" },
     { accessorKey: "type", header: "نوع ویژگی" },

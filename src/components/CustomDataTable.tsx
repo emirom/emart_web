@@ -41,25 +41,23 @@ export type ApiListResponse<TData, TFilter = unknown> = {
   details: ApiListDetails;
 };
 
-export interface CustomDataTableProps<
-  TResponse extends ApiListResponse<any, any>, // eslint-disable-line @typescript-eslint/no-explicit-any
-> {
+export interface CustomDataTableProps<TData> {
   title?: string;
   response?: Partial<{
     success: boolean | null;
-    data: TResponse["data"];
-    filters: TResponse["filters"];
+    data: TData[];
+    // accept unknown filter shapes from API responses and normalize internally
+    filters: unknown[];
     details: Partial<ApiListDetails>;
   }>;
-  columns: ColumnDef<TResponse["data"][number]>[];
+  columns: ColumnDef<TData>[];
   filterColumnKey?: string;
   filterPlaceholder?: string;
   emptyMessage?: string;
   customButton?: React.ReactNode;
 }
 
-export function CustomDataTable<TResponse extends ApiListResponse<any, any>>({
-  // eslint-disable-line @typescript-eslint/no-explicit-any
+export function CustomDataTable<TData>({
   title,
   response,
   columns,
@@ -67,12 +65,45 @@ export function CustomDataTable<TResponse extends ApiListResponse<any, any>>({
   filterPlaceholder = "Filter...",
   emptyMessage = "No results found.",
   customButton,
-}: CustomDataTableProps<TResponse>) {
-  type TData = TResponse["data"][number];
-  type TFilter = TResponse["filters"][number];
-
+}: CustomDataTableProps<TData>) {
   const data: TData[] = response?.data ?? [];
-  const filters: TFilter[] = response?.filters ?? [];
+
+  // normalize incoming filters (from various APIs) into FilterSchemaInput[]
+  const rawFilters: unknown[] = response?.filters ?? [];
+  function isObject(v: unknown): v is Record<string, unknown> {
+    return typeof v === "object" && v !== null;
+  }
+  const filters = rawFilters.map((f) => {
+    const obj = isObject(f) ? f : {};
+
+    const service =
+      typeof obj.service === "string" ? obj.service : String(obj.service ?? "");
+    const label = obj.label == null ? null : String(obj.label);
+    const open = typeof obj.open === "boolean" ? obj.open : Boolean(obj.open);
+    const type =
+      typeof obj.type === "string" ? obj.type : String(obj.type ?? "");
+    const model = obj.model == null ? null : String(obj.model);
+    const field = obj.field == null ? null : String(obj.field);
+    const advanced =
+      obj.advanced == null
+        ? null
+        : typeof obj.advanced === "boolean"
+          ? obj.advanced
+          : Boolean(obj.advanced);
+    const enumOptions =
+      obj.enumOptions == null ? null : String(obj.enumOptions);
+
+    return {
+      service,
+      label,
+      open,
+      type,
+      model,
+      field,
+      advanced,
+      enumOptions,
+    };
+  }) as import("@lib/types/file-type").FilterSchemaInput[];
   const details: ApiListDetails = {
     skip: response?.details?.skip ?? 0,
     limit: response?.details?.limit ?? data.length,
@@ -82,7 +113,7 @@ export function CustomDataTable<TResponse extends ApiListResponse<any, any>>({
 
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    []
+    [],
   );
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
@@ -138,7 +169,7 @@ export function CustomDataTable<TResponse extends ApiListResponse<any, any>>({
                 filterColumn.setFilterValue(value);
 
                 const params = new URLSearchParams(
-                  searchParams ? Array.from(searchParams.entries()) : []
+                  searchParams ? Array.from(searchParams.entries()) : [],
                 );
 
                 if (value) params.set("search", value);
@@ -172,7 +203,7 @@ export function CustomDataTable<TResponse extends ApiListResponse<any, any>>({
                       ? null
                       : flexRender(
                           header.column.columnDef.header,
-                          header.getContext()
+                          header.getContext(),
                         )}
                   </TableHead>
                 ))}
@@ -188,7 +219,7 @@ export function CustomDataTable<TResponse extends ApiListResponse<any, any>>({
                     <TableCell key={cell.id} className="text-xs">
                       {flexRender(
                         cell.column.columnDef.cell,
-                        cell.getContext()
+                        cell.getContext(),
                       )}
                     </TableCell>
                   ))}
