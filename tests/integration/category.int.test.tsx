@@ -29,7 +29,7 @@ describe("Dashboard Integration Test", () => {
     render(
       <HydrationBoundary state={dehydrate(queryClient)}>
         <Dashboard />
-      </HydrationBoundary>
+      </HydrationBoundary>,
     );
 
     await waitFor(() => {
@@ -38,7 +38,7 @@ describe("Dashboard Integration Test", () => {
 
     expect(screen.getByText("دسته بندی ها")).toBeInTheDocument();
     expect(
-      screen.getByRole("link", { name: /افزودن دسته بندی/i })
+      screen.getByRole("link", { name: /افزودن دسته بندی/i }),
     ).toBeInTheDocument();
   });
 
@@ -48,7 +48,7 @@ describe("Dashboard Integration Test", () => {
     render(
       <HydrationBoundary state={dehydrate(queryClient)}>
         <Dashboard />
-      </HydrationBoundary>
+      </HydrationBoundary>,
     );
 
     await waitFor(() => {
@@ -60,7 +60,7 @@ describe("Dashboard Integration Test", () => {
     render(
       <HydrationBoundary state={dehydrate(queryClient)}>
         <Dashboard />
-      </HydrationBoundary>
+      </HydrationBoundary>,
     );
 
     const link = screen.getByRole("link", { name: /افزودن دسته بندی/i });
