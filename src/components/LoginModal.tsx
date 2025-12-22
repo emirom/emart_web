@@ -30,13 +30,14 @@ export function LoginModal() {
   // Desktop size
   if (isDesktop) {
     return (
-      <Dialog open={open} onOpenChange={setOpen}>
+      <Dialog open={open} onOpenChange={setOpen} data-cy="login-modal">
         <DialogTrigger asChild>
           <Button
             type="button"
             className="bg-white text-tint-blue-500 border border-tint-blue-100 text-sm py-2 "
             aria-label="ورود یا عضویت"
             title="ورود یا عضویت"
+            data-cy="open-login-modal"
           >
             ورود‌/‌عضویت
           </Button>
@@ -70,7 +71,9 @@ export function LoginModal() {
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
-        <Button variant="outline">ورود‌/‌عضویت</Button>
+        <Button variant="outline" data-cy="login-button">
+          ورود‌/‌عضویت
+        </Button>
       </DrawerTrigger>
       <DrawerContent className="px-5">
         <DrawerHeader className="text-left  px-0">
