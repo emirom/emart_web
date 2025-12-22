@@ -15,13 +15,15 @@ import { Label } from "./ui/label";
 
 export default function OtpStepForm() {
   const { phone, clearPhone } = useAppStore();
-  const { control, handleSubmit, formState, setValue } =
+  const { control, handleSubmit, formState, setValue, resetField } =
     useForm<Omit<PostAuthLoginBody, "phone">>();
   const { handleChangeLanguage } = useSmartLocalizedInput();
   const inputOtpRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
-    if (inputOtpRef.current) setTimeout(() => inputOtpRef.current?.focus(), 0);
+    if (inputOtpRef.current) {
+      setTimeout(() => inputOtpRef.current?.focus(), 0);
+    }
   }, []);
 
   const onSubmit = async (data: Omit<PostAuthLoginBody, "phone">) => {
@@ -33,7 +35,11 @@ export default function OtpStepForm() {
       const payload: PostAuthLoginBody = { phone, otp: data.otp };
       await loginAction(payload);
       toast.success("شماره موبایل شما با موفقیت ثبت شد");
+
+      resetField("otp");
+
       clearPhone();
+      if (inputOtpRef.current) inputOtpRef.current.focus();
     } catch (err) {
       if (err instanceof Error) toast.error(err.message);
       else toast.error("خطایی رخ داده است");
@@ -51,6 +57,7 @@ export default function OtpStepForm() {
       <h2 id="otp-form-title" className="sr-only">
         فرم ورود با کد پیامکی
       </h2>
+
       <div className="grid gap-1">
         <div className="flex items-center gap-1 mb-2">
           <Label htmlFor="otp" className="text-tint-blue-500 text-xs">
@@ -60,6 +67,7 @@ export default function OtpStepForm() {
             *
           </span>
         </div>
+
         <Controller
           name="otp"
           control={control}
@@ -69,6 +77,7 @@ export default function OtpStepForm() {
           }}
           render={({ field: _field }) => (
             <InputOTP
+              data-cy="otp-input"
               ref={inputOtpRef}
               id="otp"
               inputMode="numeric"
@@ -103,13 +112,16 @@ export default function OtpStepForm() {
             </InputOTP>
           )}
         />
+
         <FormErrorMessage
           id="otp-error"
           className="mt-0 text-xs my-1"
           message={formState.errors.otp?.message}
         />
       </div>
+
       <Button
+        data-cy="submit-otp"
         title="ورود به حساب کاربری"
         aria-label="تایید و ورود"
         type="submit"

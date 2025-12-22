@@ -42,7 +42,7 @@ export function LoginModal() {
             ورود‌/‌عضویت
           </Button>
         </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px]">
+        <DialogContent className="sm:max-w-[425px]" data-cy="dialog-content">
           <DialogHeader>
             <div className="flex items-center justify-between">
               <DialogTitle className="text-sm   text-orange-700">

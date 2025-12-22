@@ -88,6 +88,9 @@ importers:
       cmdk:
         specifier: ^1.1.1
         version: 1.1.1(@types/react-dom@19.1.9(@types/react@19.1.14))(@types/react@19.1.14)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      cypress-plugin-api:
+        specifier: ^2.11.2
+        version: 2.11.2(cypress@15.8.1)(typescript@5.9.2)
       emart_web:
         specifier: "link:"
         version: "link:"
@@ -3522,6 +3525,62 @@ packages:
         integrity: sha512-h8z9yYhV3e1LEfaQ3zdypIrnAg/9hguReGZoS7Gl0aBG5xgA410zBqECqmaF/+RkTggRsfnzc1XaAHA6bmUufA==,
       }
 
+  "@vue/compiler-core@3.5.26":
+    resolution:
+      {
+        integrity: sha512-vXyI5GMfuoBCnv5ucIT7jhHKl55Y477yxP6fc4eUswjP8FG3FFVFd41eNDArR+Uk3QKn2Z85NavjaxLxOC19/w==,
+      }
+
+  "@vue/compiler-dom@3.5.26":
+    resolution:
+      {
+        integrity: sha512-y1Tcd3eXs834QjswshSilCBnKGeQjQXB6PqFn/1nxcQw4pmG42G8lwz+FZPAZAby6gZeHSt/8LMPfZ4Rb+Bd/A==,
+      }
+
+  "@vue/compiler-sfc@3.5.26":
+    resolution:
+      {
+        integrity: sha512-egp69qDTSEZcf4bGOSsprUr4xI73wfrY5oRs6GSgXFTiHrWj4Y3X5Ydtip9QMqiCMCPVwLglB9GBxXtTadJ3mA==,
+      }
+
+  "@vue/compiler-ssr@3.5.26":
+    resolution:
+      {
+        integrity: sha512-lZT9/Y0nSIRUPVvapFJEVDbEXruZh2IYHMk2zTtEgJSlP5gVOqeWXH54xDKAaFS4rTnDeDBQUYDtxKyoW9FwDw==,
+      }
+
+  "@vue/reactivity@3.5.26":
+    resolution:
+      {
+        integrity: sha512-9EnYB1/DIiUYYnzlnUBgwU32NNvLp/nhxLXeWRhHUEeWNTn1ECxX8aGO7RTXeX6PPcxe3LLuNBFoJbV4QZ+CFQ==,
+      }
+
+  "@vue/runtime-core@3.5.26":
+    resolution:
+      {
+        integrity: sha512-xJWM9KH1kd201w5DvMDOwDHYhrdPTrAatn56oB/LRG4plEQeZRQLw0Bpwih9KYoqmzaxF0OKSn6swzYi84e1/Q==,
+      }
+
+  "@vue/runtime-dom@3.5.26":
+    resolution:
+      {
+        integrity: sha512-XLLd/+4sPC2ZkN/6+V4O4gjJu6kSDbHAChvsyWgm1oGbdSO3efvGYnm25yCjtFm/K7rrSDvSfPDgN1pHgS4VNQ==,
+      }
+
+  "@vue/server-renderer@3.5.26":
+    resolution:
+      {
+        integrity: sha512-TYKLXmrwWKSodyVuO1WAubucd+1XlLg4set0YoV+Hu8Lo79mp/YMwWV5mC5FgtsDxX3qo1ONrxFaTP1OQgy1uA==,
+      }
+    peerDependencies:
+      vue: 3.5.26
+
+  "@vue/shared@3.5.26":
+    resolution:
+      {
+        integrity: sha512-7Z6/y3uFI5PRoKeorTOSXKcDj0MSasfNNltcslbFrPpcw6aXRUALq4IfJlaTRspiWIUOEZbrpM+iQGmCOiWe4A==,
+      }
+
   abort-controller@3.0.0:
     resolution:
       {
@@ -4259,6 +4318,20 @@ packages:
         integrity: sha512-M1uQkMl8rQK/szD0LNhtqxIPLpimGm8sOBwU7lLnCpSbTyY3yeU1Vc7l4KT5zT4s/yOxHH5O7tIuuLOCnLADRw==,
       }
 
+  csstype@3.2.3:
+    resolution:
+      {
+        integrity: sha512-z1HGKcYy2xA8AGQfwrn0PAy+PB7X/GSj3UVJW9qKyn43xWa+gl5nXmU4qqLMRzWVLFC8KusUX8T/0kCiOYpAIQ==,
+      }
+
+  cypress-plugin-api@2.11.2:
+    resolution:
+      {
+        integrity: sha512-iWvHK5OThTyi/Ml/yQbl5h2g/4ZOE7a0wd+llLofACww9tSqQi8GjlE8DqVhb4p7bsT0JFHFh4IUZOwW8U+vdQ==,
+      }
+    peerDependencies:
+      cypress: ">=10"
+
   cypress@15.8.1:
     resolution:
       {
@@ -4539,6 +4612,13 @@ packages:
     resolution:
       {
         integrity: sha512-aN97NXWF6AWBTahfVOIrB/NShkzi5H7F9r1s9mD3cDj4Ko5f2qhhVoYMibXF7GlLveb/D2ioWay8lxI97Ven3g==,
+      }
+    engines: { node: ">=0.12" }
+
+  entities@7.0.0:
+    resolution:
+      {
+        integrity: sha512-FDWG5cmEYf2Z00IkYRhbFrwIwvdFKH07uV8dvNy0omp/Qb1xcyCWp2UDtcwJF4QZZvk0sLudP6/hAu42TaqVhQ==,
       }
     engines: { node: ">=0.12" }
 
@@ -4853,6 +4933,12 @@ packages:
         integrity: sha512-MMdARuVEQziNTeJD8DgMqmhwR11BRQ/cBP+pLtYdSTnf3MIO8fFeiINEbX36ZdNlfU/7A9f3gUw49B3oQsvwBA==,
       }
     engines: { node: ">=4.0" }
+
+  estree-walker@2.0.2:
+    resolution:
+      {
+        integrity: sha512-Rfkk/Mp/DL7JVje3u18FxFujQlTNR2q6QfMSMB7AvCBx91NGj/ba3kCfza0f6dVDbw7YlRf/nDrn7pQrCCyQ/w==,
+      }
 
   estree-walker@3.0.3:
     resolution:
@@ -5380,6 +5466,13 @@ packages:
       {
         integrity: sha512-IScLbePpkvO846sIwOtOTDjutRMWdXdJmXdMvk6gCBHxFO8d+QKOQedyZSxFTTFYRSmlgSTDtXqqq4pcenBXLQ==,
       }
+
+  highlight.js@11.4.0:
+    resolution:
+      {
+        integrity: sha512-nawlpCBCSASs7EdvZOYOYVkJpGmAOKMYZgZtUqSRqodZE0GRVcFKwo1RcpeOemqh9hyttTdd5wDBwHkuSyUfnA==,
+      }
+    engines: { node: ">=12.0.0" }
 
   html-encoding-sniffer@4.0.0:
     resolution:
@@ -7020,6 +7113,13 @@ packages:
       }
     engines: { node: ^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0 }
 
+  prismjs@1.30.0:
+    resolution:
+      {
+        integrity: sha512-DEvV2ZF2r2/63V+tK8hQvrR2ZGn10srHbXviTlcv7Kpzw8jWiNTqbVgjO3IY8RxrrOUF8VPMQQFysYYYv0YZxw==,
+      }
+    engines: { node: ">=6" }
+
   process@0.11.10:
     resolution:
       {
@@ -7449,6 +7549,12 @@ packages:
     resolution:
       {
         integrity: sha512-8LS0JInaQMCRoQ7YUytAo/xUu5W2XnQxV2HI/6uM6U7CITS1RqPElr30V6uIqyMKM9lJGRVFy5/4CuzcixNYSg==,
+      }
+
+  set-cookie-parser@2.7.2:
+    resolution:
+      {
+        integrity: sha512-oeM1lpU/UvhTxw+g3cIfxXHyJRc/uidd3yK1P242gzHds0udQBYzs3y8j4gCCW+ZJ7ad0yctld8RYO+bdurlvw==,
       }
 
   set-function-length@1.2.2:
@@ -8389,6 +8495,17 @@ packages:
       happy-dom:
         optional: true
       jsdom:
+        optional: true
+
+  vue@3.5.26:
+    resolution:
+      {
+        integrity: sha512-SJ/NTccVyAoNUJmkM9KUqPcYlY+u8OVL1X5EW9RIs3ch5H2uERxyyIUI4MRxVCSOiEcupX9xNGde1tL9ZKpimA==,
+      }
+    peerDependencies:
+      typescript: "*"
+    peerDependenciesMeta:
+      typescript:
         optional: true
 
   w3c-xmlserializer@5.0.0:
@@ -10809,6 +10926,60 @@ snapshots:
       "@vitest/pretty-format": 4.0.16
       tinyrainbow: 3.0.3
 
+  "@vue/compiler-core@3.5.26":
+    dependencies:
+      "@babel/parser": 7.28.5
+      "@vue/shared": 3.5.26
+      entities: 7.0.0
+      estree-walker: 2.0.2
+      source-map-js: 1.2.1
+
+  "@vue/compiler-dom@3.5.26":
+    dependencies:
+      "@vue/compiler-core": 3.5.26
+      "@vue/shared": 3.5.26
+
+  "@vue/compiler-sfc@3.5.26":
+    dependencies:
+      "@babel/parser": 7.28.5
+      "@vue/compiler-core": 3.5.26
+      "@vue/compiler-dom": 3.5.26
+      "@vue/compiler-ssr": 3.5.26
+      "@vue/shared": 3.5.26
+      estree-walker: 2.0.2
+      magic-string: 0.30.21
+      postcss: 8.5.6
+      source-map-js: 1.2.1
+
+  "@vue/compiler-ssr@3.5.26":
+    dependencies:
+      "@vue/compiler-dom": 3.5.26
+      "@vue/shared": 3.5.26
+
+  "@vue/reactivity@3.5.26":
+    dependencies:
+      "@vue/shared": 3.5.26
+
+  "@vue/runtime-core@3.5.26":
+    dependencies:
+      "@vue/reactivity": 3.5.26
+      "@vue/shared": 3.5.26
+
+  "@vue/runtime-dom@3.5.26":
+    dependencies:
+      "@vue/reactivity": 3.5.26
+      "@vue/runtime-core": 3.5.26
+      "@vue/shared": 3.5.26
+      csstype: 3.2.3
+
+  "@vue/server-renderer@3.5.26(vue@3.5.26(typescript@5.9.2))":
+    dependencies:
+      "@vue/compiler-ssr": 3.5.26
+      "@vue/shared": 3.5.26
+      vue: 3.5.26(typescript@5.9.2)
+
+  "@vue/shared@3.5.26": {}
+
   abort-controller@3.0.0:
     dependencies:
       event-target-shim: 5.0.1
@@ -11230,6 +11401,18 @@ snapshots:
 
   csstype@3.1.3: {}
 
+  csstype@3.2.3: {}
+
+  cypress-plugin-api@2.11.2(cypress@15.8.1)(typescript@5.9.2):
+    dependencies:
+      cypress: 15.8.1
+      highlight.js: 11.4.0
+      prismjs: 1.30.0
+      set-cookie-parser: 2.7.2
+      vue: 3.5.26(typescript@5.9.2)
+    transitivePeerDependencies:
+      - typescript
+
   cypress@15.8.1:
     dependencies:
       "@cypress/request": 3.0.9
@@ -11422,6 +11605,8 @@ snapshots:
   entities@4.5.0: {}
 
   entities@6.0.1: {}
+
+  entities@7.0.0: {}
 
   error-ex@1.3.4:
     dependencies:
@@ -11817,6 +12002,8 @@ snapshots:
 
   estraverse@5.3.0: {}
 
+  estree-walker@2.0.2: {}
+
   estree-walker@3.0.3:
     dependencies:
       "@types/estree": 1.0.8
@@ -12120,6 +12307,8 @@ snapshots:
       tslib: 2.8.1
 
   headers-polyfill@4.0.3: {}
+
+  highlight.js@11.4.0: {}
 
   html-encoding-sniffer@4.0.0:
     dependencies:
@@ -13070,6 +13259,8 @@ snapshots:
       ansi-styles: 5.2.0
       react-is: 17.0.2
 
+  prismjs@1.30.0: {}
+
   process@0.11.10: {}
 
   prop-types@15.8.1:
@@ -13348,6 +13539,8 @@ snapshots:
       no-case: 3.0.4
       tslib: 2.8.1
       upper-case-first: 2.0.2
+
+  set-cookie-parser@2.7.2: {}
 
   set-function-length@1.2.2:
     dependencies:
@@ -13970,6 +14163,16 @@ snapshots:
       - terser
       - tsx
       - yaml
+
+  vue@3.5.26(typescript@5.9.2):
+    dependencies:
+      "@vue/compiler-dom": 3.5.26
+      "@vue/compiler-sfc": 3.5.26
+      "@vue/runtime-dom": 3.5.26
+      "@vue/server-renderer": 3.5.26(vue@3.5.26(typescript@5.9.2))
+      "@vue/shared": 3.5.26
+    optionalDependencies:
+      typescript: 5.9.2
 
   w3c-xmlserializer@5.0.0:
     dependencies:

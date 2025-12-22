@@ -61,7 +61,7 @@ export default function PhoneStepForm() {
         </div>
 
         <Input
-          data-cy="phone-input"
+          data-cy="otp-input"
           id="phone"
           inputMode="numeric"
           name={field.name}
@@ -103,7 +103,7 @@ export default function PhoneStepForm() {
       </div>
 
       <Button
-        data-cy="submit-phone-button"
+        data-cy="submit-otp"
         type="submit"
         className={cn(
           "bg-orange-700 text-white select-none",
