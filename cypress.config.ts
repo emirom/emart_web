@@ -6,4 +6,11 @@ export default defineConfig({
     supportFile: "tests/cypress/support/e2e.ts",
     specPattern: "tests/cypress/e2e/**/*.cy.{js,ts}",
   },
+
+  component: {
+    devServer: {
+      framework: "next",
+      bundler: "webpack",
+    },
+  },
 });
