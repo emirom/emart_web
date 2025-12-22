@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { otpAction } from "@lib/actions/login-action";
 import { useSmartLocalizedInput } from "@lib/hooks/useLocalizedNumberInput";
 import { useAppStore } from "@lib/stores/store";
-import { useForm } from "react-hook-form";
+import { useController, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { z } from "zod";
 import { FormErrorMessage } from "./FormErrorMessage";
@@ -25,20 +25,25 @@ export type PhoneFormValues = z.infer<typeof phoneSchema>;
 
 export default function PhoneStepForm() {
   const { setStep, setPhone } = useAppStore();
-  const { register, handleSubmit, setValue, formState } =
+  const { control, handleSubmit, setValue, formState } =
     useForm<PhoneFormValues>({
       resolver: zodResolver(phoneSchema),
       mode: "onChange",
+      defaultValues: { phone: "" },
     });
+
+  const { field } = useController({ name: "phone", control });
 
   const { displayValue, handleChangeLanguage } = useSmartLocalizedInput();
 
   const onSubmit = async (data: PhoneFormValues) => {
     try {
-      await otpAction({ phone: data.phone });
-      setPhone(data.phone);
-      setStep("otp");
-      toast.success("شماره موبایل شما با موفقیت ثبت شد");
+      const response = await otpAction({ phone: data.phone });
+      if (response?.success && response.data.sent === true) {
+        setPhone(data.phone);
+        setStep("otp");
+        toast.success("شماره موبایل شما با موفقیت ثبت شد");
+      }
     } catch (err: unknown) {
       if (err instanceof Error) toast.error(err.message);
       else toast.error("خطایی رخ داده است");
@@ -56,12 +61,31 @@ export default function PhoneStepForm() {
         </div>
 
         <Input
+          data-cy="phone-input"
           id="phone"
           inputMode="numeric"
-          {...register("phone")}
+          name={field.name}
+          ref={field.ref}
           value={displayValue}
-          onChange={(e) => {
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             const englishValue = handleChangeLanguage(e);
+            field.onChange(englishValue);
+            setValue("phone", englishValue, { shouldValidate: true });
+          }}
+          onInput={(e: React.FormEvent<HTMLInputElement>) => {
+            const ev = e as unknown as React.ChangeEvent<HTMLInputElement>;
+            const englishValue = handleChangeLanguage(ev);
+            field.onChange(englishValue);
+            setValue("phone", englishValue, { shouldValidate: true });
+          }}
+          onPaste={(e: React.ClipboardEvent<HTMLInputElement>) => {
+            const text = e.clipboardData?.getData("text") ?? "";
+            const fakeEvent = {
+              target: { value: text },
+            } as unknown as React.ChangeEvent<HTMLInputElement>;
+            const englishValue = handleChangeLanguage(fakeEvent);
+            e.preventDefault();
+            field.onChange(englishValue);
             setValue("phone", englishValue, { shouldValidate: true });
           }}
           className={cn(
@@ -72,12 +96,14 @@ export default function PhoneStepForm() {
         />
 
         <FormErrorMessage
+          data-cy="phone-error"
           className="mt-0 text-xs my-1"
           message={formState.errors.phone?.message}
         />
       </div>
 
       <Button
+        data-cy="submit-phone-button"
         type="submit"
         className={cn(
           "bg-orange-700 text-white select-none",

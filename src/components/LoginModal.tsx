@@ -75,7 +75,7 @@ export function LoginModal() {
           ورود‌/‌عضویت
         </Button>
       </DrawerTrigger>
-      <DrawerContent className="px-5">
+      <DrawerContent className="px-5" data-cy="mobile-drawer-content">
         <DrawerHeader className="text-left  px-0">
           <DrawerTitle className="text-start">ورود / عضویت</DrawerTitle>
         </DrawerHeader>

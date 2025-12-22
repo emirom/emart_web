@@ -4,9 +4,19 @@ import { PostAuthLoginBody, PostAuthOtpBody } from "@lib/schemas";
 import { postAuthLogin, postAuthOtp } from "@lib/services/auth/auth";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { toast } from "react-toastify";
 
 export async function otpAction(data: PostAuthOtpBody) {
-  await postAuthOtp(data);
+  try {
+    const response = await postAuthOtp(data);
+    return response;
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      toast.error(error.message);
+    } else {
+      toast.error("خطایی رخ داده است");
+    }
+  }
 }
 
 export async function loginAction(data: PostAuthLoginBody) {
