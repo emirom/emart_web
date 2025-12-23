@@ -40,7 +40,10 @@ export const TreeNodeItem = React.memo(
     const children = data?.data || [];
 
     return (
-      <li className="relative w-full flex flex-col pr-[0.375rem]">
+      <li
+        data-cy={`category-node-${node.id}`}
+        className="relative w-full flex flex-col pr-[0.375rem]"
+      >
         {!isRoot && (
           <>
             <span className="absolute right-0 top-0 bottom-0 w-px border-r border-dotted border-gray-400" />
@@ -76,7 +79,7 @@ export const TreeNodeItem = React.memo(
         </ul>
       </li>
     );
-  },
+  }
 );
 
 TreeNodeItem.displayName = "TreeNodeItem";

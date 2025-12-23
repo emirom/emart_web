@@ -52,7 +52,7 @@ describe("OTP + Login Flow - Full Success Mock (Swagger Compatible)", () => {
     }).as("login");
 
     // Enter OTP and submit
-    cy.get('[data-cy="otp-input"]').clear().type("123456");
+    cy.get('[data-cy="otp-input"]').type("123456");
     cy.get('[data-cy="submit-otp"]').click();
   });
 });
