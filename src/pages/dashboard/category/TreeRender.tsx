@@ -79,7 +79,7 @@ export const TreeNodeItem = React.memo(
         </ul>
       </li>
     );
-  }
+  },
 );
 
 TreeNodeItem.displayName = "TreeNodeItem";

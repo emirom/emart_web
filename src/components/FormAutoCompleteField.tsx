@@ -1,5 +1,4 @@
 "use client";
-
 import { useAutocomplete } from "@lib/hooks/useAutocomplete";
 import clsx from "clsx";
 import React, { InputHTMLAttributes, useEffect, useRef } from "react";
@@ -26,6 +25,7 @@ export interface AutocompleteProps<
   control: Control<TFieldValues>;
   rules?: RegisterOptions<TFieldValues, FieldPath<TFieldValues>>;
   onSelect?: (option: TOption | null) => void;
+  "data-cy"?: string;
 }
 
 function FormAutocomplete<
@@ -41,6 +41,7 @@ function FormAutocomplete<
   inputProps,
   control,
   rules,
+  "data-cy": dataCy,
 }: AutocompleteProps<TOption, TFieldValues>) {
   return (
     <Controller
@@ -60,6 +61,7 @@ function FormAutocomplete<
             value={value}
             onChange={onChange}
             fieldState={fieldState}
+            dataCy={dataCy}
           />
         );
       }}
@@ -88,6 +90,7 @@ interface InternalAutocompleteFieldProps<
       message?: string;
     };
   };
+  dataCy?: string;
 }
 
 const InternalAutocompleteField = <
@@ -104,6 +107,7 @@ const InternalAutocompleteField = <
   value,
   onChange,
   fieldState,
+  dataCy,
 }: InternalAutocompleteFieldProps<TOption, TFieldValues>) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -157,7 +161,7 @@ const InternalAutocompleteField = <
         {label}
       </label>
 
-      <div className="relative ">
+      <div className="relative">
         <Input
           type="text"
           id={name}
@@ -165,6 +169,7 @@ const InternalAutocompleteField = <
           onChange={(e) => setInputValue(e.target.value)}
           onClick={open}
           {...inputProps}
+          data-cy={dataCy}
         />
         {isOpen && (
           <ul

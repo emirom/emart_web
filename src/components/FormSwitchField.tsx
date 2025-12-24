@@ -18,6 +18,7 @@ type SwitchButtonProps<T extends FieldValues> = {
     RegisterOptions<T, Path<T>>,
     "setValueAs" | "disabled" | "valueAsNumber" | "valueAsDate"
   >;
+  "data-cy"?: string;
 };
 
 const FormSwitchField = <T extends FieldValues>({
@@ -26,6 +27,7 @@ const FormSwitchField = <T extends FieldValues>({
   control,
   defaultValue = false,
   rules,
+  "data-cy": dataCy,
 }: SwitchButtonProps<T>) => {
   return (
     <Controller
@@ -48,6 +50,7 @@ const FormSwitchField = <T extends FieldValues>({
             <button
               type="button"
               onClick={toggle}
+              data-cy={dataCy}
               className={cn(
                 "w-[120px] h-9 bg-white rounded-[7px] border border-input flex items-center transition-all duration-300 overflow-hidden relative",
                 fieldState.error && "border-destructive",

@@ -18,7 +18,8 @@ export function FormTextareaField<T extends FieldValues>({
   placeholder = "Type your message here.",
   className,
   label,
-}: Props<T>) {
+  ...props
+}: Props<T> & { "data-cy"?: string }) {
   return (
     <div className=" w-full ">
       <label className={cn("block text-xs text-tint-blue-500 font-medium")}>
@@ -35,6 +36,7 @@ export function FormTextareaField<T extends FieldValues>({
                 id={name}
                 {...field}
                 value={field.value ?? ""}
+                data-cy={props["data-cy"]}
                 className={cn(
                   "text-xs ",
                   `${fieldState?.error && "border-destructive ring-destructive"}`,

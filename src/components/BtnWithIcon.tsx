@@ -11,41 +11,59 @@ interface IconButtonProps
   className?: string;
   disabled?: boolean;
   label?: string;
+  "data-cy"?: string;
 }
 
-const EditButtonComponent = ({ onClick }: IconButtonProps) => (
+const EditButtonComponent = ({
+  onClick,
+  "data-cy": dataCy,
+}: IconButtonProps) => (
   <Button
     onClick={onClick}
     aria-label="ویرایش"
+    data-cy={dataCy}
     className="bg-sky-500 cursor-pointer px-1 mx-1 text-white hover:bg-sky-600 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-sky-500 transition-colors"
   >
     <EditIcon className="stroke-white stroke-2" />
   </Button>
 );
 
-const DeleteButtonComponent = ({ onClick }: IconButtonProps) => (
+const DeleteButtonComponent = ({
+  onClick,
+  "data-cy": dataCy,
+}: IconButtonProps) => (
   <Button
     onClick={onClick}
     aria-label="حذف"
+    data-cy={dataCy}
     className="bg-red-600 cursor-pointer px-1 mx-1 text-white hover:bg-red-700 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-red-500 transition-colors"
   >
     <Trash className="stroke-white stroke-2" />
   </Button>
 );
 
-const PlusButtonComponent = ({ onClick }: IconButtonProps) => (
+const PlusButtonComponent = ({
+  onClick,
+  "data-cy": dataCy,
+}: IconButtonProps) => (
   <Button
     onClick={onClick}
     aria-label="افزودن"
+    data-cy={dataCy}
     className="bg-white border border-gray-300 text-gray-500 hover:bg-gray-100 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-500 transition-colors"
   >
     <PlusIcon className="stroke-gray-500 stroke-2" />
   </Button>
 );
 
-const CopyButtonComponent = ({ onClick, className }: IconButtonProps) => (
+const CopyButtonComponent = ({
+  onClick,
+  className,
+  "data-cy": dataCy,
+}: IconButtonProps) => (
   <Button
     onClick={onClick}
+    data-cy={dataCy}
     aria-label="کپی"
     className={cn(
       "bg-white border border-gray-300 text-gray-500 hover:bg-gray-100 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-500 transition-colors",
@@ -56,9 +74,13 @@ const CopyButtonComponent = ({ onClick, className }: IconButtonProps) => (
   </Button>
 );
 
-const EyeButtonComponent = ({ onClick }: IconButtonProps) => (
+const EyeButtonComponent = ({
+  onClick,
+  "data-cy": dataCy,
+}: IconButtonProps) => (
   <Button
     onClick={onClick}
+    data-cy={dataCy}
     aria-label="مشاهده"
     className="bg-white border border-gray-300 text-gray-500 hover:bg-gray-100 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-500 transition-colors"
   >
@@ -70,11 +92,13 @@ const SubmitButtonComponent = ({
   onClick,
   className,
   disabled,
-  label = "ثبت ",
+  label = "ثبت",
+  "data-cy": dataCy,
 }: IconButtonProps) => (
   <Button
     disabled={disabled}
     onClick={onClick}
+    data-cy={dataCy}
     aria-label={label ? label : "ثبت"}
     className={cn(
       "bg-green-300 text-white focus-visible:ring-2 focus-visible:ring-offset-2 transition-colors",
@@ -85,9 +109,13 @@ const SubmitButtonComponent = ({
   </Button>
 );
 
-const AddButtonComponent = ({ onClick }: IconButtonProps) => (
+const AddButtonComponent = ({
+  onClick,
+  "data-cy": dataCy,
+}: IconButtonProps) => (
   <Button
     onClick={onClick}
+    data-cy={dataCy}
     aria-label="افزودن"
     className="bg-white border border-gray-300 text-gray-500 hover:bg-gray-100 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-500 transition-colors"
   >

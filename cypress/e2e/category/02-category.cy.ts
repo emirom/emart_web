@@ -45,5 +45,7 @@ describe("Dashboard Category Tree", () => {
     cy.wait("@getCategories");
     cy.get("[data-cy='category-node-11']").should("be.visible");
     cy.get("[data-cy='category-node-12']").should("be.visible");
+    cy.wait(2000);
+    cy.get('[data-cy="add-category-button"]').click();
   });
 });

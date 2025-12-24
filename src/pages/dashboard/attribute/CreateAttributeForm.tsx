@@ -7,10 +7,10 @@ import { FormScrollableSelectField } from "@components/FormScrollableSelectField
 import { zodResolver } from "@hookform/resolvers/zod";
 import { postAttributeAction } from "@lib/actions/attribute-action";
 import { queryClient } from "@lib/apis/queryClient";
-import { invalidateEntityQueries } from "@lib/utils/react-query-utils";
 import { attributeUnits } from "@lib/constants/attribute-units";
 import { CreateAttributeInput } from "@lib/schemas";
 import { useGetCategories } from "@lib/services/categories/categories";
+import { invalidateEntityQueries } from "@lib/utils/react-query-utils";
 import { postAttributesBody } from "@lib/validations/attribute.validation";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
@@ -25,14 +25,13 @@ export default function CreateAttributeForm() {
         unit: "",
         type: "text",
       },
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- @typescript-eslint/no-explicit-any
       resolver: zodResolver(postAttributesBody) as any,
     });
   const { data: categories } = useGetCategories({ skip: 0, limit: 10 });
   const onSubmit: SubmitHandler<CreateAttributeInput> = async (data) => {
     try {
       await postAttributeAction(data);
-      // Invalidate all queries that start with "/attributes" and refetch
       await invalidateEntityQueries(queryClient, "/attributes");
       toast.success("ویژگی اضافه شد");
       reset();
@@ -47,10 +46,8 @@ export default function CreateAttributeForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="w-full grid gap-2 items-stretch
-                      grid-cols-1
-                      sm:grid-cols-2
-                      "
+      className="w-full grid gap-2 items-stretch grid-cols-1 sm:grid-cols-2"
+      data-cy="create-attribute-form"
     >
       <div className="col-span-1 sm:col-span-2 lg:col-span-1">
         <FormAutocomplete
@@ -60,15 +57,26 @@ export default function CreateAttributeForm() {
           getOptionLabel={(otp) => otp.name}
           getOptionValue={(otp) => otp.id}
           control={control}
+          data-cy="categoryId"
         />
       </div>
 
       <div className="col-span-1">
-        <FormInputField label="نام ویژگی" name="title" control={control} />
+        <FormInputField
+          label="نام ویژگی"
+          name="title"
+          control={control}
+          data-cy="title"
+        />
       </div>
 
       <div className="col-span-1">
-        <FormInputField label="واحد ویژگی" name="unit" control={control} />
+        <FormInputField
+          label="واحد ویژگی"
+          name="unit"
+          control={control}
+          data-cy="unit"
+        />
       </div>
 
       <div className="col-span-1 sm:col-span-2 lg:col-span-1">
@@ -79,11 +87,16 @@ export default function CreateAttributeForm() {
           control={control}
           label="نوع تایپ"
           name="type"
+          data-cy="type"
         />
       </div>
 
-      <div className="col-span-1 sm:col-span-2  mt-2 w-full">
-        <SubmitButton className="w-full" disabled={!formState.isDirty} />
+      <div className="col-span-1 sm:col-span-2 mt-2 w-full">
+        <SubmitButton
+          className="w-full"
+          disabled={!formState.isDirty}
+          data-cy="submit-button"
+        />
       </div>
     </form>
   );

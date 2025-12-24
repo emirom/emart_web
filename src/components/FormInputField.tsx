@@ -28,6 +28,7 @@ interface Props<T extends FieldValues>
   rules?: RegisterOptions<T, Path<T>>;
   type?: HTMLInputElement["type"];
   nuSeparator?: boolean;
+  "data-cy"?: string;
 }
 
 function FormInputField<T extends FieldValues>({
@@ -64,6 +65,7 @@ function FormInputField<T extends FieldValues>({
           return (
             <>
               <Input
+                data-cy={props["data-cy"]}
                 {...props}
                 type={type}
                 inputMode={type === "number" ? "numeric" : undefined}

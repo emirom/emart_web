@@ -17,6 +17,7 @@ export default async function Dashboard() {
         <Link
           className="bg-sky-500 p-2 rounded-lg text-white"
           href="/dashboard/category/add"
+          data-cy="add-category-button"
         >
           افزودن دسته بندی
         </Link>
