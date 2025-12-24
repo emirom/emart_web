@@ -52,6 +52,7 @@ export const getAttributesQueryOrderDefaultOne = "desc";
 export const getAttributesQuerySkipMin = 0;
 export const getAttributesQueryLimitMax = 20;
 export const getAttributesQueryTitleMaxOne = 200;
+export const getAttributesQueryUnitMaxOne = 200;
 
 export const getAttributesQueryParams = zod.object({
   field: zod
@@ -79,6 +80,10 @@ export const getAttributesQueryParams = zod.object({
     .union([zod.enum(["text", "number", "boolean", "date"]), zod.null()])
     .optional()
     .describe("Filter by attribute type"),
+  unit: zod
+    .union([zod.coerce.string().max(getAttributesQueryUnitMaxOne), zod.null()])
+    .optional()
+    .describe("Filter by attribute unit"),
   categoryId: zod
     .union([zod.uuid(), zod.null()])
     .optional()

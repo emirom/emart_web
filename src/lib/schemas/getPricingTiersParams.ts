@@ -5,7 +5,7 @@
  * OpenAPI spec version: 1.0.0
  */
 
-export type GetAttributesParams = {
+export type GetPricingTiersParams = {
   /**
    * Field to sort by
    */
@@ -26,19 +26,27 @@ export type GetAttributesParams = {
    */
   limit: number;
   /**
-   * Filter by attribute title
+   * Optional date input, usually null
    */
-  title?: string | null;
+  deletedAt?: string | null;
   /**
-   * Filter by attribute type
+   * Filter by variant ID
    */
-  type?: "text" | "number" | "boolean" | "date" | null;
+  variantId?: string | null;
   /**
-   * Filter by attribute unit
+   * Filter by customer group ID
    */
-  unit?: string | null;
+  clientGroupId?: string | null;
   /**
-   * Filter by category ID
+   * Filter by currency ID
    */
-  categoryId?: string | null;
+  currencyId?: string | null;
+  /**
+   * Minimum price
+   */
+  minPrice?: number | null;
+  /**
+   * Maximum price
+   */
+  maxPrice?: number | null;
 };
