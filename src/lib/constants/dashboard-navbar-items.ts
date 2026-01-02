@@ -27,6 +27,11 @@ export const navItems = [
   { href: "/dashboard/products", label: "محصولات", icon: Package },
   { href: "/dashboard/inventory", label: "موجودی", icon: ClipboardClock },
   { href: "/dashboard/variants", label: "تنوع محصول", icon: PackageSearch },
+  {
+    href: "/dashboard/pricing-tier",
+    label: "محدوده قیمت ها",
+    icon: PackageSearch,
+  },
   { href: "/dashboard/users", label: "کاربران", icon: Users },
   { href: "/dashboard/colors", label: "رنگ‌ها", icon: PaintBucket },
   { href: "/dashboard/attributes", label: "ویژگی‌ها", icon: LandPlot },

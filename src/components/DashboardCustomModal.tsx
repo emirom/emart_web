@@ -2,6 +2,7 @@
 
 import { useMediaQuery } from "@lib/hooks/useMediaQuery";
 import { XIcon } from "lucide-react";
+import { ReactNode } from "react";
 import { Button } from "./ui/button";
 import {
   Dialog,
@@ -27,7 +28,7 @@ export function DashboardCustomModal({
   onOpenChange,
 }: {
   element: React.ReactNode;
-  title: string;
+  title: string | ReactNode;
   button?: React.ReactNode;
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
@@ -40,8 +41,8 @@ export function DashboardCustomModal({
         <DialogTrigger asChild>
           <span
             className=" text-tint-blue-500 text-sm"
-            aria-label={title}
-            title={title}
+            aria-label={typeof title === "string" ? title : ""}
+            title={typeof title === "string" ? title : ""}
           >
             {button}
           </span>

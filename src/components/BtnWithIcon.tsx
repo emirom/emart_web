@@ -101,7 +101,7 @@ const SubmitButtonComponent = ({
     data-cy={dataCy}
     aria-label={label ? label : "ثبت"}
     className={cn(
-      "bg-green-300 text-white focus-visible:ring-2 focus-visible:ring-offset-2 transition-colors",
+      "bg-green-300 text-white focus-visible:ring-2 focus-visible:ring-offset-2 transition-colors cursor-pointer",
       className,
     )}
   >
