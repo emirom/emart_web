@@ -14,12 +14,14 @@ export default function Layout({ children }: Props) {
       <CustomerHeader />
       <main
         className={cn(
-          "flex-1 overflow-y-auto px-5 my-2",
+          "flex-1  px-5 my-2 overflow-y-auto md:overflow-y-hidden",
           "md:grid grid-cols-12 md:items-stretch md:gap-2 md:p-6",
         )}
       >
         <CustomerPanelNavbar />
-        <div className="md:col-span-9 h-full">{children}</div>
+        <div className="md:col-span-9 h-full md:overflow-y-auto">
+          {children}
+        </div>
       </main>
       <CustomerFooter />
     </div>
